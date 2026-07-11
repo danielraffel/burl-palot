@@ -21,7 +21,7 @@ rather than a relabeled plugin build.
 ## 2026-07-11 — Pin an immutable framework commit
 
 `apps/desktop-burl/burl.lock.json` records the full commit behind Burl tag
-`v0.1.0-alpha.1`. CMake may use an explicit absolute `BURL_SOURCE_DIR` only for
+`v0.1.0-alpha.2` (`2cbc47f3a687caa04a8910269f09d02756e5ba08`). CMake may use an explicit absolute `BURL_SOURCE_DIR` only for
 local development. Normal consumer resolution always uses the immutable Git
 revision, preventing branch drift while retaining a fast framework iteration
 loop.

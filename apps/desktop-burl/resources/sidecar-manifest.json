@@ -1,6 +1,12 @@
 {
 	"schemaVersion": 1,
 	"protocolVersion": 1,
+	"build": {
+		"packageManager": "bun@1.3.8",
+		"lockfile": "bun.lock",
+		"lockfileSha256": "93c62cee7f48333e3b52ff4468b1095691f250e0bd58067ddb23c1ecdff1bbf7",
+		"architecture": "arm64"
+	},
 	"resourceRelativePath": "bin/palot-opencode-sidecar",
 	"bundleRelativePath": "Contents/Resources/bin/palot-opencode-sidecar",
 	"components": [
@@ -13,9 +19,12 @@
 		{
 			"name": "OpenCode SDK",
 			"package": "@opencode-ai/sdk",
-			"versionRange": "^1.2.1",
+			"version": "1.2.1",
+			"integrity": "sha512-K5e15mIXTyAykBw0GX+8O28IJHlPMw1jI/m3SDu+hgUHjmg2refqLPqyuqv8hE2nRcuGi8HajhpDJjkO7H2S0A==",
+			"sourceCommit": "cd775a2862cf9ed1d5aaf26fdee0e814ce28936b",
 			"license": "MIT",
-			"notice": "licenses/THIRD-PARTY-NOTICES.md"
+			"notice": "licenses/OpenCode-SDK-LICENSE",
+			"licenseSha256": "625f0f619133f89bbbb2abe37369613dfa1885eba1e50d02170deb62bb42cb6b"
 		},
 		{
 			"name": "Bun runtime",

@@ -9,6 +9,10 @@ option(PALOT_BUILD_TESTS "Build focused native Palot tests" ON)
 set(BURL_SOURCE_DIR "" CACHE PATH "Explicit local Burl checkout override (development only)")
 set(PALOT_OPENCODE_SIDECAR_EXECUTABLE "" CACHE FILEPATH
 	"Prebuilt palot-opencode-sidecar executable (otherwise built with Bun)")
+set(PALOT_OPENCODE_SIDECAR_SHA256 "" CACHE STRING "Expected SHA-256 for a prebuilt sidecar")
+set(PALOT_OPENCODE_SIDECAR_PROVENANCE "" CACHE FILEPATH
+	"JSON provenance statement for a prebuilt sidecar")
+set(PALOT_OPENCODE_SIDECAR_ARCH "arm64" CACHE STRING "Expected prebuilt sidecar architecture")
 
 file(READ "${CMAKE_CURRENT_SOURCE_DIR}/burl.lock.json" BURL_LOCK)
 string(JSON BURL_REPOSITORY GET "${BURL_LOCK}" repository)
@@ -64,19 +68,49 @@ if(BURL_PALOT_ENABLE_FRAMEWORK)
 	set(PALOT_SIDECAR_NAME "palot-opencode-sidecar")
 	set(PALOT_SIDECAR_BUILD_DIR "${CMAKE_CURRENT_BINARY_DIR}/sidecar")
 	set(PALOT_SIDECAR_OUTPUT "${PALOT_SIDECAR_BUILD_DIR}/${PALOT_SIDECAR_NAME}")
+	set(PALOT_SIDECAR_SHA_FILE "${PALOT_SIDECAR_BUILD_DIR}/${PALOT_SIDECAR_NAME}.sha256")
+	set(PALOT_SIDECAR_PROVENANCE_FILE "${PALOT_SIDECAR_BUILD_DIR}/${PALOT_SIDECAR_NAME}.provenance.json")
 	set(PALOT_REPOSITORY_ROOT "${CMAKE_CURRENT_SOURCE_DIR}/../..")
+	file(SHA256 "${PALOT_REPOSITORY_ROOT}/bun.lock" PALOT_LOCK_SHA256)
+	set(PALOT_EXPECTED_LOCK_SHA256 "93c62cee7f48333e3b52ff4468b1095691f250e0bd58067ddb23c1ecdff1bbf7")
+	if(NOT PALOT_LOCK_SHA256 STREQUAL PALOT_EXPECTED_LOCK_SHA256)
+		message(FATAL_ERROR "bun.lock digest does not match the sidecar manifest")
+	endif()
 
 	if(PALOT_OPENCODE_SIDECAR_EXECUTABLE)
+		string(LENGTH "${PALOT_OPENCODE_SIDECAR_SHA256}" PALOT_SIDECAR_SHA256_LENGTH)
 		if(NOT IS_ABSOLUTE "${PALOT_OPENCODE_SIDECAR_EXECUTABLE}" OR
 			NOT EXISTS "${PALOT_OPENCODE_SIDECAR_EXECUTABLE}")
 			message(FATAL_ERROR
 				"PALOT_OPENCODE_SIDECAR_EXECUTABLE must name an existing absolute file")
 		endif()
-		add_custom_command(OUTPUT "${PALOT_SIDECAR_OUTPUT}"
+		if(NOT PALOT_OPENCODE_SIDECAR_SHA256 MATCHES "^[0-9a-f]+$" OR
+			NOT PALOT_SIDECAR_SHA256_LENGTH EQUAL 64 OR
+			NOT IS_ABSOLUTE "${PALOT_OPENCODE_SIDECAR_PROVENANCE}" OR
+			NOT EXISTS "${PALOT_OPENCODE_SIDECAR_PROVENANCE}" OR
+			PALOT_OPENCODE_SIDECAR_ARCH STREQUAL "")
+			message(FATAL_ERROR
+				"Prebuilt sidecars require exact SHA-256, architecture, and existing absolute provenance")
+		endif()
+		add_custom_command(OUTPUT "${PALOT_SIDECAR_OUTPUT}" "${PALOT_SIDECAR_SHA_FILE}"
+			"${PALOT_SIDECAR_PROVENANCE_FILE}"
 			COMMAND "${CMAKE_COMMAND}" -E make_directory "${PALOT_SIDECAR_BUILD_DIR}"
+			COMMAND "${PALOT_REPOSITORY_ROOT}/scripts/verify-sidecar-artifact.sh"
+				"${PALOT_OPENCODE_SIDECAR_EXECUTABLE}" "${PALOT_OPENCODE_SIDECAR_SHA256}"
+				"${PALOT_OPENCODE_SIDECAR_ARCH}" "${PALOT_OPENCODE_SIDECAR_PROVENANCE}"
 			COMMAND "${CMAKE_COMMAND}" -E copy
 				"${PALOT_OPENCODE_SIDECAR_EXECUTABLE}" "${PALOT_SIDECAR_OUTPUT}"
+			COMMAND "${PALOT_REPOSITORY_ROOT}/scripts/verify-sidecar-artifact.sh"
+				"${PALOT_SIDECAR_OUTPUT}" "${PALOT_OPENCODE_SIDECAR_SHA256}"
+				"${PALOT_OPENCODE_SIDECAR_ARCH}" "${PALOT_OPENCODE_SIDECAR_PROVENANCE}"
+			COMMAND "${CMAKE_COMMAND}"
+				-DSIDECAR="${PALOT_SIDECAR_OUTPUT}"
+				-DOUTPUT_SHA_FILE="${PALOT_SIDECAR_SHA_FILE}"
+				-DOUTPUT_PROVENANCE="${PALOT_SIDECAR_PROVENANCE_FILE}"
+				-DSOURCE_PROVENANCE="${PALOT_OPENCODE_SIDECAR_PROVENANCE}"
+				-P "${CMAKE_CURRENT_SOURCE_DIR}/cmake/write_sidecar_metadata.cmake"
 			DEPENDS "${PALOT_OPENCODE_SIDECAR_EXECUTABLE}"
+				"${PALOT_OPENCODE_SIDECAR_PROVENANCE}"
 			VERBATIM)
 	else()
 		find_program(PALOT_BUN_EXECUTABLE bun HINTS "$ENV{HOME}/.bun/bin")
@@ -85,14 +119,36 @@ if(BURL_PALOT_ENABLE_FRAMEWORK)
 				"Bun is required to compile the OpenCode sidecar; alternatively set "
 				"PALOT_OPENCODE_SIDECAR_EXECUTABLE to a prebuilt absolute path")
 		endif()
+		file(READ "${PALOT_REPOSITORY_ROOT}/package.json" PALOT_PACKAGE_JSON)
+		string(JSON PALOT_PACKAGE_MANAGER GET "${PALOT_PACKAGE_JSON}" packageManager)
+		if(NOT PALOT_PACKAGE_MANAGER MATCHES "^bun@([0-9]+\\.[0-9]+\\.[0-9]+)$")
+			message(FATAL_ERROR "packageManager must pin an exact bun@x.y.z version")
+		endif()
+		set(PALOT_EXPECTED_BUN_VERSION "${CMAKE_MATCH_1}")
+		execute_process(COMMAND "${PALOT_BUN_EXECUTABLE}" --version
+			OUTPUT_VARIABLE PALOT_ACTUAL_BUN_VERSION OUTPUT_STRIP_TRAILING_WHITESPACE
+			RESULT_VARIABLE PALOT_BUN_VERSION_RESULT)
+		if(NOT PALOT_BUN_VERSION_RESULT EQUAL 0 OR
+			NOT PALOT_ACTUAL_BUN_VERSION STREQUAL PALOT_EXPECTED_BUN_VERSION)
+			message(FATAL_ERROR
+				"Bun ${PALOT_EXPECTED_BUN_VERSION} is required; found ${PALOT_ACTUAL_BUN_VERSION}")
+		endif()
 		file(GLOB_RECURSE PALOT_SIDECAR_SOURCES CONFIGURE_DEPENDS
 			"${PALOT_REPOSITORY_ROOT}/apps/opencode-sidecar/src/*.ts"
 			"${PALOT_REPOSITORY_ROOT}/packages/opencode/src/*.ts")
-		add_custom_command(OUTPUT "${PALOT_SIDECAR_OUTPUT}"
+		add_custom_command(OUTPUT "${PALOT_SIDECAR_OUTPUT}" "${PALOT_SIDECAR_SHA_FILE}"
+			"${PALOT_SIDECAR_PROVENANCE_FILE}"
 			COMMAND "${CMAKE_COMMAND}" -E make_directory "${PALOT_SIDECAR_BUILD_DIR}"
 			COMMAND "${PALOT_BUN_EXECUTABLE}" build --compile
 				"${PALOT_REPOSITORY_ROOT}/apps/opencode-sidecar/src/main.ts"
 				--outfile "${PALOT_SIDECAR_OUTPUT}"
+			COMMAND "${CMAKE_COMMAND}"
+				-DSIDECAR="${PALOT_SIDECAR_OUTPUT}"
+				-DOUTPUT_SHA_FILE="${PALOT_SIDECAR_SHA_FILE}"
+				-DOUTPUT_PROVENANCE="${PALOT_SIDECAR_PROVENANCE_FILE}"
+				-DBUN_VERSION="${PALOT_EXPECTED_BUN_VERSION}"
+				-DLOCK_SHA256="${PALOT_LOCK_SHA256}"
+				-P "${CMAKE_CURRENT_SOURCE_DIR}/cmake/write_sidecar_metadata.cmake"
 			WORKING_DIRECTORY "${PALOT_REPOSITORY_ROOT}"
 			DEPENDS ${PALOT_SIDECAR_SOURCES}
 				"${PALOT_REPOSITORY_ROOT}/apps/opencode-sidecar/package.json"
@@ -102,7 +158,8 @@ if(BURL_PALOT_ENABLE_FRAMEWORK)
 			VERBATIM)
 	endif()
 
-	add_custom_target(palot-opencode-sidecar DEPENDS "${PALOT_SIDECAR_OUTPUT}")
+	add_custom_target(palot-opencode-sidecar DEPENDS "${PALOT_SIDECAR_OUTPUT}"
+		"${PALOT_SIDECAR_SHA_FILE}" "${PALOT_SIDECAR_PROVENANCE_FILE}")
 	add_dependencies(burl-palot palot-opencode-sidecar)
 	target_include_directories(burl-palot PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/include")
 	target_compile_definitions(burl-palot PRIVATE
@@ -112,6 +169,8 @@ if(BURL_PALOT_ENABLE_FRAMEWORK)
 		COMMAND "${CMAKE_COMMAND}" -E make_directory
 			"$<TARGET_BUNDLE_DIR:burl-palot>/Contents/Resources/bin"
 		COMMAND "${CMAKE_COMMAND}" -E copy "${PALOT_SIDECAR_OUTPUT}"
+			"$<TARGET_BUNDLE_DIR:burl-palot>/Contents/Resources/bin/${PALOT_SIDECAR_NAME}"
+		COMMAND "${CMAKE_COMMAND}" -E compare_files "${PALOT_SIDECAR_OUTPUT}"
 			"$<TARGET_BUNDLE_DIR:burl-palot>/Contents/Resources/bin/${PALOT_SIDECAR_NAME}"
 		COMMAND chmod 755
 			"$<TARGET_BUNDLE_DIR:burl-palot>/Contents/Resources/bin/${PALOT_SIDECAR_NAME}"
@@ -126,6 +185,13 @@ if(BURL_PALOT_ENABLE_FRAMEWORK)
 		COMMAND "${CMAKE_COMMAND}" -E copy
 			"${PALOT_REPOSITORY_ROOT}/apps/opencode-sidecar/THIRD-PARTY-NOTICES.md"
 			"$<TARGET_BUNDLE_DIR:burl-palot>/Contents/Resources/licenses/SIDECAR-NOTICES.md"
+		COMMAND "${CMAKE_COMMAND}" -E copy "${PALOT_SIDECAR_SHA_FILE}"
+			"$<TARGET_BUNDLE_DIR:burl-palot>/Contents/Resources/${PALOT_SIDECAR_NAME}.sha256"
+		COMMAND "${CMAKE_COMMAND}" -E copy "${PALOT_SIDECAR_PROVENANCE_FILE}"
+			"$<TARGET_BUNDLE_DIR:burl-palot>/Contents/Resources/${PALOT_SIDECAR_NAME}.provenance.json"
+		COMMAND "${CMAKE_COMMAND}" -E copy
+			"${CMAKE_CURRENT_SOURCE_DIR}/resources/licenses/OpenCode-SDK-LICENSE"
+			"$<TARGET_BUNDLE_DIR:burl-palot>/Contents/Resources/licenses/OpenCode-SDK-LICENSE"
 		COMMAND "${CMAKE_COMMAND}" -E copy
 			"${CMAKE_CURRENT_SOURCE_DIR}/resources/sidecar-manifest.json"
 			"$<TARGET_BUNDLE_DIR:burl-palot>/Contents/Resources/sidecar-manifest.json"

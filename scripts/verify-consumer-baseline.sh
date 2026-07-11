@@ -4,8 +4,10 @@ set -eu
 root=$(CDPATH= cd -- "$(dirname -- "$0")/.." && pwd)
 cd "$root"
 
-test "$(git rev-list --max-parents=0 HEAD | head -1)" = "$(git rev-list --max-parents=0 palot-upstream/main | head -1)"
-test "$(git remote get-url palot-upstream)" = "git@github.com:ItsWendell/palot.git"
+expected_root=01e4d1ea197b9a50b413e7d848a71b1321fcc617
+test "$(git rev-list --max-parents=0 HEAD | head -1)" = "$expected_root"
+upstream_head=$(git ls-remote https://github.com/ItsWendell/palot.git refs/heads/main | awk '{print $1}')
+test -n "$upstream_head"
 test -f LICENSE
 test -f THIRD-PARTY-NOTICES.md
 test -f apps/desktop/package.json
