@@ -22,4 +22,4 @@ The initial structural mock scored SSIM `0.088831116` with MAE `13.229267`. At e
 
 Residual differences remain in renderer-specific glyph antialiasing, exact Lucide icon shapes, selected-session copy, muted metadata color, rich inline-code backgrounds, scrollbar styling, and some transcript wrapping. Chromium/CoreText and Skia will not produce byte-identical glyph pixels, so the raw metrics are retained as an honest regression signal rather than described as equality. The functional native controls remain real widgets: New Session, project chooser, session ID/Open, provider, model, Send, and Cancel are visible and operable; static painting is limited to non-interactive chrome and fixture content.
 
-The real native OpenCode path was separately exercised after the visual fixture and returned exactly `NATIVE VISUAL PALOT OK`.
+The real native OpenCode path was separately exercised after the visual fixture and returned exactly `REAL VISUAL PARITY OK`.
