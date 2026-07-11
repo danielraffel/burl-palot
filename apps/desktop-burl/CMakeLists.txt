@@ -5,6 +5,7 @@ set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 option(BURL_PALOT_ENABLE_FRAMEWORK "Resolve the immutable Burl SDK and build Palot" ON)
+option(PALOT_BUILD_TESTS "Build focused native Palot tests" ON)
 set(BURL_SOURCE_DIR "" CACHE PATH "Explicit local Burl checkout override (development only)")
 set(PALOT_OPENCODE_SIDECAR_EXECUTABLE "" CACHE FILEPATH
 	"Prebuilt palot-opencode-sidecar executable (otherwise built with Bun)")
@@ -24,6 +25,13 @@ add_custom_target(burl-palot-consumer-boundary ALL
 	VERBATIM)
 
 if(BURL_PALOT_ENABLE_FRAMEWORK)
+	include(FetchContent)
+	FetchContent_Declare(nlohmann_json
+		GIT_REPOSITORY https://github.com/nlohmann/json.git
+		GIT_TAG 9cca280a4d0ccf0c08f47a99aa71d1b0e52f8d03
+		GIT_SHALLOW TRUE)
+	FetchContent_MakeAvailable(nlohmann_json)
+
 	if(BURL_SOURCE_DIR)
 		if(NOT IS_ABSOLUTE "${BURL_SOURCE_DIR}")
 			message(FATAL_ERROR "BURL_SOURCE_DIR must be an explicit absolute path")
@@ -51,6 +59,7 @@ if(BURL_PALOT_ENABLE_FRAMEWORK)
 		APP_NAME "Palot"
 		BUNDLE_ID "com.palot.burl"
 		VERSION "0.1.0")
+	target_link_libraries(burl-palot PRIVATE nlohmann_json::nlohmann_json)
 
 	set(PALOT_SIDECAR_NAME "palot-opencode-sidecar")
 	set(PALOT_SIDECAR_BUILD_DIR "${CMAKE_CURRENT_BINARY_DIR}/sidecar")
@@ -122,4 +131,18 @@ if(BURL_PALOT_ENABLE_FRAMEWORK)
 			"$<TARGET_BUNDLE_DIR:burl-palot>/Contents/Resources/sidecar-manifest.json"
 		COMMENT "Embedding OpenCode sidecar and license manifest in Palot.app"
 		VERBATIM)
+
+	if(PALOT_BUILD_TESTS)
+		enable_testing()
+		add_executable(palot-opencode-process-test
+			test/opencode_process_test.cpp
+			src/opencode_process.cpp)
+		target_include_directories(palot-opencode-process-test PRIVATE src)
+		target_link_libraries(palot-opencode-process-test PRIVATE
+			nlohmann_json::nlohmann_json)
+		add_test(NAME palot-opencode-process
+			COMMAND palot-opencode-process-test
+				"${CMAKE_CURRENT_SOURCE_DIR}/test/fake_sidecar.py"
+				"${PALOT_SIDECAR_OUTPUT}")
+	endif()
 endif()

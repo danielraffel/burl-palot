@@ -1,27 +1,58 @@
 #pragma once
 
 #include <atomic>
-#include <functional>
+#include <cstdint>
+#include <memory>
 #include <mutex>
 #include <string>
 #include <thread>
 
+struct OpenCodeEvent {
+	std::uint64_t run_id = 0;
+	std::string type;
+	std::string value;
+};
+
+class OpenCodeEventSink {
+public:
+	virtual ~OpenCodeEventSink() = default;
+	virtual void post(OpenCodeEvent event) = 0;
+};
+
+struct OpenCodeRequest {
+	std::string project;
+	std::string prompt;
+	std::string session;
+	std::string failed_request_id;
+	std::string provider_id = "opencode";
+	std::string model_id = "north-mini-code-free";
+};
+
 class OpenCodeProcess {
 public:
-	using EventCallback = std::function<void(std::string type, std::string value)>;
+	struct Options {
+		std::string sidecar_path;
+		std::size_t max_frame_bytes = 1024 * 1024;
+	};
 
+	OpenCodeProcess();
+	explicit OpenCodeProcess(Options options);
 	~OpenCodeProcess();
-	bool start(const std::string& project, const std::string& prompt,
-	           const std::string& session, EventCallback callback);
+	OpenCodeProcess(const OpenCodeProcess&) = delete;
+	OpenCodeProcess& operator=(const OpenCodeProcess&) = delete;
+
+	bool start(OpenCodeRequest request, std::weak_ptr<OpenCodeEventSink> sink);
 	void cancel();
-	bool running() const { return running_.load(); }
+	bool running() const;
+	std::uint64_t run_id() const;
+
+	static std::string default_sidecar_path();
 
 private:
-	void run(std::string project, std::string prompt, std::string session,
-	         EventCallback callback);
+	struct State;
+	static void run(std::shared_ptr<State> state, std::uint64_t run_id,
+	                OpenCodeRequest request, std::weak_ptr<OpenCodeEventSink> sink);
 
-	std::atomic<bool> running_{false};
-	std::mutex process_mutex_;
-	int process_id_ = -1;
+	std::shared_ptr<State> state_;
 	std::jthread worker_;
 };

@@ -14,6 +14,7 @@
 #include <cstdint>
 #include <fcntl.h>
 #include <unistd.h>
+#include <mutex>
 
 namespace {
 
@@ -114,7 +115,34 @@ bool read_string(const std::vector<std::uint8_t>& bytes, std::size_t& cursor,
 
 }  // namespace
 
+class PalotView::UiEventSink final
+    : public OpenCodeEventSink,
+      public std::enable_shared_from_this<PalotView::UiEventSink> {
+public:
+	explicit UiEventSink(PalotView* view) : view_(view) {}
+
+	void post(OpenCodeEvent event) override {
+		auto self = shared_from_this();
+		pulp::events::MainThreadDispatcher::call_async(
+		    [self = std::move(self), event = std::move(event)]() mutable {
+			    std::scoped_lock lock(self->mutex_);
+			    if (self->view_ && event.run_id == self->view_->process_.run_id())
+				    self->view_->handle_event(std::move(event.type), std::move(event.value));
+		    });
+	}
+
+	void detach() {
+		std::scoped_lock lock(mutex_);
+		view_ = nullptr;
+	}
+
+private:
+	std::mutex mutex_;
+	PalotView* view_ = nullptr;
+};
+
 PalotView::PalotView() {
+	event_sink_ = std::make_shared<UiEventSink>(this);
 	set_access_label("Palot chat workspace");
 	auto project = std::make_unique<pulp::view::TextEditor>();
 	project->placeholder = "Project folder";
@@ -131,7 +159,7 @@ PalotView::PalotView() {
 	composer->set_access_label("Message composer");
 	composer->on_return = [this](const std::string& text) {
 		if (!text.empty()) send_prompt(text);
-		else if (!last_prompt_.empty()) send_prompt(last_prompt_);
+		else if (!last_prompt_.empty()) send_prompt(last_prompt_, true);
 	};
 	composer->on_escape = [this] {
 		process_.cancel();
@@ -164,6 +192,7 @@ PalotView::PalotView() {
 }
 
 PalotView::~PalotView() {
+	event_sink_->detach();
 	process_.cancel();
 	persist();
 }
@@ -227,7 +256,7 @@ void PalotView::append_message(std::string role, std::string text, bool announce
 			pulp::view::AnnouncementPriority::Polite);
 }
 
-void PalotView::send_prompt(const std::string& prompt) {
+void PalotView::send_prompt(const std::string& prompt, bool retry) {
 	if (prompt.empty() || process_.running()) return;
 	const std::string prompt_value = prompt;
 	last_prompt_ = prompt_value;
@@ -235,13 +264,12 @@ void PalotView::send_prompt(const std::string& prompt) {
 	composer_->set_text("");
 	status_ = "Streaming";
 	request_repaint();
-	process_.start(project_->text(), prompt_value, session_,
-	               [this](std::string type, std::string value) {
-		pulp::events::MainThreadDispatcher::call_async(
-			[this, type = std::move(type), value = std::move(value)]() mutable {
-				handle_event(std::move(type), std::move(value));
-			});
-	});
+	process_.start({.project = project_->text(),
+	                .prompt = prompt_value,
+	                .session = session_,
+	                .failed_request_id = retry ? last_request_id_ : ""},
+	               event_sink_);
+	last_request_id_ = std::to_string(process_.run_id()) + "-prompt";
 }
 
 void PalotView::handle_event(std::string type, std::string value) {
