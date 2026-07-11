@@ -3,5 +3,15 @@
 	"version": "0.0.0",
 	"private": true,
 	"type": "module",
-	"exports": "./src/index.ts"
+	"exports": "./src/index.ts",
+	"scripts": {
+		"test": "bun test",
+		"check-types": "tsgo --noEmit"
+	},
+	"dependencies": {
+		"@opencode-ai/sdk": "^1.2.1"
+	},
+	"devDependencies": {
+		"@typescript/native-preview": "^7.0.0-dev.20260207.1"
+	}
 }
