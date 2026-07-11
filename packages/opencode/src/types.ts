@@ -78,6 +78,8 @@ export interface RetryPromptCommand {
 	sessionId: string
 	requestId: string
 	failedRequestId: string
+	/** Original text is explicit so retry never guesses from transcript state. */
+	text: string
 	model: {
 		providerId: string
 		modelId: string
