@@ -1,0 +1,10 @@
+{
+  "status": "pass",
+  "project": "/Users/danielraffel/Code/burl-palot-wt-demo",
+  "session_id": "ses_0ad0251a1ffeHLtix1IfANEKqg",
+  "prompt": "Reply exactly: FINAL NATIVE PALOT OK",
+  "stream_chunks": 1,
+  "response": "FINAL NATIVE PALOT OK",
+  "provider": "opencode",
+  "model": "north-mini-code-free"
+}

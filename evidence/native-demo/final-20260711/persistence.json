@@ -1,0 +1,9 @@
+{
+  "schemaVersion": 1,
+  "status": "pass",
+  "multiline": true,
+  "tabs": true,
+  "truncated_recovery": true,
+  "validExit": 0,
+  "truncatedExit": 0
+}

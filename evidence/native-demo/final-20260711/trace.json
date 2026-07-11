@@ -1,0 +1,6 @@
+{
+  "status": "pass",
+  "format": "Instruments Time Profiler",
+  "duration_seconds": 5,
+  "trace_path": "/Users/danielraffel/Code/burl-palot-wt-demo/build-final/palot-final.trace"
+}

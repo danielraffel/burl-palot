@@ -1,0 +1,9 @@
+{
+  "message_nodes": 6,
+  "required_labels": [
+    "Message composer",
+    "Palot chat workspace",
+    "Project folder"
+  ],
+  "status": "pass"
+}
