@@ -12,7 +12,7 @@ The screenshot SHA-256 is
 `screenshots/final-native-opencode-chat.png` is the final GPU back-buffer
 capture from the immutable-Burl Release bundle using the packaged sidecar,
 semantic virtual transcript, and native Markdown renderer. Its SHA-256 is
-`000d8d31df37cb7b88471d516acd9dcc81f3e9467eec0511865c862c39687ae3`.
+`5c88bc669fb4499e7dc9cc5aa44bddd3050771b5a44aaf0f208ff8653edd98bf`.
 
 The package boundary is checked with:
 

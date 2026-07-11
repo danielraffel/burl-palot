@@ -39,6 +39,8 @@ private:
 	pulp::view::TextButton* choose_project_ = nullptr;
 	pulp::view::TextButton* new_session_ = nullptr;
 	pulp::view::TextButton* open_session_ = nullptr;
+	pulp::view::TextButton* send_ = nullptr;
+	pulp::view::TextButton* cancel_ = nullptr;
 	pulp::view::VirtualList* transcript_ = nullptr;
 	OpenCodeProcess process_;
 	std::shared_ptr<UiEventSink> event_sink_;

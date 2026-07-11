@@ -71,7 +71,8 @@ int main(int argc, char** argv) {
 		for (const auto& event : sink->events) {
 			session |= event.type == "session" && event.value == "session-1";
 			text |= event.type == "text" && event.value == "fixture response";
-			tool |= event.type == "tool" && event.value == "read";
+			tool |= event.type == "tool" &&
+			        event.value.find("\"tool\":\"read\"") != std::string::npos;
 			if (event.run_id != 1) return EXIT_FAILURE;
 		}
 	}

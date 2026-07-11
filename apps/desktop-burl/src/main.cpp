@@ -42,6 +42,11 @@ int main(int argc, char** argv) {
 		bool composer = false;
 		bool transcript = false;
 		bool workspace = false;
+		bool session = false;
+		bool provider = false;
+		bool model = false;
+		bool send = false;
+		bool cancel = false;
 		std::size_t accessible = 0;
 		for (const auto& node : nodes) {
 			if (node.role == pulp::view::View::AccessRole::none || node.hidden == "true") continue;
@@ -50,6 +55,11 @@ int main(int argc, char** argv) {
 			composer |= node.label == "Message composer";
 			transcript |= node.label == "Conversation transcript";
 			workspace |= node.label == "Palot chat workspace";
+			session |= node.label == "OpenCode session ID";
+			provider |= node.label == "OpenCode model provider";
+			model |= node.label == "OpenCode model ID";
+			send |= node.label == "Send message";
+			cancel |= node.label == "Cancel OpenCode response";
 			if (node.label.size() > 1024 || node.value.size() > 1024) {
 				std::cerr << "accessibility node exceeds bounded text contract\n";
 				return 2;
@@ -58,7 +68,8 @@ int main(int argc, char** argv) {
 			          << '\t' << node.label << '\n';
 		}
 		std::cout << "accessible_nodes\t" << accessible << '\n';
-		return project && composer && transcript && workspace ? 0 : 3;
+		return project && composer && transcript && workspace && session && provider &&
+		       model && send && cancel ? 0 : 3;
 	}
 	pulp::view::WindowOptions options;
 	options.title = BURL_APP_NAME;

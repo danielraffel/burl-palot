@@ -17,6 +17,7 @@
 #include <condition_variable>
 #include <deque>
 #include <string_view>
+#include <unordered_map>
 #include <vector>
 
 extern char** environ;
@@ -331,6 +332,7 @@ void OpenCodeProcess::run(std::shared_ptr<State> state, std::uint64_t generation
 		      {"id", prefix + "events"},
 		      {"subscription",
 		       {{"projectId", state->project_id}, {"sessionId", state->session_id}}}});
+		std::unordered_map<std::string, std::string> part_types;
 		for (;;) {
 			auto subscribed = next();
 			if (!subscribed) throw std::runtime_error("sidecar closed before subscription");
@@ -370,11 +372,17 @@ void OpenCodeProcess::run(std::shared_ptr<State> state, std::uint64_t generation
 			const auto& sdk = value->at("event").at("payload").at("event");
 			const auto sdk_type = sdk.value("type", "");
 			const auto& properties = sdk.at("properties");
-			if (sdk_type == "message.part.delta" && properties.value("field", "") == "text")
-				emit(sink, generation, "text", properties.value("delta", ""));
-			else if (sdk_type == "message.part.updated" &&
-			         properties.at("part").value("type", "") == "tool")
-				emit(sink, generation, "tool", properties.at("part").value("tool", "tool"));
+			if (sdk_type == "message.part.updated") {
+				const auto& part = properties.at("part");
+				part_types[part.value("id", "")] = part.value("type", "");
+				if (part.value("type", "") == "tool")
+					emit(sink, generation, "tool", part.dump());
+			} else if (sdk_type == "message.part.delta" &&
+			           properties.value("field", "") == "text") {
+				const auto part_id = properties.value("partID", "");
+				if (part_types[part_id] == "text")
+					emit(sink, generation, "text", properties.value("delta", ""));
+			}
 			else if (sdk_type == "session.idle")
 				break;
 			else if (sdk_type == "session.error")

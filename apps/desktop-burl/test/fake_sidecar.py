@@ -47,8 +47,17 @@ for line in sys.stdin:
             "type": "event",
             "subscriptionId": "1-events",
             "event": {"payload": {"type": "sdk.event", "event": {
+                "type": "message.part.updated",
+                "properties": {"part": {"id": "reason-1", "type": "reasoning", "text": ""}},
+            }}},
+        })
+        send({
+            "version": 1,
+            "type": "event",
+            "subscriptionId": "1-events",
+            "event": {"payload": {"type": "sdk.event", "event": {
                 "type": "message.part.delta",
-                "properties": {"sessionID": session_id, "field": "text", "delta": "fixture response"},
+                "properties": {"sessionID": session_id, "partID": "reason-1", "field": "text", "delta": "private reasoning"},
             }}},
         })
         send({
@@ -57,7 +66,25 @@ for line in sys.stdin:
             "subscriptionId": "1-events",
             "event": {"payload": {"type": "sdk.event", "event": {
                 "type": "message.part.updated",
-                "properties": {"part": {"type": "tool", "tool": "read"}},
+                "properties": {"part": {"id": "text-1", "type": "text", "text": ""}},
+            }}},
+        })
+        send({
+            "version": 1,
+            "type": "event",
+            "subscriptionId": "1-events",
+            "event": {"payload": {"type": "sdk.event", "event": {
+                "type": "message.part.delta",
+                "properties": {"sessionID": session_id, "partID": "text-1", "field": "text", "delta": "fixture response"},
+            }}},
+        })
+        send({
+            "version": 1,
+            "type": "event",
+            "subscriptionId": "1-events",
+            "event": {"payload": {"type": "sdk.event", "event": {
+                "type": "message.part.updated",
+                "properties": {"part": {"id": "tool-1", "type": "tool", "tool": "read"}},
             }}},
         })
         send({

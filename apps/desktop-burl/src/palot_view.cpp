@@ -182,6 +182,7 @@ PalotView::PalotView() {
 
 	auto session_editor = std::make_unique<pulp::view::TextEditor>();
 	session_editor->placeholder = "Session ID";
+	session_editor->set_access_role(AccessRole::group);
 	session_editor->set_access_label("OpenCode session ID");
 	session_editor_ = session_editor.get();
 	add_child(std::move(session_editor));
@@ -209,6 +210,7 @@ PalotView::PalotView() {
 
 	auto provider = std::make_unique<pulp::view::TextEditor>();
 	provider->placeholder = "Provider";
+	provider->set_access_role(AccessRole::group);
 	provider->set_access_label("OpenCode model provider");
 	provider->set_text("opencode");
 	provider_ = provider.get();
@@ -216,6 +218,7 @@ PalotView::PalotView() {
 
 	auto model = std::make_unique<pulp::view::TextEditor>();
 	model->placeholder = "Model";
+	model->set_access_role(AccessRole::group);
 	model->set_access_label("OpenCode model ID");
 	model->set_text("north-mini-code-free");
 	model_ = model.get();
@@ -239,6 +242,25 @@ PalotView::PalotView() {
 	};
 	composer_ = composer.get();
 	add_child(std::move(composer));
+
+	auto send = std::make_unique<pulp::view::TextButton>("Send");
+	send->set_access_label("Send message");
+	send->on_click = [this] {
+		if (!composer_->text().empty()) send_prompt(composer_->text());
+		else if (!last_prompt_.empty()) send_prompt(last_prompt_, true);
+	};
+	send_ = send.get();
+	add_child(std::move(send));
+
+	auto cancel = std::make_unique<pulp::view::TextButton>("Cancel");
+	cancel->set_access_label("Cancel OpenCode response");
+	cancel->on_click = [this] {
+		process_.cancel();
+		status_ = "Cancelling…";
+		request_repaint();
+	};
+	cancel_ = cancel.get();
+	add_child(std::move(cancel));
 
 	auto transcript = std::make_unique<pulp::view::VirtualList>();
 	transcript->set_access_label("Conversation transcript");
@@ -278,8 +300,11 @@ void PalotView::layout_children() {
 	open_session_->set_bounds({132.0f, 184.0f, 102.0f, 34.0f});
 	provider_->set_bounds({20.0f, 240.0f, 214.0f, 36.0f});
 	model_->set_bounds({20.0f, 282.0f, 214.0f, 36.0f});
+	const float composer_width = b.width - kSidebarWidth - 152.0f;
 	composer_->set_bounds({kSidebarWidth + 28.0f, b.height - kComposerHeight - 24.0f,
-	                       b.width - kSidebarWidth - 56.0f, kComposerHeight});
+	                       composer_width, kComposerHeight});
+	send_->set_bounds({b.width - 112.0f, b.height - kComposerHeight - 24.0f, 84.0f, 42.0f});
+	cancel_->set_bounds({b.width - 112.0f, b.height - 68.0f, 84.0f, 42.0f});
 	transcript_->set_bounds({kSidebarWidth + 28.0f, kTranscriptTop,
 	                         b.width - kSidebarWidth - 56.0f,
 	                         std::max(0.0f, b.height - kComposerHeight - kTranscriptTop - 38.0f)});
