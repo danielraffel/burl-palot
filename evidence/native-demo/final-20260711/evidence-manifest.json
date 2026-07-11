@@ -1,0 +1,72 @@
+{
+  "artifacts": [
+    {
+      "kind": "security",
+      "path": "security.json",
+      "sha256": "42e2be9f9790bf641345189ce08ca3a65858d8bd754565612721d1f73f087d70",
+      "status": "pass"
+    },
+    {
+      "kind": "launch",
+      "path": "launch.json",
+      "sha256": "3062a7767a65549a6b57741974a60227e833a430efa5437aec67f2cba5f605c7",
+      "status": "pass"
+    },
+    {
+      "kind": "accessibility",
+      "path": "accessibility-validation.json",
+      "sha256": "3b2217248c04c1b17ab7e1c1351b35c2c6f666bfa59a5031d8778062ae685087",
+      "status": "pass"
+    },
+    {
+      "kind": "build",
+      "path": "build.json",
+      "sha256": "3274f5fcff4417f93d98543d2a1fa8d08ecfd5048ebeb8ee6a13064bb479556b",
+      "status": "pass"
+    },
+    {
+      "kind": "screenshot",
+      "path": "screenshot.png",
+      "sha256": "b1a3c5efd734c18506b2744b5b74c4bf94a648d3722ef141a924beda55871fb1",
+      "status": "pass"
+    },
+    {
+      "kind": "trace",
+      "path": "trace.json",
+      "sha256": "543b0c7c9a4268d8eff9cbbb5d422e78d0600e0820f30ac35698f25684156f3c",
+      "status": "pass"
+    },
+    {
+      "kind": "benchmark",
+      "path": "benchmark.json",
+      "sha256": "08848f90188087a89860fad7b4faab6aff025e7960c287ca41989575fe90a717",
+      "status": "pass"
+    },
+    {
+      "kind": "opencode_integration",
+      "path": "opencode_integration.json",
+      "sha256": "2b992dfb0b7dac62b0d93424de3fdaf4995bccccedb542e20834d08975102e31",
+      "status": "pass"
+    },
+    {
+      "kind": "architecture_review",
+      "path": "architecture_review.md",
+      "sha256": "0fa703258325fdadb83305fd0ad49912e28a761ec5020a7f834c4203e6d2d41a",
+      "status": "pass"
+    },
+    {
+      "kind": "adversarial_review",
+      "path": "adversarial_review.md",
+      "sha256": "96cecfd84c53b1e13fe059d7c2eb85f64a4936ed2f7f498319047bc0aa403801",
+      "status": "pass"
+    }
+  ],
+  "created_at": "2026-07-11T21:11:12.680290Z",
+  "run_id": "final-20260711",
+  "schema_version": 1,
+  "source": {
+    "commit": "22f750e4b54a469d715ca70477bdbabedf6098c7",
+    "dependency_lock": "2e3a592f6e94153a33b1bed277fcc6d8894d03ae",
+    "repository": "https://github.com/danielraffel/burl-palot"
+  }
+}

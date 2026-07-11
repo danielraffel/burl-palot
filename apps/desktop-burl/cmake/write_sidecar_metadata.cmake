@@ -1,0 +1,11 @@
+if(NOT DEFINED SIDECAR OR NOT EXISTS "${SIDECAR}")
+	message(FATAL_ERROR "SIDECAR must name an existing artifact")
+endif()
+file(SHA256 "${SIDECAR}" SIDECAR_SHA256)
+file(WRITE "${OUTPUT_SHA_FILE}" "${SIDECAR_SHA256}  palot-opencode-sidecar\n")
+if(DEFINED SOURCE_PROVENANCE AND NOT SOURCE_PROVENANCE STREQUAL "")
+	file(COPY_FILE "${SOURCE_PROVENANCE}" "${OUTPUT_PROVENANCE}" ONLY_IF_DIFFERENT)
+else()
+	file(WRITE "${OUTPUT_PROVENANCE}"
+		"{\n  \"builder\": \"bun@${BUN_VERSION}\",\n  \"source\": \"bun.lock@${LOCK_SHA256}\"\n}\n")
+endif()

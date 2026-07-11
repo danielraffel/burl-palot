@@ -72,6 +72,7 @@ The following direct dependencies are licensed under the MIT License:
 - **lucide-react** -- Icon library (ISC License)
 - **zod** (v3 and v4) -- Schema validation
 - **jsonc-parser** -- JSON with comments parser
+- **nlohmann/json** -- Native sidecar protocol JSON parser
 - **citty** -- CLI framework
 - **consola** -- Console logger
 - **date-fns** -- Date utility library

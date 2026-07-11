@@ -1,0 +1,21 @@
+{
+	"name": "@palot/opencode",
+	"version": "0.0.0",
+	"private": true,
+	"type": "module",
+	"exports": {
+		".": "./src/index.ts",
+		"./node": "./src/adapter.ts"
+	},
+	"scripts": {
+		"test": "bun test",
+		"check-types": "tsgo --noEmit"
+	},
+	"dependencies": {
+		"@opencode-ai/sdk": "^1.2.1"
+	},
+	"devDependencies": {
+		"@types/node": "^25.0.0",
+		"@typescript/native-preview": "^7.0.0-dev.20260207.1"
+	}
+}

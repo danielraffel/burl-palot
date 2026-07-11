@@ -1,0 +1,7 @@
+{
+  "status": "pass",
+  "variable_height_1000_updates_ms": 7,
+  "transcript_rows": 10000,
+  "markdown_blocks": 2000,
+  "markdown_parse_ms_lt": 1
+}
