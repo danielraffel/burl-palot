@@ -7,6 +7,9 @@
 #include <filesystem>
 #include <fstream>
 #include <memory>
+#include <cstdint>
+#include <fcntl.h>
+#include <unistd.h>
 
 namespace {
 
@@ -15,8 +18,32 @@ constexpr float kComposerHeight = 92.0f;
 
 std::filesystem::path state_path() {
 	if (const char* home = std::getenv("HOME"))
-		return std::filesystem::path(home) / ".local/share/palot/burl-session.txt";
-	return "burl-session.txt";
+		return std::filesystem::path(home) /
+		       "Library/Application Support/Palot/burl-session.bin";
+	return "burl-session.bin";
+}
+
+constexpr std::string_view kStateMagic = "PALOT01\n";
+constexpr std::size_t kMaxStateBytes = 16 * 1024 * 1024;
+constexpr std::uint32_t kMaxMessages = 10000;
+
+void append_string(std::vector<std::uint8_t>& bytes, std::string_view value) {
+	const auto length = static_cast<std::uint32_t>(value.size());
+	for (int shift = 0; shift < 32; shift += 8)
+		bytes.push_back(static_cast<std::uint8_t>((length >> shift) & 0xff));
+	bytes.insert(bytes.end(), value.begin(), value.end());
+}
+
+bool read_string(const std::vector<std::uint8_t>& bytes, std::size_t& cursor,
+	             std::string& value) {
+	if (cursor + 4 > bytes.size()) return false;
+	std::uint32_t length = 0;
+	for (int shift = 0; shift < 32; shift += 8)
+		length |= static_cast<std::uint32_t>(bytes[cursor++]) << shift;
+	if (length > kMaxStateBytes || cursor + length > bytes.size()) return false;
+	value.assign(reinterpret_cast<const char*>(bytes.data() + cursor), length);
+	cursor += length;
+	return true;
 }
 
 }  // namespace
@@ -149,21 +176,60 @@ void PalotView::persist() const {
 	const auto path = state_path();
 	std::error_code error;
 	std::filesystem::create_directories(path.parent_path(), error);
-	std::ofstream output(path, std::ios::trunc);
-	output << session_ << '\n' << project_->text() << '\n';
-	for (const auto& [role, text] : messages_) output << role << '\t' << text << '\n';
+	if (error) return;
+	std::vector<std::uint8_t> bytes(kStateMagic.begin(), kStateMagic.end());
+	append_string(bytes, session_);
+	append_string(bytes, project_->text());
+	const auto count = static_cast<std::uint32_t>(
+		std::min<std::size_t>(messages_.size(), kMaxMessages));
+	for (int shift = 0; shift < 32; shift += 8)
+		bytes.push_back(static_cast<std::uint8_t>((count >> shift) & 0xff));
+	for (std::size_t index = messages_.size() - count; index < messages_.size(); ++index) {
+		append_string(bytes, messages_[index].first);
+		append_string(bytes, messages_[index].second);
+		if (bytes.size() > kMaxStateBytes) return;
+	}
+	const auto temporary = path.string() + ".tmp";
+	const int descriptor = open(temporary.c_str(), O_WRONLY | O_CREAT | O_TRUNC, 0600);
+	if (descriptor < 0) return;
+	std::size_t written = 0;
+	while (written < bytes.size()) {
+		const ssize_t amount = write(descriptor, bytes.data() + written, bytes.size() - written);
+		if (amount <= 0) { close(descriptor); unlink(temporary.c_str()); return; }
+		written += static_cast<std::size_t>(amount);
+	}
+	fsync(descriptor);
+	close(descriptor);
+	if (rename(temporary.c_str(), path.c_str()) != 0) unlink(temporary.c_str());
 }
 
 void PalotView::restore() {
-	std::ifstream input(state_path());
-	std::string line;
-	if (!std::getline(input, session_)) return;
-	if (std::getline(input, line) && !line.empty()) project_->set_text(line);
-	while (std::getline(input, line)) {
-		const auto tab = line.find('\t');
-		if (tab != std::string::npos) {
-			messages_.emplace_back(line.substr(0, tab), line.substr(tab + 1));
-			if (messages_.back().first == "You") last_prompt_ = messages_.back().second;
+	std::ifstream input(state_path(), std::ios::binary | std::ios::ate);
+	if (!input) return;
+	const auto size = input.tellg();
+	if (size < static_cast<std::streamoff>(kStateMagic.size()) ||
+	    size > static_cast<std::streamoff>(kMaxStateBytes)) return;
+	input.seekg(0);
+	std::vector<std::uint8_t> bytes(static_cast<std::size_t>(size));
+	if (!input.read(reinterpret_cast<char*>(bytes.data()), size)) return;
+	if (!std::equal(kStateMagic.begin(), kStateMagic.end(), bytes.begin())) return;
+	std::size_t cursor = kStateMagic.size();
+	std::string project;
+	if (!read_string(bytes, cursor, session_) || !read_string(bytes, cursor, project) ||
+	    cursor + 4 > bytes.size()) return;
+	if (!project.empty()) project_->set_text(project);
+	std::uint32_t count = 0;
+	for (int shift = 0; shift < 32; shift += 8)
+		count |= static_cast<std::uint32_t>(bytes[cursor++]) << shift;
+	if (count > kMaxMessages) return;
+	for (std::uint32_t index = 0; index < count; ++index) {
+		std::string role;
+		std::string text;
+		if (!read_string(bytes, cursor, role) || !read_string(bytes, cursor, text)) {
+			messages_.clear();
+			return;
 		}
+		messages_.emplace_back(std::move(role), std::move(text));
+		if (messages_.back().first == "You") last_prompt_ = messages_.back().second;
 	}
 }
