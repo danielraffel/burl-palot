@@ -1,0 +1,4 @@
+{
+	"builder": "accessibility validation fixture",
+	"source": "apps/desktop-burl/test/fake_sidecar.py"
+}

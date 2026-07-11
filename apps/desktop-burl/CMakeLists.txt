@@ -216,5 +216,8 @@ if(BURL_PALOT_ENABLE_FRAMEWORK)
 				"${CMAKE_CURRENT_SOURCE_DIR}/test/fake_sidecar.py"
 				"${PALOT_SIDECAR_OUTPUT}")
 		add_test(NAME palot-project-config COMMAND palot-project-config-test)
+		add_test(NAME palot-accessibility-dump
+			COMMAND $<TARGET_FILE:burl-palot> --accessibility-dump)
+		set_tests_properties(palot-accessibility-dump PROPERTIES TIMEOUT 5)
 	endif()
 endif()

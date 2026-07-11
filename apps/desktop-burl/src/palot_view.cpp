@@ -24,6 +24,14 @@ constexpr float kSidebarWidth = 250.0f;
 constexpr float kComposerHeight = 92.0f;
 constexpr float kTranscriptTop = 38.0f;
 constexpr float kTranscriptGap = 14.0f;
+constexpr std::size_t kAccessibilitySummaryBytes = 480;
+
+std::string accessibility_summary(std::string_view text) {
+	if (text.size() <= kAccessibilitySummaryBytes) return std::string(text);
+	std::size_t end = kAccessibilitySummaryBytes;
+	while (end > 0 && (static_cast<unsigned char>(text[end]) & 0xc0) == 0x80) --end;
+	return std::string(text.substr(0, end)) + "…";
+}
 
 struct MessageRow final : pulp::view::View {
 	pulp::view::Label* role = nullptr;
@@ -41,7 +49,7 @@ struct MessageRow final : pulp::view::View {
 		while (child_count() != 0) remove_child(child_at(child_count() - 1));
 		user = role_text == "You";
 		tool = role_text == "Tool";
-		set_access_label(role_text + " message: " + text);
+		set_access_label(role_text + " message");
 
 		auto role_label = std::make_unique<pulp::view::Label>(role_text);
 		role_label->set_font_size(12.0f);
@@ -53,6 +61,14 @@ struct MessageRow final : pulp::view::View {
 
 		auto markdown = std::make_unique<pulp::view::MarkdownView>(
 			tool ? "```json\n" + text + "\n```" : text);
+		const auto summary = accessibility_summary(text);
+		markdown->set_access_label(role_text + " message text: " + summary);
+		markdown->set_access_value(summary);
+		for (std::size_t index = 0; index < markdown->child_count(); ++index) {
+			markdown->child_at(index)->set_access_hidden("true");
+			markdown->child_at(index)->set_access_label("");
+			markdown->child_at(index)->set_access_value("");
+		}
 		content = markdown.get();
 		add_child(std::move(markdown));
 
@@ -146,8 +162,13 @@ private:
 PalotView::PalotView() {
 	event_sink_ = std::make_shared<UiEventSink>(this);
 	set_access_label("Palot chat workspace");
+	auto workspace = std::make_unique<pulp::view::View>();
+	workspace->set_access_role(AccessRole::group);
+	workspace->set_access_label("Palot chat workspace");
+	add_child(std::move(workspace));
 	auto project = std::make_unique<pulp::view::TextEditor>();
 	project->placeholder = "Project folder";
+	project->set_access_role(AccessRole::group);
 	project->set_access_label("Project folder");
 	project->set_text(std::filesystem::current_path().string());
 	project_ = project.get();
@@ -205,6 +226,7 @@ PalotView::PalotView() {
 	composer->multi_line = true;
 	composer->multi_line_return_behavior =
 		pulp::view::TextEditor::MultiLineReturnBehavior::commit;
+	composer->set_access_role(AccessRole::group);
 	composer->set_access_label("Message composer");
 	composer->on_return = [this](const std::string& text) {
 		if (!text.empty()) send_prompt(text);
