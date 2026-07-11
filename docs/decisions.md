@@ -39,3 +39,12 @@ The OpenCode boundary passes opaque credential references rather than token
 material. Command results are correlated to their command types, and streamed
 events carry project/session identity plus ordered cursors. This fails closed on
 gaps or reordering and lets cancellation and retry remain explicit.
+
+## 2026-07-11 — Bundle a headless OpenCode sidecar
+
+The native application bundles a self-contained, ARM64 OpenCode protocol
+sidecar under `Contents/Resources/bin`. It provides process and SDK isolation
+only; it renders no UI. The C++ client discovers it relative to the application
+bundle and exchanges bounded, versioned newline-JSON frames. This replaces the
+prototype's machine-dependent CLI lookup and brittle parsing while keeping the
+entire visible interface on Burl's C++/Skia/Dawn path.
