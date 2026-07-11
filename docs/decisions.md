@@ -48,3 +48,14 @@ only; it renders no UI. The C++ client discovers it relative to the application
 bundle and exchanges bounded, versioned newline-JSON frames. This replaces the
 prototype's machine-dependent CLI lookup and brittle parsing while keeping the
 entire visible interface on Burl's C++/Skia/Dawn path.
+
+## 2026-07-11 — Resolve repository-wide advisories at the lock boundary
+
+The legacy Electron reference workspaces remain installable, so their tooling
+dependencies are part of the repository supply-chain gate even though they are
+not shipped in the Burl application. Root overrides pin audited versions for
+vulnerable transitive packages; direct workspace ranges remain unchanged when
+the override is API-compatible. Electron stays on the supported 40.x line and
+Vite stays on 7.x (`40.10.6` and `7.3.6`) instead of taking unnecessary major
+upgrades. Type declarations for Node and CSS side-effect imports are explicit
+so frozen installs do not depend on accidental hoisting from vulnerable tools.

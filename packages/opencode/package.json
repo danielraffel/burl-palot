@@ -15,6 +15,7 @@
 		"@opencode-ai/sdk": "^1.2.1"
 	},
 	"devDependencies": {
+		"@types/node": "^25.0.0",
 		"@typescript/native-preview": "^7.0.0-dev.20260207.1"
 	}
 }
