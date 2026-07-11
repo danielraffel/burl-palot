@@ -42,7 +42,10 @@ if(BURL_PALOT_ENABLE_FRAMEWORK)
 	endif()
 
 	burl_add_app(burl-palot
-		SOURCES src/main.cpp
+		SOURCES
+			src/main.cpp
+			src/opencode_process.cpp
+			src/palot_view.cpp
 		APP_NAME "Palot"
 		BUNDLE_ID "com.palot.burl"
 		VERSION "0.1.0")
