@@ -3,6 +3,7 @@
 #include <pulp/events/main_thread_dispatcher.hpp>
 
 #include <cstdlib>
+#include <algorithm>
 #include <filesystem>
 #include <fstream>
 #include <memory>
@@ -75,8 +76,12 @@ void PalotView::paint(pulp::canvas::Canvas& canvas) {
 	canvas.fill_text("PROJECT", 20.0f, 75.0f);
 	canvas.fill_text("OpenCode • " + status_, 20.0f, b.height - 28.0f);
 
-	float y = 54.0f;
+	float y = 54.0f - transcript_scroll_;
 	for (const auto& [role, text] : messages_) {
+		if (y + 68.0f < 40.0f) {
+			y += 82.0f;
+			continue;
+		}
 		const bool user = role == "You";
 		canvas.set_fill_color(user ? pulp::canvas::Color::rgba8(20, 48, 60)
 		                           : pulp::canvas::Color::rgba8(24, 33, 49));
@@ -94,11 +99,22 @@ void PalotView::paint(pulp::canvas::Canvas& canvas) {
 	}
 }
 
+void PalotView::on_mouse_event(const pulp::view::MouseEvent& event) {
+	if (!event.is_wheel || event.position.x < kSidebarWidth) return;
+	const float viewport = std::max(0.0f, local_bounds().height - kComposerHeight - 150.0f);
+	const float content = static_cast<float>(messages_.size()) * 82.0f;
+	transcript_scroll_ = std::clamp(transcript_scroll_ + event.scroll_delta_y,
+	                                0.0f, std::max(0.0f, content - viewport));
+	request_repaint();
+}
+
 void PalotView::send_prompt(const std::string& prompt) {
 	if (prompt.empty() || process_.running()) return;
 	const std::string prompt_value = prompt;
 	last_prompt_ = prompt_value;
 	messages_.emplace_back("You", prompt_value);
+	transcript_scroll_ = std::max(0.0f, static_cast<float>(messages_.size()) * 82.0f -
+	                                      (local_bounds().height - kComposerHeight - 150.0f));
 	composer_->set_text("");
 	status_ = "Streaming";
 	request_repaint();
@@ -116,6 +132,8 @@ void PalotView::handle_event(std::string type, std::string value) {
 		session_ = std::move(value);
 	} else if (type == "text" && !value.empty()) {
 		messages_.emplace_back("OpenCode", std::move(value));
+		transcript_scroll_ = std::max(0.0f, static_cast<float>(messages_.size()) * 82.0f -
+		                                      (local_bounds().height - kComposerHeight - 150.0f));
 	} else if (type == "tool") {
 		messages_.emplace_back("Tool", std::move(value));
 	} else if (type == "done") {

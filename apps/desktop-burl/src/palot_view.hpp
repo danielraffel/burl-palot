@@ -14,6 +14,9 @@ public:
 	~PalotView() override;
 	void paint(pulp::canvas::Canvas& canvas) override;
 	void layout_children() override;
+	void on_mouse_event(const pulp::view::MouseEvent& event) override;
+	bool wants_mouse_input() const override { return true; }
+	bool wants_wheel_scroll() const override { return true; }
 
 private:
 	void send_prompt(const std::string& prompt);
@@ -28,4 +31,5 @@ private:
 	std::string session_;
 	std::string status_ = "Ready";
 	std::string last_prompt_;
+	float transcript_scroll_ = 0.0f;
 };
