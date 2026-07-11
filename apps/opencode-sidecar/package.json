@@ -1,0 +1,22 @@
+{
+	"name": "@palot/opencode-sidecar",
+	"version": "0.0.0",
+	"private": true,
+	"type": "module",
+	"bin": {
+		"palot-opencode-sidecar": "./src/main.ts"
+	},
+	"scripts": {
+		"build": "bun build --compile src/main.ts --outfile dist/palot-opencode-sidecar",
+		"package": "bun run build && mkdir -p release && cp dist/palot-opencode-sidecar release/palot-opencode-sidecar",
+		"package:app-resources": "./scripts/install-into-app.sh",
+		"test": "bun test",
+		"check-types": "tsgo --noEmit"
+	},
+	"dependencies": {
+		"@palot/opencode": "workspace:*"
+	},
+	"devDependencies": {
+		"@typescript/native-preview": "^7.0.0-dev.20260207.1"
+	}
+}

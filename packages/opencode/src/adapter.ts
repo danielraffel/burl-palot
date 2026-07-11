@@ -216,7 +216,7 @@ export class SdkOpenCodeGateway implements OpenCodeGateway {
 				)
 			case "project.select": {
 				const client = this.#requireClient()
-				const result = await client.project.current({ directory: command.directory })
+				const result = await client.project.current({ directory: command.directory }, { signal })
 				if (!result.data) throw result.error ?? new Error("OpenCode did not return a project")
 				const project: OpenCodeProject = {
 					id: result.data.id,
@@ -228,50 +228,65 @@ export class SdkOpenCodeGateway implements OpenCodeGateway {
 			}
 			case "session.list": {
 				const context = this.#project(command.projectId)
-				const result = await context.client.session.list({ directory: context.directory })
+				const result = await context.client.session.list(
+					{ directory: context.directory },
+					{ signal },
+				)
 				if (!result.data) throw result.error ?? new Error("OpenCode did not return sessions")
 				return result.data
 			}
 			case "session.create": {
 				const context = this.#project(command.projectId)
-				const result = await context.client.session.create({
-					directory: context.directory,
-					title: command.title,
-					permission: command.permission,
-				})
+				const result = await context.client.session.create(
+					{
+						directory: context.directory,
+						title: command.title,
+						permission: command.permission,
+					},
+					{ signal },
+				)
 				if (!result.data) throw result.error ?? new Error("OpenCode did not create a session")
 				return result.data
 			}
 			case "session.open": {
 				const context = this.#project(command.projectId)
-				const result = await context.client.session.get({
-					directory: context.directory,
-					sessionID: command.sessionId,
-				})
+				const result = await context.client.session.get(
+					{
+						directory: context.directory,
+						sessionID: command.sessionId,
+					},
+					{ signal },
+				)
 				if (!result.data) throw result.error ?? new Error("OpenCode session was not found")
 				return result.data
 			}
 			case "prompt.send":
 			case "prompt.retry": {
 				const context = this.#project(command.projectId)
-				const result = await context.client.session.promptAsync({
-					directory: context.directory,
-					sessionID: command.sessionId,
-					parts: [{ type: "text", text: command.text }],
-					model: {
-						providerID: command.model.providerId,
-						modelID: command.model.modelId,
+				const result = await context.client.session.promptAsync(
+					{
+						directory: context.directory,
+						sessionID: command.sessionId,
+						parts: [{ type: "text", text: command.text }],
+						model: {
+							providerID: command.model.providerId,
+							modelID: command.model.modelId,
+						},
 					},
-				})
+					{ signal },
+				)
 				if (result.error) throw result.error
 				return { requestId: command.requestId, sessionId: command.sessionId }
 			}
 			case "prompt.cancel": {
 				const context = this.#project(command.projectId)
-				const result = await context.client.session.abort({
-					directory: context.directory,
-					sessionID: command.sessionId,
-				})
+				const result = await context.client.session.abort(
+					{
+						directory: context.directory,
+						sessionID: command.sessionId,
+					},
+					{ signal },
+				)
 				if (result.error) throw result.error
 				return { requestId: command.requestId, cancelled: result.data === true }
 			}
@@ -317,7 +332,7 @@ export class SdkOpenCodeGateway implements OpenCodeGateway {
 		do {
 			if (signal?.aborted) throw signal.reason ?? new DOMException("Aborted", "AbortError")
 			try {
-				const health = await client.global.health()
+				const health = await client.global.health({ signal })
 				if (health.data) {
 					this.#client = client
 					this.#baseUrl = baseUrl

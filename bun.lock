@@ -74,6 +74,19 @@
         "electron-liquid-glass": "^1.1.1",
       },
     },
+    "apps/opencode-sidecar": {
+      "name": "@palot/opencode-sidecar",
+      "version": "0.0.0",
+      "bin": {
+        "palot-opencode-sidecar": "./src/main.ts",
+      },
+      "dependencies": {
+        "@palot/opencode": "workspace:*",
+      },
+      "devDependencies": {
+        "@typescript/native-preview": "^7.0.0-dev.20260207.1",
+      },
+    },
     "apps/server": {
       "name": "@palot/server",
       "version": "0.4.0",
@@ -123,6 +136,12 @@
     "packages/opencode": {
       "name": "@palot/opencode",
       "version": "0.0.0",
+      "dependencies": {
+        "@opencode-ai/sdk": "^1.2.1",
+      },
+      "devDependencies": {
+        "@typescript/native-preview": "^7.0.0-dev.20260207.1",
+      },
     },
     "packages/palot-react": {
       "name": "@palot/react",
@@ -639,6 +658,8 @@
     "@palot/domain": ["@palot/domain@workspace:packages/domain"],
 
     "@palot/opencode": ["@palot/opencode@workspace:packages/opencode"],
+
+    "@palot/opencode-sidecar": ["@palot/opencode-sidecar@workspace:apps/opencode-sidecar"],
 
     "@palot/react": ["@palot/react@workspace:packages/palot-react"],
 
