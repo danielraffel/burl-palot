@@ -27,11 +27,13 @@ int main(int argc, char** argv) {
 	std::string demo_project;
 	std::string demo_prompt;
 	std::string demo_capture;
+	bool visual_parity_fixture = false;
 	for (int index = 1; index < argc; ++index) {
 		const std::string_view argument(argv[index]);
 		if (argument == "--demo-project" && index + 1 < argc) demo_project = argv[++index];
 		else if (argument == "--demo-prompt" && index + 1 < argc) demo_prompt = argv[++index];
 		else if (argument == "--demo-capture" && index + 1 < argc) demo_capture = argv[++index];
+		else if (argument == "--visual-parity-fixture") visual_parity_fixture = true;
 	}
 	PalotView root;
 	root.set_bounds({0.0f, 0.0f, 1200.0f, 800.0f});
@@ -86,21 +88,30 @@ int main(int argc, char** argv) {
 	}
 	window->set_close_callback([] {});
 	std::jthread demo_starter;
-	if (!demo_project.empty() && !demo_prompt.empty()) {
+	if ((!demo_project.empty() && !demo_prompt.empty()) || visual_parity_fixture) {
 		root.on_demo_complete = [&root, &window, demo_capture] {
 			if (!demo_capture.empty()) {
-				const auto png = window->capture_back_buffer_png();
-				if (!png.empty() && write_png(demo_capture, png))
-					std::cout << "demo capture: " << demo_capture << '\n';
+				root.request_repaint();
+				window->mark_dirty();
+				window->repaint();
+				std::thread([&window, demo_capture] {
+					std::this_thread::sleep_for(std::chrono::milliseconds(750));
+					pulp::events::MainThreadDispatcher::call_async([&window, demo_capture] {
+						const auto png = window->capture_back_buffer_png();
+						if (!png.empty() && write_png(demo_capture, png))
+							std::cout << "demo capture: " << demo_capture << '\n';
+					});
+				}).detach();
 			}
 		};
 		demo_starter = std::jthread(
-			[&root, project = std::move(demo_project), prompt = std::move(demo_prompt)]() mutable {
+			[&root, visual_parity_fixture, project = std::move(demo_project), prompt = std::move(demo_prompt)]() mutable {
 				for (int attempt = 0; attempt < 20; ++attempt) {
 					if (pulp::events::MainThreadDispatcher::has_backend()) {
 						pulp::events::MainThreadDispatcher::call_async(
-						[&root, project = std::move(project), prompt = std::move(prompt)]() mutable {
-							root.start_demo(std::move(project), std::move(prompt));
+						[&root, visual_parity_fixture, project = std::move(project), prompt = std::move(prompt)]() mutable {
+							if (visual_parity_fixture) root.load_visual_parity_fixture();
+							else root.start_demo(std::move(project), std::move(prompt));
 						});
 						return;
 					}

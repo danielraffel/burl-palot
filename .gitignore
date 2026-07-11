@@ -50,3 +50,4 @@ AGENTS.local.md
 
 # Local final-validation build and trace artifacts
 /build-final/
+/build-visual/

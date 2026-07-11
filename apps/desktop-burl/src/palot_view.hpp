@@ -19,6 +19,7 @@ public:
 	void paint(pulp::canvas::Canvas& canvas) override;
 	void layout_children() override;
 	void start_demo(std::string project, std::string prompt);
+	void load_visual_parity_fixture();
 	std::function<void()> on_demo_complete;
 private:
 	class UiEventSink;
