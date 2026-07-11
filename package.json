@@ -57,7 +57,8 @@
 		"release": "changeset publish",
 		"baseline:electron": "./scripts/capture-electron-baseline.sh",
 		"verify:consumer-baseline": "./scripts/verify-consumer-baseline.sh",
-		"verify:app-package": "./scripts/verify-burl-app-package.sh"
+		"verify:app-package": "./scripts/verify-burl-app-package.sh",
+		"test:visual-parity": "python3 -m unittest -q tests/test_compare_screenshots.py"
 	},
 	"devDependencies": {
 		"@biomejs/biome": "^2.4.2",
