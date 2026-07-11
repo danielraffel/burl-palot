@@ -23,7 +23,10 @@ if grep -R -E 'BURL_(SOURCE_DIR|ROOT).*(/Users/|\.\./)' \
 	exit 1
 fi
 
-cmake -S apps/desktop-burl -B /tmp/burl-palot-boundary \
+build_dir="${TMPDIR:-/tmp}/burl-palot-boundary-$$"
+trap 'cmake -E remove_directory "$build_dir"' EXIT HUP INT TERM
+
+cmake -S apps/desktop-burl -B "$build_dir" \
 	-DBURL_PALOT_ENABLE_FRAMEWORK=OFF -DCMAKE_BUILD_TYPE=Release >/dev/null
-cmake --build /tmp/burl-palot-boundary --parallel 2 >/dev/null
+cmake --build "$build_dir" --parallel 2 >/dev/null
 echo "consumer baseline verified: Palot history, notices, Electron reference, immutable Burl pin"
