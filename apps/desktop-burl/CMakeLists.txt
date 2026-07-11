@@ -6,6 +6,8 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 option(BURL_PALOT_ENABLE_FRAMEWORK "Resolve the immutable Burl SDK and build Palot" ON)
 set(BURL_SOURCE_DIR "" CACHE PATH "Explicit local Burl checkout override (development only)")
+set(PALOT_OPENCODE_SIDECAR_EXECUTABLE "" CACHE FILEPATH
+	"Prebuilt palot-opencode-sidecar executable (otherwise built with Bun)")
 
 file(READ "${CMAKE_CURRENT_SOURCE_DIR}/burl.lock.json" BURL_LOCK)
 string(JSON BURL_REPOSITORY GET "${BURL_LOCK}" repository)
@@ -49,4 +51,75 @@ if(BURL_PALOT_ENABLE_FRAMEWORK)
 		APP_NAME "Palot"
 		BUNDLE_ID "com.palot.burl"
 		VERSION "0.1.0")
+
+	set(PALOT_SIDECAR_NAME "palot-opencode-sidecar")
+	set(PALOT_SIDECAR_BUILD_DIR "${CMAKE_CURRENT_BINARY_DIR}/sidecar")
+	set(PALOT_SIDECAR_OUTPUT "${PALOT_SIDECAR_BUILD_DIR}/${PALOT_SIDECAR_NAME}")
+	set(PALOT_REPOSITORY_ROOT "${CMAKE_CURRENT_SOURCE_DIR}/../..")
+
+	if(PALOT_OPENCODE_SIDECAR_EXECUTABLE)
+		if(NOT IS_ABSOLUTE "${PALOT_OPENCODE_SIDECAR_EXECUTABLE}" OR
+			NOT EXISTS "${PALOT_OPENCODE_SIDECAR_EXECUTABLE}")
+			message(FATAL_ERROR
+				"PALOT_OPENCODE_SIDECAR_EXECUTABLE must name an existing absolute file")
+		endif()
+		add_custom_command(OUTPUT "${PALOT_SIDECAR_OUTPUT}"
+			COMMAND "${CMAKE_COMMAND}" -E make_directory "${PALOT_SIDECAR_BUILD_DIR}"
+			COMMAND "${CMAKE_COMMAND}" -E copy
+				"${PALOT_OPENCODE_SIDECAR_EXECUTABLE}" "${PALOT_SIDECAR_OUTPUT}"
+			DEPENDS "${PALOT_OPENCODE_SIDECAR_EXECUTABLE}"
+			VERBATIM)
+	else()
+		find_program(PALOT_BUN_EXECUTABLE bun HINTS "$ENV{HOME}/.bun/bin")
+		if(NOT PALOT_BUN_EXECUTABLE)
+			message(FATAL_ERROR
+				"Bun is required to compile the OpenCode sidecar; alternatively set "
+				"PALOT_OPENCODE_SIDECAR_EXECUTABLE to a prebuilt absolute path")
+		endif()
+		file(GLOB_RECURSE PALOT_SIDECAR_SOURCES CONFIGURE_DEPENDS
+			"${PALOT_REPOSITORY_ROOT}/apps/opencode-sidecar/src/*.ts"
+			"${PALOT_REPOSITORY_ROOT}/packages/opencode/src/*.ts")
+		add_custom_command(OUTPUT "${PALOT_SIDECAR_OUTPUT}"
+			COMMAND "${CMAKE_COMMAND}" -E make_directory "${PALOT_SIDECAR_BUILD_DIR}"
+			COMMAND "${PALOT_BUN_EXECUTABLE}" build --compile
+				"${PALOT_REPOSITORY_ROOT}/apps/opencode-sidecar/src/main.ts"
+				--outfile "${PALOT_SIDECAR_OUTPUT}"
+			WORKING_DIRECTORY "${PALOT_REPOSITORY_ROOT}"
+			DEPENDS ${PALOT_SIDECAR_SOURCES}
+				"${PALOT_REPOSITORY_ROOT}/apps/opencode-sidecar/package.json"
+				"${PALOT_REPOSITORY_ROOT}/packages/opencode/package.json"
+				"${PALOT_REPOSITORY_ROOT}/bun.lock"
+			COMMENT "Compiling self-contained OpenCode sidecar"
+			VERBATIM)
+	endif()
+
+	add_custom_target(palot-opencode-sidecar DEPENDS "${PALOT_SIDECAR_OUTPUT}")
+	add_dependencies(burl-palot palot-opencode-sidecar)
+	target_include_directories(burl-palot PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/include")
+	target_compile_definitions(burl-palot PRIVATE
+		PALOT_OPENCODE_SIDECAR_RESOURCE_PATH="bin/${PALOT_SIDECAR_NAME}")
+
+	add_custom_command(TARGET burl-palot POST_BUILD
+		COMMAND "${CMAKE_COMMAND}" -E make_directory
+			"$<TARGET_BUNDLE_DIR:burl-palot>/Contents/Resources/bin"
+		COMMAND "${CMAKE_COMMAND}" -E copy "${PALOT_SIDECAR_OUTPUT}"
+			"$<TARGET_BUNDLE_DIR:burl-palot>/Contents/Resources/bin/${PALOT_SIDECAR_NAME}"
+		COMMAND chmod 755
+			"$<TARGET_BUNDLE_DIR:burl-palot>/Contents/Resources/bin/${PALOT_SIDECAR_NAME}"
+		COMMAND "${CMAKE_COMMAND}" -E make_directory
+			"$<TARGET_BUNDLE_DIR:burl-palot>/Contents/Resources/licenses"
+		COMMAND "${CMAKE_COMMAND}" -E copy
+			"${PALOT_REPOSITORY_ROOT}/LICENSE"
+			"$<TARGET_BUNDLE_DIR:burl-palot>/Contents/Resources/licenses/Palot-LICENSE"
+		COMMAND "${CMAKE_COMMAND}" -E copy
+			"${PALOT_REPOSITORY_ROOT}/THIRD-PARTY-NOTICES.md"
+			"$<TARGET_BUNDLE_DIR:burl-palot>/Contents/Resources/licenses/THIRD-PARTY-NOTICES.md"
+		COMMAND "${CMAKE_COMMAND}" -E copy
+			"${PALOT_REPOSITORY_ROOT}/apps/opencode-sidecar/THIRD-PARTY-NOTICES.md"
+			"$<TARGET_BUNDLE_DIR:burl-palot>/Contents/Resources/licenses/SIDECAR-NOTICES.md"
+		COMMAND "${CMAKE_COMMAND}" -E copy
+			"${CMAKE_CURRENT_SOURCE_DIR}/resources/sidecar-manifest.json"
+			"$<TARGET_BUNDLE_DIR:burl-palot>/Contents/Resources/sidecar-manifest.json"
+		COMMENT "Embedding OpenCode sidecar and license manifest in Palot.app"
+		VERBATIM)
 endif()

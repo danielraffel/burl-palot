@@ -23,3 +23,7 @@ application target.
 Palot product behavior belongs in this repository. General rendering,
 application-host, input, accessibility, and service capabilities belong in
 Burl and are consumed here only after the lock advances.
+
+The release target embeds the OpenCode sidecar and required notices in the
+application Resources directory. See [`PACKAGING.md`](./PACKAGING.md) for the
+bundle-relative discovery and verification contract.

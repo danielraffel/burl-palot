@@ -1,0 +1,27 @@
+{
+	"schemaVersion": 1,
+	"protocolVersion": 1,
+	"resourceRelativePath": "bin/palot-opencode-sidecar",
+	"bundleRelativePath": "Contents/Resources/bin/palot-opencode-sidecar",
+	"components": [
+		{
+			"name": "Palot OpenCode sidecar",
+			"package": "@palot/opencode-sidecar",
+			"license": "MIT",
+			"notice": "licenses/Palot-LICENSE"
+		},
+		{
+			"name": "OpenCode SDK",
+			"package": "@opencode-ai/sdk",
+			"versionRange": "^1.2.1",
+			"license": "MIT",
+			"notice": "licenses/THIRD-PARTY-NOTICES.md"
+		},
+		{
+			"name": "Bun runtime",
+			"distribution": "self-contained compiled executable",
+			"license": "MIT",
+			"notice": "licenses/SIDECAR-NOTICES.md"
+		}
+	]
+}
