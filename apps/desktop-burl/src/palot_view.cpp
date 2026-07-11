@@ -1,6 +1,10 @@
 #include "palot_view.hpp"
 
 #include <pulp/events/main_thread_dispatcher.hpp>
+#include <pulp/view/accessibility.hpp>
+#include <pulp/view/buttons.hpp>
+#include <pulp/view/markdown_view.hpp>
+#include <pulp/view/widgets.hpp>
 
 #include <cstdlib>
 #include <algorithm>
@@ -15,6 +19,68 @@ namespace {
 
 constexpr float kSidebarWidth = 250.0f;
 constexpr float kComposerHeight = 92.0f;
+constexpr float kTranscriptTop = 38.0f;
+constexpr float kTranscriptGap = 14.0f;
+
+struct MessageRow final : pulp::view::View {
+	pulp::view::Label* role = nullptr;
+	pulp::view::MarkdownView* content = nullptr;
+	pulp::view::TextButton* copy = nullptr;
+	bool user = false;
+	bool tool = false;
+
+	MessageRow() {
+		set_access_role(AccessRole::group);
+		set_overflow(Overflow::hidden);
+	}
+
+	void bind(const std::string& role_text, const std::string& text) {
+		while (child_count() != 0) remove_child(child_at(child_count() - 1));
+		user = role_text == "You";
+		tool = role_text == "Tool";
+		set_access_label(role_text + " message: " + text);
+
+		auto role_label = std::make_unique<pulp::view::Label>(role_text);
+		role_label->set_font_size(12.0f);
+		role_label->set_font_weight(700);
+		role_label->set_text_color(user ? pulp::canvas::Color::rgba8(94, 234, 212)
+		                                : pulp::canvas::Color::rgba8(148, 163, 184));
+		role = role_label.get();
+		add_child(std::move(role_label));
+
+		auto markdown = std::make_unique<pulp::view::MarkdownView>(
+			tool ? "```json\n" + text + "\n```" : text);
+		content = markdown.get();
+		add_child(std::move(markdown));
+
+		auto copy_button = std::make_unique<pulp::view::TextButton>("Copy");
+		copy_button->set_style(pulp::view::TextButton::Style::ghost);
+		copy_button->set_access_label("Copy " + role_text + " message");
+		copy_button->on_click = [this] {
+			content->set_selection(0, static_cast<int>(content->get_text().size()));
+			content->copy_selection();
+		};
+		copy = copy_button.get();
+		add_child(std::move(copy_button));
+	}
+
+	void layout_children() override {
+		const auto b = local_bounds();
+		role->set_bounds({16.0f, 10.0f, std::max(0.0f, b.width - 90.0f), 20.0f});
+		copy->set_bounds({std::max(16.0f, b.width - 70.0f), 7.0f, 54.0f, 28.0f});
+		content->set_bounds({16.0f, 38.0f, std::max(0.0f, b.width - 32.0f),
+		                     std::max(0.0f, b.height - 50.0f)});
+		content->layout_children();
+	}
+
+	void paint(pulp::canvas::Canvas& canvas) override {
+		canvas.set_fill_color(user ? pulp::canvas::Color::rgba8(20, 48, 60)
+		                           : tool ? pulp::canvas::Color::rgba8(42, 35, 24)
+		                                  : pulp::canvas::Color::rgba8(24, 33, 49));
+		canvas.fill_rounded_rect(0.0f, 0.0f, bounds().width,
+		                         std::max(0.0f, bounds().height - kTranscriptGap), 12.0f);
+	}
+};
 
 std::filesystem::path state_path() {
 	if (const char* home = std::getenv("HOME"))
@@ -74,7 +140,27 @@ PalotView::PalotView() {
 	};
 	composer_ = composer.get();
 	add_child(std::move(composer));
+
+	auto transcript = std::make_unique<pulp::view::VirtualList>();
+	transcript->set_access_label("Conversation transcript");
+	transcript->set_selection_mode(pulp::view::VirtualList::SelectionMode::none);
+	transcript->set_auto_follow(true);
+	transcript->set_overscan(4);
+	transcript->set_row_height(96.0f);
+	transcript->set_row_factory([](std::size_t) {
+		return std::make_unique<MessageRow>();
+	});
+	transcript->set_row_binder([this](pulp::view::View& row, std::size_t index) {
+		if (index >= messages_.size()) return;
+		const auto& [role, text] = messages_[index];
+		static_cast<MessageRow&>(row).bind(role, text);
+	});
+	transcript_ = transcript.get();
+	add_child(std::move(transcript));
 	restore();
+	transcript_->set_row_count(messages_.size());
+	for (std::size_t index = 0; index < messages_.size(); ++index)
+		transcript_->set_row_height(index, message_height(index));
 }
 
 PalotView::~PalotView() {
@@ -87,6 +173,10 @@ void PalotView::layout_children() {
 	project_->set_bounds({20.0f, 86.0f, kSidebarWidth - 40.0f, 38.0f});
 	composer_->set_bounds({kSidebarWidth + 28.0f, b.height - kComposerHeight - 24.0f,
 	                       b.width - kSidebarWidth - 56.0f, kComposerHeight});
+	transcript_->set_bounds({kSidebarWidth + 28.0f, kTranscriptTop,
+	                         b.width - kSidebarWidth - 56.0f,
+	                         std::max(0.0f, b.height - kComposerHeight - kTranscriptTop - 38.0f)});
+	transcript_->layout_children();
 }
 
 void PalotView::paint(pulp::canvas::Canvas& canvas) {
@@ -102,46 +192,46 @@ void PalotView::paint(pulp::canvas::Canvas& canvas) {
 	canvas.set_font("Inter", 13.0f);
 	canvas.fill_text("PROJECT", 20.0f, 75.0f);
 	canvas.fill_text("OpenCode • " + status_, 20.0f, b.height - 28.0f);
-
-	float y = 54.0f - transcript_scroll_;
-	for (const auto& [role, text] : messages_) {
-		if (y + 68.0f < 40.0f) {
-			y += 82.0f;
-			continue;
-		}
-		const bool user = role == "You";
-		canvas.set_fill_color(user ? pulp::canvas::Color::rgba8(20, 48, 60)
-		                           : pulp::canvas::Color::rgba8(24, 33, 49));
-		canvas.fill_rounded_rect(kSidebarWidth + 28.0f, y,
-		                         b.width - kSidebarWidth - 56.0f, 68.0f, 12.0f);
-		canvas.set_fill_color(user ? pulp::canvas::Color::rgba8(94, 234, 212)
-		                           : pulp::canvas::Color::rgba8(148, 163, 184));
-		canvas.set_font("Inter", 12.0f);
-		canvas.fill_text(role, kSidebarWidth + 44.0f, y + 22.0f);
-		canvas.set_fill_color(pulp::canvas::Color::rgba8(241, 245, 249));
-		canvas.set_font("Inter", 15.0f);
-		canvas.fill_text(text.substr(0, 120), kSidebarWidth + 44.0f, y + 49.0f);
-		y += 82.0f;
-		if (y > b.height - kComposerHeight - 110.0f) break;
-	}
 }
 
-void PalotView::on_mouse_event(const pulp::view::MouseEvent& event) {
-	if (!event.is_wheel || event.position.x < kSidebarWidth) return;
-	const float viewport = std::max(0.0f, local_bounds().height - kComposerHeight - 150.0f);
-	const float content = static_cast<float>(messages_.size()) * 82.0f;
-	transcript_scroll_ = std::clamp(transcript_scroll_ + event.scroll_delta_y,
-	                                0.0f, std::max(0.0f, content - viewport));
-	request_repaint();
+float PalotView::message_height(std::size_t index) const {
+	if (index >= messages_.size()) return 96.0f;
+	const auto& [role, text] = messages_[index];
+	const float width = std::max(240.0f, local_bounds().width - kSidebarWidth - 88.0f);
+	const auto characters_per_line = std::max<std::size_t>(24, static_cast<std::size_t>(width / 8.0f));
+	std::size_t lines = 1;
+	std::size_t column = 0;
+	for (const char character : text) {
+		if (character == '\n') {
+			++lines;
+			column = 0;
+		} else if (++column >= characters_per_line) {
+			++lines;
+			column = 0;
+		}
+	}
+	const float line_height = role == "Tool" ? 21.0f : 23.0f;
+	return std::clamp(58.0f + static_cast<float>(lines) * line_height + kTranscriptGap,
+	                  96.0f, 640.0f);
+}
+
+void PalotView::append_message(std::string role, std::string text, bool announce) {
+	const std::string announcement = role + ": " + text;
+	messages_.emplace_back(std::move(role), std::move(text));
+	const auto index = messages_.size() - 1;
+	transcript_->set_row_count(messages_.size());
+	transcript_->set_row_height(index, message_height(index));
+	transcript_->refresh_rows();
+	if (announce)
+		pulp::view::announce_accessibility(announcement,
+			pulp::view::AnnouncementPriority::Polite);
 }
 
 void PalotView::send_prompt(const std::string& prompt) {
 	if (prompt.empty() || process_.running()) return;
 	const std::string prompt_value = prompt;
 	last_prompt_ = prompt_value;
-	messages_.emplace_back("You", prompt_value);
-	transcript_scroll_ = std::max(0.0f, static_cast<float>(messages_.size()) * 82.0f -
-	                                      (local_bounds().height - kComposerHeight - 150.0f));
+	append_message("You", prompt_value, false);
 	composer_->set_text("");
 	status_ = "Streaming";
 	request_repaint();
@@ -158,11 +248,9 @@ void PalotView::handle_event(std::string type, std::string value) {
 	if (type == "session") {
 		session_ = std::move(value);
 	} else if (type == "text" && !value.empty()) {
-		messages_.emplace_back("OpenCode", std::move(value));
-		transcript_scroll_ = std::max(0.0f, static_cast<float>(messages_.size()) * 82.0f -
-		                                      (local_bounds().height - kComposerHeight - 150.0f));
+		append_message("OpenCode", std::move(value), true);
 	} else if (type == "tool") {
-		messages_.emplace_back("Tool", std::move(value));
+		append_message("Tool", std::move(value), true);
 	} else if (type == "done") {
 		status_ = "Ready";
 		persist();

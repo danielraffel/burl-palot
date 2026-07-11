@@ -137,7 +137,7 @@ void OpenCodeProcess::run(std::string project, std::string prompt,
 		} else if (type == "step_start") {
 			callback("session", json_string(line, "sessionID"));
 		} else if (type == "tool_use" || type == "tool_result") {
-			callback("tool", type);
+			callback("tool", line);
 		}
 	}
 	if (stream) fclose(stream);
