@@ -36,14 +36,14 @@ if(BURL_PALOT_ENABLE_FRAMEWORK)
 		FetchContent_MakeAvailable(burl)
 	endif()
 
-	if(NOT TARGET burl::app)
+	if(NOT COMMAND burl_add_app)
 		message(FATAL_ERROR
-			"Pinned Burl revision does not export burl::app yet; advance the immutable pin after B-04 lands")
+			"Pinned Burl revision does not export burl_add_app")
 	endif()
 
-	add_executable(burl-palot MACOSX_BUNDLE src/main.cpp)
-	target_link_libraries(burl-palot PRIVATE burl::app)
-	set_target_properties(burl-palot PROPERTIES
-		MACOSX_BUNDLE_BUNDLE_NAME "Palot"
-		MACOSX_BUNDLE_GUI_IDENTIFIER "com.palot.burl")
+	burl_add_app(burl-palot
+		SOURCES src/main.cpp
+		APP_NAME "Palot"
+		BUNDLE_ID "com.palot.burl"
+		VERSION "0.1.0")
 endif()
