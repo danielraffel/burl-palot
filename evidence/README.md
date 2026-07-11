@@ -9,6 +9,11 @@ the real streamed OpenCode response `NATIVE PALOT OK` in the Skia/Dawn window.
 The screenshot SHA-256 is
 `5e1d1deac0e8bae46c5c06a988357a833415fc7fb4f08cfc6dd33b71a9ffbb0c`.
 
+`screenshots/final-native-opencode-chat.png` is the final GPU back-buffer
+capture from the immutable-Burl Release bundle using the packaged sidecar,
+semantic virtual transcript, and native Markdown renderer. Its SHA-256 is
+`000d8d31df37cb7b88471d516acd9dcc81f3e9467eec0511865c862c39687ae3`.
+
 The package boundary is checked with:
 
 ```sh

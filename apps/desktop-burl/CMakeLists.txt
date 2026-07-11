@@ -62,7 +62,7 @@ if(BURL_PALOT_ENABLE_FRAMEWORK)
 			src/project_config.cpp
 			src/palot_view.cpp
 		APP_NAME "Palot"
-		BUNDLE_ID "com.palot.burl.demo"
+		BUNDLE_ID "com.palot.burl"
 		VERSION "0.1.0")
 	target_link_libraries(burl-palot PRIVATE nlohmann_json::nlohmann_json)
 

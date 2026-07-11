@@ -8,6 +8,7 @@
 #include <pulp/view/virtual_list.hpp>
 
 #include <string>
+#include <functional>
 #include <memory>
 #include <vector>
 
@@ -17,6 +18,8 @@ public:
 	~PalotView() override;
 	void paint(pulp::canvas::Canvas& canvas) override;
 	void layout_children() override;
+	void start_demo(std::string project, std::string prompt);
+	std::function<void()> on_demo_complete;
 private:
 	class UiEventSink;
 	void send_prompt(const std::string& prompt, bool retry = false);

@@ -286,6 +286,11 @@ void PalotView::layout_children() {
 	transcript_->layout_children();
 }
 
+void PalotView::start_demo(std::string project, std::string prompt) {
+	project_->set_text(std::move(project));
+	send_prompt(prompt);
+}
+
 void PalotView::paint(pulp::canvas::Canvas& canvas) {
 	const auto b = local_bounds();
 	canvas.set_fill_color(pulp::canvas::Color::rgba8(8, 13, 24));
@@ -381,12 +386,24 @@ void PalotView::handle_event(std::string type, std::string value) {
 		session_editor_->set_text(session_);
 		create_session_ = false;
 	} else if (type == "text" && !value.empty()) {
-		append_message("OpenCode", std::move(value), true);
+		if (!messages_.empty() && messages_.back().first == "OpenCode") {
+			messages_.back().second += value;
+			const auto index = messages_.size() - 1;
+			transcript_->set_row_height(index, message_height(index));
+			transcript_->refresh_rows();
+		} else {
+			append_message("OpenCode", std::move(value), false);
+		}
 	} else if (type == "tool") {
 		append_message("Tool", std::move(value), true);
 	} else if (type == "done") {
 		status_ = "Ready";
+		if (!messages_.empty() && messages_.back().first == "OpenCode")
+			pulp::view::announce_accessibility(
+			    "OpenCode: " + accessibility_summary(messages_.back().second),
+			    pulp::view::AnnouncementPriority::Polite);
 		persist();
+		if (on_demo_complete) on_demo_complete();
 	} else if (type == "error") {
 		status_ = value == "cancelled" ? "Cancelled" : "Error: " + value.substr(0, 80);
 	}
