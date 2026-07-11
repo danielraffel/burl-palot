@@ -21,7 +21,9 @@
 		"clean": "turbo clean",
 		"changeset": "changeset",
 		"version-packages": "changeset version",
-		"release": "changeset publish"
+		"release": "changeset publish",
+		"baseline:electron": "./scripts/capture-electron-baseline.sh",
+		"verify:consumer-baseline": "./scripts/verify-consumer-baseline.sh"
 	},
 	"devDependencies": {
 		"@biomejs/biome": "^2.4.2",

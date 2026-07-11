@@ -1,0 +1,12 @@
+{
+	"schemaVersion": 1,
+	"capturedAt": "20260711T191601Z",
+	"gitRevision": "fd63a75dad3d0e8555ba22a47e720d285889fbf0",
+	"platform": "Darwin-arm64",
+	"electronVersion": "40.2.1",
+	"desktopSourceBytes": 2468985,
+	"applicationBundle": "apps/desktop/release/mac-arm64/Palot.app",
+	"applicationBundleBytes": 699404288,
+	"chromiumFrameworkBytes": 269185024,
+	"artifactMeasurementStatus": "built-and-launched"
+}

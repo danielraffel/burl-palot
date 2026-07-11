@@ -1,0 +1,14 @@
+{
+	"schemaVersion": 1,
+	"scenario": "live-chat-smoke",
+	"prompt": "Reply with two short bullet points. Use *emphasis*, `inline code`, and a fenced text block. Then list the current directory using an appropriate tool.",
+	"required": [
+		"stream-started-before-completion",
+		"markdown-paragraph",
+		"markdown-emphasis",
+		"markdown-list",
+		"markdown-inline-code",
+		"markdown-fenced-code",
+		"basic-tool-call"
+	]
+}

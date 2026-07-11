@@ -17,7 +17,7 @@
     },
     "apps/desktop": {
       "name": "@palot/desktop",
-      "version": "0.8.0",
+      "version": "0.11.0",
       "dependencies": {
         "@fontsource-variable/inter": "^5.2.8",
         "@fontsource/ibm-plex-mono": "^5.2.7",
@@ -116,6 +116,18 @@
         "typescript": "^5.8.3",
       },
     },
+    "packages/domain": {
+      "name": "@palot/domain",
+      "version": "0.0.0",
+    },
+    "packages/opencode": {
+      "name": "@palot/opencode",
+      "version": "0.0.0",
+    },
+    "packages/palot-react": {
+      "name": "@palot/react",
+      "version": "0.0.0",
+    },
     "packages/ui": {
       "name": "@palot/ui",
       "version": "0.6.0",
@@ -167,6 +179,14 @@
         "tailwindcss": "^4.0.0",
         "typescript": "^5.7.0",
       },
+    },
+    "packages/ui-burl": {
+      "name": "@palot/ui-burl",
+      "version": "0.0.0",
+    },
+    "packages/ui-web": {
+      "name": "@palot/ui-web",
+      "version": "0.0.0",
     },
   },
   "packages": {
@@ -616,9 +636,19 @@
 
     "@palot/desktop": ["@palot/desktop@workspace:apps/desktop"],
 
+    "@palot/domain": ["@palot/domain@workspace:packages/domain"],
+
+    "@palot/opencode": ["@palot/opencode@workspace:packages/opencode"],
+
+    "@palot/react": ["@palot/react@workspace:packages/palot-react"],
+
     "@palot/server": ["@palot/server@workspace:apps/server"],
 
     "@palot/ui": ["@palot/ui@workspace:packages/ui"],
+
+    "@palot/ui-burl": ["@palot/ui-burl@workspace:packages/ui-burl"],
+
+    "@palot/ui-web": ["@palot/ui-web@workspace:packages/ui-web"],
 
     "@pierre/diffs": ["@pierre/diffs@1.0.10", "", { "dependencies": { "@shikijs/core": "^3.0.0", "@shikijs/engine-javascript": "^3.0.0", "@shikijs/transformers": "^3.0.0", "diff": "8.0.3", "hast-util-to-html": "9.0.5", "lru_map": "0.4.1", "shiki": "^3.0.0" }, "peerDependencies": { "react": "^18.3.1 || ^19.0.0", "react-dom": "^18.3.1 || ^19.0.0" } }, "sha512-ahkpfS30NfaB+PBxnf0/Mc20ySBRTQmM28a7Ojpd0UZixmTyhGhJfBFjvmhX8dSzR22lB3h3OIMMxpB4yYTIOQ=="],
 
