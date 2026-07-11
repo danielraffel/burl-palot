@@ -1,6 +1,8 @@
 #include "palot_view.hpp"
+#include "project_config.hpp"
 
 #include <pulp/events/main_thread_dispatcher.hpp>
+#include <pulp/platform/file_dialog.hpp>
 #include <pulp/view/accessibility.hpp>
 #include <pulp/view/buttons.hpp>
 #include <pulp/view/markdown_view.hpp>
@@ -90,7 +92,7 @@ std::filesystem::path state_path() {
 	return "burl-session.bin";
 }
 
-constexpr std::string_view kStateMagic = "PALOT01\n";
+constexpr std::string_view kStateMagic = "PALOT02\n";
 constexpr std::size_t kMaxStateBytes = 16 * 1024 * 1024;
 constexpr std::uint32_t kMaxMessages = 10000;
 
@@ -151,6 +153,53 @@ PalotView::PalotView() {
 	project_ = project.get();
 	add_child(std::move(project));
 
+	auto choose_project = std::make_unique<pulp::view::TextButton>("Choose…");
+	choose_project->set_access_label("Choose project folder");
+	choose_project->on_click = [this] { choose_project_folder(); };
+	choose_project_ = choose_project.get();
+	add_child(std::move(choose_project));
+
+	auto session_editor = std::make_unique<pulp::view::TextEditor>();
+	session_editor->placeholder = "Session ID";
+	session_editor->set_access_label("OpenCode session ID");
+	session_editor_ = session_editor.get();
+	add_child(std::move(session_editor));
+
+	auto new_session = std::make_unique<pulp::view::TextButton>("New");
+	new_session->set_access_label("Create a new OpenCode session");
+	new_session->on_click = [this] {
+		create_session_ = true;
+		session_editor_->set_text("");
+		set_configuration_error("");
+		request_repaint();
+	};
+	new_session_ = new_session.get();
+	add_child(std::move(new_session));
+
+	auto open_session = std::make_unique<pulp::view::TextButton>("Open");
+	open_session->set_access_label("Open the entered OpenCode session");
+	open_session->on_click = [this] {
+		create_session_ = false;
+		set_configuration_error("");
+		request_repaint();
+	};
+	open_session_ = open_session.get();
+	add_child(std::move(open_session));
+
+	auto provider = std::make_unique<pulp::view::TextEditor>();
+	provider->placeholder = "Provider";
+	provider->set_access_label("OpenCode model provider");
+	provider->set_text("opencode");
+	provider_ = provider.get();
+	add_child(std::move(provider));
+
+	auto model = std::make_unique<pulp::view::TextEditor>();
+	model->placeholder = "Model";
+	model->set_access_label("OpenCode model ID");
+	model->set_text("north-mini-code-free");
+	model_ = model.get();
+	add_child(std::move(model));
+
 	auto composer = std::make_unique<pulp::view::TextEditor>();
 	composer->placeholder = "Ask OpenCode…  Return to send, Esc to cancel";
 	composer->multi_line = true;
@@ -186,6 +235,7 @@ PalotView::PalotView() {
 	transcript_ = transcript.get();
 	add_child(std::move(transcript));
 	restore();
+	pulp::platform::FileDialog::install_native_backend();
 	transcript_->set_row_count(messages_.size());
 	for (std::size_t index = 0; index < messages_.size(); ++index)
 		transcript_->set_row_height(index, message_height(index));
@@ -199,7 +249,13 @@ PalotView::~PalotView() {
 
 void PalotView::layout_children() {
 	const auto b = local_bounds();
-	project_->set_bounds({20.0f, 86.0f, kSidebarWidth - 40.0f, 38.0f});
+	project_->set_bounds({20.0f, 86.0f, 142.0f, 38.0f});
+	choose_project_->set_bounds({168.0f, 86.0f, 66.0f, 38.0f});
+	session_editor_->set_bounds({20.0f, 142.0f, 214.0f, 36.0f});
+	new_session_->set_bounds({20.0f, 184.0f, 102.0f, 34.0f});
+	open_session_->set_bounds({132.0f, 184.0f, 102.0f, 34.0f});
+	provider_->set_bounds({20.0f, 240.0f, 214.0f, 36.0f});
+	model_->set_bounds({20.0f, 282.0f, 214.0f, 36.0f});
 	composer_->set_bounds({kSidebarWidth + 28.0f, b.height - kComposerHeight - 24.0f,
 	                       b.width - kSidebarWidth - 56.0f, kComposerHeight});
 	transcript_->set_bounds({kSidebarWidth + 28.0f, kTranscriptTop,
@@ -220,6 +276,12 @@ void PalotView::paint(pulp::canvas::Canvas& canvas) {
 	canvas.set_fill_color(pulp::canvas::Color::rgba8(100, 116, 139));
 	canvas.set_font("Inter", 13.0f);
 	canvas.fill_text("PROJECT", 20.0f, 75.0f);
+	canvas.fill_text(create_session_ ? "Session: new" : "Session: open existing", 20.0f,
+	                 232.0f);
+	if (!configuration_error_.empty()) {
+		canvas.set_fill_color(pulp::canvas::Color::rgba8(248, 113, 113));
+		canvas.fill_text(configuration_error_.substr(0, 32), 20.0f, 342.0f);
+	}
 	canvas.fill_text("OpenCode • " + status_, 20.0f, b.height - 28.0f);
 }
 
@@ -258,23 +320,44 @@ void PalotView::append_message(std::string role, std::string text, bool announce
 
 void PalotView::send_prompt(const std::string& prompt, bool retry) {
 	if (prompt.empty() || process_.running()) return;
+	std::string validation_error;
+	auto configuration = validate_project_configuration(
+	    {.project_path = project_->text(),
+	     .provider_id = provider_->text(),
+	     .model_id = model_->text(),
+	     .create_session = create_session_,
+	     .session_id = session_editor_->text()},
+	    validation_error);
+	if (!configuration) {
+		set_configuration_error(std::move(validation_error));
+		return;
+	}
+	set_configuration_error("");
+	project_->set_text(configuration->canonical_project_path);
 	const std::string prompt_value = prompt;
+	if (!process_.start({.project = configuration->canonical_project_path,
+	                    .prompt = prompt_value,
+	                    .session = configuration->session_id,
+	                    .failed_request_id = retry ? last_request_id_ : "",
+	                    .provider_id = configuration->provider_id,
+	                    .model_id = configuration->model_id},
+	               event_sink_)) {
+		set_configuration_error("Unable to start the OpenCode sidecar.");
+		return;
+	}
 	last_prompt_ = prompt_value;
 	append_message("You", prompt_value, false);
 	composer_->set_text("");
 	status_ = "Streaming";
 	request_repaint();
-	process_.start({.project = project_->text(),
-	                .prompt = prompt_value,
-	                .session = session_,
-	                .failed_request_id = retry ? last_request_id_ : ""},
-	               event_sink_);
 	last_request_id_ = std::to_string(process_.run_id()) + "-prompt";
 }
 
 void PalotView::handle_event(std::string type, std::string value) {
 	if (type == "session") {
 		session_ = std::move(value);
+		session_editor_->set_text(session_);
+		create_session_ = false;
 	} else if (type == "text" && !value.empty()) {
 		append_message("OpenCode", std::move(value), true);
 	} else if (type == "tool") {
@@ -288,6 +371,30 @@ void PalotView::handle_event(std::string type, std::string value) {
 	request_repaint();
 }
 
+void PalotView::choose_project_folder() {
+	auto selected = pulp::platform::FileDialog::choose_folder(
+	    "Choose a Palot project", project_->text());
+	if (!selected) return;
+	std::string error;
+	auto canonical_path = validate_project_directory(*selected, error);
+	if (!canonical_path) {
+		set_configuration_error(std::move(error));
+		return;
+	}
+	project_->set_text(*canonical_path);
+	set_configuration_error("");
+	request_repaint();
+}
+
+void PalotView::set_configuration_error(std::string error) {
+	configuration_error_ = std::move(error);
+	set_access_value(configuration_error_.empty() ? "Configuration valid" : configuration_error_);
+	if (!configuration_error_.empty())
+		pulp::view::announce_accessibility(configuration_error_,
+		    pulp::view::AnnouncementPriority::Assertive);
+	request_repaint();
+}
+
 void PalotView::persist() const {
 	const auto path = state_path();
 	std::error_code error;
@@ -296,6 +403,8 @@ void PalotView::persist() const {
 	std::vector<std::uint8_t> bytes(kStateMagic.begin(), kStateMagic.end());
 	append_string(bytes, session_);
 	append_string(bytes, project_->text());
+	append_string(bytes, provider_->text());
+	append_string(bytes, model_->text());
 	const auto count = static_cast<std::uint32_t>(
 		std::min<std::size_t>(messages_.size(), kMaxMessages));
 	for (int shift = 0; shift < 32; shift += 8)
@@ -331,9 +440,18 @@ void PalotView::restore() {
 	if (!std::equal(kStateMagic.begin(), kStateMagic.end(), bytes.begin())) return;
 	std::size_t cursor = kStateMagic.size();
 	std::string project;
+	std::string provider;
+	std::string model;
 	if (!read_string(bytes, cursor, session_) || !read_string(bytes, cursor, project) ||
+	    !read_string(bytes, cursor, provider) || !read_string(bytes, cursor, model) ||
 	    cursor + 4 > bytes.size()) return;
 	if (!project.empty()) project_->set_text(project);
+	if (!provider.empty()) provider_->set_text(provider);
+	if (!model.empty()) model_->set_text(model);
+	if (!session_.empty()) {
+		session_editor_->set_text(session_);
+		create_session_ = false;
+	}
 	std::uint32_t count = 0;
 	for (int shift = 0; shift < 32; shift += 8)
 		count |= static_cast<std::uint32_t>(bytes[cursor++]) << shift;

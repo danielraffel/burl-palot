@@ -2,6 +2,7 @@
 
 #include "opencode_process.hpp"
 
+#include <pulp/view/buttons.hpp>
 #include <pulp/view/text_editor.hpp>
 #include <pulp/view/view.hpp>
 #include <pulp/view/virtual_list.hpp>
@@ -22,11 +23,19 @@ private:
 	void handle_event(std::string type, std::string value);
 	void persist() const;
 	void restore();
+	void choose_project_folder();
+	void set_configuration_error(std::string error);
 	void append_message(std::string role, std::string text, bool announce);
 	float message_height(std::size_t index) const;
 
 	pulp::view::TextEditor* project_ = nullptr;
 	pulp::view::TextEditor* composer_ = nullptr;
+	pulp::view::TextEditor* session_editor_ = nullptr;
+	pulp::view::TextEditor* provider_ = nullptr;
+	pulp::view::TextEditor* model_ = nullptr;
+	pulp::view::TextButton* choose_project_ = nullptr;
+	pulp::view::TextButton* new_session_ = nullptr;
+	pulp::view::TextButton* open_session_ = nullptr;
 	pulp::view::VirtualList* transcript_ = nullptr;
 	OpenCodeProcess process_;
 	std::shared_ptr<UiEventSink> event_sink_;
@@ -35,4 +44,6 @@ private:
 	std::string status_ = "Ready";
 	std::string last_prompt_;
 	std::string last_request_id_;
+	std::string configuration_error_;
+	bool create_session_ = true;
 };

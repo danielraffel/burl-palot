@@ -59,6 +59,7 @@ if(BURL_PALOT_ENABLE_FRAMEWORK)
 		SOURCES
 			src/main.cpp
 			src/opencode_process.cpp
+			src/project_config.cpp
 			src/palot_view.cpp
 		APP_NAME "Palot"
 		BUNDLE_ID "com.palot.burl.demo"
@@ -206,9 +207,14 @@ if(BURL_PALOT_ENABLE_FRAMEWORK)
 		target_include_directories(palot-opencode-process-test PRIVATE src)
 		target_link_libraries(palot-opencode-process-test PRIVATE
 			nlohmann_json::nlohmann_json)
+		add_executable(palot-project-config-test
+			test/project_config_test.cpp
+			src/project_config.cpp)
+		target_include_directories(palot-project-config-test PRIVATE src)
 		add_test(NAME palot-opencode-process
 			COMMAND palot-opencode-process-test
 				"${CMAKE_CURRENT_SOURCE_DIR}/test/fake_sidecar.py"
 				"${PALOT_SIDECAR_OUTPUT}")
+		add_test(NAME palot-project-config COMMAND palot-project-config-test)
 	endif()
 endif()
