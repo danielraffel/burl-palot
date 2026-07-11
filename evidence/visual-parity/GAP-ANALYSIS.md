@@ -2,7 +2,7 @@
 
 Reference: the unmodified Palot source at `fd63a75dad3d0e8555ba22a47e720d285889fbf0`, built with Bun/Electron and opened on its deterministic `?mock=1` dark-mode session fixture. Both reference and native captures use a 1200 x 800 logical viewport and 2400 x 1600 Retina pixels.
 
-## Closed 1:1 gaps
+## Substantially closed structural gaps
 
 1. The native shell now uses the source's 280 px sidebar and 46 px app bar.
 2. Window controls, wordmark, breadcrumb, session title, and right-side status metrics occupy the same header bands.
@@ -16,8 +16,10 @@ Reference: the unmodified Palot source at `fd63a75dad3d0e8555ba22a47e720d285889f
 10. The native capture remains C++/Yoga/Skia Graphite/Dawn/Metal; no WebView or Chromium code was introduced.
 11. A deterministic screenshot harness now emits normalized inputs, montage, heatmap, overlay, hashes, MAE, RMSE, PSNR, SSIM, and changed-pixel counts for every pass.
 
-## Quantitative result
+## Quantitative result and residual gaps
 
-The initial structural mock scored SSIM `0.088831116` with MAE `13.229267`. After the 1:1 shell, fixture, composer, and typography passes, the matched native fixture scored SSIM `0.221431338` with MAE `12.862031` and `10.702708%` pixels above the 16-channel threshold. Exact-pixel equality is not a valid cross-renderer gate because Chromium/CoreText and Skia produce different glyph antialiasing; the montage is the structural parity oracle, while the numerical report remains a regression signal.
+The initial structural mock scored SSIM `0.088831116` with MAE `13.229267`. After the shell, fixture, composer, and typography passes, the matched native fixture scored SSIM `0.221431338` with MAE `12.862031` and `10.702708%` pixels above the 16-channel threshold. This is substantial structural convergence, not pixel identity.
+
+Residual differences remain in renderer-specific glyph antialiasing, exact Lucide icon shapes, selected-session copy, muted metadata color, rich inline-code backgrounds, scrollbar styling, and some transcript wrapping. Chromium/CoreText and Skia will not produce byte-identical glyph pixels, so the raw metrics are retained as an honest regression signal rather than described as equality. The functional native controls remain real widgets: New Session, project chooser, session ID/Open, provider, model, Send, and Cancel are visible and operable; static painting is limited to non-interactive chrome and fixture content.
 
 The real native OpenCode path was separately exercised after the visual fixture and returned exactly `NATIVE VISUAL PALOT OK`.

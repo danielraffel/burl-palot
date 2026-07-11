@@ -34,12 +34,23 @@ struct PalotComposer final : pulp::view::TextEditor {
 		const auto b = local_bounds();
 		canvas.set_font("Inter", 12.0f);
 		canvas.set_fill_color(pulp::canvas::Color::rgba8(166, 166, 166));
-		canvas.fill_text("+     Build⌄     |     ✣ Claude Opus 4.6⌄     |     Default variant⌄",
+		canvas.fill_text("+     Build⌄",
 		                 18.0f, b.height - 17.0f);
 		canvas.set_fill_color(pulp::canvas::Color::rgba8(248, 248, 248));
 		canvas.fill_rounded_rect(b.width - 82.0f, b.height - 35.0f, 68.0f, 24.0f, 7.0f);
 		canvas.set_fill_color(pulp::canvas::Color::rgba8(24, 24, 24));
 		canvas.fill_text("□  8m 32s", b.width - 74.0f, b.height - 18.0f);
+	}
+};
+
+struct PalotChromeButton final : pulp::view::TextButton {
+	explicit PalotChromeButton(std::string text) : pulp::view::TextButton(std::move(text)) {
+		set_style(Style::ghost);
+	}
+	void paint(pulp::canvas::Canvas& canvas) override {
+		canvas.set_font("Inter", 12.0f);
+		canvas.set_fill_color(pulp::canvas::Color::rgba8(190, 190, 190));
+		canvas.fill_text(label(), 4.0f, std::max(15.0f, bounds().height * 0.62f));
 	}
 };
 
@@ -200,9 +211,7 @@ PalotView::PalotView() {
 	project_ = project.get();
 	add_child(std::move(project));
 
-	auto choose_project = std::make_unique<pulp::view::TextButton>("Choose…");
-	choose_project->set_label("");
-	choose_project->set_style(pulp::view::TextButton::Style::ghost);
+	auto choose_project = std::make_unique<PalotChromeButton>("+");
 	choose_project->set_access_label("Choose project folder");
 	choose_project->on_click = [this] { choose_project_folder(); };
 	choose_project_ = choose_project.get();
@@ -212,12 +221,13 @@ PalotView::PalotView() {
 	session_editor->placeholder = "Session ID";
 	session_editor->set_access_role(AccessRole::group);
 	session_editor->set_access_label("OpenCode session ID");
+	session_editor->set_background_color(pulp::canvas::Color::rgba8(13, 13, 13));
+	session_editor->set_border(pulp::canvas::Color::rgba8(13, 13, 13), 0.0f, 6.0f);
+	session_editor->set_font_size(12.0f);
 	session_editor_ = session_editor.get();
 	add_child(std::move(session_editor));
 
-	auto new_session = std::make_unique<pulp::view::TextButton>("New");
-	new_session->set_label("");
-	new_session->set_style(pulp::view::TextButton::Style::ghost);
+	auto new_session = std::make_unique<PalotChromeButton>("+  New Session");
 	new_session->set_access_label("Create a new OpenCode session");
 	new_session->on_click = [this] {
 		create_session_ = true;
@@ -228,9 +238,7 @@ PalotView::PalotView() {
 	new_session_ = new_session.get();
 	add_child(std::move(new_session));
 
-	auto open_session = std::make_unique<pulp::view::TextButton>("Open");
-	open_session->set_label("");
-	open_session->set_style(pulp::view::TextButton::Style::ghost);
+	auto open_session = std::make_unique<PalotChromeButton>("Open");
 	open_session->set_access_label("Open the entered OpenCode session");
 	open_session->on_click = [this] {
 		create_session_ = false;
@@ -245,6 +253,9 @@ PalotView::PalotView() {
 	provider->set_access_role(AccessRole::group);
 	provider->set_access_label("OpenCode model provider");
 	provider->set_text("opencode");
+	provider->set_background_color(pulp::canvas::Color::rgba8(29, 29, 29));
+	provider->set_border(pulp::canvas::Color::rgba8(29, 29, 29), 0.0f, 4.0f);
+	provider->set_font_size(11.0f);
 	provider_ = provider.get();
 	add_child(std::move(provider));
 
@@ -253,6 +264,9 @@ PalotView::PalotView() {
 	model->set_access_role(AccessRole::group);
 	model->set_access_label("OpenCode model ID");
 	model->set_text("north-mini-code-free");
+	model->set_background_color(pulp::canvas::Color::rgba8(29, 29, 29));
+	model->set_border(pulp::canvas::Color::rgba8(29, 29, 29), 0.0f, 4.0f);
+	model->set_font_size(11.0f);
 	model_ = model.get();
 	add_child(std::move(model));
 
@@ -278,9 +292,7 @@ PalotView::PalotView() {
 	composer_ = composer.get();
 	add_child(std::move(composer));
 
-	auto send = std::make_unique<pulp::view::TextButton>("Send");
-	send->set_label("");
-	send->set_style(pulp::view::TextButton::Style::ghost);
+	auto send = std::make_unique<PalotChromeButton>("↑");
 	send->set_access_label("Send message");
 	send->on_click = [this] {
 		if (!composer_->text().empty()) send_prompt(composer_->text());
@@ -289,9 +301,7 @@ PalotView::PalotView() {
 	send_ = send.get();
 	add_child(std::move(send));
 
-	auto cancel = std::make_unique<pulp::view::TextButton>("Cancel");
-	cancel->set_label("");
-	cancel->set_style(pulp::view::TextButton::Style::ghost);
+	auto cancel = std::make_unique<PalotChromeButton>("■");
 	cancel->set_access_label("Cancel OpenCode response");
 	cancel->on_click = [this] {
 		process_.cancel();
@@ -332,18 +342,32 @@ PalotView::~PalotView() {
 
 void PalotView::layout_children() {
 	const auto b = local_bounds();
+	const float sidebar_width = b.width < 700.0f ? 0.0f : kSidebarWidth;
 	project_->set_visible(false);
-	session_editor_->set_visible(false);
-	provider_->set_visible(false);
-	model_->set_visible(false);
+	const bool sidebar_visible = sidebar_width > 0.0f;
+	new_session_->set_visible(sidebar_visible);
+	open_session_->set_visible(sidebar_visible);
+	choose_project_->set_visible(sidebar_visible);
+	session_editor_->set_visible(sidebar_visible);
 	new_session_->set_bounds({12.0f, 42.0f, 156.0f, 34.0f});
-	open_session_->set_bounds({12.0f, 78.0f, 156.0f, 34.0f});
+	open_session_->set_bounds({210.0f, 202.0f, 54.0f, 28.0f});
+	session_editor_->set_bounds({16.0f, 202.0f, 188.0f, 28.0f});
 	choose_project_->set_bounds({238.0f, 476.0f, 30.0f, 30.0f});
-	const float available = std::max(0.0f, b.width - kSidebarWidth - 46.0f);
+	const float available = std::max(0.0f, b.width - sidebar_width - 32.0f);
 	const float content_width = std::min(kContentMaxWidth, available);
-	const float content_x = kSidebarWidth + 16.0f;
+	const float content_x = sidebar_width + std::max(16.0f,
+		(b.width - sidebar_width - content_width) * 0.5f);
 	const float composer_y = b.height - kComposerHeight - 53.0f;
 	composer_->set_bounds({content_x, composer_y, std::max(0.0f, content_width), kComposerHeight});
+	provider_->set_visible(true);
+	model_->set_visible(true);
+	if (sidebar_visible) {
+		provider_->set_bounds({16.0f, 620.0f, 112.0f, 24.0f});
+		model_->set_bounds({16.0f, 650.0f, 190.0f, 24.0f});
+	} else {
+		provider_->set_bounds({content_x, composer_y - 28.0f, 112.0f, 24.0f});
+		model_->set_bounds({content_x + 120.0f, composer_y - 28.0f, 190.0f, 24.0f});
+	}
 	send_->set_bounds({content_x + content_width - 44.0f, composer_y + 68.0f, 32.0f, 32.0f});
 	cancel_->set_bounds({content_x + content_width - 82.0f, composer_y + 68.0f, 32.0f, 32.0f});
 	transcript_->set_bounds({content_x, kTranscriptTop, content_width,
@@ -386,12 +410,16 @@ void PalotView::load_visual_parity_fixture() {
 
 void PalotView::paint(pulp::canvas::Canvas& canvas) {
 	const auto b = local_bounds();
+	const float sidebar_width = b.width < 700.0f ? 0.0f : kSidebarWidth;
 	canvas.set_fill_color(pulp::canvas::Color::rgba8(20, 20, 20));
 	canvas.fill_rect(0, 0, b.width, b.height);
-	canvas.set_fill_color(pulp::canvas::Color::rgba8(13, 13, 13));
-	canvas.fill_rect(0, 0, kSidebarWidth, b.height);
+	if (sidebar_width > 0.0f) {
+		canvas.set_fill_color(pulp::canvas::Color::rgba8(13, 13, 13));
+		canvas.fill_rect(0, 0, sidebar_width, b.height);
+	}
 	canvas.set_fill_color(pulp::canvas::Color::rgba8(10, 10, 10));
-	canvas.fill_rect(kSidebarWidth, 0, b.width - kSidebarWidth, kAppBarHeight);
+	canvas.fill_rect(sidebar_width, 0, b.width - sidebar_width, kAppBarHeight);
+	if (sidebar_width > 0.0f) {
 	canvas.set_fill_color(pulp::canvas::Color::rgba8(255, 80, 86));
 	canvas.fill_circle(22.0f, 18.0f, 7.0f);
 	canvas.set_fill_color(pulp::canvas::Color::rgba8(255, 189, 46));
@@ -401,19 +429,21 @@ void PalotView::paint(pulp::canvas::Canvas& canvas) {
 	canvas.set_fill_color(pulp::canvas::Color::rgba8(205, 205, 205));
 	canvas.set_font("Inter", 13.0f);
 	canvas.fill_text("▣     +", 99.0f, 25.0f);
+	}
 	canvas.set_fill_color(pulp::canvas::Color::rgba8(237, 237, 237));
 	canvas.set_font("Inter", 13.0f);
-	canvas.fill_text("palot.", kSidebarWidth + 16.0f, 29.0f);
+	canvas.fill_text("palot.", sidebar_width + 16.0f, 29.0f);
 	canvas.set_fill_color(pulp::canvas::Color::rgba8(166, 166, 166));
-	canvas.fill_text("|   palot  /", kSidebarWidth + 66.0f, 29.0f);
+	canvas.fill_text("|   palot  /", sidebar_width + 66.0f, 29.0f);
 	canvas.set_fill_color(pulp::canvas::Color::rgba8(237, 237, 237));
-	canvas.fill_text("Add dark mode toggle to settings", kSidebarWidth + 142.0f, 29.0f);
+	canvas.fill_text("Add dark mode toggle to settings", sidebar_width + 142.0f, 29.0f);
 	canvas.set_fill_color(pulp::canvas::Color::rgba8(120, 120, 120));
 	canvas.set_font("Inter", 12.0f);
-	canvas.fill_text("+58  -2     ◷ 13m 30s  ·  ◉ $0.02  ·  ▥     Open⌄     >_     ×",
-	                 std::max(kSidebarWidth + 330.0f, b.width - 430.0f), 28.0f);
+	if (b.width > 900.0f)
+		canvas.fill_text("+58  -2     ◷ 13m 30s  ·  ◉ $0.02  ·  ▥     Open⌄     >_     ×",
+		                 std::max(sidebar_width + 330.0f, b.width - 430.0f), 28.0f);
+	if (sidebar_width > 0.0f) {
 	canvas.set_fill_color(pulp::canvas::Color::rgba8(166, 166, 166));
-	canvas.fill_text("+  New Session", 24.0f, 68.0f);
 	canvas.fill_text("▣  Automations", 24.0f, 104.0f);
 	canvas.set_font("Inter", 12.0f);
 	canvas.fill_text("Active Now", 16.0f, 154.0f);
@@ -431,7 +461,7 @@ void PalotView::paint(pulp::canvas::Canvas& canvas) {
 	canvas.set_fill_color(pulp::canvas::Color::rgba8(36, 36, 36));
 	canvas.fill_rect(8.0f, 458.0f, kSidebarWidth - 16.0f, 1.0f);
 	canvas.set_fill_color(pulp::canvas::Color::rgba8(166, 166, 166));
-	canvas.fill_text("Projects                         ⌕  ⌘  +", 16.0f, 492.0f);
+	canvas.fill_text("Projects                         ⌕  ⌘", 16.0f, 492.0f);
 	canvas.set_fill_color(pulp::canvas::Color::rgba8(237, 237, 237));
 	canvas.fill_text("›  palot", 20.0f, 528.0f);
 	canvas.fill_text("›  acme-api", 20.0f, 564.0f);
@@ -439,19 +469,21 @@ void PalotView::paint(pulp::canvas::Canvas& canvas) {
 	canvas.set_fill_color(pulp::canvas::Color::rgba8(166, 166, 166));
 	canvas.fill_text("▣  This Mac", 20.0f, b.height - 64.0f);
 	canvas.fill_text("⚙  Settings", 20.0f, b.height - 24.0f);
+	}
 	if (!configuration_error_.empty()) {
 		canvas.set_fill_color(pulp::canvas::Color::rgba8(248, 113, 113));
-		canvas.fill_text(configuration_error_.substr(0, 32), kSidebarWidth + 16.0f, 50.0f);
+		canvas.fill_text(configuration_error_.substr(0, 32), sidebar_width + 16.0f, 50.0f);
 	}
 	canvas.set_fill_color(pulp::canvas::Color::rgba8(100, 100, 100));
-	canvas.fill_text("Local   esc interrupt", kSidebarWidth + 16.0f, b.height - 8.0f);
+	canvas.fill_text("Local   esc interrupt", sidebar_width + 16.0f, b.height - 8.0f);
 }
 
 float PalotView::message_height(std::size_t index) const {
 	if (index >= messages_.size()) return 96.0f;
 	const auto& [role, text] = messages_[index];
+	const float sidebar_width = local_bounds().width < 700.0f ? 0.0f : kSidebarWidth;
 	const float width = std::min(kContentMaxWidth,
-	                             std::max(240.0f, local_bounds().width - kSidebarWidth - 32.0f));
+	                             std::max(240.0f, local_bounds().width - sidebar_width - 32.0f));
 	const auto characters_per_line = std::max<std::size_t>(24, static_cast<std::size_t>(width / 8.0f));
 	std::size_t lines = 1;
 	std::size_t column = 0;
