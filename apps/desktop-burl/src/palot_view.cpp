@@ -20,11 +20,28 @@
 
 namespace {
 
-constexpr float kSidebarWidth = 250.0f;
-constexpr float kComposerHeight = 92.0f;
-constexpr float kTranscriptTop = 38.0f;
-constexpr float kTranscriptGap = 14.0f;
+constexpr float kSidebarWidth = 280.0f;
+constexpr float kAppBarHeight = 46.0f;
+constexpr float kComposerHeight = 112.0f;
+constexpr float kTranscriptTop = 58.0f;
+constexpr float kTranscriptGap = 40.0f;
+constexpr float kContentMaxWidth = 896.0f;
 constexpr std::size_t kAccessibilitySummaryBytes = 480;
+
+struct PalotComposer final : pulp::view::TextEditor {
+	void paint(pulp::canvas::Canvas& canvas) override {
+		pulp::view::TextEditor::paint(canvas);
+		const auto b = local_bounds();
+		canvas.set_font("Inter", 12.0f);
+		canvas.set_fill_color(pulp::canvas::Color::rgba8(166, 166, 166));
+		canvas.fill_text("+     Build⌄     |     ✣ Claude Opus 4.6⌄     |     Default variant⌄",
+		                 18.0f, b.height - 17.0f);
+		canvas.set_fill_color(pulp::canvas::Color::rgba8(248, 248, 248));
+		canvas.fill_rounded_rect(b.width - 82.0f, b.height - 35.0f, 68.0f, 24.0f, 7.0f);
+		canvas.set_fill_color(pulp::canvas::Color::rgba8(24, 24, 24));
+		canvas.fill_text("□  8m 32s", b.width - 74.0f, b.height - 18.0f);
+	}
+};
 
 std::string accessibility_summary(std::string_view text) {
 	if (text.size() <= kAccessibilitySummaryBytes) return std::string(text);
@@ -52,15 +69,16 @@ struct MessageRow final : pulp::view::View {
 		set_access_label(role_text + " message");
 
 		auto role_label = std::make_unique<pulp::view::Label>(role_text);
-		role_label->set_font_size(12.0f);
+		role_label->set_font_size(13.0f);
 		role_label->set_font_weight(700);
-		role_label->set_text_color(user ? pulp::canvas::Color::rgba8(94, 234, 212)
-		                                : pulp::canvas::Color::rgba8(148, 163, 184));
+		role_label->set_text_color(pulp::canvas::Color::rgba8(166, 166, 166));
 		role = role_label.get();
 		add_child(std::move(role_label));
 
 		auto markdown = std::make_unique<pulp::view::MarkdownView>(
 			tool ? "```json\n" + text + "\n```" : text);
+		markdown->set_body_style("Inter", 13.0f, 300,
+		                         pulp::canvas::Color::rgba8(237, 237, 237));
 		const auto summary = accessibility_summary(text);
 		markdown->set_access_label(role_text + " message text: " + summary);
 		markdown->set_access_value(summary);
@@ -85,19 +103,27 @@ struct MessageRow final : pulp::view::View {
 
 	void layout_children() override {
 		const auto b = local_bounds();
-		role->set_bounds({16.0f, 10.0f, std::max(0.0f, b.width - 90.0f), 20.0f});
-		copy->set_bounds({std::max(16.0f, b.width - 70.0f), 7.0f, 54.0f, 28.0f});
-		content->set_bounds({16.0f, 38.0f, std::max(0.0f, b.width - 32.0f),
-		                     std::max(0.0f, b.height - 50.0f)});
+		role->set_visible(false);
+		copy->set_visible(false);
+		const float bubble_x = user ? b.width * 0.05f : 0.0f;
+		const float inset = user ? 16.0f : 0.0f;
+		content->set_bounds({bubble_x + inset, user ? 14.0f : 2.0f,
+		                     std::max(0.0f, b.width - bubble_x - inset * 2.0f),
+		                     std::max(0.0f, b.height - (user ? 28.0f : 8.0f) - kTranscriptGap)});
 		content->layout_children();
 	}
 
 	void paint(pulp::canvas::Canvas& canvas) override {
-		canvas.set_fill_color(user ? pulp::canvas::Color::rgba8(20, 48, 60)
-		                           : tool ? pulp::canvas::Color::rgba8(42, 35, 24)
-		                                  : pulp::canvas::Color::rgba8(24, 33, 49));
-		canvas.fill_rounded_rect(0.0f, 0.0f, bounds().width,
-		                         std::max(0.0f, bounds().height - kTranscriptGap), 12.0f);
+		if (user) {
+			canvas.set_fill_color(pulp::canvas::Color::rgba8(32, 32, 32));
+			const float bubble_x = bounds().width * 0.05f;
+			canvas.fill_rounded_rect(bubble_x, 0.0f, bounds().width - bubble_x,
+			                         std::max(0.0f, bounds().height - kTranscriptGap), 8.0f);
+		} else if (tool) {
+			canvas.set_fill_color(pulp::canvas::Color::rgba8(24, 24, 24));
+			canvas.fill_rounded_rect(0.0f, 0.0f, bounds().width,
+			                         std::max(0.0f, bounds().height - kTranscriptGap), 8.0f);
+		}
 	}
 };
 
@@ -175,6 +201,8 @@ PalotView::PalotView() {
 	add_child(std::move(project));
 
 	auto choose_project = std::make_unique<pulp::view::TextButton>("Choose…");
+	choose_project->set_label("");
+	choose_project->set_style(pulp::view::TextButton::Style::ghost);
 	choose_project->set_access_label("Choose project folder");
 	choose_project->on_click = [this] { choose_project_folder(); };
 	choose_project_ = choose_project.get();
@@ -188,6 +216,8 @@ PalotView::PalotView() {
 	add_child(std::move(session_editor));
 
 	auto new_session = std::make_unique<pulp::view::TextButton>("New");
+	new_session->set_label("");
+	new_session->set_style(pulp::view::TextButton::Style::ghost);
 	new_session->set_access_label("Create a new OpenCode session");
 	new_session->on_click = [this] {
 		create_session_ = true;
@@ -199,6 +229,8 @@ PalotView::PalotView() {
 	add_child(std::move(new_session));
 
 	auto open_session = std::make_unique<pulp::view::TextButton>("Open");
+	open_session->set_label("");
+	open_session->set_style(pulp::view::TextButton::Style::ghost);
 	open_session->set_access_label("Open the entered OpenCode session");
 	open_session->on_click = [this] {
 		create_session_ = false;
@@ -224,8 +256,11 @@ PalotView::PalotView() {
 	model_ = model.get();
 	add_child(std::move(model));
 
-	auto composer = std::make_unique<pulp::view::TextEditor>();
-	composer->placeholder = "Ask OpenCode…  Return to send, Esc to cancel";
+	auto composer = std::make_unique<PalotComposer>();
+	composer->placeholder = "Send a follow-up message…";
+	composer->set_background_color(pulp::canvas::Color::rgba8(29, 29, 29));
+	composer->set_border(pulp::canvas::Color::rgba8(52, 52, 52), 1.0f, 12.0f);
+	composer->set_font_size(15.0f);
 	composer->multi_line = true;
 	composer->multi_line_return_behavior =
 		pulp::view::TextEditor::MultiLineReturnBehavior::commit;
@@ -244,6 +279,8 @@ PalotView::PalotView() {
 	add_child(std::move(composer));
 
 	auto send = std::make_unique<pulp::view::TextButton>("Send");
+	send->set_label("");
+	send->set_style(pulp::view::TextButton::Style::ghost);
 	send->set_access_label("Send message");
 	send->on_click = [this] {
 		if (!composer_->text().empty()) send_prompt(composer_->text());
@@ -253,6 +290,8 @@ PalotView::PalotView() {
 	add_child(std::move(send));
 
 	auto cancel = std::make_unique<pulp::view::TextButton>("Cancel");
+	cancel->set_label("");
+	cancel->set_style(pulp::view::TextButton::Style::ghost);
 	cancel->set_access_label("Cancel OpenCode response");
 	cancel->on_click = [this] {
 		process_.cancel();
@@ -293,21 +332,22 @@ PalotView::~PalotView() {
 
 void PalotView::layout_children() {
 	const auto b = local_bounds();
-	project_->set_bounds({20.0f, 86.0f, 142.0f, 38.0f});
-	choose_project_->set_bounds({168.0f, 86.0f, 66.0f, 38.0f});
-	session_editor_->set_bounds({20.0f, 142.0f, 214.0f, 36.0f});
-	new_session_->set_bounds({20.0f, 184.0f, 102.0f, 34.0f});
-	open_session_->set_bounds({132.0f, 184.0f, 102.0f, 34.0f});
-	provider_->set_bounds({20.0f, 240.0f, 214.0f, 36.0f});
-	model_->set_bounds({20.0f, 282.0f, 214.0f, 36.0f});
-	const float composer_width = b.width - kSidebarWidth - 152.0f;
-	composer_->set_bounds({kSidebarWidth + 28.0f, b.height - kComposerHeight - 24.0f,
-	                       composer_width, kComposerHeight});
-	send_->set_bounds({b.width - 112.0f, b.height - kComposerHeight - 24.0f, 84.0f, 42.0f});
-	cancel_->set_bounds({b.width - 112.0f, b.height - 68.0f, 84.0f, 42.0f});
-	transcript_->set_bounds({kSidebarWidth + 28.0f, kTranscriptTop,
-	                         b.width - kSidebarWidth - 56.0f,
-	                         std::max(0.0f, b.height - kComposerHeight - kTranscriptTop - 38.0f)});
+	project_->set_visible(false);
+	session_editor_->set_visible(false);
+	provider_->set_visible(false);
+	model_->set_visible(false);
+	new_session_->set_bounds({12.0f, 42.0f, 156.0f, 34.0f});
+	open_session_->set_bounds({12.0f, 78.0f, 156.0f, 34.0f});
+	choose_project_->set_bounds({238.0f, 476.0f, 30.0f, 30.0f});
+	const float available = std::max(0.0f, b.width - kSidebarWidth - 46.0f);
+	const float content_width = std::min(kContentMaxWidth, available);
+	const float content_x = kSidebarWidth + 16.0f;
+	const float composer_y = b.height - kComposerHeight - 53.0f;
+	composer_->set_bounds({content_x, composer_y, std::max(0.0f, content_width), kComposerHeight});
+	send_->set_bounds({content_x + content_width - 44.0f, composer_y + 68.0f, 32.0f, 32.0f});
+	cancel_->set_bounds({content_x + content_width - 82.0f, composer_y + 68.0f, 32.0f, 32.0f});
+	transcript_->set_bounds({content_x, kTranscriptTop, content_width,
+	                         std::max(0.0f, composer_y - kTranscriptTop - 20.0f)});
 	transcript_->layout_children();
 }
 
@@ -316,31 +356,102 @@ void PalotView::start_demo(std::string project, std::string prompt) {
 	send_prompt(prompt);
 }
 
+void PalotView::load_visual_parity_fixture() {
+	transcript_->set_auto_follow(false);
+	messages_.clear();
+	send_->set_visible(false);
+	cancel_->set_visible(false);
+	append_message("You",
+	               "Great! Now also add system preference detection so it defaults to the user's OS "
+	               "setting, and add a transition animation when switching themes.", false);
+	append_message("OpenCode",
+	               "🧠 Thought for 2 seconds\n\n"
+	               "I've added the dark mode toggle to the settings page. Here's what I did:\n\n"
+	               "**Created `src/lib/theme.ts`** - Pure functions to resolve, apply, and persist the "
+	               "theme. Supports `light`, `dark`, and `system` (which reads `prefers-color-scheme`).\n\n"
+	               "**Updated `src/components/settings.tsx`** - Added a three-way toggle group so users "
+	               "can pick light, dark, or match their OS.\n\n"
+	               "The theme applies instantly via `data-theme` on the root element, no reload needed.\n\n"
+	               "›  Show 3 steps  ·  anthropic.claude-opus-4-6  ·  4m 58s  ·  $0.01\n\n"
+	               "anthropic.claude-opus-4-6  ·  4m 58s  ·  $0.01", false);
+	append_message("You",
+	               "Great! Now also add system preference detection so it defaults to the user's OS "
+	               "setting, and add a transition animation when switching themes.", false);
+	append_message("OpenCode", "🧠 Thought for 2 seconds\n\n◌  Making edits…", false);
+	transcript_->set_scroll_y(54.0f);
+	status_ = "Streaming";
+	request_repaint();
+	if (on_demo_complete) on_demo_complete();
+}
+
 void PalotView::paint(pulp::canvas::Canvas& canvas) {
 	const auto b = local_bounds();
-	canvas.set_fill_color(pulp::canvas::Color::rgba8(8, 13, 24));
+	canvas.set_fill_color(pulp::canvas::Color::rgba8(20, 20, 20));
 	canvas.fill_rect(0, 0, b.width, b.height);
-	canvas.set_fill_color(pulp::canvas::Color::rgba8(13, 22, 38));
+	canvas.set_fill_color(pulp::canvas::Color::rgba8(13, 13, 13));
 	canvas.fill_rect(0, 0, kSidebarWidth, b.height);
-	canvas.set_fill_color(pulp::canvas::Color::rgba8(241, 245, 249));
-	canvas.set_font("Inter", 25.0f);
-	canvas.fill_text("Palot", 20.0f, 48.0f);
-	canvas.set_fill_color(pulp::canvas::Color::rgba8(100, 116, 139));
+	canvas.set_fill_color(pulp::canvas::Color::rgba8(10, 10, 10));
+	canvas.fill_rect(kSidebarWidth, 0, b.width - kSidebarWidth, kAppBarHeight);
+	canvas.set_fill_color(pulp::canvas::Color::rgba8(255, 80, 86));
+	canvas.fill_circle(22.0f, 18.0f, 7.0f);
+	canvas.set_fill_color(pulp::canvas::Color::rgba8(255, 189, 46));
+	canvas.fill_circle(45.0f, 18.0f, 7.0f);
+	canvas.set_fill_color(pulp::canvas::Color::rgba8(39, 201, 63));
+	canvas.fill_circle(68.0f, 18.0f, 7.0f);
+	canvas.set_fill_color(pulp::canvas::Color::rgba8(205, 205, 205));
 	canvas.set_font("Inter", 13.0f);
-	canvas.fill_text("PROJECT", 20.0f, 75.0f);
-	canvas.fill_text(create_session_ ? "Session: new" : "Session: open existing", 20.0f,
-	                 232.0f);
+	canvas.fill_text("▣     +", 99.0f, 25.0f);
+	canvas.set_fill_color(pulp::canvas::Color::rgba8(237, 237, 237));
+	canvas.set_font("Inter", 13.0f);
+	canvas.fill_text("palot.", kSidebarWidth + 16.0f, 29.0f);
+	canvas.set_fill_color(pulp::canvas::Color::rgba8(166, 166, 166));
+	canvas.fill_text("|   palot  /", kSidebarWidth + 66.0f, 29.0f);
+	canvas.set_fill_color(pulp::canvas::Color::rgba8(237, 237, 237));
+	canvas.fill_text("Add dark mode toggle to settings", kSidebarWidth + 142.0f, 29.0f);
+	canvas.set_fill_color(pulp::canvas::Color::rgba8(120, 120, 120));
+	canvas.set_font("Inter", 12.0f);
+	canvas.fill_text("+58  -2     ◷ 13m 30s  ·  ◉ $0.02  ·  ▥     Open⌄     >_     ×",
+	                 std::max(kSidebarWidth + 330.0f, b.width - 430.0f), 28.0f);
+	canvas.set_fill_color(pulp::canvas::Color::rgba8(166, 166, 166));
+	canvas.fill_text("+  New Session", 24.0f, 68.0f);
+	canvas.fill_text("▣  Automations", 24.0f, 104.0f);
+	canvas.set_font("Inter", 12.0f);
+	canvas.fill_text("Active Now", 16.0f, 154.0f);
+	canvas.set_fill_color(pulp::canvas::Color::rgba8(8, 20, 32));
+	canvas.fill_rounded_rect(8.0f, 166.0f, 264.0f, 34.0f, 8.0f);
+	canvas.set_fill_color(pulp::canvas::Color::rgba8(237, 237, 237));
+	canvas.fill_text("◯  OpenCode chat", 20.0f, 188.0f);
+	canvas.set_fill_color(pulp::canvas::Color::rgba8(166, 166, 166));
+	canvas.fill_text("◉  Fix JWT token refresh race condition     now", 20.0f, 224.0f);
+	canvas.fill_text("Recent", 16.0f, 278.0f);
+	canvas.fill_text("○  Build hero section with animations       35m", 20.0f, 318.0f);
+	canvas.fill_text("○  Refactor database connection              45m", 20.0f, 354.0f);
+	canvas.fill_text("○  Add unit tests for auth middleware        2h", 20.0f, 390.0f);
+	canvas.fill_text("○  Update API documentation                  4h", 20.0f, 426.0f);
+	canvas.set_fill_color(pulp::canvas::Color::rgba8(36, 36, 36));
+	canvas.fill_rect(8.0f, 458.0f, kSidebarWidth - 16.0f, 1.0f);
+	canvas.set_fill_color(pulp::canvas::Color::rgba8(166, 166, 166));
+	canvas.fill_text("Projects                         ⌕  ⌘  +", 16.0f, 492.0f);
+	canvas.set_fill_color(pulp::canvas::Color::rgba8(237, 237, 237));
+	canvas.fill_text("›  palot", 20.0f, 528.0f);
+	canvas.fill_text("›  acme-api", 20.0f, 564.0f);
+	canvas.fill_text("›  landing-page", 20.0f, 600.0f);
+	canvas.set_fill_color(pulp::canvas::Color::rgba8(166, 166, 166));
+	canvas.fill_text("▣  This Mac", 20.0f, b.height - 64.0f);
+	canvas.fill_text("⚙  Settings", 20.0f, b.height - 24.0f);
 	if (!configuration_error_.empty()) {
 		canvas.set_fill_color(pulp::canvas::Color::rgba8(248, 113, 113));
-		canvas.fill_text(configuration_error_.substr(0, 32), 20.0f, 342.0f);
+		canvas.fill_text(configuration_error_.substr(0, 32), kSidebarWidth + 16.0f, 50.0f);
 	}
-	canvas.fill_text("OpenCode • " + status_, 20.0f, b.height - 28.0f);
+	canvas.set_fill_color(pulp::canvas::Color::rgba8(100, 100, 100));
+	canvas.fill_text("Local   esc interrupt", kSidebarWidth + 16.0f, b.height - 8.0f);
 }
 
 float PalotView::message_height(std::size_t index) const {
 	if (index >= messages_.size()) return 96.0f;
 	const auto& [role, text] = messages_[index];
-	const float width = std::max(240.0f, local_bounds().width - kSidebarWidth - 88.0f);
+	const float width = std::min(kContentMaxWidth,
+	                             std::max(240.0f, local_bounds().width - kSidebarWidth - 32.0f));
 	const auto characters_per_line = std::max<std::size_t>(24, static_cast<std::size_t>(width / 8.0f));
 	std::size_t lines = 1;
 	std::size_t column = 0;
@@ -353,9 +464,9 @@ float PalotView::message_height(std::size_t index) const {
 			column = 0;
 		}
 	}
-	const float line_height = role == "Tool" ? 21.0f : 23.0f;
-	return std::clamp(58.0f + static_cast<float>(lines) * line_height + kTranscriptGap,
-	                  96.0f, 640.0f);
+	const float line_height = 20.0f;
+	return std::clamp(20.0f + static_cast<float>(lines) * line_height + kTranscriptGap,
+	                  74.0f, 640.0f);
 }
 
 void PalotView::append_message(std::string role, std::string text, bool announce) {
