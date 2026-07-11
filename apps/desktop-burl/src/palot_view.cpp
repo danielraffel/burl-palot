@@ -35,7 +35,10 @@ PalotView::PalotView() {
 	composer->multi_line_return_behavior =
 		pulp::view::TextEditor::MultiLineReturnBehavior::commit;
 	composer->set_access_label("Message composer");
-	composer->on_return = [this](const std::string& text) { send_prompt(text); };
+	composer->on_return = [this](const std::string& text) {
+		if (!text.empty()) send_prompt(text);
+		else if (!last_prompt_.empty()) send_prompt(last_prompt_);
+	};
 	composer->on_escape = [this] {
 		process_.cancel();
 		status_ = "Cancelling…";
@@ -140,7 +143,9 @@ void PalotView::restore() {
 	if (std::getline(input, line) && !line.empty()) project_->set_text(line);
 	while (std::getline(input, line)) {
 		const auto tab = line.find('\t');
-		if (tab != std::string::npos)
+		if (tab != std::string::npos) {
 			messages_.emplace_back(line.substr(0, tab), line.substr(tab + 1));
+			if (messages_.back().first == "You") last_prompt_ = messages_.back().second;
+		}
 	}
 }
