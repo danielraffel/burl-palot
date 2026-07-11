@@ -1,0 +1,33 @@
+{
+  "artifacts": {
+    "candidate-normalized.png": "4ea3cb2a44b411b89b1f8bb132d4c459e5d76d0f5c2aa8e364372f741c442dea",
+    "diff-heatmap.png": "0f9503e2bc149dbed1ffd92753d33612c519f00d15e4f49156ccd753c0c2a73a",
+    "diff-overlay.png": "8cd2da912f35753c121f93a72a62494ede2f73480e176f09ed29ee727300ffec",
+    "montage.png": "cd79cfad0472ab6d56480919aa437ae6b086c19f038118290b093028e5ea82d7",
+    "reference-normalized.png": "1e7bbf28ec4c3b460b8a4bd0667e3d5462abaab91466aa3eb377fcf8d7471ae2"
+  },
+  "comparison": {
+    "candidateCrop": null,
+    "fit": "cover",
+    "height": 800,
+    "referenceCrop": null,
+    "threshold": 16,
+    "width": 1200
+  },
+  "inputs": {
+    "candidate": "/Users/danielraffel/Code/burl-palot-wt-visual-parity/evidence/visual-parity/final/native-fixture.png",
+    "candidateSha256": "52a91d88087fc549458ff63312f026dda418d14e9bb7477af887394ce633d64c",
+    "reference": "/Users/danielraffel/Code/burl-palot-wt-visual-parity/evidence/visual-parity/source-reference.png",
+    "referenceSha256": "959bac98266bec6a6cd78c0e6af1c42fab6da6c089455c2771ec6a1040e48e5a"
+  },
+  "metrics": {
+    "differentPixelPercent": 10.958333,
+    "differentPixels": 105200,
+    "globalSsim": 0.197067161,
+    "maximumChannelDelta": 255,
+    "meanAbsoluteError": 13.298452,
+    "peakSignalToNoiseRatioDb": 16.060228,
+    "rootMeanSquareError": 40.135508
+  },
+  "schemaVersion": 1
+}

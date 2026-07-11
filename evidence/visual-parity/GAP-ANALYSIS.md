@@ -18,7 +18,7 @@ Reference: the unmodified Palot source at `fd63a75dad3d0e8555ba22a47e720d285889f
 
 ## Quantitative result and residual gaps
 
-The initial structural mock scored SSIM `0.088831116` with MAE `13.229267`. After the shell, fixture, composer, and typography passes, the matched native fixture scored SSIM `0.221431338` with MAE `12.862031` and `10.702708%` pixels above the 16-channel threshold. This is substantial structural convergence, not pixel identity.
+The initial structural mock scored SSIM `0.088831116` with MAE `13.229267`. At exact consumer head `f659028`, after the shell, functional-control, fixture, composer, and typography passes, the matched native fixture scores SSIM `0.197067161`, MAE `13.298452`, and `10.958333%` pixels above the 16-channel threshold. SSIM more than doubled while MAE remained effectively flat; this is substantial structural convergence, not pixel identity.
 
 Residual differences remain in renderer-specific glyph antialiasing, exact Lucide icon shapes, selected-session copy, muted metadata color, rich inline-code backgrounds, scrollbar styling, and some transcript wrapping. Chromium/CoreText and Skia will not produce byte-identical glyph pixels, so the raw metrics are retained as an honest regression signal rather than described as equality. The functional native controls remain real widgets: New Session, project chooser, session ID/Open, provider, model, Send, and Cancel are visible and operable; static painting is limited to non-interactive chrome and fixture content.
 
