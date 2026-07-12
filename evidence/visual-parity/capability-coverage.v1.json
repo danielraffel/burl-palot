@@ -1160,34 +1160,30 @@
         {
           "value": "auto",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed cursor keyword -> supported portable TypedPaint cursor intent -> NativeDesignIR style.cursor -> View::CursorStyle -> macOS NSCursor mapping on hover, arrow restoration on exit; URL/fallback lists diagnose and fail closed",
+          "evidenceIds": ["semantic:observed-dom-cursor"]
         },
         {
           "value": "default",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed cursor keyword -> supported portable TypedPaint cursor intent -> NativeDesignIR style.cursor -> View::CursorStyle -> macOS NSCursor mapping on hover, arrow restoration on exit; URL/fallback lists diagnose and fail closed",
+          "evidenceIds": ["semantic:observed-dom-cursor"]
         },
         {
           "value": "pointer",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed cursor keyword -> supported portable TypedPaint cursor intent -> NativeDesignIR style.cursor -> View::CursorStyle -> macOS NSCursor mapping on hover, arrow restoration on exit; URL/fallback lists diagnose and fail closed",
+          "evidenceIds": ["semantic:observed-dom-cursor"]
         },
         {
           "value": "text",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed cursor keyword -> supported portable TypedPaint cursor intent -> NativeDesignIR style.cursor -> View::CursorStyle -> macOS NSCursor mapping on hover, arrow restoration on exit; URL/fallback lists diagnose and fail closed",
+          "evidenceIds": ["semantic:observed-dom-cursor"]
         }
       ]
     },
