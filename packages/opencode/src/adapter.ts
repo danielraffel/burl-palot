@@ -28,6 +28,7 @@ export interface OpenCodeAdapterOptions {
 
 interface ProjectContext {
 	directory: string
+	eventDirectories: ReadonlySet<string>
 	client: OpencodeClient
 }
 
@@ -224,7 +225,9 @@ export class SdkOpenCodeGateway implements OpenCodeGateway {
 			source,
 			subscription,
 			(directory) =>
-				[...this.#projects.entries()].find(([, context]) => context.directory === directory)?.[0],
+				[...this.#projects.entries()].find(([, context]) =>
+					context.eventDirectories.has(directory),
+				)?.[0],
 			controller,
 		)
 	}
@@ -246,10 +249,14 @@ export class SdkOpenCodeGateway implements OpenCodeGateway {
 				if (!result.data) throw result.error ?? new Error("OpenCode did not return a project")
 				const project: OpenCodeProject = {
 					id: result.data.id,
-					directory: result.data.worktree,
-					name: result.data.name ?? basename(result.data.worktree),
+					directory: command.directory,
+					name: result.data.name ?? basename(command.directory),
 				}
-				this.#projects.set(project.id, { directory: project.directory, client })
+				this.#projects.set(project.id, {
+					directory: project.directory,
+					eventDirectories: new Set([project.directory, result.data.worktree]),
+					client,
+				})
 				return project
 			}
 			case "session.list": {

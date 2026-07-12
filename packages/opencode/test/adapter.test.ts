@@ -19,7 +19,7 @@ function fakeClient(calls: Array<{ name: string; value: unknown }>): OpencodeCli
 			event: async () => ({
 				stream: (async function* () {
 					yield {
-						directory: "/tmp/project",
+						directory: "/tmp/canonical-project",
 						payload: {
 							type: "session.updated",
 							properties: { info: session },
@@ -34,7 +34,7 @@ function fakeClient(calls: Array<{ name: string; value: unknown }>): OpencodeCli
 				return {
 					data: {
 						id: "project-1",
-						worktree: "/tmp/project",
+						worktree: "/tmp/canonical-project",
 						name: "project",
 						time: { created: 1, updated: 1 },
 						sandboxes: [],
@@ -87,7 +87,10 @@ describe("SDK OpenCode gateway", () => {
 			},
 		})
 
-		await gateway.execute({ type: "project.select", directory: "/tmp/project" })
+		expect(await gateway.execute({ type: "project.select", directory: "/tmp/project" })).toEqual({
+			ok: true,
+			value: { id: "project-1", directory: "/tmp/project", name: "project" },
+		})
 		await gateway.execute({ type: "session.list", projectId: "project-1" })
 		await gateway.execute({ type: "session.create", projectId: "project-1", title: "New" })
 		await gateway.execute({

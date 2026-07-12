@@ -331,10 +331,20 @@ void OpenCodeProcess::run(std::shared_ptr<State> state) {
 			throw std::runtime_error("sidecar did not send ready frame");
 		state->connection_alive = true;
 		const std::string connection_prefix = "connection-";
+		std::string server_directory;
+		{
+			std::unique_lock lock(state->process_mutex);
+			state->changed.wait(lock, [&] { return state->shutdown || !state->requests.empty(); });
+			if (state->shutdown && state->requests.empty()) {
+				finish_connection();
+				return;
+			}
+			server_directory = state->requests.front().request.project;
+		}
 		send({{"version", 1},
 		      {"type", "command"},
 		      {"id", connection_prefix + "server"},
-		      {"command", {{"type", "server.start"}, {"directory", "."}}}});
+		      {"command", {{"type", "server.start"}, {"directory", server_directory}}}});
 		auto server = response(connection_prefix + "server");
 		if (!server.value("ok", false)) throw std::runtime_error(json_error(server));
 		send({{"version", 1},
@@ -414,8 +424,15 @@ void OpenCodeProcess::run(std::shared_ptr<State> state) {
 						continue;
 					}
 					if (type != "event") continue;
-					const auto& sdk = value->at("event").at("payload").at("event");
+					const auto& envelope = value->at("event");
+					if ((envelope.contains("projectId") &&
+					     envelope.value("projectId", "") != state->project_id) ||
+					    (envelope.contains("sessionId") &&
+					     envelope.value("sessionId", "") != state->session_id))
+						continue;
+					const auto& sdk = envelope.at("payload").at("event");
 					const auto sdk_type = sdk.value("type", "");
+					if (!sdk.contains("properties") || !sdk.at("properties").is_object()) continue;
 					const auto& properties = sdk.at("properties");
 					if (sdk_type == "message.part.updated") {
 						const auto& part = properties.at("part");
