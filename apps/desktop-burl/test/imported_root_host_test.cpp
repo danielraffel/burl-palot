@@ -64,9 +64,12 @@ int main(int argc, char** argv) {
 	composer->on_return("");
 	composer->on_escape();
 	if (calls["prompt.send"] != 1 || calls["prompt.retry"] != 1 || calls["prompt.cancel"] != 1) return 11;
-	host.set_bounds({0, 0, 1200, 800});
-	host.layout_children();
-	if (host.child_at(0)->bounds().width != 1200 || host.child_at(0)->bounds().height != 800) return 8;
+	for (const auto size : {pulp::view::Rect{0, 0, 760, 520}, pulp::view::Rect{0, 0, 980, 680},
+	                        pulp::view::Rect{0, 0, 1200, 800}}) {
+		host.set_bounds(size);
+		host.layout_children();
+		if (host.child_at(0)->bounds().width != size.width || host.child_at(0)->bounds().height != size.height) return 8;
+	}
 	std::cout << "source-observed native primary tree; no WebView/Chromium; all actions attached\n";
 	return EXIT_SUCCESS;
 }

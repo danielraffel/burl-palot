@@ -30,10 +30,8 @@
       "marginLeft": 0,
       "overflowX": "visible",
       "overflowY": "visible",
-      "widthMode": "fixed",
-      "width": 1200,
-      "heightMode": "fixed",
-      "height": 800
+      "widthMode": "fill",
+      "heightMode": "fill"
     },
     "style": {
       "backgroundColor": "#00000000",
@@ -53,9 +51,7 @@
       "borderBottomLeftRadius": 0,
       "position": "static",
       "minWidth": 0,
-      "minHeight": 800,
-      "width": 1200,
-      "height": 800
+      "minHeight": 800
     },
     "attributes": {
       "source_revision": "fd63a75dad3d0e8555ba22a47e720d285889fbf0"
@@ -90,10 +86,8 @@
           "marginLeft": 0,
           "overflowX": "visible",
           "overflowY": "visible",
-          "widthMode": "fixed",
-          "width": 1200,
-          "heightMode": "fixed",
-          "height": 800
+          "widthMode": "fill",
+          "heightMode": "fill"
         },
         "style": {
           "backgroundColor": "#00000000",
@@ -113,9 +107,7 @@
           "borderBottomLeftRadius": 0,
           "position": "static",
           "minWidth": 0,
-          "minHeight": 0,
-          "width": 1200,
-          "height": 800
+          "minHeight": 0
         },
         "attributes": {
           "source_revision": "fd63a75dad3d0e8555ba22a47e720d285889fbf0"
@@ -150,10 +142,8 @@
               "marginLeft": 0,
               "overflowX": "visible",
               "overflowY": "visible",
-              "widthMode": "fixed",
-              "width": 1200,
-              "heightMode": "fixed",
-              "height": 800
+              "widthMode": "fill",
+              "heightMode": "fill"
             },
             "style": {
               "backgroundColor": "#00000000",
@@ -173,9 +163,7 @@
               "borderBottomLeftRadius": 0,
               "position": "static",
               "minWidth": 0,
-              "minHeight": 0,
-              "width": 1200,
-              "height": 800
+              "minHeight": 0
             },
             "attributes": {
               "source_revision": "fd63a75dad3d0e8555ba22a47e720d285889fbf0"
@@ -210,10 +198,8 @@
                   "marginLeft": 0,
                   "overflowX": "visible",
                   "overflowY": "visible",
-                  "widthMode": "fixed",
-                  "width": 1200,
-                  "heightMode": "fixed",
-                  "height": 800
+                  "widthMode": "fill",
+                  "heightMode": "fill"
                 },
                 "style": {
                   "backgroundColor": "#00000000",
@@ -237,9 +223,7 @@
                   "bottom": 0,
                   "left": 0,
                   "minWidth": 0,
-                  "minHeight": 0,
-                  "width": 1200,
-                  "height": 800
+                  "minHeight": 0
                 },
                 "attributes": {
                   "source_revision": "fd63a75dad3d0e8555ba22a47e720d285889fbf0"
@@ -274,10 +258,8 @@
                       "marginLeft": 0,
                       "overflowX": "visible",
                       "overflowY": "visible",
-                      "widthMode": "fixed",
-                      "width": 1200,
-                      "heightMode": "fixed",
-                      "height": 800
+                      "widthMode": "fill",
+                      "heightMode": "fill"
                     },
                     "style": {
                       "backgroundColor": "#0d0d0d2e",
@@ -296,8 +278,7 @@
                       "borderBottomRightRadius": 0,
                       "borderBottomLeftRadius": 0,
                       "position": "static",
-                      "minHeight": 0,
-                      "height": 800
+                      "minHeight": 0
                     },
                     "attributes": {
                       "source_revision": "fd63a75dad3d0e8555ba22a47e720d285889fbf0"
