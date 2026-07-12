@@ -59,3 +59,25 @@ the override is API-compatible. Electron stays on the supported 40.x line and
 Vite stays on 7.x (`40.10.6` and `7.3.6`) instead of taking unnecessary major
 upgrades. Type declarations for Node and CSS side-effect imports are explicit
 so frozen installs do not depend on accidental hoisting from vulnerable tools.
+
+## 2026-07-11 — Import source fidelity before inferring design tokens
+
+Token-less source applications are first captured as target-neutral observed
+structure, exact computed layout, literal paint, typography, interaction
+semantics, and hashed assets. Burl must reproduce that evidence without using a
+product-specific theme or painter. Deterministic exact-value clustering may then
+suggest token candidates; only reviewed candidates are promoted, and replacing
+literals with token references must produce a pixel-identical render. Tokens
+organize an already faithful import—they are not permitted to approximate or
+invent the source appearance.
+
+## 2026-07-11 — Gate full-screen Palot on reusable component fidelity
+
+Full-screen Palot assembly is paused until Burl passes the hardened Phase B
+component gate: a uniform VisualSkin channel, zero poison-theme leakage, exact
+CSS Color 4 and inline-SVG handling, supported block-flow lowering, render-neutral
+token promotion, and stateful visual/semantic tests for the eight representative
+components. If a source capability cannot be represented, the importer emits a
+named divergence rather than silently substituting Burl defaults. This is the
+safest reversible path because any fix remains framework-generic and testable on
+held-out content.
