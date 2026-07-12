@@ -60,6 +60,32 @@ async function availablePort(preferredPort?: number): Promise<number> {
 	})
 }
 
+async function healthWithDeadline(
+	client: OpencodeClient,
+	signal: AbortSignal | undefined,
+	remainingMs: number,
+): Promise<Awaited<ReturnType<OpencodeClient["global"]["health"]>>> {
+	const timeout = new AbortController()
+	const combined = signal ? AbortSignal.any([signal, timeout.signal]) : timeout.signal
+	let rejectAbort: ((reason: unknown) => void) | undefined
+	const aborted = new Promise<never>((_, reject) => {
+		rejectAbort = reject
+	})
+	const onAbort = () => rejectAbort?.(combined.reason ?? new DOMException("Aborted", "AbortError"))
+	combined.addEventListener("abort", onAbort, { once: true })
+	const timer = setTimeout(() => {
+		const error = new Error("OpenCode server startup timed out")
+		timeout.abort(error)
+	}, Math.max(1, remainingMs))
+	try {
+		if (combined.aborted) onAbort()
+		return await Promise.race([client.global.health({ signal: combined }), aborted])
+	} finally {
+		clearTimeout(timer)
+		combined.removeEventListener("abort", onAbort)
+	}
+}
+
 class SdkEventStream implements OpenCodeEventStream {
 	readonly #subscription: OpenCodeEventSubscription
 	readonly #source: AsyncIterable<{ directory: string; payload: unknown }>
@@ -332,7 +358,7 @@ export class SdkOpenCodeGateway implements OpenCodeGateway {
 		do {
 			if (signal?.aborted) throw signal.reason ?? new DOMException("Aborted", "AbortError")
 			try {
-				const health = await client.global.health({ signal })
+				const health = await healthWithDeadline(client, signal, deadline - Date.now())
 				if (health.data) {
 					this.#client = client
 					this.#baseUrl = baseUrl

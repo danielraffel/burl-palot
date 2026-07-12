@@ -183,4 +183,20 @@ describe("SDK OpenCode gateway", () => {
 		})
 		expect(result.ok).toBe(false)
 	})
+
+	test("enforces startup timeout when a health request never settles", async () => {
+		const client = fakeClient([])
+		client.global.health = async () => await new Promise(() => {})
+		const gateway = new SdkOpenCodeGateway({
+			clientFactory: () => client,
+			startupTimeoutMs: 25,
+		})
+		const started = performance.now()
+		const result = await gateway.execute({
+			type: "server.connect",
+			connection: { baseUrl: "http://127.0.0.1:4096", directory: "/tmp/project" },
+		})
+		expect(result.ok).toBe(false)
+		expect(performance.now() - started).toBeLessThan(500)
+	})
 })
