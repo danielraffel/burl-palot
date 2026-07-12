@@ -433,6 +433,8 @@ void OpenCodeProcess::run(std::shared_ptr<State> state) {
 						const auto& part = properties.at("part");
 						part_types[part.value("id", "")] = part.value("type", "");
 						if (part.value("type", "") == "tool") emit(sink, generation, "tool", part.dump());
+						else if (part.value("type", "") == "reasoning")
+							emit(sink, generation, "reasoning", part.dump());
 					} else if (sdk_type == "message.part.delta" && properties.value("field", "") == "text") {
 						if (part_types[properties.value("partID", "")] == "text")
 							emit(sink, generation, "text", properties.value("delta", ""));

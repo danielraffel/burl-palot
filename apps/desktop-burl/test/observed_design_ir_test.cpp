@@ -57,7 +57,7 @@ int main(int argc, char** argv) {
 	// single-viewport regeneration fail closed instead of silently erasing the
 	// responsive contract while allowing additive importer improvements.
     if (counts.responsive_nodes < 251 || counts.responsive_transitions < 112 ||
-        counts.collection_templates != 4) return 7;
+        counts.collection_templates != 6) return 7;
 	std::vector<pulp::view::ImportDiagnostic> diagnostics;
 	pulp::view::NativeMaterializeOptions options;
 	options.diagnostics_out = &diagnostics;

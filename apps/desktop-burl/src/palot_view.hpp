@@ -11,6 +11,7 @@
 #include <string>
 #include <functional>
 #include <memory>
+#include <unordered_map>
 #include <vector>
 
 class PalotView final : public pulp::view::View {
@@ -39,10 +40,18 @@ public:
 	[[nodiscard]] bool composer_variant_menu_open() const noexcept { return composer_variant_menu_open_; }
 	[[nodiscard]] std::string_view display_mode() const noexcept { return display_mode_; }
 	[[nodiscard]] const std::string& navigation_route() const noexcept { return navigation_route_; }
+	[[nodiscard]] std::vector<pulp::view::ImportedListItem> transcript_projection() const;
 	std::function<void()> on_demo_complete;
 	std::function<void()> on_stream_delta;
 	std::function<void()> on_demo_error;
 private:
+	struct TranscriptEntry {
+		std::string key;
+		std::string role;
+		std::string text;
+		std::string template_id;
+		std::unordered_map<std::string, std::string> values;
+	};
 	class UiEventSink;
 	void send_prompt(const std::string& prompt, bool retry = false);
 	void handle_event(std::string type, std::string value);
@@ -51,6 +60,8 @@ private:
 	void choose_project_folder();
 	void set_configuration_error(std::string error);
 	void append_message(std::string role, std::string text, bool announce);
+	void upsert_reasoning(std::string payload);
+	void upsert_tool(std::string payload, bool announce);
 	void sync_imported_transcript();
 	void sync_imported_projects();
 	void schedule_imported_transcript_sync();
@@ -69,7 +80,7 @@ private:
 	pulp::view::VirtualList* transcript_ = nullptr;
 	OpenCodeProcess process_;
 	std::shared_ptr<UiEventSink> event_sink_;
-	std::vector<std::pair<std::string, std::string>> messages_;
+	std::vector<TranscriptEntry> messages_;
 	std::string session_;
 	std::string status_ = "Ready";
 	std::string last_prompt_;

@@ -98,10 +98,14 @@ public:
 		if (!pending_hosts_.contains("messages") || !pending_hosts_.contains("projects"))
 			throw std::runtime_error("required imported collection slot was not bound");
 		auto templates = pulp::view::extract_imported_collection_templates(ir_.root);
-		if (!templates.contains("user") || !templates.contains("assistant") || !templates.contains("tool") ||
-		    !templates.contains("project")) throw std::runtime_error("source collection templates are incomplete");
+		if (!templates.contains("user") || !templates.contains("assistant") ||
+		    !templates.contains("reasoning") ||
+		    !templates.contains("tool.read") || !templates.contains("tool.edit") ||
+		    !templates.contains("project"))
+			throw std::runtime_error("source collection templates are incomplete");
 		std::unordered_map<std::string, pulp::view::IRNode> transcript_templates;
-		for (const auto* id : {"user", "assistant", "tool"}) transcript_templates.emplace(id, templates.at(id));
+		for (const auto* id : {"user", "assistant", "reasoning", "tool.read", "tool.edit"})
+			transcript_templates.emplace(id, templates.at(id));
 		auto list = std::make_unique<pulp::view::ImportedRepeatedList>(std::move(transcript_templates), ir_.asset_manifest, this);
 		auto* transcript_host = pending_hosts_.at("messages");
 		while (transcript_host->child_count()) transcript_host->remove_child(transcript_host->child_at(0));

@@ -74,18 +74,30 @@ int main(int argc, char** argv) {
 	if (!sink->wait_for("done")) return EXIT_FAILURE;
 	bool session = false;
 	bool text = false;
-	bool tool = false;
+	bool tool_running = false;
+	bool tool_completed = false;
+	std::size_t tool_updates = 0;
+	bool reasoning_completed = false;
 	{
 		std::scoped_lock lock(sink->mutex);
 		for (const auto& event : sink->events) {
 			session |= event.type == "session" && event.value == "session-1";
 			text |= event.type == "text" && event.value == "fixture response";
-			tool |= event.type == "tool" &&
-			        event.value.find("\"tool\":\"read\"") != std::string::npos;
+			if (event.type == "tool") {
+				++tool_updates;
+				tool_running |= event.value.find("\"status\":\"running\"") != std::string::npos &&
+				                event.value.find("src/lib/theme.ts") != std::string::npos;
+				tool_completed |= event.value.find("\"status\":\"completed\"") != std::string::npos &&
+				                  event.value.find("\"end\":4000") != std::string::npos;
+			}
+			reasoning_completed |= event.type == "reasoning" &&
+			                       event.value.find("\"end\":3000") != std::string::npos;
 			if (event.run_id != 1) return EXIT_FAILURE;
 		}
 	}
-	if (!session || !text || !tool || process.running()) return EXIT_FAILURE;
+	if (!session || !text || !tool_running || !tool_completed || tool_updates != 2 ||
+	    !reasoning_completed || process.running())
+		return EXIT_FAILURE;
 
 	auto cancelled_sink = std::make_shared<Sink>();
 	if (!process.start({.project = "/tmp/project", .prompt = "cancel me"}, cancelled_sink))

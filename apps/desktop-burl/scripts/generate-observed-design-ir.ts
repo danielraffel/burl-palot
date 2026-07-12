@@ -30,6 +30,20 @@ const renderRoot = semantics.observedDom.tagName?.toLowerCase() === "html"
 	? semantics.observedDom.children?.find((child: any) => child.tagName?.toLowerCase() === "body")
 	: semantics.observedDom
 if (!renderRoot) throw new Error("source semantics has no renderable body")
+const styleProvenance = semantics.styleProvenanceByDomOrder as Array<{
+	declarations?: Record<string, unknown>
+	matchedStylesCapture?: string
+}> | undefined
+const attachStyleProvenance = (node: any, receipts = styleProvenance) => {
+	if (Number.isInteger(node.provenanceIndex) && node.provenanceIndex >= 0) {
+		const receipt = receipts?.[node.provenanceIndex]
+		if (!receipt) throw new Error(`source semantics has no style provenance at DOM order ${node.provenanceIndex}`)
+		node.styleProvenance = receipt.declarations ?? {}
+		node.styleProvenanceComplete = receipt.matchedStylesCapture === "complete"
+	}
+	for (const child of node.children ?? []) attachStyleProvenance(child, receipts)
+}
+if (styleProvenance) attachStyleProvenance(renderRoot)
 const motionBySourceId = new Map<string, unknown[]>()
 if (motionSemanticsPath) {
 	const motionSemantics = JSON.parse(await readFile(motionSemanticsPath, "utf8"))
@@ -100,6 +114,8 @@ if (responsiveSemantics.length) {
 				width: capture.capture.innerWidth, height: capture.capture.innerHeight,
 			} : undefined)
 		if (!root || !viewport) throw new Error(`invalid responsive semantics ${path}`)
+		if (capture.styleProvenanceByDomOrder)
+			attachStyleProvenance(root, capture.styleProvenanceByDomOrder)
 		removeFormattingWhitespace(root)
 		applyMotionReceipts(root)
 		const cohort = JSON.stringify({

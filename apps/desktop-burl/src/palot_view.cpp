@@ -8,9 +8,12 @@
 #include <pulp/view/buttons.hpp>
 #include <pulp/view/markdown_view.hpp>
 #include <pulp/view/widgets.hpp>
+#include <nlohmann/json.hpp>
 
 #include <cstdlib>
 #include <algorithm>
+#include <cmath>
+#include <cctype>
 #include <filesystem>
 #include <fstream>
 #include <memory>
@@ -28,6 +31,63 @@ constexpr float kTranscriptTop = 58.0f;
 constexpr float kTranscriptGap = 40.0f;
 constexpr float kContentMaxWidth = 896.0f;
 constexpr std::size_t kAccessibilitySummaryBytes = 480;
+
+struct ProjectedTool {
+	std::string id;
+	std::string template_id;
+	std::string label;
+	std::string subject;
+	std::string duration;
+	std::string status;
+};
+
+std::string first_string(const nlohmann::json& object,
+	                     std::initializer_list<std::string_view> keys) {
+	if (!object.is_object()) return {};
+	for (const auto key : keys) {
+		const auto found = object.find(std::string(key));
+		if (found != object.end() && found->is_string() && !found->get_ref<const std::string&>().empty())
+			return found->get<std::string>();
+	}
+	return {};
+}
+
+ProjectedTool project_tool_part(std::string_view payload) {
+	const auto part = nlohmann::json::parse(payload);
+	if (!part.is_object() || part.value("type", "") != "tool")
+		throw std::invalid_argument("OpenCode tool event is not a tool part");
+	ProjectedTool out;
+	out.id = first_string(part, {"id", "callID", "callId"});
+	if (out.id.empty()) throw std::invalid_argument("OpenCode tool part has no stable identity");
+	const auto tool = first_string(part, {"tool", "name"});
+	const auto normalized = [&] {
+		auto value = tool;
+		std::ranges::transform(value, value.begin(), [](unsigned char c) { return static_cast<char>(std::tolower(c)); });
+		return value;
+	}();
+	out.template_id = normalized == "read" ? "tool.read" : "tool.edit";
+	out.label = normalized == "read" ? "Read" :
+	            (normalized == "edit" || normalized == "write" || normalized == "patch") ? "Edit" : tool;
+	if (out.label.empty()) out.label = "Tool";
+	out.label.front() = static_cast<char>(std::toupper(static_cast<unsigned char>(out.label.front())));
+	const auto& state = part.contains("state") ? part.at("state") : nlohmann::json::object();
+	out.status = first_string(state, {"status"});
+	const auto& input = state.is_object() && state.contains("input") ? state.at("input") : nlohmann::json::object();
+	out.subject = first_string(input, {"path", "filePath", "file", "filename"});
+	if (out.subject.empty()) out.subject = first_string(state, {"title"});
+	if (out.subject.empty()) out.subject = first_string(part, {"title"});
+	if (out.subject.empty()) out.subject = tool;
+	out.duration = out.status == "running" || out.status == "pending" ? "…" : "";
+	if (state.is_object() && state.contains("time") && state.at("time").is_object()) {
+		const auto& time = state.at("time");
+		if (time.contains("start") && time.contains("end") && time.at("start").is_number() && time.at("end").is_number()) {
+			auto seconds = time.at("end").get<double>() - time.at("start").get<double>();
+			if (seconds > 100.0) seconds /= 1000.0;
+			out.duration = std::to_string(std::max(0L, std::lround(seconds))) + "s";
+		}
+	}
+	return out;
+}
 
 struct PalotComposer final : pulp::view::TextEditor {
 	void paint(pulp::canvas::Canvas& canvas) override {
@@ -458,8 +518,7 @@ PalotView::PalotView() {
 	});
 	transcript->set_row_binder([this](pulp::view::View& row, std::size_t index) {
 		if (index >= messages_.size()) return;
-		const auto& [role, text] = messages_[index];
-		static_cast<MessageRow&>(row).bind(role, text);
+		static_cast<MessageRow&>(row).bind(messages_[index].role, messages_[index].text);
 	});
 	transcript_ = transcript.get();
 	add_child(std::move(transcript));
@@ -572,20 +631,24 @@ void PalotView::load_visual_parity_fixture() {
 	append_message("You",
 	               "Add a dark mode toggle to the application settings page. It should persist the user's "
 	               "preference to localStorage and apply the theme immediately without a page reload.", false);
+	upsert_reasoning(R"({"id":"fixture-reasoning-1","type":"reasoning","state":{"time":{"start":0,"end":2000}}})");
+	upsert_tool(R"({"id":"fixture-read-1","type":"tool","tool":"read","state":{"status":"running","input":{"path":"components/settings.tsx"},"time":{"start":0}}})", false);
+	upsert_tool(R"({"id":"fixture-read-1","type":"tool","tool":"read","state":{"status":"completed","input":{"path":"components/settings.tsx"},"time":{"start":0,"end":3000}}})", false);
+	upsert_tool(R"({"id":"fixture-edit-1","type":"tool","tool":"edit","state":{"status":"completed","input":{"path":"lib/theme.ts"},"time":{"start":0,"end":3000}}})", false);
+	upsert_tool(R"({"id":"fixture-edit-2","type":"tool","tool":"edit","state":{"status":"completed","input":{"path":"components/settings.tsx"},"time":{"start":0,"end":3000}}})", false);
 	append_message("OpenCode",
-	               "🧠 Thought for 2 seconds\n\n"
 	               "I've added the dark mode toggle to the settings page. Here's what I did:\n\n"
 	               "**Created `src/lib/theme.ts`** - Pure functions to resolve, apply, and persist the "
 	               "theme. Supports `light`, `dark`, and `system` (which reads `prefers-color-scheme`).\n\n"
 	               "**Updated `src/components/settings.tsx`** - Added a three-way toggle group so users "
 	               "can pick light, dark, or match their OS.\n\n"
 	               "The theme applies instantly via `data-theme` on the root element, no reload needed.\n\n"
-	               "›  Show 3 steps  ·  anthropic.claude-opus-4-6  ·  4m 58s  ·  $0.01\n\n"
 	               "anthropic.claude-opus-4-6  ·  4m 58s  ·  $0.01", false);
 	append_message("You",
 	               "Great! Now also add system preference detection so it defaults to the user's OS "
 	               "setting, and add a transition animation when switching themes.", false);
-	append_message("OpenCode", "🧠 Thought for 2 seconds\n\n**Making edits** in `src/lib/theme.ts`…", false);
+	upsert_reasoning(R"({"id":"fixture-reasoning-2","type":"reasoning","state":{"time":{"start":0,"end":2000}}})");
+	upsert_tool(R"({"id":"fixture-edit-running","type":"tool","tool":"edit","state":{"status":"running","input":{"path":"src/lib/theme.ts"}}})", false);
 	transcript_->set_scroll_y(54.0f);
 	imported_root_->set_transcript_scroll_y(0.0f);
 	status_ = "Streaming";
@@ -599,7 +662,7 @@ void PalotView::paint(pulp::canvas::Canvas& canvas) {
 
 float PalotView::message_height(std::size_t index) const {
 	if (index >= messages_.size()) return 96.0f;
-	const auto& [role, text] = messages_[index];
+	const auto& text = messages_[index].text;
 	const float sidebar_width = local_bounds().width < 700.0f ? 0.0f : kSidebarWidth;
 	const float width = std::min(kContentMaxWidth,
 	                             std::max(240.0f, local_bounds().width - sidebar_width - 32.0f));
@@ -622,7 +685,8 @@ float PalotView::message_height(std::size_t index) const {
 
 void PalotView::append_message(std::string role, std::string text, bool announce) {
 	const std::string announcement = role + ": " + text;
-	messages_.emplace_back(std::move(role), std::move(text));
+	const auto key = role + "-" + std::to_string(messages_.size());
+	messages_.push_back({.key = key, .role = std::move(role), .text = std::move(text)});
 	const auto index = messages_.size() - 1;
 	transcript_->set_row_count(messages_.size());
 	transcript_->set_row_height(index, message_height(index));
@@ -633,17 +697,80 @@ void PalotView::append_message(std::string role, std::string text, bool announce
 			pulp::view::AnnouncementPriority::Polite);
 }
 
-void PalotView::sync_imported_transcript() {
-	if (!imported_root_) return;
+void PalotView::upsert_reasoning(std::string payload) {
+	const auto part = nlohmann::json::parse(payload);
+	if (!part.is_object() || part.value("type", "") != "reasoning")
+		throw std::invalid_argument("OpenCode reasoning event is not a reasoning part");
+	const auto id = first_string(part, {"id"});
+	if (id.empty()) throw std::invalid_argument("OpenCode reasoning part has no stable identity");
+	std::string label = "Thought";
+	const auto& state = part.contains("state") ? part.at("state") : nlohmann::json::object();
+	const auto& time = state.is_object() && state.contains("time") ? state.at("time") :
+	                   part.contains("time") ? part.at("time") : nlohmann::json::object();
+	if (time.is_object() && time.contains("start") && time.contains("end") &&
+	    time.at("start").is_number() && time.at("end").is_number()) {
+		auto seconds = time.at("end").get<double>() - time.at("start").get<double>();
+		if (seconds > 100.0) seconds /= 1000.0;
+		label += " for " + std::to_string(std::max(0L, std::lround(seconds))) + " seconds";
+	}
+	auto found = std::ranges::find(messages_, id, &TranscriptEntry::key);
+	const auto values = std::unordered_map<std::string, std::string>{{"reasoning.label", label}};
+	if (found == messages_.end()) {
+		messages_.push_back({.key = id, .role = "Reasoning", .text = std::move(payload),
+		                     .template_id = "reasoning", .values = values});
+	} else {
+		found->text = std::move(payload);
+		found->template_id = "reasoning";
+		found->values = values;
+	}
+	transcript_->set_row_count(messages_.size());
+	transcript_->refresh_rows();
+	sync_imported_transcript();
+}
+
+void PalotView::upsert_tool(std::string payload, bool announce) {
+	const auto projected = project_tool_part(payload);
+	auto found = std::ranges::find(messages_, projected.id, &TranscriptEntry::key);
+	const auto values = std::unordered_map<std::string, std::string>{
+		{"tool.label", projected.label}, {"tool.subject", projected.subject},
+		{"tool.duration", projected.duration}, {"tool.status", projected.status},
+	};
+	if (found == messages_.end()) {
+		messages_.push_back({.key = projected.id, .role = "Tool", .text = std::move(payload),
+		                     .template_id = projected.template_id, .values = values});
+	} else {
+		found->text = std::move(payload);
+		found->template_id = projected.template_id;
+		found->values = values;
+	}
+	transcript_->set_row_count(messages_.size());
+	const auto index = static_cast<std::size_t>(std::distance(messages_.begin(),
+		std::ranges::find(messages_, projected.id, &TranscriptEntry::key)));
+	transcript_->set_row_height(index, message_height(index));
+	transcript_->refresh_rows();
+	sync_imported_transcript();
+	if (announce)
+		pulp::view::announce_accessibility(projected.label + " " + projected.subject,
+		                                    pulp::view::AnnouncementPriority::Polite);
+}
+
+std::vector<pulp::view::ImportedListItem> PalotView::transcript_projection() const {
 	std::vector<pulp::view::ImportedListItem> rows;
 	rows.reserve(messages_.size());
 	for (std::size_t index = 0; index < messages_.size(); ++index) {
-		const auto& [role, content] = messages_[index];
-		rows.push_back({role + "-" + std::to_string(index),
-		                role == "You" ? "user" : role == "Tool" ? "tool" : "assistant",
-		                {{"message.text", content}}});
+		const auto& message = messages_[index];
+		rows.push_back({message.key,
+		                !message.template_id.empty() ? message.template_id :
+		                message.role == "You" ? "user" : "assistant",
+		                !message.values.empty() ? message.values :
+		                std::unordered_map<std::string, std::string>{{"message.text", message.text}}});
 	}
-	imported_root_->set_transcript(std::move(rows));
+	return rows;
+}
+
+void PalotView::sync_imported_transcript() {
+	if (!imported_root_) return;
+	imported_root_->set_transcript(transcript_projection());
 }
 
 void PalotView::schedule_imported_transcript_sync() {
@@ -693,8 +820,8 @@ void PalotView::handle_event(std::string type, std::string value) {
 		create_session_ = false;
 	} else if (type == "text" && !value.empty()) {
 		if (on_stream_delta) on_stream_delta();
-		if (!messages_.empty() && messages_.back().first == "OpenCode") {
-			messages_.back().second += value;
+		if (!messages_.empty() && messages_.back().role == "OpenCode") {
+			messages_.back().text += value;
 			const auto index = messages_.size() - 1;
 			transcript_->set_row_height(index, message_height(index));
 			transcript_->refresh_rows();
@@ -702,13 +829,23 @@ void PalotView::handle_event(std::string type, std::string value) {
 		} else {
 			append_message("OpenCode", std::move(value), false);
 		}
+	} else if (type == "reasoning") {
+		try {
+			upsert_reasoning(std::move(value));
+		} catch (const std::exception& error) {
+			set_configuration_error(std::string("Invalid OpenCode reasoning event: ") + error.what());
+		}
 	} else if (type == "tool") {
-		append_message("Tool", std::move(value), true);
+		try {
+			upsert_tool(std::move(value), true);
+		} catch (const std::exception& error) {
+			set_configuration_error(std::string("Invalid OpenCode tool event: ") + error.what());
+		}
 	} else if (type == "done") {
 		status_ = "Ready";
-		if (!messages_.empty() && messages_.back().first == "OpenCode")
+		if (!messages_.empty() && messages_.back().role == "OpenCode")
 			pulp::view::announce_accessibility(
-			    "OpenCode: " + accessibility_summary(messages_.back().second),
+			    "OpenCode: " + accessibility_summary(messages_.back().text),
 			    pulp::view::AnnouncementPriority::Polite);
 		persist();
 		if (on_demo_complete) on_demo_complete();
@@ -759,8 +896,8 @@ void PalotView::persist() const {
 	for (int shift = 0; shift < 32; shift += 8)
 		bytes.push_back(static_cast<std::uint8_t>((count >> shift) & 0xff));
 	for (std::size_t index = messages_.size() - count; index < messages_.size(); ++index) {
-		append_string(bytes, messages_[index].first);
-		append_string(bytes, messages_[index].second);
+		append_string(bytes, messages_[index].role);
+		append_string(bytes, messages_[index].text);
 		if (bytes.size() > kMaxStateBytes) return;
 	}
 	const auto temporary = path.string() + ".tmp";
@@ -812,7 +949,20 @@ void PalotView::restore() {
 			messages_.clear();
 			return;
 		}
-		messages_.emplace_back(std::move(role), std::move(text));
-		if (messages_.back().first == "You") last_prompt_ = messages_.back().second;
+		const auto key = role + "-restored-" + std::to_string(messages_.size());
+		messages_.push_back({.key = key, .role = std::move(role), .text = std::move(text)});
+		if (messages_.back().role == "Tool") {
+			try {
+				const auto tool = project_tool_part(messages_.back().text);
+				messages_.back().key = tool.id;
+				messages_.back().template_id = tool.template_id;
+				messages_.back().values = {{"tool.label", tool.label}, {"tool.subject", tool.subject},
+				                           {"tool.duration", tool.duration}, {"tool.status", tool.status}};
+			} catch (const std::exception&) {
+				messages_.pop_back();
+				continue;
+			}
+		}
+		if (messages_.back().role == "You") last_prompt_ = messages_.back().text;
 	}
 }

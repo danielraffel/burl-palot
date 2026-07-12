@@ -3,6 +3,7 @@
 #include <pulp/view/input_events.hpp>
 
 #include <cstdlib>
+#include <unordered_set>
 
 int main() {
 	PalotView view;
@@ -35,5 +36,30 @@ int main() {
 	const auto mode = std::string(view.display_mode());
 	if (!view.invoke_imported_action("display.mode.cycle") || view.display_mode() == mode) return 16;
 	if (!view.invoke_imported_action("navigation.session.close") || view.navigation_route() != "/") return 17;
+	view.load_visual_parity_fixture();
+	const auto transcript = view.transcript_projection();
+	std::unordered_set<std::string> tool_keys;
+	std::size_t read_rows = 0;
+	std::size_t edit_rows = 0;
+	std::size_t reasoning_rows = 0;
+	bool completed_duration = false;
+	bool running_duration = false;
+	for (const auto& row : transcript) {
+		if (row.template_id == "reasoning") {
+			++reasoning_rows;
+			if (!row.values.contains("reasoning.label") ||
+			    row.values.at("reasoning.label") != "Thought for 2 seconds") return 20;
+			continue;
+		}
+		if (row.template_id != "tool.read" && row.template_id != "tool.edit") continue;
+		tool_keys.insert(row.key);
+		read_rows += row.template_id == "tool.read";
+		edit_rows += row.template_id == "tool.edit";
+		completed_duration |= row.values.contains("tool.duration") && row.values.at("tool.duration") == "3s";
+		running_duration |= row.values.contains("tool.duration") && row.values.at("tool.duration") == "…";
+		if (!row.values.contains("tool.label") || !row.values.contains("tool.subject")) return 18;
+	}
+	if (tool_keys.size() != 4 || read_rows != 1 || edit_rows != 3 || reasoning_rows != 2 ||
+	    !completed_duration || !running_duration) return 19;
 	return EXIT_SUCCESS;
 }

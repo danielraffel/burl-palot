@@ -3,6 +3,9 @@
 #include <pulp/view/design_ir.hpp>
 #include <pulp/view/accessibility_tree.hpp>
 #include <pulp/view/text_editor.hpp>
+#include <pulp/view/widgets.hpp>
+#include <pulp/canvas/canvas.hpp>
+#include <pulp/canvas/text_shaper.hpp>
 
 #include <cstdlib>
 #include <fstream>
@@ -13,6 +16,48 @@
 #include <unordered_map>
 
 namespace {
+
+class ShapingRecordingCanvas final : public pulp::canvas::RecordingCanvas {
+public:
+	void set_font(const std::string& family, float size) override {
+		family_ = family;
+		size_ = size;
+		weight_ = 400;
+		slant_ = 0;
+		letter_spacing_ = 0.0f;
+		RecordingCanvas::set_font(family, size);
+	}
+
+	void set_font_full(const std::string& family, float size, int weight, int slant,
+	                   float letter_spacing) override {
+		family_ = family;
+		size_ = size;
+		weight_ = weight;
+		slant_ = slant;
+		letter_spacing_ = letter_spacing;
+		RecordingCanvas::set_font_full(family, size, weight, slant, letter_spacing);
+	}
+
+	float measure_text(const std::string& text) override {
+		pulp::canvas::AttributedString attributed;
+		pulp::canvas::TextSpan span;
+		span.text = text;
+		span.font_family = family_;
+		span.font_size = size_;
+		span.font_weight = weight_;
+		span.italic = slant_ != 0;
+		span.letter_spacing = letter_spacing_;
+		attributed.append(std::move(span));
+		return pulp::canvas::global_text_shaper().prepare(attributed).total_width();
+	}
+
+private:
+	std::string family_ = "Inter";
+	float size_ = 14.0f;
+	int weight_ = 400;
+	int slant_ = 0;
+	float letter_spacing_ = 0.0f;
+};
 
 bool forbidden_renderer(const pulp::view::IRNode& node) {
 	if (node.type == "webview" || node.type == "chromium" || node.type == "iframe") return true;
@@ -71,8 +116,11 @@ int main(int argc, char** argv) {
 	if (host.child_at(0)->child_count() == 0) return 6;
 	if (host.attached_action_count() != 26 || !host.unattached_required_actions().empty()) return 7;
 	host.set_transcript({{"u1", "user", {{"message.text", "runtime user"}}},
+	                     {"r1", "reasoning", {{"reasoning.label", "Thought for 2 seconds"}}},
 	                     {"a1", "assistant", {{"message.text", "runtime assistant"}}},
-	                     {"t1", "tool", {{"message.text", "tool.read"}}}});
+	                     {"t1", "tool.read", {{"tool.label", "Read"},
+	                                           {"tool.subject", "tool.read"},
+	                                           {"tool.duration", "1s"}}}});
 	host.set_projects({{"p1", "project", {{"id", "/tmp/project-one"},
 	                                          {"project.name", "project-one"},
 	                                          {"directory", "/tmp/project-one"},
@@ -127,6 +175,56 @@ int main(int argc, char** argv) {
 		}
 	host.set_bounds({0, 0, 1200, 800});
 	host.layout_children();
+	auto* app_bar_title = find_anchor_suffix(host, "/button-shape-dabbe371:0/h2-shape-62d7ba2f:0");
+	auto* app_bar_title_label = dynamic_cast<pulp::view::Label*>(app_bar_title);
+	if (std::getenv("PALOT_APP_BAR_PROOF")) {
+		const auto b = app_bar_title ? app_bar_title->bounds() : pulp::view::Rect{};
+		std::cerr << "app-bar-title bounds=" << b.x << ',' << b.y << ',' << b.width << ',' << b.height
+		          << " intrinsic=" << (app_bar_title_label ? app_bar_title_label->intrinsic_width() : 0.0f) << '\n';
+		for (const auto suffix : {"/div-data-slot-app-bar:0", "/div-shape-91386c77:0",
+		                          "/div-shape-b9281b89:0", "/button-shape-dabbe371:0"}) {
+			const auto* item = find_anchor_suffix(host, suffix);
+			const auto r = item ? item->bounds() : pulp::view::Rect{};
+			std::cerr << suffix << " bounds=" << r.x << ',' << r.y << ',' << r.width << ',' << r.height << '\n';
+			if (item && std::string_view(suffix) == "/div-shape-b9281b89:0") {
+				for (std::size_t index = 0; index < item->child_count(); ++index) {
+					const auto* child = item->child_at(index);
+					const auto child_bounds = child->bounds();
+					std::cerr << " child=" << child->anchor_id() << " bounds=" << child_bounds.x << ','
+					          << child_bounds.y << ',' << child_bounds.width << ',' << child_bounds.height
+					          << " intrinsic=" << child->intrinsic_width() << '\n';
+				}
+			}
+		}
+	}
+	if (!app_bar_title_label || app_bar_title_label->text() != "Add dark mode toggle to settings" ||
+	    app_bar_title_label->bounds().width <= 0 || app_bar_title_label->bounds().height <= 0) {
+		std::cerr << "source app-bar title failed native materialization" << '\n';
+		return 22;
+	}
+	ShapingRecordingCanvas paint_probe;
+	host.paint_all(paint_probe);
+	const auto painted_app_bar_title = std::ranges::any_of(paint_probe.commands(), [](const auto& command) {
+		return command.type == pulp::canvas::DrawCommand::Type::fill_text &&
+		       command.text == "Add dark mode toggle to settings";
+	});
+	if (!painted_app_bar_title) {
+		std::cerr << "source app-bar title did not reach the native paint stream" << '\n';
+		for (const auto& command : paint_probe.commands())
+			if (command.type == pulp::canvas::DrawCommand::Type::fill_text &&
+			    command.text.find("Add") != std::string::npos)
+				std::cerr << " related paint text=" << command.text << " at=" << command.f[0] << ','
+				          << command.f[1] << '\n';
+		return 24;
+	}
+	auto* reasoning_label = find_anchor_suffix(host,
+		"/div-data-slot-collapsible:0/button-data-slot-collapsible-trigger:0/p-shape-554e6069:0");
+	if (!reasoning_label || reasoning_label->bounds().x > 64.0f || reasoning_label->bounds().width > 300.0f) {
+		const auto r = reasoning_label ? reasoning_label->bounds() : pulp::view::Rect{};
+		std::cerr << "reasoning label lost source-local inline geometry: " << r.x << ',' << r.y << ','
+		          << r.width << ',' << r.height << '\n';
+		return 23;
+	}
 	if (!host.set_application_state("sidebar.open", "closed")) return 16;
 	host.layout_children();
 	if (sidebar->visible()) return 17;
@@ -144,7 +242,7 @@ int main(int argc, char** argv) {
 			return node.label.find(text) != std::string::npos || node.value.find(text) != std::string::npos;
 		});
 	};
-	for (const auto text : {"runtime user", "runtime assistant", "tool.read", "project-two"})
+	for (const auto text : {"runtime user", "Thought for 2 seconds", "runtime assistant", "tool.read", "project-two"})
 		if (!contains_accessible_text(text)) {
 			std::cerr << "dynamic imported collection missing accessible value: " << text << '\n';
 			return 14;

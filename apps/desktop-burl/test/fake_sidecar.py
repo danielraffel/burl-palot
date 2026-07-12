@@ -103,6 +103,16 @@ for line in sys.stdin:
             "subscriptionId": "1-events",
             "event": {"payload": {"type": "sdk.event", "event": {
                 "type": "message.part.updated",
+                "properties": {"part": {"id": "reason-1", "type": "reasoning",
+                    "state": {"time": {"start": 1000, "end": 3000}}}},
+            }}},
+        })
+        send({
+            "version": 1,
+            "type": "event",
+            "subscriptionId": "1-events",
+            "event": {"payload": {"type": "sdk.event", "event": {
+                "type": "message.part.updated",
                 "properties": {"part": {"id": "text-1", "type": "text", "text": ""}},
             }}},
         })
@@ -123,7 +133,20 @@ for line in sys.stdin:
             "subscriptionId": "1-events",
             "event": {"payload": {"type": "sdk.event", "event": {
                 "type": "message.part.updated",
-                "properties": {"part": {"id": "tool-1", "type": "tool", "tool": "read"}},
+                "properties": {"part": {"id": "tool-1", "type": "tool", "tool": "read",
+                    "state": {"status": "running", "input": {"path": "src/lib/theme.ts"},
+                              "time": {"start": 1000}}}},
+            }}},
+        })
+        send({
+            "version": 1,
+            "type": "event",
+            "subscriptionId": "1-events",
+            "event": {"payload": {"type": "sdk.event", "event": {
+                "type": "message.part.updated",
+                "properties": {"part": {"id": "tool-1", "type": "tool", "tool": "read",
+                    "state": {"status": "completed", "input": {"path": "src/lib/theme.ts"},
+                              "time": {"start": 1000, "end": 4000}, "output": "ok"}}},
             }}},
         })
         send({
