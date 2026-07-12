@@ -23,6 +23,7 @@ def file_hash(path: Path) -> str:
 
 
 CONTEXT_PROPERTIES = {"alignContent": ("display",), "alignItems": ("display",)}
+SIDE_COLOR_WIDTH = {"borderBottomColor": "borderBottomWidth"}
 
 
 def computed_property_values(path: Path) -> dict[str, set[tuple[str, tuple[tuple[str, str], ...]]]]:
@@ -33,7 +34,9 @@ def computed_property_values(path: Path) -> dict[str, set[tuple[str, tuple[tuple
 			style = value.get("computedStyle")
 			if isinstance(style, dict):
 				for name, observed in style.items():
-					if name == "alignSelf":
+					if name in SIDE_COLOR_WIDTH:
+						context = (("width", str(style.get(SIDE_COLOR_WIDTH[name], ""))),)
+					elif name == "alignSelf":
 						context = tuple((field, str((parent_style or {}).get(source, "")))
 							for field, source in (
 								("parentAlignItems", "alignItems"), ("parentDisplay", "display"),

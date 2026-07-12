@@ -372,30 +372,55 @@
       "values": [
         {
           "value": "oklab(0.301182 0.0000137091 0.00000602007 / 0.6)",
+          "context": {"width": "0px"},
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed per-side border color + width=0 -> TypedPaint side slots -> NativeDesignIR side style -> generic View explicit zero width -> no Skia side fill",
+          "evidenceIds": ["semantic:observed-dom-border-side-zero"]
+        },
+        {
+          "value": "oklab(0.301182 0.0000137091 0.00000602007 / 0.6)",
+          "context": {"width": "1px"},
+          "observation": "observed",
+          "decision": "lowered",
+          "route": "computed per-side border width/color -> normalizeCssColor -> TypedPaint side slots -> NativeDesignIR side style -> generic View per-side fill -> Skia; asymmetric promoted widgets fail closed",
+          "evidenceIds": ["semantic:observed-dom-border-side"]
         },
         {
           "value": "rgb(175, 175, 175)",
+          "context": {"width": "0px"},
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed per-side border color + width=0 -> TypedPaint side slots -> NativeDesignIR side style -> generic View explicit zero width -> no Skia side fill",
+          "evidenceIds": ["semantic:observed-dom-border-side-zero"]
         },
         {
           "value": "rgb(46, 46, 46)",
+          "context": {"width": "0px"},
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed per-side border color + width=0 -> TypedPaint side slots -> NativeDesignIR side style -> generic View explicit zero width -> no Skia side fill",
+          "evidenceIds": ["semantic:observed-dom-border-side-zero"]
+        },
+        {
+          "value": "rgb(46, 46, 46)",
+          "context": {"width": "1px"},
+          "observation": "observed",
+          "decision": "lowered",
+          "route": "computed per-side border width/color -> normalizeCssColor -> TypedPaint side slots -> NativeDesignIR side style -> generic View per-side fill -> Skia; asymmetric promoted widgets fail closed",
+          "evidenceIds": ["semantic:observed-dom-border-side"]
         },
         {
           "value": "rgba(0, 0, 0, 0)",
+          "context": {"width": "0px"},
+          "observation": "observed",
+          "decision": "lowered",
+          "route": "computed per-side border color + width=0 -> TypedPaint side slots -> NativeDesignIR side style -> generic View explicit zero width -> no Skia side fill",
+          "evidenceIds": ["semantic:observed-dom-border-side-zero"]
+        },
+        {
+          "value": "rgba(0, 0, 0, 0)",
+          "context": {"width": "1px"},
           "observation": "observed",
           "decision": "unsupported",
           "route": null,
