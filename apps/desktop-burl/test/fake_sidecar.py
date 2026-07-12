@@ -51,6 +51,16 @@ for line in sys.stdin:
         if project_directory == "/tmp/close-on-cancel":
             os._exit(0)
         if project_directory == "/tmp/delayed-cancel":
+            for event_type in ("session.error", "session.idle"):
+                send({
+                    "version": 1,
+                    "type": "event",
+                    "subscriptionId": "1-events",
+                    "event": {"projectId": project_id, "sessionId": session_id, "payload": {
+                        "type": "sdk.event",
+                        "event": {"type": event_type, "properties": {"sessionID": session_id}},
+                    }},
+                })
             time.sleep(0.2)
         result = {"ok": True, "value": {"requestId": command["requestId"], "cancelled": True}}
     else:

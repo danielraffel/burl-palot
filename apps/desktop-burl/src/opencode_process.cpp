@@ -411,11 +411,6 @@ void OpenCodeProcess::run(std::shared_ptr<State> state) {
 						const auto cancel_id = "cancel-" + std::to_string(generation);
 						if (type == "response" && value->value("id", "") == cancel_id)
 							throw std::runtime_error("cancelled");
-						if (type == "event") {
-							const auto& sdk = value->at("event").at("payload").at("event");
-							if (sdk.value("type", "") == "session.idle" || sdk.value("type", "") == "session.error")
-								throw std::runtime_error("cancelled");
-						}
 						continue;
 					}
 					if (type == "response" && value->value("id", "") == state->request_id) {

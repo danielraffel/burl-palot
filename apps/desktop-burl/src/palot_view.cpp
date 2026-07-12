@@ -141,6 +141,7 @@ struct MessageRow final : pulp::view::View {
 };
 
 std::filesystem::path state_path() {
+	if (const char* override_path = std::getenv("PALOT_STATE_PATH")) return override_path;
 	if (const char* home = std::getenv("HOME"))
 		return std::filesystem::path(home) /
 		       "Library/Application Support/Palot/burl-session.bin";
@@ -444,6 +445,14 @@ void PalotView::start_demo(std::string project, std::string prompt) {
 	send_prompt(prompt);
 }
 
+bool PalotView::invoke_imported_action(std::string_view action) {
+	return imported_root_ && imported_root_->invoke_bound_action(action);
+}
+
+void PalotView::flush_demo_projection() {
+	if (transcript_updates_.flush()) sync_imported_transcript();
+}
+
 void PalotView::sync_imported_projects() {
 	if (!imported_root_ || !project_ || project_->text().empty()) return;
 	const auto directory = std::filesystem::path(project_->text()).lexically_normal();
@@ -582,6 +591,7 @@ void PalotView::handle_event(std::string type, std::string value) {
 		session_editor_->set_text(session_);
 		create_session_ = false;
 	} else if (type == "text" && !value.empty()) {
+		if (on_stream_delta) on_stream_delta();
 		if (!messages_.empty() && messages_.back().first == "OpenCode") {
 			messages_.back().second += value;
 			const auto index = messages_.size() - 1;
@@ -603,6 +613,8 @@ void PalotView::handle_event(std::string type, std::string value) {
 		if (on_demo_complete) on_demo_complete();
 	} else if (type == "error") {
 		status_ = value == "cancelled" ? "Cancelled" : "Error: " + value.substr(0, 80);
+		auto callback = std::move(on_demo_error);
+		if (callback) callback();
 	}
 	request_repaint();
 }

@@ -21,9 +21,14 @@ public:
 	void layout_children() override;
 	void start_demo(std::string project, std::string prompt);
 	void load_visual_parity_fixture();
+	bool invoke_imported_action(std::string_view action);
+	void flush_demo_projection();
+	[[nodiscard]] const std::string& demo_session_id() const noexcept { return session_; }
 	[[nodiscard]] bool source_observed_primary_tree() const noexcept;
 	[[nodiscard]] const std::vector<std::string>& unattached_required_actions() const noexcept;
 	std::function<void()> on_demo_complete;
+	std::function<void()> on_stream_delta;
+	std::function<void()> on_demo_error;
 private:
 	class UiEventSink;
 	void send_prompt(const std::string& prompt, bool retry = false);

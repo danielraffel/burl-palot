@@ -115,6 +115,7 @@ public:
 		auto* transcript_host = pending_hosts_.at("messages");
 		while (transcript_host->child_count()) transcript_host->remove_child(transcript_host->child_at(0));
 		buttons_.erase("composer.copy");
+		payloads_.erase("composer.copy");
 		transcript_ = list.get();
 		transcript_->flex().flex_grow = 1.0f;
 		transcript_host->add_child(std::move(list));
@@ -122,6 +123,7 @@ public:
 			std::unordered_map<std::string, pulp::view::IRNode>{{"project", templates.at("project")}}, ir_.asset_manifest, this);
 		auto* project_host = pending_hosts_.at("projects");
 		buttons_.erase("project.open");
+		payloads_.erase("project.open");
 		while (project_host->child_count()) project_host->remove_child(project_host->child_at(0));
 		projects_ = project_list.get();
 		projects_->set_auto_follow(false);
@@ -132,12 +134,11 @@ public:
 	[[nodiscard]] const std::unordered_set<std::string>& attached() const noexcept { return attached_; }
 	[[nodiscard]] pulp::view::TextEditor* composer() const noexcept { return composer_; }
 	bool invoke_bound(std::string_view id) {
-		auto button = buttons_.find(std::string(id));
-		if (button != buttons_.end() && !button->second.empty() && button->second.front()->on_click) {
-			button->second.front()->on_click();
-			return true;
-		}
-		return attached_.contains(std::string(id)) && invoke(id, "");
+		const auto key = std::string(id);
+		if (!attached_.contains(key)) return false;
+		const auto payload = payloads_.find(key);
+		return invoke(id, payload == payloads_.end() || payload->second.empty()
+			? std::string_view{} : std::string_view(payload->second.front()));
 	}
 	std::vector<pulp::view::View*> bound_views(std::string_view id) const {
 		std::vector<pulp::view::View*> result;
@@ -158,11 +159,13 @@ private:
 		button.on_click = [callback = endpoint->second, payload] { callback(payload); };
 		attached_.insert(id);
 		buttons_[id].push_back(&button);
+		payloads_[id].push_back(payload);
 	}
 	bool invoke(std::string_view id, std::string_view payload) {
 		auto endpoint = endpoints_.find(std::string(id));
 		if (endpoint == endpoints_.end()) return false;
-		endpoint->second(payload);
+		auto callback = endpoint->second;
+		callback(payload);
 		return true;
 	}
 
@@ -173,6 +176,7 @@ private:
 	std::unordered_map<std::string, pulp::view::View*> pending_hosts_;
 	std::unordered_set<std::string> attached_;
 	std::unordered_map<std::string, std::vector<pulp::view::TextButton*>> buttons_;
+	std::unordered_map<std::string, std::vector<std::string>> payloads_;
 	pulp::view::TextEditor* composer_ = nullptr;
 };
 

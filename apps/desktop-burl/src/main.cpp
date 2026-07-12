@@ -5,6 +5,7 @@
 #include <pulp/events/main_thread_dispatcher.hpp>
 #include <pulp/canvas/font_flight_recorder.hpp>
 #include <pulp/canvas/font_resolver.hpp>
+#include <nlohmann/json.hpp>
 
 #include <fstream>
 #include <filesystem>
@@ -43,6 +44,8 @@ int main(int argc, char** argv) {
 	std::string demo_prompt;
 	std::string demo_capture;
 	std::string font_receipt;
+	std::string demo_evidence;
+	bool demo_cancel_retry = false;
 	bool visual_parity_fixture = false;
 	float window_width = 1200.0f;
 	float window_height = 800.0f;
@@ -52,6 +55,10 @@ int main(int argc, char** argv) {
 		else if (argument == "--demo-prompt" && index + 1 < argc) demo_prompt = argv[++index];
 		else if (argument == "--demo-capture" && index + 1 < argc) demo_capture = argv[++index];
 		else if (argument == "--font-receipt" && index + 1 < argc) font_receipt = argv[++index];
+		else if (argument == "--demo-evidence" && index + 1 < argc) demo_evidence = argv[++index];
+		else if (argument == "--demo-cancel-retry-proof") demo_cancel_retry = true;
+		else if (argument == "--demo-state" && index + 1 < argc)
+			setenv("PALOT_STATE_PATH", argv[++index], 1);
 		else if (argument == "--visual-parity-fixture") visual_parity_fixture = true;
 		else if (argument == "--window-width" && index + 1 < argc) window_width = std::stof(argv[++index]);
 		else if (argument == "--window-height" && index + 1 < argc) window_height = std::stof(argv[++index]);
@@ -106,7 +113,48 @@ int main(int argc, char** argv) {
 	window->set_close_callback([] {});
 	std::jthread demo_starter;
 	if ((!demo_project.empty() && !demo_prompt.empty()) || visual_parity_fixture) {
-		root.on_demo_complete = [&root, &window, demo_capture, font_receipt] {
+		auto proof_session = std::make_shared<std::string>();
+		if (demo_cancel_retry) {
+			auto cancellation_started = std::make_shared<bool>(false);
+			root.on_stream_delta = [&root, cancellation_started, proof_session, demo_evidence] {
+				if (*cancellation_started) return;
+				*cancellation_started = true;
+				*proof_session = root.demo_session_id();
+				if (!demo_evidence.empty()) write_text(demo_evidence + ".progress", "streamed\ncancel\n");
+				pulp::events::MainThreadDispatcher::call_async([&root] {
+					if (!root.invoke_imported_action("prompt.cancel"))
+						std::cerr << "demo proof: bound prompt.cancel unavailable\n";
+				});
+			};
+			root.on_demo_error = [&root, demo_evidence] {
+				root.on_stream_delta = {};
+				root.on_demo_error = [demo_evidence] {
+					if (!demo_evidence.empty()) write_text(demo_evidence + ".progress", "retry-error\n");
+				};
+				if (!demo_evidence.empty()) write_text(demo_evidence + ".progress", "streamed\ncancelled\nretry\n");
+				pulp::events::MainThreadDispatcher::call_async_after([&root] {
+					if (!root.invoke_imported_action("prompt.retry"))
+						std::cerr << "demo proof: bound retry unavailable\n";
+				}, 3000);
+			};
+		}
+		root.on_demo_complete = [&root, &window, demo_capture, font_receipt, demo_evidence,
+		                         demo_cancel_retry, proof_session] {
+			if (demo_cancel_retry && (proof_session->empty() || root.demo_session_id() != *proof_session)) {
+				if (!demo_evidence.empty())
+					write_text(demo_evidence + ".progress", "session-changed\nexpected=" +
+					           *proof_session + "\nactual=" + root.demo_session_id() + "\n");
+				return;
+			}
+			if (!demo_evidence.empty()) write_text(demo_evidence + ".progress", "streamed\ncancelled\nretried\ndone\n");
+			root.flush_demo_projection();
+			if (!demo_evidence.empty()) {
+				nlohmann::json nodes = nlohmann::json::array();
+				for (const auto& node : pulp::view::snapshot_accessibility_tree(root))
+					nodes.push_back({{"depth", node.depth}, {"role", static_cast<int>(node.role)},
+					                 {"label", node.label}, {"value", node.value}});
+				write_text(demo_evidence, nodes.dump(2) + "\n");
+			}
 			if (!demo_capture.empty() || !font_receipt.empty()) {
 				if (!font_receipt.empty()) pulp::canvas::FontFlightRecorder::instance().clear();
 				root.request_repaint();
