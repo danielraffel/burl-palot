@@ -971,57 +971,57 @@
           "value": "-2px",
           "observation": "observed",
           "decision": "lowered",
-          "route": "computed position + bottom px/auto -> TypedLayout authored inset/unset -> NativeDesignIR position/inset/bottomAuto -> static ignore, relative flow offset, absolute parent-local anchor + resize or explicit clear, fixed/sticky diagnostic fail-closed -> Yoga native bounds",
-          "evidenceIds": ["semantic:observed-dom-position-bottom"]
+          "route": "computed CSS position plus physical top/right/bottom/left px, percent, linear calc, or auto -> validated TypedLayout keyword/Length -> NativeDesignIR style numeric or retained expression -> validated IRStyle -> View position and per-edge Dimension terms -> Yoga containing-block flow/out-of-flow geometry recomputed under resize -> z-sorted hit testing and Skia pixels; fixed is admitted only by the observed viewport-equivalent capture lane while sticky/unknown syntax fails closed",
+          "evidenceIds": ["semantic:observed-dom-position-family"]
         },
         {
           "value": "0px",
           "observation": "observed",
           "decision": "lowered",
-          "route": "computed position + bottom px/auto -> TypedLayout authored inset/unset -> NativeDesignIR position/inset/bottomAuto -> static ignore, relative flow offset, absolute parent-local anchor + resize or explicit clear, fixed/sticky diagnostic fail-closed -> Yoga native bounds",
-          "evidenceIds": ["semantic:observed-dom-position-bottom"]
+          "route": "computed CSS position plus physical top/right/bottom/left px, percent, linear calc, or auto -> validated TypedLayout keyword/Length -> NativeDesignIR style numeric or retained expression -> validated IRStyle -> View position and per-edge Dimension terms -> Yoga containing-block flow/out-of-flow geometry recomputed under resize -> z-sorted hit testing and Skia pixels; fixed is admitted only by the observed viewport-equivalent capture lane while sticky/unknown syntax fails closed",
+          "evidenceIds": ["semantic:observed-dom-position-family"]
         },
         {
           "value": "10.5px",
           "observation": "observed",
           "decision": "lowered",
-          "route": "computed position + bottom px/auto -> TypedLayout authored inset/unset -> NativeDesignIR position/inset/bottomAuto -> static ignore, relative flow offset, absolute parent-local anchor + resize or explicit clear, fixed/sticky diagnostic fail-closed -> Yoga native bounds",
-          "evidenceIds": ["semantic:observed-dom-position-bottom"]
+          "route": "computed CSS position plus physical top/right/bottom/left px, percent, linear calc, or auto -> validated TypedLayout keyword/Length -> NativeDesignIR style numeric or retained expression -> validated IRStyle -> View position and per-edge Dimension terms -> Yoga containing-block flow/out-of-flow geometry recomputed under resize -> z-sorted hit testing and Skia pixels; fixed is admitted only by the observed viewport-equivalent capture lane while sticky/unknown syntax fails closed",
+          "evidenceIds": ["semantic:observed-dom-position-family"]
         },
         {
           "value": "118px",
           "observation": "observed",
           "decision": "lowered",
-          "route": "computed position + bottom px/auto -> TypedLayout authored inset/unset -> NativeDesignIR position/inset/bottomAuto -> static ignore, relative flow offset, absolute parent-local anchor + resize or explicit clear, fixed/sticky diagnostic fail-closed -> Yoga native bounds",
-          "evidenceIds": ["semantic:observed-dom-position-bottom"]
+          "route": "computed CSS position plus physical top/right/bottom/left px, percent, linear calc, or auto -> validated TypedLayout keyword/Length -> NativeDesignIR style numeric or retained expression -> validated IRStyle -> View position and per-edge Dimension terms -> Yoga containing-block flow/out-of-flow geometry recomputed under resize -> z-sorted hit testing and Skia pixels; fixed is admitted only by the observed viewport-equivalent capture lane while sticky/unknown syntax fails closed",
+          "evidenceIds": ["semantic:observed-dom-position-family"]
         },
         {
           "value": "161px",
           "observation": "observed",
           "decision": "lowered",
-          "route": "computed position + bottom px/auto -> TypedLayout authored inset/unset -> NativeDesignIR position/inset/bottomAuto -> static ignore, relative flow offset, absolute parent-local anchor + resize or explicit clear, fixed/sticky diagnostic fail-closed -> Yoga native bounds",
-          "evidenceIds": ["semantic:observed-dom-position-bottom"]
+          "route": "computed CSS position plus physical top/right/bottom/left px, percent, linear calc, or auto -> validated TypedLayout keyword/Length -> NativeDesignIR style numeric or retained expression -> validated IRStyle -> View position and per-edge Dimension terms -> Yoga containing-block flow/out-of-flow geometry recomputed under resize -> z-sorted hit testing and Skia pixels; fixed is admitted only by the observed viewport-equivalent capture lane while sticky/unknown syntax fails closed",
+          "evidenceIds": ["semantic:observed-dom-position-family"]
         },
         {
           "value": "764px",
           "observation": "observed",
           "decision": "lowered",
-          "route": "computed position + bottom px/auto -> TypedLayout authored inset/unset -> NativeDesignIR position/inset/bottomAuto -> static ignore, relative flow offset, absolute parent-local anchor + resize or explicit clear, fixed/sticky diagnostic fail-closed -> Yoga native bounds",
-          "evidenceIds": ["semantic:observed-dom-position-bottom"]
+          "route": "computed CSS position plus physical top/right/bottom/left px, percent, linear calc, or auto -> validated TypedLayout keyword/Length -> NativeDesignIR style numeric or retained expression -> validated IRStyle -> View position and per-edge Dimension terms -> Yoga containing-block flow/out-of-flow geometry recomputed under resize -> z-sorted hit testing and Skia pixels; fixed is admitted only by the observed viewport-equivalent capture lane while sticky/unknown syntax fails closed",
+          "evidenceIds": ["semantic:observed-dom-position-family"]
         },
         {
           "value": "801px",
           "observation": "observed",
           "decision": "lowered",
-          "route": "computed position + bottom px/auto -> TypedLayout authored inset/unset -> NativeDesignIR position/inset/bottomAuto -> static ignore, relative flow offset, absolute parent-local anchor + resize or explicit clear, fixed/sticky diagnostic fail-closed -> Yoga native bounds",
-          "evidenceIds": ["semantic:observed-dom-position-bottom"]
+          "route": "computed CSS position plus physical top/right/bottom/left px, percent, linear calc, or auto -> validated TypedLayout keyword/Length -> NativeDesignIR style numeric or retained expression -> validated IRStyle -> View position and per-edge Dimension terms -> Yoga containing-block flow/out-of-flow geometry recomputed under resize -> z-sorted hit testing and Skia pixels; fixed is admitted only by the observed viewport-equivalent capture lane while sticky/unknown syntax fails closed",
+          "evidenceIds": ["semantic:observed-dom-position-family"]
         },
         {
           "value": "auto",
           "observation": "observed",
           "decision": "lowered",
-          "route": "computed position + bottom px/auto -> TypedLayout authored inset/unset -> NativeDesignIR position/inset/bottomAuto -> static ignore, relative flow offset, absolute parent-local anchor + resize or explicit clear, fixed/sticky diagnostic fail-closed -> Yoga native bounds",
-          "evidenceIds": ["semantic:observed-dom-position-bottom"]
+          "route": "computed CSS position plus physical top/right/bottom/left px, percent, linear calc, or auto -> validated TypedLayout keyword/Length -> NativeDesignIR style numeric or retained expression -> validated IRStyle -> View position and per-edge Dimension terms -> Yoga containing-block flow/out-of-flow geometry recomputed under resize -> z-sorted hit testing and Skia pixels; fixed is admitted only by the observed viewport-equivalent capture lane while sticky/unknown syntax fails closed",
+          "evidenceIds": ["semantic:observed-dom-position-family"]
         }
       ]
     },
@@ -1966,78 +1966,78 @@
           "value": "0px",
           "observation": "observed",
           "decision": "supported",
-          "route": "computed CSS left px/auto plus position mode -> typed Length -> NativeDesignIR numeric inset or explicit unset -> validated IRStyle left -> static ignore or relative/absolute/fixed native inset -> Yoga positioned layout under containing-block resize -> Skia pixels; unsupported syntax and non-finite native IR fail closed",
-          "evidenceIds": ["semantic:observed-dom-left"]
+          "route": "computed CSS position plus physical top/right/bottom/left px, percent, linear calc, or auto -> validated TypedLayout keyword/Length -> NativeDesignIR style numeric or retained expression -> validated IRStyle -> View position and per-edge Dimension terms -> Yoga containing-block flow/out-of-flow geometry recomputed under resize -> z-sorted hit testing and Skia pixels; fixed is admitted only by the observed viewport-equivalent capture lane while sticky/unknown syntax fails closed",
+          "evidenceIds": ["semantic:observed-dom-position-family"]
         },
         {
           "value": "10.5px",
           "observation": "observed",
           "decision": "supported",
-          "route": "computed CSS left px/auto plus position mode -> typed Length -> NativeDesignIR numeric inset or explicit unset -> validated IRStyle left -> static ignore or relative/absolute/fixed native inset -> Yoga positioned layout under containing-block resize -> Skia pixels; unsupported syntax and non-finite native IR fail closed",
-          "evidenceIds": ["semantic:observed-dom-left"]
+          "route": "computed CSS position plus physical top/right/bottom/left px, percent, linear calc, or auto -> validated TypedLayout keyword/Length -> NativeDesignIR style numeric or retained expression -> validated IRStyle -> View position and per-edge Dimension terms -> Yoga containing-block flow/out-of-flow geometry recomputed under resize -> z-sorted hit testing and Skia pixels; fixed is admitted only by the observed viewport-equivalent capture lane while sticky/unknown syntax fails closed",
+          "evidenceIds": ["semantic:observed-dom-position-family"]
         },
         {
           "value": "104.5px",
           "observation": "observed",
           "decision": "supported",
-          "route": "computed CSS left px/auto plus position mode -> typed Length -> NativeDesignIR numeric inset or explicit unset -> validated IRStyle left -> static ignore or relative/absolute/fixed native inset -> Yoga positioned layout under containing-block resize -> Skia pixels; unsupported syntax and non-finite native IR fail closed",
-          "evidenceIds": ["semantic:observed-dom-left"]
+          "route": "computed CSS position plus physical top/right/bottom/left px, percent, linear calc, or auto -> validated TypedLayout keyword/Length -> NativeDesignIR style numeric or retained expression -> validated IRStyle -> View position and per-edge Dimension terms -> Yoga containing-block flow/out-of-flow geometry recomputed under resize -> z-sorted hit testing and Skia pixels; fixed is admitted only by the observed viewport-equivalent capture lane while sticky/unknown syntax fails closed",
+          "evidenceIds": ["semantic:observed-dom-position-family"]
         },
         {
           "value": "10px",
           "observation": "observed",
           "decision": "supported",
-          "route": "computed CSS left px/auto plus position mode -> typed Length -> NativeDesignIR numeric inset or explicit unset -> validated IRStyle left -> static ignore or relative/absolute/fixed native inset -> Yoga positioned layout under containing-block resize -> Skia pixels; unsupported syntax and non-finite native IR fail closed",
-          "evidenceIds": ["semantic:observed-dom-left"]
+          "route": "computed CSS position plus physical top/right/bottom/left px, percent, linear calc, or auto -> validated TypedLayout keyword/Length -> NativeDesignIR style numeric or retained expression -> validated IRStyle -> View position and per-edge Dimension terms -> Yoga containing-block flow/out-of-flow geometry recomputed under resize -> z-sorted hit testing and Skia pixels; fixed is admitted only by the observed viewport-equivalent capture lane while sticky/unknown syntax fails closed",
+          "evidenceIds": ["semantic:observed-dom-position-family"]
         },
         {
           "value": "140.5px",
           "observation": "observed",
           "decision": "supported",
-          "route": "computed CSS left px/auto plus position mode -> typed Length -> NativeDesignIR numeric inset or explicit unset -> validated IRStyle left -> static ignore or relative/absolute/fixed native inset -> Yoga positioned layout under containing-block resize -> Skia pixels; unsupported syntax and non-finite native IR fail closed",
-          "evidenceIds": ["semantic:observed-dom-left"]
+          "route": "computed CSS position plus physical top/right/bottom/left px, percent, linear calc, or auto -> validated TypedLayout keyword/Length -> NativeDesignIR style numeric or retained expression -> validated IRStyle -> View position and per-edge Dimension terms -> Yoga containing-block flow/out-of-flow geometry recomputed under resize -> z-sorted hit testing and Skia pixels; fixed is admitted only by the observed viewport-equivalent capture lane while sticky/unknown syntax fails closed",
+          "evidenceIds": ["semantic:observed-dom-position-family"]
         },
         {
           "value": "204px",
           "observation": "observed",
           "decision": "supported",
-          "route": "computed CSS left px/auto plus position mode -> typed Length -> NativeDesignIR numeric inset or explicit unset -> validated IRStyle left -> static ignore or relative/absolute/fixed native inset -> Yoga positioned layout under containing-block resize -> Skia pixels; unsupported syntax and non-finite native IR fail closed",
-          "evidenceIds": ["semantic:observed-dom-left"]
+          "route": "computed CSS position plus physical top/right/bottom/left px, percent, linear calc, or auto -> validated TypedLayout keyword/Length -> NativeDesignIR style numeric or retained expression -> validated IRStyle -> View position and per-edge Dimension terms -> Yoga containing-block flow/out-of-flow geometry recomputed under resize -> z-sorted hit testing and Skia pixels; fixed is admitted only by the observed viewport-equivalent capture lane while sticky/unknown syntax fails closed",
+          "evidenceIds": ["semantic:observed-dom-position-family"]
         },
         {
           "value": "32.5px",
           "observation": "observed",
           "decision": "supported",
-          "route": "computed CSS left px/auto plus position mode -> typed Length -> NativeDesignIR numeric inset or explicit unset -> validated IRStyle left -> static ignore or relative/absolute/fixed native inset -> Yoga positioned layout under containing-block resize -> Skia pixels; unsupported syntax and non-finite native IR fail closed",
-          "evidenceIds": ["semantic:observed-dom-left"]
+          "route": "computed CSS position plus physical top/right/bottom/left px, percent, linear calc, or auto -> validated TypedLayout keyword/Length -> NativeDesignIR style numeric or retained expression -> validated IRStyle -> View position and per-edge Dimension terms -> Yoga containing-block flow/out-of-flow geometry recomputed under resize -> z-sorted hit testing and Skia pixels; fixed is admitted only by the observed viewport-equivalent capture lane while sticky/unknown syntax fails closed",
+          "evidenceIds": ["semantic:observed-dom-position-family"]
         },
         {
           "value": "54.5px",
           "observation": "observed",
           "decision": "supported",
-          "route": "computed CSS left px/auto plus position mode -> typed Length -> NativeDesignIR numeric inset or explicit unset -> validated IRStyle left -> static ignore or relative/absolute/fixed native inset -> Yoga positioned layout under containing-block resize -> Skia pixels; unsupported syntax and non-finite native IR fail closed",
-          "evidenceIds": ["semantic:observed-dom-left"]
+          "route": "computed CSS position plus physical top/right/bottom/left px, percent, linear calc, or auto -> validated TypedLayout keyword/Length -> NativeDesignIR style numeric or retained expression -> validated IRStyle -> View position and per-edge Dimension terms -> Yoga containing-block flow/out-of-flow geometry recomputed under resize -> z-sorted hit testing and Skia pixels; fixed is admitted only by the observed viewport-equivalent capture lane while sticky/unknown syntax fails closed",
+          "evidenceIds": ["semantic:observed-dom-position-family"]
         },
         {
           "value": "68.5px",
           "observation": "observed",
           "decision": "supported",
-          "route": "computed CSS left px/auto plus position mode -> typed Length -> NativeDesignIR numeric inset or explicit unset -> validated IRStyle left -> static ignore or relative/absolute/fixed native inset -> Yoga positioned layout under containing-block resize -> Skia pixels; unsupported syntax and non-finite native IR fail closed",
-          "evidenceIds": ["semantic:observed-dom-left"]
+          "route": "computed CSS position plus physical top/right/bottom/left px, percent, linear calc, or auto -> validated TypedLayout keyword/Length -> NativeDesignIR style numeric or retained expression -> validated IRStyle -> View position and per-edge Dimension terms -> Yoga containing-block flow/out-of-flow geometry recomputed under resize -> z-sorted hit testing and Skia pixels; fixed is admitted only by the observed viewport-equivalent capture lane while sticky/unknown syntax fails closed",
+          "evidenceIds": ["semantic:observed-dom-position-family"]
         },
         {
           "value": "93px",
           "observation": "observed",
           "decision": "supported",
-          "route": "computed CSS left px/auto plus position mode -> typed Length -> NativeDesignIR numeric inset or explicit unset -> validated IRStyle left -> static ignore or relative/absolute/fixed native inset -> Yoga positioned layout under containing-block resize -> Skia pixels; unsupported syntax and non-finite native IR fail closed",
-          "evidenceIds": ["semantic:observed-dom-left"]
+          "route": "computed CSS position plus physical top/right/bottom/left px, percent, linear calc, or auto -> validated TypedLayout keyword/Length -> NativeDesignIR style numeric or retained expression -> validated IRStyle -> View position and per-edge Dimension terms -> Yoga containing-block flow/out-of-flow geometry recomputed under resize -> z-sorted hit testing and Skia pixels; fixed is admitted only by the observed viewport-equivalent capture lane while sticky/unknown syntax fails closed",
+          "evidenceIds": ["semantic:observed-dom-position-family"]
         },
         {
           "value": "auto",
           "observation": "observed",
           "decision": "lowered",
-          "route": "computed CSS left px/auto plus position mode -> typed Length -> NativeDesignIR numeric inset or explicit unset -> validated IRStyle left -> static ignore or relative/absolute/fixed native inset -> Yoga positioned layout under containing-block resize -> Skia pixels; unsupported syntax and non-finite native IR fail closed",
-          "evidenceIds": ["semantic:observed-dom-left"]
+          "route": "computed CSS position plus physical top/right/bottom/left px, percent, linear calc, or auto -> validated TypedLayout keyword/Length -> NativeDesignIR style numeric or retained expression -> validated IRStyle -> View position and per-edge Dimension terms -> Yoga containing-block flow/out-of-flow geometry recomputed under resize -> z-sorted hit testing and Skia pixels; fixed is admitted only by the observed viewport-equivalent capture lane while sticky/unknown syntax fails closed",
+          "evidenceIds": ["semantic:observed-dom-position-family"]
         }
       ]
     },
@@ -2987,34 +2987,30 @@
         {
           "value": "absolute",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed CSS position plus physical top/right/bottom/left px, percent, linear calc, or auto -> validated TypedLayout keyword/Length -> NativeDesignIR style numeric or retained expression -> validated IRStyle -> View position and per-edge Dimension terms -> Yoga containing-block flow/out-of-flow geometry recomputed under resize -> z-sorted hit testing and Skia pixels; fixed is admitted only by the observed viewport-equivalent capture lane while sticky/unknown syntax fails closed",
+          "evidenceIds": ["semantic:observed-dom-position-family"]
         },
         {
           "value": "fixed",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed CSS position plus physical top/right/bottom/left px, percent, linear calc, or auto -> validated TypedLayout keyword/Length -> NativeDesignIR style numeric or retained expression -> validated IRStyle -> View position and per-edge Dimension terms -> Yoga containing-block flow/out-of-flow geometry recomputed under resize -> z-sorted hit testing and Skia pixels; fixed is admitted only by the observed viewport-equivalent capture lane while sticky/unknown syntax fails closed",
+          "evidenceIds": ["semantic:observed-dom-position-family"]
         },
         {
           "value": "relative",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed CSS position plus physical top/right/bottom/left px, percent, linear calc, or auto -> validated TypedLayout keyword/Length -> NativeDesignIR style numeric or retained expression -> validated IRStyle -> View position and per-edge Dimension terms -> Yoga containing-block flow/out-of-flow geometry recomputed under resize -> z-sorted hit testing and Skia pixels; fixed is admitted only by the observed viewport-equivalent capture lane while sticky/unknown syntax fails closed",
+          "evidenceIds": ["semantic:observed-dom-position-family"]
         },
         {
           "value": "static",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed CSS position plus physical top/right/bottom/left px, percent, linear calc, or auto -> validated TypedLayout keyword/Length -> NativeDesignIR style numeric or retained expression -> validated IRStyle -> View position and per-edge Dimension terms -> Yoga containing-block flow/out-of-flow geometry recomputed under resize -> z-sorted hit testing and Skia pixels; fixed is admitted only by the observed viewport-equivalent capture lane while sticky/unknown syntax fails closed",
+          "evidenceIds": ["semantic:observed-dom-position-family"]
         }
       ]
     },
@@ -3024,106 +3020,93 @@
         {
           "value": "-2px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed CSS position plus physical top/right/bottom/left px, percent, linear calc, or auto -> validated TypedLayout keyword/Length -> NativeDesignIR style numeric or retained expression -> validated IRStyle -> View position and per-edge Dimension terms -> Yoga containing-block flow/out-of-flow geometry recomputed under resize -> z-sorted hit testing and Skia pixels; fixed is admitted only by the observed viewport-equivalent capture lane while sticky/unknown syntax fails closed",
+          "evidenceIds": ["semantic:observed-dom-position-family"]
         },
         {
           "value": "0px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed CSS position plus physical top/right/bottom/left px, percent, linear calc, or auto -> validated TypedLayout keyword/Length -> NativeDesignIR style numeric or retained expression -> validated IRStyle -> View position and per-edge Dimension terms -> Yoga containing-block flow/out-of-flow geometry recomputed under resize -> z-sorted hit testing and Skia pixels; fixed is admitted only by the observed viewport-equivalent capture lane while sticky/unknown syntax fails closed",
+          "evidenceIds": ["semantic:observed-dom-position-family"]
         },
         {
           "value": "10.5px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed CSS position plus physical top/right/bottom/left px, percent, linear calc, or auto -> validated TypedLayout keyword/Length -> NativeDesignIR style numeric or retained expression -> validated IRStyle -> View position and per-edge Dimension terms -> Yoga containing-block flow/out-of-flow geometry recomputed under resize -> z-sorted hit testing and Skia pixels; fixed is admitted only by the observed viewport-equivalent capture lane while sticky/unknown syntax fails closed",
+          "evidenceIds": ["semantic:observed-dom-position-family"]
         },
         {
           "value": "1049px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed CSS position plus physical top/right/bottom/left px, percent, linear calc, or auto -> validated TypedLayout keyword/Length -> NativeDesignIR style numeric or retained expression -> validated IRStyle -> View position and per-edge Dimension terms -> Yoga containing-block flow/out-of-flow geometry recomputed under resize -> z-sorted hit testing and Skia pixels; fixed is admitted only by the observed viewport-equivalent capture lane while sticky/unknown syntax fails closed",
+          "evidenceIds": ["semantic:observed-dom-position-family"]
         },
         {
           "value": "1201px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed CSS position plus physical top/right/bottom/left px, percent, linear calc, or auto -> validated TypedLayout keyword/Length -> NativeDesignIR style numeric or retained expression -> validated IRStyle -> View position and per-edge Dimension terms -> Yoga containing-block flow/out-of-flow geometry recomputed under resize -> z-sorted hit testing and Skia pixels; fixed is admitted only by the observed viewport-equivalent capture lane while sticky/unknown syntax fails closed",
+          "evidenceIds": ["semantic:observed-dom-position-family"]
         },
         {
           "value": "12px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed CSS position plus physical top/right/bottom/left px, percent, linear calc, or auto -> validated TypedLayout keyword/Length -> NativeDesignIR style numeric or retained expression -> validated IRStyle -> View position and per-edge Dimension terms -> Yoga containing-block flow/out-of-flow geometry recomputed under resize -> z-sorted hit testing and Skia pixels; fixed is admitted only by the observed viewport-equivalent capture lane while sticky/unknown syntax fails closed",
+          "evidenceIds": ["semantic:observed-dom-position-family"]
         },
         {
           "value": "32.5px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed CSS position plus physical top/right/bottom/left px, percent, linear calc, or auto -> validated TypedLayout keyword/Length -> NativeDesignIR style numeric or retained expression -> validated IRStyle -> View position and per-edge Dimension terms -> Yoga containing-block flow/out-of-flow geometry recomputed under resize -> z-sorted hit testing and Skia pixels; fixed is admitted only by the observed viewport-equivalent capture lane while sticky/unknown syntax fails closed",
+          "evidenceIds": ["semantic:observed-dom-position-family"]
         },
         {
           "value": "54.5px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed CSS position plus physical top/right/bottom/left px, percent, linear calc, or auto -> validated TypedLayout keyword/Length -> NativeDesignIR style numeric or retained expression -> validated IRStyle -> View position and per-edge Dimension terms -> Yoga containing-block flow/out-of-flow geometry recomputed under resize -> z-sorted hit testing and Skia pixels; fixed is admitted only by the observed viewport-equivalent capture lane while sticky/unknown syntax fails closed",
+          "evidenceIds": ["semantic:observed-dom-position-family"]
         },
         {
           "value": "767.5px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed CSS position plus physical top/right/bottom/left px, percent, linear calc, or auto -> validated TypedLayout keyword/Length -> NativeDesignIR style numeric or retained expression -> validated IRStyle -> View position and per-edge Dimension terms -> Yoga containing-block flow/out-of-flow geometry recomputed under resize -> z-sorted hit testing and Skia pixels; fixed is admitted only by the observed viewport-equivalent capture lane while sticky/unknown syntax fails closed",
+          "evidenceIds": ["semantic:observed-dom-position-family"]
         },
         {
           "value": "803.5px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed CSS position plus physical top/right/bottom/left px, percent, linear calc, or auto -> validated TypedLayout keyword/Length -> NativeDesignIR style numeric or retained expression -> validated IRStyle -> View position and per-edge Dimension terms -> Yoga containing-block flow/out-of-flow geometry recomputed under resize -> z-sorted hit testing and Skia pixels; fixed is admitted only by the observed viewport-equivalent capture lane while sticky/unknown syntax fails closed",
+          "evidenceIds": ["semantic:observed-dom-position-family"]
         },
         {
           "value": "839.5px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed CSS position plus physical top/right/bottom/left px, percent, linear calc, or auto -> validated TypedLayout keyword/Length -> NativeDesignIR style numeric or retained expression -> validated IRStyle -> View position and per-edge Dimension terms -> Yoga containing-block flow/out-of-flow geometry recomputed under resize -> z-sorted hit testing and Skia pixels; fixed is admitted only by the observed viewport-equivalent capture lane while sticky/unknown syntax fails closed",
+          "evidenceIds": ["semantic:observed-dom-position-family"]
         },
         {
           "value": "875.5px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed CSS position plus physical top/right/bottom/left px, percent, linear calc, or auto -> validated TypedLayout keyword/Length -> NativeDesignIR style numeric or retained expression -> validated IRStyle -> View position and per-edge Dimension terms -> Yoga containing-block flow/out-of-flow geometry recomputed under resize -> z-sorted hit testing and Skia pixels; fixed is admitted only by the observed viewport-equivalent capture lane while sticky/unknown syntax fails closed",
+          "evidenceIds": ["semantic:observed-dom-position-family"]
         },
         {
           "value": "auto",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed CSS position plus physical top/right/bottom/left px, percent, linear calc, or auto -> validated TypedLayout keyword/Length -> NativeDesignIR style numeric or retained expression -> validated IRStyle -> View position and per-edge Dimension terms -> Yoga containing-block flow/out-of-flow geometry recomputed under resize -> z-sorted hit testing and Skia pixels; fixed is admitted only by the observed viewport-equivalent capture lane while sticky/unknown syntax fails closed",
+          "evidenceIds": ["semantic:observed-dom-position-family"]
         }
       ]
     },
@@ -3183,58 +3166,51 @@
         {
           "value": "0px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed CSS position plus physical top/right/bottom/left px, percent, linear calc, or auto -> validated TypedLayout keyword/Length -> NativeDesignIR style numeric or retained expression -> validated IRStyle -> View position and per-edge Dimension terms -> Yoga containing-block flow/out-of-flow geometry recomputed under resize -> z-sorted hit testing and Skia pixels; fixed is admitted only by the observed viewport-equivalent capture lane while sticky/unknown syntax fails closed",
+          "evidenceIds": ["semantic:observed-dom-position-family"]
         },
         {
           "value": "10.5px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed CSS position plus physical top/right/bottom/left px, percent, linear calc, or auto -> validated TypedLayout keyword/Length -> NativeDesignIR style numeric or retained expression -> validated IRStyle -> View position and per-edge Dimension terms -> Yoga containing-block flow/out-of-flow geometry recomputed under resize -> z-sorted hit testing and Skia pixels; fixed is admitted only by the observed viewport-equivalent capture lane while sticky/unknown syntax fails closed",
+          "evidenceIds": ["semantic:observed-dom-position-family"]
         },
         {
           "value": "10px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed CSS position plus physical top/right/bottom/left px, percent, linear calc, or auto -> validated TypedLayout keyword/Length -> NativeDesignIR style numeric or retained expression -> validated IRStyle -> View position and per-edge Dimension terms -> Yoga containing-block flow/out-of-flow geometry recomputed under resize -> z-sorted hit testing and Skia pixels; fixed is admitted only by the observed viewport-equivalent capture lane while sticky/unknown syntax fails closed",
+          "evidenceIds": ["semantic:observed-dom-position-family"]
         },
         {
           "value": "14px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed CSS position plus physical top/right/bottom/left px, percent, linear calc, or auto -> validated TypedLayout keyword/Length -> NativeDesignIR style numeric or retained expression -> validated IRStyle -> View position and per-edge Dimension terms -> Yoga containing-block flow/out-of-flow geometry recomputed under resize -> z-sorted hit testing and Skia pixels; fixed is admitted only by the observed viewport-equivalent capture lane while sticky/unknown syntax fails closed",
+          "evidenceIds": ["semantic:observed-dom-position-family"]
         },
         {
           "value": "421.5px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed CSS position plus physical top/right/bottom/left px, percent, linear calc, or auto -> validated TypedLayout keyword/Length -> NativeDesignIR style numeric or retained expression -> validated IRStyle -> View position and per-edge Dimension terms -> Yoga containing-block flow/out-of-flow geometry recomputed under resize -> z-sorted hit testing and Skia pixels; fixed is admitted only by the observed viewport-equivalent capture lane while sticky/unknown syntax fails closed",
+          "evidenceIds": ["semantic:observed-dom-position-family"]
         },
         {
           "value": "8px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed CSS position plus physical top/right/bottom/left px, percent, linear calc, or auto -> validated TypedLayout keyword/Length -> NativeDesignIR style numeric or retained expression -> validated IRStyle -> View position and per-edge Dimension terms -> Yoga containing-block flow/out-of-flow geometry recomputed under resize -> z-sorted hit testing and Skia pixels; fixed is admitted only by the observed viewport-equivalent capture lane while sticky/unknown syntax fails closed",
+          "evidenceIds": ["semantic:observed-dom-position-family"]
         },
         {
           "value": "auto",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed CSS position plus physical top/right/bottom/left px, percent, linear calc, or auto -> validated TypedLayout keyword/Length -> NativeDesignIR style numeric or retained expression -> validated IRStyle -> View position and per-edge Dimension terms -> Yoga containing-block flow/out-of-flow geometry recomputed under resize -> z-sorted hit testing and Skia pixels; fixed is admitted only by the observed viewport-equivalent capture lane while sticky/unknown syntax fails closed",
+          "evidenceIds": ["semantic:observed-dom-position-family"]
         }
       ]
     },
