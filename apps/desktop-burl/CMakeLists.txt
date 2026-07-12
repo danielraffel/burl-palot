@@ -294,6 +294,26 @@ if(BURL_PALOT_ENABLE_FRAMEWORK)
 			COMMAND palot-native-interaction-execution-test
 				"${CMAKE_CURRENT_SOURCE_DIR}/resources/import/main-chat.observed.design-ir.v1.json"
 				"${CMAKE_CURRENT_SOURCE_DIR}/contracts/main-chat.application-bindings.v1.json")
+		if(APPLE AND BURL_SOURCE_DIR AND
+		   EXISTS "${BURL_SOURCE_DIR}/test/mac_window_harness.mm")
+			set_source_files_properties("${BURL_SOURCE_DIR}/test/mac_window_harness.mm"
+				PROPERTIES LANGUAGE CXX COMPILE_FLAGS "-x objective-c++")
+			add_executable(palot-mac-production-interaction-test
+				test/mac_production_interaction_test.cpp
+				src/imported_root_host.cpp
+				"${BURL_SOURCE_DIR}/test/mac_window_harness.mm")
+			target_include_directories(palot-mac-production-interaction-test PRIVATE
+				src "${BURL_SOURCE_DIR}/test")
+			target_compile_definitions(palot-mac-production-interaction-test PRIVATE
+				PALOT_RESOURCE_SOURCE_ROOT="${CMAKE_CURRENT_SOURCE_DIR}/resources")
+			target_link_libraries(palot-mac-production-interaction-test PRIVATE
+				pulp-view "-framework AppKit" "-framework CoreGraphics")
+			add_test(NAME palot-mac-production-interaction
+				COMMAND palot-mac-production-interaction-test
+					"${CMAKE_CURRENT_SOURCE_DIR}/resources/import/main-chat.observed.design-ir.v1.json"
+					"${CMAKE_CURRENT_SOURCE_DIR}/contracts/main-chat.application-bindings.v1.json")
+			set_tests_properties(palot-mac-production-interaction PROPERTIES TIMEOUT 30)
+		endif()
 		add_executable(palot-real-opencode-e2e test/real_opencode_e2e.cpp src/opencode_process.cpp)
 		target_include_directories(palot-real-opencode-e2e PRIVATE src)
 		target_link_libraries(palot-real-opencode-e2e PRIVATE nlohmann_json::nlohmann_json)
