@@ -422,10 +422,9 @@
           "value": "rgba(0, 0, 0, 0)",
           "context": {"width": "1px"},
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed per-side transparent color + positive width -> TypedPaint RGBA8 alpha=0 side slots -> NativeDesignIR side style -> generic View alpha gate -> no Skia side fill",
+          "evidenceIds": ["semantic:observed-dom-border-side-transparent"]
         }
       ]
     },
