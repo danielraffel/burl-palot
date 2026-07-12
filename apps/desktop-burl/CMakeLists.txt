@@ -245,6 +245,12 @@ if(BURL_PALOT_ENABLE_FRAMEWORK)
 				"${CMAKE_CURRENT_SOURCE_DIR}/scripts/generate-authored-theme-sidecar.py"
 				--repo "${CMAKE_CURRENT_SOURCE_DIR}/../.."
 				--check "${CMAKE_CURRENT_SOURCE_DIR}/resources/tokens/palot-authored-theme.sidecar.json")
+		add_executable(palot-observed-design-ir-test
+			test/observed_design_ir_test.cpp)
+		target_link_libraries(palot-observed-design-ir-test PRIVATE pulp-view)
+		add_test(NAME palot-observed-design-ir
+			COMMAND palot-observed-design-ir-test
+				"${CMAKE_CURRENT_SOURCE_DIR}/resources/import/main-chat.observed.design-ir.v1.json")
 		add_test(NAME palot-accessibility-dump
 			COMMAND $<TARGET_FILE:burl-palot> --accessibility-dump)
 		set_tests_properties(palot-accessibility-dump PROPERTIES TIMEOUT 5)

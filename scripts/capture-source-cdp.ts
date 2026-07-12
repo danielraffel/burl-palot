@@ -38,7 +38,7 @@ export const semanticExpression = `(() => {
       const parent = current.parentElement;
       const index = parent ? Array.from(parent.children).indexOf(current) + 1 : 1;
       const stable = current.getAttribute("data-testid") || current.id || current.getAttribute("data-slot");
-      parts.push(current.tagName.toLowerCase() + (stable ? "[" + stable + "]" : ":" + index));
+      parts.push(current.tagName.toLowerCase() + (stable ? "[" + stable + "]:" + index : ":" + index));
     }
     return parts.reverse().join("/");
   };

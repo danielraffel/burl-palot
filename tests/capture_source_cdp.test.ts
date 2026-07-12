@@ -19,6 +19,7 @@ describe("source CDP capture helper", () => {
 		expect(semanticExpression).toContain("observedDom")
 		expect(semanticExpression).toContain("computedStyle")
 		expect(semanticExpression).toContain("sourceId")
+		expect(semanticExpression).toContain('"[" + stable + "]:" + index')
 		expect(semanticExpression).toContain("flexGrow")
 		expect(semanticExpression).toContain("borderTopColor")
 		expect(semanticExpression).toContain("outerHtml")
