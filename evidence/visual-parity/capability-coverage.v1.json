@@ -570,10 +570,9 @@
         {
           "value": "0px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed per-side border color + width=0 -> TypedPaint side slots -> NativeDesignIR side style -> generic View explicit zero width -> no Skia side fill",
+          "evidenceIds": ["semantic:observed-dom-border-side-zero"]
         },
         {
           "value": "1px",
