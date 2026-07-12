@@ -86,6 +86,9 @@ export const semanticExpression = `(() => {
       componentName: element.tagName.toLowerCase(),
       propNames: Object.keys(reactProps).filter(name => /^on[A-Z]/.test(name)).sort()
     } : null;
+    const semanticRole = element.getAttribute("role") || (element.tagName.toLowerCase() === "textarea" ? "textbox" : element.tagName.toLowerCase());
+    const interactionCandidate = ["button","input","textarea","select","a"].includes(element.tagName.toLowerCase()) ||
+      ["button","checkbox","combobox","link","menuitem","option","radio","slider","switch","tab","textbox"].includes(semanticRole);
     return {
       sourceId: sourceId(element),
       tagName: element.tagName.toLowerCase(),
@@ -93,13 +96,13 @@ export const semanticExpression = `(() => {
       outerHtml: element.tagName.toLowerCase() === "svg" ? element.outerHTML : "",
       imageSrc: element.tagName.toLowerCase() === "img" ? element.getAttribute("src") || "" : "",
       attributes: attrs,
-      interactionEvidence: {
+      ...(interactionCandidate ? {interactionEvidence: {
         enabled: !element.disabled && element.getAttribute("aria-disabled") !== "true",
-        role: element.getAttribute("role") || (element.tagName.toLowerCase() === "textarea" ? "textbox" : element.tagName.toLowerCase()),
+        role: semanticRole,
         accessibleName: element.getAttribute("aria-label") || (element.innerText || element.value || "").trim().replace(/\s+/g, " "),
         listeners,
         ...(react ? {react} : {})
-      },
+      }} : {}),
       ...(content.length ? {content} : {}),
       pseudoElements: [before, after].filter(Boolean),
       orderedPaintContent: [...(before ? [before] : []), ...content, ...(after ? [after] : [])],
