@@ -28,19 +28,29 @@ CONTEXT_PROPERTIES = {"alignContent": ("display",), "alignItems": ("display",)}
 def computed_property_values(path: Path) -> dict[str, set[tuple[str, tuple[tuple[str, str], ...]]]]:
 	payload = json.loads(path.read_text())
 	result: dict[str, set[tuple[str, tuple[tuple[str, str], ...]]]] = {}
-	def walk(value):
+	def walk(value, parent_style=None):
 		if isinstance(value, dict):
 			style = value.get("computedStyle")
 			if isinstance(style, dict):
 				for name, observed in style.items():
-					context = tuple((field, str(style.get(field, "")))
-						for field in CONTEXT_PROPERTIES.get(name, ()))
+					if name == "alignSelf":
+						context = tuple((field, str((parent_style or {}).get(source, "")))
+							for field, source in (
+								("parentAlignItems", "alignItems"), ("parentDisplay", "display"),
+							))
+					else:
+						context = tuple((field, str(style.get(field, "")))
+							for field in CONTEXT_PROPERTIES.get(name, ()))
 					result.setdefault(name, set()).add((str(observed), context))
-			for child in value.values():
-				walk(child)
+			for key, child in value.items():
+				if key == "children" and isinstance(child, list):
+					for descendant in child:
+						walk(descendant, style if isinstance(style, dict) else parent_style)
+				elif key != "children":
+					walk(child, parent_style)
 		elif isinstance(value, list):
 			for child in value:
-				walk(child)
+				walk(child, parent_style)
 	walk(payload)
 	return result
 

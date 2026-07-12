@@ -108,14 +108,63 @@
       "values": [
         {
           "value": "auto",
+          "context": {"parentAlignItems": "", "parentDisplay": ""},
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed alignSelf + parent display/alignItems -> TypedLayout.alignSelf -> NativeDesignIR.layout.alignSelf -> apply_layout -> FlexStyle.align_self -> Yoga inherited alignment",
+          "evidenceIds": ["semantic:observed-dom-align-self-auto"]
+        },
+        {
+          "value": "auto",
+          "context": {"parentAlignItems": "center", "parentDisplay": "flex"},
+          "observation": "observed",
+          "decision": "lowered",
+          "route": "computed alignSelf + parent display/alignItems -> TypedLayout.alignSelf -> NativeDesignIR.layout.alignSelf -> apply_layout -> FlexStyle.align_self -> Yoga inherited alignment",
+          "evidenceIds": ["semantic:observed-dom-align-self-auto"]
+        },
+        {
+          "value": "auto",
+          "context": {"parentAlignItems": "normal", "parentDisplay": "block"},
+          "observation": "observed",
+          "decision": "lowered",
+          "route": "computed alignSelf + parent display/alignItems -> TypedLayout.alignSelf -> NativeDesignIR.layout.alignSelf -> apply_layout -> FlexStyle.align_self -> Yoga inherited alignment",
+          "evidenceIds": ["semantic:observed-dom-align-self-auto"]
+        },
+        {
+          "value": "auto",
+          "context": {"parentAlignItems": "normal", "parentDisplay": "flex"},
+          "observation": "observed",
+          "decision": "lowered",
+          "route": "computed alignSelf + parent display/alignItems -> TypedLayout.alignSelf -> NativeDesignIR.layout.alignSelf -> apply_layout -> FlexStyle.align_self -> Yoga inherited alignment",
+          "evidenceIds": ["semantic:observed-dom-align-self-auto"]
+        },
+        {
+          "value": "auto",
+          "context": {"parentAlignItems": "normal", "parentDisplay": "inline"},
+          "observation": "observed",
+          "decision": "lowered",
+          "route": "computed alignSelf + parent display/alignItems -> TypedLayout.alignSelf -> NativeDesignIR.layout.alignSelf -> apply_layout -> FlexStyle.align_self -> Yoga inherited alignment",
+          "evidenceIds": ["semantic:observed-dom-align-self-auto"]
+        },
+        {
+          "value": "auto",
+          "context": {"parentAlignItems": "normal", "parentDisplay": "inline-block"},
+          "observation": "observed",
+          "decision": "lowered",
+          "route": "computed alignSelf + parent display/alignItems -> TypedLayout.alignSelf -> NativeDesignIR.layout.alignSelf -> apply_layout -> FlexStyle.align_self -> Yoga inherited alignment",
+          "evidenceIds": ["semantic:observed-dom-align-self-auto"]
+        },
+        {
+          "value": "auto",
+          "context": {"parentAlignItems": "normal", "parentDisplay": "list-item"},
+          "observation": "observed",
+          "decision": "lowered",
+          "route": "computed alignSelf + parent display/alignItems -> TypedLayout.alignSelf -> NativeDesignIR.layout.alignSelf -> apply_layout -> FlexStyle.align_self -> Yoga inherited alignment",
+          "evidenceIds": ["semantic:observed-dom-align-self-auto"]
         },
         {
           "value": "stretch",
+          "context": {"parentAlignItems": "center", "parentDisplay": "flex"},
           "observation": "observed",
           "decision": "unsupported",
           "route": null,
