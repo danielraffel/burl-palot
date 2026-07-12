@@ -2047,10 +2047,9 @@
         {
           "value": "normal",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed CSS letter-spacing normal -> explicit typed zero tracking -> NativeDesignIR style/textRun letterSpacing=0 -> inherited/direct Label authored zero override -> shared CoreText/Skia shaping metrics and pixels; invalid units/keywords fail closed",
+          "evidenceIds": ["semantic:observed-dom-letter-spacing-normal"]
         }
       ]
     },
