@@ -9,6 +9,7 @@
 #include <filesystem>
 #include <optional>
 #include <spawn.h>
+#include <poll.h>
 #include <sys/wait.h>
 #include <unistd.h>
 
@@ -199,9 +200,11 @@ void OpenCodeProcess::run(std::shared_ptr<State> state, std::uint64_t generation
 	int error_pipe[2]{-1, -1};
 	pid_t pid = -1;
 	std::thread stderr_reader;
+	std::atomic<bool> stop_stderr_reader{false};
 	std::string stderr_text;
 	auto finish = [&](std::string type, std::string value) {
 		if (pid > 0) wait_for_child(pid);
+		stop_stderr_reader = true;
 		if (stderr_reader.joinable()) stderr_reader.join();
 		for (int fd : {input_pipe[0], input_pipe[1], output_pipe[0], output_pipe[1],
 		               error_pipe[0], error_pipe[1]})
@@ -250,9 +253,14 @@ void OpenCodeProcess::run(std::shared_ptr<State> state, std::uint64_t generation
 		state->pid = pid;
 		state->input_fd = input_pipe[1];
 	}
-	stderr_reader = std::thread([fd = error_pipe[0], &stderr_text] {
+	stderr_reader = std::thread([fd = error_pipe[0], &stderr_text, &stop_stderr_reader] {
 		std::array<char, 1024> bytes{};
-		while (stderr_text.size() < 8192) {
+		while (!stop_stderr_reader.load() && stderr_text.size() < 8192) {
+			pollfd descriptor{fd, POLLIN, 0};
+			const auto ready = ::poll(&descriptor, 1, 100);
+			if (ready == 0) continue;
+			if (ready < 0) { if (errno == EINTR) continue; break; }
+			if (!(descriptor.revents & (POLLIN | POLLHUP))) break;
 			const auto count = ::read(fd, bytes.data(), bytes.size());
 			if (count <= 0) break;
 			stderr_text.append(bytes.data(), static_cast<std::size_t>(count));

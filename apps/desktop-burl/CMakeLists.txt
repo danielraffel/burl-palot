@@ -294,6 +294,9 @@ if(BURL_PALOT_ENABLE_FRAMEWORK)
 			COMMAND palot-native-interaction-execution-test
 				"${CMAKE_CURRENT_SOURCE_DIR}/resources/import/main-chat.observed.design-ir.v1.json"
 				"${CMAKE_CURRENT_SOURCE_DIR}/contracts/main-chat.application-bindings.v1.json")
+		add_executable(palot-real-opencode-e2e test/real_opencode_e2e.cpp src/opencode_process.cpp)
+		target_include_directories(palot-real-opencode-e2e PRIVATE src)
+		target_link_libraries(palot-real-opencode-e2e PRIVATE nlohmann_json::nlohmann_json)
 		add_test(NAME palot-accessibility-dump
 			COMMAND $<TARGET_FILE:burl-palot> --accessibility-dump)
 		set_tests_properties(palot-accessibility-dump PROPERTIES TIMEOUT 5)
