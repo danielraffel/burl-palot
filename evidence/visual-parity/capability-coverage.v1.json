@@ -971,58 +971,57 @@
           "value": "-2px",
           "observation": "observed",
           "decision": "lowered",
-          "route": "computed position + signed bottom px -> TypedLayout authored inset -> NativeDesignIR position/inset -> static ignore, relative flow offset, absolute parent-local anchor + resize, fixed/sticky diagnostic fail-closed -> Yoga native bounds",
+          "route": "computed position + bottom px/auto -> TypedLayout authored inset/unset -> NativeDesignIR position/inset/bottomAuto -> static ignore, relative flow offset, absolute parent-local anchor + resize or explicit clear, fixed/sticky diagnostic fail-closed -> Yoga native bounds",
           "evidenceIds": ["semantic:observed-dom-position-bottom"]
         },
         {
           "value": "0px",
           "observation": "observed",
           "decision": "lowered",
-          "route": "computed position + signed bottom px -> TypedLayout authored inset -> NativeDesignIR position/inset -> static ignore, relative flow offset, absolute parent-local anchor + resize, fixed/sticky diagnostic fail-closed -> Yoga native bounds",
+          "route": "computed position + bottom px/auto -> TypedLayout authored inset/unset -> NativeDesignIR position/inset/bottomAuto -> static ignore, relative flow offset, absolute parent-local anchor + resize or explicit clear, fixed/sticky diagnostic fail-closed -> Yoga native bounds",
           "evidenceIds": ["semantic:observed-dom-position-bottom"]
         },
         {
           "value": "10.5px",
           "observation": "observed",
           "decision": "lowered",
-          "route": "computed position + signed bottom px -> TypedLayout authored inset -> NativeDesignIR position/inset -> static ignore, relative flow offset, absolute parent-local anchor + resize, fixed/sticky diagnostic fail-closed -> Yoga native bounds",
+          "route": "computed position + bottom px/auto -> TypedLayout authored inset/unset -> NativeDesignIR position/inset/bottomAuto -> static ignore, relative flow offset, absolute parent-local anchor + resize or explicit clear, fixed/sticky diagnostic fail-closed -> Yoga native bounds",
           "evidenceIds": ["semantic:observed-dom-position-bottom"]
         },
         {
           "value": "118px",
           "observation": "observed",
           "decision": "lowered",
-          "route": "computed position + signed bottom px -> TypedLayout authored inset -> NativeDesignIR position/inset -> static ignore, relative flow offset, absolute parent-local anchor + resize, fixed/sticky diagnostic fail-closed -> Yoga native bounds",
+          "route": "computed position + bottom px/auto -> TypedLayout authored inset/unset -> NativeDesignIR position/inset/bottomAuto -> static ignore, relative flow offset, absolute parent-local anchor + resize or explicit clear, fixed/sticky diagnostic fail-closed -> Yoga native bounds",
           "evidenceIds": ["semantic:observed-dom-position-bottom"]
         },
         {
           "value": "161px",
           "observation": "observed",
           "decision": "lowered",
-          "route": "computed position + signed bottom px -> TypedLayout authored inset -> NativeDesignIR position/inset -> static ignore, relative flow offset, absolute parent-local anchor + resize, fixed/sticky diagnostic fail-closed -> Yoga native bounds",
+          "route": "computed position + bottom px/auto -> TypedLayout authored inset/unset -> NativeDesignIR position/inset/bottomAuto -> static ignore, relative flow offset, absolute parent-local anchor + resize or explicit clear, fixed/sticky diagnostic fail-closed -> Yoga native bounds",
           "evidenceIds": ["semantic:observed-dom-position-bottom"]
         },
         {
           "value": "764px",
           "observation": "observed",
           "decision": "lowered",
-          "route": "computed position + signed bottom px -> TypedLayout authored inset -> NativeDesignIR position/inset -> static ignore, relative flow offset, absolute parent-local anchor + resize, fixed/sticky diagnostic fail-closed -> Yoga native bounds",
+          "route": "computed position + bottom px/auto -> TypedLayout authored inset/unset -> NativeDesignIR position/inset/bottomAuto -> static ignore, relative flow offset, absolute parent-local anchor + resize or explicit clear, fixed/sticky diagnostic fail-closed -> Yoga native bounds",
           "evidenceIds": ["semantic:observed-dom-position-bottom"]
         },
         {
           "value": "801px",
           "observation": "observed",
           "decision": "lowered",
-          "route": "computed position + signed bottom px -> TypedLayout authored inset -> NativeDesignIR position/inset -> static ignore, relative flow offset, absolute parent-local anchor + resize, fixed/sticky diagnostic fail-closed -> Yoga native bounds",
+          "route": "computed position + bottom px/auto -> TypedLayout authored inset/unset -> NativeDesignIR position/inset/bottomAuto -> static ignore, relative flow offset, absolute parent-local anchor + resize or explicit clear, fixed/sticky diagnostic fail-closed -> Yoga native bounds",
           "evidenceIds": ["semantic:observed-dom-position-bottom"]
         },
         {
           "value": "auto",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed position + bottom px/auto -> TypedLayout authored inset/unset -> NativeDesignIR position/inset/bottomAuto -> static ignore, relative flow offset, absolute parent-local anchor + resize or explicit clear, fixed/sticky diagnostic fail-closed -> Yoga native bounds",
+          "evidenceIds": ["semantic:observed-dom-position-bottom"]
         }
       ]
     },
