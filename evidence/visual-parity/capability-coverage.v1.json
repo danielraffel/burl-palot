@@ -2612,162 +2612,142 @@
         {
           "value": "0px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed CSS padding shorthand and side longhands plus box-sizing -> validated 1/2/3/4 Length expansion with longhand precedence -> NativeDesignIR px or retained percent/calc edge dimensions -> validated IRLayout -> native Dimension and BoxSizing -> Yoga padding and box-model geometry recomputed under containing-block resize -> Skia pixels; negative/auto/unknown syntax fails closed",
+          "evidenceIds": ["semantic:observed-dom-padding-family"]
         },
         {
           "value": "0px 12px 0px 16px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed CSS padding shorthand and side longhands plus box-sizing -> validated 1/2/3/4 Length expansion with longhand precedence -> NativeDesignIR px or retained percent/calc edge dimensions -> validated IRLayout -> native Dimension and BoxSizing -> Yoga padding and box-model geometry recomputed under containing-block resize -> Skia pixels; negative/auto/unknown syntax fails closed",
+          "evidenceIds": ["semantic:observed-dom-padding-family"]
         },
         {
           "value": "0px 4px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed CSS padding shorthand and side longhands plus box-sizing -> validated 1/2/3/4 Length expansion with longhand precedence -> NativeDesignIR px or retained percent/calc edge dimensions -> validated IRLayout -> native Dimension and BoxSizing -> Yoga padding and box-model geometry recomputed under containing-block resize -> Skia pixels; negative/auto/unknown syntax fails closed",
+          "evidenceIds": ["semantic:observed-dom-padding-family"]
         },
         {
           "value": "0px 6px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed CSS padding shorthand and side longhands plus box-sizing -> validated 1/2/3/4 Length expansion with longhand precedence -> NativeDesignIR px or retained percent/calc edge dimensions -> validated IRLayout -> native Dimension and BoxSizing -> Yoga padding and box-model geometry recomputed under containing-block resize -> Skia pixels; negative/auto/unknown syntax fails closed",
+          "evidenceIds": ["semantic:observed-dom-padding-family"]
         },
         {
           "value": "0px 8px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed CSS padding shorthand and side longhands plus box-sizing -> validated 1/2/3/4 Length expansion with longhand precedence -> NativeDesignIR px or retained percent/calc edge dimensions -> validated IRLayout -> native Dimension and BoxSizing -> Yoga padding and box-model geometry recomputed under containing-block resize -> Skia pixels; negative/auto/unknown syntax fails closed",
+          "evidenceIds": ["semantic:observed-dom-padding-family"]
         },
         {
           "value": "12px 16px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed CSS padding shorthand and side longhands plus box-sizing -> validated 1/2/3/4 Length expansion with longhand precedence -> NativeDesignIR px or retained percent/calc edge dimensions -> validated IRLayout -> native Dimension and BoxSizing -> Yoga padding and box-model geometry recomputed under containing-block resize -> Skia pixels; negative/auto/unknown syntax fails closed",
+          "evidenceIds": ["semantic:observed-dom-padding-family"]
         },
         {
           "value": "24px 16px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed CSS padding shorthand and side longhands plus box-sizing -> validated 1/2/3/4 Length expansion with longhand precedence -> NativeDesignIR px or retained percent/calc edge dimensions -> validated IRLayout -> native Dimension and BoxSizing -> Yoga padding and box-model geometry recomputed under containing-block resize -> Skia pixels; negative/auto/unknown syntax fails closed",
+          "evidenceIds": ["semantic:observed-dom-padding-family"]
         },
         {
           "value": "2px 0px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed CSS padding shorthand and side longhands plus box-sizing -> validated 1/2/3/4 Length expansion with longhand precedence -> NativeDesignIR px or retained percent/calc edge dimensions -> validated IRLayout -> native Dimension and BoxSizing -> Yoga padding and box-model geometry recomputed under containing-block resize -> Skia pixels; negative/auto/unknown syntax fails closed",
+          "evidenceIds": ["semantic:observed-dom-padding-family"]
         },
         {
           "value": "2px 4px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed CSS padding shorthand and side longhands plus box-sizing -> validated 1/2/3/4 Length expansion with longhand precedence -> NativeDesignIR px or retained percent/calc edge dimensions -> validated IRLayout -> native Dimension and BoxSizing -> Yoga padding and box-model geometry recomputed under containing-block resize -> Skia pixels; negative/auto/unknown syntax fails closed",
+          "evidenceIds": ["semantic:observed-dom-padding-family"]
         },
         {
           "value": "2px 6px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed CSS padding shorthand and side longhands plus box-sizing -> validated 1/2/3/4 Length expansion with longhand precedence -> NativeDesignIR px or retained percent/calc edge dimensions -> validated IRLayout -> native Dimension and BoxSizing -> Yoga padding and box-model geometry recomputed under containing-block resize -> Skia pixels; negative/auto/unknown syntax fails closed",
+          "evidenceIds": ["semantic:observed-dom-padding-family"]
         },
         {
           "value": "48px 0px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed CSS padding shorthand and side longhands plus box-sizing -> validated 1/2/3/4 Length expansion with longhand precedence -> NativeDesignIR px or retained percent/calc edge dimensions -> validated IRLayout -> native Dimension and BoxSizing -> Yoga padding and box-model geometry recomputed under containing-block resize -> Skia pixels; negative/auto/unknown syntax fails closed",
+          "evidenceIds": ["semantic:observed-dom-padding-family"]
         },
         {
           "value": "4px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed CSS padding shorthand and side longhands plus box-sizing -> validated 1/2/3/4 Length expansion with longhand precedence -> NativeDesignIR px or retained percent/calc edge dimensions -> validated IRLayout -> native Dimension and BoxSizing -> Yoga padding and box-model geometry recomputed under containing-block resize -> Skia pixels; negative/auto/unknown syntax fails closed",
+          "evidenceIds": ["semantic:observed-dom-padding-family"]
         },
         {
           "value": "4px 0px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed CSS padding shorthand and side longhands plus box-sizing -> validated 1/2/3/4 Length expansion with longhand precedence -> NativeDesignIR px or retained percent/calc edge dimensions -> validated IRLayout -> native Dimension and BoxSizing -> Yoga padding and box-model geometry recomputed under containing-block resize -> Skia pixels; negative/auto/unknown syntax fails closed",
+          "evidenceIds": ["semantic:observed-dom-padding-family"]
         },
         {
           "value": "4px 8px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed CSS padding shorthand and side longhands plus box-sizing -> validated 1/2/3/4 Length expansion with longhand precedence -> NativeDesignIR px or retained percent/calc edge dimensions -> validated IRLayout -> native Dimension and BoxSizing -> Yoga padding and box-model geometry recomputed under containing-block resize -> Skia pixels; negative/auto/unknown syntax fails closed",
+          "evidenceIds": ["semantic:observed-dom-padding-family"]
         },
         {
           "value": "6px 10px 8px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed CSS padding shorthand and side longhands plus box-sizing -> validated 1/2/3/4 Length expansion with longhand precedence -> NativeDesignIR px or retained percent/calc edge dimensions -> validated IRLayout -> native Dimension and BoxSizing -> Yoga padding and box-model geometry recomputed under containing-block resize -> Skia pixels; negative/auto/unknown syntax fails closed",
+          "evidenceIds": ["semantic:observed-dom-padding-family"]
         },
         {
           "value": "8px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed CSS padding shorthand and side longhands plus box-sizing -> validated 1/2/3/4 Length expansion with longhand precedence -> NativeDesignIR px or retained percent/calc edge dimensions -> validated IRLayout -> native Dimension and BoxSizing -> Yoga padding and box-model geometry recomputed under containing-block resize -> Skia pixels; negative/auto/unknown syntax fails closed",
+          "evidenceIds": ["semantic:observed-dom-padding-family"]
         },
         {
           "value": "8px 10px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed CSS padding shorthand and side longhands plus box-sizing -> validated 1/2/3/4 Length expansion with longhand precedence -> NativeDesignIR px or retained percent/calc edge dimensions -> validated IRLayout -> native Dimension and BoxSizing -> Yoga padding and box-model geometry recomputed under containing-block resize -> Skia pixels; negative/auto/unknown syntax fails closed",
+          "evidenceIds": ["semantic:observed-dom-padding-family"]
         },
         {
           "value": "8px 12px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed CSS padding shorthand and side longhands plus box-sizing -> validated 1/2/3/4 Length expansion with longhand precedence -> NativeDesignIR px or retained percent/calc edge dimensions -> validated IRLayout -> native Dimension and BoxSizing -> Yoga padding and box-model geometry recomputed under containing-block resize -> Skia pixels; negative/auto/unknown syntax fails closed",
+          "evidenceIds": ["semantic:observed-dom-padding-family"]
         },
         {
           "value": "8px 16px 16px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed CSS padding shorthand and side longhands plus box-sizing -> validated 1/2/3/4 Length expansion with longhand precedence -> NativeDesignIR px or retained percent/calc edge dimensions -> validated IRLayout -> native Dimension and BoxSizing -> Yoga padding and box-model geometry recomputed under containing-block resize -> Skia pixels; negative/auto/unknown syntax fails closed",
+          "evidenceIds": ["semantic:observed-dom-padding-family"]
         },
         {
           "value": "8px 8px 0px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed CSS padding shorthand and side longhands plus box-sizing -> validated 1/2/3/4 Length expansion with longhand precedence -> NativeDesignIR px or retained percent/calc edge dimensions -> validated IRLayout -> native Dimension and BoxSizing -> Yoga padding and box-model geometry recomputed under containing-block resize -> Skia pixels; negative/auto/unknown syntax fails closed",
+          "evidenceIds": ["semantic:observed-dom-padding-family"]
         }
       ]
     },
@@ -2777,66 +2757,58 @@
         {
           "value": "0px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed CSS padding shorthand and side longhands plus box-sizing -> validated 1/2/3/4 Length expansion with longhand precedence -> NativeDesignIR px or retained percent/calc edge dimensions -> validated IRLayout -> native Dimension and BoxSizing -> Yoga padding and box-model geometry recomputed under containing-block resize -> Skia pixels; negative/auto/unknown syntax fails closed",
+          "evidenceIds": ["semantic:observed-dom-padding-family"]
         },
         {
           "value": "12px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed CSS padding shorthand and side longhands plus box-sizing -> validated 1/2/3/4 Length expansion with longhand precedence -> NativeDesignIR px or retained percent/calc edge dimensions -> validated IRLayout -> native Dimension and BoxSizing -> Yoga padding and box-model geometry recomputed under containing-block resize -> Skia pixels; negative/auto/unknown syntax fails closed",
+          "evidenceIds": ["semantic:observed-dom-padding-family"]
         },
         {
           "value": "16px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed CSS padding shorthand and side longhands plus box-sizing -> validated 1/2/3/4 Length expansion with longhand precedence -> NativeDesignIR px or retained percent/calc edge dimensions -> validated IRLayout -> native Dimension and BoxSizing -> Yoga padding and box-model geometry recomputed under containing-block resize -> Skia pixels; negative/auto/unknown syntax fails closed",
+          "evidenceIds": ["semantic:observed-dom-padding-family"]
         },
         {
           "value": "24px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed CSS padding shorthand and side longhands plus box-sizing -> validated 1/2/3/4 Length expansion with longhand precedence -> NativeDesignIR px or retained percent/calc edge dimensions -> validated IRLayout -> native Dimension and BoxSizing -> Yoga padding and box-model geometry recomputed under containing-block resize -> Skia pixels; negative/auto/unknown syntax fails closed",
+          "evidenceIds": ["semantic:observed-dom-padding-family"]
         },
         {
           "value": "2px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed CSS padding shorthand and side longhands plus box-sizing -> validated 1/2/3/4 Length expansion with longhand precedence -> NativeDesignIR px or retained percent/calc edge dimensions -> validated IRLayout -> native Dimension and BoxSizing -> Yoga padding and box-model geometry recomputed under containing-block resize -> Skia pixels; negative/auto/unknown syntax fails closed",
+          "evidenceIds": ["semantic:observed-dom-padding-family"]
         },
         {
           "value": "48px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed CSS padding shorthand and side longhands plus box-sizing -> validated 1/2/3/4 Length expansion with longhand precedence -> NativeDesignIR px or retained percent/calc edge dimensions -> validated IRLayout -> native Dimension and BoxSizing -> Yoga padding and box-model geometry recomputed under containing-block resize -> Skia pixels; negative/auto/unknown syntax fails closed",
+          "evidenceIds": ["semantic:observed-dom-padding-family"]
         },
         {
           "value": "4px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed CSS padding shorthand and side longhands plus box-sizing -> validated 1/2/3/4 Length expansion with longhand precedence -> NativeDesignIR px or retained percent/calc edge dimensions -> validated IRLayout -> native Dimension and BoxSizing -> Yoga padding and box-model geometry recomputed under containing-block resize -> Skia pixels; negative/auto/unknown syntax fails closed",
+          "evidenceIds": ["semantic:observed-dom-padding-family"]
         },
         {
           "value": "8px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed CSS padding shorthand and side longhands plus box-sizing -> validated 1/2/3/4 Length expansion with longhand precedence -> NativeDesignIR px or retained percent/calc edge dimensions -> validated IRLayout -> native Dimension and BoxSizing -> Yoga padding and box-model geometry recomputed under containing-block resize -> Skia pixels; negative/auto/unknown syntax fails closed",
+          "evidenceIds": ["semantic:observed-dom-padding-family"]
         }
       ]
     },
@@ -2846,58 +2818,51 @@
         {
           "value": "0px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed CSS padding shorthand and side longhands plus box-sizing -> validated 1/2/3/4 Length expansion with longhand precedence -> NativeDesignIR px or retained percent/calc edge dimensions -> validated IRLayout -> native Dimension and BoxSizing -> Yoga padding and box-model geometry recomputed under containing-block resize -> Skia pixels; negative/auto/unknown syntax fails closed",
+          "evidenceIds": ["semantic:observed-dom-padding-family"]
         },
         {
           "value": "10px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed CSS padding shorthand and side longhands plus box-sizing -> validated 1/2/3/4 Length expansion with longhand precedence -> NativeDesignIR px or retained percent/calc edge dimensions -> validated IRLayout -> native Dimension and BoxSizing -> Yoga padding and box-model geometry recomputed under containing-block resize -> Skia pixels; negative/auto/unknown syntax fails closed",
+          "evidenceIds": ["semantic:observed-dom-padding-family"]
         },
         {
           "value": "12px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed CSS padding shorthand and side longhands plus box-sizing -> validated 1/2/3/4 Length expansion with longhand precedence -> NativeDesignIR px or retained percent/calc edge dimensions -> validated IRLayout -> native Dimension and BoxSizing -> Yoga padding and box-model geometry recomputed under containing-block resize -> Skia pixels; negative/auto/unknown syntax fails closed",
+          "evidenceIds": ["semantic:observed-dom-padding-family"]
         },
         {
           "value": "16px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed CSS padding shorthand and side longhands plus box-sizing -> validated 1/2/3/4 Length expansion with longhand precedence -> NativeDesignIR px or retained percent/calc edge dimensions -> validated IRLayout -> native Dimension and BoxSizing -> Yoga padding and box-model geometry recomputed under containing-block resize -> Skia pixels; negative/auto/unknown syntax fails closed",
+          "evidenceIds": ["semantic:observed-dom-padding-family"]
         },
         {
           "value": "4px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed CSS padding shorthand and side longhands plus box-sizing -> validated 1/2/3/4 Length expansion with longhand precedence -> NativeDesignIR px or retained percent/calc edge dimensions -> validated IRLayout -> native Dimension and BoxSizing -> Yoga padding and box-model geometry recomputed under containing-block resize -> Skia pixels; negative/auto/unknown syntax fails closed",
+          "evidenceIds": ["semantic:observed-dom-padding-family"]
         },
         {
           "value": "6px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed CSS padding shorthand and side longhands plus box-sizing -> validated 1/2/3/4 Length expansion with longhand precedence -> NativeDesignIR px or retained percent/calc edge dimensions -> validated IRLayout -> native Dimension and BoxSizing -> Yoga padding and box-model geometry recomputed under containing-block resize -> Skia pixels; negative/auto/unknown syntax fails closed",
+          "evidenceIds": ["semantic:observed-dom-padding-family"]
         },
         {
           "value": "8px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed CSS padding shorthand and side longhands plus box-sizing -> validated 1/2/3/4 Length expansion with longhand precedence -> NativeDesignIR px or retained percent/calc edge dimensions -> validated IRLayout -> native Dimension and BoxSizing -> Yoga padding and box-model geometry recomputed under containing-block resize -> Skia pixels; negative/auto/unknown syntax fails closed",
+          "evidenceIds": ["semantic:observed-dom-padding-family"]
         }
       ]
     },
@@ -2907,58 +2872,51 @@
         {
           "value": "0px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed CSS padding shorthand and side longhands plus box-sizing -> validated 1/2/3/4 Length expansion with longhand precedence -> NativeDesignIR px or retained percent/calc edge dimensions -> validated IRLayout -> native Dimension and BoxSizing -> Yoga padding and box-model geometry recomputed under containing-block resize -> Skia pixels; negative/auto/unknown syntax fails closed",
+          "evidenceIds": ["semantic:observed-dom-padding-family"]
         },
         {
           "value": "10px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed CSS padding shorthand and side longhands plus box-sizing -> validated 1/2/3/4 Length expansion with longhand precedence -> NativeDesignIR px or retained percent/calc edge dimensions -> validated IRLayout -> native Dimension and BoxSizing -> Yoga padding and box-model geometry recomputed under containing-block resize -> Skia pixels; negative/auto/unknown syntax fails closed",
+          "evidenceIds": ["semantic:observed-dom-padding-family"]
         },
         {
           "value": "12px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed CSS padding shorthand and side longhands plus box-sizing -> validated 1/2/3/4 Length expansion with longhand precedence -> NativeDesignIR px or retained percent/calc edge dimensions -> validated IRLayout -> native Dimension and BoxSizing -> Yoga padding and box-model geometry recomputed under containing-block resize -> Skia pixels; negative/auto/unknown syntax fails closed",
+          "evidenceIds": ["semantic:observed-dom-padding-family"]
         },
         {
           "value": "16px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed CSS padding shorthand and side longhands plus box-sizing -> validated 1/2/3/4 Length expansion with longhand precedence -> NativeDesignIR px or retained percent/calc edge dimensions -> validated IRLayout -> native Dimension and BoxSizing -> Yoga padding and box-model geometry recomputed under containing-block resize -> Skia pixels; negative/auto/unknown syntax fails closed",
+          "evidenceIds": ["semantic:observed-dom-padding-family"]
         },
         {
           "value": "4px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed CSS padding shorthand and side longhands plus box-sizing -> validated 1/2/3/4 Length expansion with longhand precedence -> NativeDesignIR px or retained percent/calc edge dimensions -> validated IRLayout -> native Dimension and BoxSizing -> Yoga padding and box-model geometry recomputed under containing-block resize -> Skia pixels; negative/auto/unknown syntax fails closed",
+          "evidenceIds": ["semantic:observed-dom-padding-family"]
         },
         {
           "value": "6px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed CSS padding shorthand and side longhands plus box-sizing -> validated 1/2/3/4 Length expansion with longhand precedence -> NativeDesignIR px or retained percent/calc edge dimensions -> validated IRLayout -> native Dimension and BoxSizing -> Yoga padding and box-model geometry recomputed under containing-block resize -> Skia pixels; negative/auto/unknown syntax fails closed",
+          "evidenceIds": ["semantic:observed-dom-padding-family"]
         },
         {
           "value": "8px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed CSS padding shorthand and side longhands plus box-sizing -> validated 1/2/3/4 Length expansion with longhand precedence -> NativeDesignIR px or retained percent/calc edge dimensions -> validated IRLayout -> native Dimension and BoxSizing -> Yoga padding and box-model geometry recomputed under containing-block resize -> Skia pixels; negative/auto/unknown syntax fails closed",
+          "evidenceIds": ["semantic:observed-dom-padding-family"]
         }
       ]
     },
@@ -2968,66 +2926,58 @@
         {
           "value": "0px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed CSS padding shorthand and side longhands plus box-sizing -> validated 1/2/3/4 Length expansion with longhand precedence -> NativeDesignIR px or retained percent/calc edge dimensions -> validated IRLayout -> native Dimension and BoxSizing -> Yoga padding and box-model geometry recomputed under containing-block resize -> Skia pixels; negative/auto/unknown syntax fails closed",
+          "evidenceIds": ["semantic:observed-dom-padding-family"]
         },
         {
           "value": "12px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed CSS padding shorthand and side longhands plus box-sizing -> validated 1/2/3/4 Length expansion with longhand precedence -> NativeDesignIR px or retained percent/calc edge dimensions -> validated IRLayout -> native Dimension and BoxSizing -> Yoga padding and box-model geometry recomputed under containing-block resize -> Skia pixels; negative/auto/unknown syntax fails closed",
+          "evidenceIds": ["semantic:observed-dom-padding-family"]
         },
         {
           "value": "24px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed CSS padding shorthand and side longhands plus box-sizing -> validated 1/2/3/4 Length expansion with longhand precedence -> NativeDesignIR px or retained percent/calc edge dimensions -> validated IRLayout -> native Dimension and BoxSizing -> Yoga padding and box-model geometry recomputed under containing-block resize -> Skia pixels; negative/auto/unknown syntax fails closed",
+          "evidenceIds": ["semantic:observed-dom-padding-family"]
         },
         {
           "value": "2px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed CSS padding shorthand and side longhands plus box-sizing -> validated 1/2/3/4 Length expansion with longhand precedence -> NativeDesignIR px or retained percent/calc edge dimensions -> validated IRLayout -> native Dimension and BoxSizing -> Yoga padding and box-model geometry recomputed under containing-block resize -> Skia pixels; negative/auto/unknown syntax fails closed",
+          "evidenceIds": ["semantic:observed-dom-padding-family"]
         },
         {
           "value": "48px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed CSS padding shorthand and side longhands plus box-sizing -> validated 1/2/3/4 Length expansion with longhand precedence -> NativeDesignIR px or retained percent/calc edge dimensions -> validated IRLayout -> native Dimension and BoxSizing -> Yoga padding and box-model geometry recomputed under containing-block resize -> Skia pixels; negative/auto/unknown syntax fails closed",
+          "evidenceIds": ["semantic:observed-dom-padding-family"]
         },
         {
           "value": "4px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed CSS padding shorthand and side longhands plus box-sizing -> validated 1/2/3/4 Length expansion with longhand precedence -> NativeDesignIR px or retained percent/calc edge dimensions -> validated IRLayout -> native Dimension and BoxSizing -> Yoga padding and box-model geometry recomputed under containing-block resize -> Skia pixels; negative/auto/unknown syntax fails closed",
+          "evidenceIds": ["semantic:observed-dom-padding-family"]
         },
         {
           "value": "6px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed CSS padding shorthand and side longhands plus box-sizing -> validated 1/2/3/4 Length expansion with longhand precedence -> NativeDesignIR px or retained percent/calc edge dimensions -> validated IRLayout -> native Dimension and BoxSizing -> Yoga padding and box-model geometry recomputed under containing-block resize -> Skia pixels; negative/auto/unknown syntax fails closed",
+          "evidenceIds": ["semantic:observed-dom-padding-family"]
         },
         {
           "value": "8px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed CSS padding shorthand and side longhands plus box-sizing -> validated 1/2/3/4 Length expansion with longhand precedence -> NativeDesignIR px or retained percent/calc edge dimensions -> validated IRLayout -> native Dimension and BoxSizing -> Yoga padding and box-model geometry recomputed under containing-block resize -> Skia pixels; negative/auto/unknown syntax fails closed",
+          "evidenceIds": ["semantic:observed-dom-padding-family"]
         }
       ]
     },
