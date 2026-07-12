@@ -265,6 +265,16 @@ void ImportedRootHost::set_transcript(std::vector<pulp::view::ImportedListItem> 
 	transcript_->set_items(std::move(items));
 }
 
+void ImportedRootHost::set_transcript_auto_follow(bool enabled) {
+	if (!transcript_) throw std::logic_error("source transcript slot is not bound");
+	transcript_->set_auto_follow(enabled);
+}
+
+void ImportedRootHost::set_transcript_scroll_y(float y) {
+	if (!transcript_) throw std::logic_error("source transcript slot is not bound");
+	transcript_->set_scroll_y(y);
+}
+
 void ImportedRootHost::set_projects(std::vector<pulp::view::ImportedListItem> items) {
 	if (!projects_) throw std::logic_error("imported projects collection is not installed");
 	projects_->set_items(std::move(items));

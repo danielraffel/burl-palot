@@ -1,6 +1,7 @@
 #include "imported_root_host.hpp"
 
 #include <pulp/view/design_ir.hpp>
+#include <pulp/view/accessibility_tree.hpp>
 #include <pulp/view/text_editor.hpp>
 
 #include <cstdlib>
@@ -66,6 +67,10 @@ int main(int argc, char** argv) {
 	host.set_transcript({{"u1", "user", {{"message.text", "runtime user"}}},
 	                     {"a1", "assistant", {{"message.text", "runtime assistant"}}},
 	                     {"t1", "tool", {{"message.text", "tool.read"}}}});
+	host.set_projects({{"p1", "project", {{"id", "/tmp/project-one"},
+	                                          {"project.name", "project-one"},
+	                                          {"directory", "/tmp/project-one"},
+	                                          {"status", "active"}}}});
 	for (const auto* id : {"composer.copy", "project.select", "session.create", "session.open"}) {
 		if (!host.invoke_bound_action(id) || calls[id] != 1) return 9;
 	}
@@ -102,6 +107,17 @@ int main(int argc, char** argv) {
 			          << " sidebar-visible=" << sidebar->visible() << " main-x=" << main->bounds().x
 			          << " main-width=" << main->bounds().width << '\n';
 			return 13;
+		}
+	const auto accessibility = pulp::view::snapshot_accessibility_tree(host);
+	const auto contains_accessible_text = [&](std::string_view text) {
+		return std::ranges::any_of(accessibility, [text](const auto& node) {
+			return node.label.find(text) != std::string::npos || node.value.find(text) != std::string::npos;
+		});
+	};
+	for (const auto text : {"runtime user", "runtime assistant", "tool.read", "project-one"})
+		if (!contains_accessible_text(text)) {
+			std::cerr << "dynamic imported collection missing accessible value: " << text << '\n';
+			return 14;
 		}
 	std::cout << "source-observed native primary tree; no WebView/Chromium; all actions attached\n";
 	return EXIT_SUCCESS;

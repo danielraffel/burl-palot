@@ -32,6 +32,8 @@ public:
 	[[nodiscard]] const std::vector<std::string>& unattached_actions() const noexcept;
 	pulp::view::TextEditor* bound_composer() const noexcept;
 	void set_transcript(std::vector<pulp::view::ImportedListItem> items);
+	void set_transcript_auto_follow(bool enabled);
+	void set_transcript_scroll_y(float y);
 	void set_projects(std::vector<pulp::view::ImportedListItem> items);
 
 private:

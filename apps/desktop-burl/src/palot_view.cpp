@@ -466,6 +466,18 @@ void PalotView::sync_imported_projects() {
 
 void PalotView::load_visual_parity_fixture() {
 	transcript_->set_auto_follow(false);
+	imported_root_->set_transcript_auto_follow(false);
+	imported_root_->set_projects({
+		{.key = "/fixture/palot", .template_id = "project",
+		 .values = {{"id", "/fixture/palot"}, {"project.name", "palot"},
+		            {"directory", "/fixture/palot"}, {"status", "active"}}},
+		{.key = "/fixture/acme-api", .template_id = "project",
+		 .values = {{"id", "/fixture/acme-api"}, {"project.name", "acme-api"},
+		            {"directory", "/fixture/acme-api"}, {"status", "idle"}}},
+		{.key = "/fixture/landing-page", .template_id = "project",
+		 .values = {{"id", "/fixture/landing-page"}, {"project.name", "landing-page"},
+		            {"directory", "/fixture/landing-page"}, {"status", "idle"}}},
+	});
 	messages_.clear();
 	send_->set_visible(false);
 	cancel_->set_visible(false);
@@ -487,6 +499,7 @@ void PalotView::load_visual_parity_fixture() {
 	               "setting, and add a transition animation when switching themes.", false);
 	append_message("OpenCode", "🧠 Thought for 2 seconds\n\n**Making edits** in `src/lib/theme.ts`…", false);
 	transcript_->set_scroll_y(54.0f);
+	imported_root_->set_transcript_scroll_y(0.0f);
 	status_ = "Streaming";
 	request_repaint();
 	if (on_demo_complete) on_demo_complete();
