@@ -30,7 +30,8 @@ std::string read_text(const char* path) {
 }
 
 void register_actions(ImportedRootHost& host, std::unordered_map<std::string, int>* calls = nullptr) {
-	for (const auto* id : {"composer.copy", "navigation.settings", "project.open", "project.select",
+	for (const auto* id : {"command.palette.open", "composer.copy", "navigation.automations",
+	                       "navigation.settings", "project.open", "project.search.toggle", "project.select",
 	                       "prompt.cancel", "prompt.retry", "prompt.send", "server.menu.toggle",
 	                       "session.create", "session.open", "sidebar.toggle"})
 		host.register_action(id, [calls, id](std::string_view) { if (calls) ++(*calls)[id]; });
@@ -64,7 +65,7 @@ int main(int argc, char** argv) {
 	host.load(argv[1], argv[2]);
 	if (!host.source_observed_primary_tree() || host.child_count() != 1) return 5;
 	if (host.child_at(0)->child_count() == 0) return 6;
-	if (host.attached_action_count() != 11 || !host.unattached_required_actions().empty()) return 7;
+	if (host.attached_action_count() != 14 || !host.unattached_required_actions().empty()) return 7;
 	host.set_transcript({{"u1", "user", {{"message.text", "runtime user"}}},
 	                     {"a1", "assistant", {{"message.text", "runtime assistant"}}},
 	                     {"t1", "tool", {{"message.text", "tool.read"}}}});
@@ -119,6 +120,19 @@ int main(int argc, char** argv) {
 			          << " main-width=" << main->bounds().width << '\n';
 			return 13;
 		}
+	host.set_bounds({0, 0, 1200, 800});
+	host.layout_children();
+	if (!host.set_application_state("sidebar.open", "closed")) return 16;
+	host.layout_children();
+	if (sidebar->visible()) return 17;
+	host.set_bounds({0, 0, 599, 800});
+	host.layout_children();
+	host.set_bounds({0, 0, 1200, 800});
+	host.layout_children();
+	if (sidebar->visible()) return 18;
+	if (!host.clear_application_state("sidebar.open")) return 19;
+	host.layout_children();
+	if (!sidebar->visible()) return 20;
 	const auto accessibility = pulp::view::snapshot_accessibility_tree(host);
 	const auto contains_accessible_text = [&](std::string_view text) {
 		return std::ranges::any_of(accessibility, [text](const auto& node) {

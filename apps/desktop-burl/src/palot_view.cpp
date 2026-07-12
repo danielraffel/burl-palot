@@ -211,11 +211,20 @@ PalotView::PalotView() {
 	event_sink_ = std::make_shared<UiEventSink>(this);
 	set_access_label("Palot chat workspace");
 	auto imported_root = std::make_unique<ImportedRootHost>();
+	imported_root->register_action("command.palette.open", [this](std::string_view) {
+		command_palette_open_ = true;
+		request_repaint();
+	});
 	imported_root->register_action("composer.copy", [this](std::string_view) {
 		if (transcript_ && transcript_->child_count() != 0) request_repaint();
 	});
 	imported_root->register_action("navigation.settings", [this](std::string_view) {
 		navigation_route_ = "/settings/general";
+		server_menu_open_ = false;
+		request_repaint();
+	});
+	imported_root->register_action("navigation.automations", [this](std::string_view) {
+		navigation_route_ = "/automations";
 		server_menu_open_ = false;
 		request_repaint();
 	});
@@ -231,6 +240,10 @@ PalotView::PalotView() {
 		sync_imported_projects();
 		set_configuration_error("");
 		create_session_ = false;
+		request_repaint();
+	});
+	imported_root->register_action("project.search.toggle", [this](std::string_view) {
+		project_search_open_ = !project_search_open_;
 		request_repaint();
 	});
 	imported_root->register_action("prompt.cancel", [this](std::string_view) {
@@ -257,6 +270,8 @@ PalotView::PalotView() {
 	});
 	imported_root->register_action("sidebar.toggle", [this](std::string_view) {
 		sidebar_open_ = !sidebar_open_;
+		if (imported_root_)
+			imported_root_->set_application_state("sidebar.open", sidebar_open_ ? "open" : "closed");
 		request_repaint();
 	});
 	imported_root->load(palot_bundle_resource("import/main-chat.observed.design-ir.v1.json"),

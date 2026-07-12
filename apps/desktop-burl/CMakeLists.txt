@@ -169,8 +169,7 @@ if(BURL_PALOT_ENABLE_FRAMEWORK)
 	add_dependencies(burl-palot palot-opencode-sidecar)
 	target_include_directories(burl-palot PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/include")
 	target_compile_definitions(burl-palot PRIVATE
-		PALOT_OPENCODE_SIDECAR_RESOURCE_PATH="bin/${PALOT_SIDECAR_NAME}"
-		PALOT_RESOURCE_SOURCE_ROOT="${CMAKE_CURRENT_SOURCE_DIR}/resources")
+		PALOT_OPENCODE_SIDECAR_RESOURCE_PATH="bin/${PALOT_SIDECAR_NAME}")
 
 	add_custom_command(TARGET burl-palot POST_BUILD
 		COMMAND "${CMAKE_COMMAND}" -E make_directory

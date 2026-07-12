@@ -13,7 +13,7 @@ cmake --build build-semantic --target palot-mac-production-interaction-test -j4
 ctest --test-dir build-semantic -R '^palot-mac-production-interaction$' --output-on-failure
 ```
 
-Current result: **FAIL — 74 observations across 72 enumerated controls**.
+Current result: **FAIL — 51 observations across 85 enumerated controls**.
 The repeated observations are intentional: a control must remain valid at
 every width where it is effectively visible.
 
@@ -26,11 +26,12 @@ sidebar wrapper.
 
 Highest-priority actionable groups:
 
-- Sidebar/session/project navigation: Automations, recent-session rows,
-  Search projects, Command palette, This Mac, and Settings are focusable but
-  have no consumer application action binding. New Session, the active session,
-  Add Project, and the project template are bound and reach the production
-  dispatch path.
+- Sidebar/session/project navigation cluster now passes production dispatch:
+  both New Session surfaces, all six captured session rows, Automations,
+  Search projects, Command palette, Add Project, the project template,
+  This Mac, Settings, and sidebar toggle are bound. Manual sidebar close also
+  persists through narrow-to-wide resize and clearing returns to the responsive
+  baseline.
 - App bar: title rename, diff-count button, Open and its adjacent menu controls
   are focusable but unbound.
 - Composer toolbar: attachment, Build, model, and variant controls are focusable

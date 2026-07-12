@@ -718,10 +718,16 @@
                             1025,
                             1200,
                             1400
-                          ]
+                          ],
+                          "applicationStateKey": "sidebar.open",
+                          "visibilityByApplicationState": {
+                            "open": true,
+                            "closed": false
+                          }
                         },
                         "attributes": {
-                          "source_revision": "fd63a75dad3d0e8555ba22a47e720d285889fbf0"
+                          "source_revision": "fd63a75dad3d0e8555ba22a47e720d285889fbf0",
+                          "pulpBindingPolicyRule": "sidebar-application-state"
                         },
                         "stable_anchor_id": "observed-dom:dom/html-shape-3b68501b:0/body-shape-d65c892b:0/div-id-root:0/div-shape-74caabae:0/div-shape-20ec5713:0/div-data-slot-sidebar-wrapper:0/div-data-slot-sidebar:0",
                         "anchor_strategy": "adapter",
@@ -2421,7 +2427,12 @@
                                                         },
                                                         "attributes": {
                                                           "role": "button",
-                                                          "source_revision": "fd63a75dad3d0e8555ba22a47e720d285889fbf0"
+                                                          "source_revision": "fd63a75dad3d0e8555ba22a47e720d285889fbf0",
+                                                          "pulpRouteId": "/automations",
+                                                          "pulpHostAction": "navigation.automations",
+                                                          "pulpHostActionLabel": "Automations",
+                                                          "pulpEventContract": "click",
+                                                          "pulpBindingPolicyRule": "automations-navigation"
                                                         },
                                                         "stable_anchor_id": "observed-dom:dom/html-shape-3b68501b:0/body-shape-d65c892b:0/div-id-root:0/div-shape-74caabae:0/div-shape-20ec5713:0/div-data-slot-sidebar-wrapper:0/div-data-slot-sidebar:0/div-data-slot-sidebar-container:0/div-data-slot-sidebar-inner:0/div-data-slot-sidebar-content:0/div-data-slot-sidebar-group:0/div-data-slot-sidebar-group-content:0/ul-data-slot-sidebar-menu:0/li-data-slot-sidebar-menu-item:1/button-data-slot-sidebar-menu-button:0",
                                                         "anchor_strategy": "adapter",
@@ -4313,7 +4324,12 @@
                                                         },
                                                         "attributes": {
                                                           "role": "button",
-                                                          "source_revision": "fd63a75dad3d0e8555ba22a47e720d285889fbf0"
+                                                          "source_revision": "fd63a75dad3d0e8555ba22a47e720d285889fbf0",
+                                                          "pulpRouteId": "session.open",
+                                                          "pulpHostAction": "session.open",
+                                                          "pulpHostActionLabel": "Open session",
+                                                          "pulpEventContract": "click",
+                                                          "pulpBindingPolicyRule": "active-session-secondary"
                                                         },
                                                         "stable_anchor_id": "observed-dom:dom/html-shape-3b68501b:0/body-shape-d65c892b:0/div-id-root:0/div-shape-74caabae:0/div-shape-20ec5713:0/div-data-slot-sidebar-wrapper:0/div-data-slot-sidebar:0/div-data-slot-sidebar-container:0/div-data-slot-sidebar-inner:0/div-data-slot-sidebar-content:0/div-data-slot-sidebar-group:1/div-data-slot-sidebar-group-content:0/ul-data-slot-sidebar-menu:0/li-data-slot-context-menu-trigger:1/button-data-slot-sidebar-menu-button:0",
                                                         "anchor_strategy": "adapter",
@@ -5776,7 +5792,12 @@
                                                         },
                                                         "attributes": {
                                                           "role": "button",
-                                                          "source_revision": "fd63a75dad3d0e8555ba22a47e720d285889fbf0"
+                                                          "source_revision": "fd63a75dad3d0e8555ba22a47e720d285889fbf0",
+                                                          "pulpRouteId": "session.open",
+                                                          "pulpHostAction": "session.open",
+                                                          "pulpHostActionLabel": "Open recent session",
+                                                          "pulpEventContract": "click",
+                                                          "pulpBindingPolicyRule": "recent-session-0"
                                                         },
                                                         "stable_anchor_id": "observed-dom:dom/html-shape-3b68501b:0/body-shape-d65c892b:0/div-id-root:0/div-shape-74caabae:0/div-shape-20ec5713:0/div-data-slot-sidebar-wrapper:0/div-data-slot-sidebar:0/div-data-slot-sidebar-container:0/div-data-slot-sidebar-inner:0/div-data-slot-sidebar-content:0/div-data-slot-sidebar-group:2/div-data-slot-sidebar-group-content:0/ul-data-slot-sidebar-menu:0/li-data-slot-context-menu-trigger:0/button-data-slot-sidebar-menu-button:0",
                                                         "anchor_strategy": "adapter",
@@ -6593,7 +6614,12 @@
                                                         },
                                                         "attributes": {
                                                           "role": "button",
-                                                          "source_revision": "fd63a75dad3d0e8555ba22a47e720d285889fbf0"
+                                                          "source_revision": "fd63a75dad3d0e8555ba22a47e720d285889fbf0",
+                                                          "pulpRouteId": "session.open",
+                                                          "pulpHostAction": "session.open",
+                                                          "pulpHostActionLabel": "Open recent session",
+                                                          "pulpEventContract": "click",
+                                                          "pulpBindingPolicyRule": "recent-session-1"
                                                         },
                                                         "stable_anchor_id": "observed-dom:dom/html-shape-3b68501b:0/body-shape-d65c892b:0/div-id-root:0/div-shape-74caabae:0/div-shape-20ec5713:0/div-data-slot-sidebar-wrapper:0/div-data-slot-sidebar:0/div-data-slot-sidebar-container:0/div-data-slot-sidebar-inner:0/div-data-slot-sidebar-content:0/div-data-slot-sidebar-group:2/div-data-slot-sidebar-group-content:0/ul-data-slot-sidebar-menu:0/li-data-slot-context-menu-trigger:1/button-data-slot-sidebar-menu-button:0",
                                                         "anchor_strategy": "adapter",
@@ -7410,7 +7436,12 @@
                                                         },
                                                         "attributes": {
                                                           "role": "button",
-                                                          "source_revision": "fd63a75dad3d0e8555ba22a47e720d285889fbf0"
+                                                          "source_revision": "fd63a75dad3d0e8555ba22a47e720d285889fbf0",
+                                                          "pulpRouteId": "session.open",
+                                                          "pulpHostAction": "session.open",
+                                                          "pulpHostActionLabel": "Open recent session",
+                                                          "pulpEventContract": "click",
+                                                          "pulpBindingPolicyRule": "recent-session-2"
                                                         },
                                                         "stable_anchor_id": "observed-dom:dom/html-shape-3b68501b:0/body-shape-d65c892b:0/div-id-root:0/div-shape-74caabae:0/div-shape-20ec5713:0/div-data-slot-sidebar-wrapper:0/div-data-slot-sidebar:0/div-data-slot-sidebar-container:0/div-data-slot-sidebar-inner:0/div-data-slot-sidebar-content:0/div-data-slot-sidebar-group:2/div-data-slot-sidebar-group-content:0/ul-data-slot-sidebar-menu:0/li-data-slot-context-menu-trigger:2/button-data-slot-sidebar-menu-button:0",
                                                         "anchor_strategy": "adapter",
@@ -8227,7 +8258,12 @@
                                                         },
                                                         "attributes": {
                                                           "role": "button",
-                                                          "source_revision": "fd63a75dad3d0e8555ba22a47e720d285889fbf0"
+                                                          "source_revision": "fd63a75dad3d0e8555ba22a47e720d285889fbf0",
+                                                          "pulpRouteId": "session.open",
+                                                          "pulpHostAction": "session.open",
+                                                          "pulpHostActionLabel": "Open recent session",
+                                                          "pulpEventContract": "click",
+                                                          "pulpBindingPolicyRule": "recent-session-3"
                                                         },
                                                         "stable_anchor_id": "observed-dom:dom/html-shape-3b68501b:0/body-shape-d65c892b:0/div-id-root:0/div-shape-74caabae:0/div-shape-20ec5713:0/div-data-slot-sidebar-wrapper:0/div-data-slot-sidebar:0/div-data-slot-sidebar-container:0/div-data-slot-sidebar-inner:0/div-data-slot-sidebar-content:0/div-data-slot-sidebar-group:2/div-data-slot-sidebar-group-content:0/ul-data-slot-sidebar-menu:0/li-data-slot-context-menu-trigger:3/button-data-slot-sidebar-menu-button:0",
                                                         "anchor_strategy": "adapter",
@@ -9434,7 +9470,14 @@
                                                 },
                                                 "attributes": {
                                                   "role": "button",
-                                                  "source_revision": "fd63a75dad3d0e8555ba22a47e720d285889fbf0"
+                                                  "source_revision": "fd63a75dad3d0e8555ba22a47e720d285889fbf0",
+                                                  "pulpRouteId": "app.projects.search",
+                                                  "pulpHostAction": "project.search.toggle",
+                                                  "pulpHostActionLabel": "Search projects",
+                                                  "pulpEventContract": "click",
+                                                  "pulpStateKey": "project.search.open",
+                                                  "pulpStateTransition": "toggle",
+                                                  "pulpBindingPolicyRule": "project-search-toggle"
                                                 },
                                                 "stable_anchor_id": "observed-dom:dom/html-shape-3b68501b:0/body-shape-d65c892b:0/div-id-root:0/div-shape-74caabae:0/div-shape-20ec5713:0/div-data-slot-sidebar-wrapper:0/div-data-slot-sidebar:0/div-data-slot-sidebar-container:0/div-data-slot-sidebar-inner:0/div-data-slot-sidebar-content:0/div-data-slot-sidebar-group:3/div-shape-8d87b6d1:0/button-data-slot-tooltip-trigger:0",
                                                 "anchor_strategy": "adapter",
@@ -9868,7 +9911,14 @@
                                                 },
                                                 "attributes": {
                                                   "role": "button",
-                                                  "source_revision": "fd63a75dad3d0e8555ba22a47e720d285889fbf0"
+                                                  "source_revision": "fd63a75dad3d0e8555ba22a47e720d285889fbf0",
+                                                  "pulpRouteId": "app.command-palette",
+                                                  "pulpHostAction": "command.palette.open",
+                                                  "pulpHostActionLabel": "Command palette",
+                                                  "pulpEventContract": "click",
+                                                  "pulpStateKey": "command.palette.open",
+                                                  "pulpStateTransition": "set:true",
+                                                  "pulpBindingPolicyRule": "command-palette-open"
                                                 },
                                                 "stable_anchor_id": "observed-dom:dom/html-shape-3b68501b:0/body-shape-d65c892b:0/div-id-root:0/div-shape-74caabae:0/div-shape-20ec5713:0/div-data-slot-sidebar-wrapper:0/div-data-slot-sidebar:0/div-data-slot-sidebar-container:0/div-data-slot-sidebar-inner:0/div-data-slot-sidebar-content:0/div-data-slot-sidebar-group:3/div-shape-8d87b6d1:0/button-data-slot-tooltip-trigger:1",
                                                 "anchor_strategy": "adapter",
@@ -56074,7 +56124,12 @@
                               "role": "button",
                               "focusable": "true",
                               "tabIndex": "0",
-                              "source_revision": "fd63a75dad3d0e8555ba22a47e720d285889fbf0"
+                              "source_revision": "fd63a75dad3d0e8555ba22a47e720d285889fbf0",
+                              "pulpRouteId": "session.create",
+                              "pulpHostAction": "session.create",
+                              "pulpHostActionLabel": "New Session",
+                              "pulpEventContract": "click",
+                              "pulpBindingPolicyRule": "window-new-session"
                             },
                             "stable_anchor_id": "observed-dom:dom/html-shape-3b68501b:0/body-shape-d65c892b:0/div-id-root:0/div-shape-74caabae:0/div-shape-20ec5713:0/div-data-slot-sidebar-wrapper:0/div-shape-101f5816:0/button-data-slot-tooltip-trigger:1",
                             "anchor_strategy": "adapter",

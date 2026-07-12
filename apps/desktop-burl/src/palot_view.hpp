@@ -28,6 +28,8 @@ public:
 	[[nodiscard]] const std::vector<std::string>& unattached_required_actions() const noexcept;
 	[[nodiscard]] bool sidebar_open() const noexcept { return sidebar_open_; }
 	[[nodiscard]] bool server_menu_open() const noexcept { return server_menu_open_; }
+	[[nodiscard]] bool project_search_open() const noexcept { return project_search_open_; }
+	[[nodiscard]] bool command_palette_open() const noexcept { return command_palette_open_; }
 	[[nodiscard]] const std::string& navigation_route() const noexcept { return navigation_route_; }
 	std::function<void()> on_demo_complete;
 	std::function<void()> on_stream_delta;
@@ -68,6 +70,8 @@ private:
 	bool create_session_ = true;
 	bool sidebar_open_ = true;
 	bool server_menu_open_ = false;
+	bool project_search_open_ = false;
+	bool command_palette_open_ = false;
 	std::string navigation_route_ = "/";
 	ImportedRootHost* imported_root_ = nullptr;
 	pulp::view::FrameUpdateCoalescer transcript_updates_;

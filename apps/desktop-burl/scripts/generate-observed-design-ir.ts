@@ -179,6 +179,7 @@ interface PolicyRule {
 	id: string
 	match: { sourceId?: string; tagName?: string; role?: string; accessibleName?: string; textExact?: string; attribute?: { name: string; present?: boolean; value?: string } }
 	attributes: Record<string, string>
+	applicationState?: { key: string; visibility: Record<string, boolean> }
 }
 
 const policy = importPolicy
@@ -209,6 +210,15 @@ const stamp = (node: any) => {
 	const entry = observed.get(node.name)
 	if (entry) for (const rule of policy.rules) if (matches(entry, rule)) {
 		node.attributes = { ...(node.attributes ?? {}), ...rule.attributes, pulpBindingPolicyRule: rule.id }
+		if (rule.applicationState) {
+			if (!rule.applicationState.key || !Object.keys(rule.applicationState.visibility).length)
+				throw new Error(`binding policy ${rule.id} has invalid application state`)
+			node.responsive = {
+				...(node.responsive ?? {}),
+				applicationStateKey: rule.applicationState.key,
+				visibilityByApplicationState: rule.applicationState.visibility,
+			}
+		}
 		applied.set(rule.id, (applied.get(rule.id) ?? 0) + 1)
 	}
 	for (const child of node.children ?? []) stamp(child)

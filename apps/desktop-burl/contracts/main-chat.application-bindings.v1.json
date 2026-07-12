@@ -16,10 +16,13 @@
     {"id":"state.streaming","sourceUri":"apps/desktop/src/renderer/atoms/streaming.ts","symbol":"applyStreamingDelta"}
   ],
   "actions": [
+    {"id":"command.palette.open","variant":"typed","sourceAnchor":"app.sidebar","required":true,"fields":[],"resultType":"boolean"},
     {"id":"composer.copy","variant":"typed","sourceAnchor":"chat.transcript","required":true,"fields":[{"name":"messageID","type":"string","required":true}],"resultType":"void"},
     {"id":"navigation.settings","variant":"typed","sourceAnchor":"app.sidebar","required":true,"fields":[],"resultType":"route"},
+    {"id":"navigation.automations","variant":"typed","sourceAnchor":"app.sidebar","required":true,"fields":[],"resultType":"route"},
     {"id":"project.select","variant":"typed","sourceAnchor":"app.sidebar","required":true,"fields":[{"name":"directory","type":"path","required":true}],"resultType":"project"},
     {"id":"project.open","variant":"typed","sourceAnchor":"app.sidebar","required":false,"fields":[{"name":"directory","type":"path","required":true}],"resultType":"project"},
+    {"id":"project.search.toggle","variant":"typed","sourceAnchor":"app.sidebar","required":true,"fields":[],"resultType":"boolean"},
     {"id":"prompt.cancel","variant":"typed","sourceAnchor":"opencode.commands","required":true,"fields":[{"name":"directory","type":"path","required":true},{"name":"sessionID","type":"string","required":true}],"resultType":"void"},
     {"id":"prompt.retry","variant":"typed","sourceAnchor":"opencode.commands","required":true,"fields":[{"name":"failedRequestID","type":"string","required":true},{"name":"sessionID","type":"string","required":true}],"resultType":"request-id"},
     {"id":"prompt.send","variant":"typed","sourceAnchor":"opencode.commands","required":true,"fields":[{"name":"agent","type":"string","required":false},{"name":"files","type":"file-attachment[]","required":false},{"name":"model","type":"model-ref","required":true},{"name":"sessionID","type":"string","required":true},{"name":"text","type":"string","required":true},{"name":"variant","type":"string","required":false}],"resultType":"request-id"},

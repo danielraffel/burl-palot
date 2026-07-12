@@ -77,7 +77,8 @@ int main(int argc, char** argv) {
 	ImportedRootHost host;
 	std::unordered_map<std::string, int> calls;
 	std::unordered_map<std::string, std::string> payloads;
-	for (const auto* id : {"composer.copy", "navigation.settings", "project.open", "project.select",
+	for (const auto* id : {"command.palette.open", "composer.copy", "navigation.automations",
+	                       "navigation.settings", "project.open", "project.search.toggle", "project.select",
 	                       "prompt.cancel", "prompt.retry", "prompt.send", "server.menu.toggle",
 	                       "session.create", "session.open", "sidebar.toggle"})
 		host.register_action(id, [&calls, &payloads, id](std::string_view payload) {

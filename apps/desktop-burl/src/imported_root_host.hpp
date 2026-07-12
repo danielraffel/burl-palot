@@ -28,6 +28,8 @@ public:
 	[[nodiscard]] std::size_t attached_action_count() const noexcept;
 	[[nodiscard]] const std::vector<std::string>& unattached_required_actions() const noexcept;
 	bool invoke_bound_action(std::string_view id);
+	bool set_application_state(std::string_view key, std::string_view value);
+	bool clear_application_state(std::string_view key);
 	[[nodiscard]] std::vector<pulp::view::View*> bound_action_views(std::string_view id) const;
 	[[nodiscard]] const std::vector<std::string>& unattached_actions() const noexcept;
 	pulp::view::TextEditor* bound_composer() const noexcept;

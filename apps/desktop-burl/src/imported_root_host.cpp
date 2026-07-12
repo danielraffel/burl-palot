@@ -259,6 +259,16 @@ bool ImportedRootHost::invoke_bound_action(std::string_view id) {
 	return binding_context_ && binding_context_->invoke_bound(id);
 }
 
+bool ImportedRootHost::set_application_state(std::string_view key, std::string_view value) {
+	return child_count() != 0 &&
+	       pulp::view::set_imported_application_state(*child_at(0), key, value);
+}
+
+bool ImportedRootHost::clear_application_state(std::string_view key) {
+	return child_count() != 0 &&
+	       pulp::view::clear_imported_application_state(*child_at(0), key);
+}
+
 std::vector<pulp::view::View*> ImportedRootHost::bound_action_views(std::string_view id) const {
 	return binding_context_ ? binding_context_->bound_views(id) : std::vector<pulp::view::View*>{};
 }

@@ -100,10 +100,12 @@ int main(int argc, char** argv) {
 	ImportedRootHost root;
 	std::unordered_map<std::string, int> calls;
 	const std::vector<std::string> action_ids = {
-		"composer.copy", "navigation.settings", "project.open", "project.select", "prompt.cancel",
+		"command.palette.open", "composer.copy", "navigation.automations", "navigation.settings",
+		"project.open", "project.search.toggle", "project.select", "prompt.cancel",
 		"prompt.retry", "prompt.send", "server.menu.toggle", "session.create", "session.open",
 		"sidebar.toggle"};
-	for (const auto* id : {"composer.copy", "navigation.settings", "project.open", "project.select",
+	for (const auto* id : {"command.palette.open", "composer.copy", "navigation.automations",
+	                       "navigation.settings", "project.open", "project.search.toggle", "project.select",
 	                       "prompt.cancel", "prompt.retry", "prompt.send", "server.menu.toggle",
 	                       "session.create", "session.open", "sidebar.toggle"}) {
 		root.register_action(id, [&, id](std::string_view) { ++calls[id]; });
