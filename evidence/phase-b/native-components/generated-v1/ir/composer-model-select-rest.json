@@ -15,6 +15,9 @@
       "display": "flex",
       "direction": "row",
       "wrap": false,
+      "flexGrow": 0,
+      "flexShrink": 1,
+      "flexBasis": "auto",
       "align": "center",
       "justify": "normal",
       "gap": 4,
@@ -34,20 +37,69 @@
       "height": 28
     },
     "style": {
+      "backgroundColor": "#00000000",
       "color": "#afafafff",
+      "borderTopColor": "#2e2e2eff",
+      "borderRightColor": "#2e2e2eff",
+      "borderBottomColor": "#2e2e2eff",
+      "borderLeftColor": "#2e2e2eff",
+      "borderTopWidth": 0,
+      "borderRightWidth": 0,
+      "borderBottomWidth": 0,
+      "borderLeftWidth": 0,
       "borderRadius": 10.5,
+      "borderTopLeftRadius": 10.5,
+      "borderTopRightRadius": 10.5,
+      "borderBottomRightRadius": 10.5,
+      "borderBottomLeftRadius": 10.5,
+      "cursor": "default",
+      "boxShadow": "0px 0px 0px 0px #00000000, 0px 0px 0px 0px #00000000, 0px 0px 0px 0px #00000000, 0px 0px 0px 0px #00000000, 0px 0px 0px 0px #00000000",
       "fontFamily": "-apple-system, \"system-ui\", \"Segoe UI\", system-ui, sans-serif",
       "fontSize": 13,
       "fontWeight": 500,
       "lineHeight": 18,
       "textAlign": "center",
       "whiteSpace": "normal",
-      "width": 158.828,
+      "textOverflow": "clip",
+      "position": "static",
       "height": 28
+    },
+    "visualSkin": {
+      "states": {
+        "rest": {
+          "background": {
+            "r": 0,
+            "g": 0,
+            "b": 0,
+            "a": 0
+          },
+          "foreground": {
+            "r": 175,
+            "g": 175,
+            "b": 175,
+            "a": 255
+          },
+          "cornerRadius": 10.5,
+          "fontSize": 13,
+          "lineHeight": 18,
+          "fontFamily": "-apple-system, \"system-ui\", \"Segoe UI\", system-ui, sans-serif",
+          "fontWeight": 500,
+          "textAlign": 1,
+          "insetHorizontal": 8,
+          "insetVertical": 0
+        }
+      },
+      "tokenRefs": {}
     },
     "attributes": {
       "role": "button",
-      "source_revision": "55696de9b3bd6d4b3846f9fb2457eb4bfe9239ee5fb3e1275b2fafe0d17a72d0"
+      "action_binding_id": "model.select",
+      "pulpRouteId": "html:1/body:2/div[root]:3/div:1/div:1/div[sidebar-wrapper]:1/main[sidebar-inset]:2/div[content-area]:2/div:1/div:1/div:1/div:1/div:2/div:1/div:1/form:2/div[input-group]:1/div[input-group-addon]:2/div:1/div:2/button[base-ui-_r_48_]:4",
+      "pulpHostAction": "model.select",
+      "pulpEventContract": "click",
+      "disabled": "false",
+      "focusable": "true",
+      "source_revision": "cde304eb408da4379d598b2b3e7508fa7ebb19b72dfbbcf02b06f53a0b5fbac4"
     },
     "stable_anchor_id": "observed-dom:html:1/body:2/div[root]:3/div:1/div:1/div[sidebar-wrapper]:1/main[sidebar-inset]:2/div[content-area]:2/div:1/div:1/div:1/div:1/div:2/div:1/div:1/form:2/div[input-group]:1/div[input-group-addon]:2/div:1/div:2/button[base-ui-_r_48_]:4",
     "anchor_strategy": "adapter",
@@ -55,7 +107,7 @@
     "source_adapter": "observed-dom",
     "source_version": "1.0.0",
     "confidence": "pass",
-    "raw_source": "{\"kind\":\"observed-dom\",\"node\":{\"sourceId\":\"html:1/body:2/div[root]:3/div:1/div:1/div[sidebar-wrapper]:1/main[sidebar-inset]:2/div[content-area]:2/div:1/div:1/div:1/div:1/div:2/div:1/div:1/form:2/div[input-group]:1/div[input-group-addon]:2/div:1/div:2/button[base-ui-_r_48_]:4\",\"tagName\":\"button\",\"attributes\":{\"id\":\"base-ui-_r_48_\",\"aria-expanded\":\"false\",\"data-slot\":\"searchable-list-popover-trigger\"},\"rect\":{\"x\":419.102,\"y\":708.5,\"width\":158.828,\"height\":28}},\"computedStyle\":{\"display\":\"flex\",\"position\":\"static\",\"flexDirection\":\"row\",\"flexGrow\":\"0\",\"flexShrink\":\"1\",\"flexBasis\":\"auto\",\"flexWrap\":\"nowrap\",\"alignItems\":\"center\",\"alignSelf\":\"auto\",\"alignContent\":\"normal\",\"justifyContent\":\"normal\",\"gap\":\"4px\",\"padding\":\"0px 8px\",\"paddingTop\":\"0px\",\"paddingRight\":\"8px\",\"paddingBottom\":\"0px\",\"paddingLeft\":\"8px\",\"margin\":\"0px\",\"marginTop\":\"0px\",\"marginRight\":\"0px\",\"marginBottom\":\"0px\",\"marginLeft\":\"0px\",\"width\":\"158.828px\",\"height\":\"28px\",\"minWidth\":\"auto\",\"minHeight\":\"auto\",\"maxWidth\":\"none\",\"maxHeight\":\"none\",\"top\":\"auto\",\"right\":\"auto\",\"bottom\":\"auto\",\"left\":\"auto\",\"color\":\"rgb(175, 175, 175)\",\"backgroundColor\":\"rgba(0, 0, 0, 0)\",\"fontFamily\":\"-apple-system, \\\"system-ui\\\", \\\"Segoe UI\\\", system-ui, sans-serif\",\"fontSize\":\"13px\",\"fontWeight\":\"500\",\"lineHeight\":\"18px\",\"whiteSpace\":\"normal\",\"textAlign\":\"center\",\"letterSpacing\":\"normal\",\"border\":\"0px none rgb(46, 46, 46)\",\"borderRadius\":\"10.5px\",\"borderTopWidth\":\"0px\",\"borderRightWidth\":\"0px\",\"borderBottomWidth\":\"0px\",\"borderLeftWidth\":\"0px\",\"borderTopColor\":\"rgb(46, 46, 46)\",\"borderRightColor\":\"rgb(46, 46, 46)\",\"borderBottomColor\":\"rgb(46, 46, 46)\",\"borderLeftColor\":\"rgb(46, 46, 46)\",\"opacity\":\"1\",\"boxShadow\":\"rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px\",\"cursor\":\"default\",\"overflowX\":\"visible\",\"overflowY\":\"visible\"}}",
+    "raw_source": "{\"kind\":\"observed-dom\",\"node\":{\"sourceId\":\"html:1/body:2/div[root]:3/div:1/div:1/div[sidebar-wrapper]:1/main[sidebar-inset]:2/div[content-area]:2/div:1/div:1/div:1/div:1/div:2/div:1/div:1/form:2/div[input-group]:1/div[input-group-addon]:2/div:1/div:2/button[base-ui-_r_48_]:4\",\"tagName\":\"button\",\"attributes\":{\"id\":\"base-ui-_r_48_\",\"aria-expanded\":\"false\",\"data-slot\":\"searchable-list-popover-trigger\",\"data-pulp-action\":\"model.select\"},\"rect\":{\"x\":419.102,\"y\":708.5,\"width\":158.828,\"height\":28}},\"computedStyle\":{\"display\":\"flex\",\"position\":\"static\",\"flexDirection\":\"row\",\"flexGrow\":\"0\",\"flexShrink\":\"1\",\"flexBasis\":\"auto\",\"flexWrap\":\"nowrap\",\"alignItems\":\"center\",\"alignSelf\":\"auto\",\"alignContent\":\"normal\",\"justifyContent\":\"normal\",\"gap\":\"4px\",\"padding\":\"0px 8px\",\"paddingTop\":\"0px\",\"paddingRight\":\"8px\",\"paddingBottom\":\"0px\",\"paddingLeft\":\"8px\",\"margin\":\"0px\",\"marginTop\":\"0px\",\"marginRight\":\"0px\",\"marginBottom\":\"0px\",\"marginLeft\":\"0px\",\"width\":\"158.828px\",\"height\":\"28px\",\"minWidth\":\"auto\",\"minHeight\":\"auto\",\"maxWidth\":\"none\",\"maxHeight\":\"none\",\"top\":\"auto\",\"right\":\"auto\",\"bottom\":\"auto\",\"left\":\"auto\",\"color\":\"rgb(175, 175, 175)\",\"backgroundColor\":\"rgba(0, 0, 0, 0)\",\"backgroundImage\":\"none\",\"transform\":\"none\",\"filter\":\"none\",\"backdropFilter\":\"none\",\"fontFamily\":\"-apple-system, \\\"system-ui\\\", \\\"Segoe UI\\\", system-ui, sans-serif\",\"fontSize\":\"13px\",\"fontWeight\":\"500\",\"lineHeight\":\"18px\",\"whiteSpace\":\"normal\",\"textAlign\":\"center\",\"textOverflow\":\"clip\",\"overflowWrap\":\"normal\",\"wordWrap\":\"normal\",\"letterSpacing\":\"normal\",\"border\":\"0px none rgb(46, 46, 46)\",\"borderRadius\":\"10.5px\",\"borderTopLeftRadius\":\"10.5px\",\"borderTopRightRadius\":\"10.5px\",\"borderBottomRightRadius\":\"10.5px\",\"borderBottomLeftRadius\":\"10.5px\",\"borderTopWidth\":\"0px\",\"borderRightWidth\":\"0px\",\"borderBottomWidth\":\"0px\",\"borderLeftWidth\":\"0px\",\"borderTopColor\":\"rgb(46, 46, 46)\",\"borderRightColor\":\"rgb(46, 46, 46)\",\"borderBottomColor\":\"rgb(46, 46, 46)\",\"borderLeftColor\":\"rgb(46, 46, 46)\",\"opacity\":\"1\",\"boxShadow\":\"rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px\",\"cursor\":\"default\",\"overflowX\":\"visible\",\"overflowY\":\"visible\"}}",
     "children": [
       {
         "type": "image",
@@ -64,6 +116,9 @@
           "display": "flex",
           "direction": "column",
           "wrap": false,
+          "flexGrow": 0,
+          "flexShrink": 0,
+          "flexBasis": "auto",
           "align": "normal",
           "justify": "normal",
           "paddingTop": 0,
@@ -82,80 +137,48 @@
           "height": 16
         },
         "style": {
+          "backgroundColor": "#00000000",
           "color": "#afafafff",
+          "borderTopColor": "#2e2e2eff",
+          "borderRightColor": "#2e2e2eff",
+          "borderBottomColor": "#2e2e2eff",
+          "borderLeftColor": "#2e2e2eff",
+          "borderTopWidth": 0,
+          "borderRightWidth": 0,
+          "borderBottomWidth": 0,
+          "borderLeftWidth": 0,
           "borderRadius": 8.5,
-          "width": 16,
+          "borderTopLeftRadius": 8.5,
+          "borderTopRightRadius": 8.5,
+          "borderBottomRightRadius": 8.5,
+          "borderBottomLeftRadius": 8.5,
+          "cursor": "default",
+          "position": "static",
           "height": 16
         },
         "attributes": {
           "role": "img",
-          "source_revision": "55696de9b3bd6d4b3846f9fb2457eb4bfe9239ee5fb3e1275b2fafe0d17a72d0"
+          "source_revision": "cde304eb408da4379d598b2b3e7508fa7ebb19b72dfbbcf02b06f53a0b5fbac4"
         },
         "stable_anchor_id": "observed-dom:html:1/body:2/div[root]:3/div:1/div:1/div[sidebar-wrapper]:1/main[sidebar-inset]:2/div[content-area]:2/div:1/div:1/div:1/div:1/div:2/div:1/div:1/form:2/div[input-group]:1/div[input-group-addon]:2/div:1/div:2/button[base-ui-_r_48_]:4/img:1",
         "anchor_strategy": "adapter",
         "source_node_id": "html:1/body:2/div[root]:3/div:1/div:1/div[sidebar-wrapper]:1/main[sidebar-inset]:2/div[content-area]:2/div:1/div:1/div:1/div:1/div:2/div:1/div:1/form:2/div[input-group]:1/div[input-group-addon]:2/div:1/div:2/button[base-ui-_r_48_]:4/img:1",
         "source_adapter": "observed-dom",
         "source_version": "1.0.0",
-        "confidence": "pass",
-        "raw_source": "{\"kind\":\"observed-dom\",\"node\":{\"sourceId\":\"html:1/body:2/div[root]:3/div:1/div:1/div[sidebar-wrapper]:1/main[sidebar-inset]:2/div[content-area]:2/div:1/div:1/div:1/div:1/div:2/div:1/div:1/form:2/div[input-group]:1/div[input-group-addon]:2/div:1/div:2/button[base-ui-_r_48_]:4/img:1\",\"tagName\":\"img\",\"attributes\":{},\"rect\":{\"x\":427.102,\"y\":714.5,\"width\":16,\"height\":16}},\"computedStyle\":{\"display\":\"block\",\"position\":\"static\",\"flexDirection\":\"row\",\"flexGrow\":\"0\",\"flexShrink\":\"0\",\"flexBasis\":\"auto\",\"flexWrap\":\"nowrap\",\"alignItems\":\"normal\",\"alignSelf\":\"auto\",\"alignContent\":\"normal\",\"justifyContent\":\"normal\",\"gap\":\"normal\",\"padding\":\"0px\",\"paddingTop\":\"0px\",\"paddingRight\":\"0px\",\"paddingBottom\":\"0px\",\"paddingLeft\":\"0px\",\"margin\":\"0px\",\"marginTop\":\"0px\",\"marginRight\":\"0px\",\"marginBottom\":\"0px\",\"marginLeft\":\"0px\",\"width\":\"16px\",\"height\":\"16px\",\"minWidth\":\"auto\",\"minHeight\":\"auto\",\"maxWidth\":\"100%\",\"maxHeight\":\"none\",\"top\":\"auto\",\"right\":\"auto\",\"bottom\":\"auto\",\"left\":\"auto\",\"color\":\"rgb(175, 175, 175)\",\"backgroundColor\":\"rgba(0, 0, 0, 0)\",\"fontFamily\":\"-apple-system, \\\"system-ui\\\", \\\"Segoe UI\\\", system-ui, sans-serif\",\"fontSize\":\"13px\",\"fontWeight\":\"500\",\"lineHeight\":\"18px\",\"whiteSpace\":\"normal\",\"textAlign\":\"center\",\"letterSpacing\":\"normal\",\"border\":\"0px solid rgb(46, 46, 46)\",\"borderRadius\":\"8.5px\",\"borderTopWidth\":\"0px\",\"borderRightWidth\":\"0px\",\"borderBottomWidth\":\"0px\",\"borderLeftWidth\":\"0px\",\"borderTopColor\":\"rgb(46, 46, 46)\",\"borderRightColor\":\"rgb(46, 46, 46)\",\"borderBottomColor\":\"rgb(46, 46, 46)\",\"borderLeftColor\":\"rgb(46, 46, 46)\",\"opacity\":\"1\",\"boxShadow\":\"none\",\"cursor\":\"default\",\"overflowX\":\"clip\",\"overflowY\":\"clip\"}}",
-        "children": []
-      },
-      {
-        "type": "text",
-        "name": "html:1/body:2/div[root]:3/div:1/div:1/div[sidebar-wrapper]:1/main[sidebar-inset]:2/div[content-area]:2/div:1/div:1/div:1/div:1/div:2/div:1/div:1/form:2/div[input-group]:1/div[input-group-addon]:2/div:1/div:2/button[base-ui-_r_48_]:4/span:2",
-        "content": "Claude Opus 4.6",
-        "layout": {
-          "display": "flex",
-          "direction": "column",
-          "wrap": false,
-          "align": "normal",
-          "justify": "normal",
-          "paddingTop": 0,
-          "paddingRight": 0,
-          "paddingBottom": 0,
-          "paddingLeft": 0,
-          "marginTop": 0,
-          "marginRight": 0,
-          "marginBottom": 0,
-          "marginLeft": 0,
-          "overflowX": "visible",
-          "overflowY": "visible",
-          "widthMode": "fixed",
-          "width": 102.828,
-          "heightMode": "fixed",
-          "height": 18
-        },
-        "style": {
-          "color": "#afafafff",
-          "borderRadius": 0,
-          "fontFamily": "-apple-system, \"system-ui\", \"Segoe UI\", system-ui, sans-serif",
-          "fontSize": 13,
-          "fontWeight": 500,
-          "lineHeight": 18,
-          "textAlign": "center",
-          "whiteSpace": "normal",
-          "width": 102.828,
-          "height": 18
-        },
-        "attributes": {
-          "source_revision": "55696de9b3bd6d4b3846f9fb2457eb4bfe9239ee5fb3e1275b2fafe0d17a72d0"
-        },
-        "stable_anchor_id": "observed-dom:html:1/body:2/div[root]:3/div:1/div:1/div[sidebar-wrapper]:1/main[sidebar-inset]:2/div[content-area]:2/div:1/div:1/div:1/div:1/div:2/div:1/div:1/form:2/div[input-group]:1/div[input-group-addon]:2/div:1/div:2/button[base-ui-_r_48_]:4/span:2",
-        "anchor_strategy": "adapter",
-        "source_node_id": "html:1/body:2/div[root]:3/div:1/div:1/div[sidebar-wrapper]:1/main[sidebar-inset]:2/div[content-area]:2/div:1/div:1/div:1/div:1/div:2/div:1/div:1/form:2/div[input-group]:1/div[input-group-addon]:2/div:1/div:2/button[base-ui-_r_48_]:4/span:2",
-        "source_adapter": "observed-dom",
-        "source_version": "1.0.0",
-        "confidence": "pass",
-        "raw_source": "{\"kind\":\"observed-dom\",\"node\":{\"sourceId\":\"html:1/body:2/div[root]:3/div:1/div:1/div[sidebar-wrapper]:1/main[sidebar-inset]:2/div[content-area]:2/div:1/div:1/div:1/div:1/div:2/div:1/div:1/form:2/div[input-group]:1/div[input-group-addon]:2/div:1/div:2/button[base-ui-_r_48_]:4/span:2\",\"tagName\":\"span\",\"attributes\":{},\"rect\":{\"x\":447.102,\"y\":713.5,\"width\":102.828,\"height\":18}},\"computedStyle\":{\"display\":\"block\",\"position\":\"static\",\"flexDirection\":\"row\",\"flexGrow\":\"0\",\"flexShrink\":\"1\",\"flexBasis\":\"auto\",\"flexWrap\":\"nowrap\",\"alignItems\":\"normal\",\"alignSelf\":\"auto\",\"alignContent\":\"normal\",\"justifyContent\":\"normal\",\"gap\":\"normal\",\"padding\":\"0px\",\"paddingTop\":\"0px\",\"paddingRight\":\"0px\",\"paddingBottom\":\"0px\",\"paddingLeft\":\"0px\",\"margin\":\"0px\",\"marginTop\":\"0px\",\"marginRight\":\"0px\",\"marginBottom\":\"0px\",\"marginLeft\":\"0px\",\"width\":\"102.828px\",\"height\":\"18px\",\"minWidth\":\"auto\",\"minHeight\":\"auto\",\"maxWidth\":\"none\",\"maxHeight\":\"none\",\"top\":\"auto\",\"right\":\"auto\",\"bottom\":\"auto\",\"left\":\"auto\",\"color\":\"rgb(175, 175, 175)\",\"backgroundColor\":\"rgba(0, 0, 0, 0)\",\"fontFamily\":\"-apple-system, \\\"system-ui\\\", \\\"Segoe UI\\\", system-ui, sans-serif\",\"fontSize\":\"13px\",\"fontWeight\":\"500\",\"lineHeight\":\"18px\",\"whiteSpace\":\"normal\",\"textAlign\":\"center\",\"letterSpacing\":\"normal\",\"border\":\"0px solid rgb(46, 46, 46)\",\"borderRadius\":\"0px\",\"borderTopWidth\":\"0px\",\"borderRightWidth\":\"0px\",\"borderBottomWidth\":\"0px\",\"borderLeftWidth\":\"0px\",\"borderTopColor\":\"rgb(46, 46, 46)\",\"borderRightColor\":\"rgb(46, 46, 46)\",\"borderBottomColor\":\"rgb(46, 46, 46)\",\"borderLeftColor\":\"rgb(46, 46, 46)\",\"opacity\":\"1\",\"boxShadow\":\"none\",\"cursor\":\"default\",\"overflowX\":\"visible\",\"overflowY\":\"visible\"}}",
+        "confidence": "diverge",
+        "raw_source": "{\"kind\":\"observed-dom\",\"node\":{\"sourceId\":\"html:1/body:2/div[root]:3/div:1/div:1/div[sidebar-wrapper]:1/main[sidebar-inset]:2/div[content-area]:2/div:1/div:1/div:1/div:1/div:2/div:1/div:1/form:2/div[input-group]:1/div[input-group-addon]:2/div:1/div:2/button[base-ui-_r_48_]:4/img:1\",\"tagName\":\"img\",\"attributes\":{},\"rect\":{\"x\":427.102,\"y\":714.5,\"width\":16,\"height\":16}},\"computedStyle\":{\"display\":\"block\",\"position\":\"static\",\"flexDirection\":\"row\",\"flexGrow\":\"0\",\"flexShrink\":\"0\",\"flexBasis\":\"auto\",\"flexWrap\":\"nowrap\",\"alignItems\":\"normal\",\"alignSelf\":\"auto\",\"alignContent\":\"normal\",\"justifyContent\":\"normal\",\"gap\":\"normal\",\"padding\":\"0px\",\"paddingTop\":\"0px\",\"paddingRight\":\"0px\",\"paddingBottom\":\"0px\",\"paddingLeft\":\"0px\",\"margin\":\"0px\",\"marginTop\":\"0px\",\"marginRight\":\"0px\",\"marginBottom\":\"0px\",\"marginLeft\":\"0px\",\"width\":\"16px\",\"height\":\"16px\",\"minWidth\":\"auto\",\"minHeight\":\"auto\",\"maxWidth\":\"100%\",\"maxHeight\":\"none\",\"top\":\"auto\",\"right\":\"auto\",\"bottom\":\"auto\",\"left\":\"auto\",\"color\":\"rgb(175, 175, 175)\",\"backgroundColor\":\"rgba(0, 0, 0, 0)\",\"backgroundImage\":\"none\",\"transform\":\"none\",\"filter\":\"invert(1)\",\"backdropFilter\":\"none\",\"fontFamily\":\"-apple-system, \\\"system-ui\\\", \\\"Segoe UI\\\", system-ui, sans-serif\",\"fontSize\":\"13px\",\"fontWeight\":\"500\",\"lineHeight\":\"18px\",\"whiteSpace\":\"normal\",\"textAlign\":\"center\",\"textOverflow\":\"clip\",\"overflowWrap\":\"normal\",\"wordWrap\":\"normal\",\"letterSpacing\":\"normal\",\"border\":\"0px solid rgb(46, 46, 46)\",\"borderRadius\":\"8.5px\",\"borderTopLeftRadius\":\"8.5px\",\"borderTopRightRadius\":\"8.5px\",\"borderBottomRightRadius\":\"8.5px\",\"borderBottomLeftRadius\":\"8.5px\",\"borderTopWidth\":\"0px\",\"borderRightWidth\":\"0px\",\"borderBottomWidth\":\"0px\",\"borderLeftWidth\":\"0px\",\"borderTopColor\":\"rgb(46, 46, 46)\",\"borderRightColor\":\"rgb(46, 46, 46)\",\"borderBottomColor\":\"rgb(46, 46, 46)\",\"borderLeftColor\":\"rgb(46, 46, 46)\",\"opacity\":\"1\",\"boxShadow\":\"none\",\"cursor\":\"default\",\"overflowX\":\"clip\",\"overflowY\":\"clip\"}}",
         "children": []
       },
       {
         "type": "view",
         "name": "html:1/body:2/div[root]:3/div:1/div:1/div[sidebar-wrapper]:1/main[sidebar-inset]:2/div[content-area]:2/div:1/div:1/div:1/div:1/div:2/div:1/div:1/form:2/div[input-group]:1/div[input-group-addon]:2/div:1/div:2/button[base-ui-_r_48_]:4/svg:3",
         "layout": {
-          "display": "block",
-          "direction": "row",
+          "display": "flex",
+          "direction": "column",
           "wrap": false,
+          "flexGrow": 0,
+          "flexShrink": 0,
+          "flexBasis": "auto",
           "align": "normal",
           "justify": "normal",
           "paddingTop": 0,
@@ -174,13 +197,27 @@
           "height": 16
         },
         "style": {
+          "backgroundColor": "#00000000",
           "color": "#afafafff",
+          "borderTopColor": "#2e2e2eff",
+          "borderRightColor": "#2e2e2eff",
+          "borderBottomColor": "#2e2e2eff",
+          "borderLeftColor": "#2e2e2eff",
+          "borderTopWidth": 0,
+          "borderRightWidth": 0,
+          "borderBottomWidth": 0,
+          "borderLeftWidth": 0,
           "borderRadius": 0,
-          "width": 16,
+          "borderTopLeftRadius": 0,
+          "borderTopRightRadius": 0,
+          "borderBottomRightRadius": 0,
+          "borderBottomLeftRadius": 0,
+          "cursor": "default",
+          "position": "static",
           "height": 16
         },
         "attributes": {
-          "source_revision": "55696de9b3bd6d4b3846f9fb2457eb4bfe9239ee5fb3e1275b2fafe0d17a72d0"
+          "source_revision": "cde304eb408da4379d598b2b3e7508fa7ebb19b72dfbbcf02b06f53a0b5fbac4"
         },
         "stable_anchor_id": "observed-dom:html:1/body:2/div[root]:3/div:1/div:1/div[sidebar-wrapper]:1/main[sidebar-inset]:2/div[content-area]:2/div:1/div:1/div:1/div:1/div:2/div:1/div:1/form:2/div[input-group]:1/div[input-group-addon]:2/div:1/div:2/button[base-ui-_r_48_]:4/svg:3",
         "anchor_strategy": "adapter",
@@ -188,51 +225,10 @@
         "source_adapter": "observed-dom",
         "source_version": "1.0.0",
         "confidence": "pass",
-        "raw_source": "{\"kind\":\"observed-dom\",\"node\":{\"sourceId\":\"html:1/body:2/div[root]:3/div:1/div:1/div[sidebar-wrapper]:1/main[sidebar-inset]:2/div[content-area]:2/div:1/div:1/div:1/div:1/div:2/div:1/div:1/form:2/div[input-group]:1/div[input-group-addon]:2/div:1/div:2/button[base-ui-_r_48_]:4/svg:3\",\"tagName\":\"svg\",\"attributes\":{},\"rect\":{\"x\":553.93,\"y\":714.5,\"width\":16,\"height\":16}},\"computedStyle\":{\"display\":\"block\",\"position\":\"static\",\"flexDirection\":\"row\",\"flexGrow\":\"0\",\"flexShrink\":\"0\",\"flexBasis\":\"auto\",\"flexWrap\":\"nowrap\",\"alignItems\":\"normal\",\"alignSelf\":\"auto\",\"alignContent\":\"normal\",\"justifyContent\":\"normal\",\"gap\":\"normal\",\"padding\":\"0px\",\"paddingTop\":\"0px\",\"paddingRight\":\"0px\",\"paddingBottom\":\"0px\",\"paddingLeft\":\"0px\",\"margin\":\"0px\",\"marginTop\":\"0px\",\"marginRight\":\"0px\",\"marginBottom\":\"0px\",\"marginLeft\":\"0px\",\"width\":\"16px\",\"height\":\"16px\",\"minWidth\":\"auto\",\"minHeight\":\"auto\",\"maxWidth\":\"none\",\"maxHeight\":\"none\",\"top\":\"auto\",\"right\":\"auto\",\"bottom\":\"auto\",\"left\":\"auto\",\"color\":\"rgb(175, 175, 175)\",\"backgroundColor\":\"rgba(0, 0, 0, 0)\",\"fontFamily\":\"-apple-system, \\\"system-ui\\\", \\\"Segoe UI\\\", system-ui, sans-serif\",\"fontSize\":\"13px\",\"fontWeight\":\"500\",\"lineHeight\":\"18px\",\"whiteSpace\":\"normal\",\"textAlign\":\"center\",\"letterSpacing\":\"normal\",\"border\":\"0px solid rgb(46, 46, 46)\",\"borderRadius\":\"0px\",\"borderTopWidth\":\"0px\",\"borderRightWidth\":\"0px\",\"borderBottomWidth\":\"0px\",\"borderLeftWidth\":\"0px\",\"borderTopColor\":\"rgb(46, 46, 46)\",\"borderRightColor\":\"rgb(46, 46, 46)\",\"borderBottomColor\":\"rgb(46, 46, 46)\",\"borderLeftColor\":\"rgb(46, 46, 46)\",\"opacity\":\"1\",\"boxShadow\":\"none\",\"cursor\":\"default\",\"overflowX\":\"hidden\",\"overflowY\":\"hidden\"}}",
-        "children": [
-          {
-            "type": "view",
-            "name": "html:1/body:2/div[root]:3/div:1/div:1/div[sidebar-wrapper]:1/main[sidebar-inset]:2/div[content-area]:2/div:1/div:1/div:1/div:1/div:2/div:1/div:1/form:2/div[input-group]:1/div[input-group-addon]:2/div:1/div:2/button[base-ui-_r_48_]:4/svg:3/path:1",
-            "layout": {
-              "display": "inline",
-              "direction": "row",
-              "wrap": false,
-              "align": "normal",
-              "justify": "normal",
-              "paddingTop": 0,
-              "paddingRight": 0,
-              "paddingBottom": 0,
-              "paddingLeft": 0,
-              "marginTop": 0,
-              "marginRight": 0,
-              "marginBottom": 0,
-              "marginLeft": 0,
-              "overflowX": "visible",
-              "overflowY": "visible",
-              "widthMode": "fixed",
-              "width": 8,
-              "heightMode": "fixed",
-              "height": 4
-            },
-            "style": {
-              "color": "#afafafff",
-              "borderRadius": 0,
-              "width": 8,
-              "height": 4
-            },
-            "attributes": {
-              "source_revision": "55696de9b3bd6d4b3846f9fb2457eb4bfe9239ee5fb3e1275b2fafe0d17a72d0"
-            },
-            "stable_anchor_id": "observed-dom:html:1/body:2/div[root]:3/div:1/div:1/div[sidebar-wrapper]:1/main[sidebar-inset]:2/div[content-area]:2/div:1/div:1/div:1/div:1/div:2/div:1/div:1/form:2/div[input-group]:1/div[input-group-addon]:2/div:1/div:2/button[base-ui-_r_48_]:4/svg:3/path:1",
-            "anchor_strategy": "adapter",
-            "source_node_id": "html:1/body:2/div[root]:3/div:1/div:1/div[sidebar-wrapper]:1/main[sidebar-inset]:2/div[content-area]:2/div:1/div:1/div:1/div:1/div:2/div:1/div:1/form:2/div[input-group]:1/div[input-group-addon]:2/div:1/div:2/button[base-ui-_r_48_]:4/svg:3/path:1",
-            "source_adapter": "observed-dom",
-            "source_version": "1.0.0",
-            "confidence": "diverge",
-            "raw_source": "{\"kind\":\"observed-dom\",\"node\":{\"sourceId\":\"html:1/body:2/div[root]:3/div:1/div:1/div[sidebar-wrapper]:1/main[sidebar-inset]:2/div[content-area]:2/div:1/div:1/div:1/div:1/div:2/div:1/div:1/form:2/div[input-group]:1/div[input-group-addon]:2/div:1/div:2/button[base-ui-_r_48_]:4/svg:3/path:1\",\"tagName\":\"path\",\"attributes\":{},\"rect\":{\"x\":557.93,\"y\":720.5,\"width\":8,\"height\":4}},\"computedStyle\":{\"display\":\"inline\",\"position\":\"static\",\"flexDirection\":\"row\",\"flexGrow\":\"0\",\"flexShrink\":\"1\",\"flexBasis\":\"auto\",\"flexWrap\":\"nowrap\",\"alignItems\":\"normal\",\"alignSelf\":\"auto\",\"alignContent\":\"normal\",\"justifyContent\":\"normal\",\"gap\":\"normal\",\"padding\":\"0px\",\"paddingTop\":\"0px\",\"paddingRight\":\"0px\",\"paddingBottom\":\"0px\",\"paddingLeft\":\"0px\",\"margin\":\"0px\",\"marginTop\":\"0px\",\"marginRight\":\"0px\",\"marginBottom\":\"0px\",\"marginLeft\":\"0px\",\"width\":\"auto\",\"height\":\"auto\",\"minWidth\":\"0px\",\"minHeight\":\"0px\",\"maxWidth\":\"none\",\"maxHeight\":\"none\",\"top\":\"auto\",\"right\":\"auto\",\"bottom\":\"auto\",\"left\":\"auto\",\"color\":\"rgb(175, 175, 175)\",\"backgroundColor\":\"rgba(0, 0, 0, 0)\",\"fontFamily\":\"-apple-system, \\\"system-ui\\\", \\\"Segoe UI\\\", system-ui, sans-serif\",\"fontSize\":\"13px\",\"fontWeight\":\"500\",\"lineHeight\":\"18px\",\"whiteSpace\":\"normal\",\"textAlign\":\"center\",\"letterSpacing\":\"normal\",\"border\":\"0px solid rgb(46, 46, 46)\",\"borderRadius\":\"0px\",\"borderTopWidth\":\"0px\",\"borderRightWidth\":\"0px\",\"borderBottomWidth\":\"0px\",\"borderLeftWidth\":\"0px\",\"borderTopColor\":\"rgb(46, 46, 46)\",\"borderRightColor\":\"rgb(46, 46, 46)\",\"borderBottomColor\":\"rgb(46, 46, 46)\",\"borderLeftColor\":\"rgb(46, 46, 46)\",\"opacity\":\"1\",\"boxShadow\":\"none\",\"cursor\":\"default\",\"overflowX\":\"visible\",\"overflowY\":\"visible\"}}",
-            "children": []
-          }
-        ]
+        "raw_source": "{\"kind\":\"observed-dom\",\"node\":{\"sourceId\":\"html:1/body:2/div[root]:3/div:1/div:1/div[sidebar-wrapper]:1/main[sidebar-inset]:2/div[content-area]:2/div:1/div:1/div:1/div:1/div:2/div:1/div:1/form:2/div[input-group]:1/div[input-group-addon]:2/div:1/div:2/button[base-ui-_r_48_]:4/svg:3\",\"tagName\":\"svg\",\"attributes\":{},\"rect\":{\"x\":553.93,\"y\":714.5,\"width\":16,\"height\":16}},\"computedStyle\":{\"display\":\"block\",\"position\":\"static\",\"flexDirection\":\"row\",\"flexGrow\":\"0\",\"flexShrink\":\"0\",\"flexBasis\":\"auto\",\"flexWrap\":\"nowrap\",\"alignItems\":\"normal\",\"alignSelf\":\"auto\",\"alignContent\":\"normal\",\"justifyContent\":\"normal\",\"gap\":\"normal\",\"padding\":\"0px\",\"paddingTop\":\"0px\",\"paddingRight\":\"0px\",\"paddingBottom\":\"0px\",\"paddingLeft\":\"0px\",\"margin\":\"0px\",\"marginTop\":\"0px\",\"marginRight\":\"0px\",\"marginBottom\":\"0px\",\"marginLeft\":\"0px\",\"width\":\"16px\",\"height\":\"16px\",\"minWidth\":\"auto\",\"minHeight\":\"auto\",\"maxWidth\":\"none\",\"maxHeight\":\"none\",\"top\":\"auto\",\"right\":\"auto\",\"bottom\":\"auto\",\"left\":\"auto\",\"color\":\"rgb(175, 175, 175)\",\"backgroundColor\":\"rgba(0, 0, 0, 0)\",\"backgroundImage\":\"none\",\"transform\":\"none\",\"filter\":\"none\",\"backdropFilter\":\"none\",\"fontFamily\":\"-apple-system, \\\"system-ui\\\", \\\"Segoe UI\\\", system-ui, sans-serif\",\"fontSize\":\"13px\",\"fontWeight\":\"500\",\"lineHeight\":\"18px\",\"whiteSpace\":\"normal\",\"textAlign\":\"center\",\"textOverflow\":\"clip\",\"overflowWrap\":\"normal\",\"wordWrap\":\"normal\",\"letterSpacing\":\"normal\",\"border\":\"0px solid rgb(46, 46, 46)\",\"borderRadius\":\"0px\",\"borderTopLeftRadius\":\"0px\",\"borderTopRightRadius\":\"0px\",\"borderBottomRightRadius\":\"0px\",\"borderBottomLeftRadius\":\"0px\",\"borderTopWidth\":\"0px\",\"borderRightWidth\":\"0px\",\"borderBottomWidth\":\"0px\",\"borderLeftWidth\":\"0px\",\"borderTopColor\":\"rgb(46, 46, 46)\",\"borderRightColor\":\"rgb(46, 46, 46)\",\"borderBottomColor\":\"rgb(46, 46, 46)\",\"borderLeftColor\":\"rgb(46, 46, 46)\",\"opacity\":\"1\",\"boxShadow\":\"none\",\"cursor\":\"default\",\"overflowX\":\"hidden\",\"overflowY\":\"hidden\"}}",
+        "render_mode": "faithful_svg",
+        "svg_asset_id": "inline-svg-2d59e16324476dc6",
+        "children": []
       }
     ]
   },
@@ -243,7 +239,15 @@
   },
   "assetManifest": {
     "version": 1,
-    "assets": []
+    "assets": [
+      {
+        "asset_id": "inline-svg-2d59e16324476dc6",
+        "original_uri": "data:image/svg+xml,%3Csvg%20aria-hidden%3D%22true%22%20class%3D%22lucide%20lucide-chevron-down%20size-4%20shrink-0%20text-muted-foreground%20pointer-events-none%22%20fill%3D%22none%22%20height%3D%2224%22%20stroke%3D%22rgb(175%2C%20175%2C%20175)%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%20stroke-width%3D%222%22%20viewBox%3D%220%200%2024%2024%22%20width%3D%2224%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Cpath%20d%3D%22m6%209%206%206%206-6%22%2F%3E%3C%2Fsvg%3E",
+        "content_hash": "2d59e16324476dc6748a9551a36c7f2686fb8c6c7d8e4b184467f47ca995a126",
+        "mime": "image/svg+xml",
+        "diagnostics": []
+      }
+    ]
   },
   "fontFamilyAssets": [
     {

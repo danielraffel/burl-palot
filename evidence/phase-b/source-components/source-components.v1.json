@@ -5,7 +5,7 @@
     "png": "../../visual-parity/baselines/01-shell/source.png",
     "semantics": "../../visual-parity/baselines/01-shell/source-semantics.json",
     "pngSha256": "d363d609c214a7a4e7b34a58e0eea9b87a4c588d3fcd457c5a9aaf64c12cc7b0",
-    "semanticsSha256": "55696de9b3bd6d4b3846f9fb2457eb4bfe9239ee5fb3e1275b2fafe0d17a72d0",
+    "semanticsSha256": "cde304eb408da4379d598b2b3e7508fa7ebb19b72dfbbcf02b06f53a0b5fbac4",
     "pixelWidth": 2400,
     "pixelHeight": 1600,
     "devicePixelRatio": 2

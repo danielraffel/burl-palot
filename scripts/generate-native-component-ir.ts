@@ -4,7 +4,14 @@ import { mkdir, readFile, rm, writeFile } from "node:fs/promises"
 import { dirname, resolve } from "node:path"
 import { pathToFileURL } from "node:url"
 
-type Node = { sourceId: string; children: Node[] }
+type Node = {
+	sourceId: string
+	tagName: string
+	outerHtml: string
+	attributes: Record<string, string>
+	computedStyle: Record<string, string>
+	children: Node[]
+}
 const flatten = (node: Node): Node[] => [node, ...node.children.flatMap(flatten)]
 
 const [manifestArg, sourceEvidenceArg, outputArg, burlArg] = process.argv.slice(2)
@@ -19,6 +26,13 @@ const output = resolve(outputArg)
 const burl = resolve(burlArg)
 const manifest = JSON.parse(await readFile(manifestPath, "utf8"))
 const sourceEvidence = JSON.parse(await readFile(evidencePath, "utf8"))
+const applicationBindings = JSON.parse(
+	await readFile(
+		resolve("apps/desktop-burl/contracts/main-chat.application-bindings.v1.json"),
+		"utf8",
+	),
+)
+const applicationActions = applicationBindings.actions.map((action: { id: string }) => action.id)
 const semanticsPath = resolve(dirname(manifestPath), manifest.source.semantics)
 const semantics = JSON.parse(await readFile(semanticsPath, "utf8"))
 const nodes = new Map(flatten(semantics.observedDom).map((node) => [node.sourceId, node]))
@@ -30,14 +44,28 @@ await rm(output, { recursive: true, force: true })
 await mkdir(resolve(output, "ir"), { recursive: true })
 const records = []
 for (const source of sourceEvidence.references) {
-	const node = nodes.get(source.sourceId)
+	const capturedNode = nodes.get(source.sourceId)
+	const node = capturedNode ? JSON.parse(JSON.stringify(capturedNode)) : undefined
 	if (!node) throw new Error(`${source.id}: source node is absent`)
-	const lowered = importer.lowerObservedDom(node, "2026-07-11T00:00:00.000Z")
+	if (source.interaction.applicationBindingRequired && source.interaction.actionIdentity)
+		node.attributes["data-pulp-action"] = source.interaction.actionIdentity
+	const lowered = importer.lowerObservedDom(node, "2026-07-11T00:00:00.000Z", {
+		applicationActions,
+		selectedStateAttributes: ["data-active"],
+	})
+	const inlineSvgCaptures = flatten(node)
+		.filter((child: any) => child.tagName === "svg" && child.outerHtml)
+		.map((child: any) => ({
+			sourceId: child.sourceId,
+			outerHTML: child.outerHtml,
+			computedColor: child.computedStyle.color,
+		}))
 	const ir = importer.toNativeDesignIrV1(lowered, {
 		sourceFile: semanticsPath,
 		importedAt: "2026-07-11T00:00:00.000Z",
 		sourceRevision: manifest.source.semanticsSha256,
 		platformFonts: importer.macosSkiaPlatformFontContract,
+		inlineSvgCaptures,
 	})
 	const irFile = `ir/${source.id}.json`
 	await writeFile(resolve(output, irFile), `${JSON.stringify(ir, null, 2)}\n`)

@@ -49,7 +49,8 @@ export const semanticExpression = `(() => {
     const rect = element.getBoundingClientRect();
     const attrs = {};
     for (const name of selectedAttributes) if (element.hasAttribute(name)) attrs[name] = element.getAttribute(name);
-    const children = Array.from(element.children).filter(visible).map(observed);
+    const isSvg = element.tagName.toLowerCase() === "svg";
+    const children = isSvg ? [] : Array.from(element.children).filter(visible).map(observed);
     const pseudo = (name) => {
       const value = getComputedStyle(element, name);
       if (!value || value.content === "none" || value.content === "normal" || value.content === "") return null;
@@ -59,8 +60,13 @@ export const semanticExpression = `(() => {
         fontSize: value.fontSize, fontWeight: value.fontWeight, lineHeight: value.lineHeight
       }, geometry: { source: "host-rect", x: rect.x, y: rect.y, width: rect.width, height: rect.height } };
     };
-    const content = Array.from(element.childNodes).flatMap(node => {
-      if (node.nodeType === Node.TEXT_NODE) return node.textContent ? [{kind:"text", text:node.textContent}] : [];
+    const content = isSvg ? [] : Array.from(element.childNodes).flatMap(node => {
+      if (node.nodeType === Node.TEXT_NODE) {
+        if (!node.textContent) return [];
+        const range = document.createRange(); range.selectNodeContents(node);
+        const textRect = range.getBoundingClientRect();
+        return [{kind:"text", text:node.textContent, rect:{x:textRect.x,y:textRect.y,width:textRect.width,height:textRect.height}}];
+      }
       if (node.nodeType !== Node.ELEMENT_NODE || !visible(node)) return [];
       const id = sourceId(node);
       return [{kind:"child", sourceId:id}];
@@ -69,11 +75,11 @@ export const semanticExpression = `(() => {
     return {
       sourceId: sourceId(element),
       tagName: element.tagName.toLowerCase(),
-      text: children.length === 0 ? (element.textContent || "").trim().replace(/\\s+/g, " ") : "",
+      ...(content.length === 0 ? {text:(element.textContent || "").trim().replace(/\\s+/g, " ")} : {}),
       outerHtml: element.tagName.toLowerCase() === "svg" ? element.outerHTML : "",
       imageSrc: element.tagName.toLowerCase() === "img" ? element.getAttribute("src") || "" : "",
       attributes: attrs,
-      content,
+      ...(content.length ? {content} : {}),
       pseudoElements: [before, after].filter(Boolean),
       orderedPaintContent: [...(before ? [before] : []), ...content, ...(after ? [after] : [])],
       computedStyle: {

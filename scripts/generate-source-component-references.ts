@@ -8,7 +8,8 @@ import sharp from "sharp"
 interface SemanticNode {
 	sourceId: string
 	tagName: string
-	text: string
+	text?: string
+	content?: Array<{ kind: string; text?: string; sourceId?: string }>
 	outerHtml: string
 	attributes: Record<string, string>
 	computedStyle: Record<string, string>
@@ -67,12 +68,29 @@ const canonical = (value: unknown): string => {
 
 const flatten = (root: SemanticNode): SemanticNode[] => [root, ...root.children.flatMap(flatten)]
 const descendantText = (node: SemanticNode): string =>
-	[node.text, ...node.children.map(descendantText)].join(" ").trim().replace(/\s+/g, " ")
+	node.tagName === "svg"
+		? ""
+		: [
+				node.text ?? "",
+				...(node.content ?? [])
+					.filter((item) => item.kind === "text")
+					.map((item) => item.text ?? ""),
+				...node.children.map(descendantText),
+			]
+				.join(" ")
+				.trim()
+				.replace(/\s+/g, " ")
 
 export const resolveSelector = (nodes: SemanticNode[], selector: Selector): SemanticNode => {
 	const matches = nodes.filter((node) => {
 		if (selector.tagName !== undefined && node.tagName !== selector.tagName) return false
-		if (selector.text !== undefined && node.text !== selector.text) return false
+		const directText = [
+			node.text ?? "",
+			...(node.content ?? []).filter((item) => item.kind === "text").map((item) => item.text ?? ""),
+		]
+			.join("")
+			.trim()
+		if (selector.text !== undefined && directText !== selector.text) return false
 		if (selector.descendantText !== undefined && descendantText(node) !== selector.descendantText)
 			return false
 		return Object.entries(selector.attributes ?? {}).every(

@@ -3,11 +3,11 @@
   "scenario": "01-shell",
   "manifest": {
     "file": "source-components.v1.json",
-    "sha256": "710761d78ec0d46eeb62e14acf052f81501eba41ce13f0e44cfa4e6c2645b38c"
+    "sha256": "df9368091475e8e6436e8d086f18bacd07d62b793dbadb552759e1f279359934"
   },
   "source": {
     "pngSha256": "d363d609c214a7a4e7b34a58e0eea9b87a4c588d3fcd457c5a9aaf64c12cc7b0",
-    "semanticsSha256": "55696de9b3bd6d4b3846f9fb2457eb4bfe9239ee5fb3e1275b2fafe0d17a72d0",
+    "semanticsSha256": "cde304eb408da4379d598b2b3e7508fa7ebb19b72dfbbcf02b06f53a0b5fbac4",
     "pixelWidth": 2400,
     "pixelHeight": 1600,
     "devicePixelRatio": 2
@@ -27,7 +27,6 @@
       "sourceId": "html:1/body:2/div[root]:3/div:1/div:1/div[sidebar-wrapper]:1/div[sidebar]:1/div[sidebar-container]:1/div[sidebar-inner]:1/div[sidebar-content]:2/div[sidebar-group]:2/div[sidebar-group-content]:2/ul[sidebar-menu]:1/li[context-menu-trigger]:1/button[base-ui-_r_p_]:1",
       "semantic": {
         "tagName": "button",
-        "text": "",
         "descendantText": "Add dark mode toggle to settings now",
         "attributes": {
           "id": "base-ui-_r_p_",
@@ -85,7 +84,7 @@
         "file": "sidebar-session-selected.png",
         "sha256": "22cea3c31ae6ee42adadf226228ffd712cab2a6f1068ebda89803277f89d42f0"
       },
-      "evidenceSha256": "463b9e9e3d35d266b2d1784eec6d9cc584e4d1989cbf6e7814189428f8fdb1da"
+      "evidenceSha256": "dd63bc4635f6e73fe91e7530b6e658e686aebaf2da5d10cc0b67a15d7e532a92"
     },
     {
       "id": "sidebar-new-session-rest",
@@ -100,7 +99,6 @@
       "sourceId": "html:1/body:2/div[root]:3/div:1/div:1/div[sidebar-wrapper]:1/div[sidebar]:1/div[sidebar-container]:1/div[sidebar-inner]:1/div[sidebar-content]:2/div[sidebar-group]:1/div[sidebar-group-content]:1/ul[sidebar-menu]:1/li[sidebar-menu-item]:1/button[base-ui-_r_1_]:1",
       "semantic": {
         "tagName": "button",
-        "text": "",
         "descendantText": "New Session",
         "attributes": {
           "id": "base-ui-_r_1_",
@@ -157,7 +155,7 @@
         "file": "sidebar-new-session-rest.png",
         "sha256": "6d2a82534cc3194e735374408913fef12a8751ab0e286b5a18baf0141631e780"
       },
-      "evidenceSha256": "898a14c88cf4f03561fd749c8fa02f1fd499f7534a379973935d8a1e490691d3"
+      "evidenceSha256": "f6c543a381c9e721ba446cdebbe1be2bf9eed67ba985c80387766d67292850c4"
     },
     {
       "id": "composer-stop-primary",
@@ -172,8 +170,7 @@
       "sourceId": "html:1/body:2/div[root]:3/div:1/div:1/div[sidebar-wrapper]:1/main[sidebar-inset]:2/div[content-area]:2/div:1/div:1/div:1/div:1/div:2/div:1/div:1/form:2/div[input-group]:1/div[input-group-addon]:2/button[button]:2",
       "semantic": {
         "tagName": "button",
-        "text": "",
-        "descendantText": "",
+        "descendantText": "7m 58s",
         "attributes": {
           "aria-label": "Stop",
           "data-slot": "button"
@@ -229,7 +226,7 @@
         "file": "composer-stop-primary.png",
         "sha256": "e6d6029650b32133b174ad9368b5f60c11f35d5d443e44d6306b50c0fd65b1ef"
       },
-      "evidenceSha256": "edbba8efe992c691c9b2a1cbd7345b6efaed8a0d85c5eda38895ea5e7b685267"
+      "evidenceSha256": "970bf9193ed7f1fd53df7ba918f2dd7d1968910235b63ce40799be3769c984d3"
     },
     {
       "id": "composer-rest",
@@ -316,7 +313,6 @@
       "sourceId": "html:1/body:2/div[root]:3/div:1/div:1/div[sidebar-wrapper]:1/main[sidebar-inset]:2/div[content-area]:2/div:1/div:1/div:1/div:1/div:2/div:1/div:1/form:2/div[input-group]:1/div[input-group-addon]:2/div:1/div:2/button[base-ui-_r_43_]:1",
       "semantic": {
         "tagName": "button",
-        "text": "",
         "descendantText": "Build",
         "attributes": {
           "id": "base-ui-_r_43_",
@@ -375,7 +371,7 @@
         "file": "composer-build-select-rest.png",
         "sha256": "2c245c686146090787dee306414aff1fa61e0016b6118ec81f6143f0c1de662e"
       },
-      "evidenceSha256": "080deb914e074edbbd2ff21fb548ce861c15c37d86b51feb05f26907cd1982ae"
+      "evidenceSha256": "465186ad6d1d9136f9a5744b17c342daaad2790b6efbd21a251fbe3720410fd7"
     },
     {
       "id": "composer-model-select-rest",
@@ -391,7 +387,6 @@
       "sourceId": "html:1/body:2/div[root]:3/div:1/div:1/div[sidebar-wrapper]:1/main[sidebar-inset]:2/div[content-area]:2/div:1/div:1/div:1/div:1/div:2/div:1/div:1/form:2/div[input-group]:1/div[input-group-addon]:2/div:1/div:2/button[base-ui-_r_48_]:4",
       "semantic": {
         "tagName": "button",
-        "text": "",
         "descendantText": "Claude Opus 4.6",
         "attributes": {
           "id": "base-ui-_r_48_",
@@ -449,7 +444,7 @@
         "file": "composer-model-select-rest.png",
         "sha256": "47fa0f63889cbdbf6166d6061fa0f400bf96cda2013bb794a63a682bf9c5f603"
       },
-      "evidenceSha256": "942a343ebe49d4c42d5383769e82c57feb6a33f1e20a4cbd5113367e5ee01187"
+      "evidenceSha256": "73940b65a6332241071227cbce6a78e64c066d4ddaafada9e4b143d6e2875755"
     },
     {
       "id": "transcript-inline-code",
@@ -461,7 +456,6 @@
       "sourceId": "html:1/body:2/div[root]:3/div:1/div:1/div[sidebar-wrapper]:1/main[sidebar-inset]:2/div[content-area]:2/div:1/div:1/div:1/div:1/div:1/div:1/div:1/div:1/div:1/div:1/div:2/div:1/div:2/div:1/div:1/div:1/ol:2/li:1/p:1/span:1/code:1",
       "semantic": {
         "tagName": "code",
-        "text": "src/lib/theme.ts",
         "descendantText": "src/lib/theme.ts",
         "attributes": {}
       },
@@ -515,7 +509,7 @@
         "file": "transcript-inline-code.png",
         "sha256": "de12f4e42bdc305a824b5f6acde48e66f759e069c4663c4ae60184798f1b2514"
       },
-      "evidenceSha256": "3b086d8cabfaafb74ff5d8c8545612a493e66e901310e105d2c8f4b2efba0962"
+      "evidenceSha256": "3085334ad963c7ef09c0074d2f28561fe87b2392f394aeb27788c936454164e5"
     },
     {
       "id": "transcript-copy-icon-rest",
@@ -530,7 +524,6 @@
       "sourceId": "html:1/body:2/div[root]:3/div:1/div:1/div[sidebar-wrapper]:1/main[sidebar-inset]:2/div[content-area]:2/div:1/div:1/div:1/div:1/div:1/div:1/div:1/div:1/div:1/div:1/div:4/button[base-ui-_r_3r_]:2",
       "semantic": {
         "tagName": "button",
-        "text": "",
         "descendantText": "Copy response",
         "attributes": {
           "id": "base-ui-_r_3r_",
@@ -587,7 +580,7 @@
         "file": "transcript-copy-icon-rest.png",
         "sha256": "3d47063c9ec85936734e2326f4f86714c9e3d9204495918b262e4a256c2f3fc3"
       },
-      "evidenceSha256": "a6c42de4fb661039e4ffffee097b9c2f058bf85565c43bed6c2dde455cf3ad65"
+      "evidenceSha256": "82695178d2d0cff35e59378191cc222d112fbc76ab4c7071a59f0e88defca5e4"
     }
   ]
 }

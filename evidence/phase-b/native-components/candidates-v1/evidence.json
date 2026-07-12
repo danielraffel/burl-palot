@@ -34,25 +34,33 @@
         "backend": "skia",
         "capturePhase": "pre-interaction",
         "dpr": 2,
-        "interactionSupported": false,
+        "interactionSupported": true,
         "irDiagnostics": [],
         "irErrors": false,
         "logicalHeight": 32,
         "logicalWidth": 264,
-        "materializeDiagnostics": [],
+        "materializeDiagnostics": [
+          {
+            "code": "native-widget-asymmetric-border-unsupported",
+            "message": "promoted widget cannot represent per-side borders or per-corner radii without loss",
+            "path": "$",
+            "property": "style.border",
+            "severity": "warning"
+          }
+        ],
         "materializeErrors": false,
-        "postActionPass": true,
+        "postActionPass": false,
         "rendered": true,
         "visualStatePreconditionPass": true
       },
       "metrics": {
-        "mae": 0.2953127901255199,
-        "ssim": 0.28719667764379275,
-        "edgeDiff": 0.044093252199465915
+        "mae": 0.2161523321449792,
+        "ssim": 0.30354712821273383,
+        "edgeDiff": 0.046324288082510996
       },
       "status": "GAP",
       "blockers": [
-        "post-action semantic unsupported",
+        "post-action semantic failed",
         "ApplicationBindingManifest dispatch not proven: session.select",
         "visual gap: missing-nested-svg",
         "visual gap: text-truncation-mismatch",
@@ -100,25 +108,35 @@
         "irErrors": false,
         "logicalHeight": 32,
         "logicalWidth": 264,
-        "materializeDiagnostics": [],
+        "materializeDiagnostics": [
+          {
+            "code": "native-widget-asymmetric-border-unsupported",
+            "message": "promoted widget cannot represent per-side borders or per-corner radii without loss",
+            "path": "$",
+            "property": "style.border",
+            "severity": "warning"
+          }
+        ],
         "materializeErrors": false,
         "postActionPass": true,
         "rendered": true,
         "visualStatePreconditionPass": true
       },
       "metrics": {
-        "mae": 0.3535366591001931,
-        "ssim": 0.3930301704525178,
-        "edgeDiff": 0.011140261886748923
+        "mae": 0.2902233212176916,
+        "ssim": 0.014776358121674618,
+        "edgeDiff": 0.016877236605796042
       },
       "status": "GAP",
       "blockers": [
         "ApplicationBindingManifest dispatch not proven: session.create",
-        "visual gap: missing-nested-svg",
+        "visual gap: nested-svg-render-mismatch",
+        "visual gap: missing-nested-text",
         "visual gap: wrong-shell-paint"
       ],
       "visualGapCodes": [
-        "missing-nested-svg",
+        "nested-svg-render-mismatch",
+        "missing-nested-text",
         "wrong-shell-paint"
       ]
     },
@@ -158,27 +176,47 @@
         "irErrors": false,
         "logicalHeight": 24,
         "logicalWidth": 81,
-        "materializeDiagnostics": [],
+        "materializeDiagnostics": [
+          {
+            "code": "native-unsupported-property",
+            "message": "boxShadow is not represented by the native resolver yet",
+            "path": "$",
+            "property": "boxShadow",
+            "severity": "warning"
+          },
+          {
+            "code": "native-widget-asymmetric-border-unsupported",
+            "message": "promoted widget cannot represent per-side borders or per-corner radii without loss",
+            "path": "$",
+            "property": "style.border",
+            "severity": "warning"
+          },
+          {
+            "code": "native-widget-box-shadow-unsupported",
+            "message": "promoted widget cannot represent ordered box shadows without loss",
+            "path": "$",
+            "property": "style.boxShadow",
+            "severity": "warning"
+          }
+        ],
         "materializeErrors": false,
         "postActionPass": true,
         "rendered": true,
         "visualStatePreconditionPass": true
       },
       "metrics": {
-        "mae": 0.4660705640280804,
-        "ssim": -0.04291747320325344,
-        "edgeDiff": 0.07187297045737862
+        "mae": 0.1398639857177439,
+        "ssim": 0.35998190446408856,
+        "edgeDiff": 0.09862693713933285
       },
       "status": "GAP",
       "blockers": [
         "ApplicationBindingManifest dispatch not proven: stream.stop",
-        "visual gap: missing-nested-svg",
-        "visual gap: missing-nested-text",
+        "visual gap: nested-svg-render-mismatch",
         "visual gap: wrong-shell-paint"
       ],
       "visualGapCodes": [
-        "missing-nested-svg",
-        "missing-nested-text",
+        "nested-svg-render-mismatch",
         "wrong-shell-paint"
       ]
     },
@@ -218,16 +256,38 @@
         "irErrors": false,
         "logicalHeight": 64,
         "logicalWidth": 873,
-        "materializeDiagnostics": [],
+        "materializeDiagnostics": [
+          {
+            "code": "native-unsupported-property",
+            "message": "boxShadow is not represented by the native resolver yet",
+            "path": "$",
+            "property": "boxShadow",
+            "severity": "warning"
+          },
+          {
+            "code": "native-widget-asymmetric-border-unsupported",
+            "message": "promoted widget cannot represent per-side borders or per-corner radii without loss",
+            "path": "$",
+            "property": "style.border",
+            "severity": "warning"
+          },
+          {
+            "code": "native-widget-box-shadow-unsupported",
+            "message": "promoted widget cannot represent ordered box shadows without loss",
+            "path": "$",
+            "property": "style.boxShadow",
+            "severity": "warning"
+          }
+        ],
         "materializeErrors": false,
         "postActionPass": true,
         "rendered": true,
         "visualStatePreconditionPass": true
       },
       "metrics": {
-        "mae": 0.06019244968892483,
-        "ssim": 0.20459034591731787,
-        "edgeDiff": 0.0038513351497677325
+        "mae": 0.1374038769287784,
+        "ssim": 0.21335711014052375,
+        "edgeDiff": 0.0027728935598876608
       },
       "status": "GAP",
       "blockers": [
@@ -271,23 +331,62 @@
         "capturePhase": "pre-interaction",
         "dpr": 2,
         "interactionSupported": true,
-        "irDiagnostics": [],
-        "irErrors": false,
+        "irDiagnostics": [
+          {
+            "code": "inline-svg-unsafe-content",
+            "message": "text is allowed only in title and desc",
+            "path": "html:1/body:2/div[root]:3/div:1/div:1/div[sidebar-wrapper]:1/main[sidebar-inset]:2/div[content-area]:2/div:1/div:1/div:1/div:1/div:2/div:1/div:1/form:2/div[input-group]:1/div[input-group-addon]:2/div:1/div:2/button[base-ui-_r_43_]:1/svg:2",
+            "property": "#text",
+            "severity": "error"
+          }
+        ],
+        "irErrors": true,
         "logicalHeight": 28,
         "logicalWidth": 68,
-        "materializeDiagnostics": [],
-        "materializeErrors": false,
+        "materializeDiagnostics": [
+          {
+            "code": "native-unsupported-property",
+            "message": "boxShadow is not represented by the native resolver yet",
+            "path": "$",
+            "property": "boxShadow",
+            "severity": "warning"
+          },
+          {
+            "code": "inline-svg-unsafe-content",
+            "message": "text is allowed only in title and desc",
+            "path": "html:1/body:2/div[root]:3/div:1/div:1/div[sidebar-wrapper]:1/main[sidebar-inset]:2/div[content-area]:2/div:1/div:1/div:1/div:1/div:2/div:1/div:1/form:2/div[input-group]:1/div[input-group-addon]:2/div:1/div:2/button[base-ui-_r_43_]:1/svg:2",
+            "property": "#text",
+            "severity": "error"
+          },
+          {
+            "code": "native-widget-asymmetric-border-unsupported",
+            "message": "promoted widget cannot represent per-side borders or per-corner radii without loss",
+            "path": "$",
+            "property": "style.border",
+            "severity": "warning"
+          },
+          {
+            "code": "native-widget-box-shadow-unsupported",
+            "message": "promoted widget cannot represent ordered box shadows without loss",
+            "path": "$",
+            "property": "style.boxShadow",
+            "severity": "warning"
+          }
+        ],
+        "materializeErrors": true,
         "postActionPass": true,
         "rendered": true,
         "visualStatePreconditionPass": true
       },
       "metrics": {
-        "mae": 0.1397489366116817,
-        "ssim": 0.36669756907698337,
-        "edgeDiff": 0.023869032165376638
+        "mae": 0.08059809108828717,
+        "ssim": 0.4412923315710546,
+        "edgeDiff": 0.028842554659855725
       },
       "status": "GAP",
       "blockers": [
+        "import inline-svg-unsafe-content: html:1/body:2/div[root]:3/div:1/div:1/div[sidebar-wrapper]:1/main[sidebar-inset]:2/div[content-area]:2/div:1/div:1/div:1/div:1/div:2/div:1/div:1/form:2/div[input-group]:1/div[input-group-addon]:2/div:1/div:2/button[base-ui-_r_43_]:1/svg:2",
+        "materialization inline-svg-unsafe-content: html:1/body:2/div[root]:3/div:1/div:1/div[sidebar-wrapper]:1/main[sidebar-inset]:2/div[content-area]:2/div:1/div:1/div:1/div:1/div:2/div:1/div:1/form:2/div[input-group]:1/div[input-group-addon]:2/div:1/div:2/button[base-ui-_r_43_]:1/svg:2",
         "ApplicationBindingManifest dispatch not proven: agent.select",
         "visual gap: missing-nested-svg",
         "visual gap: wrong-shell-paint"
@@ -335,6 +434,27 @@
         "logicalWidth": 159,
         "materializeDiagnostics": [
           {
+            "code": "native-unsupported-property",
+            "message": "boxShadow is not represented by the native resolver yet",
+            "path": "$",
+            "property": "boxShadow",
+            "severity": "warning"
+          },
+          {
+            "code": "native-widget-asymmetric-border-unsupported",
+            "message": "promoted widget cannot represent per-side borders or per-corner radii without loss",
+            "path": "$",
+            "property": "style.border",
+            "severity": "warning"
+          },
+          {
+            "code": "native-widget-box-shadow-unsupported",
+            "message": "promoted widget cannot represent ordered box shadows without loss",
+            "path": "$",
+            "property": "style.boxShadow",
+            "severity": "warning"
+          },
+          {
             "code": "native-materialize-unresolved-asset",
             "message": "image node has no resolved asset id",
             "path": "$/children[0]",
@@ -348,18 +468,20 @@
         "visualStatePreconditionPass": true
       },
       "metrics": {
-        "mae": 0.15418230185155823,
-        "ssim": 0.13569616610259208,
-        "edgeDiff": 0.03596767990913093
+        "mae": 0.08691720398851364,
+        "ssim": -0.0006519644206380954,
+        "edgeDiff": 0.03133379667898176
       },
       "status": "GAP",
       "blockers": [
         "ApplicationBindingManifest dispatch not proven: model.select",
-        "visual gap: missing-nested-svg",
+        "visual gap: nested-svg-render-mismatch",
+        "visual gap: missing-nested-text",
         "visual gap: wrong-shell-paint"
       ],
       "visualGapCodes": [
-        "missing-nested-svg",
+        "nested-svg-render-mismatch",
+        "missing-nested-text",
         "wrong-shell-paint"
       ]
     },
@@ -406,9 +528,9 @@
         "visualStatePreconditionPass": true
       },
       "metrics": {
-        "mae": 0.16151317946005952,
-        "ssim": 0.11968786097626416,
-        "edgeDiff": 0.07733010794488664
+        "mae": 0.1615139078887369,
+        "ssim": 0.11968444485919351,
+        "edgeDiff": 0.07733037641552275
       },
       "status": "GAP",
       "blockers": [
@@ -456,27 +578,33 @@
         "irErrors": false,
         "logicalHeight": 32,
         "logicalWidth": 32,
-        "materializeDiagnostics": [],
+        "materializeDiagnostics": [
+          {
+            "code": "native-widget-asymmetric-border-unsupported",
+            "message": "promoted widget cannot represent per-side borders or per-corner radii without loss",
+            "path": "$",
+            "property": "style.border",
+            "severity": "warning"
+          }
+        ],
         "materializeErrors": false,
         "postActionPass": true,
         "rendered": true,
         "visualStatePreconditionPass": true
       },
       "metrics": {
-        "mae": 0.2288631663602941,
-        "ssim": 0.00864388163611009,
-        "edgeDiff": 0.040566063462422225
+        "mae": 0.09804113051470588,
+        "ssim": 0.07338279161590792,
+        "edgeDiff": 0.020615443214322807
       },
       "status": "GAP",
       "blockers": [
         "ApplicationBindingManifest dispatch not proven: transcript.copy",
-        "visual gap: missing-nested-svg",
-        "visual gap: text-truncation-mismatch",
+        "visual gap: nested-svg-render-mismatch",
         "visual gap: wrong-shell-paint"
       ],
       "visualGapCodes": [
-        "missing-nested-svg",
-        "text-truncation-mismatch",
+        "nested-svg-render-mismatch",
         "wrong-shell-paint"
       ]
     }
