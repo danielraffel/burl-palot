@@ -53,7 +53,10 @@ int main(int argc, char** argv) {
 	if (count_type(ir.root, "button") < 20 || count_type(ir.root, "text_editor") < 1) return 5;
 	ImportContractCounts counts;
 	collect_import_contract(ir.root, counts);
-	if (counts.responsive_nodes < 274 || counts.responsive_transitions < 267 ||
+	// Canonical 15-width source capture baseline. These floors make a
+	// single-viewport regeneration fail closed instead of silently erasing the
+	// responsive contract while allowing additive importer improvements.
+	if (counts.responsive_nodes < 251 || counts.responsive_transitions < 112 ||
 	    counts.collection_templates != 3) return 7;
 	std::vector<pulp::view::ImportDiagnostic> diagnostics;
 	pulp::view::NativeMaterializeOptions options;

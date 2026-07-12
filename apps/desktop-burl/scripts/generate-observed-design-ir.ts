@@ -43,8 +43,12 @@ const removeFormattingWhitespace = (node: any) => {
 		return
 	}
 	node.children = (node.children ?? []).filter((child: any) => !["script", "style", "template", "link", "meta"].includes(child.tagName?.toLowerCase()))
-	if (Array.isArray(node.content)) node.content = node.content.filter((item: any) => item.kind !== "text" || item.text?.trim())
-	if (Array.isArray(node.orderedPaintContent)) node.orderedPaintContent = node.orderedPaintContent.filter((item: any) => item.kind !== "text" || item.text?.trim())
+	const retainedChildren = new Set(node.children.map((child: any) => child.sourceId))
+	const retainContent = (item: any) => item.kind === "child"
+		? retainedChildren.has(item.sourceId)
+		: item.kind !== "text" || item.text?.trim()
+	if (Array.isArray(node.content)) node.content = node.content.filter(retainContent)
+	if (Array.isArray(node.orderedPaintContent)) node.orderedPaintContent = node.orderedPaintContent.filter(retainContent)
 	if ((node.content?.length || node.orderedPaintContent?.length) && node.text !== undefined) delete node.text
 	for (const child of node.children ?? []) removeFormattingWhitespace(child)
 }
@@ -61,13 +65,20 @@ if (responsiveSemantics.length) {
 		removeFormattingWhitespace(root)
 		return { viewport: capture.policy.viewport, root }
 	}))
-	const reconciliation = importer.reconcileResponsiveConstraints(captures)
+	const alignment = importer.alignStableObservedDomIdentitiesWithReport(captures)
+	const alignedCaptures = alignment.captures
+	if (alignment.report.refusedCollisions !== alignment.report.collisions)
+		throw new Error(`responsive identity collision accounting mismatch: ${JSON.stringify(alignment.report)}`)
+	if (alignment.report.aligned !== 0)
+		throw new Error(`canonical captures must not require identity remapping: ${JSON.stringify(alignment.report)}`)
+	console.error(`[responsive-identity] ${JSON.stringify(alignment.report)}`)
+	const reconciliation = importer.reconcileResponsiveConstraints(alignedCaptures)
 	for (const [sourceId, constraint] of reconciliation.constraints) {
 		const transitions = [...constraint.visibility, ...constraint.layoutVariants]
 		if (transitions.some((variant: any) => variant.transitionToNext?.confidence === "bounded"))
 			reconciliation.constraints.delete(sourceId)
 	}
-	const loweredCaptures = captures.map((capture) => importer.lowerObservedDom(capture.root, importedAt))
+	const loweredCaptures = alignedCaptures.map((capture: any) => importer.lowerObservedDom(capture.root, importedAt))
 	lowered = importer.unionResponsiveTrees(loweredCaptures, reconciliation)
 }
 const inlineSvgCaptures: Array<{ sourceId: string; outerHTML: string; computedColor?: string }> = []
