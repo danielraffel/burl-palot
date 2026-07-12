@@ -300,10 +300,9 @@
         {
           "value": "none",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed backgroundImage=none -> TypedPaint.backgroundLayers=[] -> NativeDesignIR.style.backgroundLayers=[] -> explicit IR empty layers -> materializer clear -> View no background gradient",
+          "evidenceIds": ["semantic:observed-dom-background-image-none"]
         }
       ]
     },
