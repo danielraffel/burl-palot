@@ -1,0 +1,14 @@
+{
+  "schemaVersion": 1,
+  "cdpEndpoint": "http://127.0.0.1:9222",
+  "pageUrlPattern": "__palotCapture=1.*ses-mock-darkmode-001",
+  "output": "/tmp/palot-canonical-height/600x420",
+  "viewport": { "width": 600, "height": 420, "deviceScaleFactor": 2 },
+  "clock": "2026-07-11T20:00:00.000Z",
+  "settleFrames": 2,
+  "timeoutMs": 120000,
+  "reload": true,
+  "includeMatchedStyles": false,
+  "clearStorage": false,
+  "security": { "mode": "recording-fake" }
+}

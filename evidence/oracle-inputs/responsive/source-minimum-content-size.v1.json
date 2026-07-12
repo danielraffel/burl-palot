@@ -2,6 +2,7 @@
   "schema": "burl-source-minimum-content-size-v1",
   "sourceRevision": "fd63a75dad3d0e8555ba22a47e720d285889fbf0",
   "captureMethod": "CDP Emulation.setDeviceMetricsOverride plus getBoundingClientRect",
+  "canonicalCaptureSet": "canonical-height-captures.v1.json",
   "criterion": "main and composer follow the app bar; composer, textarea, and every visible composer control remain inside the main content and viewport without a clipping ancestor",
   "minimum": {
     "width": 280,

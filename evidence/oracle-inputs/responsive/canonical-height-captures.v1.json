@@ -1,0 +1,67 @@
+{
+  "schema": "palot-canonical-responsive-capture-set-v1",
+  "sourceRevision": "fd63a75dad3d0e8555ba22a47e720d285889fbf0",
+  "captureFrameworkRevision": "3202d6c8096de502bf265aa7ae157b6043bbc8fa",
+  "captureMethod": "CDP DOMSnapshot captured first; ordinary provenance joined by snapshot backendNodeId; before/after pseudo-elements retain explicit generated provenance",
+  "deviceScaleFactor": 2,
+  "storagePolicy": "Large source JSON and PNG artifacts remain external under /tmp; this tracked ledger pins paths, hashes, manifests, and reproduction commands.",
+  "fixture": {
+    "route": "#/project/palot-proj-a1b2c3d/session/ses-mock-darkmode-001?mock=1",
+    "clock": "2026-07-11T20:00:00.000Z"
+  },
+  "reproduction": {
+    "sourceLaunch": "cd /Users/danielraffel/Code/palot && bun run dev:desktop",
+    "fixtureBootstrap": "cd /Users/danielraffel/Code/burl-palot-wt-semantic-restart && bun scripts/capture-source-cdp.ts --scenario 01-shell --output /tmp/palot-canonical-seed",
+    "captureCommandTemplate": "cd /Users/danielraffel/Code/burl-wt-native-migration-feasibility && bun tools/import-design/runtime-capture/capture-source-cdp.ts --manifest /Users/danielraffel/Code/burl-palot-wt-semantic-restart/evidence/oracle-inputs/responsive/capture-manifests/<manifest>"
+  },
+  "captures": [
+    {
+      "id": "source-280x248",
+      "viewport": { "width": 280, "height": 248, "deviceScaleFactor": 2 },
+      "manifest": "capture-manifests/source-280x248.snapshot-first.json",
+      "artifactDirectory": "/tmp/palot-canonical-height/280x248",
+      "canonicalRootId": "dom/html-shape-3b68501b:0",
+      "treeNodes": 536,
+      "generatedPseudoElements": 13,
+      "evidenceSha256": "dc6cb5739d1422bb8d4620857fac6eaf3f19a0284a0d2862df69936df0e5a4f7",
+      "screenshotSha256": "718b755acef65285252298428da4440abf0ed833bea9636aee2bb895889d5c82",
+      "metadataSha256": "6bc4e4defec615e268f5228b449a0edf15503c4c03f53a14d7b631999aab1ef7"
+    },
+    {
+      "id": "source-280x420",
+      "viewport": { "width": 280, "height": 420, "deviceScaleFactor": 2 },
+      "manifest": "capture-manifests/source-280x420.snapshot-first.json",
+      "artifactDirectory": "/tmp/palot-canonical-height/280x420",
+      "canonicalRootId": "dom/html-shape-3b68501b:0",
+      "treeNodes": 536,
+      "generatedPseudoElements": 13,
+      "evidenceSha256": "8a195a67f884ec7140f504d017963eac7ca4494487f79eb3a0c3b33be4454a0f",
+      "screenshotSha256": "f144c616f35ccdb4ca619c078163e2fed40678bc3412b4bde75940f9bdf7a952",
+      "metadataSha256": "e33290a7f0d09bf9567c2b9d0e9a8dc2a3eef0103fe284ca8b904a6b022569c1"
+    },
+    {
+      "id": "source-600x420",
+      "viewport": { "width": 600, "height": 420, "deviceScaleFactor": 2 },
+      "manifest": "capture-manifests/source-600x420.snapshot-first.json",
+      "artifactDirectory": "/tmp/palot-canonical-height/600x420",
+      "canonicalRootId": "dom/html-shape-3b68501b:0",
+      "treeNodes": 536,
+      "generatedPseudoElements": 13,
+      "evidenceSha256": "ab5378f3de2d07ee84be9034ffbcdc1277ac886e605b627a9b0df4aae79c97c1",
+      "screenshotSha256": "5a99cc0eeac9a63428149bd1413514d18b852e27bffdcdd05fc2b70910d00459",
+      "metadataSha256": "ef48c19b7808585fd390edec93561dc9246b9f81492d9d38b8f9fa770e34e81f"
+    },
+    {
+      "id": "source-1200x420",
+      "viewport": { "width": 1200, "height": 420, "deviceScaleFactor": 2 },
+      "manifest": "capture-manifests/source-1200x420.snapshot-first.json",
+      "artifactDirectory": "/tmp/palot-canonical-height/1200x420",
+      "canonicalRootId": "dom/html-shape-3b68501b:0",
+      "treeNodes": 722,
+      "generatedPseudoElements": 13,
+      "evidenceSha256": "b45db59e71ab95804615a8019515bff83f1e96bc101b4fa9cce2d9b11d743b98",
+      "screenshotSha256": "146885a74c76a675ae00a44f2f95360413e1b1e1bcc812fbb3f0ad66dcb4fe7c",
+      "metadataSha256": "3deb249596a6f41d4b99395ceaf18db8b645f94a1c4d09a74b1a02c25777a179"
+    }
+  ]
+}

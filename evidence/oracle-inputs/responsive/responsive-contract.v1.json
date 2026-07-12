@@ -3,6 +3,7 @@
   "sourceRevision": "fd63a75dad3d0e8555ba22a47e720d285889fbf0",
   "height": 800,
   "deviceScaleFactor": 2,
+  "canonicalHeightCaptureSet": "canonical-height-captures.v1.json",
   "capturePolicy": {
     "crop": "forbidden",
     "resizeOrNormalization": "forbidden",
