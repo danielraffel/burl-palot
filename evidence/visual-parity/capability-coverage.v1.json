@@ -435,7 +435,7 @@
           "value": "0px",
           "observation": "observed",
           "decision": "lowered",
-          "route": "computed borderBottomLeftRadius=0px -> TypedPaint corner slot -> NativeDesignIR corner style -> generic View explicit zero corner -> Skia square corner; asymmetric promoted widgets fail closed",
+          "route": "computed per-corner radius=0px -> TypedPaint corner slot -> NativeDesignIR corner style -> generic View explicit zero corner -> Skia square corner; asymmetric promoted widgets fail closed",
           "evidenceIds": ["semantic:observed-dom-border-corner-zero"]
         },
         {
