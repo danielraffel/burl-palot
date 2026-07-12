@@ -66,15 +66,19 @@
     "version": 1,
     "assets": []
   },
-  "fontFamilyAssets": [],
-  "diagnostics": [
+  "fontFamilyAssets": [
     {
-      "severity": "error",
-      "kind": "unresolved_asset",
-      "code": "font-face-unresolved",
-      "path": "html:1/body:2/div[root]:3/div:1/div:1/div[sidebar-wrapper]:1/main[sidebar-inset]:2/div[content-area]:2/div:1/div:1/div:1/div:1/div:2/div:1/div:1/form:2/div[input-group]:1/textarea[input-group-control]:1",
-      "property": "fontFamily",
-      "message": "no bundled face exactly matches -apple-system, system-ui, Segoe UI, system-ui, sans-serif 400 normal; parity mode forbids substitution"
+      "family": "-apple-system",
+      "weight": 400,
+      "style": "normal",
+      "platform_face": ".AppleSystemUIFont",
+      "provenance": {
+        "platform": "macos",
+        "os": "macos",
+        "runtime": "coretext-skia",
+        "cssAlias": "-apple-system"
+      }
     }
-  ]
+  ],
+  "diagnostics": []
 }

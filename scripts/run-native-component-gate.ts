@@ -4,13 +4,17 @@ import { mkdir, readFile, writeFile } from "node:fs/promises"
 import { dirname, resolve } from "node:path"
 import sharp from "sharp"
 
-const [manifestArg, rendererArg, outputArg] = process.argv.slice(2)
-if (!manifestArg || !rendererArg || !outputArg)
-	throw new Error("usage: run-native-component-gate.ts <manifest> <renderer> <output>")
+const [manifestArg, rendererArg, outputArg, inventoryArg] = process.argv.slice(2)
+if (!manifestArg || !rendererArg || !outputArg || !inventoryArg)
+	throw new Error(
+		"usage: run-native-component-gate.ts <manifest> <renderer> <output> <visual-gap-inventory>",
+	)
 const manifestPath = resolve(manifestArg)
 const renderer = resolve(rendererArg)
 const output = resolve(outputArg)
 const manifest = JSON.parse(await readFile(manifestPath, "utf8"))
+const inventory = JSON.parse(await readFile(resolve(inventoryArg), "utf8"))
+if (inventory.schemaVersion !== 1) throw new Error("unsupported visual gap inventory")
 await mkdir(output, { recursive: true })
 
 const raw = async (path: string) => sharp(path).ensureAlpha().raw().toBuffer()
@@ -96,6 +100,8 @@ for (const record of manifest.records) {
 	const execution = JSON.parse(process.stdout.toString())
 	if (!Array.isArray(execution.irDiagnostics) || !Array.isArray(execution.materializeDiagnostics))
 		throw new Error(`${record.id}: renderer omitted exact diagnostic arrays`)
+	if (execution.capturePhase !== "pre-interaction" || !execution.visualStatePreconditionPass)
+		throw new Error(`${record.id}: visual-state precondition failed`)
 	await sharp(wide)
 		.extract({ left: 0, top: 0, width: record.pixel.width, height: record.pixel.height })
 		.png()
@@ -127,6 +133,9 @@ for (const record of manifest.records) {
 		blockers.push(
 			`ApplicationBindingManifest dispatch not proven: ${record.interaction.actionIdentity}`,
 		)
+	const visualGapCodes = inventory.components[record.id]
+	if (!Array.isArray(visualGapCodes)) throw new Error(`${record.id}: missing visual gap inventory`)
+	for (const code of visualGapCodes) blockers.push(`visual gap: ${code}`)
 	results.push({
 		...record,
 		candidate,
@@ -135,6 +144,7 @@ for (const record of manifest.records) {
 		metrics: { mae: metrics.mae, ssim: metrics.ssim, edgeDiff: metrics.edgeDiff },
 		status: blockers.length ? "GAP" : "PASS",
 		blockers,
+		visualGapCodes,
 	})
 }
 await writeFile(

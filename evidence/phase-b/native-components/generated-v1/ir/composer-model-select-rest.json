@@ -245,23 +245,19 @@
     "version": 1,
     "assets": []
   },
-  "fontFamilyAssets": [],
-  "diagnostics": [
+  "fontFamilyAssets": [
     {
-      "severity": "error",
-      "kind": "unresolved_asset",
-      "code": "font-face-unresolved",
-      "path": "html:1/body:2/div[root]:3/div:1/div:1/div[sidebar-wrapper]:1/main[sidebar-inset]:2/div[content-area]:2/div:1/div:1/div:1/div:1/div:2/div:1/div:1/form:2/div[input-group]:1/div[input-group-addon]:2/div:1/div:2/button[base-ui-_r_48_]:4",
-      "property": "fontFamily",
-      "message": "no bundled face exactly matches -apple-system, system-ui, Segoe UI, system-ui, sans-serif 500 normal; parity mode forbids substitution"
-    },
-    {
-      "severity": "error",
-      "kind": "unresolved_asset",
-      "code": "font-face-unresolved",
-      "path": "html:1/body:2/div[root]:3/div:1/div:1/div[sidebar-wrapper]:1/main[sidebar-inset]:2/div[content-area]:2/div:1/div:1/div:1/div:1/div:2/div:1/div:1/form:2/div[input-group]:1/div[input-group-addon]:2/div:1/div:2/button[base-ui-_r_48_]:4/span:2",
-      "property": "fontFamily",
-      "message": "no bundled face exactly matches -apple-system, system-ui, Segoe UI, system-ui, sans-serif 500 normal; parity mode forbids substitution"
+      "family": "-apple-system",
+      "weight": 500,
+      "style": "normal",
+      "platform_face": ".AppleSystemUIFont",
+      "provenance": {
+        "platform": "macos",
+        "os": "macos",
+        "runtime": "coretext-skia",
+        "cssAlias": "-apple-system"
+      }
     }
-  ]
+  ],
+  "diagnostics": []
 }

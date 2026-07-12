@@ -1,0 +1,14 @@
+{
+  "schemaVersion": 1,
+  "reviewMethod": "side-by-side visual inspection plus source-observed-DOM/native-DesignIR structure inventory",
+  "components": {
+    "sidebar-session-selected": ["missing-nested-svg", "text-truncation-mismatch", "wrong-shell-paint"],
+    "sidebar-new-session-rest": ["missing-nested-svg", "wrong-shell-paint"],
+    "composer-stop-primary": ["missing-nested-svg", "missing-nested-text", "wrong-shell-paint"],
+    "composer-rest": ["missing-placeholder-text", "wrong-shell-paint"],
+    "composer-build-select-rest": ["missing-nested-svg", "wrong-shell-paint"],
+    "composer-model-select-rest": ["missing-nested-svg", "wrong-shell-paint"],
+    "transcript-inline-code": ["text-layout-mismatch", "wrong-shell-paint"],
+    "transcript-copy-icon-rest": ["missing-nested-svg", "text-truncation-mismatch", "wrong-shell-paint"]
+  }
+}

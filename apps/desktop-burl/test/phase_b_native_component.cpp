@@ -66,9 +66,19 @@ int main(int argc, char** argv) {
     view->set_bounds({0, 0, static_cast<float>(logical_width), static_cast<float>(logical_height)});
     view->layout_children();
 
+    const std::string interaction = argv[6];
+    bool visual_state_precondition_pass = true;
+    if (interaction == "text-input") {
+        auto* editor = find_view<TextEditor>(*view);
+        visual_state_precondition_pass = editor != nullptr && editor->text().empty();
+    }
+    // The parity image is always the declared source state. Interaction is
+    // exercised only after capture so semantic mutation cannot contaminate it.
+    const bool rendered = render_to_file(*view, logical_width, logical_height, argv[2], dpr,
+                                         ScreenshotBackend::skia);
+
     bool interaction_supported = true;
     bool post_action_pass = true;
-    const std::string interaction = argv[6];
     if (interaction == "activate") {
         if (auto* button = find_view<TextButton>(*view)) {
             int count = 0;
@@ -92,8 +102,6 @@ int main(int argc, char** argv) {
         } else interaction_supported = false;
     }
 
-    const bool rendered = render_to_file(*view, logical_width, logical_height, argv[2], dpr,
-                                         ScreenshotBackend::skia);
     const bool ir_errors = std::any_of(ir.diagnostics.begin(), ir.diagnostics.end(), [](const auto& d) {
         return d.severity == ImportDiagnosticSeverity::error;
     });
@@ -104,6 +112,8 @@ int main(int argc, char** argv) {
         {"irDiagnostics", diagnostics_json(ir.diagnostics)},
         {"materializeErrors", materialize_errors},
         {"materializeDiagnostics", diagnostics_json(materialize_diagnostics)},
+        {"capturePhase", "pre-interaction"},
+        {"visualStatePreconditionPass", visual_state_precondition_pass},
         {"interactionSupported", interaction_supported},
         {"postActionPass", post_action_pass}, {"logicalWidth", logical_width},
         {"logicalHeight", logical_height}, {"backend", "skia"}, {"dpr", dpr}};

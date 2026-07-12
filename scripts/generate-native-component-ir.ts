@@ -37,6 +37,7 @@ for (const source of sourceEvidence.references) {
 		sourceFile: semanticsPath,
 		importedAt: "2026-07-11T00:00:00.000Z",
 		sourceRevision: manifest.source.semanticsSha256,
+		platformFonts: importer.macosSkiaPlatformFontContract,
 	})
 	const irFile = `ir/${source.id}.json`
 	await writeFile(resolve(output, irFile), `${JSON.stringify(ir, null, 2)}\n`)

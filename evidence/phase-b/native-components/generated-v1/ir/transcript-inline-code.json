@@ -67,15 +67,19 @@
     "version": 1,
     "assets": []
   },
-  "fontFamilyAssets": [],
-  "diagnostics": [
+  "fontFamilyAssets": [
     {
-      "severity": "error",
-      "kind": "unresolved_asset",
-      "code": "font-face-unresolved",
-      "path": "html:1/body:2/div[root]:3/div:1/div:1/div[sidebar-wrapper]:1/main[sidebar-inset]:2/div[content-area]:2/div:1/div:1/div:1/div:1/div:1/div:1/div:1/div:1/div:1/div:1/div:2/div:1/div:2/div:1/div:1/div:1/ol:2/li:1/p:1/span:1/code:1",
-      "property": "fontFamily",
-      "message": "no bundled face exactly matches ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, Liberation Mono, monospace 600 normal; parity mode forbids substitution"
+      "family": "ui-monospace",
+      "weight": 600,
+      "style": "normal",
+      "platform_face": ".AppleSystemUIFontMonospaced",
+      "provenance": {
+        "platform": "macos",
+        "os": "macos",
+        "runtime": "coretext-skia",
+        "cssAlias": "ui-monospace"
+      }
     }
-  ]
+  ],
+  "diagnostics": []
 }
