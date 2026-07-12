@@ -217,6 +217,8 @@ if(BURL_PALOT_ENABLE_FRAMEWORK)
 		target_include_directories(palot-source-aware-slice-test PRIVATE src)
 		target_link_libraries(palot-source-aware-slice-test PRIVATE
 			nlohmann_json::nlohmann_json pulp-view pulp-state)
+		add_executable(palot-authored-theme-test test/authored_theme_test.cpp)
+		target_link_libraries(palot-authored-theme-test PRIVATE pulp-view)
 		if(BURL_SOURCE_DIR AND EXISTS
 			"${BURL_SOURCE_DIR}/core/view/include/pulp/view/application_binding_manifest.hpp")
 			add_executable(palot-application-binding-manifest-test
@@ -234,6 +236,15 @@ if(BURL_PALOT_ENABLE_FRAMEWORK)
 		add_test(NAME palot-source-aware-slice
 			COMMAND palot-source-aware-slice-test
 				"${CMAKE_CURRENT_SOURCE_DIR}/test/fixtures/source-aware-stream.json")
+		add_test(NAME palot-authored-theme
+			COMMAND palot-authored-theme-test
+				"${CMAKE_CURRENT_SOURCE_DIR}/resources/tokens/palot-authored-theme.sidecar.json")
+		find_program(PALOT_PYTHON3_EXECUTABLE python3 REQUIRED)
+		add_test(NAME palot-authored-theme-generation
+			COMMAND "${PALOT_PYTHON3_EXECUTABLE}"
+				"${CMAKE_CURRENT_SOURCE_DIR}/scripts/generate-authored-theme-sidecar.py"
+				--repo "${CMAKE_CURRENT_SOURCE_DIR}/../.."
+				--check "${CMAKE_CURRENT_SOURCE_DIR}/resources/tokens/palot-authored-theme.sidecar.json")
 		add_test(NAME palot-accessibility-dump
 			COMMAND $<TARGET_FILE:burl-palot> --accessibility-dump)
 		set_tests_properties(palot-accessibility-dump PROPERTIES TIMEOUT 5)
