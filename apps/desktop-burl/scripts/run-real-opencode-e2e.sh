@@ -12,6 +12,14 @@ test -x /opt/homebrew/bin/opencode
 test -d "$project_dir"
 sidecar="$build_dir/Palot.app/Contents/Resources/bin/palot-opencode-sidecar"
 test -x "$sidecar"
-PALOT_OPENCODE_VERSION=$(/opt/homebrew/bin/opencode --version) \
-PALOT_SIDECAR_SHA256=$(shasum -a 256 "$sidecar" | awk '{print $1}') \
-  "$build_dir/palot-real-opencode-e2e" "$sidecar" "$project_dir" "$evidence"
+export PALOT_OPENCODE_VERSION=$(/opt/homebrew/bin/opencode --version)
+export PALOT_SIDECAR_SHA256=$(shasum -a 256 "$sidecar" | awk '{print $1}')
+python3 - "$build_dir/palot-real-opencode-e2e" "$sidecar" "$project_dir" "$evidence" <<'PY'
+import subprocess, sys
+try:
+    result = subprocess.run(sys.argv[1:], timeout=420)
+except subprocess.TimeoutExpired:
+    print("real OpenCode E2E exceeded 420 seconds", file=sys.stderr)
+    raise SystemExit(124)
+raise SystemExit(result.returncode)
+PY

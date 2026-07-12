@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "kind": "real-opencode-stream-proof",
-  "executedAt": "2026-07-12T10:53:12Z",
+  "executedAt": "2026-07-12T11:00:00Z",
   "project": "<redacted-existing-directory>",
   "provenance": {
     "opencodePath": "/opt/homebrew/bin/opencode",
@@ -10,19 +10,19 @@
     "transport": "bundled-sidecar-stdio-v1"
   },
   "initial": {
-    "marker": "BURL_REAL_STREAM_1783853592789473",
+    "marker": "BURL_REAL_STREAM_1783853969200454",
     "markerObserved": true,
     "sessionCreated": true,
     "streamDeltaCount": 11
   },
   "cancellation": {
     "streamStarted": true,
-    "streamDeltaCountBeforeCancel": 1,
+    "streamDeltaCountBeforeCancel": 2,
     "cancelled": true
   },
   "retry": {
     "attemptedWithFailedRequestId": "2-prompt",
-    "marker": "BURL_REAL_RETRY_1783853592789473",
+    "marker": "BURL_REAL_RETRY_1783853969200454",
     "markerObserved": true,
     "streamDeltaCount": 11,
     "completed": true

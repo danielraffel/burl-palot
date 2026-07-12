@@ -78,6 +78,7 @@ int main(int argc, char** argv) {
 	    first->count("text") < 2 || first->text().find(marker) == std::string::npos) {
 		std::cerr << "initial real prompt failed: " << first->error() << '\n'; return 3;
 	}
+	std::cerr << "phase initial pass deltas=" << first->count("text") << '\n';
 	const auto session = first->session();
 	if (session.empty()) return 4;
 
@@ -87,6 +88,7 @@ int main(int argc, char** argv) {
 	    !cancelled->wait_for("text", std::chrono::seconds(120))) return 5;
 	process.cancel();
 	if (!cancelled->wait_for("error", std::chrono::seconds(20))) return 6;
+	std::cerr << "phase cancellation pass deltas=" << cancelled->count("text") << '\n';
 	std::this_thread::sleep_for(std::chrono::seconds(3));
 
 	auto retry = std::make_shared<RealSink>();
@@ -96,6 +98,7 @@ int main(int argc, char** argv) {
 	    retry->count("text") == 0 || retry->text().find(retry_marker) == std::string::npos) {
 		std::cerr << "real retry failed: " << retry->error() << '\n'; return 7;
 	}
+	std::cerr << "phase retry pass deltas=" << retry->count("text") << '\n';
 
 	nlohmann::json evidence = {
 		{"schemaVersion", 1}, {"kind", "real-opencode-stream-proof"},
