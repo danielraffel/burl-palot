@@ -4004,10 +4004,9 @@
     {
       "name": "accessibility",
       "observation": "observed",
-      "decision": "unsupported",
-      "route": null,
-      "evidenceIds": [],
-      "reason": "No exact behavior route plus resolving evidence ID is published; screenshot scoring is gated."
+      "decision": "lowered",
+      "route": "captured DOM implicit or explicit ARIA role plus aria-label/title and aria-pressed/checked/disabled/hidden -> observed DOM semantic metadata -> NativeDesignIR accessibility attributes -> native materializer role/name/state projection -> View accessibility slots -> cross-platform accessibility tree and platform bridge; no WebView",
+      "evidenceIds": ["behavior:observed-accessibility"]
     },
     {
       "name": "active/pressed",
