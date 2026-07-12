@@ -22,7 +22,7 @@
           {
             "family": ".AppleSystemUIFont / SFNS",
             "path": "oracle-inputs/candidate-font-receipt.json",
-            "sha256": "4e8447f6067aa2876a496db18b2c3733762de42bf343532acf57eae56394ac1e"
+            "sha256": "7cc3b57e361ae0d5e9a6ca861d7254bd37a74263c617f85b5ed11aab90b9ec64"
           }
         ],
         "height": 1600,
@@ -39,7 +39,7 @@
           {
             "family": ".AppleSystemUIFont / SFNS",
             "path": "oracle-inputs/candidate-font-receipt.json",
-            "sha256": "4e8447f6067aa2876a496db18b2c3733762de42bf343532acf57eae56394ac1e"
+            "sha256": "7cc3b57e361ae0d5e9a6ca861d7254bd37a74263c617f85b5ed11aab90b9ec64"
           }
         ],
         "height": 1600,
@@ -95,7 +95,7 @@
       {
         "family": ".AppleSystemUIFont / SFNS",
         "path": "oracle-inputs/candidate-font-receipt.json",
-        "sha256": "4e8447f6067aa2876a496db18b2c3733762de42bf343532acf57eae56394ac1e"
+        "sha256": "7cc3b57e361ae0d5e9a6ca861d7254bd37a74263c617f85b5ed11aab90b9ec64"
       }
     ],
     "height": 1600,

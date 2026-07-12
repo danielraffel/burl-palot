@@ -32,7 +32,7 @@ struct PalotComposer final : pulp::view::TextEditor {
 	void paint(pulp::canvas::Canvas& canvas) override {
 		pulp::view::TextEditor::paint(canvas);
 		const auto b = local_bounds();
-		canvas.set_font("Inter", 12.0f);
+		canvas.set_font(".SF NS", 12.0f);
 		canvas.set_fill_color(pulp::canvas::Color::rgba8(166, 166, 166));
 		canvas.fill_text("+     Build⌄",
 		                 18.0f, b.height - 17.0f);
@@ -48,7 +48,7 @@ struct PalotChromeButton final : pulp::view::TextButton {
 		set_style(Style::ghost);
 	}
 	void paint(pulp::canvas::Canvas& canvas) override {
-		canvas.set_font("Inter", 12.0f);
+		canvas.set_font(".SF NS", 12.0f);
 		canvas.set_fill_color(pulp::canvas::Color::rgba8(190, 190, 190));
 		canvas.fill_text(label(), 4.0f, std::max(15.0f, bounds().height * 0.62f));
 	}
@@ -82,14 +82,16 @@ struct MessageRow final : pulp::view::View {
 		auto role_label = std::make_unique<pulp::view::Label>(role_text);
 		role_label->set_font_size(13.0f);
 		role_label->set_font_weight(700);
+		role_label->set_font_family(".SF NS");
 		role_label->set_text_color(pulp::canvas::Color::rgba8(166, 166, 166));
 		role = role_label.get();
 		add_child(std::move(role_label));
 
 		auto markdown = std::make_unique<pulp::view::MarkdownView>(
 			tool ? "```json\n" + text + "\n```" : text);
-		markdown->set_body_style("Inter", 13.0f, 300,
+		markdown->set_body_style(".SF NS", 13.0f, 300,
 		                         pulp::canvas::Color::rgba8(237, 237, 237));
+		markdown->set_code_font_family("Menlo");
 		const auto summary = accessibility_summary(text);
 		markdown->set_access_label(role_text + " message text: " + summary);
 		markdown->set_access_value(summary);
@@ -373,6 +375,7 @@ PalotView::PalotView() {
 	transcript_ = transcript.get();
 	add_child(std::move(transcript));
 	restore();
+	sync_imported_projects();
 	pulp::platform::FileDialog::install_native_backend();
 	transcript_->set_row_count(messages_.size());
 	for (std::size_t index = 0; index < messages_.size(); ++index)

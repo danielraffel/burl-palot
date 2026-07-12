@@ -3,6 +3,8 @@
 #include <pulp/view/window_host.hpp>
 #include <pulp/view/accessibility_tree.hpp>
 #include <pulp/events/main_thread_dispatcher.hpp>
+#include <pulp/canvas/font_flight_recorder.hpp>
+#include <pulp/canvas/font_resolver.hpp>
 
 #include <fstream>
 #include <iostream>
@@ -21,12 +23,20 @@ bool write_png(const std::string& path, const std::vector<std::uint8_t>& bytes) 
 	return output.good();
 }
 
+bool write_text(const std::string& path, const std::string& text) {
+	std::ofstream output(path, std::ios::binary | std::ios::trunc);
+	output << text;
+	return output.good();
+}
+
 }  // namespace
 
 int main(int argc, char** argv) {
+	pulp::canvas::FontResolver::instance().set_family_alias("monospace", "Menlo");
 	std::string demo_project;
 	std::string demo_prompt;
 	std::string demo_capture;
+	std::string font_receipt;
 	bool visual_parity_fixture = false;
 	float window_width = 1200.0f;
 	float window_height = 800.0f;
@@ -35,6 +45,7 @@ int main(int argc, char** argv) {
 		if (argument == "--demo-project" && index + 1 < argc) demo_project = argv[++index];
 		else if (argument == "--demo-prompt" && index + 1 < argc) demo_prompt = argv[++index];
 		else if (argument == "--demo-capture" && index + 1 < argc) demo_capture = argv[++index];
+		else if (argument == "--font-receipt" && index + 1 < argc) font_receipt = argv[++index];
 		else if (argument == "--visual-parity-fixture") visual_parity_fixture = true;
 		else if (argument == "--window-width" && index + 1 < argc) window_width = std::stof(argv[++index]);
 		else if (argument == "--window-height" && index + 1 < argc) window_height = std::stof(argv[++index]);
@@ -81,17 +92,21 @@ int main(int argc, char** argv) {
 	window->set_close_callback([] {});
 	std::jthread demo_starter;
 	if ((!demo_project.empty() && !demo_prompt.empty()) || visual_parity_fixture) {
-		root.on_demo_complete = [&root, &window, demo_capture] {
-			if (!demo_capture.empty()) {
+		root.on_demo_complete = [&root, &window, demo_capture, font_receipt] {
+			if (!demo_capture.empty() || !font_receipt.empty()) {
+				if (!font_receipt.empty()) pulp::canvas::FontFlightRecorder::instance().clear();
 				root.request_repaint();
 				window->mark_dirty();
 				window->repaint();
-				std::thread([&window, demo_capture] {
+				std::thread([&window, demo_capture, font_receipt] {
 					std::this_thread::sleep_for(std::chrono::milliseconds(750));
-					pulp::events::MainThreadDispatcher::call_async([&window, demo_capture] {
+					pulp::events::MainThreadDispatcher::call_async([&window, demo_capture, font_receipt] {
 						const auto png = window->capture_back_buffer_png();
-						if (!png.empty() && write_png(demo_capture, png))
+						if (!demo_capture.empty() && !png.empty() && write_png(demo_capture, png))
 							std::cout << "demo capture: " << demo_capture << '\n';
+						if (!font_receipt.empty() &&
+						    write_text(font_receipt, pulp::canvas::flight_recorder_drain_json()))
+							std::cout << "font receipt: " << font_receipt << '\n';
 					});
 				}).detach();
 			}

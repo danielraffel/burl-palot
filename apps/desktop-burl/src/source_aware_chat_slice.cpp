@@ -7,6 +7,8 @@
 
 SourceAwareChatSlice::SourceAwareChatSlice() {
 	markdown_.set_bounds({0.0f, 0.0f, 720.0f, 1000.0f});
+	markdown_.set_body_style(".SF NS", 14.0f, 400, pulp::canvas::Color::rgba8(255, 255, 255));
+	markdown_.set_code_font_family("Menlo");
 	markdown_.set_access_role(pulp::view::View::AccessRole::group);
 	markdown_.set_access_label("Conversation log");
 	composer_.set_text("draft composition");
@@ -121,10 +123,14 @@ void SourceAwareChatSlice::reconcile_native_markdown() {
 void SourceAwareChatSlice::prepare_native_markdown() {
 	pulp::canvas::AttributedString attributed;
 	for (const auto& block : markdown_.document().blocks()) {
-		for (auto span : block.attributed_text.spans()) attributed.append(std::move(span));
+		for (auto span : block.attributed_text.spans()) {
+			if (span.font_family == "monospace") span.font_family = "Menlo";
+			else if (span.font_family.empty() || span.font_family == "system") span.font_family = ".SF NS";
+			attributed.append(std::move(span));
+		}
 		pulp::canvas::TextSpan newline;
 		newline.text = "\n";
-		newline.font_family = "system";
+		newline.font_family = ".SF NS";
 		newline.font_size = 14.0f;
 		attributed.append(std::move(newline));
 	}
