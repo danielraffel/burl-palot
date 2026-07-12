@@ -22,13 +22,13 @@ test("reviewed action mappings point to exact runtime trace records", async () =
 	}
 })
 
-test("every promoted optional action has a consumer endpoint", async () => {
+test("every promoted action has a consumer endpoint", async () => {
 	const [manifest, source] = await Promise.all([
 		readFile("apps/desktop-burl/contracts/main-chat.application-bindings.v1.json", "utf8").then(
 			(value) => JSON.parse(value),
 		),
 		readFile("apps/desktop-burl/src/palot_view.cpp", "utf8"),
 	])
-	for (const action of manifest.actions.filter((entry: { required: boolean }) => !entry.required))
+	for (const action of manifest.actions)
 		expect(source).toContain(`register_action("${action.id}"`)
 })

@@ -214,6 +214,11 @@ PalotView::PalotView() {
 	imported_root->register_action("composer.copy", [this](std::string_view) {
 		if (transcript_ && transcript_->child_count() != 0) request_repaint();
 	});
+	imported_root->register_action("navigation.settings", [this](std::string_view) {
+		navigation_route_ = "/settings/general";
+		server_menu_open_ = false;
+		request_repaint();
+	});
 	imported_root->register_action("project.select", [this](std::string_view) { choose_project_folder(); });
 	imported_root->register_action("project.open", [this](std::string_view payload) {
 		std::string error;
@@ -246,10 +251,23 @@ PalotView::PalotView() {
 	imported_root->register_action("session.open", [this](std::string_view) {
 		create_session_ = false;
 	});
+	imported_root->register_action("server.menu.toggle", [this](std::string_view) {
+		server_menu_open_ = !server_menu_open_;
+		request_repaint();
+	});
+	imported_root->register_action("sidebar.toggle", [this](std::string_view) {
+		sidebar_open_ = !sidebar_open_;
+		request_repaint();
+	});
 	imported_root->load(palot_bundle_resource("import/main-chat.observed.design-ir.v1.json"),
 	                   palot_bundle_resource("contracts/main-chat.application-bindings.v1.json"));
 	imported_root_ = imported_root.get();
 	add_child(std::move(imported_root));
+	on_global_key = [this](const pulp::view::KeyEvent& event) {
+		if (!event.is_down || event.key != pulp::view::KeyCode::b || !event.isMainModifier())
+			return false;
+		return invoke_imported_action("sidebar.toggle");
+	};
 	auto project = std::make_unique<pulp::view::TextEditor>();
 	project->placeholder = "Project folder";
 	project->set_access_role(AccessRole::group);

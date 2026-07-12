@@ -62,7 +62,11 @@ int main(int argc, char** argv) {
 	pulp::view::NativeMaterializeOptions options;
 	options.diagnostics_out = &diagnostics;
 	auto root = pulp::view::build_native_view_tree(ir, ir.asset_manifest, options);
-	if (!root || root->child_count() == 0) return 6;
+	if (!root || root->child_count() == 0) {
+		for (const auto& diagnostic : diagnostics)
+			std::cerr << diagnostic.code << ": " << diagnostic.message << '\n';
+		return 6;
+	}
 	root->set_bounds({0.0f, 0.0f, 1200.0f, 800.0f});
 	root->layout_children();
 	std::cout << "observed DesignIR nodes=" << count_nodes(ir.root)

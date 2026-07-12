@@ -26,6 +26,9 @@ public:
 	[[nodiscard]] const std::string& demo_session_id() const noexcept { return session_; }
 	[[nodiscard]] bool source_observed_primary_tree() const noexcept;
 	[[nodiscard]] const std::vector<std::string>& unattached_required_actions() const noexcept;
+	[[nodiscard]] bool sidebar_open() const noexcept { return sidebar_open_; }
+	[[nodiscard]] bool server_menu_open() const noexcept { return server_menu_open_; }
+	[[nodiscard]] const std::string& navigation_route() const noexcept { return navigation_route_; }
 	std::function<void()> on_demo_complete;
 	std::function<void()> on_stream_delta;
 	std::function<void()> on_demo_error;
@@ -63,6 +66,9 @@ private:
 	std::string last_request_id_;
 	std::string configuration_error_;
 	bool create_session_ = true;
+	bool sidebar_open_ = true;
+	bool server_menu_open_ = false;
+	std::string navigation_route_ = "/";
 	ImportedRootHost* imported_root_ = nullptr;
 	pulp::view::FrameUpdateCoalescer transcript_updates_;
 };

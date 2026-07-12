@@ -105,6 +105,10 @@ public:
 		auto list = std::make_unique<pulp::view::ImportedRepeatedList>(std::move(transcript_templates), ir_.asset_manifest, this);
 		auto* transcript_host = pending_hosts_.at("messages");
 		while (transcript_host->child_count()) transcript_host->remove_child(transcript_host->child_at(0));
+		transcript_host->flex().direction = pulp::view::FlexDirection::column;
+		transcript_host->flex().flex_shrink = 1.0f;
+		transcript_host->flex().min_height = 0.0f;
+		transcript_host->flex().dim_min_height = {0.0f, pulp::view::DimensionUnit::px};
 		action_views_.erase("composer.copy");
 		action_view_instance_ids_.erase("composer.copy");
 		payloads_.erase("composer.copy");
@@ -295,8 +299,19 @@ std::filesystem::path palot_bundle_resource(std::string_view relative_path) {
 	if (_NSGetExecutablePath(executable.data(), &size) != 0)
 		throw std::runtime_error("unable to resolve Palot executable path");
 	executable.resize(std::char_traits<char>::length(executable.c_str()));
-	return std::filesystem::weakly_canonical(std::filesystem::path(executable).parent_path() /
-		"../Resources" / relative_path);
+	const auto bundled = std::filesystem::weakly_canonical(
+		std::filesystem::path(executable).parent_path() / "../Resources" / relative_path);
+	if (std::filesystem::exists(bundled)) return bundled;
+#if defined(PALOT_RESOURCE_SOURCE_ROOT)
+	const auto source_root = std::filesystem::path(PALOT_RESOURCE_SOURCE_ROOT);
+	const auto resource_candidate = source_root / relative_path;
+	if (std::filesystem::exists(resource_candidate)) return resource_candidate;
+	const auto consumer_candidate = source_root.parent_path() / relative_path;
+	if (std::filesystem::exists(consumer_candidate)) return consumer_candidate;
+	return resource_candidate;
+#else
+	return bundled;
+#endif
 #else
 	return std::filesystem::path(PALOT_RESOURCE_SOURCE_ROOT) / relative_path;
 #endif

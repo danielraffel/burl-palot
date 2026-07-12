@@ -16,6 +16,7 @@ const sourceRevision = args.get("--source-revision") ?? ""
 const importedAt = args.get("--imported-at") ?? ""
 const bindingPolicyPath = resolve(args.get("--binding-policy") ?? "")
 const fontReceiptPath = resolve(args.get("--font-receipt") ?? "")
+const motionSemanticsPath = args.get("--motion-semantics") ? resolve(args.get("--motion-semantics")!) : undefined
 const responsiveSemantics = (args.get("--responsive-semantics") ?? "").split(",").filter(Boolean).map((path) => resolve(path))
 if (!burlSource || !semanticsPath || !outputPath || !sourceRevision || !importedAt || !bindingPolicyPath || !fontReceiptPath) {
 	throw new Error("required: --burl-source --semantics --output --source-revision --imported-at --binding-policy --font-receipt")
@@ -29,6 +30,32 @@ const renderRoot = semantics.observedDom.tagName?.toLowerCase() === "html"
 	? semantics.observedDom.children?.find((child: any) => child.tagName?.toLowerCase() === "body")
 	: semantics.observedDom
 if (!renderRoot) throw new Error("source semantics has no renderable body")
+const motionBySourceId = new Map<string, unknown[]>()
+if (motionSemanticsPath) {
+	const motionSemantics = JSON.parse(await readFile(motionSemanticsPath, "utf8"))
+	const visit = (node: any) => {
+		if (node.sourceId && node.motion?.length) {
+			if (motionBySourceId.has(node.sourceId)) throw new Error(`duplicate motion source identity ${node.sourceId}`)
+			motionBySourceId.set(node.sourceId, node.motion)
+		}
+		for (const child of node.children ?? []) visit(child)
+	}
+	visit(motionSemantics.observedDom)
+	if (!motionBySourceId.size) throw new Error(`motion semantics has no animation receipts: ${motionSemanticsPath}`)
+}
+const applyMotionReceipts = (root: any) => {
+	let joined = 0
+	const visit = (node: any) => {
+		const motion = motionBySourceId.get(node.sourceId)
+		if (motion) {
+			node.motion = motion
+			joined++
+		}
+		for (const child of node.children ?? []) visit(child)
+	}
+	visit(root)
+	return joined
+}
 const importPolicy = JSON.parse(await readFile(bindingPolicyPath, "utf8")) as {
 	version: number
 	rules: PolicyRule[]
@@ -58,6 +85,8 @@ const removeFormattingWhitespace = (node: any) => {
 	for (const child of node.children ?? []) removeFormattingWhitespace(child)
 }
 removeFormattingWhitespace(renderRoot)
+if (motionBySourceId.size && !applyMotionReceipts(renderRoot))
+	throw new Error("motion receipts did not join the canonical source tree")
 
 let lowered = importer.lowerObservedDom(renderRoot, importedAt)
 if (responsiveSemantics.length) {
@@ -72,6 +101,7 @@ if (responsiveSemantics.length) {
 			} : undefined)
 		if (!root || !viewport) throw new Error(`invalid responsive semantics ${path}`)
 		removeFormattingWhitespace(root)
+		applyMotionReceipts(root)
 		return { viewport, root, path }
 	}))
 	// unionResponsiveTrees takes its canonical literal/style tree from the last
@@ -87,11 +117,6 @@ if (responsiveSemantics.length) {
 		throw new Error(`canonical captures must not require identity remapping: ${JSON.stringify(alignment.report)}`)
 	console.error(`[responsive-identity] ${JSON.stringify(alignment.report)}`)
 	const reconciliation = importer.reconcileResponsiveConstraints(alignedCaptures)
-	for (const [sourceId, constraint] of reconciliation.constraints) {
-		const transitions = [...constraint.visibility, ...constraint.layoutVariants]
-		if (transitions.some((variant: any) => variant.transitionToNext?.confidence === "bounded"))
-			reconciliation.constraints.delete(sourceId)
-	}
 	const loweredCaptures = alignedCaptures.map((capture: any) => importer.lowerObservedDom(capture.root, importedAt))
 	lowered = importer.unionResponsiveTrees(loweredCaptures, reconciliation)
 }

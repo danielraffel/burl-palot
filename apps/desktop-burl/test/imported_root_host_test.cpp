@@ -30,8 +30,9 @@ std::string read_text(const char* path) {
 }
 
 void register_actions(ImportedRootHost& host, std::unordered_map<std::string, int>* calls = nullptr) {
-	for (const auto* id : {"composer.copy", "project.open", "project.select", "prompt.cancel", "prompt.retry",
-	                       "prompt.send", "session.create", "session.open"})
+	for (const auto* id : {"composer.copy", "navigation.settings", "project.open", "project.select",
+	                       "prompt.cancel", "prompt.retry", "prompt.send", "server.menu.toggle",
+	                       "session.create", "session.open", "sidebar.toggle"})
 		host.register_action(id, [calls, id](std::string_view) { if (calls) ++(*calls)[id]; });
 }
 
@@ -63,7 +64,7 @@ int main(int argc, char** argv) {
 	host.load(argv[1], argv[2]);
 	if (!host.source_observed_primary_tree() || host.child_count() != 1) return 5;
 	if (host.child_at(0)->child_count() == 0) return 6;
-	if (host.attached_action_count() != 8 || !host.unattached_required_actions().empty()) return 7;
+	if (host.attached_action_count() != 11 || !host.unattached_required_actions().empty()) return 7;
 	host.set_transcript({{"u1", "user", {{"message.text", "runtime user"}}},
 	                     {"a1", "assistant", {{"message.text", "runtime assistant"}}},
 	                     {"t1", "tool", {{"message.text", "tool.read"}}}});
@@ -106,11 +107,11 @@ int main(int argc, char** argv) {
 		       main->bounds().x == main_x && main->bounds().width == main_width &&
 		       (!sidebar_visible || (sidebar->bounds().x == 0.0f && sidebar->bounds().width == 280.0f));
 	};
-	for (const auto geometry : {std::tuple{599.0f, false, 0.0f, 587.0f},
+	for (const auto geometry : {std::tuple{599.0f, false, 12.0f, 575.0f},
 	                            std::tuple{768.0f, true, 280.0f, 476.0f},
 	                            std::tuple{1200.0f, true, 280.0f, 908.0f},
 	                            std::tuple{768.0f, true, 280.0f, 476.0f},
-	                            std::tuple{599.0f, false, 0.0f, 587.0f}})
+	                            std::tuple{599.0f, false, 12.0f, 575.0f}})
 		if (!verify_geometry(std::get<0>(geometry), std::get<1>(geometry),
 		                     std::get<2>(geometry), std::get<3>(geometry))) {
 			std::cerr << "responsive geometry width=" << std::get<0>(geometry)

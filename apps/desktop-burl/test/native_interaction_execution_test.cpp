@@ -2,6 +2,7 @@
 
 #include <pulp/view/buttons.hpp>
 #include <pulp/view/pointer_dispatch.hpp>
+#include <pulp/view/ui_components.hpp>
 #include <pulp/canvas/canvas.hpp>
 #include <pulp/view/screenshot.hpp>
 
@@ -26,6 +27,18 @@ pulp::view::Point center_in_root(const pulp::view::View& view, const pulp::view:
 	return {x, y};
 }
 
+pulp::view::Rect rect_in_root(const pulp::view::View& view, const pulp::view::View& root) {
+	auto center = center_in_root(view, root);
+	return {center.x - view.bounds().width * 0.5f, center.y - view.bounds().height * 0.5f,
+	        view.bounds().width, view.bounds().height};
+}
+
+bool contains(const pulp::view::Rect& outer, const pulp::view::Rect& inner) {
+	return inner.x >= outer.x && inner.y >= outer.y &&
+	       inner.x + inner.width <= outer.x + outer.width &&
+	       inner.y + inner.height <= outer.y + outer.height;
+}
+
 bool descends_from(pulp::view::View* candidate, const pulp::view::View* ancestor) {
 	for (auto* current = candidate; current; current = current->parent())
 		if (current == ancestor) return true;
@@ -47,6 +60,16 @@ pulp::view::View* find_anchor_suffix(pulp::view::View& root, std::string_view su
 	return nullptr;
 }
 
+pulp::view::ImportedRepeatedList* find_repeated_list(pulp::view::View& root,
+	                                                  std::size_t item_count) {
+	if (auto* list = dynamic_cast<pulp::view::ImportedRepeatedList*>(&root);
+	    list && list->items().size() == item_count)
+		return list;
+	for (std::size_t index = 0; index < root.child_count(); ++index)
+		if (auto* found = find_repeated_list(*root.child_at(index), item_count)) return found;
+	return nullptr;
+}
+
 }  // namespace
 
 int main(int argc, char** argv) {
@@ -54,8 +77,9 @@ int main(int argc, char** argv) {
 	ImportedRootHost host;
 	std::unordered_map<std::string, int> calls;
 	std::unordered_map<std::string, std::string> payloads;
-	for (const auto* id : {"composer.copy", "project.open", "project.select", "prompt.cancel",
-	                       "prompt.retry", "prompt.send", "session.create", "session.open"})
+	for (const auto* id : {"composer.copy", "navigation.settings", "project.open", "project.select",
+	                       "prompt.cancel", "prompt.retry", "prompt.send", "server.menu.toggle",
+	                       "session.create", "session.open", "sidebar.toggle"})
 		host.register_action(id, [&calls, &payloads, id](std::string_view payload) {
 			++calls[id]; payloads[id] = payload;
 		});
@@ -74,6 +98,34 @@ int main(int argc, char** argv) {
 		{"u2", "user", {{"message.text", "second prompt"}}},
 		{"a2", "assistant", {{"message.text", "second response"}}},
 	});
+	host.set_bounds({0, 0, 280, 248});
+	host.layout_children();
+	auto* minimum_main = find_anchor_suffix(host, "main-data-slot-sidebar-inset:0");
+	auto* minimum_composer = find_anchor_suffix(host, "form-shape-b21c5bbc:0");
+	auto* minimum_textarea = find_anchor_suffix(host, "textarea-data-slot-input-group-control:0");
+	const pulp::view::Rect minimum_viewport{0, 0, 280, 248};
+	if (!minimum_main || !minimum_composer || !minimum_textarea ||
+	    !contains(minimum_viewport, rect_in_root(*minimum_main, host)) ||
+	    !contains(rect_in_root(*minimum_main, host), rect_in_root(*minimum_composer, host)) ||
+	    !contains(rect_in_root(*minimum_composer, host), rect_in_root(*minimum_textarea, host))) {
+		const auto main_rect = minimum_main ? rect_in_root(*minimum_main, host) : pulp::view::Rect{};
+		const auto composer_rect = minimum_composer ? rect_in_root(*minimum_composer, host) : pulp::view::Rect{};
+		const auto textarea_rect = minimum_textarea ? rect_in_root(*minimum_textarea, host) : pulp::view::Rect{};
+		std::cerr << "minimum content size clips the imported chat frame main=" << main_rect.x << ','
+		          << main_rect.y << ',' << main_rect.width << ',' << main_rect.height << " composer="
+		          << composer_rect.x << ',' << composer_rect.y << ',' << composer_rect.width << ','
+		          << composer_rect.height << " textarea=" << textarea_rect.x << ',' << textarea_rect.y
+		          << ',' << textarea_rect.width << ',' << textarea_rect.height << '\n';
+		for (auto* current = minimum_composer; current && current != &host; current = current->parent()) {
+			const auto rect = rect_in_root(*current, host);
+			std::cerr << " composer-ancestor=" << current->anchor_id() << " rect=" << rect.x << ','
+			          << rect.y << ',' << rect.width << ',' << rect.height;
+			if (auto* scroll = dynamic_cast<pulp::view::ScrollView*>(current))
+				std::cerr << " scroll=" << scroll->scroll_x() << ',' << scroll->scroll_y();
+			std::cerr << '\n';
+		}
+		return 17;
+	}
 	if (!host.unattached_actions().empty()) {
 		for (const auto& action : host.unattached_actions()) std::cerr << "unattached=" << action << '\n';
 		return 3;
@@ -87,7 +139,7 @@ int main(int argc, char** argv) {
 		    std::abs(main_panel->corner_radius_bl() - 16.5f) > 0.01f ||
 		    std::abs(main_panel->corner_radius_br() - 16.5f) > 0.01f ||
 		    std::abs(main_panel->bounds().height - 788.0f) > 0.01f ||
-		    std::abs(main_panel->bounds().width - (width < 768.0f ? width - 12.0f : width - 292.0f)) > 0.01f)
+		    std::abs(main_panel->bounds().width - (width < 768.0f ? width - 24.0f : width - 292.0f)) > 0.01f)
 			return 16;
 		for (const auto* id : {"composer.copy", "project.open", "project.select", "prompt.cancel", "session.create",
 		                       "session.open"}) {
@@ -110,14 +162,10 @@ int main(int argc, char** argv) {
 						          << ancestor->bounds().width << ',' << ancestor->bounds().height << '\n';
 					return 5;
 				}
-				const auto local = pulp::view::point_to_local(root_point, down_target, &host);
 				button->on_focus_changed(true);
 				if (!button->has_focus()) return 6;
 				const int before_pointer = calls[id];
-				down_target->on_mouse_down(local);
-				auto* up_target = host.hit_test(root_point);
-				if (up_target != down_target) return 7;
-				up_target->on_mouse_up(local);
+				host.simulate_click(root_point);
 				if (calls[id] != before_pointer + 1) {
 					std::cerr << "pointer callback count action=" << id << " before=" << before_pointer
 					          << " after=" << calls[id] << '\n';
@@ -132,8 +180,7 @@ int main(int argc, char** argv) {
 
 				button->set_enabled(false);
 				const int before_disabled = calls[id];
-				button->on_mouse_down(local);
-				button->on_mouse_up(local);
+				host.simulate_click(root_point);
 				if (button->on_key_event({.key = pulp::view::KeyCode::space, .is_down = true}) ||
 				    calls[id] != before_disabled)
 					return 10;
@@ -146,6 +193,47 @@ int main(int argc, char** argv) {
 	for (const auto* id : {"project.open", "project.select", "prompt.cancel", "session.create", "session.open"})
 		if (exercised[id] == 0) { std::cerr << "unexercised=" << id << '\n'; return 11; }
 	if (payloads["project.open"].empty()) return 12;
+
+	std::vector<pulp::view::ImportedListItem> scroll_rows;
+	for (int index = 0; index < 24; ++index) {
+		scroll_rows.push_back({"scroll-" + std::to_string(index), index % 2 ? "assistant" : "user",
+		                       {{"message.text", "Scrollable imported message " + std::to_string(index) +
+		                                             " with enough text to exercise wrapped row geometry."}}});
+	}
+	host.set_transcript(std::move(scroll_rows));
+	host.set_bounds({0, 0, 1200, 520});
+	host.layout_children();
+	auto* transcript = find_repeated_list(host, 24);
+	if (!transcript || transcript->content_height() <= transcript->bounds().height) return 18;
+	const auto wheel_point = center_in_root(*transcript, host);
+	auto* wheel_target = pulp::view::find_wheel_scroll_view_at(host, wheel_point);
+	if (!wheel_target || !descends_from(wheel_target, transcript)) {
+		std::cerr << "wheel target missing point=" << wheel_point.x << ',' << wheel_point.y
+		          << " transcript=" << rect_in_root(*transcript, host).x << ','
+		          << rect_in_root(*transcript, host).y << ',' << transcript->bounds().width << ','
+		          << transcript->bounds().height << " children=" << transcript->child_count() << '\n';
+		for (std::size_t index = 0; index < transcript->child_count(); ++index) {
+			auto* child = transcript->child_at(index);
+			std::cerr << " child=" << child->anchor_id() << " bounds=" << child->bounds().x << ','
+			          << child->bounds().y << ',' << child->bounds().width << ',' << child->bounds().height
+			          << " wheel=" << child->wants_wheel_scroll() << '\n';
+		}
+		for (auto* current = transcript->parent(); current && current != &host; current = current->parent())
+			std::cerr << " ancestor=" << current->anchor_id() << " bounds=" << current->bounds().x << ','
+			          << current->bounds().y << ',' << current->bounds().width << ',' << current->bounds().height << '\n';
+		return 19;
+	}
+	pulp::view::MouseEvent wheel;
+	wheel.is_wheel = true;
+	wheel.scroll_delta_y = 100000.0f;
+	wheel_target->on_mouse_event(wheel);
+	const float max_scroll = std::max(0.0f, transcript->content_height() - transcript->bounds().height);
+	if (transcript->scroll_y() <= 0.0f || std::abs(transcript->scroll_y() - max_scroll) > 0.5f)
+		return 20;
+	wheel.scroll_delta_y = -100000.0f;
+	wheel_target->on_mouse_event(wheel);
+	if (std::abs(transcript->scroll_y()) > 0.01f) return 21;
+
 	pulp::canvas::RecordingCanvas canvas;
 	host.paint_all(canvas);
 	std::unordered_set<std::string> painted_projects;
