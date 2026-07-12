@@ -2,6 +2,7 @@
 import json
 import os
 import sys
+import time
 
 
 def send(value):
@@ -37,6 +38,8 @@ for line in sys.stdin:
     elif command_type == "prompt.cancel":
         if project_directory == "/tmp/close-on-cancel":
             os._exit(0)
+        if project_directory == "/tmp/delayed-cancel":
+            time.sleep(0.2)
         result = {"ok": True, "value": {"requestId": command["requestId"], "cancelled": True}}
     else:
         result = {"ok": False, "error": {"message": "unsupported fixture command"}}
@@ -81,7 +84,7 @@ for line in sys.stdin:
                 "properties": {"sessionID": session_id, "partID": "text-1", "field": "text", "delta": "fixture response"},
             }}},
         })
-        if project_directory == "/tmp/close-on-cancel":
+        if project_directory in ("/tmp/close-on-cancel", "/tmp/delayed-cancel"):
             continue
         send({
             "version": 1,

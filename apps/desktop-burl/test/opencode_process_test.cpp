@@ -102,6 +102,16 @@ int main(int argc, char** argv) {
 	for (const auto& event : closed_pipe_sink->events)
 		if (event.run_id != 3) return EXIT_FAILURE;
 
+	auto delayed_cancel_sink = std::make_shared<Sink>();
+	if (!process.start({.project = "/tmp/delayed-cancel", .prompt = "settle cancel"},
+	                   delayed_cancel_sink) || !delayed_cancel_sink->wait_for("text"))
+		return EXIT_FAILURE;
+	const auto cancel_started = std::chrono::steady_clock::now();
+	process.cancel();
+	if (!delayed_cancel_sink->wait_for("error") ||
+	    std::chrono::steady_clock::now() - cancel_started < std::chrono::milliseconds(150))
+		return EXIT_FAILURE;
+
 	auto retry_sink = std::make_shared<Sink>();
 	if (!process.start({.project = "/tmp/project",
 	                    .prompt = "retry",
@@ -113,7 +123,7 @@ int main(int argc, char** argv) {
 	{
 		std::scoped_lock lock(retry_sink->mutex);
 		for (const auto& event : retry_sink->events)
-			if (event.run_id != 4) return EXIT_FAILURE;
+			if (event.run_id != 5) return EXIT_FAILURE;
 	}
 
 	OpenCodeProcess bounded({.sidecar_path = argv[1], .max_frame_bytes = 512});
