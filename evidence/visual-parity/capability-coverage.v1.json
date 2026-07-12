@@ -622,18 +622,16 @@
         {
           "value": "0px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed borderLeftWidth + CSS Color 4 borderLeftColor -> normalizeCssColor -> TypedPaint left slots -> NativeDesignIR left style -> generic View width-and-alpha gate -> Skia side fill or identity",
+          "evidenceIds": ["semantic:observed-dom-border-left-color"]
         },
         {
           "value": "1px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed borderLeftWidth + CSS Color 4 borderLeftColor -> normalizeCssColor -> TypedPaint left slots -> NativeDesignIR left style -> generic View width-and-alpha gate -> Skia side fill or identity",
+          "evidenceIds": ["semantic:observed-dom-border-left-color"]
         }
       ]
     },
