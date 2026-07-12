@@ -100,6 +100,23 @@ class PalotVisualOracleTests(unittest.TestCase):
 		self.assertEqual(len(results["scenarios"]), 11)
 		self.assertFalse(any(scenario["oraclePassed"] for scenario in results["scenarios"]))
 
+	def test_responsive_contract_uses_current_viewports_without_cropping(self):
+		contract = json.loads((
+			ROOT / "evidence/oracle-inputs/responsive/responsive-contract.v1.json"
+		).read_text())
+		self.assertEqual(contract["capturePolicy"]["crop"], "forbidden")
+		self.assertEqual(contract["capturePolicy"]["resizeOrNormalization"], "forbidden")
+		self.assertEqual([capture["width"] for capture in contract["captures"]], [280, 740, 1200])
+		self.assertEqual(contract["native"]["declaredMinimumWidth"], 760)
+		self.assertEqual(contract["native"]["status"], "gap")
+		for capture in contract["captures"]:
+			geometry = json.loads((
+				ROOT / "evidence/oracle-inputs/responsive" / capture["geometry"]
+			).read_text())
+			self.assertEqual(geometry["innerWidth"], capture["width"])
+			self.assertEqual(geometry["rootScrollWidth"], capture["width"])
+			self.assertEqual(geometry["bodyScrollWidth"], capture["width"])
+
 
 if __name__ == "__main__":
 	unittest.main()

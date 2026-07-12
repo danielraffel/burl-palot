@@ -1,0 +1,9 @@
+{
+  "schema": "palot-os-window-probe-v1",
+  "sourceRevision": "fd63a75dad3d0e8555ba22a47e720d285889fbf0",
+  "browserWindowConfig": {"width": 1200, "height": 800, "minWidth": null, "minHeight": null},
+  "method": "macOS System Events frame requests plus CDP renderer geometry reads",
+  "result": "inconclusive",
+  "finding": "Accessibility reported requested frames down to 100px, while an earlier CDP metrics override kept the renderer viewport fixed. The override contamination makes those physical-window samples invalid as a minimum oracle.",
+  "decision": "Do not infer an OS minimum. Use independently reloaded, exact renderer viewports for current source reflow evidence and keep physical-window/native minimum proof as GAP."
+}

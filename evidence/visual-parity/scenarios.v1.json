@@ -87,14 +87,15 @@
     },
     {
       "id": "10-responsive-contract",
-      "description": "Declared responsive widths without image normalization",
+      "description": "Source-minimum, intermediate, and reference responsive reflow without cropping or normalization",
       "captures": [
-        {"logicalWidth": 1200, "logicalHeight": 800, "pixelWidth": 2400, "pixelHeight": 1600},
-        {"logicalWidth": 760, "logicalHeight": 800, "pixelWidth": 1520, "pixelHeight": 1600},
-        {"logicalWidth": 600, "logicalHeight": 800, "pixelWidth": 1200, "pixelHeight": 1600}
+        {"id": "source-minimum", "widthPolicy": "empirically-probed-source-minimum", "logicalHeight": 800, "resizePolicy": "reject"},
+        {"id": "intermediate", "widthPolicy": "midpoint(source-minimum,1200)", "logicalHeight": 800, "resizePolicy": "reject"},
+        {"id": "reference", "logicalWidth": 1200, "logicalHeight": 800, "pixelWidth": 2400, "pixelHeight": 1600, "resizePolicy": "reject"}
       ],
       "regions": [{"id": "full", "x": 0, "y": 0, "width": 1200, "height": 800}],
-      "postconditions": [{"path": "responsive.breakpointsTested", "equals": 3}, {"path": "responsive.controlsRemainOperable", "equals": true}]
+      "responsiveContract": "../oracle-inputs/responsive/responsive-contract.v1.json",
+      "postconditions": [{"path": "responsive.breakpointsTested", "equals": 3}, {"path": "responsive.currentViewportGeometry", "equals": true}, {"path": "responsive.noCropOrNormalization", "equals": true}, {"path": "responsive.noCriticalRegionClipped", "equals": true}, {"path": "responsive.sidebarBehaviorMatchesSource", "equals": true}, {"path": "responsive.controlsRemainOperable", "equals": true}]
     },
     {
       "id": "11-live-stream",

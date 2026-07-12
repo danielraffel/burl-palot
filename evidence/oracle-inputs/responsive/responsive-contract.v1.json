@@ -1,0 +1,68 @@
+{
+  "schema": "palot-responsive-contract-v1",
+  "sourceRevision": "fd63a75dad3d0e8555ba22a47e720d285889fbf0",
+  "height": 800,
+  "deviceScaleFactor": 2,
+  "capturePolicy": {
+    "crop": "forbidden",
+    "resizeOrNormalization": "forbidden",
+    "geometryOracle": "window.innerWidth/innerHeight and document scroll geometry at capture time",
+    "criticalRegionPolicy": "every region must remain inside the current viewport and independently pass"
+  },
+  "sourceProbe": {
+    "browserWindowDeclaration": "1200x800 default with no minWidth/minHeight",
+    "physicalOsMinimum": {
+      "status": "gap",
+      "reason": "macOS accessibility accepted smaller frame requests but did not provide a trustworthy renderer-coupled minimum; no physical minimum is inferred"
+    },
+    "layoutMinimumTested": 280,
+    "layoutMinimumFinding": "At a real 280x800 renderer viewport the document has no horizontal overflow, the desktop sidebar is absent, and the composer reflows to x=1 width=265",
+    "responsiveBreakpointFinding": "At 740x800 matchMedia(max-width:767px) is true, the desktop sidebar is absent, and the composer reflows to x=17 width=693",
+    "referenceFinding": "At 1200x800 the sidebar is present at x=8 width=264 and the composer is x=297 width=873"
+  },
+  "captures": [
+    {
+      "id": "source-minimum",
+      "width": 280,
+      "height": 800,
+      "pixelWidth": 560,
+      "pixelHeight": 1600,
+      "source": "source-280x800.png",
+      "geometry": "source-280x800.geometry.json",
+      "sourceSha256": "2ebb10f4cae1059d4027751255a5ba66863beb865e7dd88152b8a463f01a0be1",
+      "geometrySha256": "2ea5ab1fc07a2867e91a6380ea46cbce7d2bb52107b29f3a3cd96c0070251df1"
+    },
+    {
+      "id": "intermediate",
+      "width": 740,
+      "height": 800,
+      "pixelWidth": 1480,
+      "pixelHeight": 1600,
+      "source": "source-740x800.png",
+      "geometry": "source-740x800.geometry.json",
+      "sourceSha256": "c6ab77dd28bd4cc6c831d879ab1b1a237c5f3f53b33d72e39934c59d8a2cdb08",
+      "geometrySha256": "9b992a641f725b7320371ba7e81bc44c94f45a654987673b956468fe942ccfe8"
+    },
+    {
+      "id": "reference",
+      "width": 1200,
+      "height": 800,
+      "pixelWidth": 2400,
+      "pixelHeight": 1600,
+      "source": "source-1200x800.png",
+      "geometry": "source-1200x800.geometry.json",
+      "sourceSha256": "8ee405481c3f7a4fc49c1159df447d07728037045a38068054923f639a6f9521",
+      "geometrySha256": "66c2c199fae921d8faed01311db9b4dee62d91603bb23bafbba0fcf66283e23e"
+    }
+  ],
+  "native": {
+    "declaredMinimumWidth": 760,
+    "status": "gap",
+    "firstDivergence": "The current native WindowOptions min_width=760 prevents reaching the source-tested 280px viewport, so source-minimum parity is impossible before any pixel comparison",
+    "requiredCaptures": [
+      280,
+      740,
+      1200
+    ]
+  }
+}

@@ -3,7 +3,7 @@
   "sourceSemantics": "evidence/visual-parity/baselines/01-shell/source-semantics.json",
   "sourceSemanticsSha256": "cde304eb408da4379d598b2b3e7508fa7ebb19b72dfbbcf02b06f53a0b5fbac4",
   "scenarioManifest": "evidence/visual-parity/scenarios.v1.json",
-  "scenarioManifestSha256": "f49e6c95f132012f8315def0919229bf18d67c4a55a5a755634ee46e279a6c70",
+  "scenarioManifestSha256": "3bac15fa229ee67e38e32f3c6aedafb4a6949f18fe422920f84fe01b5e7287f1",
   "computedProperties": [
     {
       "name": "alignContent",

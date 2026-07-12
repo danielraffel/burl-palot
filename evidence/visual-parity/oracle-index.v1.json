@@ -54,7 +54,7 @@
       "id": "10-responsive-contract",
       "manifest": "evidence/visual-parity-oracle-10-responsive-contract.manifest.json",
       "stateEvidence": "gap",
-      "gap": "760px and 600px source/native captures are unavailable"
+      "gap": "source 280/740/1200 captures exist, but native min_width=760 blocks the source minimum and no exact 280/740/1200 native capture triplet exists"
     },
     {
       "id": "11-live-stream",

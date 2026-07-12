@@ -32,7 +32,7 @@ following remain explicit pre-image gaps:
 - 02: no matched Electron/native window-layer capture;
 - 08: no matched native focus, typed text, selection, and IME capture;
 - 09: no matched stable-scroll-anchor capture;
-- 10: no matched 760 px and 600 px source/native captures;
+- 10: exact source captures now exist at 280 px, 740 px, and 1200 px with no cropping; native `min_width=760` blocks the source minimum and the matched native triplet is still absent;
 - 11: a real native OpenCode screenshot exists, but no state-matched Electron
   streamed transcript capture exists.
 
