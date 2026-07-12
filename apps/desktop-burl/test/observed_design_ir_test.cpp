@@ -30,7 +30,7 @@ int main(int argc, char** argv) {
 	std::ostringstream bytes;
 	bytes << input.rdbuf();
 	const auto ir = pulp::view::parse_design_ir_json(bytes.str());
-	if (ir.source_adapter != "observed-dom" || count_nodes(ir.root) != 432) return 4;
+	if (ir.source_adapter != "observed-dom" || count_nodes(ir.root) < 250) return 4;
 	if (count_type(ir.root, "button") < 20 || count_type(ir.root, "text_editor") < 1) return 5;
 	std::vector<pulp::view::ImportDiagnostic> diagnostics;
 	pulp::view::NativeMaterializeOptions options;

@@ -1,0 +1,6 @@
+{
+  "family": ".AppleSystemUIFont / SFNS",
+  "source": "/System/Library/Fonts/SFNS.ttf",
+  "sourceSha256": "2bfd40dc72e6759e248f82a52a40d551338979fffc9b5c070e685b4b7ad19e66",
+  "finding": "The current native capture does not prove the source Inter Variable face; this differing identity must fail the font parity gate."
+}

@@ -66,6 +66,10 @@ if(BURL_PALOT_ENABLE_FRAMEWORK)
 		BUNDLE_ID "com.palot.burl"
 		VERSION "0.1.0")
 	target_link_libraries(burl-palot PRIVATE nlohmann_json::nlohmann_json)
+	set_property(TARGET burl-palot APPEND PROPERTY LINK_DEPENDS
+		"${CMAKE_CURRENT_SOURCE_DIR}/resources/import/main-chat.observed.design-ir.v1.json"
+		"${CMAKE_CURRENT_SOURCE_DIR}/contracts/main-chat.application-bindings.v1.json"
+		"${CMAKE_CURRENT_SOURCE_DIR}/contracts/main-chat.source-binding-policy.v1.json")
 
 	set(PALOT_SIDECAR_NAME "palot-opencode-sidecar")
 	set(PALOT_SIDECAR_BUILD_DIR "${CMAKE_CURRENT_BINARY_DIR}/sidecar")

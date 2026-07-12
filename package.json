@@ -58,12 +58,13 @@
 		"baseline:electron": "./scripts/capture-electron-baseline.sh",
 		"verify:consumer-baseline": "./scripts/verify-consumer-baseline.sh",
 		"verify:app-package": "./scripts/verify-burl-app-package.sh",
-		"test:visual-parity": "python3 -m unittest -q tests/test_compare_screenshots.py tests/test_visual_scenario_runner.py",
+		"test:visual-parity": "python3 -m unittest -q tests/test_compare_screenshots.py tests/test_visual_scenario_runner.py tests/test_palot_visual_oracle.py",
 		"test:source-capture": "bun test tests/capture_source_cdp.test.ts",
 		"generate:source-components": "bun scripts/generate-source-component-references.ts",
 		"test:source-components": "bun test tests/generate_source_component_references.test.ts",
 		"generate:native-components": "bun scripts/generate-native-component-ir.ts",
-		"gate:native-components": "bun scripts/run-native-component-gate.ts"
+		"gate:native-components": "bun scripts/run-native-component-gate.ts",
+		"gate:visual-oracle": "python3 scripts/run-palot-visual-oracle.py --burl-source ${BURL_SOURCE_DIR:?set BURL_SOURCE_DIR to the reviewed Burl checkout}"
 	},
 	"devDependencies": {
 		"@biomejs/biome": "^2.4.2",

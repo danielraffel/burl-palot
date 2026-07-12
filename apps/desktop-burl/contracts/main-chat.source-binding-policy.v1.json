@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "rules": [
+    {"id":"session-create","match":{"role":"button","textExact":"New Session"},"attributes":{"pulpRouteId":"session.create","pulpHostAction":"session.create","pulpHostActionLabel":"New Session","pulpEventContract":"click"}},
+    {"id":"project-select","match":{"role":"button","textExact":"Add Project"},"attributes":{"pulpRouteId":"project.select","pulpHostAction":"project.select","pulpHostActionLabel":"Add Project","pulpEventContract":"click"}},
+    {"id":"session-open","match":{"role":"button","attribute":{"name":"data-active","present":true}},"attributes":{"pulpRouteId":"session.open","pulpHostAction":"session.open","pulpHostActionLabel":"Open selected session","pulpEventContract":"click"}},
+    {"id":"composer-copy","match":{"role":"button","textExact":"Copy response"},"attributes":{"pulpRouteId":"composer.copy","pulpHostAction":"composer.copy","pulpHostActionLabel":"Copy response","pulpEventContract":"click"}},
+    {"id":"prompt-cancel","match":{"role":"button","accessibleName":"Stop"},"attributes":{"pulpRouteId":"prompt.cancel","pulpHostAction":"prompt.cancel","pulpHostActionLabel":"Stop","pulpEventContract":"click"}},
+    {"id":"composer","match":{"tagName":"textarea","role":"textbox"},"attributes":{"pulpRouteId":"chat.composer","pulpValueKey":"composer.draft","pulpEventContract":"submit-send-or-retry;escape-cancel","pulpFocusContract":"composer-focus"}}
+  ]
+}

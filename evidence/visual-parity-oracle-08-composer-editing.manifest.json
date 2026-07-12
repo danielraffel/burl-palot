@@ -1,0 +1,150 @@
+{
+  "backdrop": {
+    "policy": "opaque-tier",
+    "tier": "deterministic-dark-opaque"
+  },
+  "baseline_provenance": {
+    "captured_by": "independent Electron CDP capture",
+    "regeneration_reason": "apply reviewed generic oracle to existing immutable baseline",
+    "renderer_version": "chromium-144.0.7559.111",
+    "review_commit": "40a32031622568ff202b9b7940b32fe29ba9b605",
+    "reviewed_by": "two independent architecture reviews",
+    "source_revision": "fd63a75dad3d0e8555ba22a47e720d285889fbf0"
+  },
+  "calibration": {
+    "candidate_minimum_pixel_similarity": 1.0,
+    "candidate_repeats": [
+      {
+        "backend": "skia-dawn-metal",
+        "captured_at": "2026-07-12T07:00:00Z",
+        "dpr": 2,
+        "fonts": [
+          {
+            "family": ".AppleSystemUIFont / SFNS",
+            "path": "oracle-inputs/candidate-font-receipt.json",
+            "sha256": "4e8447f6067aa2876a496db18b2c3733762de42bf343532acf57eae56394ac1e"
+          }
+        ],
+        "height": 1600,
+        "path": "oracle-inputs/native-repeat-1.png",
+        "revision": "working-tree-00d3d8b1b02ec2560904b498594fa899dcad609e",
+        "sha256": "3f22827d9bff31b42fbd316b1a01cdd764e1f56da1b7643ba040154b31b7cfc5",
+        "width": 2400
+      },
+      {
+        "backend": "skia-dawn-metal",
+        "captured_at": "2026-07-12T07:01:00Z",
+        "dpr": 2,
+        "fonts": [
+          {
+            "family": ".AppleSystemUIFont / SFNS",
+            "path": "oracle-inputs/candidate-font-receipt.json",
+            "sha256": "4e8447f6067aa2876a496db18b2c3733762de42bf343532acf57eae56394ac1e"
+          }
+        ],
+        "height": 1600,
+        "path": "oracle-inputs/native-repeat-2.png",
+        "revision": "working-tree-00d3d8b1b02ec2560904b498594fa899dcad609e",
+        "sha256": "3f22827d9bff31b42fbd316b1a01cdd764e1f56da1b7643ba040154b31b7cfc5",
+        "width": 2400
+      }
+    ],
+    "source_minimum_pixel_similarity": 0.9560427543049747,
+    "source_repeats": [
+      {
+        "backend": "chromium-144.0.7559.111",
+        "captured_at": "2026-07-11T20:00:00Z",
+        "dpr": 2,
+        "fonts": [
+          {
+            "family": "Inter Variable",
+            "path": "oracle-inputs/source-font-receipt.json",
+            "sha256": "d18b048ce0ee45c9badbba00a3d6b67c1764273c5190242d0b4f0c6a1788abf6"
+          }
+        ],
+        "height": 1600,
+        "path": "visual-parity/baselines/01-shell/source.png",
+        "revision": "fd63a75dad3d0e8555ba22a47e720d285889fbf0",
+        "sha256": "d363d609c214a7a4e7b34a58e0eea9b87a4c588d3fcd457c5a9aaf64c12cc7b0",
+        "width": 2400
+      },
+      {
+        "backend": "chromium-144.0.7559.111",
+        "captured_at": "2026-07-11T20:00:00Z",
+        "dpr": 2,
+        "fonts": [
+          {
+            "family": "Inter Variable",
+            "path": "oracle-inputs/source-font-receipt.json",
+            "sha256": "d18b048ce0ee45c9badbba00a3d6b67c1764273c5190242d0b4f0c6a1788abf6"
+          }
+        ],
+        "height": 1600,
+        "path": "visual-parity/source-reference.png",
+        "revision": "fd63a75dad3d0e8555ba22a47e720d285889fbf0",
+        "sha256": "959bac98266bec6a6cd78c0e6af1c42fab6da6c089455c2771ec6a1040e48e5a",
+        "width": 2400
+      }
+    ]
+  },
+  "candidate": {
+    "backend": "skia-dawn-metal",
+    "captured_at": "2026-07-12T07:00:00Z",
+    "dpr": 2,
+    "fonts": [
+      {
+        "family": ".AppleSystemUIFont / SFNS",
+        "path": "oracle-inputs/candidate-font-receipt.json",
+        "sha256": "4e8447f6067aa2876a496db18b2c3733762de42bf343532acf57eae56394ac1e"
+      }
+    ],
+    "height": 1600,
+    "path": "oracle-inputs/native-repeat-1.png",
+    "revision": "working-tree-00d3d8b1b02ec2560904b498594fa899dcad609e",
+    "sha256": "3f22827d9bff31b42fbd316b1a01cdd764e1f56da1b7643ba040154b31b7cfc5",
+    "width": 2400
+  },
+  "critical_regions": [
+    {
+      "minimum_pixel_similarity": 0.95,
+      "name": "composer",
+      "rect": {
+        "height": 224,
+        "width": 1776,
+        "x": 592,
+        "y": 1206
+      }
+    }
+  ],
+  "freshness": {
+    "max_age_seconds": 604800
+  },
+  "masks": [],
+  "schema": "pulp-visual-parity-manifest-v1",
+  "source": {
+    "backend": "chromium-144.0.7559.111",
+    "captured_at": "2026-07-11T20:00:00Z",
+    "dpr": 2,
+    "fonts": [
+      {
+        "family": "Inter Variable",
+        "path": "oracle-inputs/source-font-receipt.json",
+        "sha256": "d18b048ce0ee45c9badbba00a3d6b67c1764273c5190242d0b4f0c6a1788abf6"
+      }
+    ],
+    "height": 1600,
+    "path": "visual-parity/baselines/01-shell/source.png",
+    "revision": "fd63a75dad3d0e8555ba22a47e720d285889fbf0",
+    "sha256": "d363d609c214a7a4e7b34a58e0eea9b87a4c588d3fcd457c5a9aaf64c12cc7b0",
+    "width": 2400
+  },
+  "threshold_approval": {
+    "policy_sha256": "f4a1da4755a5c8dc8429d146fe1e37b527541e9753733ce4bc33c6d30c238a94",
+    "rationale": "0.95 does not exceed measured 0.9560427543049747 same-renderer source repeatability; no masks or aggregate waiver",
+    "review_commit": "40a32031622568ff202b9b7940b32fe29ba9b605",
+    "reviewed_by": "oracle integration"
+  },
+  "thresholds": {
+    "metric": "normalized-rgb-l2-v1"
+  }
+}

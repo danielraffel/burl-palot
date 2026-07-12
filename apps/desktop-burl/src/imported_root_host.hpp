@@ -26,6 +26,8 @@ public:
 	[[nodiscard]] bool source_observed_primary_tree() const noexcept;
 	[[nodiscard]] std::size_t attached_action_count() const noexcept;
 	[[nodiscard]] const std::vector<std::string>& unattached_required_actions() const noexcept;
+	bool invoke_bound_action(std::string_view id);
+	pulp::view::TextEditor* bound_composer() const noexcept;
 
 private:
 	class BindingContext;

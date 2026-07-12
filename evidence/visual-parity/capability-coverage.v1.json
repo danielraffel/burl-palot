@@ -1,0 +1,4482 @@
+{
+  "schema": "palot-capability-coverage-v1",
+  "sourceSemantics": "evidence/visual-parity/baselines/01-shell/source-semantics.json",
+  "sourceSemanticsSha256": "cde304eb408da4379d598b2b3e7508fa7ebb19b72dfbbcf02b06f53a0b5fbac4",
+  "scenarioManifest": "evidence/visual-parity/scenarios.v1.json",
+  "scenarioManifestSha256": "f49e6c95f132012f8315def0919229bf18d67c4a55a5a755634ee46e279a6c70",
+  "computedProperties": [
+    {
+      "name": "alignContent",
+      "values": [
+        {
+          "value": "normal",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        }
+      ]
+    },
+    {
+      "name": "alignItems",
+      "values": [
+        {
+          "value": "center",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "normal",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        }
+      ]
+    },
+    {
+      "name": "alignSelf",
+      "values": [
+        {
+          "value": "auto",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "stretch",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        }
+      ]
+    },
+    {
+      "name": "backdropFilter",
+      "values": [
+        {
+          "value": "none",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        }
+      ]
+    },
+    {
+      "name": "backgroundColor",
+      "values": [
+        {
+          "value": "color(srgb 0 0 0 / 0)",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "color(srgb 0 0.0941177 0.2 / 0.35)",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "color(srgb 0.0509804 0.0509804 0.0509804 / 0.18)",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "color(srgb 0.0941176 0.0941176 0.0941176 / 0.8)",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "oklab(0.301182 0.0000137091 0.00000602007 / 0.3)",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "oklab(0.301182 0.0000137091 0.00000602007 / 0.6)",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "oklab(0.999994 0.0000455678 0.0000200868 / 0.05)",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "oklch(0.723 0.219 149.579)",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "rgb(24, 24, 24)",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "rgb(255, 255, 255)",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "rgb(33, 33, 33)",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "rgb(40, 40, 40)",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "rgb(46, 46, 46)",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "rgba(0, 0, 0, 0)",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        }
+      ]
+    },
+    {
+      "name": "backgroundImage",
+      "values": [
+        {
+          "value": "linear-gradient(90deg, rgba(0, 0, 0, 0) calc(50% - 30px), rgb(24, 24, 24), rgba(0, 0, 0, 0) calc(50% + 30px)), linear-gradient(rgb(175, 175, 175), rgb(175, 175, 175))",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "none",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        }
+      ]
+    },
+    {
+      "name": "border",
+      "values": [
+        {
+          "value": "",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "0px none rgb(175, 175, 175)",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "0px none rgb(46, 46, 46)",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "0px solid rgb(46, 46, 46)",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "0px solid rgba(0, 0, 0, 0)",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "1px solid oklab(0.301182 0.0000137091 0.00000602007 / 0.6)",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "1px solid rgb(46, 46, 46)",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "1px solid rgba(0, 0, 0, 0)",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        }
+      ]
+    },
+    {
+      "name": "borderBottomColor",
+      "values": [
+        {
+          "value": "oklab(0.301182 0.0000137091 0.00000602007 / 0.6)",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "rgb(175, 175, 175)",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "rgb(46, 46, 46)",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "rgba(0, 0, 0, 0)",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        }
+      ]
+    },
+    {
+      "name": "borderBottomLeftRadius",
+      "values": [
+        {
+          "value": "0px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "1.67772e+07px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "10.5px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "10px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "12.5px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "16.5px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "4px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "7.5px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "8.5px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        }
+      ]
+    },
+    {
+      "name": "borderBottomRightRadius",
+      "values": [
+        {
+          "value": "0px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "1.67772e+07px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "10.5px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "10px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "12.5px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "16.5px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "4px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "7.5px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "8.5px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        }
+      ]
+    },
+    {
+      "name": "borderBottomWidth",
+      "values": [
+        {
+          "value": "0px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "1px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        }
+      ]
+    },
+    {
+      "name": "borderLeftColor",
+      "values": [
+        {
+          "value": "oklab(0.301182 0.0000137091 0.00000602007 / 0.6)",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "rgb(175, 175, 175)",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "rgb(46, 46, 46)",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "rgba(0, 0, 0, 0)",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        }
+      ]
+    },
+    {
+      "name": "borderLeftWidth",
+      "values": [
+        {
+          "value": "0px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "1px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        }
+      ]
+    },
+    {
+      "name": "borderRadius",
+      "values": [
+        {
+          "value": "0px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "0px 10.5px 10.5px 0px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "1.67772e+07px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "10.5px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "10.5px 0px 0px 10.5px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "10px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "12.5px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "16.5px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "16.5px 16.5px 0px 0px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "4px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "7.5px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "8.5px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        }
+      ]
+    },
+    {
+      "name": "borderRightColor",
+      "values": [
+        {
+          "value": "oklab(0.301182 0.0000137091 0.00000602007 / 0.6)",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "rgb(175, 175, 175)",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "rgb(46, 46, 46)",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "rgba(0, 0, 0, 0)",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        }
+      ]
+    },
+    {
+      "name": "borderRightWidth",
+      "values": [
+        {
+          "value": "0px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "1px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        }
+      ]
+    },
+    {
+      "name": "borderTopColor",
+      "values": [
+        {
+          "value": "oklab(0.301182 0.0000137091 0.00000602007 / 0.6)",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "rgb(175, 175, 175)",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "rgb(46, 46, 46)",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "rgba(0, 0, 0, 0)",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        }
+      ]
+    },
+    {
+      "name": "borderTopLeftRadius",
+      "values": [
+        {
+          "value": "0px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "1.67772e+07px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "10.5px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "10px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "12.5px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "16.5px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "4px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "7.5px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "8.5px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        }
+      ]
+    },
+    {
+      "name": "borderTopRightRadius",
+      "values": [
+        {
+          "value": "0px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "1.67772e+07px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "10.5px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "10px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "12.5px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "16.5px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "4px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "7.5px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "8.5px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        }
+      ]
+    },
+    {
+      "name": "borderTopWidth",
+      "values": [
+        {
+          "value": "0px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "1px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        }
+      ]
+    },
+    {
+      "name": "bottom",
+      "values": [
+        {
+          "value": "-2px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "0px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "10.5px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "118px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "161px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "764px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "801px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "auto",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        }
+      ]
+    },
+    {
+      "name": "boxShadow",
+      "values": [
+        {
+          "value": "none",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgb(255, 255, 255) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0.05) 0px 1px 2px 0px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        }
+      ]
+    },
+    {
+      "name": "color",
+      "values": [
+        {
+          "value": "oklab(0.754013 0.0000343323 0.0000150204 / 0.2)",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "oklab(0.754013 0.0000343323 0.0000150204 / 0.3)",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "oklab(0.754013 0.0000343323 0.0000150204 / 0.4)",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "oklab(0.754013 0.0000343323 0.0000150204 / 0.6)",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "oklab(0.754013 0.0000343323 0.0000150204 / 0.7)",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "oklab(0.999994 0.0000455677 0.0000200868 / 0.7)",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "oklch(0.637 0.237 25.331)",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "oklch(0.723 0.219 149.579)",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "oklch(0.795 0.184 86.047)",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "rgb(13, 13, 13)",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "rgb(175, 175, 175)",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "rgb(255, 255, 255)",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "rgba(0, 0, 0, 0)",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        }
+      ]
+    },
+    {
+      "name": "cursor",
+      "values": [
+        {
+          "value": "auto",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "default",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "pointer",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "text",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        }
+      ]
+    },
+    {
+      "name": "display",
+      "values": [
+        {
+          "value": "block",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "flex",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "inline",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "inline-block",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "list-item",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        }
+      ]
+    },
+    {
+      "name": "filter",
+      "values": [
+        {
+          "value": "invert(1)",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "none",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        }
+      ]
+    },
+    {
+      "name": "flexBasis",
+      "values": [
+        {
+          "value": "0%",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "auto",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        }
+      ]
+    },
+    {
+      "name": "flexDirection",
+      "values": [
+        {
+          "value": "column",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "row",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        }
+      ]
+    },
+    {
+      "name": "flexGrow",
+      "values": [
+        {
+          "value": "0",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "1",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        }
+      ]
+    },
+    {
+      "name": "flexShrink",
+      "values": [
+        {
+          "value": "0",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "1",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        }
+      ]
+    },
+    {
+      "name": "flexWrap",
+      "values": [
+        {
+          "value": "nowrap",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "wrap",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        }
+      ]
+    },
+    {
+      "name": "fontFamily",
+      "values": [
+        {
+          "value": "-apple-system, \"system-ui\", \"Segoe UI\", system-ui, sans-serif",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "ui-monospace, SFMono-Regular, \"SF Mono\", Menlo, Consolas, \"Liberation Mono\", monospace",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        }
+      ]
+    },
+    {
+      "name": "fontSize",
+      "values": [
+        {
+          "value": "10px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "11px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "13px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "15px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "16px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        }
+      ]
+    },
+    {
+      "name": "fontWeight",
+      "values": [
+        {
+          "value": "400",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "500",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "600",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        }
+      ]
+    },
+    {
+      "name": "gap",
+      "values": [
+        {
+          "value": "10px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "12px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "2px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "2px 6px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "40px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "4px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "6px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "8px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "normal",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        }
+      ]
+    },
+    {
+      "name": "height",
+      "values": [
+        {
+          "value": "0px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "104px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "105.5px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "106px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "107px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "10px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "112px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "116px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "118px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "11px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "12px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "13.75px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "136.5px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "13px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "140px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "14px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "152px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "15px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "16.25px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "16.5px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "160.5px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "16px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "182px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "186px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "188px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "18px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "1px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "20px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "22.5px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "224px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "22px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "24.5px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "248.5px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "24px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "26px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "28px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "30px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "32px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "39px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "413px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "44.5px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "44px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "45px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "46px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "52.5px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "53px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "56px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "581.5px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "593px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "596px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "641px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "64px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "666px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "68px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "742px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "788px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "800px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "84px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "88px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "8px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "auto",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        }
+      ]
+    },
+    {
+      "name": "justifyContent",
+      "values": [
+        {
+          "value": "center",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "flex-end",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "normal",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "space-between",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        }
+      ]
+    },
+    {
+      "name": "left",
+      "values": [
+        {
+          "value": "0px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "10.5px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "104.5px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "10px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "140.5px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "204px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "32.5px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "54.5px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "68.5px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "93px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "auto",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        }
+      ]
+    },
+    {
+      "name": "letterSpacing",
+      "values": [
+        {
+          "value": "normal",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        }
+      ]
+    },
+    {
+      "name": "lineHeight",
+      "values": [
+        {
+          "value": "10px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "13.75px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "13px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "15px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "16.25px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "16.5px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "18px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "22px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "24px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        }
+      ]
+    },
+    {
+      "name": "margin",
+      "values": [
+        {
+          "value": "-1px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "0px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "0px 0px 0px 402.258px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "0px 0px 0px 659.781px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "0px 0px 0px 8px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "0px 0px 16px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "0px 0px 16px 43.75px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "0px 0px 40px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "0px 0px 8px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "0px 12px 12px 0px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "0px 8px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "8px 2px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        }
+      ]
+    },
+    {
+      "name": "marginBottom",
+      "values": [
+        {
+          "value": "-1px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "0px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "12px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "16px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "40px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "8px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        }
+      ]
+    },
+    {
+      "name": "marginLeft",
+      "values": [
+        {
+          "value": "-1px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "0px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "2px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "402.258px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "43.75px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "659.781px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "8px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        }
+      ]
+    },
+    {
+      "name": "marginRight",
+      "values": [
+        {
+          "value": "-1px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "0px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "12px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "2px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "8px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        }
+      ]
+    },
+    {
+      "name": "marginTop",
+      "values": [
+        {
+          "value": "-1px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "0px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "8px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        }
+      ]
+    },
+    {
+      "name": "maxHeight",
+      "values": [
+        {
+          "value": "128px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "192px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "none",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        }
+      ]
+    },
+    {
+      "name": "maxWidth",
+      "values": [
+        {
+          "value": "100%",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "896px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "95%",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "calc(100% - 64px)",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "none",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        }
+      ]
+    },
+    {
+      "name": "minHeight",
+      "values": [
+        {
+          "value": "0px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "64px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "800px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "auto",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        }
+      ]
+    },
+    {
+      "name": "minWidth",
+      "values": [
+        {
+          "value": "0px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "480px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "auto",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        }
+      ]
+    },
+    {
+      "name": "opacity",
+      "values": [
+        {
+          "value": "0",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "1",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        }
+      ]
+    },
+    {
+      "name": "overflowWrap",
+      "values": [
+        {
+          "value": "break-word",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "normal",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        }
+      ]
+    },
+    {
+      "name": "overflowX",
+      "values": [
+        {
+          "value": "auto",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "clip",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "hidden",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "visible",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        }
+      ]
+    },
+    {
+      "name": "overflowY",
+      "values": [
+        {
+          "value": "auto",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "clip",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "hidden",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "visible",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        }
+      ]
+    },
+    {
+      "name": "padding",
+      "values": [
+        {
+          "value": "0px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "0px 12px 0px 16px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "0px 4px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "0px 6px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "0px 8px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "12px 16px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "24px 16px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "2px 0px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "2px 4px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "2px 6px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "48px 0px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "4px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "4px 0px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "4px 8px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "6px 10px 8px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "8px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "8px 10px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "8px 12px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "8px 16px 16px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "8px 8px 0px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        }
+      ]
+    },
+    {
+      "name": "paddingBottom",
+      "values": [
+        {
+          "value": "0px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "12px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "16px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "24px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "2px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "48px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "4px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "8px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        }
+      ]
+    },
+    {
+      "name": "paddingLeft",
+      "values": [
+        {
+          "value": "0px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "10px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "12px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "16px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "4px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "6px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "8px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        }
+      ]
+    },
+    {
+      "name": "paddingRight",
+      "values": [
+        {
+          "value": "0px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "10px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "12px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "16px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "4px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "6px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "8px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        }
+      ]
+    },
+    {
+      "name": "paddingTop",
+      "values": [
+        {
+          "value": "0px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "12px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "24px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "2px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "48px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "4px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "6px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "8px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        }
+      ]
+    },
+    {
+      "name": "position",
+      "values": [
+        {
+          "value": "absolute",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "fixed",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "relative",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "static",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        }
+      ]
+    },
+    {
+      "name": "right",
+      "values": [
+        {
+          "value": "-2px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "0px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "10.5px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "1049px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "1201px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "12px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "32.5px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "54.5px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "767.5px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "803.5px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "839.5px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "875.5px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "auto",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        }
+      ]
+    },
+    {
+      "name": "textAlign",
+      "values": [
+        {
+          "value": "center",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "left",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "start",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        }
+      ]
+    },
+    {
+      "name": "textOverflow",
+      "values": [
+        {
+          "value": "clip",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "ellipsis",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        }
+      ]
+    },
+    {
+      "name": "top",
+      "values": [
+        {
+          "value": "0px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "10.5px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "10px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "14px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "421.5px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "8px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "auto",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        }
+      ]
+    },
+    {
+      "name": "transform",
+      "values": [
+        {
+          "value": "matrix(1, 0, 0, 1, 0, 0)",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "none",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        }
+      ]
+    },
+    {
+      "name": "whiteSpace",
+      "values": [
+        {
+          "value": "normal",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "nowrap",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "pre-wrap",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        }
+      ]
+    },
+    {
+      "name": "width",
+      "values": [
+        {
+          "value": "10.9922px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "102.828px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "10px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "11.9609px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "114.258px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "1200px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "126.672px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "129.273px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "12px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "133.406px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "143.016px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "14px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "15.6875px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "155.328px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "158.828px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "167.109px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "16px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "17.3359px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "17.6875px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "18.7031px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "188.539px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "19.0781px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "190.523px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "191.148px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "1px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "20.9609px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "200.312px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "20px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "210.867px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "21px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "228.867px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "22px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "237.359px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "24.8516px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "25.4766px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "25.9609px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "264px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "27.4609px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "27.8125px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "28.0625px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "280px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "28px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "3.33594px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "3.89062px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "30.4219px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "31.1016px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "31.3047px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "32px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "33.2109px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "331.891px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "34.6797px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "35.3516px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "36.9219px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "37.8125px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "370.602px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "39.3516px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "39.6016px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "392.523px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "393.32px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "4.4375px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "40.2344px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "406.602px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "408.922px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "410.664px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "416.242px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "43.8125px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "45.5312px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "472px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "480px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "50.6641px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "52.2344px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "53.8125px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "55.5938px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "56.6016px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "58px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "6.39062px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "62.0156px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "64px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "66.0547px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "66.7656px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "67.1016px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "69.2109px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "70.5312px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "70px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "72.9219px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "76.7656px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "77.5938px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "799.25px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "80.7656px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "831.25px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "86.0703px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "87.9688px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "873px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "875px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "880px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "8px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "90.6719px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "907px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "908px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "92.2109px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "93.2188px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "94px",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "auto",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        }
+      ]
+    },
+    {
+      "name": "wordWrap",
+      "values": [
+        {
+          "value": "break-word",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        },
+        {
+          "value": "normal",
+          "observation": "observed",
+          "decision": "unsupported",
+          "route": null,
+          "evidenceIds": [],
+          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+        }
+      ]
+    }
+  ],
+  "behaviorClasses": [
+    {
+      "name": "accessibility",
+      "observation": "observed",
+      "decision": "unsupported",
+      "route": null,
+      "evidenceIds": [],
+      "reason": "No exact behavior route plus resolving evidence ID is published; screenshot scoring is gated."
+    },
+    {
+      "name": "active/pressed",
+      "observation": "observed",
+      "decision": "unsupported",
+      "route": null,
+      "evidenceIds": [],
+      "reason": "No exact behavior route plus resolving evidence ID is published; screenshot scoring is gated."
+    },
+    {
+      "name": "cancellation",
+      "observation": "observed",
+      "decision": "unsupported",
+      "route": null,
+      "evidenceIds": [],
+      "reason": "No exact behavior route plus resolving evidence ID is published; screenshot scoring is gated."
+    },
+    {
+      "name": "clipboard",
+      "observation": "observed",
+      "decision": "unsupported",
+      "route": null,
+      "evidenceIds": [],
+      "reason": "No exact behavior route plus resolving evidence ID is published; screenshot scoring is gated."
+    },
+    {
+      "name": "disabled",
+      "observation": "observed",
+      "decision": "unsupported",
+      "route": null,
+      "evidenceIds": [],
+      "reason": "No exact behavior route plus resolving evidence ID is published; screenshot scoring is gated."
+    },
+    {
+      "name": "focus-visible",
+      "observation": "observed",
+      "decision": "unsupported",
+      "route": null,
+      "evidenceIds": [],
+      "reason": "No exact behavior route plus resolving evidence ID is published; screenshot scoring is gated."
+    },
+    {
+      "name": "hover",
+      "observation": "observed",
+      "decision": "unsupported",
+      "route": null,
+      "evidenceIds": [],
+      "reason": "No exact behavior route plus resolving evidence ID is published; screenshot scoring is gated."
+    },
+    {
+      "name": "ime-composition",
+      "observation": "observed",
+      "decision": "unsupported",
+      "route": null,
+      "evidenceIds": [],
+      "reason": "No exact behavior route plus resolving evidence ID is published; screenshot scoring is gated."
+    },
+    {
+      "name": "keyboard-navigation",
+      "observation": "observed",
+      "decision": "unsupported",
+      "route": null,
+      "evidenceIds": [],
+      "reason": "No exact behavior route plus resolving evidence ID is published; screenshot scoring is gated."
+    },
+    {
+      "name": "loading/streaming",
+      "observation": "observed",
+      "decision": "unsupported",
+      "route": null,
+      "evidenceIds": [],
+      "reason": "No exact behavior route plus resolving evidence ID is published; screenshot scoring is gated."
+    },
+    {
+      "name": "persistence",
+      "observation": "observed",
+      "decision": "unsupported",
+      "route": null,
+      "evidenceIds": [],
+      "reason": "No exact behavior route plus resolving evidence ID is published; screenshot scoring is gated."
+    },
+    {
+      "name": "responsive-layout",
+      "observation": "observed",
+      "decision": "unsupported",
+      "route": null,
+      "evidenceIds": [],
+      "reason": "No exact behavior route plus resolving evidence ID is published; screenshot scoring is gated."
+    },
+    {
+      "name": "retry",
+      "observation": "observed",
+      "decision": "unsupported",
+      "route": null,
+      "evidenceIds": [],
+      "reason": "No exact behavior route plus resolving evidence ID is published; screenshot scoring is gated."
+    },
+    {
+      "name": "scroll-anchor",
+      "observation": "observed",
+      "decision": "unsupported",
+      "route": null,
+      "evidenceIds": [],
+      "reason": "No exact behavior route plus resolving evidence ID is published; screenshot scoring is gated."
+    },
+    {
+      "name": "selection",
+      "observation": "observed",
+      "decision": "unsupported",
+      "route": null,
+      "evidenceIds": [],
+      "reason": "No exact behavior route plus resolving evidence ID is published; screenshot scoring is gated."
+    }
+  ]
+}

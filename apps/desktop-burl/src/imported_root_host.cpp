@@ -1,6 +1,7 @@
 #include "imported_root_host.hpp"
 
 #include <pulp/view/buttons.hpp>
+#include <pulp/view/text_editor.hpp>
 
 #include <algorithm>
 #include <fstream>
@@ -28,6 +29,17 @@ bool has_error(const std::vector<pulp::view::ImportDiagnostic>& diagnostics) {
 	});
 }
 
+std::string error_diagnostics(const std::vector<pulp::view::ImportDiagnostic>& diagnostics) {
+	std::string message;
+	for (const auto& diagnostic : diagnostics) {
+		if (diagnostic.severity != pulp::view::ImportDiagnosticSeverity::error) continue;
+		message += " [" + diagnostic.code + " " + diagnostic.path;
+		if (diagnostic.property) message += " property=" + *diagnostic.property;
+		message += ": " + diagnostic.message + "]";
+	}
+	return message;
+}
+
 }  // namespace
 
 class ImportedRootHost::BindingContext final : public pulp::view::NativeImportBindingContext {
@@ -44,8 +56,29 @@ public:
 	                             const pulp::view::NativeImportHostActionDescriptor& descriptor) override {
 		if (auto* button = dynamic_cast<pulp::view::TextButton*>(&view)) attach(*button, descriptor);
 	}
+	void bind_text_editor(pulp::view::TextEditor& editor,
+	                      const pulp::view::NativeImportTextBindingDescriptor& descriptor) override {
+		if (descriptor.value_key != "composer.draft") return;
+		composer_ = &editor;
+		editor.multi_line = true;
+		editor.multi_line_return_behavior = pulp::view::TextEditor::MultiLineReturnBehavior::commit;
+		editor.on_return = [this](const std::string& text) {
+			invoke(text.empty() ? "prompt.retry" : "prompt.send", text);
+		};
+		editor.on_escape = [this] { invoke("prompt.cancel", ""); };
+		attached_.insert("prompt.send");
+		attached_.insert("prompt.retry");
+		attached_.insert("prompt.cancel");
+	}
 
 	[[nodiscard]] const std::unordered_set<std::string>& attached() const noexcept { return attached_; }
+	[[nodiscard]] pulp::view::TextEditor* composer() const noexcept { return composer_; }
+	bool invoke_bound(std::string_view id) {
+		auto button = buttons_.find(std::string(id));
+		if (button == buttons_.end() || !button->second->on_click) return false;
+		button->second->on_click();
+		return true;
+	}
 
 private:
 	void attach(pulp::view::TextButton& button,
@@ -56,10 +89,19 @@ private:
 		const auto payload = std::string(descriptor.payload_contract);
 		button.on_click = [callback = endpoint->second, payload] { callback(payload); };
 		attached_.insert(id);
+		buttons_[id] = &button;
+	}
+	bool invoke(std::string_view id, std::string_view payload) {
+		auto endpoint = endpoints_.find(std::string(id));
+		if (endpoint == endpoints_.end()) return false;
+		endpoint->second(payload);
+		return true;
 	}
 
 	std::unordered_map<std::string, ActionEndpoint>& endpoints_;
 	std::unordered_set<std::string> attached_;
+	std::unordered_map<std::string, pulp::view::TextButton*> buttons_;
+	pulp::view::TextEditor* composer_ = nullptr;
 };
 
 ImportedRootHost::ImportedRootHost() = default;
@@ -92,7 +134,8 @@ void ImportedRootHost::load(const std::filesystem::path& design_ir_path,
 	options.diagnostics_out = &diagnostics;
 	auto root = pulp::view::build_native_view_tree(*parsed, parsed->asset_manifest, options);
 	if (!root || root->child_count() == 0 || has_error(diagnostics))
-		throw std::runtime_error("source-observed primary tree failed native materialization");
+		throw std::runtime_error("source-observed primary tree failed native materialization" +
+		                         error_diagnostics(diagnostics));
 
 	binding_context_ = std::make_unique<BindingContext>(endpoints_);
 	pulp::view::bind_native_view_tree(*root, *parsed, *binding_context_, {.diagnostics_out = &diagnostics});
@@ -121,6 +164,14 @@ std::size_t ImportedRootHost::attached_action_count() const noexcept { return at
 
 const std::vector<std::string>& ImportedRootHost::unattached_required_actions() const noexcept {
 	return unattached_required_actions_;
+}
+
+bool ImportedRootHost::invoke_bound_action(std::string_view id) {
+	return binding_context_ && binding_context_->invoke_bound(id);
+}
+
+pulp::view::TextEditor* ImportedRootHost::bound_composer() const noexcept {
+	return binding_context_ ? binding_context_->composer() : nullptr;
 }
 
 std::filesystem::path palot_bundle_resource(std::string_view relative_path) {
