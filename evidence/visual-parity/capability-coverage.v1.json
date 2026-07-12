@@ -1038,26 +1038,23 @@
         {
           "value": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgb(255, 255, 255) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed ordered boxShadow list -> splitCssList + CSS Color 4 normalization -> TypedPaint shadow layers -> NativeDesignIR ordered CSS -> IRBoxShadow vector -> reverse CSS paint order per outset/inset stack -> alpha-zero suppression -> Skia draw_box_shadow",
+          "evidenceIds": ["semantic:observed-dom-box-shadow-layers"]
         },
         {
           "value": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed ordered boxShadow list -> splitCssList + CSS Color 4 normalization -> TypedPaint shadow layers -> NativeDesignIR ordered CSS -> IRBoxShadow vector -> reverse CSS paint order per outset/inset stack -> alpha-zero suppression -> Skia draw_box_shadow",
+          "evidenceIds": ["semantic:observed-dom-box-shadow-layers"]
         },
         {
           "value": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0.05) 0px 1px 2px 0px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed ordered boxShadow list -> splitCssList + CSS Color 4 normalization -> TypedPaint shadow layers -> NativeDesignIR ordered CSS -> IRBoxShadow vector -> reverse CSS paint order per outset/inset stack -> alpha-zero suppression -> Skia draw_box_shadow",
+          "evidenceIds": ["semantic:observed-dom-box-shadow-layers"]
         }
       ]
     },
