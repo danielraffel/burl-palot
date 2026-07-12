@@ -3215,18 +3215,16 @@
         {
           "value": "matrix(1, 0, 0, 1, 0, 0)",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed CSS invertible matrix()/none or canonical translate-px/scale/rotate-deg plus percent-pair or px-pair transform-origin -> validated TypedPaint strings -> NativeDesignIR style transform/origin -> validated IRStyle -> Affine2D matrix and responsive/absolute View origin -> shared Canvas concat paint and inverse View hit-test mapping -> Skia pixels; singular, percentage-translate without authored receipt, perspective, and 3D fail closed",
+          "evidenceIds": ["semantic:observed-dom-transform-2d"]
         },
         {
           "value": "none",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed CSS invertible matrix()/none or canonical translate-px/scale/rotate-deg plus percent-pair or px-pair transform-origin -> validated TypedPaint strings -> NativeDesignIR style transform/origin -> validated IRStyle -> Affine2D matrix and responsive/absolute View origin -> shared Canvas concat paint and inverse View hit-test mapping -> Skia pixels; singular, percentage-translate without authored receipt, perspective, and 3D fail closed",
+          "evidenceIds": ["semantic:observed-dom-transform-2d"]
         }
       ]
     },
