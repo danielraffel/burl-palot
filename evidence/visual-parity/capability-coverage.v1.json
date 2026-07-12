@@ -816,72 +816,64 @@
           "value": "0px",
           "observation": "observed",
           "decision": "lowered",
-          "route": "computed borderTopWidth + CSS Color 4 borderTopColor -> normalizeCssColor -> TypedPaint top slots -> NativeDesignIR top style -> generic View width-and-alpha gate -> Skia side fill or identity",
-          "evidenceIds": ["semantic:observed-dom-border-top-color"]
+          "route": "computed borderTopLeftRadius px -> authored TypedPaint value -> NativeDesignIR corner style -> View authored radius -> CSS overlap common-scale used value at paint/resize -> Skia path",
+          "evidenceIds": ["semantic:observed-dom-border-corner-top-left"]
         },
         {
           "value": "1.67772e+07px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed borderTopLeftRadius px -> authored TypedPaint value -> NativeDesignIR corner style -> View authored radius -> CSS overlap common-scale used value at paint/resize -> Skia path",
+          "evidenceIds": ["semantic:observed-dom-border-corner-top-left"]
         },
         {
           "value": "10.5px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed borderTopLeftRadius px -> authored TypedPaint value -> NativeDesignIR corner style -> View authored radius -> CSS overlap common-scale used value at paint/resize -> Skia path",
+          "evidenceIds": ["semantic:observed-dom-border-corner-top-left"]
         },
         {
           "value": "10px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed borderTopLeftRadius px -> authored TypedPaint value -> NativeDesignIR corner style -> View authored radius -> CSS overlap common-scale used value at paint/resize -> Skia path",
+          "evidenceIds": ["semantic:observed-dom-border-corner-top-left"]
         },
         {
           "value": "12.5px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed borderTopLeftRadius px -> authored TypedPaint value -> NativeDesignIR corner style -> View authored radius -> CSS overlap common-scale used value at paint/resize -> Skia path",
+          "evidenceIds": ["semantic:observed-dom-border-corner-top-left"]
         },
         {
           "value": "16.5px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed borderTopLeftRadius px -> authored TypedPaint value -> NativeDesignIR corner style -> View authored radius -> CSS overlap common-scale used value at paint/resize -> Skia path",
+          "evidenceIds": ["semantic:observed-dom-border-corner-top-left"]
         },
         {
           "value": "4px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed borderTopLeftRadius px -> authored TypedPaint value -> NativeDesignIR corner style -> View authored radius -> CSS overlap common-scale used value at paint/resize -> Skia path",
+          "evidenceIds": ["semantic:observed-dom-border-corner-top-left"]
         },
         {
           "value": "7.5px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed borderTopLeftRadius px -> authored TypedPaint value -> NativeDesignIR corner style -> View authored radius -> CSS overlap common-scale used value at paint/resize -> Skia path",
+          "evidenceIds": ["semantic:observed-dom-border-corner-top-left"]
         },
         {
           "value": "8.5px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed borderTopLeftRadius px -> authored TypedPaint value -> NativeDesignIR corner style -> View authored radius -> CSS overlap common-scale used value at paint/resize -> Skia path",
+          "evidenceIds": ["semantic:observed-dom-border-corner-top-left"]
         }
       ]
     },
@@ -891,74 +883,65 @@
         {
           "value": "0px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed borderTopRightRadius px -> authored TypedPaint value -> NativeDesignIR corner style -> View authored radius -> CSS overlap common-scale used value at paint/resize -> Skia path",
+          "evidenceIds": ["semantic:observed-dom-border-corner-top-right"]
         },
         {
           "value": "1.67772e+07px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed borderTopRightRadius px -> authored TypedPaint value -> NativeDesignIR corner style -> View authored radius -> CSS overlap common-scale used value at paint/resize -> Skia path",
+          "evidenceIds": ["semantic:observed-dom-border-corner-top-right"]
         },
         {
           "value": "10.5px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed borderTopRightRadius px -> authored TypedPaint value -> NativeDesignIR corner style -> View authored radius -> CSS overlap common-scale used value at paint/resize -> Skia path",
+          "evidenceIds": ["semantic:observed-dom-border-corner-top-right"]
         },
         {
           "value": "10px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed borderTopRightRadius px -> authored TypedPaint value -> NativeDesignIR corner style -> View authored radius -> CSS overlap common-scale used value at paint/resize -> Skia path",
+          "evidenceIds": ["semantic:observed-dom-border-corner-top-right"]
         },
         {
           "value": "12.5px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed borderTopRightRadius px -> authored TypedPaint value -> NativeDesignIR corner style -> View authored radius -> CSS overlap common-scale used value at paint/resize -> Skia path",
+          "evidenceIds": ["semantic:observed-dom-border-corner-top-right"]
         },
         {
           "value": "16.5px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed borderTopRightRadius px -> authored TypedPaint value -> NativeDesignIR corner style -> View authored radius -> CSS overlap common-scale used value at paint/resize -> Skia path",
+          "evidenceIds": ["semantic:observed-dom-border-corner-top-right"]
         },
         {
           "value": "4px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed borderTopRightRadius px -> authored TypedPaint value -> NativeDesignIR corner style -> View authored radius -> CSS overlap common-scale used value at paint/resize -> Skia path",
+          "evidenceIds": ["semantic:observed-dom-border-corner-top-right"]
         },
         {
           "value": "7.5px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed borderTopRightRadius px -> authored TypedPaint value -> NativeDesignIR corner style -> View authored radius -> CSS overlap common-scale used value at paint/resize -> Skia path",
+          "evidenceIds": ["semantic:observed-dom-border-corner-top-right"]
         },
         {
           "value": "8.5px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed borderTopRightRadius px -> authored TypedPaint value -> NativeDesignIR corner style -> View authored radius -> CSS overlap common-scale used value at paint/resize -> Skia path",
+          "evidenceIds": ["semantic:observed-dom-border-corner-top-right"]
         }
       ]
     },
