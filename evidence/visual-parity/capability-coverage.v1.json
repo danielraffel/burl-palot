@@ -3142,18 +3142,16 @@
         {
           "value": "clip",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed CSS text-overflow clip/ellipsis plus supported white-space and positive webkit line clamp -> validated TypedText values -> NativeDesignIR style textOverflow/whiteSpace/numberOfLines -> validated IRStyle -> Label single/multiline mode, content-box overflow axes, line clamp, and UTF-8-safe truncate_to_width -> shared paint and text-edit caret geometry -> Skia pixels; unsupported syntax fails closed",
+          "evidenceIds": ["semantic:observed-dom-text-overflow"]
         },
         {
           "value": "ellipsis",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed CSS text-overflow clip/ellipsis plus supported white-space and positive webkit line clamp -> validated TypedText values -> NativeDesignIR style textOverflow/whiteSpace/numberOfLines -> validated IRStyle -> Label single/multiline mode, content-box overflow axes, line clamp, and UTF-8-safe truncate_to_width -> shared paint and text-edit caret geometry -> Skia pixels; unsupported syntax fails closed",
+          "evidenceIds": ["semantic:observed-dom-text-overflow"]
         }
       ]
     },
@@ -3238,26 +3236,23 @@
         {
           "value": "normal",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed CSS text-overflow clip/ellipsis plus supported white-space and positive webkit line clamp -> validated TypedText values -> NativeDesignIR style textOverflow/whiteSpace/numberOfLines -> validated IRStyle -> Label single/multiline mode, content-box overflow axes, line clamp, and UTF-8-safe truncate_to_width -> shared paint and text-edit caret geometry -> Skia pixels; unsupported syntax fails closed",
+          "evidenceIds": ["semantic:observed-dom-text-overflow"]
         },
         {
           "value": "nowrap",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed CSS text-overflow clip/ellipsis plus supported white-space and positive webkit line clamp -> validated TypedText values -> NativeDesignIR style textOverflow/whiteSpace/numberOfLines -> validated IRStyle -> Label single/multiline mode, content-box overflow axes, line clamp, and UTF-8-safe truncate_to_width -> shared paint and text-edit caret geometry -> Skia pixels; unsupported syntax fails closed",
+          "evidenceIds": ["semantic:observed-dom-text-overflow"]
         },
         {
           "value": "pre-wrap",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed CSS text-overflow clip/ellipsis plus supported white-space and positive webkit line clamp -> validated TypedText values -> NativeDesignIR style textOverflow/whiteSpace/numberOfLines -> validated IRStyle -> Label single/multiline mode, content-box overflow axes, line clamp, and UTF-8-safe truncate_to_width -> shared paint and text-edit caret geometry -> Skia pixels; unsupported syntax fails closed",
+          "evidenceIds": ["semantic:observed-dom-text-overflow"]
         }
       ]
     },
