@@ -245,10 +245,13 @@ async function main() {
 			screenWidth: capture.logicalWidth,
 			screenHeight: capture.logicalHeight,
 		})
-		await cdp.command("Page.addScriptToEvaluateOnNewDocument", {
-			source: bootstrapSource(manifest.clock, manifest.sourceBootstrap.localStorage),
-		})
+		const bootstrap = bootstrapSource(manifest.clock, manifest.sourceBootstrap.localStorage)
+		await cdp.command("Page.addScriptToEvaluateOnNewDocument", { source: bootstrap })
+		// A hash-only route change does not create a document, so installing only
+		// the future-document hook leaves the current Electron page unseeded.
+		await cdp.command("Runtime.evaluate", { expression: bootstrap, returnByValue: true })
 		const navigation = new URL(page.url)
+		navigation.searchParams.set("__palotCapture", "1")
 		navigation.hash = manifest.route.slice(1)
 		await cdp.command("Page.navigate", { url: navigation.toString() })
 		await Bun.sleep(1200)
