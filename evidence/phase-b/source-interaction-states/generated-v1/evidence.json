@@ -1,0 +1,321 @@
+{
+  "schemaVersion": 1,
+  "sourceRevision": "fd63a75dad3d0e8555ba22a47e720d285889fbf0",
+  "clock": "2026-07-11T20:00:00.000Z",
+  "capture": {
+    "logicalWidth": 1200,
+    "logicalHeight": 800,
+    "pixelWidth": 2400,
+    "pixelHeight": 1600,
+    "deviceScaleFactor": 2,
+    "boundary": "content",
+    "resizePolicy": "reject"
+  },
+  "records": [
+    {
+      "id": "new-session-hover",
+      "status": "PASS",
+      "action": {
+        "type": "hover"
+      },
+      "postcondition": "matches-hover",
+      "post": {
+        "active": false,
+        "value": "",
+        "dataActive": false,
+        "disabled": false,
+        "hover": true,
+        "activePseudo": false,
+        "rect": {
+          "x": 8,
+          "y": 54,
+          "width": 264,
+          "height": 32
+        },
+        "mouseDownHeldAtCapture": false,
+        "visualStateMethod": "natural",
+        "contentFloorPass": true
+      },
+      "geometry": {
+        "logical": {
+          "x": 8,
+          "y": 54,
+          "width": 264,
+          "height": 32
+        },
+        "pixel": {
+          "left": 16,
+          "top": 108,
+          "width": 528,
+          "height": 64
+        },
+        "devicePixelRatio": 2
+      },
+      "files": {
+        "crop": "new-session-hover/crop.png",
+        "semantics": "new-session-hover/semantics.json"
+      },
+      "hashes": {
+        "crop": "a28b7b8eaea1287e7d1392b598c269588b83140763d3933b8a3f43dd5d0ddc2e",
+        "semantics": "5c9c0708bc7c5b268f75424832303ee19a3760a26cf4d3fc314432e0a812ac9a"
+      }
+    },
+    {
+      "id": "new-session-pressed",
+      "status": "PASS",
+      "action": {
+        "type": "pressed"
+      },
+      "postcondition": "mouse-down-held",
+      "post": {
+        "active": false,
+        "value": "",
+        "dataActive": false,
+        "disabled": false,
+        "hover": true,
+        "activePseudo": true,
+        "rect": {
+          "x": 8,
+          "y": 54,
+          "width": 264,
+          "height": 32
+        },
+        "mouseDownHeldAtCapture": true,
+        "visualStateMethod": "CSS.forcePseudoState(:active)",
+        "contentFloorPass": true
+      },
+      "geometry": {
+        "logical": {
+          "x": 8,
+          "y": 54,
+          "width": 264,
+          "height": 32
+        },
+        "pixel": {
+          "left": 16,
+          "top": 108,
+          "width": 528,
+          "height": 64
+        },
+        "devicePixelRatio": 2
+      },
+      "files": {
+        "crop": "new-session-pressed/crop.png",
+        "semantics": "new-session-pressed/semantics.json"
+      },
+      "hashes": {
+        "crop": "a28b7b8eaea1287e7d1392b598c269588b83140763d3933b8a3f43dd5d0ddc2e",
+        "semantics": "5c9c0708bc7c5b268f75424832303ee19a3760a26cf4d3fc314432e0a812ac9a"
+      }
+    },
+    {
+      "id": "new-session-keyboard-focused",
+      "status": "PASS",
+      "action": {
+        "type": "focus"
+      },
+      "postcondition": "active-element",
+      "post": {
+        "active": true,
+        "value": "",
+        "dataActive": false,
+        "disabled": false,
+        "hover": false,
+        "activePseudo": false,
+        "rect": {
+          "x": 8,
+          "y": 54,
+          "width": 264,
+          "height": 32
+        },
+        "mouseDownHeldAtCapture": false,
+        "visualStateMethod": "natural",
+        "contentFloorPass": true
+      },
+      "geometry": {
+        "logical": {
+          "x": 8,
+          "y": 54,
+          "width": 264,
+          "height": 32
+        },
+        "pixel": {
+          "left": 16,
+          "top": 108,
+          "width": 528,
+          "height": 64
+        },
+        "devicePixelRatio": 2
+      },
+      "files": {
+        "crop": "new-session-keyboard-focused/crop.png",
+        "semantics": "new-session-keyboard-focused/semantics.json"
+      },
+      "hashes": {
+        "crop": "c48e8b49f24e19fe550945c6df8dbed4ed9eecccc8eb4901fba57f7d4fb2c4d2",
+        "semantics": "3a3e8d0a2e988964d2dbc7ed10645694cf68cd367abdf099367383c8a537a00c"
+      }
+    },
+    {
+      "id": "session-selected",
+      "status": "PASS",
+      "action": {
+        "type": "none"
+      },
+      "postcondition": "data-active-present",
+      "post": {
+        "active": false,
+        "value": "",
+        "dataActive": true,
+        "disabled": false,
+        "hover": false,
+        "activePseudo": false,
+        "rect": {
+          "x": 8,
+          "y": 178,
+          "width": 264,
+          "height": 32
+        },
+        "mouseDownHeldAtCapture": false,
+        "visualStateMethod": "natural",
+        "contentFloorPass": true
+      },
+      "geometry": {
+        "logical": {
+          "x": 8,
+          "y": 178,
+          "width": 264,
+          "height": 32
+        },
+        "pixel": {
+          "left": 16,
+          "top": 356,
+          "width": 528,
+          "height": 64
+        },
+        "devicePixelRatio": 2
+      },
+      "files": {
+        "crop": "session-selected/crop.png",
+        "semantics": "session-selected/semantics.json"
+      },
+      "hashes": {
+        "crop": "22cea3c31ae6ee42adadf226228ffd712cab2a6f1068ebda89803277f89d42f0",
+        "semantics": "a7a8adf81254ac2a5daecc5259e7bcd472ceb532530343492d2b45743a8afbd3"
+      }
+    },
+    {
+      "id": "composer-focused-empty",
+      "status": "PASS",
+      "action": {
+        "type": "focus"
+      },
+      "postcondition": "focused-empty",
+      "post": {
+        "active": true,
+        "value": "",
+        "dataActive": false,
+        "disabled": false,
+        "hover": false,
+        "activePseudo": false,
+        "rect": {
+          "x": 297,
+          "y": 636.5,
+          "width": 873,
+          "height": 64
+        },
+        "mouseDownHeldAtCapture": false,
+        "visualStateMethod": "natural",
+        "contentFloorPass": true
+      },
+      "geometry": {
+        "logical": {
+          "x": 297,
+          "y": 636.5,
+          "width": 873,
+          "height": 64
+        },
+        "pixel": {
+          "left": 594,
+          "top": 1273,
+          "width": 1746,
+          "height": 128
+        },
+        "devicePixelRatio": 2
+      },
+      "files": {
+        "crop": "composer-focused-empty/crop.png",
+        "semantics": "composer-focused-empty/semantics.json"
+      },
+      "hashes": {
+        "crop": "91afe949e2f28b1ae5ae4dd0c61930884ff8287403335533229bf15f693dd15d",
+        "semantics": "0bba62221da70dcdd2db9d26575aa280b5fb088b843b506d27b50d7f478849f1"
+      }
+    },
+    {
+      "id": "composer-typed",
+      "status": "PASS",
+      "action": {
+        "type": "type",
+        "text": "alpha\n日本語"
+      },
+      "postcondition": "focused-value-exact",
+      "post": {
+        "active": true,
+        "value": "alpha\n日本語",
+        "dataActive": false,
+        "disabled": false,
+        "hover": false,
+        "activePseudo": false,
+        "rect": {
+          "x": 297,
+          "y": 636.5,
+          "width": 873,
+          "height": 64
+        },
+        "mouseDownHeldAtCapture": false,
+        "visualStateMethod": "natural",
+        "contentFloorPass": true
+      },
+      "geometry": {
+        "logical": {
+          "x": 297,
+          "y": 636.5,
+          "width": 873,
+          "height": 64
+        },
+        "pixel": {
+          "left": 594,
+          "top": 1273,
+          "width": 1746,
+          "height": 128
+        },
+        "devicePixelRatio": 2
+      },
+      "files": {
+        "crop": "composer-typed/crop.png",
+        "semantics": "composer-typed/semantics.json"
+      },
+      "hashes": {
+        "crop": "434c94cfbb0f4af77a63b0ba7122178d1db690d4daf3a8eeef8455bc37484f3b",
+        "semantics": "9c369008f8a4d23a8e206be4890ddedfcfbfa45911082f3a507256ed9afcffa6"
+      }
+    },
+    {
+      "id": "stop-ordered-content",
+      "status": "GAP",
+      "gapCode": "live-timer-state-not-byte-stable"
+    },
+    {
+      "id": "transcript-scrolled",
+      "status": "GAP",
+      "gapCode": "stable-scroll-region-unavailable"
+    },
+    {
+      "id": "source-disabled-control",
+      "status": "GAP",
+      "gapCode": "source-state-unavailable",
+      "selector": "[aria-disabled='true'],button:disabled,textarea:disabled"
+    }
+  ]
+}

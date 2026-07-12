@@ -1,0 +1,49 @@
+{
+  "id": "composer-typed",
+  "status": "PASS",
+  "action": {
+    "type": "type",
+    "text": "alpha\n日本語"
+  },
+  "postcondition": "focused-value-exact",
+  "post": {
+    "active": true,
+    "value": "alpha\n日本語",
+    "dataActive": false,
+    "disabled": false,
+    "hover": false,
+    "activePseudo": false,
+    "rect": {
+      "x": 297,
+      "y": 636.5,
+      "width": 873,
+      "height": 64
+    },
+    "mouseDownHeldAtCapture": false,
+    "visualStateMethod": "natural",
+    "contentFloorPass": true
+  },
+  "geometry": {
+    "logical": {
+      "x": 297,
+      "y": 636.5,
+      "width": 873,
+      "height": 64
+    },
+    "pixel": {
+      "left": 594,
+      "top": 1273,
+      "width": 1746,
+      "height": 128
+    },
+    "devicePixelRatio": 2
+  },
+  "files": {
+    "crop": "composer-typed/crop.png",
+    "semantics": "composer-typed/semantics.json"
+  },
+  "hashes": {
+    "crop": "434c94cfbb0f4af77a63b0ba7122178d1db690d4daf3a8eeef8455bc37484f3b",
+    "semantics": "9c369008f8a4d23a8e206be4890ddedfcfbfa45911082f3a507256ed9afcffa6"
+  }
+}

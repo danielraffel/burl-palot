@@ -1,0 +1,48 @@
+{
+  "id": "session-selected",
+  "status": "PASS",
+  "action": {
+    "type": "none"
+  },
+  "postcondition": "data-active-present",
+  "post": {
+    "active": false,
+    "value": "",
+    "dataActive": true,
+    "disabled": false,
+    "hover": false,
+    "activePseudo": false,
+    "rect": {
+      "x": 8,
+      "y": 178,
+      "width": 264,
+      "height": 32
+    },
+    "mouseDownHeldAtCapture": false,
+    "visualStateMethod": "natural",
+    "contentFloorPass": true
+  },
+  "geometry": {
+    "logical": {
+      "x": 8,
+      "y": 178,
+      "width": 264,
+      "height": 32
+    },
+    "pixel": {
+      "left": 16,
+      "top": 356,
+      "width": 528,
+      "height": 64
+    },
+    "devicePixelRatio": 2
+  },
+  "files": {
+    "crop": "session-selected/crop.png",
+    "semantics": "session-selected/semantics.json"
+  },
+  "hashes": {
+    "crop": "22cea3c31ae6ee42adadf226228ffd712cab2a6f1068ebda89803277f89d42f0",
+    "semantics": "a7a8adf81254ac2a5daecc5259e7bcd472ceb532530343492d2b45743a8afbd3"
+  }
+}

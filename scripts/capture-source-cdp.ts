@@ -1,7 +1,7 @@
 #!/usr/bin/env bun
 
 import { mkdir, readFile, writeFile } from "node:fs/promises"
-import { dirname, resolve } from "node:path"
+import { resolve } from "node:path"
 
 type Json = Record<string, unknown>
 
@@ -18,7 +18,9 @@ class FrozenDate extends NativeDate {
 globalThis.Date = FrozenDate;
 const apply = () => {
   ${Object.entries(storage)
-		.map(([key, value]) => `localStorage.setItem(${JSON.stringify(key)}, ${JSON.stringify(value)});`)
+		.map(
+			([key, value]) => `localStorage.setItem(${JSON.stringify(key)}, ${JSON.stringify(value)});`,
+		)
 		.join("\n  ")}
   const style = document.createElement("style");
   style.dataset.visualCapture = "true";
@@ -48,6 +50,22 @@ export const semanticExpression = `(() => {
     const attrs = {};
     for (const name of selectedAttributes) if (element.hasAttribute(name)) attrs[name] = element.getAttribute(name);
     const children = Array.from(element.children).filter(visible).map(observed);
+    const pseudo = (name) => {
+      const value = getComputedStyle(element, name);
+      if (!value || value.content === "none" || value.content === "normal" || value.content === "") return null;
+      return { kind: "pseudo", pseudo: name, content: value.content, computedStyle: {
+        display: value.display, position: value.position, color: value.color,
+        backgroundColor: value.backgroundColor, fontFamily: value.fontFamily,
+        fontSize: value.fontSize, fontWeight: value.fontWeight, lineHeight: value.lineHeight
+      }, geometry: { source: "host-rect", x: rect.x, y: rect.y, width: rect.width, height: rect.height } };
+    };
+    const content = Array.from(element.childNodes).flatMap(node => {
+      if (node.nodeType === Node.TEXT_NODE) return node.textContent ? [{kind:"text", text:node.textContent}] : [];
+      if (node.nodeType !== Node.ELEMENT_NODE || !visible(node)) return [];
+      const id = sourceId(node);
+      return [{kind:"child", sourceId:id}];
+    });
+    const before = pseudo("::before"), after = pseudo("::after");
     return {
       sourceId: sourceId(element),
       tagName: element.tagName.toLowerCase(),
@@ -55,6 +73,9 @@ export const semanticExpression = `(() => {
       outerHtml: element.tagName.toLowerCase() === "svg" ? element.outerHTML : "",
       imageSrc: element.tagName.toLowerCase() === "img" ? element.getAttribute("src") || "" : "",
       attributes: attrs,
+      content,
+      pseudoElements: [before, after].filter(Boolean),
+      orderedPaintContent: [...(before ? [before] : []), ...content, ...(after ? [after] : [])],
       computedStyle: {
         display: style.display, position: style.position, flexDirection: style.flexDirection,
         flexGrow: style.flexGrow, flexShrink: style.flexShrink, flexBasis: style.flexBasis,
@@ -68,9 +89,14 @@ export const semanticExpression = `(() => {
         maxWidth: style.maxWidth, maxHeight: style.maxHeight,
         top: style.top, right: style.right, bottom: style.bottom, left: style.left,
         color: style.color, backgroundColor: style.backgroundColor,
+        backgroundImage: style.backgroundImage, transform: style.transform,
+        filter: style.filter, backdropFilter: style.backdropFilter,
         fontFamily: style.fontFamily, fontSize: style.fontSize, fontWeight: style.fontWeight,
         lineHeight: style.lineHeight, whiteSpace: style.whiteSpace, textAlign: style.textAlign,
+        textOverflow: style.textOverflow, overflowWrap: style.overflowWrap, wordWrap: style.wordWrap,
         letterSpacing: style.letterSpacing, border: style.border, borderRadius: style.borderRadius,
+        borderTopLeftRadius: style.borderTopLeftRadius, borderTopRightRadius: style.borderTopRightRadius,
+        borderBottomRightRadius: style.borderBottomRightRadius, borderBottomLeftRadius: style.borderBottomLeftRadius,
         borderTopWidth: style.borderTopWidth, borderRightWidth: style.borderRightWidth,
         borderBottomWidth: style.borderBottomWidth, borderLeftWidth: style.borderLeftWidth,
         borderTopColor: style.borderTopColor, borderRightColor: style.borderRightColor,
@@ -99,17 +125,21 @@ export const semanticExpression = `(() => {
   };
 })()`
 
-class Cdp {
+export class Cdp {
 	private socket: WebSocket
 	private nextId = 1
-	private pending = new Map<number, { resolve: (value: any) => void; reject: (error: Error) => void }>()
+	private pending = new Map<
+		number,
+		{ resolve: (value: any) => void; reject: (error: Error) => void }
+	>()
 
 	private constructor(socket: WebSocket) {
 		this.socket = socket
 		socket.addEventListener("message", (message) => {
-			const encoded = typeof message.data === "string"
-				? message.data
-				: Buffer.from(message.data as ArrayBuffer).toString("utf8")
+			const encoded =
+				typeof message.data === "string"
+					? message.data
+					: Buffer.from(message.data as ArrayBuffer).toString("utf8")
 			const payload = JSON.parse(encoded)
 			if (!payload.id) return
 			const waiter = this.pending.get(payload.id)
@@ -124,7 +154,9 @@ class Cdp {
 		const socket = new WebSocket(url)
 		await new Promise<void>((resolveOpen, rejectOpen) => {
 			socket.addEventListener("open", () => resolveOpen(), { once: true })
-			socket.addEventListener("error", () => rejectOpen(new Error("CDP WebSocket failed")), { once: true })
+			socket.addEventListener("error", () => rejectOpen(new Error("CDP WebSocket failed")), {
+				once: true,
+			})
 		})
 		return new Cdp(socket)
 	}
@@ -135,10 +167,16 @@ class Cdp {
 			const timeout = setTimeout(() => {
 				this.pending.delete(id)
 				rejectCommand(new Error(`CDP command timed out: ${method}`))
-			}, 5000)
+			}, 15000)
 			this.pending.set(id, {
-				resolve: (value) => { clearTimeout(timeout); resolveCommand(value) },
-				reject: (error) => { clearTimeout(timeout); rejectCommand(error) }
+				resolve: (value) => {
+					clearTimeout(timeout)
+					resolveCommand(value)
+				},
+				reject: (error) => {
+					clearTimeout(timeout)
+					rejectCommand(error)
+				},
 			})
 			this.socket.send(JSON.stringify({ id, method, params }))
 		})
@@ -151,7 +189,8 @@ class Cdp {
 
 async function main() {
 	const args = new Map<string, string>()
-	for (let index = 2; index < process.argv.length; index += 2) args.set(process.argv[index], process.argv[index + 1])
+	for (let index = 2; index < process.argv.length; index += 2)
+		args.set(process.argv[index], process.argv[index + 1])
 	const manifestPath = resolve(args.get("--manifest") ?? "evidence/visual-parity/scenarios.v1.json")
 	const scenarioId = args.get("--scenario") ?? "01-shell"
 	const output = resolve(args.get("--output") ?? `evidence/visual-parity/baselines/${scenarioId}`)
@@ -174,10 +213,10 @@ async function main() {
 			deviceScaleFactor: capture.deviceScaleFactor,
 			mobile: false,
 			screenWidth: capture.logicalWidth,
-			screenHeight: capture.logicalHeight
+			screenHeight: capture.logicalHeight,
 		})
 		await cdp.command("Page.addScriptToEvaluateOnNewDocument", {
-			source: bootstrapSource(manifest.clock, manifest.sourceBootstrap.localStorage)
+			source: bootstrapSource(manifest.clock, manifest.sourceBootstrap.localStorage),
 		})
 		const navigation = new URL(page.url)
 		navigation.hash = manifest.route.slice(1)
@@ -189,16 +228,16 @@ document.fonts.ready.then(() => new Promise(resolve => requestAnimationFrame(() 
 new Promise(resolve => setTimeout(resolve, 2500))
 ])`,
 			awaitPromise: true,
-			returnByValue: true
+			returnByValue: true,
 		})
 		const semanticResult = await cdp.command("Runtime.evaluate", {
 			expression: semanticExpression,
-			returnByValue: true
+			returnByValue: true,
 		})
 		const screenshot = await cdp.command("Page.captureScreenshot", {
 			format: "png",
 			fromSurface: true,
-			captureBeyondViewport: false
+			captureBeyondViewport: false,
 		})
 
 		await mkdir(output, { recursive: true })
@@ -206,7 +245,7 @@ new Promise(resolve => setTimeout(resolve, 2500))
 		const semanticPath = `${output}/source-semantics.json`
 		const metadataPath = `${output}/source-meta.json`
 		await writeFile(imagePath, Buffer.from(screenshot.data, "base64"))
-		await writeFile(semanticPath, JSON.stringify(semanticResult.result.value, null, 2) + "\n")
+		await writeFile(semanticPath, `${JSON.stringify(semanticResult.result.value, null, 2)}\n`)
 		const osBuild = Bun.spawnSync(["sw_vers", "-buildVersion"]).stdout.toString().trim()
 		const metadata = {
 			lane: "source",
@@ -221,9 +260,11 @@ new Promise(resolve => setTimeout(resolve, 2500))
 			pixelHeight: capture.pixelHeight,
 			deviceScaleFactor: capture.deviceScaleFactor,
 			boundary: capture.boundary,
-			cdpBrowser: (await fetch("http://127.0.0.1:9222/json/version").then((response) => response.json())).Browser
+			cdpBrowser: (
+				await fetch("http://127.0.0.1:9222/json/version").then((response) => response.json())
+			).Browser,
 		}
-		await writeFile(metadataPath, JSON.stringify(metadata, null, 2) + "\n")
+		await writeFile(metadataPath, `${JSON.stringify(metadata, null, 2)}\n`)
 		console.log(JSON.stringify({ imagePath, semanticPath, metadataPath }))
 	} finally {
 		cdp.close()

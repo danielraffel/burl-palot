@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "scenario": "01-shell",
+  "states": [
+    {"id":"new-session-hover","selector":"[data-slot='sidebar-menu-button']","descendantText":"New Session","action":{"type":"hover"},"postcondition":"matches-hover"},
+    {"id":"new-session-pressed","selector":"[data-slot='sidebar-menu-button']","descendantText":"New Session","action":{"type":"pressed"},"postcondition":"mouse-down-held"},
+    {"id":"new-session-keyboard-focused","selector":"[data-slot='sidebar-menu-button']","descendantText":"New Session","action":{"type":"focus"},"postcondition":"active-element"},
+    {"id":"session-selected","selector":"[data-slot='sidebar-menu-button'][data-active]","action":{"type":"none"},"postcondition":"data-active-present"},
+    {"id":"composer-focused-empty","selector":"textarea[data-slot='input-group-control']","action":{"type":"focus"},"postcondition":"focused-empty"},
+    {"id":"composer-typed","selector":"textarea[data-slot='input-group-control']","action":{"type":"type","text":"alpha\n日本語"},"postcondition":"focused-value-exact"},
+    {"id":"stop-ordered-content","selector":"main form button[aria-label='Stop']","action":{"type":"none"},"postcondition":"ordered-content-present","availability":"gap","gapCode":"live-timer-state-not-byte-stable"},
+    {"id":"transcript-scrolled","selector":"main","action":{"type":"scroll","top":180},"postcondition":"scroll-top-exact"},
+    {"id":"source-disabled-control","selector":"[aria-disabled='true'],button:disabled,textarea:disabled","action":{"type":"none"},"postcondition":"disabled","availability":"optional"}
+  ]
+}
