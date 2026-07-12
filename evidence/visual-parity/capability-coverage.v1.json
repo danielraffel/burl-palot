@@ -2383,26 +2383,23 @@
         {
           "value": "128px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed CSS min/max width/height px, percent, auto, none, and linear calc(percent plus or minus px) -> typed Length -> NativeDesignIR numeric or expression value -> IRStyle retained dimension -> native Dimension percent and offset terms -> Yoga clamping recomputed under containing-block resize -> Skia pixels; nonlinear and unresolved expressions fail closed",
+          "evidenceIds": ["semantic:observed-dom-min-max-sizing"]
         },
         {
           "value": "192px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed CSS min/max width/height px, percent, auto, none, and linear calc(percent plus or minus px) -> typed Length -> NativeDesignIR numeric or expression value -> IRStyle retained dimension -> native Dimension percent and offset terms -> Yoga clamping recomputed under containing-block resize -> Skia pixels; nonlinear and unresolved expressions fail closed",
+          "evidenceIds": ["semantic:observed-dom-min-max-sizing"]
         },
         {
           "value": "none",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed CSS min/max width/height px, percent, auto, none, and linear calc(percent plus or minus px) -> typed Length -> NativeDesignIR numeric or expression value -> IRStyle retained dimension -> native Dimension percent and offset terms -> Yoga clamping recomputed under containing-block resize -> Skia pixels; nonlinear and unresolved expressions fail closed",
+          "evidenceIds": ["semantic:observed-dom-min-max-sizing"]
         }
       ]
     },
@@ -2412,42 +2409,37 @@
         {
           "value": "100%",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed CSS min/max width/height px, percent, auto, none, and linear calc(percent plus or minus px) -> typed Length -> NativeDesignIR numeric or expression value -> IRStyle retained dimension -> native Dimension percent and offset terms -> Yoga clamping recomputed under containing-block resize -> Skia pixels; nonlinear and unresolved expressions fail closed",
+          "evidenceIds": ["semantic:observed-dom-min-max-sizing"]
         },
         {
           "value": "896px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed CSS min/max width/height px, percent, auto, none, and linear calc(percent plus or minus px) -> typed Length -> NativeDesignIR numeric or expression value -> IRStyle retained dimension -> native Dimension percent and offset terms -> Yoga clamping recomputed under containing-block resize -> Skia pixels; nonlinear and unresolved expressions fail closed",
+          "evidenceIds": ["semantic:observed-dom-min-max-sizing"]
         },
         {
           "value": "95%",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed CSS min/max width/height px, percent, auto, none, and linear calc(percent plus or minus px) -> typed Length -> NativeDesignIR numeric or expression value -> IRStyle retained dimension -> native Dimension percent and offset terms -> Yoga clamping recomputed under containing-block resize -> Skia pixels; nonlinear and unresolved expressions fail closed",
+          "evidenceIds": ["semantic:observed-dom-min-max-sizing"]
         },
         {
           "value": "calc(100% - 64px)",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed CSS min/max width/height px, percent, auto, none, and linear calc(percent plus or minus px) -> typed Length -> NativeDesignIR numeric or expression value -> IRStyle retained dimension -> native Dimension percent and offset terms -> Yoga clamping recomputed under containing-block resize -> Skia pixels; nonlinear and unresolved expressions fail closed",
+          "evidenceIds": ["semantic:observed-dom-min-max-sizing"]
         },
         {
           "value": "none",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed CSS min/max width/height px, percent, auto, none, and linear calc(percent plus or minus px) -> typed Length -> NativeDesignIR numeric or expression value -> IRStyle retained dimension -> native Dimension percent and offset terms -> Yoga clamping recomputed under containing-block resize -> Skia pixels; nonlinear and unresolved expressions fail closed",
+          "evidenceIds": ["semantic:observed-dom-min-max-sizing"]
         }
       ]
     },
@@ -2457,34 +2449,30 @@
         {
           "value": "0px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed CSS min/max width/height px, percent, auto, none, and linear calc(percent plus or minus px) -> typed Length -> NativeDesignIR numeric or expression value -> IRStyle retained dimension -> native Dimension percent and offset terms -> Yoga clamping recomputed under containing-block resize -> Skia pixels; nonlinear and unresolved expressions fail closed",
+          "evidenceIds": ["semantic:observed-dom-min-max-sizing"]
         },
         {
           "value": "64px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed CSS min/max width/height px, percent, auto, none, and linear calc(percent plus or minus px) -> typed Length -> NativeDesignIR numeric or expression value -> IRStyle retained dimension -> native Dimension percent and offset terms -> Yoga clamping recomputed under containing-block resize -> Skia pixels; nonlinear and unresolved expressions fail closed",
+          "evidenceIds": ["semantic:observed-dom-min-max-sizing"]
         },
         {
           "value": "800px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed CSS min/max width/height px, percent, auto, none, and linear calc(percent plus or minus px) -> typed Length -> NativeDesignIR numeric or expression value -> IRStyle retained dimension -> native Dimension percent and offset terms -> Yoga clamping recomputed under containing-block resize -> Skia pixels; nonlinear and unresolved expressions fail closed",
+          "evidenceIds": ["semantic:observed-dom-min-max-sizing"]
         },
         {
           "value": "auto",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed CSS min/max width/height px, percent, auto, none, and linear calc(percent plus or minus px) -> typed Length -> NativeDesignIR numeric or expression value -> IRStyle retained dimension -> native Dimension percent and offset terms -> Yoga clamping recomputed under containing-block resize -> Skia pixels; nonlinear and unresolved expressions fail closed",
+          "evidenceIds": ["semantic:observed-dom-min-max-sizing"]
         }
       ]
     },
@@ -2494,26 +2482,23 @@
         {
           "value": "0px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed CSS min/max width/height px, percent, auto, none, and linear calc(percent plus or minus px) -> typed Length -> NativeDesignIR numeric or expression value -> IRStyle retained dimension -> native Dimension percent and offset terms -> Yoga clamping recomputed under containing-block resize -> Skia pixels; nonlinear and unresolved expressions fail closed",
+          "evidenceIds": ["semantic:observed-dom-min-max-sizing"]
         },
         {
           "value": "480px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed CSS min/max width/height px, percent, auto, none, and linear calc(percent plus or minus px) -> typed Length -> NativeDesignIR numeric or expression value -> IRStyle retained dimension -> native Dimension percent and offset terms -> Yoga clamping recomputed under containing-block resize -> Skia pixels; nonlinear and unresolved expressions fail closed",
+          "evidenceIds": ["semantic:observed-dom-min-max-sizing"]
         },
         {
           "value": "auto",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed CSS min/max width/height px, percent, auto, none, and linear calc(percent plus or minus px) -> typed Length -> NativeDesignIR numeric or expression value -> IRStyle retained dimension -> native Dimension percent and offset terms -> Yoga clamping recomputed under containing-block resize -> Skia pixels; nonlinear and unresolved expressions fail closed",
+          "evidenceIds": ["semantic:observed-dom-min-max-sizing"]
         }
       ]
     },
