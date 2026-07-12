@@ -217,6 +217,15 @@ if(BURL_PALOT_ENABLE_FRAMEWORK)
 		target_include_directories(palot-source-aware-slice-test PRIVATE src)
 		target_link_libraries(palot-source-aware-slice-test PRIVATE
 			nlohmann_json::nlohmann_json pulp-view pulp-state)
+		if(BURL_SOURCE_DIR AND EXISTS
+			"${BURL_SOURCE_DIR}/core/view/include/pulp/view/application_binding_manifest.hpp")
+			add_executable(palot-application-binding-manifest-test
+				test/application_binding_manifest_test.cpp)
+			target_link_libraries(palot-application-binding-manifest-test PRIVATE pulp-view)
+			add_test(NAME palot-application-binding-manifest
+				COMMAND palot-application-binding-manifest-test
+					"${CMAKE_CURRENT_SOURCE_DIR}/contracts/main-chat.application-bindings.v1.json")
+		endif()
 		add_test(NAME palot-opencode-process
 			COMMAND palot-opencode-process-test
 				"${CMAKE_CURRENT_SOURCE_DIR}/test/fake_sidecar.py"
