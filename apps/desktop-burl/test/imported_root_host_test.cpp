@@ -55,6 +55,9 @@ int main(int argc, char** argv) {
 	if (!host.source_observed_primary_tree() || host.child_count() != 1) return 5;
 	if (host.child_at(0)->child_count() == 0) return 6;
 	if (host.attached_action_count() != 7 || !host.unattached_required_actions().empty()) return 7;
+	host.set_transcript({{"u1", "user", {{"message.text", "runtime user"}}},
+	                     {"a1", "assistant", {{"message.text", "runtime assistant"}}},
+	                     {"t1", "tool", {{"message.text", "tool.read"}}}});
 	for (const auto* id : {"composer.copy", "project.select", "session.create", "session.open"}) {
 		if (!host.invoke_bound_action(id) || calls[id] != 1) return 9;
 	}

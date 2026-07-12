@@ -2,6 +2,7 @@
 
 #include <pulp/view/application_binding_manifest.hpp>
 #include <pulp/view/design_import.hpp>
+#include <pulp/view/design_import_dynamic.hpp>
 #include <pulp/view/view.hpp>
 
 #include <filesystem>
@@ -28,6 +29,7 @@ public:
 	[[nodiscard]] const std::vector<std::string>& unattached_required_actions() const noexcept;
 	bool invoke_bound_action(std::string_view id);
 	pulp::view::TextEditor* bound_composer() const noexcept;
+	void set_transcript(std::vector<pulp::view::ImportedListItem> items);
 
 private:
 	class BindingContext;
@@ -37,6 +39,7 @@ private:
 	std::vector<std::string> unattached_required_actions_;
 	bool source_observed_primary_tree_ = false;
 	std::size_t attached_action_count_ = 0;
+	pulp::view::ImportedRepeatedList* transcript_ = nullptr;
 };
 
 std::filesystem::path palot_bundle_resource(std::string_view relative_path);

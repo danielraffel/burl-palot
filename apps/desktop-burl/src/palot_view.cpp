@@ -480,9 +480,23 @@ void PalotView::append_message(std::string role, std::string text, bool announce
 	transcript_->set_row_count(messages_.size());
 	transcript_->set_row_height(index, message_height(index));
 	transcript_->refresh_rows();
+	sync_imported_transcript();
 	if (announce)
 		pulp::view::announce_accessibility(announcement,
 			pulp::view::AnnouncementPriority::Polite);
+}
+
+void PalotView::sync_imported_transcript() {
+	if (!imported_root_) return;
+	std::vector<pulp::view::ImportedListItem> rows;
+	rows.reserve(messages_.size());
+	for (std::size_t index = 0; index < messages_.size(); ++index) {
+		const auto& [role, content] = messages_[index];
+		rows.push_back({role + "-" + std::to_string(index),
+		                role == "You" ? "user" : role == "Tool" ? "tool" : "assistant",
+		                {{"message.text", content}}});
+	}
+	imported_root_->set_transcript(std::move(rows));
 }
 
 void PalotView::send_prompt(const std::string& prompt, bool retry) {
@@ -531,6 +545,7 @@ void PalotView::handle_event(std::string type, std::string value) {
 			const auto index = messages_.size() - 1;
 			transcript_->set_row_height(index, message_height(index));
 			transcript_->refresh_rows();
+			sync_imported_transcript();
 		} else {
 			append_message("OpenCode", std::move(value), false);
 		}
