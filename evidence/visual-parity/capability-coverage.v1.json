@@ -4025,10 +4025,9 @@
     {
       "name": "clipboard",
       "observation": "observed",
-      "decision": "unsupported",
-      "route": null,
-      "evidenceIds": [],
-      "reason": "No exact behavior route plus resolving evidence ID is published; screenshot scoring is gated."
+      "decision": "supported",
+      "route": "imported TextEditor or MarkdownView selection -> native keyboard/context-menu/copy action -> platform Clipboard text API -> macOS pasteboard -> copy/cut/paste and paste-match-style round trip with selection replacement, policy checks, and no WebView",
+      "evidenceIds": ["behavior:native-text-clipboard"]
     },
     {
       "name": "disabled",
