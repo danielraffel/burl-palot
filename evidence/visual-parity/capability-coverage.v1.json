@@ -1064,106 +1064,93 @@
         {
           "value": "oklab(0.754013 0.0000343323 0.0000150204 / 0.2)",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed CSS Color 4 color -> normalizeCssColor RGBA8 -> TypedPaint foreground -> NativeDesignIR style.color -> parent inheritable color or explicit Label override -> native glyph set_fill_color -> Skia text pixels",
+          "evidenceIds": ["semantic:observed-dom-text-color"]
         },
         {
           "value": "oklab(0.754013 0.0000343323 0.0000150204 / 0.3)",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed CSS Color 4 color -> normalizeCssColor RGBA8 -> TypedPaint foreground -> NativeDesignIR style.color -> parent inheritable color or explicit Label override -> native glyph set_fill_color -> Skia text pixels",
+          "evidenceIds": ["semantic:observed-dom-text-color"]
         },
         {
           "value": "oklab(0.754013 0.0000343323 0.0000150204 / 0.4)",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed CSS Color 4 color -> normalizeCssColor RGBA8 -> TypedPaint foreground -> NativeDesignIR style.color -> parent inheritable color or explicit Label override -> native glyph set_fill_color -> Skia text pixels",
+          "evidenceIds": ["semantic:observed-dom-text-color"]
         },
         {
           "value": "oklab(0.754013 0.0000343323 0.0000150204 / 0.6)",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed CSS Color 4 color -> normalizeCssColor RGBA8 -> TypedPaint foreground -> NativeDesignIR style.color -> parent inheritable color or explicit Label override -> native glyph set_fill_color -> Skia text pixels",
+          "evidenceIds": ["semantic:observed-dom-text-color"]
         },
         {
           "value": "oklab(0.754013 0.0000343323 0.0000150204 / 0.7)",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed CSS Color 4 color -> normalizeCssColor RGBA8 -> TypedPaint foreground -> NativeDesignIR style.color -> parent inheritable color or explicit Label override -> native glyph set_fill_color -> Skia text pixels",
+          "evidenceIds": ["semantic:observed-dom-text-color"]
         },
         {
           "value": "oklab(0.999994 0.0000455677 0.0000200868 / 0.7)",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed CSS Color 4 color -> normalizeCssColor RGBA8 -> TypedPaint foreground -> NativeDesignIR style.color -> parent inheritable color or explicit Label override -> native glyph set_fill_color -> Skia text pixels",
+          "evidenceIds": ["semantic:observed-dom-text-color"]
         },
         {
           "value": "oklch(0.637 0.237 25.331)",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed CSS Color 4 color -> normalizeCssColor RGBA8 -> TypedPaint foreground -> NativeDesignIR style.color -> parent inheritable color or explicit Label override -> native glyph set_fill_color -> Skia text pixels",
+          "evidenceIds": ["semantic:observed-dom-text-color"]
         },
         {
           "value": "oklch(0.723 0.219 149.579)",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed CSS Color 4 color -> normalizeCssColor RGBA8 -> TypedPaint foreground -> NativeDesignIR style.color -> parent inheritable color or explicit Label override -> native glyph set_fill_color -> Skia text pixels",
+          "evidenceIds": ["semantic:observed-dom-text-color"]
         },
         {
           "value": "oklch(0.795 0.184 86.047)",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed CSS Color 4 color -> normalizeCssColor RGBA8 -> TypedPaint foreground -> NativeDesignIR style.color -> parent inheritable color or explicit Label override -> native glyph set_fill_color -> Skia text pixels",
+          "evidenceIds": ["semantic:observed-dom-text-color"]
         },
         {
           "value": "rgb(13, 13, 13)",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed CSS Color 4 color -> normalizeCssColor RGBA8 -> TypedPaint foreground -> NativeDesignIR style.color -> parent inheritable color or explicit Label override -> native glyph set_fill_color -> Skia text pixels",
+          "evidenceIds": ["semantic:observed-dom-text-color"]
         },
         {
           "value": "rgb(175, 175, 175)",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed CSS Color 4 color -> normalizeCssColor RGBA8 -> TypedPaint foreground -> NativeDesignIR style.color -> parent inheritable color or explicit Label override -> native glyph set_fill_color -> Skia text pixels",
+          "evidenceIds": ["semantic:observed-dom-text-color"]
         },
         {
           "value": "rgb(255, 255, 255)",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed CSS Color 4 color -> normalizeCssColor RGBA8 -> TypedPaint foreground -> NativeDesignIR style.color -> parent inheritable color or explicit Label override -> native glyph set_fill_color -> Skia text pixels",
+          "evidenceIds": ["semantic:observed-dom-text-color"]
         },
         {
           "value": "rgba(0, 0, 0, 0)",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed CSS Color 4 color -> normalizeCssColor RGBA8 -> TypedPaint foreground -> NativeDesignIR style.color -> parent inheritable color or explicit Label override -> native glyph set_fill_color -> Skia text pixels",
+          "evidenceIds": ["semantic:observed-dom-text-color"]
         }
       ]
     },
