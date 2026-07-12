@@ -30,6 +30,14 @@ public:
 	[[nodiscard]] bool server_menu_open() const noexcept { return server_menu_open_; }
 	[[nodiscard]] bool project_search_open() const noexcept { return project_search_open_; }
 	[[nodiscard]] bool command_palette_open() const noexcept { return command_palette_open_; }
+	[[nodiscard]] bool title_editing() const noexcept { return title_editing_; }
+	[[nodiscard]] bool review_panel_open() const noexcept { return review_panel_open_; }
+	[[nodiscard]] bool session_metrics_open() const noexcept { return session_metrics_open_; }
+	[[nodiscard]] bool external_open_menu_open() const noexcept { return external_open_menu_open_; }
+	[[nodiscard]] bool composer_agent_menu_open() const noexcept { return composer_agent_menu_open_; }
+	[[nodiscard]] bool composer_model_menu_open() const noexcept { return composer_model_menu_open_; }
+	[[nodiscard]] bool composer_variant_menu_open() const noexcept { return composer_variant_menu_open_; }
+	[[nodiscard]] std::string_view display_mode() const noexcept { return display_mode_; }
 	[[nodiscard]] const std::string& navigation_route() const noexcept { return navigation_route_; }
 	std::function<void()> on_demo_complete;
 	std::function<void()> on_stream_delta;
@@ -72,6 +80,15 @@ private:
 	bool server_menu_open_ = false;
 	bool project_search_open_ = false;
 	bool command_palette_open_ = false;
+	bool title_editing_ = false;
+	bool review_panel_open_ = false;
+	bool session_metrics_open_ = false;
+	bool external_open_menu_open_ = false;
+	bool composer_agent_menu_open_ = false;
+	bool composer_model_menu_open_ = false;
+	bool composer_variant_menu_open_ = false;
+	std::string display_mode_ = "verbose";
+	std::vector<std::string> pending_attachments_;
 	std::string navigation_route_ = "/";
 	ImportedRootHost* imported_root_ = nullptr;
 	pulp::view::FrameUpdateCoalescer transcript_updates_;

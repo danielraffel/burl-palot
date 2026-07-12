@@ -20054,7 +20054,14 @@
                                             },
                                             "attributes": {
                                               "role": "button",
-                                              "source_revision": "fd63a75dad3d0e8555ba22a47e720d285889fbf0"
+                                              "source_revision": "fd63a75dad3d0e8555ba22a47e720d285889fbf0",
+                                              "pulpRouteId": "session.title.edit",
+                                              "pulpHostAction": "session.title.edit.begin",
+                                              "pulpHostActionLabel": "Edit session title",
+                                              "pulpEventContract": "click",
+                                              "pulpStateKey": "session.title.editing",
+                                              "pulpStateTransition": "set:true",
+                                              "pulpBindingPolicyRule": "session-title-edit"
                                             },
                                             "stable_anchor_id": "observed-dom:dom/html-shape-3b68501b:0/body-shape-d65c892b:0/div-id-root:0/div-shape-74caabae:0/div-shape-20ec5713:0/div-data-slot-sidebar-wrapper:0/main-data-slot-sidebar-inset:0/div-data-slot-app-bar:0/div-shape-d1a99e95:0/div-shape-91386c77:0/div-shape-b9281b89:0/button-shape-dabbe371:0",
                                             "anchor_strategy": "adapter",
@@ -20644,7 +20651,14 @@
                                             },
                                             "attributes": {
                                               "role": "button",
-                                              "source_revision": "fd63a75dad3d0e8555ba22a47e720d285889fbf0"
+                                              "source_revision": "fd63a75dad3d0e8555ba22a47e720d285889fbf0",
+                                              "pulpRouteId": "session.review-panel",
+                                              "pulpHostAction": "review.panel.toggle",
+                                              "pulpHostActionLabel": "Toggle changes panel",
+                                              "pulpEventContract": "click-or-primary-modifier-shift-d",
+                                              "pulpStateKey": "review.panel.open",
+                                              "pulpStateTransition": "toggle",
+                                              "pulpBindingPolicyRule": "review-panel-toggle"
                                             },
                                             "stable_anchor_id": "observed-dom:dom/html-shape-3b68501b:0/body-shape-d65c892b:0/div-id-root:0/div-shape-74caabae:0/div-shape-20ec5713:0/div-data-slot-sidebar-wrapper:0/main-data-slot-sidebar-inset:0/div-data-slot-app-bar:0/div-shape-d1a99e95:0/div-shape-91386c77:0/div-shape-424a2145:0/button-data-slot-tooltip-trigger:0",
                                             "anchor_strategy": "adapter",
@@ -22572,7 +22586,14 @@
                                                       "role": "button",
                                                       "focusable": "true",
                                                       "tabIndex": "0",
-                                                      "source_revision": "fd63a75dad3d0e8555ba22a47e720d285889fbf0"
+                                                      "source_revision": "fd63a75dad3d0e8555ba22a47e720d285889fbf0",
+                                                      "pulpRouteId": "session.metrics",
+                                                      "pulpHostAction": "session.metrics.toggle",
+                                                      "pulpHostActionLabel": "Session metrics",
+                                                      "pulpEventContract": "click",
+                                                      "pulpStateKey": "session.metrics.open",
+                                                      "pulpStateTransition": "toggle",
+                                                      "pulpBindingPolicyRule": "session-metrics-toggle"
                                                     },
                                                     "stable_anchor_id": "observed-dom:dom/html-shape-3b68501b:0/body-shape-d65c892b:0/div-id-root:0/div-shape-74caabae:0/div-shape-20ec5713:0/div-data-slot-sidebar-wrapper:0/main-data-slot-sidebar-inset:0/div-data-slot-app-bar:0/div-shape-d1a99e95:0/div-shape-91386c77:0/div-shape-424a2145:0/div-shape-c035cafe:0/div-shape-e09411d2:0/button-data-slot-popover-trigger:0",
                                                     "anchor_strategy": "adapter",
@@ -23112,7 +23133,12 @@
                                                     },
                                                     "attributes": {
                                                       "role": "button",
-                                                      "source_revision": "fd63a75dad3d0e8555ba22a47e720d285889fbf0"
+                                                      "source_revision": "fd63a75dad3d0e8555ba22a47e720d285889fbf0",
+                                                      "pulpRouteId": "external.open.preferred",
+                                                      "pulpHostAction": "external.open.preferred",
+                                                      "pulpHostActionLabel": "Open in preferred editor",
+                                                      "pulpEventContract": "click",
+                                                      "pulpBindingPolicyRule": "external-open-primary"
                                                     },
                                                     "stable_anchor_id": "observed-dom:dom/html-shape-3b68501b:0/body-shape-d65c892b:0/div-id-root:0/div-shape-74caabae:0/div-shape-20ec5713:0/div-data-slot-sidebar-wrapper:0/main-data-slot-sidebar-inset:0/div-data-slot-app-bar:0/div-shape-d1a99e95:0/div-shape-91386c77:0/div-shape-424a2145:0/div-shape-c4391174:0/div-shape-e60d23fc:0/button-shape-dca9c0c1:0",
                                                     "anchor_strategy": "adapter",
@@ -23544,7 +23570,14 @@
                                                       "role": "button",
                                                       "focusable": "true",
                                                       "tabIndex": "0",
-                                                      "source_revision": "fd63a75dad3d0e8555ba22a47e720d285889fbf0"
+                                                      "source_revision": "fd63a75dad3d0e8555ba22a47e720d285889fbf0",
+                                                      "pulpRouteId": "external.open.menu",
+                                                      "pulpHostAction": "external.open.menu.toggle",
+                                                      "pulpHostActionLabel": "Choose external editor",
+                                                      "pulpEventContract": "click",
+                                                      "pulpStateKey": "external.open.menu.open",
+                                                      "pulpStateTransition": "toggle",
+                                                      "pulpBindingPolicyRule": "external-open-menu"
                                                     },
                                                     "stable_anchor_id": "observed-dom:dom/html-shape-3b68501b:0/body-shape-d65c892b:0/div-id-root:0/div-shape-74caabae:0/div-shape-20ec5713:0/div-data-slot-sidebar-wrapper:0/main-data-slot-sidebar-inset:0/div-data-slot-app-bar:0/div-shape-d1a99e95:0/div-shape-91386c77:0/div-shape-424a2145:0/div-shape-c4391174:0/div-shape-e60d23fc:0/button-data-slot-dropdown-menu-trigger:0",
                                                     "anchor_strategy": "adapter",
@@ -23961,7 +23994,12 @@
                                                   "role": "button",
                                                   "focusable": "true",
                                                   "tabIndex": "0",
-                                                  "source_revision": "fd63a75dad3d0e8555ba22a47e720d285889fbf0"
+                                                  "source_revision": "fd63a75dad3d0e8555ba22a47e720d285889fbf0",
+                                                  "pulpRouteId": "terminal.attach",
+                                                  "pulpHostAction": "terminal.attach",
+                                                  "pulpHostActionLabel": "Open in terminal",
+                                                  "pulpEventContract": "click",
+                                                  "pulpBindingPolicyRule": "terminal-attach"
                                                 },
                                                 "stable_anchor_id": "observed-dom:dom/html-shape-3b68501b:0/body-shape-d65c892b:0/div-id-root:0/div-shape-74caabae:0/div-shape-20ec5713:0/div-data-slot-sidebar-wrapper:0/main-data-slot-sidebar-inset:0/div-data-slot-app-bar:0/div-shape-d1a99e95:0/div-shape-91386c77:0/div-shape-424a2145:0/div-shape-c4391174:1/button-data-slot-tooltip-trigger:0",
                                                 "anchor_strategy": "adapter",
@@ -24249,7 +24287,12 @@
                                             },
                                             "attributes": {
                                               "role": "button",
-                                              "source_revision": "fd63a75dad3d0e8555ba22a47e720d285889fbf0"
+                                              "source_revision": "fd63a75dad3d0e8555ba22a47e720d285889fbf0",
+                                              "pulpRouteId": "/",
+                                              "pulpHostAction": "navigation.session.close",
+                                              "pulpHostActionLabel": "Close session",
+                                              "pulpEventContract": "click",
+                                              "pulpBindingPolicyRule": "session-close"
                                             },
                                             "stable_anchor_id": "observed-dom:dom/html-shape-3b68501b:0/body-shape-d65c892b:0/div-id-root:0/div-shape-74caabae:0/div-shape-20ec5713:0/div-data-slot-sidebar-wrapper:0/main-data-slot-sidebar-inset:0/div-data-slot-app-bar:0/div-shape-d1a99e95:0/div-shape-91386c77:0/div-shape-424a2145:0/button-shape-06db62cb:0",
                                             "anchor_strategy": "adapter",
@@ -44613,7 +44656,12 @@
                                                                               "role": "button",
                                                                               "focusable": "true",
                                                                               "tabIndex": "0",
-                                                                              "source_revision": "fd63a75dad3d0e8555ba22a47e720d285889fbf0"
+                                                                              "source_revision": "fd63a75dad3d0e8555ba22a47e720d285889fbf0",
+                                                                              "pulpRouteId": "composer.attachment",
+                                                                              "pulpHostAction": "composer.attachment.open",
+                                                                              "pulpHostActionLabel": "Attach files",
+                                                                              "pulpEventContract": "click",
+                                                                              "pulpBindingPolicyRule": "composer-attachment"
                                                                             },
                                                                             "stable_anchor_id": "observed-dom:dom/html-shape-3b68501b:0/body-shape-d65c892b:0/div-id-root:0/div-shape-74caabae:0/div-shape-20ec5713:0/div-data-slot-sidebar-wrapper:0/main-data-slot-sidebar-inset:0/div-data-slot-content-area:0/div-shape-12bbae35:0/div-shape-a9a56a97:0/div-shape-2f218dff:0/div-shape-641627bd:0/div-shape-e76cfa30:0/div-shape-b167bdec:0/div-shape-071b50ec:0/form-shape-b21c5bbc:0/div-data-slot-input-group:0/div-data-slot-input-group-addon:0/div-shape-4176c8d6:0/button-data-slot-tooltip-trigger:0",
                                                                             "anchor_strategy": "adapter",
@@ -45030,7 +45078,14 @@
                                                                                   "role": "combobox",
                                                                                   "focusable": "true",
                                                                                   "tabIndex": "0",
-                                                                                  "source_revision": "fd63a75dad3d0e8555ba22a47e720d285889fbf0"
+                                                                                  "source_revision": "fd63a75dad3d0e8555ba22a47e720d285889fbf0",
+                                                                                  "pulpRouteId": "composer.agent-menu",
+                                                                                  "pulpHostAction": "composer.agent-menu.toggle",
+                                                                                  "pulpHostActionLabel": "Choose agent",
+                                                                                  "pulpEventContract": "click",
+                                                                                  "pulpStateKey": "composer.agent-menu.open",
+                                                                                  "pulpStateTransition": "toggle",
+                                                                                  "pulpBindingPolicyRule": "composer-agent-menu"
                                                                                 },
                                                                                 "stable_anchor_id": "observed-dom:dom/html-shape-3b68501b:0/body-shape-d65c892b:0/div-id-root:0/div-shape-74caabae:0/div-shape-20ec5713:0/div-data-slot-sidebar-wrapper:0/main-data-slot-sidebar-inset:0/div-data-slot-content-area:0/div-shape-12bbae35:0/div-shape-a9a56a97:0/div-shape-2f218dff:0/div-shape-641627bd:0/div-shape-e76cfa30:0/div-shape-b167bdec:0/div-shape-071b50ec:0/form-shape-b21c5bbc:0/div-data-slot-input-group:0/div-data-slot-input-group-addon:0/div-shape-4176c8d6:0/div-shape-4a883fc8:0/button-data-slot-select-trigger:0",
                                                                                 "anchor_strategy": "adapter",
@@ -45839,7 +45894,14 @@
                                                                                   "role": "button",
                                                                                   "focusable": "true",
                                                                                   "tabIndex": "0",
-                                                                                  "source_revision": "fd63a75dad3d0e8555ba22a47e720d285889fbf0"
+                                                                                  "source_revision": "fd63a75dad3d0e8555ba22a47e720d285889fbf0",
+                                                                                  "pulpRouteId": "composer.model-menu",
+                                                                                  "pulpHostAction": "composer.model-menu.toggle",
+                                                                                  "pulpHostActionLabel": "Choose model",
+                                                                                  "pulpEventContract": "click",
+                                                                                  "pulpStateKey": "composer.model-menu.open",
+                                                                                  "pulpStateTransition": "toggle",
+                                                                                  "pulpBindingPolicyRule": "composer-model-menu"
                                                                                 },
                                                                                 "stable_anchor_id": "observed-dom:dom/html-shape-3b68501b:0/body-shape-d65c892b:0/div-id-root:0/div-shape-74caabae:0/div-shape-20ec5713:0/div-data-slot-sidebar-wrapper:0/main-data-slot-sidebar-inset:0/div-data-slot-content-area:0/div-shape-12bbae35:0/div-shape-a9a56a97:0/div-shape-2f218dff:0/div-shape-641627bd:0/div-shape-e76cfa30:0/div-shape-b167bdec:0/div-shape-071b50ec:0/form-shape-b21c5bbc:0/div-data-slot-input-group:0/div-data-slot-input-group-addon:0/div-shape-4176c8d6:0/div-shape-4a883fc8:0/button-data-slot-searchable-list-popover-trigger:0",
                                                                                 "anchor_strategy": "adapter",
@@ -46516,7 +46578,14 @@
                                                                                   "role": "combobox",
                                                                                   "focusable": "true",
                                                                                   "tabIndex": "0",
-                                                                                  "source_revision": "fd63a75dad3d0e8555ba22a47e720d285889fbf0"
+                                                                                  "source_revision": "fd63a75dad3d0e8555ba22a47e720d285889fbf0",
+                                                                                  "pulpRouteId": "composer.variant-menu",
+                                                                                  "pulpHostAction": "composer.variant-menu.toggle",
+                                                                                  "pulpHostActionLabel": "Choose variant",
+                                                                                  "pulpEventContract": "click",
+                                                                                  "pulpStateKey": "composer.variant-menu.open",
+                                                                                  "pulpStateTransition": "toggle",
+                                                                                  "pulpBindingPolicyRule": "composer-variant-menu"
                                                                                 },
                                                                                 "stable_anchor_id": "observed-dom:dom/html-shape-3b68501b:0/body-shape-d65c892b:0/div-id-root:0/div-shape-74caabae:0/div-shape-20ec5713:0/div-data-slot-sidebar-wrapper:0/main-data-slot-sidebar-inset:0/div-data-slot-content-area:0/div-shape-12bbae35:0/div-shape-a9a56a97:0/div-shape-2f218dff:0/div-shape-641627bd:0/div-shape-e76cfa30:0/div-shape-b167bdec:0/div-shape-071b50ec:0/form-shape-b21c5bbc:0/div-data-slot-input-group:0/div-data-slot-input-group-addon:0/div-shape-4176c8d6:0/div-shape-4a883fc8:0/button-data-slot-select-trigger:1",
                                                                                 "anchor_strategy": "adapter",
@@ -48947,7 +49016,14 @@
                                                                 "attributes": {
                                                                   "role": "button",
                                                                   "accessibility_name": "Display: Verbose (click to cycle)",
-                                                                  "source_revision": "fd63a75dad3d0e8555ba22a47e720d285889fbf0"
+                                                                  "source_revision": "fd63a75dad3d0e8555ba22a47e720d285889fbf0",
+                                                                  "pulpRouteId": "display.mode",
+                                                                  "pulpHostAction": "display.mode.cycle",
+                                                                  "pulpHostActionLabel": "Cycle display mode",
+                                                                  "pulpEventContract": "click",
+                                                                  "pulpStateKey": "display.mode",
+                                                                  "pulpStateTransition": "cycle:default,verbose",
+                                                                  "pulpBindingPolicyRule": "display-mode-cycle"
                                                                 },
                                                                 "stable_anchor_id": "observed-dom:dom/html-shape-3b68501b:0/body-shape-d65c892b:0/div-id-root:0/div-shape-74caabae:0/div-shape-20ec5713:0/div-data-slot-sidebar-wrapper:0/main-data-slot-sidebar-inset:0/div-data-slot-content-area:0/div-shape-12bbae35:0/div-shape-a9a56a97:0/div-shape-2f218dff:0/div-shape-641627bd:0/div-shape-e76cfa30:0/div-shape-b167bdec:0/div-shape-0edddc8f:0/div-shape-ca34cdd6:0/button-semantic-display-verbose-click-to-cycle:0",
                                                                 "anchor_strategy": "adapter",

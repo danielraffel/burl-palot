@@ -30,10 +30,14 @@ std::string read_text(const char* path) {
 }
 
 void register_actions(ImportedRootHost& host, std::unordered_map<std::string, int>* calls = nullptr) {
-	for (const auto* id : {"command.palette.open", "composer.copy", "navigation.automations",
-	                       "navigation.settings", "project.open", "project.search.toggle", "project.select",
-	                       "prompt.cancel", "prompt.retry", "prompt.send", "server.menu.toggle",
-	                       "session.create", "session.open", "sidebar.toggle"})
+	for (const auto* id : {"command.palette.open", "composer.agent-menu.toggle", "composer.attachment.open",
+	                       "composer.copy", "composer.model-menu.toggle", "composer.variant-menu.toggle",
+	                       "display.mode.cycle", "external.open.menu.toggle", "external.open.preferred",
+	                       "navigation.automations", "navigation.session.close", "navigation.settings",
+	                       "project.open", "project.search.toggle", "project.select", "prompt.cancel",
+	                       "prompt.retry", "prompt.send", "review.panel.toggle", "server.menu.toggle",
+	                       "session.create", "session.metrics.toggle", "session.open", "session.title.edit.begin",
+	                       "sidebar.toggle", "terminal.attach"})
 		host.register_action(id, [calls, id](std::string_view) { if (calls) ++(*calls)[id]; });
 }
 
@@ -65,7 +69,7 @@ int main(int argc, char** argv) {
 	host.load(argv[1], argv[2]);
 	if (!host.source_observed_primary_tree() || host.child_count() != 1) return 5;
 	if (host.child_at(0)->child_count() == 0) return 6;
-	if (host.attached_action_count() != 14 || !host.unattached_required_actions().empty()) return 7;
+	if (host.attached_action_count() != 26 || !host.unattached_required_actions().empty()) return 7;
 	host.set_transcript({{"u1", "user", {{"message.text", "runtime user"}}},
 	                     {"a1", "assistant", {{"message.text", "runtime assistant"}}},
 	                     {"t1", "tool", {{"message.text", "tool.read"}}}});

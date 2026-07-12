@@ -3,6 +3,7 @@
 
 #include <pulp/events/main_thread_dispatcher.hpp>
 #include <pulp/platform/file_dialog.hpp>
+#include <pulp/platform/clipboard.hpp>
 #include <pulp/view/accessibility.hpp>
 #include <pulp/view/buttons.hpp>
 #include <pulp/view/markdown_view.hpp>
@@ -211,12 +212,40 @@ PalotView::PalotView() {
 	event_sink_ = std::make_shared<UiEventSink>(this);
 	set_access_label("Palot chat workspace");
 	auto imported_root = std::make_unique<ImportedRootHost>();
+	imported_root->register_action("composer.agent-menu.toggle", [this](std::string_view) {
+		composer_agent_menu_open_ = !composer_agent_menu_open_;
+		request_repaint();
+	});
+	imported_root->register_action("composer.attachment.open", [this](std::string_view) {
+		pending_attachments_ = pulp::platform::FileDialog::open_files(
+			"Attach files to the Palot prompt", {}, project_ ? project_->text() : std::string{});
+		request_repaint();
+	});
+	imported_root->register_action("composer.model-menu.toggle", [this](std::string_view) {
+		composer_model_menu_open_ = !composer_model_menu_open_;
+		request_repaint();
+	});
+	imported_root->register_action("composer.variant-menu.toggle", [this](std::string_view) {
+		composer_variant_menu_open_ = !composer_variant_menu_open_;
+		request_repaint();
+	});
 	imported_root->register_action("command.palette.open", [this](std::string_view) {
 		command_palette_open_ = true;
 		request_repaint();
 	});
 	imported_root->register_action("composer.copy", [this](std::string_view) {
 		if (transcript_ && transcript_->child_count() != 0) request_repaint();
+	});
+	imported_root->register_action("display.mode.cycle", [this](std::string_view) {
+		display_mode_ = display_mode_ == "default" ? "verbose" : "default";
+		request_repaint();
+	});
+	imported_root->register_action("external.open.menu.toggle", [this](std::string_view) {
+		external_open_menu_open_ = !external_open_menu_open_;
+		request_repaint();
+	});
+	imported_root->register_action("external.open.preferred", [this](std::string_view) {
+		set_configuration_error("No portable external-editor launcher is available in this Burl build");
 	});
 	imported_root->register_action("navigation.settings", [this](std::string_view) {
 		navigation_route_ = "/settings/general";
@@ -226,6 +255,10 @@ PalotView::PalotView() {
 	imported_root->register_action("navigation.automations", [this](std::string_view) {
 		navigation_route_ = "/automations";
 		server_menu_open_ = false;
+		request_repaint();
+	});
+	imported_root->register_action("navigation.session.close", [this](std::string_view) {
+		navigation_route_ = "/";
 		request_repaint();
 	});
 	imported_root->register_action("project.select", [this](std::string_view) { choose_project_folder(); });
@@ -268,10 +301,30 @@ PalotView::PalotView() {
 		server_menu_open_ = !server_menu_open_;
 		request_repaint();
 	});
+	imported_root->register_action("review.panel.toggle", [this](std::string_view) {
+		review_panel_open_ = !review_panel_open_;
+		request_repaint();
+	});
+	imported_root->register_action("session.metrics.toggle", [this](std::string_view) {
+		session_metrics_open_ = !session_metrics_open_;
+		request_repaint();
+	});
+	imported_root->register_action("session.title.edit.begin", [this](std::string_view) {
+		title_editing_ = true;
+		request_repaint();
+	});
 	imported_root->register_action("sidebar.toggle", [this](std::string_view) {
 		sidebar_open_ = !sidebar_open_;
 		if (imported_root_)
 			imported_root_->set_application_state("sidebar.open", sidebar_open_ ? "open" : "closed");
+		request_repaint();
+	});
+	imported_root->register_action("terminal.attach", [this](std::string_view) {
+		const auto directory = project_ ? project_->text() : std::string{};
+		const auto command = "opencode attach http://127.0.0.1:4101 --session " + session_ +
+		                     " --dir " + directory;
+		if (!pulp::platform::Clipboard::set_text(command))
+			set_configuration_error("Unable to copy the OpenCode attach command");
 		request_repaint();
 	});
 	imported_root->load(palot_bundle_resource("import/main-chat.observed.design-ir.v1.json"),
@@ -279,9 +332,11 @@ PalotView::PalotView() {
 	imported_root_ = imported_root.get();
 	add_child(std::move(imported_root));
 	on_global_key = [this](const pulp::view::KeyEvent& event) {
-		if (!event.is_down || event.key != pulp::view::KeyCode::b || !event.isMainModifier())
-			return false;
-		return invoke_imported_action("sidebar.toggle");
+		if (!event.is_down || !event.isMainModifier()) return false;
+		if (event.key == pulp::view::KeyCode::b) return invoke_imported_action("sidebar.toggle");
+		if (event.key == pulp::view::KeyCode::d && event.isShiftDown())
+			return invoke_imported_action("review.panel.toggle");
+		return false;
 	};
 	auto project = std::make_unique<pulp::view::TextEditor>();
 	project->placeholder = "Project folder";

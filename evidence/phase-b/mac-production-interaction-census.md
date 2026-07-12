@@ -13,7 +13,7 @@ cmake --build build-semantic --target palot-mac-production-interaction-test -j4
 ctest --test-dir build-semantic -R '^palot-mac-production-interaction$' --output-on-failure
 ```
 
-Current result: **FAIL — 51 observations across 85 enumerated controls**.
+Current result: **FAIL — 20 observations across 85 enumerated controls**.
 The repeated observations are intentional: a control must remain valid at
 every width where it is effectively visible.
 
@@ -32,12 +32,14 @@ Highest-priority actionable groups:
   This Mac, Settings, and sidebar toggle are bound. Manual sidebar close also
   persists through narrow-to-wide resize and clearing returns to the responsive
   baseline.
-- App bar: title rename, diff-count button, Open and its adjacent menu controls
-  are focusable but unbound.
-- Composer toolbar: attachment, Build, model, and variant controls are focusable
-  but unbound. The textarea is handled as an editable/focus target; its
-  `prompt.send` contract is keyboard-submit semantics and is not incorrectly
-  treated as a click action.
+- App-bar title editing, changes panel, metrics, Open/menu, terminal attach,
+  and close-session controls now dispatch through typed consumer actions.
+  Terminal attach writes the real OpenCode attach command through Burl's
+  portable clipboard.
+- Composer attachment, Build, model, variant, and display-mode controls now
+  dispatch through typed actions. Attachment invokes Burl's real file dialog.
+  The textarea remains an editable/focus target; its `prompt.send` contract is
+  keyboard-submit semantics and is not incorrectly treated as a click action.
 - Responsive geometry: composer and secondary-panel controls can intersect the
   root while lying outside their intended container, demonstrating source
   geometry that has not been lowered to a responsive native layout.

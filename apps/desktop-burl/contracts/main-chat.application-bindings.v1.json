@@ -16,10 +16,18 @@
     {"id":"state.streaming","sourceUri":"apps/desktop/src/renderer/atoms/streaming.ts","symbol":"applyStreamingDelta"}
   ],
   "actions": [
+    {"id":"composer.agent-menu.toggle","variant":"typed","sourceAnchor":"chat.composer","required":true,"fields":[],"resultType":"boolean"},
+    {"id":"composer.attachment.open","variant":"typed","sourceAnchor":"chat.composer","required":true,"fields":[],"resultType":"file-attachment[]"},
+    {"id":"composer.model-menu.toggle","variant":"typed","sourceAnchor":"chat.composer","required":true,"fields":[],"resultType":"boolean"},
+    {"id":"composer.variant-menu.toggle","variant":"typed","sourceAnchor":"chat.composer","required":true,"fields":[],"resultType":"boolean"},
     {"id":"command.palette.open","variant":"typed","sourceAnchor":"app.sidebar","required":true,"fields":[],"resultType":"boolean"},
     {"id":"composer.copy","variant":"typed","sourceAnchor":"chat.transcript","required":true,"fields":[{"name":"messageID","type":"string","required":true}],"resultType":"void"},
+    {"id":"display.mode.cycle","variant":"typed","sourceAnchor":"chat.controller","required":true,"fields":[],"resultType":"display-mode"},
+    {"id":"external.open.menu.toggle","variant":"typed","sourceAnchor":"chat.controller","required":true,"fields":[],"resultType":"boolean"},
+    {"id":"external.open.preferred","variant":"typed","sourceAnchor":"chat.controller","required":true,"fields":[{"name":"directory","type":"path","required":true}],"resultType":"void"},
     {"id":"navigation.settings","variant":"typed","sourceAnchor":"app.sidebar","required":true,"fields":[],"resultType":"route"},
     {"id":"navigation.automations","variant":"typed","sourceAnchor":"app.sidebar","required":true,"fields":[],"resultType":"route"},
+    {"id":"navigation.session.close","variant":"typed","sourceAnchor":"chat.controller","required":true,"fields":[],"resultType":"route"},
     {"id":"project.select","variant":"typed","sourceAnchor":"app.sidebar","required":true,"fields":[{"name":"directory","type":"path","required":true}],"resultType":"project"},
     {"id":"project.open","variant":"typed","sourceAnchor":"app.sidebar","required":false,"fields":[{"name":"directory","type":"path","required":true}],"resultType":"project"},
     {"id":"project.search.toggle","variant":"typed","sourceAnchor":"app.sidebar","required":true,"fields":[],"resultType":"boolean"},
@@ -29,7 +37,11 @@
     {"id":"session.create","variant":"typed","sourceAnchor":"chat.controller","required":true,"fields":[{"name":"directory","type":"path","required":true}],"resultType":"session"},
     {"id":"session.open","variant":"typed","sourceAnchor":"chat.controller","required":true,"fields":[{"name":"directory","type":"path","required":true},{"name":"sessionID","type":"string","required":true}],"resultType":"session"},
     {"id":"server.menu.toggle","variant":"typed","sourceAnchor":"app.sidebar","required":true,"fields":[],"resultType":"boolean"},
-    {"id":"sidebar.toggle","variant":"typed","sourceAnchor":"app.sidebar","required":true,"fields":[],"resultType":"boolean"}
+    {"id":"review.panel.toggle","variant":"typed","sourceAnchor":"chat.controller","required":true,"fields":[],"resultType":"boolean"},
+    {"id":"session.metrics.toggle","variant":"typed","sourceAnchor":"chat.controller","required":true,"fields":[],"resultType":"boolean"},
+    {"id":"session.title.edit.begin","variant":"typed","sourceAnchor":"chat.controller","required":true,"fields":[],"resultType":"boolean"},
+    {"id":"sidebar.toggle","variant":"typed","sourceAnchor":"app.sidebar","required":true,"fields":[],"resultType":"boolean"},
+    {"id":"terminal.attach","variant":"typed","sourceAnchor":"chat.controller","required":true,"fields":[{"name":"directory","type":"path","required":true},{"name":"sessionID","type":"string","required":true}],"resultType":"void"}
   ],
   "events": [
     {"id":"message.part.delta","variant":"typed","sourceAnchor":"opencode.connection","required":true,"fields":[{"name":"delta","type":"string","required":true},{"name":"field","type":"string","required":true},{"name":"messageID","type":"string","required":true},{"name":"partID","type":"string","required":true},{"name":"sessionID","type":"string","required":true}],"resultType":"void"},

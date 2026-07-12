@@ -21,5 +21,19 @@ int main() {
 	if (!view.invoke_imported_action("command.palette.open") || !view.command_palette_open()) return 7;
 	if (!view.invoke_imported_action("navigation.automations") ||
 	    view.navigation_route() != "/automations") return 8;
+	if (!view.invoke_imported_action("session.title.edit.begin") || !view.title_editing()) return 9;
+	pulp::view::KeyEvent review_shortcut;
+	review_shortcut.key = pulp::view::KeyCode::d;
+	review_shortcut.modifiers = pulp::view::kModCmd | pulp::view::kModShift;
+	review_shortcut.is_down = true;
+	if (!view.on_global_key(review_shortcut) || !view.review_panel_open()) return 10;
+	if (!view.invoke_imported_action("session.metrics.toggle") || !view.session_metrics_open()) return 11;
+	if (!view.invoke_imported_action("external.open.menu.toggle") || !view.external_open_menu_open()) return 12;
+	if (!view.invoke_imported_action("composer.agent-menu.toggle") || !view.composer_agent_menu_open()) return 13;
+	if (!view.invoke_imported_action("composer.model-menu.toggle") || !view.composer_model_menu_open()) return 14;
+	if (!view.invoke_imported_action("composer.variant-menu.toggle") || !view.composer_variant_menu_open()) return 15;
+	const auto mode = std::string(view.display_mode());
+	if (!view.invoke_imported_action("display.mode.cycle") || view.display_mode() == mode) return 16;
+	if (!view.invoke_imported_action("navigation.session.close") || view.navigation_route() != "/") return 17;
 	return EXIT_SUCCESS;
 }
