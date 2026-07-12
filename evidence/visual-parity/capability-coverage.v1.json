@@ -190,10 +190,9 @@
         {
           "value": "color(srgb 0 0 0 / 0)",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed backgroundColor=color(srgb ... / 0) -> normalizeCssColor -> TypedPaint.backgroundColor=#00000000 -> NativeDesignIR.style.backgroundColor -> apply_visual_style -> View transparent background -> Skia",
+          "evidenceIds": ["semantic:observed-dom-background-color-srgb-transparent"]
         },
         {
           "value": "color(srgb 0 0.0941177 0.2 / 0.35)",
