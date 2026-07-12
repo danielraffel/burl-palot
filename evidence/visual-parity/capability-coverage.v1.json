@@ -4032,10 +4032,9 @@
     {
       "name": "disabled",
       "observation": "observed",
-      "decision": "unsupported",
-      "route": null,
-      "evidenceIds": [],
-      "reason": "No exact behavior route plus resolving evidence ID is published; screenshot scoring is gated."
+      "decision": "lowered",
+      "route": "captured HTML disabled presence or aria-disabled=true -> observed semantic disabled flag plus verbatim accessibility state -> NativeDesignIR disabled and VisualSkin disabled state -> native materializer View enabled=false -> hit-test and focus traversal exclusion plus pointer/keyboard and bound action dispatch suppression -> disabled Skia pixels and platform accessibility state",
+      "evidenceIds": ["behavior:observed-disabled"]
     },
     {
       "name": "focus-visible",
