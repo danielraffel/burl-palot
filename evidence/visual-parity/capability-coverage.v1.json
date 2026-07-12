@@ -509,66 +509,58 @@
         {
           "value": "1.67772e+07px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed large borderBottomRightRadius px -> authored TypedPaint value -> NativeDesignIR corner style -> View authored radius -> CSS overlap common-scale used value at each paint/resize -> Skia path",
+          "evidenceIds": ["semantic:observed-dom-border-corner-right-large"]
         },
         {
           "value": "10.5px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed fractional borderBottomRightRadius px -> TypedPaint corner slot -> NativeDesignIR corner style -> View authored radius -> CSS used-value overlap normalization -> Skia path",
+          "evidenceIds": ["semantic:observed-dom-border-corner-right-fractional"]
         },
         {
           "value": "10px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed fractional borderBottomRightRadius px -> TypedPaint corner slot -> NativeDesignIR corner style -> View authored radius -> CSS used-value overlap normalization -> Skia path",
+          "evidenceIds": ["semantic:observed-dom-border-corner-right-fractional"]
         },
         {
           "value": "12.5px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed fractional borderBottomRightRadius px -> TypedPaint corner slot -> NativeDesignIR corner style -> View authored radius -> CSS used-value overlap normalization -> Skia path",
+          "evidenceIds": ["semantic:observed-dom-border-corner-right-fractional"]
         },
         {
           "value": "16.5px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed fractional borderBottomRightRadius px -> TypedPaint corner slot -> NativeDesignIR corner style -> View authored radius -> CSS used-value overlap normalization -> Skia path",
+          "evidenceIds": ["semantic:observed-dom-border-corner-right-fractional"]
         },
         {
           "value": "4px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed fractional borderBottomRightRadius px -> TypedPaint corner slot -> NativeDesignIR corner style -> View authored radius -> CSS used-value overlap normalization -> Skia path",
+          "evidenceIds": ["semantic:observed-dom-border-corner-right-fractional"]
         },
         {
           "value": "7.5px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed fractional borderBottomRightRadius px -> TypedPaint corner slot -> NativeDesignIR corner style -> View authored radius -> CSS used-value overlap normalization -> Skia path",
+          "evidenceIds": ["semantic:observed-dom-border-corner-right-fractional"]
         },
         {
           "value": "8.5px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed fractional borderBottomRightRadius px -> TypedPaint corner slot -> NativeDesignIR corner style -> View authored radius -> CSS used-value overlap normalization -> Skia path",
+          "evidenceIds": ["semantic:observed-dom-border-corner-right-fractional"]
         }
       ]
     },
