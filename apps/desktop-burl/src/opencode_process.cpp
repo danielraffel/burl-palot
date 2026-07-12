@@ -172,6 +172,7 @@ bool OpenCodeProcess::start(OpenCodeRequest request,
 void OpenCodeProcess::cancel() {
 	auto state = state_;
 	state->cancelled = true;
+	const auto generation = state->generation.load();
 	std::scoped_lock lock(state->process_mutex);
 	if (state->input_fd >= 0) {
 		if (!state->project_id.empty() && !state->session_id.empty()) {
@@ -185,12 +186,13 @@ void OpenCodeProcess::cancel() {
 			                   {"sessionId", state->session_id},
 			                   {"requestId", state->request_id}}}}));
 		}
-		write_all(state->input_fd,
-		          frame({{"version", 1},
-		                 {"type", "shutdown"},
-		                 {"id", "shutdown-" + std::to_string(state->generation.load())}}));
 	}
-	if (state->pid > 0) ::kill(state->pid, SIGTERM);
+	std::thread([state, generation] {
+		std::this_thread::sleep_for(std::chrono::seconds(5));
+		std::scoped_lock fallback_lock(state->process_mutex);
+		if (state->generation.load() == generation && state->running.load() && state->pid > 0)
+			::kill(state->pid, SIGTERM);
+	}).detach();
 }
 
 void OpenCodeProcess::run(std::shared_ptr<State> state, std::uint64_t generation,
@@ -374,10 +376,21 @@ void OpenCodeProcess::run(std::shared_ptr<State> state, std::uint64_t generation
 		      {"command", std::move(prompt_command)}});
 
 		for (;;) {
-			if (state->cancelled.load()) throw std::runtime_error("cancelled");
 			auto value = next();
 			if (!value) throw std::runtime_error("sidecar stream ended");
 			const auto type = value->value("type", "");
+			if (state->cancelled.load()) {
+				const auto cancel_id = "cancel-" + std::to_string(generation);
+				if (type == "response" && value->value("id", "") == cancel_id)
+					throw std::runtime_error("cancelled");
+				if (type == "event") {
+					const auto& cancelled_sdk = value->at("event").at("payload").at("event");
+					const auto cancelled_type = cancelled_sdk.value("type", "");
+					if (cancelled_type == "session.idle" || cancelled_type == "session.error")
+						throw std::runtime_error("cancelled");
+				}
+				continue;
+			}
 			if (type == "response" && value->value("id", "") == state->request_id) {
 				auto result = value->at("result");
 				if (!result.value("ok", false)) throw std::runtime_error(json_error(result));
