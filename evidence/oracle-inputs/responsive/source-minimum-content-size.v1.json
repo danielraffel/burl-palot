@@ -1,0 +1,34 @@
+{
+  "schema": "burl-source-minimum-content-size-v1",
+  "sourceRevision": "fd63a75dad3d0e8555ba22a47e720d285889fbf0",
+  "captureMethod": "CDP Emulation.setDeviceMetricsOverride plus getBoundingClientRect",
+  "criterion": "main and composer follow the app bar; composer, textarea, and every visible composer control remain inside the main content and viewport without a clipping ancestor",
+  "minimum": {
+    "width": 280,
+    "height": 248
+  },
+  "minimumGeometry": {
+    "main": { "x": 12, "y": 0, "width": 256, "height": 236 },
+    "appBarBottom": 46,
+    "composer": { "x": 12, "y": 50, "width": 255, "height": 186 },
+    "furthestControlBottom": 227
+  },
+  "boundaryProof": {
+    "nextLowerHeight": 247,
+    "passed": false
+  },
+  "sampledPassingViewports": [
+    { "width": 280, "height": 420 },
+    { "width": 280, "height": 520 },
+    { "width": 280, "height": 640 },
+    { "width": 280, "height": 800 },
+    { "width": 600, "height": 420 },
+    { "width": 600, "height": 520 },
+    { "width": 600, "height": 640 },
+    { "width": 600, "height": 800 },
+    { "width": 1200, "height": 420 },
+    { "width": 1200, "height": 520 },
+    { "width": 1200, "height": 640 },
+    { "width": 1200, "height": 800 }
+  ]
+}

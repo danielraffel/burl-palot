@@ -91,10 +91,6 @@ int main(int argc, char** argv) {
 	options.title = BURL_APP_NAME;
 	options.width = window_width;
 	options.height = window_height;
-	// Source BrowserWindow declares no minimum; zero delegates only to the
-	// platform's physical window limit rather than inventing a product limit.
-	options.min_width = 0.0f;
-	options.min_height = 0.0f;
 	options.use_gpu = true;
 	const auto contract_path = std::filesystem::path(argv[0]).parent_path().parent_path() /
 		"Resources/contracts/source-window.browser-window.v1.json";

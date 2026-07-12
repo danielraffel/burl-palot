@@ -16,6 +16,13 @@
     "appearance": "dark",
     "transparent": true,
     "trafficLightX": 15,
-    "trafficLightY": 15
+    "trafficLightY": 15,
+    "minimumContentSize": {
+      "width": 280,
+      "height": 248,
+      "derivation": "one-pixel source critical-content containment probe",
+      "sourceRevision": "fd63a75dad3d0e8555ba22a47e720d285889fbf0",
+      "evidence": "evidence/oracle-inputs/responsive/source-minimum-content-size.v1.json"
+    }
   }
 }
