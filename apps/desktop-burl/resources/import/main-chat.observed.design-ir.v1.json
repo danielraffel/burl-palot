@@ -10727,7 +10727,9 @@
                                                                               "height": 248.5
                                                                             },
                                                                             "attributes": {
-                                                                              "source_revision": "fd63a75dad3d0e8555ba22a47e720d285889fbf0"
+                                                                              "source_revision": "fd63a75dad3d0e8555ba22a47e720d285889fbf0",
+                                                                              "pulpCollectionTemplate": "assistant",
+                                                                              "pulpBindingPolicyRule": "assistant-template"
                                                                             },
                                                                             "stable_anchor_id": "observed-dom:html:1/body:2/div[root]:3/div:1/div:1/div[sidebar-wrapper]:1/main[sidebar-inset]:2/div[content-area]:2/div:1/div:1/div:1/div:1/div:1/div:1/div:1/div:1/div:1/div:1/div:2",
                                                                             "anchor_strategy": "adapter",
@@ -11240,9 +11242,7 @@
                                                                                       "height": 186
                                                                                     },
                                                                                     "attributes": {
-                                                                                      "source_revision": "fd63a75dad3d0e8555ba22a47e720d285889fbf0",
-                                                                                      "pulpCollectionTemplate": "assistant",
-                                                                                      "pulpBindingPolicyRule": "assistant-template"
+                                                                                      "source_revision": "fd63a75dad3d0e8555ba22a47e720d285889fbf0"
                                                                                     },
                                                                                     "stable_anchor_id": "observed-dom:html:1/body:2/div[root]:3/div:1/div:1/div[sidebar-wrapper]:1/main[sidebar-inset]:2/div[content-area]:2/div:1/div:1/div:1/div:1/div:1/div:1/div:1/div:1/div:1/div:1/div:2/div:1/div:2",
                                                                                     "anchor_strategy": "adapter",
