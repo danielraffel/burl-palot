@@ -29031,7 +29031,7 @@
                                                                                                               "backdropFilter": "none",
                                                                                                               "filter": "none",
                                                                                                               "backgroundLayers": [],
-                                                                                                              "fontFamily": ".SF NS, Menlo",
+                                                                                                              "fontFamily": ".SF NS",
                                                                                                               "fontSize": 15,
                                                                                                               "fontWeight": 400,
                                                                                                               "lineHeight": 22,
@@ -48571,93 +48571,9 @@
   "fontFamilyAssets": [
     {
       "family": ".SF NS",
-      "weight": 400,
-      "style": "normal",
-      "platform_face": ".SFNS-Bold",
-      "provenance": {
-        "platform": "source-runtime",
-        "os": "captured",
-        "runtime": "cdp-platform-fonts",
-        "cssAlias": "-apple-system, system-ui, Segoe UI, system-ui, sans-serif"
-      }
-    },
-    {
-      "family": ".SF NS",
       "weight": 600,
       "style": "normal",
       "platform_face": ".SFNS-Bold",
-      "provenance": {
-        "platform": "source-runtime",
-        "os": "captured",
-        "runtime": "cdp-platform-fonts",
-        "cssAlias": "-apple-system, system-ui, Segoe UI, system-ui, sans-serif"
-      }
-    },
-    {
-      "family": ".SF NS",
-      "weight": 400,
-      "style": "normal",
-      "platform_face": ".SFNS-Regular_wdth_opsz110000_GRAD_wght1F40000",
-      "provenance": {
-        "platform": "source-runtime",
-        "os": "captured",
-        "runtime": "cdp-platform-fonts",
-        "cssAlias": "-apple-system, system-ui, Segoe UI, system-ui, sans-serif"
-      }
-    },
-    {
-      "family": ".SF NS",
-      "weight": 500,
-      "style": "normal",
-      "platform_face": ".SFNS-Regular_wdth_opsz110000_GRAD_wght1F40000",
-      "provenance": {
-        "platform": "source-runtime",
-        "os": "captured",
-        "runtime": "cdp-platform-fonts",
-        "cssAlias": "-apple-system, system-ui, Segoe UI, system-ui, sans-serif"
-      }
-    },
-    {
-      "family": ".SF NS",
-      "weight": 600,
-      "style": "normal",
-      "platform_face": ".SFNS-Regular_wdth_opsz110000_GRAD_wght1F40000",
-      "provenance": {
-        "platform": "source-runtime",
-        "os": "captured",
-        "runtime": "cdp-platform-fonts",
-        "cssAlias": "-apple-system, system-ui, Segoe UI, system-ui, sans-serif"
-      }
-    },
-    {
-      "family": ".SF NS",
-      "weight": 400,
-      "style": "normal",
-      "platform_face": ".SFNS-Regular_wdth_opsz110000_GRAD_wght2580000",
-      "provenance": {
-        "platform": "source-runtime",
-        "os": "captured",
-        "runtime": "cdp-platform-fonts",
-        "cssAlias": "-apple-system, system-ui, Segoe UI, system-ui, sans-serif"
-      }
-    },
-    {
-      "family": ".SF NS",
-      "weight": 500,
-      "style": "normal",
-      "platform_face": ".SFNS-Regular_wdth_opsz110000_GRAD_wght2580000",
-      "provenance": {
-        "platform": "source-runtime",
-        "os": "captured",
-        "runtime": "cdp-platform-fonts",
-        "cssAlias": "-apple-system, system-ui, Segoe UI, system-ui, sans-serif"
-      }
-    },
-    {
-      "family": ".SF NS",
-      "weight": 600,
-      "style": "normal",
-      "platform_face": ".SFNS-Regular_wdth_opsz110000_GRAD_wght2580000",
       "provenance": {
         "platform": "source-runtime",
         "os": "captured",
@@ -48723,18 +48639,6 @@
         "os": "captured",
         "runtime": "cdp-platform-fonts",
         "cssAlias": "-apple-system, system-ui, Segoe UI, system-ui, sans-serif"
-      }
-    },
-    {
-      "family": "Menlo",
-      "weight": 400,
-      "style": "normal",
-      "platform_face": "Menlo-Bold",
-      "provenance": {
-        "platform": "source-runtime",
-        "os": "captured",
-        "runtime": "cdp-platform-fonts",
-        "cssAlias": "ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, Liberation Mono, monospace"
       }
     },
     {

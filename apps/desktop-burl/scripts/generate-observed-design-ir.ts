@@ -105,6 +105,15 @@ const collectInlineSvg = (node: any) => {
 	for (const child of node.children ?? []) collectInlineSvg(child)
 }
 collectInlineSvg(renderRoot)
+const runtimeFontsBySourceId = new Map<string, Array<{
+	family: string; postScriptName: string; custom: boolean; glyphCount: number
+}>>()
+const collectRuntimeFonts = (node: any) => {
+	const used = (node.usedFonts ?? []).filter((face: any) => face.glyphCount > 0)
+	if (node.sourceId && used.length) runtimeFontsBySourceId.set(node.sourceId, used)
+	for (const child of node.children ?? []) collectRuntimeFonts(child)
+}
+collectRuntimeFonts(renderRoot)
 const exclusions = new Map((importPolicy.svgExclusions ?? []).map((item) => [item.sourceId, item.reason]))
 for (const [sourceId, reason] of exclusions) {
 	if (!reason.trim() || !inlineSvgCaptures.some((capture) => capture.sourceId === sourceId))
@@ -117,7 +126,11 @@ const designIr = importer.toNativeDesignIrV1(lowered, {
 	sourceRevision,
 	platformFonts: importer.macosSkiaPlatformFontContract,
 	observedFontUses: importer.projectAggregateRuntimeFontFaces(
-		importer.collectObservedFontUses(lowered), fontReceipt.usedFaces,
+		importer.collectObservedFontUses(lowered).map((use: any) => ({
+			...use,
+			runtimeUsedFonts: runtimeFontsBySourceId.get(use.sourceId) ?? use.runtimeUsedFonts,
+		})),
+		fontReceipt.usedFaces,
 	),
 	inlineSvgCaptures: projectedSvgCaptures,
 })
