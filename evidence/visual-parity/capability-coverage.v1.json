@@ -641,98 +641,86 @@
         {
           "value": "0px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed borderRadius shorthand -> CSS one/four-value expansion -> TypedPaint authored radius slots -> NativeDesignIR uniform/per-corner style -> CSS overlap scaling at paint/resize -> Skia square, rounded-rect, or per-corner path",
+          "evidenceIds": ["semantic:observed-dom-border-radius-shorthand"]
         },
         {
           "value": "0px 10.5px 10.5px 0px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed borderRadius shorthand -> CSS one/four-value expansion -> TypedPaint authored radius slots -> NativeDesignIR uniform/per-corner style -> CSS overlap scaling at paint/resize -> Skia square, rounded-rect, or per-corner path",
+          "evidenceIds": ["semantic:observed-dom-border-radius-shorthand"]
         },
         {
           "value": "1.67772e+07px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed borderRadius shorthand -> CSS one/four-value expansion -> TypedPaint authored radius slots -> NativeDesignIR uniform/per-corner style -> CSS overlap scaling at paint/resize -> Skia square, rounded-rect, or per-corner path",
+          "evidenceIds": ["semantic:observed-dom-border-radius-shorthand"]
         },
         {
           "value": "10.5px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed borderRadius shorthand -> CSS one/four-value expansion -> TypedPaint authored radius slots -> NativeDesignIR uniform/per-corner style -> CSS overlap scaling at paint/resize -> Skia square, rounded-rect, or per-corner path",
+          "evidenceIds": ["semantic:observed-dom-border-radius-shorthand"]
         },
         {
           "value": "10.5px 0px 0px 10.5px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed borderRadius shorthand -> CSS one/four-value expansion -> TypedPaint authored radius slots -> NativeDesignIR uniform/per-corner style -> CSS overlap scaling at paint/resize -> Skia square, rounded-rect, or per-corner path",
+          "evidenceIds": ["semantic:observed-dom-border-radius-shorthand"]
         },
         {
           "value": "10px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed borderRadius shorthand -> CSS one/four-value expansion -> TypedPaint authored radius slots -> NativeDesignIR uniform/per-corner style -> CSS overlap scaling at paint/resize -> Skia square, rounded-rect, or per-corner path",
+          "evidenceIds": ["semantic:observed-dom-border-radius-shorthand"]
         },
         {
           "value": "12.5px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed borderRadius shorthand -> CSS one/four-value expansion -> TypedPaint authored radius slots -> NativeDesignIR uniform/per-corner style -> CSS overlap scaling at paint/resize -> Skia square, rounded-rect, or per-corner path",
+          "evidenceIds": ["semantic:observed-dom-border-radius-shorthand"]
         },
         {
           "value": "16.5px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed borderRadius shorthand -> CSS one/four-value expansion -> TypedPaint authored radius slots -> NativeDesignIR uniform/per-corner style -> CSS overlap scaling at paint/resize -> Skia square, rounded-rect, or per-corner path",
+          "evidenceIds": ["semantic:observed-dom-border-radius-shorthand"]
         },
         {
           "value": "16.5px 16.5px 0px 0px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed borderRadius shorthand -> CSS one/four-value expansion -> TypedPaint authored radius slots -> NativeDesignIR uniform/per-corner style -> CSS overlap scaling at paint/resize -> Skia square, rounded-rect, or per-corner path",
+          "evidenceIds": ["semantic:observed-dom-border-radius-shorthand"]
         },
         {
           "value": "4px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed borderRadius shorthand -> CSS one/four-value expansion -> TypedPaint authored radius slots -> NativeDesignIR uniform/per-corner style -> CSS overlap scaling at paint/resize -> Skia square, rounded-rect, or per-corner path",
+          "evidenceIds": ["semantic:observed-dom-border-radius-shorthand"]
         },
         {
           "value": "7.5px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed borderRadius shorthand -> CSS one/four-value expansion -> TypedPaint authored radius slots -> NativeDesignIR uniform/per-corner style -> CSS overlap scaling at paint/resize -> Skia square, rounded-rect, or per-corner path",
+          "evidenceIds": ["semantic:observed-dom-border-radius-shorthand"]
         },
         {
           "value": "8.5px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed borderRadius shorthand -> CSS one/four-value expansion -> TypedPaint authored radius slots -> NativeDesignIR uniform/per-corner style -> CSS overlap scaling at paint/resize -> Skia square, rounded-rect, or per-corner path",
+          "evidenceIds": ["semantic:observed-dom-border-radius-shorthand"]
         }
       ]
     },
