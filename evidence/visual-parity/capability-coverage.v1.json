@@ -246,50 +246,44 @@
         {
           "value": "rgb(24, 24, 24)",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed backgroundColor rgb()/rgba() -> normalizeCssColor integer channels + alpha -> TypedPaint.backgroundColor RGBA8 -> NativeDesignIR.style.backgroundColor -> apply_visual_style -> View background -> Skia",
+          "evidenceIds": ["semantic:observed-dom-background-color-rgb"]
         },
         {
           "value": "rgb(255, 255, 255)",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed backgroundColor rgb()/rgba() -> normalizeCssColor integer channels + alpha -> TypedPaint.backgroundColor RGBA8 -> NativeDesignIR.style.backgroundColor -> apply_visual_style -> View background -> Skia",
+          "evidenceIds": ["semantic:observed-dom-background-color-rgb"]
         },
         {
           "value": "rgb(33, 33, 33)",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed backgroundColor rgb()/rgba() -> normalizeCssColor integer channels + alpha -> TypedPaint.backgroundColor RGBA8 -> NativeDesignIR.style.backgroundColor -> apply_visual_style -> View background -> Skia",
+          "evidenceIds": ["semantic:observed-dom-background-color-rgb"]
         },
         {
           "value": "rgb(40, 40, 40)",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed backgroundColor rgb()/rgba() -> normalizeCssColor integer channels + alpha -> TypedPaint.backgroundColor RGBA8 -> NativeDesignIR.style.backgroundColor -> apply_visual_style -> View background -> Skia",
+          "evidenceIds": ["semantic:observed-dom-background-color-rgb"]
         },
         {
           "value": "rgb(46, 46, 46)",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed backgroundColor rgb()/rgba() -> normalizeCssColor integer channels + alpha -> TypedPaint.backgroundColor RGBA8 -> NativeDesignIR.style.backgroundColor -> apply_visual_style -> View background -> Skia",
+          "evidenceIds": ["semantic:observed-dom-background-color-rgb"]
         },
         {
           "value": "rgba(0, 0, 0, 0)",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed backgroundColor rgb()/rgba() -> normalizeCssColor integer channels + alpha -> TypedPaint.backgroundColor RGBA8 -> NativeDesignIR.style.backgroundColor -> apply_visual_style -> View background -> Skia",
+          "evidenceIds": ["semantic:observed-dom-background-color-rgb"]
         }
       ]
     },
