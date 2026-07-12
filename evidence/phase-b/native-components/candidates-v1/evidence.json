@@ -54,9 +54,9 @@
         "visualStatePreconditionPass": true
       },
       "metrics": {
-        "mae": 0.2161523321449792,
-        "ssim": 0.30354712821273383,
-        "edgeDiff": 0.046324288082510996
+        "mae": 0.2127231645499109,
+        "ssim": 0.28638281341352506,
+        "edgeDiff": 0.04428141240725669
       },
       "status": "GAP",
       "blockers": [
