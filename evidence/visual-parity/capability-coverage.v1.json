@@ -2059,74 +2059,65 @@
         {
           "value": "10px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "supported",
+          "route": "computed CSS line-height px -> exact typed scalar -> NativeDesignIR style lineHeight -> Label/attributed/Markdown shared multiline layout -> CoreText baseline/block metrics -> Skia pixels; normal maps to explicit native auto metric and invalid units fail closed",
+          "evidenceIds": ["semantic:observed-dom-line-height"]
         },
         {
           "value": "13.75px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "supported",
+          "route": "computed CSS line-height px -> exact typed scalar -> NativeDesignIR style lineHeight -> Label/attributed/Markdown shared multiline layout -> CoreText baseline/block metrics -> Skia pixels; normal maps to explicit native auto metric and invalid units fail closed",
+          "evidenceIds": ["semantic:observed-dom-line-height"]
         },
         {
           "value": "13px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "supported",
+          "route": "computed CSS line-height px -> exact typed scalar -> NativeDesignIR style lineHeight -> Label/attributed/Markdown shared multiline layout -> CoreText baseline/block metrics -> Skia pixels; normal maps to explicit native auto metric and invalid units fail closed",
+          "evidenceIds": ["semantic:observed-dom-line-height"]
         },
         {
           "value": "15px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "supported",
+          "route": "computed CSS line-height px -> exact typed scalar -> NativeDesignIR style lineHeight -> Label/attributed/Markdown shared multiline layout -> CoreText baseline/block metrics -> Skia pixels; normal maps to explicit native auto metric and invalid units fail closed",
+          "evidenceIds": ["semantic:observed-dom-line-height"]
         },
         {
           "value": "16.25px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "supported",
+          "route": "computed CSS line-height px -> exact typed scalar -> NativeDesignIR style lineHeight -> Label/attributed/Markdown shared multiline layout -> CoreText baseline/block metrics -> Skia pixels; normal maps to explicit native auto metric and invalid units fail closed",
+          "evidenceIds": ["semantic:observed-dom-line-height"]
         },
         {
           "value": "16.5px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "supported",
+          "route": "computed CSS line-height px -> exact typed scalar -> NativeDesignIR style lineHeight -> Label/attributed/Markdown shared multiline layout -> CoreText baseline/block metrics -> Skia pixels; normal maps to explicit native auto metric and invalid units fail closed",
+          "evidenceIds": ["semantic:observed-dom-line-height"]
         },
         {
           "value": "18px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "supported",
+          "route": "computed CSS line-height px -> exact typed scalar -> NativeDesignIR style lineHeight -> Label/attributed/Markdown shared multiline layout -> CoreText baseline/block metrics -> Skia pixels; normal maps to explicit native auto metric and invalid units fail closed",
+          "evidenceIds": ["semantic:observed-dom-line-height"]
         },
         {
           "value": "22px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "supported",
+          "route": "computed CSS line-height px -> exact typed scalar -> NativeDesignIR style lineHeight -> Label/attributed/Markdown shared multiline layout -> CoreText baseline/block metrics -> Skia pixels; normal maps to explicit native auto metric and invalid units fail closed",
+          "evidenceIds": ["semantic:observed-dom-line-height"]
         },
         {
           "value": "24px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "supported",
+          "route": "computed CSS line-height px -> exact typed scalar -> NativeDesignIR style lineHeight -> Label/attributed/Markdown shared multiline layout -> CoreText baseline/block metrics -> Skia pixels; normal maps to explicit native auto metric and invalid units fail closed",
+          "evidenceIds": ["semantic:observed-dom-line-height"]
         }
       ]
     },
