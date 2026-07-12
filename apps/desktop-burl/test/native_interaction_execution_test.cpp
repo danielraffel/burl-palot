@@ -53,9 +53,14 @@ int main(int argc, char** argv) {
 			++calls[id]; payloads[id] = payload;
 		});
 	host.load(argv[1], argv[2]);
-	host.set_projects({{"project", "project", {{"id", "project"}, {"project.name", "burl-palot-wt-semantic-restart"},
-	                                             {"directory", std::filesystem::current_path().string()},
-	                                             {"status", "active"}}}});
+	host.set_projects({
+		{"project-a", "project", {{"id", "project-a"}, {"project.name", "palot"},
+		                                {"directory", "/fixture/palot"}, {"status", "active"}}},
+		{"project-b", "project", {{"id", "project-b"}, {"project.name", "acme-api"},
+		                                {"directory", "/fixture/acme-api"}, {"status", "idle"}}},
+		{"project-c", "project", {{"id", "project-c"}, {"project.name", "landing-page"},
+		                                {"directory", "/fixture/landing-page"}, {"status", "idle"}}},
+	});
 	if (!host.unattached_actions().empty()) {
 		for (const auto& action : host.unattached_actions()) std::cerr << "unattached=" << action << '\n';
 		return 3;
@@ -116,10 +121,10 @@ int main(int argc, char** argv) {
 	}
 	for (const auto* id : {"project.open", "project.select", "prompt.cancel", "session.create", "session.open"})
 		if (exercised[id] == 0) { std::cerr << "unexercised=" << id << '\n'; return 11; }
-	if (payloads["project.open"] != std::filesystem::current_path().string()) return 12;
+	if (payloads["project.open"].empty()) return 12;
 	pulp::canvas::RecordingCanvas canvas;
 	host.paint_all(canvas);
-	bool painted_project = false;
+	std::unordered_set<std::string> painted_projects;
 	bool opaque_project_foreground = false;
 	std::unordered_set<std::string> painted_composite_labels;
 	pulp::canvas::Color current_fill;
@@ -128,16 +133,17 @@ int main(int argc, char** argv) {
 			current_fill = command.color;
 		}
 		if (command.type == pulp::canvas::DrawCommand::Type::fill_text &&
-		    command.text.find("burl-palot-wt-semantic-restart") != std::string::npos) {
-			painted_project = true;
-			opaque_project_foreground = current_fill.a > 0.0f;
+		    (command.text == "palot" || command.text == "acme-api" || command.text == "landing-page")) {
+			painted_projects.insert(command.text);
+			opaque_project_foreground = current_fill.a > 0.9f &&
+				(current_fill.r + current_fill.g + current_fill.b) > 1.5f;
 		}
 		if (command.type == pulp::canvas::DrawCommand::Type::fill_text) {
 			for (const auto* label : {"New Session", "Automations", "This Mac", "Settings"})
 				if (command.text.find(label) != std::string::npos) painted_composite_labels.insert(label);
 		}
 	}
-	if (!painted_project || !opaque_project_foreground) return 13;
+	if (painted_projects.size() != 3 || !opaque_project_foreground) return 13;
 	if (painted_composite_labels.size() != 4) return 14;
 	if (const auto* proof = std::getenv("PALOT_PROJECT_ROW_PROOF")) {
 		const auto png = pulp::view::render_to_png(host, 1200, 800, 1.0f,
