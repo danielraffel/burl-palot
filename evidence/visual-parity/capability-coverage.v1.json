@@ -1406,26 +1406,23 @@
         {
           "value": "400",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "supported",
+          "route": "computed CSS font-weight numeric used value -> typed text integer -> NativeDesignIR style fontWeight -> validated IRStyle font_weight -> inherited/direct Label weight -> runtime platform-face receipt and Skia typeface resolution/pixels; invalid native IR fails closed",
+          "evidenceIds": ["semantic:observed-dom-font-weight"]
         },
         {
           "value": "500",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "supported",
+          "route": "computed CSS font-weight numeric used value -> typed text integer -> NativeDesignIR style fontWeight -> validated IRStyle font_weight -> inherited/direct Label weight -> runtime platform-face receipt and Skia typeface resolution/pixels; invalid native IR fails closed",
+          "evidenceIds": ["semantic:observed-dom-font-weight"]
         },
         {
           "value": "600",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "supported",
+          "route": "computed CSS font-weight numeric used value -> typed text integer -> NativeDesignIR style fontWeight -> validated IRStyle font_weight -> inherited/direct Label weight -> runtime platform-face receipt and Skia typeface resolution/pixels; invalid native IR fails closed",
+          "evidenceIds": ["semantic:observed-dom-font-weight"]
         }
       ]
     },
