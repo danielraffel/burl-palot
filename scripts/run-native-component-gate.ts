@@ -94,6 +94,8 @@ for (const record of manifest.records) {
 	if (process.exitCode !== 0)
 		throw new Error(`${record.id}: renderer failed: ${process.stderr.toString()}`)
 	const execution = JSON.parse(process.stdout.toString())
+	if (!Array.isArray(execution.irDiagnostics) || !Array.isArray(execution.materializeDiagnostics))
+		throw new Error(`${record.id}: renderer omitted exact diagnostic arrays`)
 	await sharp(wide)
 		.extract({ left: 0, top: 0, width: record.pixel.width, height: record.pixel.height })
 		.png()
@@ -111,8 +113,14 @@ for (const record of manifest.records) {
 		.png()
 		.toFile(diffPath)
 	const blockers = []
-	if (execution.irErrors) blockers.push("import diagnostics contain error")
-	if (execution.materializeErrors) blockers.push("materialization diagnostics contain error")
+	for (const diagnostic of execution.irDiagnostics.filter(
+		(diagnostic: { severity: string }) => diagnostic.severity === "error",
+	))
+		blockers.push(`import ${diagnostic.code}: ${diagnostic.path}`)
+	for (const diagnostic of execution.materializeDiagnostics.filter(
+		(diagnostic: { severity: string }) => diagnostic.severity === "error",
+	))
+		blockers.push(`materialization ${diagnostic.code}: ${diagnostic.path}`)
 	if (!execution.interactionSupported) blockers.push("post-action semantic unsupported")
 	if (!execution.postActionPass) blockers.push("post-action semantic failed")
 	if (record.interaction.applicationBindingRequired)

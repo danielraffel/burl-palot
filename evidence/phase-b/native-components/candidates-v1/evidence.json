@@ -34,9 +34,55 @@
         "backend": "skia",
         "dpr": 2,
         "interactionSupported": false,
+        "irDiagnostics": [
+          {
+            "code": "font-face-unresolved",
+            "message": "no bundled face exactly matches -apple-system, system-ui, Segoe UI, system-ui, sans-serif 500 normal; parity mode forbids substitution",
+            "path": "html:1/body:2/div[root]:3/div:1/div:1/div[sidebar-wrapper]:1/div[sidebar]:1/div[sidebar-container]:1/div[sidebar-inner]:1/div[sidebar-content]:2/div[sidebar-group]:2/div[sidebar-group-content]:2/ul[sidebar-menu]:1/li[context-menu-trigger]:1/button[base-ui-_r_p_]:1",
+            "property": "fontFamily",
+            "severity": "error"
+          },
+          {
+            "code": "font-face-unresolved",
+            "message": "no bundled face exactly matches -apple-system, system-ui, Segoe UI, system-ui, sans-serif 500 normal; parity mode forbids substitution",
+            "path": "html:1/body:2/div[root]:3/div:1/div:1/div[sidebar-wrapper]:1/div[sidebar]:1/div[sidebar-container]:1/div[sidebar-inner]:1/div[sidebar-content]:2/div[sidebar-group]:2/div[sidebar-group-content]:2/ul[sidebar-menu]:1/li[context-menu-trigger]:1/button[base-ui-_r_p_]:1/div:2/span:1",
+            "property": "fontFamily",
+            "severity": "error"
+          },
+          {
+            "code": "font-face-unresolved",
+            "message": "no bundled face exactly matches -apple-system, system-ui, Segoe UI, system-ui, sans-serif 500 normal; parity mode forbids substitution",
+            "path": "html:1/body:2/div[root]:3/div:1/div:1/div[sidebar-wrapper]:1/div[sidebar]:1/div[sidebar-container]:1/div[sidebar-inner]:1/div[sidebar-content]:2/div[sidebar-group]:2/div[sidebar-group-content]:2/ul[sidebar-menu]:1/li[context-menu-trigger]:1/button[base-ui-_r_p_]:1/span:3",
+            "property": "fontFamily",
+            "severity": "error"
+          }
+        ],
         "irErrors": true,
         "logicalHeight": 32,
         "logicalWidth": 264,
+        "materializeDiagnostics": [
+          {
+            "code": "font-face-unresolved",
+            "message": "no bundled face exactly matches -apple-system, system-ui, Segoe UI, system-ui, sans-serif 500 normal; parity mode forbids substitution",
+            "path": "html:1/body:2/div[root]:3/div:1/div:1/div[sidebar-wrapper]:1/div[sidebar]:1/div[sidebar-container]:1/div[sidebar-inner]:1/div[sidebar-content]:2/div[sidebar-group]:2/div[sidebar-group-content]:2/ul[sidebar-menu]:1/li[context-menu-trigger]:1/button[base-ui-_r_p_]:1",
+            "property": "fontFamily",
+            "severity": "error"
+          },
+          {
+            "code": "font-face-unresolved",
+            "message": "no bundled face exactly matches -apple-system, system-ui, Segoe UI, system-ui, sans-serif 500 normal; parity mode forbids substitution",
+            "path": "html:1/body:2/div[root]:3/div:1/div:1/div[sidebar-wrapper]:1/div[sidebar]:1/div[sidebar-container]:1/div[sidebar-inner]:1/div[sidebar-content]:2/div[sidebar-group]:2/div[sidebar-group-content]:2/ul[sidebar-menu]:1/li[context-menu-trigger]:1/button[base-ui-_r_p_]:1/div:2/span:1",
+            "property": "fontFamily",
+            "severity": "error"
+          },
+          {
+            "code": "font-face-unresolved",
+            "message": "no bundled face exactly matches -apple-system, system-ui, Segoe UI, system-ui, sans-serif 500 normal; parity mode forbids substitution",
+            "path": "html:1/body:2/div[root]:3/div:1/div:1/div[sidebar-wrapper]:1/div[sidebar]:1/div[sidebar-container]:1/div[sidebar-inner]:1/div[sidebar-content]:2/div[sidebar-group]:2/div[sidebar-group-content]:2/ul[sidebar-menu]:1/li[context-menu-trigger]:1/button[base-ui-_r_p_]:1/span:3",
+            "property": "fontFamily",
+            "severity": "error"
+          }
+        ],
         "materializeErrors": true,
         "postActionPass": true,
         "rendered": true
@@ -48,8 +94,12 @@
       },
       "status": "GAP",
       "blockers": [
-        "import diagnostics contain error",
-        "materialization diagnostics contain error",
+        "import font-face-unresolved: html:1/body:2/div[root]:3/div:1/div:1/div[sidebar-wrapper]:1/div[sidebar]:1/div[sidebar-container]:1/div[sidebar-inner]:1/div[sidebar-content]:2/div[sidebar-group]:2/div[sidebar-group-content]:2/ul[sidebar-menu]:1/li[context-menu-trigger]:1/button[base-ui-_r_p_]:1",
+        "import font-face-unresolved: html:1/body:2/div[root]:3/div:1/div:1/div[sidebar-wrapper]:1/div[sidebar]:1/div[sidebar-container]:1/div[sidebar-inner]:1/div[sidebar-content]:2/div[sidebar-group]:2/div[sidebar-group-content]:2/ul[sidebar-menu]:1/li[context-menu-trigger]:1/button[base-ui-_r_p_]:1/div:2/span:1",
+        "import font-face-unresolved: html:1/body:2/div[root]:3/div:1/div:1/div[sidebar-wrapper]:1/div[sidebar]:1/div[sidebar-container]:1/div[sidebar-inner]:1/div[sidebar-content]:2/div[sidebar-group]:2/div[sidebar-group-content]:2/ul[sidebar-menu]:1/li[context-menu-trigger]:1/button[base-ui-_r_p_]:1/span:3",
+        "materialization font-face-unresolved: html:1/body:2/div[root]:3/div:1/div:1/div[sidebar-wrapper]:1/div[sidebar]:1/div[sidebar-container]:1/div[sidebar-inner]:1/div[sidebar-content]:2/div[sidebar-group]:2/div[sidebar-group-content]:2/ul[sidebar-menu]:1/li[context-menu-trigger]:1/button[base-ui-_r_p_]:1",
+        "materialization font-face-unresolved: html:1/body:2/div[root]:3/div:1/div:1/div[sidebar-wrapper]:1/div[sidebar]:1/div[sidebar-container]:1/div[sidebar-inner]:1/div[sidebar-content]:2/div[sidebar-group]:2/div[sidebar-group-content]:2/ul[sidebar-menu]:1/li[context-menu-trigger]:1/button[base-ui-_r_p_]:1/div:2/span:1",
+        "materialization font-face-unresolved: html:1/body:2/div[root]:3/div:1/div:1/div[sidebar-wrapper]:1/div[sidebar]:1/div[sidebar-container]:1/div[sidebar-inner]:1/div[sidebar-content]:2/div[sidebar-group]:2/div[sidebar-group-content]:2/ul[sidebar-menu]:1/li[context-menu-trigger]:1/button[base-ui-_r_p_]:1/span:3",
         "post-action semantic unsupported",
         "ApplicationBindingManifest dispatch not proven: session.select"
       ]
@@ -85,9 +135,41 @@
         "backend": "skia",
         "dpr": 2,
         "interactionSupported": true,
+        "irDiagnostics": [
+          {
+            "code": "font-face-unresolved",
+            "message": "no bundled face exactly matches -apple-system, system-ui, Segoe UI, system-ui, sans-serif 400 normal; parity mode forbids substitution",
+            "path": "html:1/body:2/div[root]:3/div:1/div:1/div[sidebar-wrapper]:1/div[sidebar]:1/div[sidebar-container]:1/div[sidebar-inner]:1/div[sidebar-content]:2/div[sidebar-group]:1/div[sidebar-group-content]:1/ul[sidebar-menu]:1/li[sidebar-menu-item]:1/button[base-ui-_r_1_]:1",
+            "property": "fontFamily",
+            "severity": "error"
+          },
+          {
+            "code": "font-face-unresolved",
+            "message": "no bundled face exactly matches -apple-system, system-ui, Segoe UI, system-ui, sans-serif 400 normal; parity mode forbids substitution",
+            "path": "html:1/body:2/div[root]:3/div:1/div:1/div[sidebar-wrapper]:1/div[sidebar]:1/div[sidebar-container]:1/div[sidebar-inner]:1/div[sidebar-content]:2/div[sidebar-group]:1/div[sidebar-group-content]:1/ul[sidebar-menu]:1/li[sidebar-menu-item]:1/button[base-ui-_r_1_]:1/span:2",
+            "property": "fontFamily",
+            "severity": "error"
+          }
+        ],
         "irErrors": true,
         "logicalHeight": 32,
         "logicalWidth": 264,
+        "materializeDiagnostics": [
+          {
+            "code": "font-face-unresolved",
+            "message": "no bundled face exactly matches -apple-system, system-ui, Segoe UI, system-ui, sans-serif 400 normal; parity mode forbids substitution",
+            "path": "html:1/body:2/div[root]:3/div:1/div:1/div[sidebar-wrapper]:1/div[sidebar]:1/div[sidebar-container]:1/div[sidebar-inner]:1/div[sidebar-content]:2/div[sidebar-group]:1/div[sidebar-group-content]:1/ul[sidebar-menu]:1/li[sidebar-menu-item]:1/button[base-ui-_r_1_]:1",
+            "property": "fontFamily",
+            "severity": "error"
+          },
+          {
+            "code": "font-face-unresolved",
+            "message": "no bundled face exactly matches -apple-system, system-ui, Segoe UI, system-ui, sans-serif 400 normal; parity mode forbids substitution",
+            "path": "html:1/body:2/div[root]:3/div:1/div:1/div[sidebar-wrapper]:1/div[sidebar]:1/div[sidebar-container]:1/div[sidebar-inner]:1/div[sidebar-content]:2/div[sidebar-group]:1/div[sidebar-group-content]:1/ul[sidebar-menu]:1/li[sidebar-menu-item]:1/button[base-ui-_r_1_]:1/span:2",
+            "property": "fontFamily",
+            "severity": "error"
+          }
+        ],
         "materializeErrors": true,
         "postActionPass": true,
         "rendered": true
@@ -99,8 +181,10 @@
       },
       "status": "GAP",
       "blockers": [
-        "import diagnostics contain error",
-        "materialization diagnostics contain error",
+        "import font-face-unresolved: html:1/body:2/div[root]:3/div:1/div:1/div[sidebar-wrapper]:1/div[sidebar]:1/div[sidebar-container]:1/div[sidebar-inner]:1/div[sidebar-content]:2/div[sidebar-group]:1/div[sidebar-group-content]:1/ul[sidebar-menu]:1/li[sidebar-menu-item]:1/button[base-ui-_r_1_]:1",
+        "import font-face-unresolved: html:1/body:2/div[root]:3/div:1/div:1/div[sidebar-wrapper]:1/div[sidebar]:1/div[sidebar-container]:1/div[sidebar-inner]:1/div[sidebar-content]:2/div[sidebar-group]:1/div[sidebar-group-content]:1/ul[sidebar-menu]:1/li[sidebar-menu-item]:1/button[base-ui-_r_1_]:1/span:2",
+        "materialization font-face-unresolved: html:1/body:2/div[root]:3/div:1/div:1/div[sidebar-wrapper]:1/div[sidebar]:1/div[sidebar-container]:1/div[sidebar-inner]:1/div[sidebar-content]:2/div[sidebar-group]:1/div[sidebar-group-content]:1/ul[sidebar-menu]:1/li[sidebar-menu-item]:1/button[base-ui-_r_1_]:1",
+        "materialization font-face-unresolved: html:1/body:2/div[root]:3/div:1/div:1/div[sidebar-wrapper]:1/div[sidebar]:1/div[sidebar-container]:1/div[sidebar-inner]:1/div[sidebar-content]:2/div[sidebar-group]:1/div[sidebar-group-content]:1/ul[sidebar-menu]:1/li[sidebar-menu-item]:1/button[base-ui-_r_1_]:1/span:2",
         "ApplicationBindingManifest dispatch not proven: session.create"
       ]
     },
@@ -135,9 +219,27 @@
         "backend": "skia",
         "dpr": 2,
         "interactionSupported": true,
+        "irDiagnostics": [
+          {
+            "code": "font-face-unresolved",
+            "message": "no bundled face exactly matches -apple-system, system-ui, Segoe UI, system-ui, sans-serif 500 normal; parity mode forbids substitution",
+            "path": "html:1/body:2/div[root]:3/div:1/div:1/div[sidebar-wrapper]:1/main[sidebar-inset]:2/div[content-area]:2/div:1/div:1/div:1/div:1/div:2/div:1/div:1/form:2/div[input-group]:1/div[input-group-addon]:2/button[button]:2",
+            "property": "fontFamily",
+            "severity": "error"
+          }
+        ],
         "irErrors": true,
         "logicalHeight": 24,
         "logicalWidth": 81,
+        "materializeDiagnostics": [
+          {
+            "code": "font-face-unresolved",
+            "message": "no bundled face exactly matches -apple-system, system-ui, Segoe UI, system-ui, sans-serif 500 normal; parity mode forbids substitution",
+            "path": "html:1/body:2/div[root]:3/div:1/div:1/div[sidebar-wrapper]:1/main[sidebar-inset]:2/div[content-area]:2/div:1/div:1/div:1/div:1/div:2/div:1/div:1/form:2/div[input-group]:1/div[input-group-addon]:2/button[button]:2",
+            "property": "fontFamily",
+            "severity": "error"
+          }
+        ],
         "materializeErrors": true,
         "postActionPass": true,
         "rendered": true
@@ -149,8 +251,8 @@
       },
       "status": "GAP",
       "blockers": [
-        "import diagnostics contain error",
-        "materialization diagnostics contain error",
+        "import font-face-unresolved: html:1/body:2/div[root]:3/div:1/div:1/div[sidebar-wrapper]:1/main[sidebar-inset]:2/div[content-area]:2/div:1/div:1/div:1/div:1/div:2/div:1/div:1/form:2/div[input-group]:1/div[input-group-addon]:2/button[button]:2",
+        "materialization font-face-unresolved: html:1/body:2/div[root]:3/div:1/div:1/div[sidebar-wrapper]:1/main[sidebar-inset]:2/div[content-area]:2/div:1/div:1/div:1/div:1/div:2/div:1/div:1/form:2/div[input-group]:1/div[input-group-addon]:2/button[button]:2",
         "ApplicationBindingManifest dispatch not proven: stream.stop"
       ]
     },
@@ -185,9 +287,27 @@
         "backend": "skia",
         "dpr": 2,
         "interactionSupported": true,
+        "irDiagnostics": [
+          {
+            "code": "font-face-unresolved",
+            "message": "no bundled face exactly matches -apple-system, system-ui, Segoe UI, system-ui, sans-serif 400 normal; parity mode forbids substitution",
+            "path": "html:1/body:2/div[root]:3/div:1/div:1/div[sidebar-wrapper]:1/main[sidebar-inset]:2/div[content-area]:2/div:1/div:1/div:1/div:1/div:2/div:1/div:1/form:2/div[input-group]:1/textarea[input-group-control]:1",
+            "property": "fontFamily",
+            "severity": "error"
+          }
+        ],
         "irErrors": true,
         "logicalHeight": 64,
         "logicalWidth": 873,
+        "materializeDiagnostics": [
+          {
+            "code": "font-face-unresolved",
+            "message": "no bundled face exactly matches -apple-system, system-ui, Segoe UI, system-ui, sans-serif 400 normal; parity mode forbids substitution",
+            "path": "html:1/body:2/div[root]:3/div:1/div:1/div[sidebar-wrapper]:1/main[sidebar-inset]:2/div[content-area]:2/div:1/div:1/div:1/div:1/div:2/div:1/div:1/form:2/div[input-group]:1/textarea[input-group-control]:1",
+            "property": "fontFamily",
+            "severity": "error"
+          }
+        ],
         "materializeErrors": true,
         "postActionPass": true,
         "rendered": true
@@ -199,8 +319,8 @@
       },
       "status": "GAP",
       "blockers": [
-        "import diagnostics contain error",
-        "materialization diagnostics contain error"
+        "import font-face-unresolved: html:1/body:2/div[root]:3/div:1/div:1/div[sidebar-wrapper]:1/main[sidebar-inset]:2/div[content-area]:2/div:1/div:1/div:1/div:1/div:2/div:1/div:1/form:2/div[input-group]:1/textarea[input-group-control]:1",
+        "materialization font-face-unresolved: html:1/body:2/div[root]:3/div:1/div:1/div[sidebar-wrapper]:1/main[sidebar-inset]:2/div[content-area]:2/div:1/div:1/div:1/div:1/div:2/div:1/div:1/form:2/div[input-group]:1/textarea[input-group-control]:1"
       ]
     },
     {
@@ -234,9 +354,41 @@
         "backend": "skia",
         "dpr": 2,
         "interactionSupported": true,
+        "irDiagnostics": [
+          {
+            "code": "font-face-unresolved",
+            "message": "no bundled face exactly matches -apple-system, system-ui, Segoe UI, system-ui, sans-serif 500 normal; parity mode forbids substitution",
+            "path": "html:1/body:2/div[root]:3/div:1/div:1/div[sidebar-wrapper]:1/main[sidebar-inset]:2/div[content-area]:2/div:1/div:1/div:1/div:1/div:2/div:1/div:1/form:2/div[input-group]:1/div[input-group-addon]:2/div:1/div:2/button[base-ui-_r_43_]:1",
+            "property": "fontFamily",
+            "severity": "error"
+          },
+          {
+            "code": "font-face-unresolved",
+            "message": "no bundled face exactly matches -apple-system, system-ui, Segoe UI, system-ui, sans-serif 500 normal; parity mode forbids substitution",
+            "path": "html:1/body:2/div[root]:3/div:1/div:1/div[sidebar-wrapper]:1/main[sidebar-inset]:2/div[content-area]:2/div:1/div:1/div:1/div:1/div:2/div:1/div:1/form:2/div[input-group]:1/div[input-group-addon]:2/div:1/div:2/button[base-ui-_r_43_]:1/span:1/span:1",
+            "property": "fontFamily",
+            "severity": "error"
+          }
+        ],
         "irErrors": true,
         "logicalHeight": 28,
         "logicalWidth": 68,
+        "materializeDiagnostics": [
+          {
+            "code": "font-face-unresolved",
+            "message": "no bundled face exactly matches -apple-system, system-ui, Segoe UI, system-ui, sans-serif 500 normal; parity mode forbids substitution",
+            "path": "html:1/body:2/div[root]:3/div:1/div:1/div[sidebar-wrapper]:1/main[sidebar-inset]:2/div[content-area]:2/div:1/div:1/div:1/div:1/div:2/div:1/div:1/form:2/div[input-group]:1/div[input-group-addon]:2/div:1/div:2/button[base-ui-_r_43_]:1",
+            "property": "fontFamily",
+            "severity": "error"
+          },
+          {
+            "code": "font-face-unresolved",
+            "message": "no bundled face exactly matches -apple-system, system-ui, Segoe UI, system-ui, sans-serif 500 normal; parity mode forbids substitution",
+            "path": "html:1/body:2/div[root]:3/div:1/div:1/div[sidebar-wrapper]:1/main[sidebar-inset]:2/div[content-area]:2/div:1/div:1/div:1/div:1/div:2/div:1/div:1/form:2/div[input-group]:1/div[input-group-addon]:2/div:1/div:2/button[base-ui-_r_43_]:1/span:1/span:1",
+            "property": "fontFamily",
+            "severity": "error"
+          }
+        ],
         "materializeErrors": true,
         "postActionPass": true,
         "rendered": true
@@ -248,8 +400,10 @@
       },
       "status": "GAP",
       "blockers": [
-        "import diagnostics contain error",
-        "materialization diagnostics contain error",
+        "import font-face-unresolved: html:1/body:2/div[root]:3/div:1/div:1/div[sidebar-wrapper]:1/main[sidebar-inset]:2/div[content-area]:2/div:1/div:1/div:1/div:1/div:2/div:1/div:1/form:2/div[input-group]:1/div[input-group-addon]:2/div:1/div:2/button[base-ui-_r_43_]:1",
+        "import font-face-unresolved: html:1/body:2/div[root]:3/div:1/div:1/div[sidebar-wrapper]:1/main[sidebar-inset]:2/div[content-area]:2/div:1/div:1/div:1/div:1/div:2/div:1/div:1/form:2/div[input-group]:1/div[input-group-addon]:2/div:1/div:2/button[base-ui-_r_43_]:1/span:1/span:1",
+        "materialization font-face-unresolved: html:1/body:2/div[root]:3/div:1/div:1/div[sidebar-wrapper]:1/main[sidebar-inset]:2/div[content-area]:2/div:1/div:1/div:1/div:1/div:2/div:1/div:1/form:2/div[input-group]:1/div[input-group-addon]:2/div:1/div:2/button[base-ui-_r_43_]:1",
+        "materialization font-face-unresolved: html:1/body:2/div[root]:3/div:1/div:1/div[sidebar-wrapper]:1/main[sidebar-inset]:2/div[content-area]:2/div:1/div:1/div:1/div:1/div:2/div:1/div:1/form:2/div[input-group]:1/div[input-group-addon]:2/div:1/div:2/button[base-ui-_r_43_]:1/span:1/span:1",
         "ApplicationBindingManifest dispatch not proven: agent.select"
       ]
     },
@@ -284,9 +438,48 @@
         "backend": "skia",
         "dpr": 2,
         "interactionSupported": true,
+        "irDiagnostics": [
+          {
+            "code": "font-face-unresolved",
+            "message": "no bundled face exactly matches -apple-system, system-ui, Segoe UI, system-ui, sans-serif 500 normal; parity mode forbids substitution",
+            "path": "html:1/body:2/div[root]:3/div:1/div:1/div[sidebar-wrapper]:1/main[sidebar-inset]:2/div[content-area]:2/div:1/div:1/div:1/div:1/div:2/div:1/div:1/form:2/div[input-group]:1/div[input-group-addon]:2/div:1/div:2/button[base-ui-_r_48_]:4",
+            "property": "fontFamily",
+            "severity": "error"
+          },
+          {
+            "code": "font-face-unresolved",
+            "message": "no bundled face exactly matches -apple-system, system-ui, Segoe UI, system-ui, sans-serif 500 normal; parity mode forbids substitution",
+            "path": "html:1/body:2/div[root]:3/div:1/div:1/div[sidebar-wrapper]:1/main[sidebar-inset]:2/div[content-area]:2/div:1/div:1/div:1/div:1/div:2/div:1/div:1/form:2/div[input-group]:1/div[input-group-addon]:2/div:1/div:2/button[base-ui-_r_48_]:4/span:2",
+            "property": "fontFamily",
+            "severity": "error"
+          }
+        ],
         "irErrors": true,
         "logicalHeight": 28,
         "logicalWidth": 159,
+        "materializeDiagnostics": [
+          {
+            "code": "font-face-unresolved",
+            "message": "no bundled face exactly matches -apple-system, system-ui, Segoe UI, system-ui, sans-serif 500 normal; parity mode forbids substitution",
+            "path": "html:1/body:2/div[root]:3/div:1/div:1/div[sidebar-wrapper]:1/main[sidebar-inset]:2/div[content-area]:2/div:1/div:1/div:1/div:1/div:2/div:1/div:1/form:2/div[input-group]:1/div[input-group-addon]:2/div:1/div:2/button[base-ui-_r_48_]:4",
+            "property": "fontFamily",
+            "severity": "error"
+          },
+          {
+            "code": "font-face-unresolved",
+            "message": "no bundled face exactly matches -apple-system, system-ui, Segoe UI, system-ui, sans-serif 500 normal; parity mode forbids substitution",
+            "path": "html:1/body:2/div[root]:3/div:1/div:1/div[sidebar-wrapper]:1/main[sidebar-inset]:2/div[content-area]:2/div:1/div:1/div:1/div:1/div:2/div:1/div:1/form:2/div[input-group]:1/div[input-group-addon]:2/div:1/div:2/button[base-ui-_r_48_]:4/span:2",
+            "property": "fontFamily",
+            "severity": "error"
+          },
+          {
+            "code": "native-materialize-unresolved-asset",
+            "message": "image node has no resolved asset id",
+            "path": "$/children[0]",
+            "property": "srcAssetId",
+            "severity": "warning"
+          }
+        ],
         "materializeErrors": true,
         "postActionPass": true,
         "rendered": true
@@ -298,8 +491,10 @@
       },
       "status": "GAP",
       "blockers": [
-        "import diagnostics contain error",
-        "materialization diagnostics contain error",
+        "import font-face-unresolved: html:1/body:2/div[root]:3/div:1/div:1/div[sidebar-wrapper]:1/main[sidebar-inset]:2/div[content-area]:2/div:1/div:1/div:1/div:1/div:2/div:1/div:1/form:2/div[input-group]:1/div[input-group-addon]:2/div:1/div:2/button[base-ui-_r_48_]:4",
+        "import font-face-unresolved: html:1/body:2/div[root]:3/div:1/div:1/div[sidebar-wrapper]:1/main[sidebar-inset]:2/div[content-area]:2/div:1/div:1/div:1/div:1/div:2/div:1/div:1/form:2/div[input-group]:1/div[input-group-addon]:2/div:1/div:2/button[base-ui-_r_48_]:4/span:2",
+        "materialization font-face-unresolved: html:1/body:2/div[root]:3/div:1/div:1/div[sidebar-wrapper]:1/main[sidebar-inset]:2/div[content-area]:2/div:1/div:1/div:1/div:1/div:2/div:1/div:1/form:2/div[input-group]:1/div[input-group-addon]:2/div:1/div:2/button[base-ui-_r_48_]:4",
+        "materialization font-face-unresolved: html:1/body:2/div[root]:3/div:1/div:1/div[sidebar-wrapper]:1/main[sidebar-inset]:2/div[content-area]:2/div:1/div:1/div:1/div:1/div:2/div:1/div:1/form:2/div[input-group]:1/div[input-group-addon]:2/div:1/div:2/button[base-ui-_r_48_]:4/span:2",
         "ApplicationBindingManifest dispatch not proven: model.select"
       ]
     },
@@ -334,9 +529,27 @@
         "backend": "skia",
         "dpr": 2,
         "interactionSupported": true,
+        "irDiagnostics": [
+          {
+            "code": "font-face-unresolved",
+            "message": "no bundled face exactly matches ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, Liberation Mono, monospace 600 normal; parity mode forbids substitution",
+            "path": "html:1/body:2/div[root]:3/div:1/div:1/div[sidebar-wrapper]:1/main[sidebar-inset]:2/div[content-area]:2/div:1/div:1/div:1/div:1/div:1/div:1/div:1/div:1/div:1/div:1/div:2/div:1/div:2/div:1/div:1/div:1/ol:2/li:1/p:1/span:1/code:1",
+            "property": "fontFamily",
+            "severity": "error"
+          }
+        ],
         "irErrors": true,
         "logicalHeight": 22,
         "logicalWidth": 157,
+        "materializeDiagnostics": [
+          {
+            "code": "font-face-unresolved",
+            "message": "no bundled face exactly matches ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, Liberation Mono, monospace 600 normal; parity mode forbids substitution",
+            "path": "html:1/body:2/div[root]:3/div:1/div:1/div[sidebar-wrapper]:1/main[sidebar-inset]:2/div[content-area]:2/div:1/div:1/div:1/div:1/div:1/div:1/div:1/div:1/div:1/div:1/div:2/div:1/div:2/div:1/div:1/div:1/ol:2/li:1/p:1/span:1/code:1",
+            "property": "fontFamily",
+            "severity": "error"
+          }
+        ],
         "materializeErrors": true,
         "postActionPass": true,
         "rendered": true
@@ -348,8 +561,8 @@
       },
       "status": "GAP",
       "blockers": [
-        "import diagnostics contain error",
-        "materialization diagnostics contain error"
+        "import font-face-unresolved: html:1/body:2/div[root]:3/div:1/div:1/div[sidebar-wrapper]:1/main[sidebar-inset]:2/div[content-area]:2/div:1/div:1/div:1/div:1/div:1/div:1/div:1/div:1/div:1/div:1/div:2/div:1/div:2/div:1/div:1/div:1/ol:2/li:1/p:1/span:1/code:1",
+        "materialization font-face-unresolved: html:1/body:2/div[root]:3/div:1/div:1/div[sidebar-wrapper]:1/main[sidebar-inset]:2/div[content-area]:2/div:1/div:1/div:1/div:1/div:1/div:1/div:1/div:1/div:1/div:1/div:2/div:1/div:2/div:1/div:1/div:1/ol:2/li:1/p:1/span:1/code:1"
       ]
     },
     {
@@ -383,9 +596,41 @@
         "backend": "skia",
         "dpr": 2,
         "interactionSupported": true,
+        "irDiagnostics": [
+          {
+            "code": "font-face-unresolved",
+            "message": "no bundled face exactly matches -apple-system, system-ui, Segoe UI, system-ui, sans-serif 500 normal; parity mode forbids substitution",
+            "path": "html:1/body:2/div[root]:3/div:1/div:1/div[sidebar-wrapper]:1/main[sidebar-inset]:2/div[content-area]:2/div:1/div:1/div:1/div:1/div:1/div:1/div:1/div:1/div:1/div:1/div:4/button[base-ui-_r_3r_]:2",
+            "property": "fontFamily",
+            "severity": "error"
+          },
+          {
+            "code": "font-face-unresolved",
+            "message": "no bundled face exactly matches -apple-system, system-ui, Segoe UI, system-ui, sans-serif 500 normal; parity mode forbids substitution",
+            "path": "html:1/body:2/div[root]:3/div:1/div:1/div[sidebar-wrapper]:1/main[sidebar-inset]:2/div[content-area]:2/div:1/div:1/div:1/div:1/div:1/div:1/div:1/div:1/div:1/div:1/div:4/button[base-ui-_r_3r_]:2/span:2",
+            "property": "fontFamily",
+            "severity": "error"
+          }
+        ],
         "irErrors": true,
         "logicalHeight": 32,
         "logicalWidth": 32,
+        "materializeDiagnostics": [
+          {
+            "code": "font-face-unresolved",
+            "message": "no bundled face exactly matches -apple-system, system-ui, Segoe UI, system-ui, sans-serif 500 normal; parity mode forbids substitution",
+            "path": "html:1/body:2/div[root]:3/div:1/div:1/div[sidebar-wrapper]:1/main[sidebar-inset]:2/div[content-area]:2/div:1/div:1/div:1/div:1/div:1/div:1/div:1/div:1/div:1/div:1/div:4/button[base-ui-_r_3r_]:2",
+            "property": "fontFamily",
+            "severity": "error"
+          },
+          {
+            "code": "font-face-unresolved",
+            "message": "no bundled face exactly matches -apple-system, system-ui, Segoe UI, system-ui, sans-serif 500 normal; parity mode forbids substitution",
+            "path": "html:1/body:2/div[root]:3/div:1/div:1/div[sidebar-wrapper]:1/main[sidebar-inset]:2/div[content-area]:2/div:1/div:1/div:1/div:1/div:1/div:1/div:1/div:1/div:1/div:1/div:4/button[base-ui-_r_3r_]:2/span:2",
+            "property": "fontFamily",
+            "severity": "error"
+          }
+        ],
         "materializeErrors": true,
         "postActionPass": true,
         "rendered": true
@@ -397,8 +642,10 @@
       },
       "status": "GAP",
       "blockers": [
-        "import diagnostics contain error",
-        "materialization diagnostics contain error",
+        "import font-face-unresolved: html:1/body:2/div[root]:3/div:1/div:1/div[sidebar-wrapper]:1/main[sidebar-inset]:2/div[content-area]:2/div:1/div:1/div:1/div:1/div:1/div:1/div:1/div:1/div:1/div:1/div:4/button[base-ui-_r_3r_]:2",
+        "import font-face-unresolved: html:1/body:2/div[root]:3/div:1/div:1/div[sidebar-wrapper]:1/main[sidebar-inset]:2/div[content-area]:2/div:1/div:1/div:1/div:1/div:1/div:1/div:1/div:1/div:1/div:1/div:4/button[base-ui-_r_3r_]:2/span:2",
+        "materialization font-face-unresolved: html:1/body:2/div[root]:3/div:1/div:1/div[sidebar-wrapper]:1/main[sidebar-inset]:2/div[content-area]:2/div:1/div:1/div:1/div:1/div:1/div:1/div:1/div:1/div:1/div:1/div:4/button[base-ui-_r_3r_]:2",
+        "materialization font-face-unresolved: html:1/body:2/div[root]:3/div:1/div:1/div[sidebar-wrapper]:1/main[sidebar-inset]:2/div[content-area]:2/div:1/div:1/div:1/div:1/div:1/div:1/div:1/div:1/div:1/div:1/div:4/button[base-ui-_r_3r_]:2/span:2",
         "ApplicationBindingManifest dispatch not proven: transcript.copy"
       ]
     }

@@ -23,6 +23,27 @@ template <class T> T* find_view(View& view) {
     return nullptr;
 }
 
+const char* severity_name(ImportDiagnosticSeverity severity) {
+    switch (severity) {
+        case ImportDiagnosticSeverity::info: return "info";
+        case ImportDiagnosticSeverity::warning: return "warning";
+        case ImportDiagnosticSeverity::error: return "error";
+    }
+    return "unknown";
+}
+
+nlohmann::json diagnostics_json(const std::vector<ImportDiagnostic>& diagnostics) {
+    auto out = nlohmann::json::array();
+    for (const auto& diagnostic : diagnostics) {
+        out.push_back({{"code", diagnostic.code},
+                       {"severity", severity_name(diagnostic.severity)},
+                       {"path", diagnostic.path},
+                       {"property", diagnostic.property.value_or("")},
+                       {"message", diagnostic.message}});
+    }
+    return out;
+}
+
 int main(int argc, char** argv) {
     if (argc != 7) {
         std::cerr << "usage: renderer <ir> <png> <pixel-width> <pixel-height> <dpr> <interaction>\n";
@@ -80,7 +101,10 @@ int main(int argc, char** argv) {
         return d.severity == ImportDiagnosticSeverity::error;
     });
     nlohmann::json result{{"rendered", rendered}, {"irErrors", ir_errors},
-        {"materializeErrors", materialize_errors}, {"interactionSupported", interaction_supported},
+        {"irDiagnostics", diagnostics_json(ir.diagnostics)},
+        {"materializeErrors", materialize_errors},
+        {"materializeDiagnostics", diagnostics_json(materialize_diagnostics)},
+        {"interactionSupported", interaction_supported},
         {"postActionPass", post_action_pass}, {"logicalWidth", logical_width},
         {"logicalHeight", logical_height}, {"backend", "skia"}, {"dpr", dpr}};
     std::cout << result.dump() << '\n';
