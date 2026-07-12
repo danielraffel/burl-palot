@@ -15,6 +15,7 @@ const outputPath = resolve(args.get("--output") ?? "")
 const sourceRevision = args.get("--source-revision") ?? ""
 const importedAt = args.get("--imported-at") ?? ""
 const bindingPolicyPath = resolve(args.get("--binding-policy") ?? "")
+const responsiveSemantics = (args.get("--responsive-semantics") ?? "").split(",").filter(Boolean).map((path) => resolve(path))
 if (!burlSource || !semanticsPath || !outputPath || !sourceRevision || !importedAt || !bindingPolicyPath) {
 	throw new Error("required: --burl-source --semantics --output --source-revision --imported-at --binding-policy")
 }
@@ -23,6 +24,10 @@ const modulePath = resolve(burlSource, "packages/pulp-import-ir/src/index.ts")
 const importer = await import(pathToFileURL(modulePath).href)
 const semantics = JSON.parse(await readFile(semanticsPath, "utf8"))
 if (!semantics.observedDom) throw new Error("source semantics has no observedDom tree")
+const renderRoot = semantics.observedDom.tagName?.toLowerCase() === "html"
+	? semantics.observedDom.children?.find((child: any) => child.tagName?.toLowerCase() === "body")
+	: semantics.observedDom
+if (!renderRoot) throw new Error("source semantics has no renderable body")
 const importPolicy = JSON.parse(await readFile(bindingPolicyPath, "utf8")) as {
 	version: number
 	rules: PolicyRule[]
@@ -30,22 +35,47 @@ const importPolicy = JSON.parse(await readFile(bindingPolicyPath, "utf8")) as {
 	svgExclusions?: Array<{ sourceId: string; reason: string }>
 }
 const removeFormattingWhitespace = (node: any) => {
+	if (node.tagName?.toLowerCase() === "svg") {
+		node.content = []
+		node.children = []
+		return
+	}
+	node.children = (node.children ?? []).filter((child: any) => !["script", "style", "template", "link", "meta"].includes(child.tagName?.toLowerCase()))
 	if (Array.isArray(node.content)) node.content = node.content.filter((item: any) => item.kind !== "text" || item.text?.trim())
 	if (Array.isArray(node.orderedPaintContent)) node.orderedPaintContent = node.orderedPaintContent.filter((item: any) => item.kind !== "text" || item.text?.trim())
 	for (const child of node.children ?? []) removeFormattingWhitespace(child)
 }
-removeFormattingWhitespace(semantics.observedDom)
+removeFormattingWhitespace(renderRoot)
 
-const lowered = importer.lowerObservedDom(semantics.observedDom, importedAt)
+let lowered = importer.lowerObservedDom(renderRoot, importedAt)
+if (responsiveSemantics.length) {
+	const captures = await Promise.all(responsiveSemantics.map(async (path) => {
+		const capture = JSON.parse(await readFile(path, "utf8"))
+		const root = capture.observedDom?.tagName?.toLowerCase() === "html"
+			? capture.observedDom.children?.find((child: any) => child.tagName?.toLowerCase() === "body")
+			: capture.observedDom
+		if (!root || !capture.policy?.viewport) throw new Error(`invalid responsive semantics ${path}`)
+		removeFormattingWhitespace(root)
+		return { viewport: capture.policy.viewport, root }
+	}))
+	const reconciliation = importer.reconcileResponsiveConstraints(captures)
+	for (const [sourceId, constraint] of reconciliation.constraints) {
+		const transitions = [...constraint.visibility, ...constraint.layoutVariants]
+		if (transitions.some((variant: any) => variant.transitionToNext?.confidence === "bounded"))
+			reconciliation.constraints.delete(sourceId)
+	}
+	lowered = importer.applyResponsiveConstraints(lowered, reconciliation)
+}
 const inlineSvgCaptures: Array<{ sourceId: string; outerHTML: string; computedColor?: string }> = []
 const collectInlineSvg = (node: any) => {
 	if (node.tagName?.toLowerCase() === "svg") {
-		if (!node.outerHtml) throw new Error(`SVG ${node.sourceId} has no captured outerHTML`)
-		inlineSvgCaptures.push({ sourceId: node.sourceId, outerHTML: node.outerHtml, computedColor: node.computedStyle?.color })
+		const outerHTML = node.outerHtml ?? node.outerHTML ?? node.inlineSvg
+		if (!outerHTML) throw new Error(`SVG ${node.sourceId} has no captured outerHTML`)
+		inlineSvgCaptures.push({ sourceId: node.sourceId, outerHTML, computedColor: node.computedStyle?.color })
 	}
 	for (const child of node.children ?? []) collectInlineSvg(child)
 }
-collectInlineSvg(semantics.observedDom)
+collectInlineSvg(renderRoot)
 const exclusions = new Map((importPolicy.svgExclusions ?? []).map((item) => [item.sourceId, item.reason]))
 for (const [sourceId, reason] of exclusions) {
 	if (!reason.trim() || !inlineSvgCaptures.some((capture) => capture.sourceId === sourceId))
@@ -89,7 +119,7 @@ const collect = (node: ObservedNode): string => {
 	observed.set(node.sourceId, { node, text })
 	return text
 }
-collect(semantics.observedDom)
+collect(renderRoot)
 const matches = (entry: { node: ObservedNode; text: string }, rule: PolicyRule) => {
 	const { node, text } = entry, match = rule.match
 	if (match.sourceId && node.sourceId !== match.sourceId) return false
