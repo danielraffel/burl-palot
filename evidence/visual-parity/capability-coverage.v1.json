@@ -1309,18 +1309,16 @@
         {
           "value": "0",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed nonnegative finite flex-shrink -> typed numeric factor -> NativeDesignIR flexShrink -> validated IRLayout flex_shrink -> native FlexStyle -> Yoga scaled shrink distribution using basis times factor with min/max freezing; invalid values fail closed",
+          "evidenceIds": ["semantic:observed-dom-flex-shrink"]
         },
         {
           "value": "1",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed nonnegative finite flex-shrink -> typed numeric factor -> NativeDesignIR flexShrink -> validated IRLayout flex_shrink -> native FlexStyle -> Yoga scaled shrink distribution using basis times factor with min/max freezing; invalid values fail closed",
+          "evidenceIds": ["semantic:observed-dom-flex-shrink"]
         }
       ]
     },
