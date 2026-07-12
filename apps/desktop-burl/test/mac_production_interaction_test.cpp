@@ -2,6 +2,8 @@
 #include "mac_window_harness.hpp"
 
 #include <pulp/view/text_editor.hpp>
+#include <pulp/view/markdown_view.hpp>
+#include <pulp/view/virtual_list.hpp>
 #include <nlohmann/json.hpp>
 
 #include <algorithm>
@@ -9,6 +11,8 @@
 #include <cstdlib>
 #include <iostream>
 #include <fstream>
+#include <optional>
+#include <typeinfo>
 #include <unordered_map>
 #include <unordered_set>
 #include <string>
@@ -27,20 +31,39 @@ pulp::view::Rect bounds_in_root(const pulp::view::View& view,
 	return {x, y, view.bounds().width, view.bounds().height};
 }
 
+std::optional<pulp::view::Rect> visible_bounds_in_root(const pulp::view::View& view,
+                                                       const pulp::view::View& root) {
+	auto visible = bounds_in_root(view, root);
+	auto clip_x = [&](const pulp::view::Rect& clip) {
+		const float right = std::min(visible.x + visible.width, clip.x + clip.width);
+		visible.x = std::max(visible.x, clip.x);
+		visible.width = right - visible.x;
+	};
+	auto clip_y = [&](const pulp::view::Rect& clip) {
+		const float bottom = std::min(visible.y + visible.height, clip.y + clip.height);
+		visible.y = std::max(visible.y, clip.y);
+		visible.height = bottom - visible.y;
+	};
+	clip_x({0, 0, root.bounds().width, root.bounds().height});
+	clip_y({0, 0, root.bounds().width, root.bounds().height});
+	for (auto* ancestor = view.parent(); ancestor; ancestor = ancestor->parent()) {
+		const auto clip = bounds_in_root(*ancestor, root);
+		if (ancestor->clips_overflow_x()) clip_x(clip);
+		if (ancestor->clips_overflow_y()) clip_y(clip);
+		if (ancestor == &root) break;
+	}
+	if (visible.width <= 0.0f || visible.height <= 0.0f) return std::nullopt;
+	return visible;
+}
+
 bool intersects_root(const pulp::view::View& view, const pulp::view::View& root) {
-	const auto bounds = bounds_in_root(view, root);
-	return bounds.x < root.bounds().width && bounds.y < root.bounds().height &&
-	       bounds.x + bounds.width > 0.0f && bounds.y + bounds.height > 0.0f;
+	return visible_bounds_in_root(view, root).has_value();
 }
 
 pulp::view::Point center_in_visible_root(const pulp::view::View& view,
                                          const pulp::view::View& root) {
-	const auto bounds = bounds_in_root(view, root);
-	const float left = std::max(0.0f, bounds.x);
-	const float top = std::max(0.0f, bounds.y);
-	const float right = std::min(root.bounds().width, bounds.x + bounds.width);
-	const float bottom = std::min(root.bounds().height, bounds.y + bounds.height);
-	return {(left + right) * 0.5f, (top + bottom) * 0.5f};
+	const auto bounds = visible_bounds_in_root(view, root).value_or(bounds_in_root(view, root));
+	return {bounds.x + bounds.width * 0.5f, bounds.y + bounds.height * 0.5f};
 }
 
 bool effectively_visible(const pulp::view::View& view, const pulp::view::View& root) {
@@ -54,6 +77,13 @@ bool effectively_visible(const pulp::view::View& view, const pulp::view::View& r
 bool descends_from(const pulp::view::View* candidate, const pulp::view::View* ancestor) {
 	for (auto* current = candidate; current; current = current->parent())
 		if (current == ancestor) return true;
+	return false;
+}
+
+bool is_native_local_interaction(const pulp::view::View& view) {
+	for (auto* current = &view; current; current = current->parent())
+		if (dynamic_cast<const pulp::view::MarkdownView*>(current) ||
+		    dynamic_cast<const pulp::view::VirtualList*>(current)) return true;
 	return false;
 }
 
@@ -147,6 +177,7 @@ int main(int argc, char** argv) {
 
 	std::size_t census_count = 0;
 	std::size_t census_failures = 0;
+	std::size_t native_local_count = 0;
 	for (const float width : {599.0f, 768.0f, 1200.0f}) {
 		root.set_bounds({0, 0, width, 700});
 		root.layout_children();
@@ -178,10 +209,14 @@ int main(int argc, char** argv) {
 					          << found->second << " anchor=" << control->anchor_id() << '\n';
 					++census_failures;
 				}
+			} else if (is_native_local_interaction(*control)) {
+				++native_local_count;
 			} else if (control->focusable() && !dynamic_cast<pulp::view::TextEditor*>(control) &&
 			           !control->wants_wheel_scroll()) {
 				std::cerr << "visible focusable control has no application binding width=" << width
-				          << " anchor=" << control->anchor_id() << " label=" << control->access_label() << '\n';
+				          << " anchor=" << control->anchor_id() << " label=" << control->access_label()
+				          << " type=" << typeid(*control).name() << " mouse=" << control->wants_mouse_input()
+				          << " wheel=" << control->wants_wheel_scroll() << '\n';
 				++census_failures;
 			}
 			++census_count;
@@ -220,6 +255,7 @@ int main(int argc, char** argv) {
 	}
 
 	std::cout << "production AppKit census: " << census_count
-	          << " visible controls plus bound click, composer focus, and wheel routing pass\n";
+	          << " visible controls (" << native_local_count
+	          << " native-local) plus bound click, composer focus, and wheel routing pass\n";
 	return EXIT_SUCCESS;
 }

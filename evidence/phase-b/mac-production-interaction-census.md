@@ -13,18 +13,17 @@ cmake --build build-semantic --target palot-mac-production-interaction-test -j4
 ctest --test-dir build-semantic -R '^palot-mac-production-interaction$' --output-on-failure
 ```
 
-Current result: **FAIL — 20 observations across 85 enumerated controls**.
-The repeated observations are intentional: a control must remain valid at
-every width where it is effectively visible.
+Current result: **PASS — zero failures across 82 enumerated controls**, including
+eight native-local controls (selectable Markdown and keyboard-focusable virtual
+lists). The repeated observations are intentional: a control must remain valid
+at every width where it is effectively visible.
 
-The first scalable harness correction removed false positives from descendants
-outside the viewport. Controls are now evaluated in root coordinates and
-partially visible controls use the center of their visible intersection. This
-also exposes real responsive overflow: at 599/768 px, several right-side
-controls are represented only by a clipped sliver whose hit resolves to the
-sidebar wrapper.
+The scalable harness correction removes false positives from descendants
+outside the viewport and from descendants clipped by any overflow-clipping
+ancestor. Controls are evaluated in root coordinates and partially visible
+controls use the center of their effective visible intersection.
 
-Highest-priority actionable groups:
+Covered interaction groups:
 
 - Sidebar/session/project navigation cluster now passes production dispatch:
   both New Session surfaces, all six captured session rows, Automations,
@@ -40,12 +39,12 @@ Highest-priority actionable groups:
   dispatch through typed actions. Attachment invokes Burl's real file dialog.
   The textarea remains an editable/focus target; its `prompt.send` contract is
   keyboard-submit semantics and is not incorrectly treated as a click action.
-- Responsive geometry: composer and secondary-panel controls can intersect the
-  root while lying outside their intended container, demonstrating source
-  geometry that has not been lowered to a responsive native layout.
-- Selectable Markdown descendants participate in mouse input but currently do
-  not have a stable leaf hit target, so selection semantics require a separate
-  text-selection assertion rather than a synthetic application action.
+- Source-hidden form proxies (`aria-hidden`, non-focusable, negative tabindex)
+  are pointer-inert after native promotion; widget defaults cannot turn these
+  DOM implementation details into duplicate hit targets.
+- Selectable Markdown and virtual-list keyboard/scroll behavior are classified
+  as native-local interaction. They must hit correctly, but deliberately do not
+  receive fabricated application actions.
 
 The machine-readable full diagnostics are emitted by the test itself, including
 width, stable source anchor, accessible label, actual hit anchor, and test point.

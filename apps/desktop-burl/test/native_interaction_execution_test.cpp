@@ -260,7 +260,11 @@ int main(int argc, char** argv) {
 				if (command.text.find(label) != std::string::npos) painted_composite_labels.insert(label);
 		}
 	}
-	if (painted_projects.size() != 3 || !opaque_project_foreground) return 13;
+	if (painted_projects.size() != 3 || !opaque_project_foreground) {
+		std::cerr << "painted project labels=" << painted_projects.size()
+		          << " opaque=" << opaque_project_foreground << '\n';
+		return 13;
+	}
 	if (painted_composite_labels.size() != 4) return 14;
 	if (const auto* proof = std::getenv("PALOT_PROJECT_ROW_PROOF")) {
 		const auto png = pulp::view::render_to_png(host, 1200, 800, 1.0f,
