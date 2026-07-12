@@ -1252,18 +1252,16 @@
         {
           "value": "0%",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed flex-basis used value -> typed Length preserving percent/px/auto -> NativeDesignIR string -> validated IRLayout flex_basis -> Dimension unit -> Yoga flex-basis percent/point/auto API; content/calc fail closed",
+          "evidenceIds": ["semantic:observed-dom-flex-basis"]
         },
         {
           "value": "auto",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed flex-basis used value -> typed Length preserving percent/px/auto -> NativeDesignIR string -> validated IRLayout flex_basis -> Dimension unit -> Yoga flex-basis percent/point/auto API; content/calc fail closed",
+          "evidenceIds": ["semantic:observed-dom-flex-basis"]
         }
       ]
     },
