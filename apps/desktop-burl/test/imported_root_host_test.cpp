@@ -92,6 +92,7 @@ int main(int argc, char** argv) {
 	}
 	auto* composer = host.bound_composer();
 	if (!composer) return 10;
+	if (composer->placeholder != "Send a follow-up message...") return 21;
 	composer->on_return("hello");
 	composer->on_return("");
 	composer->on_escape();

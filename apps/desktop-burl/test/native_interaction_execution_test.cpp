@@ -3,6 +3,7 @@
 #include <pulp/view/buttons.hpp>
 #include <pulp/view/pointer_dispatch.hpp>
 #include <pulp/view/ui_components.hpp>
+#include <pulp/view/widgets.hpp>
 #include <pulp/canvas/canvas.hpp>
 #include <pulp/view/screenshot.hpp>
 
@@ -10,6 +11,7 @@
 #include <cstdlib>
 #include <filesystem>
 #include <fstream>
+#include <functional>
 #include <iostream>
 #include <string>
 #include <unordered_map>
@@ -216,7 +218,8 @@ int main(int argc, char** argv) {
 		std::cerr << "wheel target missing point=" << wheel_point.x << ',' << wheel_point.y
 		          << " transcript=" << rect_in_root(*transcript, host).x << ','
 		          << rect_in_root(*transcript, host).y << ',' << transcript->bounds().width << ','
-		          << transcript->bounds().height << " children=" << transcript->child_count() << '\n';
+		          << transcript->bounds().height << " content=" << transcript->content_height()
+		          << " children=" << transcript->child_count() << '\n';
 		for (std::size_t index = 0; index < transcript->child_count(); ++index) {
 			auto* child = transcript->child_at(index);
 			std::cerr << " child=" << child->anchor_id() << " bounds=" << child->bounds().x << ','
@@ -267,6 +270,15 @@ int main(int argc, char** argv) {
 	}
 	if (painted_composite_labels.size() != 4) return 14;
 	if (const auto* proof = std::getenv("PALOT_PROJECT_ROW_PROOF")) {
+		std::function<void(pulp::view::View&)> report_labels = [&](pulp::view::View& view) {
+			if (auto* label = dynamic_cast<pulp::view::Label*>(&view);
+			    label && (label->text() == "palot" || label->text() == "acme-api" ||
+			              label->text() == "landing-page"))
+				std::cerr << "project-label " << label->text() << " bounds=" << label->bounds().width
+				          << " intrinsic=" << label->intrinsic_width() << '\n';
+			for (std::size_t i = 0; i < view.child_count(); ++i) report_labels(*view.child_at(i));
+		};
+		report_labels(host);
 		const auto png = pulp::view::render_to_png(host, 1200, 800, 1.0f,
 		                                             pulp::view::ScreenshotBackend::skia);
 		std::ofstream output(proof, std::ios::binary);
