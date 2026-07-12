@@ -67,8 +67,10 @@ int main(int argc, char** argv) {
 	options.title = BURL_APP_NAME;
 	options.width = window_width;
 	options.height = window_height;
-	options.min_width = 280.0f;
-	options.min_height = 520.0f;
+	// Source BrowserWindow declares no minimum; zero delegates only to the
+	// platform's physical window limit rather than inventing a product limit.
+	options.min_width = 0.0f;
+	options.min_height = 0.0f;
 	options.use_gpu = true;
 
 	auto window = pulp::view::WindowHost::create(root, options);
