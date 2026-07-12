@@ -3260,826 +3260,723 @@
         {
           "value": "10.9922px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed CSS width fractional px, percent, linear calc(percent plus or minus px), or auto plus box-sizing and min/max constraints -> validated TypedLayout Length -> NativeDesignIR numeric or retained expression -> validated IRStyle width dimension -> native Dimension/BoxSizing -> Yoga intrinsic or responsive width then min/max clamp under resize -> Skia pixels; min/max-content, fit-content, negative, and unknown syntax fail closed",
+          "evidenceIds": ["semantic:observed-dom-width"]
         },
         {
           "value": "102.828px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed CSS width fractional px, percent, linear calc(percent plus or minus px), or auto plus box-sizing and min/max constraints -> validated TypedLayout Length -> NativeDesignIR numeric or retained expression -> validated IRStyle width dimension -> native Dimension/BoxSizing -> Yoga intrinsic or responsive width then min/max clamp under resize -> Skia pixels; min/max-content, fit-content, negative, and unknown syntax fail closed",
+          "evidenceIds": ["semantic:observed-dom-width"]
         },
         {
           "value": "10px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed CSS width fractional px, percent, linear calc(percent plus or minus px), or auto plus box-sizing and min/max constraints -> validated TypedLayout Length -> NativeDesignIR numeric or retained expression -> validated IRStyle width dimension -> native Dimension/BoxSizing -> Yoga intrinsic or responsive width then min/max clamp under resize -> Skia pixels; min/max-content, fit-content, negative, and unknown syntax fail closed",
+          "evidenceIds": ["semantic:observed-dom-width"]
         },
         {
           "value": "11.9609px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed CSS width fractional px, percent, linear calc(percent plus or minus px), or auto plus box-sizing and min/max constraints -> validated TypedLayout Length -> NativeDesignIR numeric or retained expression -> validated IRStyle width dimension -> native Dimension/BoxSizing -> Yoga intrinsic or responsive width then min/max clamp under resize -> Skia pixels; min/max-content, fit-content, negative, and unknown syntax fail closed",
+          "evidenceIds": ["semantic:observed-dom-width"]
         },
         {
           "value": "114.258px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed CSS width fractional px, percent, linear calc(percent plus or minus px), or auto plus box-sizing and min/max constraints -> validated TypedLayout Length -> NativeDesignIR numeric or retained expression -> validated IRStyle width dimension -> native Dimension/BoxSizing -> Yoga intrinsic or responsive width then min/max clamp under resize -> Skia pixels; min/max-content, fit-content, negative, and unknown syntax fail closed",
+          "evidenceIds": ["semantic:observed-dom-width"]
         },
         {
           "value": "1200px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed CSS width fractional px, percent, linear calc(percent plus or minus px), or auto plus box-sizing and min/max constraints -> validated TypedLayout Length -> NativeDesignIR numeric or retained expression -> validated IRStyle width dimension -> native Dimension/BoxSizing -> Yoga intrinsic or responsive width then min/max clamp under resize -> Skia pixels; min/max-content, fit-content, negative, and unknown syntax fail closed",
+          "evidenceIds": ["semantic:observed-dom-width"]
         },
         {
           "value": "126.672px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed CSS width fractional px, percent, linear calc(percent plus or minus px), or auto plus box-sizing and min/max constraints -> validated TypedLayout Length -> NativeDesignIR numeric or retained expression -> validated IRStyle width dimension -> native Dimension/BoxSizing -> Yoga intrinsic or responsive width then min/max clamp under resize -> Skia pixels; min/max-content, fit-content, negative, and unknown syntax fail closed",
+          "evidenceIds": ["semantic:observed-dom-width"]
         },
         {
           "value": "129.273px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed CSS width fractional px, percent, linear calc(percent plus or minus px), or auto plus box-sizing and min/max constraints -> validated TypedLayout Length -> NativeDesignIR numeric or retained expression -> validated IRStyle width dimension -> native Dimension/BoxSizing -> Yoga intrinsic or responsive width then min/max clamp under resize -> Skia pixels; min/max-content, fit-content, negative, and unknown syntax fail closed",
+          "evidenceIds": ["semantic:observed-dom-width"]
         },
         {
           "value": "12px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed CSS width fractional px, percent, linear calc(percent plus or minus px), or auto plus box-sizing and min/max constraints -> validated TypedLayout Length -> NativeDesignIR numeric or retained expression -> validated IRStyle width dimension -> native Dimension/BoxSizing -> Yoga intrinsic or responsive width then min/max clamp under resize -> Skia pixels; min/max-content, fit-content, negative, and unknown syntax fail closed",
+          "evidenceIds": ["semantic:observed-dom-width"]
         },
         {
           "value": "133.406px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed CSS width fractional px, percent, linear calc(percent plus or minus px), or auto plus box-sizing and min/max constraints -> validated TypedLayout Length -> NativeDesignIR numeric or retained expression -> validated IRStyle width dimension -> native Dimension/BoxSizing -> Yoga intrinsic or responsive width then min/max clamp under resize -> Skia pixels; min/max-content, fit-content, negative, and unknown syntax fail closed",
+          "evidenceIds": ["semantic:observed-dom-width"]
         },
         {
           "value": "143.016px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed CSS width fractional px, percent, linear calc(percent plus or minus px), or auto plus box-sizing and min/max constraints -> validated TypedLayout Length -> NativeDesignIR numeric or retained expression -> validated IRStyle width dimension -> native Dimension/BoxSizing -> Yoga intrinsic or responsive width then min/max clamp under resize -> Skia pixels; min/max-content, fit-content, negative, and unknown syntax fail closed",
+          "evidenceIds": ["semantic:observed-dom-width"]
         },
         {
           "value": "14px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed CSS width fractional px, percent, linear calc(percent plus or minus px), or auto plus box-sizing and min/max constraints -> validated TypedLayout Length -> NativeDesignIR numeric or retained expression -> validated IRStyle width dimension -> native Dimension/BoxSizing -> Yoga intrinsic or responsive width then min/max clamp under resize -> Skia pixels; min/max-content, fit-content, negative, and unknown syntax fail closed",
+          "evidenceIds": ["semantic:observed-dom-width"]
         },
         {
           "value": "15.6875px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed CSS width fractional px, percent, linear calc(percent plus or minus px), or auto plus box-sizing and min/max constraints -> validated TypedLayout Length -> NativeDesignIR numeric or retained expression -> validated IRStyle width dimension -> native Dimension/BoxSizing -> Yoga intrinsic or responsive width then min/max clamp under resize -> Skia pixels; min/max-content, fit-content, negative, and unknown syntax fail closed",
+          "evidenceIds": ["semantic:observed-dom-width"]
         },
         {
           "value": "155.328px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed CSS width fractional px, percent, linear calc(percent plus or minus px), or auto plus box-sizing and min/max constraints -> validated TypedLayout Length -> NativeDesignIR numeric or retained expression -> validated IRStyle width dimension -> native Dimension/BoxSizing -> Yoga intrinsic or responsive width then min/max clamp under resize -> Skia pixels; min/max-content, fit-content, negative, and unknown syntax fail closed",
+          "evidenceIds": ["semantic:observed-dom-width"]
         },
         {
           "value": "158.828px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed CSS width fractional px, percent, linear calc(percent plus or minus px), or auto plus box-sizing and min/max constraints -> validated TypedLayout Length -> NativeDesignIR numeric or retained expression -> validated IRStyle width dimension -> native Dimension/BoxSizing -> Yoga intrinsic or responsive width then min/max clamp under resize -> Skia pixels; min/max-content, fit-content, negative, and unknown syntax fail closed",
+          "evidenceIds": ["semantic:observed-dom-width"]
         },
         {
           "value": "167.109px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed CSS width fractional px, percent, linear calc(percent plus or minus px), or auto plus box-sizing and min/max constraints -> validated TypedLayout Length -> NativeDesignIR numeric or retained expression -> validated IRStyle width dimension -> native Dimension/BoxSizing -> Yoga intrinsic or responsive width then min/max clamp under resize -> Skia pixels; min/max-content, fit-content, negative, and unknown syntax fail closed",
+          "evidenceIds": ["semantic:observed-dom-width"]
         },
         {
           "value": "16px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed CSS width fractional px, percent, linear calc(percent plus or minus px), or auto plus box-sizing and min/max constraints -> validated TypedLayout Length -> NativeDesignIR numeric or retained expression -> validated IRStyle width dimension -> native Dimension/BoxSizing -> Yoga intrinsic or responsive width then min/max clamp under resize -> Skia pixels; min/max-content, fit-content, negative, and unknown syntax fail closed",
+          "evidenceIds": ["semantic:observed-dom-width"]
         },
         {
           "value": "17.3359px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed CSS width fractional px, percent, linear calc(percent plus or minus px), or auto plus box-sizing and min/max constraints -> validated TypedLayout Length -> NativeDesignIR numeric or retained expression -> validated IRStyle width dimension -> native Dimension/BoxSizing -> Yoga intrinsic or responsive width then min/max clamp under resize -> Skia pixels; min/max-content, fit-content, negative, and unknown syntax fail closed",
+          "evidenceIds": ["semantic:observed-dom-width"]
         },
         {
           "value": "17.6875px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed CSS width fractional px, percent, linear calc(percent plus or minus px), or auto plus box-sizing and min/max constraints -> validated TypedLayout Length -> NativeDesignIR numeric or retained expression -> validated IRStyle width dimension -> native Dimension/BoxSizing -> Yoga intrinsic or responsive width then min/max clamp under resize -> Skia pixels; min/max-content, fit-content, negative, and unknown syntax fail closed",
+          "evidenceIds": ["semantic:observed-dom-width"]
         },
         {
           "value": "18.7031px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed CSS width fractional px, percent, linear calc(percent plus or minus px), or auto plus box-sizing and min/max constraints -> validated TypedLayout Length -> NativeDesignIR numeric or retained expression -> validated IRStyle width dimension -> native Dimension/BoxSizing -> Yoga intrinsic or responsive width then min/max clamp under resize -> Skia pixels; min/max-content, fit-content, negative, and unknown syntax fail closed",
+          "evidenceIds": ["semantic:observed-dom-width"]
         },
         {
           "value": "188.539px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed CSS width fractional px, percent, linear calc(percent plus or minus px), or auto plus box-sizing and min/max constraints -> validated TypedLayout Length -> NativeDesignIR numeric or retained expression -> validated IRStyle width dimension -> native Dimension/BoxSizing -> Yoga intrinsic or responsive width then min/max clamp under resize -> Skia pixels; min/max-content, fit-content, negative, and unknown syntax fail closed",
+          "evidenceIds": ["semantic:observed-dom-width"]
         },
         {
           "value": "19.0781px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed CSS width fractional px, percent, linear calc(percent plus or minus px), or auto plus box-sizing and min/max constraints -> validated TypedLayout Length -> NativeDesignIR numeric or retained expression -> validated IRStyle width dimension -> native Dimension/BoxSizing -> Yoga intrinsic or responsive width then min/max clamp under resize -> Skia pixels; min/max-content, fit-content, negative, and unknown syntax fail closed",
+          "evidenceIds": ["semantic:observed-dom-width"]
         },
         {
           "value": "190.523px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed CSS width fractional px, percent, linear calc(percent plus or minus px), or auto plus box-sizing and min/max constraints -> validated TypedLayout Length -> NativeDesignIR numeric or retained expression -> validated IRStyle width dimension -> native Dimension/BoxSizing -> Yoga intrinsic or responsive width then min/max clamp under resize -> Skia pixels; min/max-content, fit-content, negative, and unknown syntax fail closed",
+          "evidenceIds": ["semantic:observed-dom-width"]
         },
         {
           "value": "191.148px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed CSS width fractional px, percent, linear calc(percent plus or minus px), or auto plus box-sizing and min/max constraints -> validated TypedLayout Length -> NativeDesignIR numeric or retained expression -> validated IRStyle width dimension -> native Dimension/BoxSizing -> Yoga intrinsic or responsive width then min/max clamp under resize -> Skia pixels; min/max-content, fit-content, negative, and unknown syntax fail closed",
+          "evidenceIds": ["semantic:observed-dom-width"]
         },
         {
           "value": "1px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed CSS width fractional px, percent, linear calc(percent plus or minus px), or auto plus box-sizing and min/max constraints -> validated TypedLayout Length -> NativeDesignIR numeric or retained expression -> validated IRStyle width dimension -> native Dimension/BoxSizing -> Yoga intrinsic or responsive width then min/max clamp under resize -> Skia pixels; min/max-content, fit-content, negative, and unknown syntax fail closed",
+          "evidenceIds": ["semantic:observed-dom-width"]
         },
         {
           "value": "20.9609px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed CSS width fractional px, percent, linear calc(percent plus or minus px), or auto plus box-sizing and min/max constraints -> validated TypedLayout Length -> NativeDesignIR numeric or retained expression -> validated IRStyle width dimension -> native Dimension/BoxSizing -> Yoga intrinsic or responsive width then min/max clamp under resize -> Skia pixels; min/max-content, fit-content, negative, and unknown syntax fail closed",
+          "evidenceIds": ["semantic:observed-dom-width"]
         },
         {
           "value": "200.312px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed CSS width fractional px, percent, linear calc(percent plus or minus px), or auto plus box-sizing and min/max constraints -> validated TypedLayout Length -> NativeDesignIR numeric or retained expression -> validated IRStyle width dimension -> native Dimension/BoxSizing -> Yoga intrinsic or responsive width then min/max clamp under resize -> Skia pixels; min/max-content, fit-content, negative, and unknown syntax fail closed",
+          "evidenceIds": ["semantic:observed-dom-width"]
         },
         {
           "value": "20px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed CSS width fractional px, percent, linear calc(percent plus or minus px), or auto plus box-sizing and min/max constraints -> validated TypedLayout Length -> NativeDesignIR numeric or retained expression -> validated IRStyle width dimension -> native Dimension/BoxSizing -> Yoga intrinsic or responsive width then min/max clamp under resize -> Skia pixels; min/max-content, fit-content, negative, and unknown syntax fail closed",
+          "evidenceIds": ["semantic:observed-dom-width"]
         },
         {
           "value": "210.867px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed CSS width fractional px, percent, linear calc(percent plus or minus px), or auto plus box-sizing and min/max constraints -> validated TypedLayout Length -> NativeDesignIR numeric or retained expression -> validated IRStyle width dimension -> native Dimension/BoxSizing -> Yoga intrinsic or responsive width then min/max clamp under resize -> Skia pixels; min/max-content, fit-content, negative, and unknown syntax fail closed",
+          "evidenceIds": ["semantic:observed-dom-width"]
         },
         {
           "value": "21px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed CSS width fractional px, percent, linear calc(percent plus or minus px), or auto plus box-sizing and min/max constraints -> validated TypedLayout Length -> NativeDesignIR numeric or retained expression -> validated IRStyle width dimension -> native Dimension/BoxSizing -> Yoga intrinsic or responsive width then min/max clamp under resize -> Skia pixels; min/max-content, fit-content, negative, and unknown syntax fail closed",
+          "evidenceIds": ["semantic:observed-dom-width"]
         },
         {
           "value": "228.867px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed CSS width fractional px, percent, linear calc(percent plus or minus px), or auto plus box-sizing and min/max constraints -> validated TypedLayout Length -> NativeDesignIR numeric or retained expression -> validated IRStyle width dimension -> native Dimension/BoxSizing -> Yoga intrinsic or responsive width then min/max clamp under resize -> Skia pixels; min/max-content, fit-content, negative, and unknown syntax fail closed",
+          "evidenceIds": ["semantic:observed-dom-width"]
         },
         {
           "value": "22px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed CSS width fractional px, percent, linear calc(percent plus or minus px), or auto plus box-sizing and min/max constraints -> validated TypedLayout Length -> NativeDesignIR numeric or retained expression -> validated IRStyle width dimension -> native Dimension/BoxSizing -> Yoga intrinsic or responsive width then min/max clamp under resize -> Skia pixels; min/max-content, fit-content, negative, and unknown syntax fail closed",
+          "evidenceIds": ["semantic:observed-dom-width"]
         },
         {
           "value": "237.359px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed CSS width fractional px, percent, linear calc(percent plus or minus px), or auto plus box-sizing and min/max constraints -> validated TypedLayout Length -> NativeDesignIR numeric or retained expression -> validated IRStyle width dimension -> native Dimension/BoxSizing -> Yoga intrinsic or responsive width then min/max clamp under resize -> Skia pixels; min/max-content, fit-content, negative, and unknown syntax fail closed",
+          "evidenceIds": ["semantic:observed-dom-width"]
         },
         {
           "value": "24.8516px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed CSS width fractional px, percent, linear calc(percent plus or minus px), or auto plus box-sizing and min/max constraints -> validated TypedLayout Length -> NativeDesignIR numeric or retained expression -> validated IRStyle width dimension -> native Dimension/BoxSizing -> Yoga intrinsic or responsive width then min/max clamp under resize -> Skia pixels; min/max-content, fit-content, negative, and unknown syntax fail closed",
+          "evidenceIds": ["semantic:observed-dom-width"]
         },
         {
           "value": "25.4766px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed CSS width fractional px, percent, linear calc(percent plus or minus px), or auto plus box-sizing and min/max constraints -> validated TypedLayout Length -> NativeDesignIR numeric or retained expression -> validated IRStyle width dimension -> native Dimension/BoxSizing -> Yoga intrinsic or responsive width then min/max clamp under resize -> Skia pixels; min/max-content, fit-content, negative, and unknown syntax fail closed",
+          "evidenceIds": ["semantic:observed-dom-width"]
         },
         {
           "value": "25.9609px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed CSS width fractional px, percent, linear calc(percent plus or minus px), or auto plus box-sizing and min/max constraints -> validated TypedLayout Length -> NativeDesignIR numeric or retained expression -> validated IRStyle width dimension -> native Dimension/BoxSizing -> Yoga intrinsic or responsive width then min/max clamp under resize -> Skia pixels; min/max-content, fit-content, negative, and unknown syntax fail closed",
+          "evidenceIds": ["semantic:observed-dom-width"]
         },
         {
           "value": "264px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed CSS width fractional px, percent, linear calc(percent plus or minus px), or auto plus box-sizing and min/max constraints -> validated TypedLayout Length -> NativeDesignIR numeric or retained expression -> validated IRStyle width dimension -> native Dimension/BoxSizing -> Yoga intrinsic or responsive width then min/max clamp under resize -> Skia pixels; min/max-content, fit-content, negative, and unknown syntax fail closed",
+          "evidenceIds": ["semantic:observed-dom-width"]
         },
         {
           "value": "27.4609px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed CSS width fractional px, percent, linear calc(percent plus or minus px), or auto plus box-sizing and min/max constraints -> validated TypedLayout Length -> NativeDesignIR numeric or retained expression -> validated IRStyle width dimension -> native Dimension/BoxSizing -> Yoga intrinsic or responsive width then min/max clamp under resize -> Skia pixels; min/max-content, fit-content, negative, and unknown syntax fail closed",
+          "evidenceIds": ["semantic:observed-dom-width"]
         },
         {
           "value": "27.8125px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed CSS width fractional px, percent, linear calc(percent plus or minus px), or auto plus box-sizing and min/max constraints -> validated TypedLayout Length -> NativeDesignIR numeric or retained expression -> validated IRStyle width dimension -> native Dimension/BoxSizing -> Yoga intrinsic or responsive width then min/max clamp under resize -> Skia pixels; min/max-content, fit-content, negative, and unknown syntax fail closed",
+          "evidenceIds": ["semantic:observed-dom-width"]
         },
         {
           "value": "28.0625px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed CSS width fractional px, percent, linear calc(percent plus or minus px), or auto plus box-sizing and min/max constraints -> validated TypedLayout Length -> NativeDesignIR numeric or retained expression -> validated IRStyle width dimension -> native Dimension/BoxSizing -> Yoga intrinsic or responsive width then min/max clamp under resize -> Skia pixels; min/max-content, fit-content, negative, and unknown syntax fail closed",
+          "evidenceIds": ["semantic:observed-dom-width"]
         },
         {
           "value": "280px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed CSS width fractional px, percent, linear calc(percent plus or minus px), or auto plus box-sizing and min/max constraints -> validated TypedLayout Length -> NativeDesignIR numeric or retained expression -> validated IRStyle width dimension -> native Dimension/BoxSizing -> Yoga intrinsic or responsive width then min/max clamp under resize -> Skia pixels; min/max-content, fit-content, negative, and unknown syntax fail closed",
+          "evidenceIds": ["semantic:observed-dom-width"]
         },
         {
           "value": "28px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed CSS width fractional px, percent, linear calc(percent plus or minus px), or auto plus box-sizing and min/max constraints -> validated TypedLayout Length -> NativeDesignIR numeric or retained expression -> validated IRStyle width dimension -> native Dimension/BoxSizing -> Yoga intrinsic or responsive width then min/max clamp under resize -> Skia pixels; min/max-content, fit-content, negative, and unknown syntax fail closed",
+          "evidenceIds": ["semantic:observed-dom-width"]
         },
         {
           "value": "3.33594px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed CSS width fractional px, percent, linear calc(percent plus or minus px), or auto plus box-sizing and min/max constraints -> validated TypedLayout Length -> NativeDesignIR numeric or retained expression -> validated IRStyle width dimension -> native Dimension/BoxSizing -> Yoga intrinsic or responsive width then min/max clamp under resize -> Skia pixels; min/max-content, fit-content, negative, and unknown syntax fail closed",
+          "evidenceIds": ["semantic:observed-dom-width"]
         },
         {
           "value": "3.89062px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed CSS width fractional px, percent, linear calc(percent plus or minus px), or auto plus box-sizing and min/max constraints -> validated TypedLayout Length -> NativeDesignIR numeric or retained expression -> validated IRStyle width dimension -> native Dimension/BoxSizing -> Yoga intrinsic or responsive width then min/max clamp under resize -> Skia pixels; min/max-content, fit-content, negative, and unknown syntax fail closed",
+          "evidenceIds": ["semantic:observed-dom-width"]
         },
         {
           "value": "30.4219px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed CSS width fractional px, percent, linear calc(percent plus or minus px), or auto plus box-sizing and min/max constraints -> validated TypedLayout Length -> NativeDesignIR numeric or retained expression -> validated IRStyle width dimension -> native Dimension/BoxSizing -> Yoga intrinsic or responsive width then min/max clamp under resize -> Skia pixels; min/max-content, fit-content, negative, and unknown syntax fail closed",
+          "evidenceIds": ["semantic:observed-dom-width"]
         },
         {
           "value": "31.1016px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed CSS width fractional px, percent, linear calc(percent plus or minus px), or auto plus box-sizing and min/max constraints -> validated TypedLayout Length -> NativeDesignIR numeric or retained expression -> validated IRStyle width dimension -> native Dimension/BoxSizing -> Yoga intrinsic or responsive width then min/max clamp under resize -> Skia pixels; min/max-content, fit-content, negative, and unknown syntax fail closed",
+          "evidenceIds": ["semantic:observed-dom-width"]
         },
         {
           "value": "31.3047px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed CSS width fractional px, percent, linear calc(percent plus or minus px), or auto plus box-sizing and min/max constraints -> validated TypedLayout Length -> NativeDesignIR numeric or retained expression -> validated IRStyle width dimension -> native Dimension/BoxSizing -> Yoga intrinsic or responsive width then min/max clamp under resize -> Skia pixels; min/max-content, fit-content, negative, and unknown syntax fail closed",
+          "evidenceIds": ["semantic:observed-dom-width"]
         },
         {
           "value": "32px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed CSS width fractional px, percent, linear calc(percent plus or minus px), or auto plus box-sizing and min/max constraints -> validated TypedLayout Length -> NativeDesignIR numeric or retained expression -> validated IRStyle width dimension -> native Dimension/BoxSizing -> Yoga intrinsic or responsive width then min/max clamp under resize -> Skia pixels; min/max-content, fit-content, negative, and unknown syntax fail closed",
+          "evidenceIds": ["semantic:observed-dom-width"]
         },
         {
           "value": "33.2109px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed CSS width fractional px, percent, linear calc(percent plus or minus px), or auto plus box-sizing and min/max constraints -> validated TypedLayout Length -> NativeDesignIR numeric or retained expression -> validated IRStyle width dimension -> native Dimension/BoxSizing -> Yoga intrinsic or responsive width then min/max clamp under resize -> Skia pixels; min/max-content, fit-content, negative, and unknown syntax fail closed",
+          "evidenceIds": ["semantic:observed-dom-width"]
         },
         {
           "value": "331.891px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed CSS width fractional px, percent, linear calc(percent plus or minus px), or auto plus box-sizing and min/max constraints -> validated TypedLayout Length -> NativeDesignIR numeric or retained expression -> validated IRStyle width dimension -> native Dimension/BoxSizing -> Yoga intrinsic or responsive width then min/max clamp under resize -> Skia pixels; min/max-content, fit-content, negative, and unknown syntax fail closed",
+          "evidenceIds": ["semantic:observed-dom-width"]
         },
         {
           "value": "34.6797px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed CSS width fractional px, percent, linear calc(percent plus or minus px), or auto plus box-sizing and min/max constraints -> validated TypedLayout Length -> NativeDesignIR numeric or retained expression -> validated IRStyle width dimension -> native Dimension/BoxSizing -> Yoga intrinsic or responsive width then min/max clamp under resize -> Skia pixels; min/max-content, fit-content, negative, and unknown syntax fail closed",
+          "evidenceIds": ["semantic:observed-dom-width"]
         },
         {
           "value": "35.3516px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed CSS width fractional px, percent, linear calc(percent plus or minus px), or auto plus box-sizing and min/max constraints -> validated TypedLayout Length -> NativeDesignIR numeric or retained expression -> validated IRStyle width dimension -> native Dimension/BoxSizing -> Yoga intrinsic or responsive width then min/max clamp under resize -> Skia pixels; min/max-content, fit-content, negative, and unknown syntax fail closed",
+          "evidenceIds": ["semantic:observed-dom-width"]
         },
         {
           "value": "36.9219px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed CSS width fractional px, percent, linear calc(percent plus or minus px), or auto plus box-sizing and min/max constraints -> validated TypedLayout Length -> NativeDesignIR numeric or retained expression -> validated IRStyle width dimension -> native Dimension/BoxSizing -> Yoga intrinsic or responsive width then min/max clamp under resize -> Skia pixels; min/max-content, fit-content, negative, and unknown syntax fail closed",
+          "evidenceIds": ["semantic:observed-dom-width"]
         },
         {
           "value": "37.8125px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed CSS width fractional px, percent, linear calc(percent plus or minus px), or auto plus box-sizing and min/max constraints -> validated TypedLayout Length -> NativeDesignIR numeric or retained expression -> validated IRStyle width dimension -> native Dimension/BoxSizing -> Yoga intrinsic or responsive width then min/max clamp under resize -> Skia pixels; min/max-content, fit-content, negative, and unknown syntax fail closed",
+          "evidenceIds": ["semantic:observed-dom-width"]
         },
         {
           "value": "370.602px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed CSS width fractional px, percent, linear calc(percent plus or minus px), or auto plus box-sizing and min/max constraints -> validated TypedLayout Length -> NativeDesignIR numeric or retained expression -> validated IRStyle width dimension -> native Dimension/BoxSizing -> Yoga intrinsic or responsive width then min/max clamp under resize -> Skia pixels; min/max-content, fit-content, negative, and unknown syntax fail closed",
+          "evidenceIds": ["semantic:observed-dom-width"]
         },
         {
           "value": "39.3516px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed CSS width fractional px, percent, linear calc(percent plus or minus px), or auto plus box-sizing and min/max constraints -> validated TypedLayout Length -> NativeDesignIR numeric or retained expression -> validated IRStyle width dimension -> native Dimension/BoxSizing -> Yoga intrinsic or responsive width then min/max clamp under resize -> Skia pixels; min/max-content, fit-content, negative, and unknown syntax fail closed",
+          "evidenceIds": ["semantic:observed-dom-width"]
         },
         {
           "value": "39.6016px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed CSS width fractional px, percent, linear calc(percent plus or minus px), or auto plus box-sizing and min/max constraints -> validated TypedLayout Length -> NativeDesignIR numeric or retained expression -> validated IRStyle width dimension -> native Dimension/BoxSizing -> Yoga intrinsic or responsive width then min/max clamp under resize -> Skia pixels; min/max-content, fit-content, negative, and unknown syntax fail closed",
+          "evidenceIds": ["semantic:observed-dom-width"]
         },
         {
           "value": "392.523px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed CSS width fractional px, percent, linear calc(percent plus or minus px), or auto plus box-sizing and min/max constraints -> validated TypedLayout Length -> NativeDesignIR numeric or retained expression -> validated IRStyle width dimension -> native Dimension/BoxSizing -> Yoga intrinsic or responsive width then min/max clamp under resize -> Skia pixels; min/max-content, fit-content, negative, and unknown syntax fail closed",
+          "evidenceIds": ["semantic:observed-dom-width"]
         },
         {
           "value": "393.32px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed CSS width fractional px, percent, linear calc(percent plus or minus px), or auto plus box-sizing and min/max constraints -> validated TypedLayout Length -> NativeDesignIR numeric or retained expression -> validated IRStyle width dimension -> native Dimension/BoxSizing -> Yoga intrinsic or responsive width then min/max clamp under resize -> Skia pixels; min/max-content, fit-content, negative, and unknown syntax fail closed",
+          "evidenceIds": ["semantic:observed-dom-width"]
         },
         {
           "value": "4.4375px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed CSS width fractional px, percent, linear calc(percent plus or minus px), or auto plus box-sizing and min/max constraints -> validated TypedLayout Length -> NativeDesignIR numeric or retained expression -> validated IRStyle width dimension -> native Dimension/BoxSizing -> Yoga intrinsic or responsive width then min/max clamp under resize -> Skia pixels; min/max-content, fit-content, negative, and unknown syntax fail closed",
+          "evidenceIds": ["semantic:observed-dom-width"]
         },
         {
           "value": "40.2344px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed CSS width fractional px, percent, linear calc(percent plus or minus px), or auto plus box-sizing and min/max constraints -> validated TypedLayout Length -> NativeDesignIR numeric or retained expression -> validated IRStyle width dimension -> native Dimension/BoxSizing -> Yoga intrinsic or responsive width then min/max clamp under resize -> Skia pixels; min/max-content, fit-content, negative, and unknown syntax fail closed",
+          "evidenceIds": ["semantic:observed-dom-width"]
         },
         {
           "value": "406.602px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed CSS width fractional px, percent, linear calc(percent plus or minus px), or auto plus box-sizing and min/max constraints -> validated TypedLayout Length -> NativeDesignIR numeric or retained expression -> validated IRStyle width dimension -> native Dimension/BoxSizing -> Yoga intrinsic or responsive width then min/max clamp under resize -> Skia pixels; min/max-content, fit-content, negative, and unknown syntax fail closed",
+          "evidenceIds": ["semantic:observed-dom-width"]
         },
         {
           "value": "408.922px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed CSS width fractional px, percent, linear calc(percent plus or minus px), or auto plus box-sizing and min/max constraints -> validated TypedLayout Length -> NativeDesignIR numeric or retained expression -> validated IRStyle width dimension -> native Dimension/BoxSizing -> Yoga intrinsic or responsive width then min/max clamp under resize -> Skia pixels; min/max-content, fit-content, negative, and unknown syntax fail closed",
+          "evidenceIds": ["semantic:observed-dom-width"]
         },
         {
           "value": "410.664px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed CSS width fractional px, percent, linear calc(percent plus or minus px), or auto plus box-sizing and min/max constraints -> validated TypedLayout Length -> NativeDesignIR numeric or retained expression -> validated IRStyle width dimension -> native Dimension/BoxSizing -> Yoga intrinsic or responsive width then min/max clamp under resize -> Skia pixels; min/max-content, fit-content, negative, and unknown syntax fail closed",
+          "evidenceIds": ["semantic:observed-dom-width"]
         },
         {
           "value": "416.242px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed CSS width fractional px, percent, linear calc(percent plus or minus px), or auto plus box-sizing and min/max constraints -> validated TypedLayout Length -> NativeDesignIR numeric or retained expression -> validated IRStyle width dimension -> native Dimension/BoxSizing -> Yoga intrinsic or responsive width then min/max clamp under resize -> Skia pixels; min/max-content, fit-content, negative, and unknown syntax fail closed",
+          "evidenceIds": ["semantic:observed-dom-width"]
         },
         {
           "value": "43.8125px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed CSS width fractional px, percent, linear calc(percent plus or minus px), or auto plus box-sizing and min/max constraints -> validated TypedLayout Length -> NativeDesignIR numeric or retained expression -> validated IRStyle width dimension -> native Dimension/BoxSizing -> Yoga intrinsic or responsive width then min/max clamp under resize -> Skia pixels; min/max-content, fit-content, negative, and unknown syntax fail closed",
+          "evidenceIds": ["semantic:observed-dom-width"]
         },
         {
           "value": "45.5312px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed CSS width fractional px, percent, linear calc(percent plus or minus px), or auto plus box-sizing and min/max constraints -> validated TypedLayout Length -> NativeDesignIR numeric or retained expression -> validated IRStyle width dimension -> native Dimension/BoxSizing -> Yoga intrinsic or responsive width then min/max clamp under resize -> Skia pixels; min/max-content, fit-content, negative, and unknown syntax fail closed",
+          "evidenceIds": ["semantic:observed-dom-width"]
         },
         {
           "value": "472px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed CSS width fractional px, percent, linear calc(percent plus or minus px), or auto plus box-sizing and min/max constraints -> validated TypedLayout Length -> NativeDesignIR numeric or retained expression -> validated IRStyle width dimension -> native Dimension/BoxSizing -> Yoga intrinsic or responsive width then min/max clamp under resize -> Skia pixels; min/max-content, fit-content, negative, and unknown syntax fail closed",
+          "evidenceIds": ["semantic:observed-dom-width"]
         },
         {
           "value": "480px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed CSS width fractional px, percent, linear calc(percent plus or minus px), or auto plus box-sizing and min/max constraints -> validated TypedLayout Length -> NativeDesignIR numeric or retained expression -> validated IRStyle width dimension -> native Dimension/BoxSizing -> Yoga intrinsic or responsive width then min/max clamp under resize -> Skia pixels; min/max-content, fit-content, negative, and unknown syntax fail closed",
+          "evidenceIds": ["semantic:observed-dom-width"]
         },
         {
           "value": "50.6641px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed CSS width fractional px, percent, linear calc(percent plus or minus px), or auto plus box-sizing and min/max constraints -> validated TypedLayout Length -> NativeDesignIR numeric or retained expression -> validated IRStyle width dimension -> native Dimension/BoxSizing -> Yoga intrinsic or responsive width then min/max clamp under resize -> Skia pixels; min/max-content, fit-content, negative, and unknown syntax fail closed",
+          "evidenceIds": ["semantic:observed-dom-width"]
         },
         {
           "value": "52.2344px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed CSS width fractional px, percent, linear calc(percent plus or minus px), or auto plus box-sizing and min/max constraints -> validated TypedLayout Length -> NativeDesignIR numeric or retained expression -> validated IRStyle width dimension -> native Dimension/BoxSizing -> Yoga intrinsic or responsive width then min/max clamp under resize -> Skia pixels; min/max-content, fit-content, negative, and unknown syntax fail closed",
+          "evidenceIds": ["semantic:observed-dom-width"]
         },
         {
           "value": "53.8125px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed CSS width fractional px, percent, linear calc(percent plus or minus px), or auto plus box-sizing and min/max constraints -> validated TypedLayout Length -> NativeDesignIR numeric or retained expression -> validated IRStyle width dimension -> native Dimension/BoxSizing -> Yoga intrinsic or responsive width then min/max clamp under resize -> Skia pixels; min/max-content, fit-content, negative, and unknown syntax fail closed",
+          "evidenceIds": ["semantic:observed-dom-width"]
         },
         {
           "value": "55.5938px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed CSS width fractional px, percent, linear calc(percent plus or minus px), or auto plus box-sizing and min/max constraints -> validated TypedLayout Length -> NativeDesignIR numeric or retained expression -> validated IRStyle width dimension -> native Dimension/BoxSizing -> Yoga intrinsic or responsive width then min/max clamp under resize -> Skia pixels; min/max-content, fit-content, negative, and unknown syntax fail closed",
+          "evidenceIds": ["semantic:observed-dom-width"]
         },
         {
           "value": "56.6016px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed CSS width fractional px, percent, linear calc(percent plus or minus px), or auto plus box-sizing and min/max constraints -> validated TypedLayout Length -> NativeDesignIR numeric or retained expression -> validated IRStyle width dimension -> native Dimension/BoxSizing -> Yoga intrinsic or responsive width then min/max clamp under resize -> Skia pixels; min/max-content, fit-content, negative, and unknown syntax fail closed",
+          "evidenceIds": ["semantic:observed-dom-width"]
         },
         {
           "value": "58px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed CSS width fractional px, percent, linear calc(percent plus or minus px), or auto plus box-sizing and min/max constraints -> validated TypedLayout Length -> NativeDesignIR numeric or retained expression -> validated IRStyle width dimension -> native Dimension/BoxSizing -> Yoga intrinsic or responsive width then min/max clamp under resize -> Skia pixels; min/max-content, fit-content, negative, and unknown syntax fail closed",
+          "evidenceIds": ["semantic:observed-dom-width"]
         },
         {
           "value": "6.39062px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed CSS width fractional px, percent, linear calc(percent plus or minus px), or auto plus box-sizing and min/max constraints -> validated TypedLayout Length -> NativeDesignIR numeric or retained expression -> validated IRStyle width dimension -> native Dimension/BoxSizing -> Yoga intrinsic or responsive width then min/max clamp under resize -> Skia pixels; min/max-content, fit-content, negative, and unknown syntax fail closed",
+          "evidenceIds": ["semantic:observed-dom-width"]
         },
         {
           "value": "62.0156px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed CSS width fractional px, percent, linear calc(percent plus or minus px), or auto plus box-sizing and min/max constraints -> validated TypedLayout Length -> NativeDesignIR numeric or retained expression -> validated IRStyle width dimension -> native Dimension/BoxSizing -> Yoga intrinsic or responsive width then min/max clamp under resize -> Skia pixels; min/max-content, fit-content, negative, and unknown syntax fail closed",
+          "evidenceIds": ["semantic:observed-dom-width"]
         },
         {
           "value": "64px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed CSS width fractional px, percent, linear calc(percent plus or minus px), or auto plus box-sizing and min/max constraints -> validated TypedLayout Length -> NativeDesignIR numeric or retained expression -> validated IRStyle width dimension -> native Dimension/BoxSizing -> Yoga intrinsic or responsive width then min/max clamp under resize -> Skia pixels; min/max-content, fit-content, negative, and unknown syntax fail closed",
+          "evidenceIds": ["semantic:observed-dom-width"]
         },
         {
           "value": "66.0547px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed CSS width fractional px, percent, linear calc(percent plus or minus px), or auto plus box-sizing and min/max constraints -> validated TypedLayout Length -> NativeDesignIR numeric or retained expression -> validated IRStyle width dimension -> native Dimension/BoxSizing -> Yoga intrinsic or responsive width then min/max clamp under resize -> Skia pixels; min/max-content, fit-content, negative, and unknown syntax fail closed",
+          "evidenceIds": ["semantic:observed-dom-width"]
         },
         {
           "value": "66.7656px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed CSS width fractional px, percent, linear calc(percent plus or minus px), or auto plus box-sizing and min/max constraints -> validated TypedLayout Length -> NativeDesignIR numeric or retained expression -> validated IRStyle width dimension -> native Dimension/BoxSizing -> Yoga intrinsic or responsive width then min/max clamp under resize -> Skia pixels; min/max-content, fit-content, negative, and unknown syntax fail closed",
+          "evidenceIds": ["semantic:observed-dom-width"]
         },
         {
           "value": "67.1016px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed CSS width fractional px, percent, linear calc(percent plus or minus px), or auto plus box-sizing and min/max constraints -> validated TypedLayout Length -> NativeDesignIR numeric or retained expression -> validated IRStyle width dimension -> native Dimension/BoxSizing -> Yoga intrinsic or responsive width then min/max clamp under resize -> Skia pixels; min/max-content, fit-content, negative, and unknown syntax fail closed",
+          "evidenceIds": ["semantic:observed-dom-width"]
         },
         {
           "value": "69.2109px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed CSS width fractional px, percent, linear calc(percent plus or minus px), or auto plus box-sizing and min/max constraints -> validated TypedLayout Length -> NativeDesignIR numeric or retained expression -> validated IRStyle width dimension -> native Dimension/BoxSizing -> Yoga intrinsic or responsive width then min/max clamp under resize -> Skia pixels; min/max-content, fit-content, negative, and unknown syntax fail closed",
+          "evidenceIds": ["semantic:observed-dom-width"]
         },
         {
           "value": "70.5312px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed CSS width fractional px, percent, linear calc(percent plus or minus px), or auto plus box-sizing and min/max constraints -> validated TypedLayout Length -> NativeDesignIR numeric or retained expression -> validated IRStyle width dimension -> native Dimension/BoxSizing -> Yoga intrinsic or responsive width then min/max clamp under resize -> Skia pixels; min/max-content, fit-content, negative, and unknown syntax fail closed",
+          "evidenceIds": ["semantic:observed-dom-width"]
         },
         {
           "value": "70px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed CSS width fractional px, percent, linear calc(percent plus or minus px), or auto plus box-sizing and min/max constraints -> validated TypedLayout Length -> NativeDesignIR numeric or retained expression -> validated IRStyle width dimension -> native Dimension/BoxSizing -> Yoga intrinsic or responsive width then min/max clamp under resize -> Skia pixels; min/max-content, fit-content, negative, and unknown syntax fail closed",
+          "evidenceIds": ["semantic:observed-dom-width"]
         },
         {
           "value": "72.9219px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed CSS width fractional px, percent, linear calc(percent plus or minus px), or auto plus box-sizing and min/max constraints -> validated TypedLayout Length -> NativeDesignIR numeric or retained expression -> validated IRStyle width dimension -> native Dimension/BoxSizing -> Yoga intrinsic or responsive width then min/max clamp under resize -> Skia pixels; min/max-content, fit-content, negative, and unknown syntax fail closed",
+          "evidenceIds": ["semantic:observed-dom-width"]
         },
         {
           "value": "76.7656px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed CSS width fractional px, percent, linear calc(percent plus or minus px), or auto plus box-sizing and min/max constraints -> validated TypedLayout Length -> NativeDesignIR numeric or retained expression -> validated IRStyle width dimension -> native Dimension/BoxSizing -> Yoga intrinsic or responsive width then min/max clamp under resize -> Skia pixels; min/max-content, fit-content, negative, and unknown syntax fail closed",
+          "evidenceIds": ["semantic:observed-dom-width"]
         },
         {
           "value": "77.5938px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed CSS width fractional px, percent, linear calc(percent plus or minus px), or auto plus box-sizing and min/max constraints -> validated TypedLayout Length -> NativeDesignIR numeric or retained expression -> validated IRStyle width dimension -> native Dimension/BoxSizing -> Yoga intrinsic or responsive width then min/max clamp under resize -> Skia pixels; min/max-content, fit-content, negative, and unknown syntax fail closed",
+          "evidenceIds": ["semantic:observed-dom-width"]
         },
         {
           "value": "799.25px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed CSS width fractional px, percent, linear calc(percent plus or minus px), or auto plus box-sizing and min/max constraints -> validated TypedLayout Length -> NativeDesignIR numeric or retained expression -> validated IRStyle width dimension -> native Dimension/BoxSizing -> Yoga intrinsic or responsive width then min/max clamp under resize -> Skia pixels; min/max-content, fit-content, negative, and unknown syntax fail closed",
+          "evidenceIds": ["semantic:observed-dom-width"]
         },
         {
           "value": "80.7656px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed CSS width fractional px, percent, linear calc(percent plus or minus px), or auto plus box-sizing and min/max constraints -> validated TypedLayout Length -> NativeDesignIR numeric or retained expression -> validated IRStyle width dimension -> native Dimension/BoxSizing -> Yoga intrinsic or responsive width then min/max clamp under resize -> Skia pixels; min/max-content, fit-content, negative, and unknown syntax fail closed",
+          "evidenceIds": ["semantic:observed-dom-width"]
         },
         {
           "value": "831.25px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed CSS width fractional px, percent, linear calc(percent plus or minus px), or auto plus box-sizing and min/max constraints -> validated TypedLayout Length -> NativeDesignIR numeric or retained expression -> validated IRStyle width dimension -> native Dimension/BoxSizing -> Yoga intrinsic or responsive width then min/max clamp under resize -> Skia pixels; min/max-content, fit-content, negative, and unknown syntax fail closed",
+          "evidenceIds": ["semantic:observed-dom-width"]
         },
         {
           "value": "86.0703px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed CSS width fractional px, percent, linear calc(percent plus or minus px), or auto plus box-sizing and min/max constraints -> validated TypedLayout Length -> NativeDesignIR numeric or retained expression -> validated IRStyle width dimension -> native Dimension/BoxSizing -> Yoga intrinsic or responsive width then min/max clamp under resize -> Skia pixels; min/max-content, fit-content, negative, and unknown syntax fail closed",
+          "evidenceIds": ["semantic:observed-dom-width"]
         },
         {
           "value": "87.9688px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed CSS width fractional px, percent, linear calc(percent plus or minus px), or auto plus box-sizing and min/max constraints -> validated TypedLayout Length -> NativeDesignIR numeric or retained expression -> validated IRStyle width dimension -> native Dimension/BoxSizing -> Yoga intrinsic or responsive width then min/max clamp under resize -> Skia pixels; min/max-content, fit-content, negative, and unknown syntax fail closed",
+          "evidenceIds": ["semantic:observed-dom-width"]
         },
         {
           "value": "873px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed CSS width fractional px, percent, linear calc(percent plus or minus px), or auto plus box-sizing and min/max constraints -> validated TypedLayout Length -> NativeDesignIR numeric or retained expression -> validated IRStyle width dimension -> native Dimension/BoxSizing -> Yoga intrinsic or responsive width then min/max clamp under resize -> Skia pixels; min/max-content, fit-content, negative, and unknown syntax fail closed",
+          "evidenceIds": ["semantic:observed-dom-width"]
         },
         {
           "value": "875px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed CSS width fractional px, percent, linear calc(percent plus or minus px), or auto plus box-sizing and min/max constraints -> validated TypedLayout Length -> NativeDesignIR numeric or retained expression -> validated IRStyle width dimension -> native Dimension/BoxSizing -> Yoga intrinsic or responsive width then min/max clamp under resize -> Skia pixels; min/max-content, fit-content, negative, and unknown syntax fail closed",
+          "evidenceIds": ["semantic:observed-dom-width"]
         },
         {
           "value": "880px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed CSS width fractional px, percent, linear calc(percent plus or minus px), or auto plus box-sizing and min/max constraints -> validated TypedLayout Length -> NativeDesignIR numeric or retained expression -> validated IRStyle width dimension -> native Dimension/BoxSizing -> Yoga intrinsic or responsive width then min/max clamp under resize -> Skia pixels; min/max-content, fit-content, negative, and unknown syntax fail closed",
+          "evidenceIds": ["semantic:observed-dom-width"]
         },
         {
           "value": "8px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed CSS width fractional px, percent, linear calc(percent plus or minus px), or auto plus box-sizing and min/max constraints -> validated TypedLayout Length -> NativeDesignIR numeric or retained expression -> validated IRStyle width dimension -> native Dimension/BoxSizing -> Yoga intrinsic or responsive width then min/max clamp under resize -> Skia pixels; min/max-content, fit-content, negative, and unknown syntax fail closed",
+          "evidenceIds": ["semantic:observed-dom-width"]
         },
         {
           "value": "90.6719px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed CSS width fractional px, percent, linear calc(percent plus or minus px), or auto plus box-sizing and min/max constraints -> validated TypedLayout Length -> NativeDesignIR numeric or retained expression -> validated IRStyle width dimension -> native Dimension/BoxSizing -> Yoga intrinsic or responsive width then min/max clamp under resize -> Skia pixels; min/max-content, fit-content, negative, and unknown syntax fail closed",
+          "evidenceIds": ["semantic:observed-dom-width"]
         },
         {
           "value": "907px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed CSS width fractional px, percent, linear calc(percent plus or minus px), or auto plus box-sizing and min/max constraints -> validated TypedLayout Length -> NativeDesignIR numeric or retained expression -> validated IRStyle width dimension -> native Dimension/BoxSizing -> Yoga intrinsic or responsive width then min/max clamp under resize -> Skia pixels; min/max-content, fit-content, negative, and unknown syntax fail closed",
+          "evidenceIds": ["semantic:observed-dom-width"]
         },
         {
           "value": "908px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed CSS width fractional px, percent, linear calc(percent plus or minus px), or auto plus box-sizing and min/max constraints -> validated TypedLayout Length -> NativeDesignIR numeric or retained expression -> validated IRStyle width dimension -> native Dimension/BoxSizing -> Yoga intrinsic or responsive width then min/max clamp under resize -> Skia pixels; min/max-content, fit-content, negative, and unknown syntax fail closed",
+          "evidenceIds": ["semantic:observed-dom-width"]
         },
         {
           "value": "92.2109px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed CSS width fractional px, percent, linear calc(percent plus or minus px), or auto plus box-sizing and min/max constraints -> validated TypedLayout Length -> NativeDesignIR numeric or retained expression -> validated IRStyle width dimension -> native Dimension/BoxSizing -> Yoga intrinsic or responsive width then min/max clamp under resize -> Skia pixels; min/max-content, fit-content, negative, and unknown syntax fail closed",
+          "evidenceIds": ["semantic:observed-dom-width"]
         },
         {
           "value": "93.2188px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed CSS width fractional px, percent, linear calc(percent plus or minus px), or auto plus box-sizing and min/max constraints -> validated TypedLayout Length -> NativeDesignIR numeric or retained expression -> validated IRStyle width dimension -> native Dimension/BoxSizing -> Yoga intrinsic or responsive width then min/max clamp under resize -> Skia pixels; min/max-content, fit-content, negative, and unknown syntax fail closed",
+          "evidenceIds": ["semantic:observed-dom-width"]
         },
         {
           "value": "94px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed CSS width fractional px, percent, linear calc(percent plus or minus px), or auto plus box-sizing and min/max constraints -> validated TypedLayout Length -> NativeDesignIR numeric or retained expression -> validated IRStyle width dimension -> native Dimension/BoxSizing -> Yoga intrinsic or responsive width then min/max clamp under resize -> Skia pixels; min/max-content, fit-content, negative, and unknown syntax fail closed",
+          "evidenceIds": ["semantic:observed-dom-width"]
         },
         {
           "value": "auto",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed CSS width fractional px, percent, linear calc(percent plus or minus px), or auto plus box-sizing and min/max constraints -> validated TypedLayout Length -> NativeDesignIR numeric or retained expression -> validated IRStyle width dimension -> native Dimension/BoxSizing -> Yoga intrinsic or responsive width then min/max clamp under resize -> Skia pixels; min/max-content, fit-content, negative, and unknown syntax fail closed",
+          "evidenceIds": ["semantic:observed-dom-width"]
         }
       ]
     },
