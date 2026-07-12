@@ -7,6 +7,7 @@
 #include <pulp/canvas/font_resolver.hpp>
 
 #include <fstream>
+#include <filesystem>
 #include <iostream>
 #include <string>
 #include <string_view>
@@ -27,6 +28,11 @@ bool write_text(const std::string& path, const std::string& text) {
 	std::ofstream output(path, std::ios::binary | std::ios::trunc);
 	output << text;
 	return output.good();
+}
+
+std::string read_text(const std::filesystem::path& path) {
+	std::ifstream input(path, std::ios::binary);
+	return input ? std::string(std::istreambuf_iterator<char>(input), {}) : std::string{};
 }
 
 }  // namespace
@@ -83,6 +89,14 @@ int main(int argc, char** argv) {
 	options.min_width = 0.0f;
 	options.min_height = 0.0f;
 	options.use_gpu = true;
+	const auto contract_path = std::filesystem::path(argv[0]).parent_path().parent_path() /
+		"Resources/contracts/source-window.browser-window.v1.json";
+	const auto source_window = pulp::view::parse_source_window_contract_json(read_text(contract_path));
+	if (!source_window) {
+		std::cerr << "Palot: source window contract is missing or invalid\n";
+		return 1;
+	}
+	source_window->apply(options);
 
 	auto window = pulp::view::WindowHost::create(root, options);
 	if (!window) {

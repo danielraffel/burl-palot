@@ -1,0 +1,16 @@
+{
+  "schema": "burl-native-window-contract-proof-v1",
+  "contract": "apps/desktop-burl/contracts/source-window.browser-window.v1.json",
+  "backend": "skia-dawn-metal",
+  "captures": [
+    { "logicalWidth": 599, "logicalHeight": 800, "pixelWidth": 1198, "pixelHeight": 1600, "path": "native-chrome-599.png", "sha256": "e89a7aab9caadd50369e256552e45af9125017b630128ccc24475e63e44812a8" },
+    { "logicalWidth": 768, "logicalHeight": 800, "pixelWidth": 1536, "pixelHeight": 1600, "path": "native-chrome-768.png", "sha256": "6e8c6dee985ec321b86a2e10ea284ee87944691383cb53003c72f8ee4c38a83e" },
+    { "logicalWidth": 1200, "logicalHeight": 800, "pixelWidth": 2400, "pixelHeight": 1600, "path": "native-chrome-1200.png", "sha256": "f9bd360ff19f5ee3ec0afc8b4fe7cd867e379e06e020b80150cd6e8d0b05b56d" }
+  ],
+  "assertions": {
+    "fullBackBufferNoCrop": true,
+    "deviceScaleFactor": 2,
+    "contentTracksWindowBounds": true,
+    "duplicateInContentTrafficLights": false
+  }
+}

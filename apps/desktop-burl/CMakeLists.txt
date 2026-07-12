@@ -183,6 +183,9 @@ if(BURL_PALOT_ENABLE_FRAMEWORK)
 		COMMAND "${CMAKE_COMMAND}" -E copy
 			"${CMAKE_CURRENT_SOURCE_DIR}/contracts/main-chat.application-bindings.v1.json"
 			"$<TARGET_BUNDLE_DIR:burl-palot>/Contents/Resources/contracts/main-chat.application-bindings.v1.json"
+		COMMAND "${CMAKE_COMMAND}" -E copy
+			"${CMAKE_CURRENT_SOURCE_DIR}/contracts/source-window.browser-window.v1.json"
+			"$<TARGET_BUNDLE_DIR:burl-palot>/Contents/Resources/contracts/source-window.browser-window.v1.json"
 		COMMAND "${CMAKE_COMMAND}" -E make_directory
 			"$<TARGET_BUNDLE_DIR:burl-palot>/Contents/Resources/bin"
 		COMMAND "${CMAKE_COMMAND}" -E copy "${PALOT_SIDECAR_OUTPUT}"

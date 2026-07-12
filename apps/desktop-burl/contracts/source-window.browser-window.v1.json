@@ -1,0 +1,20 @@
+{
+  "schema": "burl-source-window-contract-v1",
+  "source": "Electron BrowserWindow",
+  "observations": {
+    "titleBarStyle": "hiddenInset",
+    "transparent": true,
+    "trafficLightPosition": { "x": 15, "y": 15 },
+    "vibrancy": "menu",
+    "resizable": true,
+    "minimumSize": { "width": 0, "height": 0 },
+    "contentFillsWindowBounds": true
+  },
+  "projection": {
+    "titleBarStyle": "hidden_inset",
+    "backdropEffect": "vibrancy_menu",
+    "transparent": true,
+    "trafficLightX": 15,
+    "trafficLightY": 15
+  }
+}
