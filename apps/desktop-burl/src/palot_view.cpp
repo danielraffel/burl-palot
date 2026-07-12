@@ -482,8 +482,8 @@ void PalotView::load_visual_parity_fixture() {
 	send_->set_visible(false);
 	cancel_->set_visible(false);
 	append_message("You",
-	               "Great! Now also add system preference detection so it defaults to the user's OS "
-	               "setting, and add a transition animation when switching themes.", false);
+	               "Add a dark mode toggle to the application settings page. It should persist the user's "
+	               "preference to localStorage and apply the theme immediately without a page reload.", false);
 	append_message("OpenCode",
 	               "🧠 Thought for 2 seconds\n\n"
 	               "I've added the dark mode toggle to the settings page. Here's what I did:\n\n"

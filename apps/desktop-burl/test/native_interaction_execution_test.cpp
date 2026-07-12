@@ -40,6 +40,13 @@ bool effectively_visible(const pulp::view::View& view, const pulp::view::View& r
 	return false;
 }
 
+pulp::view::View* find_anchor_suffix(pulp::view::View& root, std::string_view suffix) {
+	if (std::string_view(root.anchor_id()).ends_with(suffix)) return &root;
+	for (std::size_t index = 0; index < root.child_count(); ++index)
+		if (auto* found = find_anchor_suffix(*root.child_at(index), suffix)) return found;
+	return nullptr;
+}
+
 }  // namespace
 
 int main(int argc, char** argv) {
@@ -61,6 +68,12 @@ int main(int argc, char** argv) {
 		{"project-c", "project", {{"id", "project-c"}, {"project.name", "landing-page"},
 		                                {"directory", "/fixture/landing-page"}, {"status", "idle"}}},
 	});
+	host.set_transcript({
+		{"u1", "user", {{"message.text", "first prompt"}}},
+		{"a1", "assistant", {{"message.text", "first response"}}},
+		{"u2", "user", {{"message.text", "second prompt"}}},
+		{"a2", "assistant", {{"message.text", "second response"}}},
+	});
 	if (!host.unattached_actions().empty()) {
 		for (const auto& action : host.unattached_actions()) std::cerr << "unattached=" << action << '\n';
 		return 3;
@@ -69,6 +82,13 @@ int main(int argc, char** argv) {
 	for (const float width : {599.0f, 768.0f, 1200.0f}) {
 		host.set_bounds({0, 0, width, 800});
 		host.layout_children();
+		auto* main_panel = find_anchor_suffix(host, "main-data-slot-sidebar-inset:0");
+		if (!main_panel ||
+		    std::abs(main_panel->corner_radius_bl() - 16.5f) > 0.01f ||
+		    std::abs(main_panel->corner_radius_br() - 16.5f) > 0.01f ||
+		    std::abs(main_panel->bounds().height - 788.0f) > 0.01f ||
+		    std::abs(main_panel->bounds().width - (width < 768.0f ? width - 12.0f : width - 292.0f)) > 0.01f)
+			return 16;
 		for (const auto* id : {"composer.copy", "project.open", "project.select", "prompt.cancel", "session.create",
 		                       "session.open"}) {
 			for (auto* candidate : host.bound_action_views(id)) {
