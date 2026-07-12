@@ -57,9 +57,9 @@
         "dpr": 2,
         "fonts": [
           {
-            "family": "Inter Variable",
+            "family": ".SF NS + Menlo runtime-used",
             "path": "oracle-inputs/source-font-receipt.json",
-            "sha256": "d18b048ce0ee45c9badbba00a3d6b67c1764273c5190242d0b4f0c6a1788abf6"
+            "sha256": "b79d672d8ea143dcaf1603261fd11c4255df4a37664db7dfd3a55a3bb8c12f1c"
           }
         ],
         "height": 1600,
@@ -74,9 +74,9 @@
         "dpr": 2,
         "fonts": [
           {
-            "family": "Inter Variable",
+            "family": ".SF NS + Menlo runtime-used",
             "path": "oracle-inputs/source-font-receipt.json",
-            "sha256": "d18b048ce0ee45c9badbba00a3d6b67c1764273c5190242d0b4f0c6a1788abf6"
+            "sha256": "b79d672d8ea143dcaf1603261fd11c4255df4a37664db7dfd3a55a3bb8c12f1c"
           }
         ],
         "height": 1600,
@@ -127,9 +127,9 @@
     "dpr": 2,
     "fonts": [
       {
-        "family": "Inter Variable",
+        "family": ".SF NS + Menlo runtime-used",
         "path": "oracle-inputs/source-font-receipt.json",
-        "sha256": "d18b048ce0ee45c9badbba00a3d6b67c1764273c5190242d0b4f0c6a1788abf6"
+        "sha256": "b79d672d8ea143dcaf1603261fd11c4255df4a37664db7dfd3a55a3bb8c12f1c"
       }
     ],
     "height": 1600,

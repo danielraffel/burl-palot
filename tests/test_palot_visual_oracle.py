@@ -121,6 +121,25 @@ class PalotVisualOracleTests(unittest.TestCase):
 			self.assertEqual(geometry["rootScrollWidth"], capture["width"])
 			self.assertEqual(geometry["bodyScrollWidth"], capture["width"])
 
+	def test_source_font_receipt_uses_runtime_glyph_evidence(self):
+		receipt = json.loads((ROOT / "evidence/oracle-inputs/source-font-receipt.json").read_text())
+		self.assertEqual(receipt["schema"], "palot-runtime-used-font-receipt-v1")
+		self.assertRegex(receipt["captureSha256"], r"^[0-9a-f]{64}$")
+		self.assertRegex(receipt["captureMetaSha256"], r"^[0-9a-f]{64}$")
+		faces = receipt["usedFaces"]
+		self.assertTrue(faces)
+		self.assertEqual({face["family"] for face in faces}, {".SF NS", "Menlo"})
+		self.assertTrue(all(face["glyphCount"] > 0 and face["nodeCount"] > 0 for face in faces))
+		self.assertTrue(all(face["evidence"]["sourceId"].startswith("dom/") for face in faces))
+		self.assertEqual(receipt["negativeEvidence"], {
+			"family": "Inter Variable", "runtimeGlyphCount": 0,
+			"reason": "Installed package assets are not runtime-use evidence.",
+		})
+		for manifest_path in ROOT.glob("evidence/visual-parity-oracle-*.manifest.json"):
+			manifest = json.loads(manifest_path.read_text())
+			for artifact in [manifest["source"], *manifest["calibration"]["source_repeats"]]:
+				self.assertNotIn("Inter Variable", {font["family"] for font in artifact["fonts"]})
+
 
 if __name__ == "__main__":
 	unittest.main()
