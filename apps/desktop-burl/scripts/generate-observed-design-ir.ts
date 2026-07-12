@@ -15,9 +15,10 @@ const outputPath = resolve(args.get("--output") ?? "")
 const sourceRevision = args.get("--source-revision") ?? ""
 const importedAt = args.get("--imported-at") ?? ""
 const bindingPolicyPath = resolve(args.get("--binding-policy") ?? "")
+const fontReceiptPath = resolve(args.get("--font-receipt") ?? "")
 const responsiveSemantics = (args.get("--responsive-semantics") ?? "").split(",").filter(Boolean).map((path) => resolve(path))
-if (!burlSource || !semanticsPath || !outputPath || !sourceRevision || !importedAt || !bindingPolicyPath) {
-	throw new Error("required: --burl-source --semantics --output --source-revision --imported-at --binding-policy")
+if (!burlSource || !semanticsPath || !outputPath || !sourceRevision || !importedAt || !bindingPolicyPath || !fontReceiptPath) {
+	throw new Error("required: --burl-source --semantics --output --source-revision --imported-at --binding-policy --font-receipt")
 }
 
 const modulePath = resolve(burlSource, "packages/pulp-import-ir/src/index.ts")
@@ -34,6 +35,10 @@ const importPolicy = JSON.parse(await readFile(bindingPolicyPath, "utf8")) as {
 	collections?: Array<{ id: string; containerSourceId: string; firstChildSourceId: string; lastChildSourceId: string; collectionKey: string; routeId: string }>
 	svgExclusions?: Array<{ sourceId: string; reason: string }>
 }
+const fontReceipt = JSON.parse(await readFile(fontReceiptPath, "utf8")) as {
+	usedFaces?: Array<{ family: string; postScriptName: string; custom: boolean; glyphCount: number }>
+}
+if (!fontReceipt.usedFaces?.some((face) => face.glyphCount > 0)) throw new Error("font receipt has no runtime-used faces")
 const removeFormattingWhitespace = (node: any) => {
 	if (node.tagName?.toLowerCase() === "svg") {
 		node.content = []
@@ -111,6 +116,9 @@ const designIr = importer.toNativeDesignIrV1(lowered, {
 	importedAt,
 	sourceRevision,
 	platformFonts: importer.macosSkiaPlatformFontContract,
+	observedFontUses: importer.projectAggregateRuntimeFontFaces(
+		importer.collectObservedFontUses(lowered), fontReceipt.usedFaces,
+	),
 	inlineSvgCaptures: projectedSvgCaptures,
 })
 
