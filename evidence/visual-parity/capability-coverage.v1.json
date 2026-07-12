@@ -577,10 +577,9 @@
         {
           "value": "1px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed per-side border width/color -> normalizeCssColor -> TypedPaint side slots -> NativeDesignIR side style -> generic View per-side fill -> Skia; asymmetric promoted widgets fail closed",
+          "evidenceIds": ["semantic:observed-dom-border-side"]
         }
       ]
     },
