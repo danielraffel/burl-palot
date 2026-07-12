@@ -4053,10 +4053,9 @@
     {
       "name": "ime-composition",
       "observation": "observed",
-      "decision": "unsupported",
-      "route": null,
-      "evidenceIds": [],
-      "reason": "No exact behavior route plus resolving evidence ID is published; screenshot scoring is gated."
+      "decision": "supported",
+      "route": "captured textarea/input semantic -> observed DOM native TextEditor promotion -> NativeDesignIR input node -> native materializer TextEditor -> macOS NSTextInputClient marked-text/UTF-16 selection and candidate-rect routing -> composition replacement and commit as one undo unit -> focus-loss cancellation; no WebView",
+      "evidenceIds": ["behavior:native-ime-composition"]
     },
     {
       "name": "keyboard-navigation",
