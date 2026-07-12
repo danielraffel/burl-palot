@@ -312,42 +312,37 @@
         {
           "value": "",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed border shorthand + side width/color -> TypedPaint borderWidth/borderColor -> Native VisualSkin rest border -> TextButton/ToggleButton width-and-alpha no-stroke gate -> Skia",
+          "evidenceIds": ["semantic:observed-dom-border-no-stroke"]
         },
         {
           "value": "0px none rgb(175, 175, 175)",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed border shorthand + side width/color -> TypedPaint borderWidth/borderColor -> Native VisualSkin rest border -> TextButton/ToggleButton width-and-alpha no-stroke gate -> Skia",
+          "evidenceIds": ["semantic:observed-dom-border-no-stroke"]
         },
         {
           "value": "0px none rgb(46, 46, 46)",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed border shorthand + side width/color -> TypedPaint borderWidth/borderColor -> Native VisualSkin rest border -> TextButton/ToggleButton width-and-alpha no-stroke gate -> Skia",
+          "evidenceIds": ["semantic:observed-dom-border-no-stroke"]
         },
         {
           "value": "0px solid rgb(46, 46, 46)",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed border shorthand + side width/color -> TypedPaint borderWidth/borderColor -> Native VisualSkin rest border -> TextButton/ToggleButton width-and-alpha no-stroke gate -> Skia",
+          "evidenceIds": ["semantic:observed-dom-border-no-stroke"]
         },
         {
           "value": "0px solid rgba(0, 0, 0, 0)",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed border shorthand + side width/color -> TypedPaint borderWidth/borderColor -> Native VisualSkin rest border -> TextButton/ToggleButton width-and-alpha no-stroke gate -> Skia",
+          "evidenceIds": ["semantic:observed-dom-border-no-stroke"]
         },
         {
           "value": "1px solid oklab(0.301182 0.0000137091 0.00000602007 / 0.6)",
@@ -368,10 +363,9 @@
         {
           "value": "1px solid rgba(0, 0, 0, 0)",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed border shorthand + side width/color -> TypedPaint borderWidth/borderColor -> Native VisualSkin rest border -> TextButton/ToggleButton width-and-alpha no-stroke gate -> Skia",
+          "evidenceIds": ["semantic:observed-dom-border-no-stroke"]
         }
       ]
     },
