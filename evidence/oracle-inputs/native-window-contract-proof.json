@@ -3,9 +3,9 @@
   "contract": "apps/desktop-burl/contracts/source-window.browser-window.v1.json",
   "backend": "skia-dawn-metal",
   "captures": [
-    { "logicalWidth": 599, "logicalHeight": 800, "pixelWidth": 1198, "pixelHeight": 1600, "path": "native-chrome-599.png", "sha256": "49029d758061873d13057cb7e69fd83f953b5b4bec1ee55caf8107e1e5c2fe9a" },
-    { "logicalWidth": 768, "logicalHeight": 800, "pixelWidth": 1536, "pixelHeight": 1600, "path": "native-chrome-768.png", "sha256": "dff770197cabeeacdeb4d3597d2e0386a84ea30ad7f403597f307b1946bb47d6" },
-    { "logicalWidth": 1200, "logicalHeight": 800, "pixelWidth": 2400, "pixelHeight": 1600, "path": "native-chrome-1200.png", "sha256": "142d0be7f066a8527642e97039d0430127bf4fd444919a06f0923b01b120d058" }
+    { "logicalWidth": 599, "logicalHeight": 800, "pixelWidth": 1198, "pixelHeight": 1600, "path": "native-chrome-599.png", "sha256": "6ee38163f49eedcf4d176a8b8937e4184ed33048e09175b740427053aeae8fbf" },
+    { "logicalWidth": 768, "logicalHeight": 800, "pixelWidth": 1536, "pixelHeight": 1600, "path": "native-chrome-768.png", "sha256": "13058859e5872ccc8b38982e412268f83eb78b629d961a711e3f5cb4f1c8979e" },
+    { "logicalWidth": 1200, "logicalHeight": 800, "pixelWidth": 2400, "pixelHeight": 1600, "path": "native-chrome-1200.png", "sha256": "b864a15850494c8081bca9921139f4a6eee19df3a4c2e9c051248e0b7f8e5692" }
   ],
   "assertions": {
     "fullBackBufferNoCrop": true,

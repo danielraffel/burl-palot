@@ -12,6 +12,7 @@
 #include <iostream>
 #include <string>
 #include <unordered_map>
+#include <unordered_set>
 
 namespace {
 
@@ -120,6 +121,7 @@ int main(int argc, char** argv) {
 	host.paint_all(canvas);
 	bool painted_project = false;
 	bool opaque_project_foreground = false;
+	std::unordered_set<std::string> painted_composite_labels;
 	pulp::canvas::Color current_fill;
 	for (const auto& command : canvas.commands()) {
 		if (command.type == pulp::canvas::DrawCommand::Type::set_fill_color) {
@@ -130,14 +132,19 @@ int main(int argc, char** argv) {
 			painted_project = true;
 			opaque_project_foreground = current_fill.a > 0.0f;
 		}
+		if (command.type == pulp::canvas::DrawCommand::Type::fill_text) {
+			for (const auto* label : {"New Session", "Automations", "This Mac", "Settings"})
+				if (command.text.find(label) != std::string::npos) painted_composite_labels.insert(label);
+		}
 	}
 	if (!painted_project || !opaque_project_foreground) return 13;
+	if (painted_composite_labels.size() != 4) return 14;
 	if (const auto* proof = std::getenv("PALOT_PROJECT_ROW_PROOF")) {
 		const auto png = pulp::view::render_to_png(host, 1200, 800, 1.0f,
 		                                             pulp::view::ScreenshotBackend::skia);
 		std::ofstream output(proof, std::ios::binary);
 		output.write(reinterpret_cast<const char*>(png.data()), static_cast<std::streamsize>(png.size()));
-		if (!output.good() || png.empty()) return 14;
+		if (!output.good() || png.empty()) return 15;
 	}
 	std::cout << "native interaction union: anchors, pointer down/up, endpoint, focus, keyboard, disabled, overlay and fail-closed diagnostics pass\n";
 	return EXIT_SUCCESS;
