@@ -293,10 +293,9 @@
         {
           "value": "linear-gradient(90deg, rgba(0, 0, 0, 0) calc(50% - 30px), rgb(24, 24, 24), rgba(0, 0, 0, 0) calc(50% + 30px)), linear-gradient(rgb(175, 175, 175), rgb(175, 175, 175))",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed backgroundImage ordered layers -> top-level layer split -> TypedPaint.backgroundLayers + affine calc stops -> NativeDesignIR.style.backgroundLayers -> materializer append -> View ordered layers -> resize-resolved stops -> Skia SrcOver",
+          "evidenceIds": ["semantic:observed-dom-background-layers-calc"]
         },
         {
           "value": "none",
