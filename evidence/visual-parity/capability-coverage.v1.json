@@ -1328,18 +1328,16 @@
         {
           "value": "nowrap",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed flex-wrap -> typed nowrap/wrap/wrap-reverse -> NativeDesignIR wrap plus wrapReverse -> IRLayout JSON round-trip -> native FlexWrap -> Yoga line formation/cross-axis reversal/gaps -> Skia positions",
+          "evidenceIds": ["semantic:observed-dom-flex-wrap"]
         },
         {
           "value": "wrap",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed flex-wrap -> typed nowrap/wrap/wrap-reverse -> NativeDesignIR wrap plus wrapReverse -> IRLayout JSON round-trip -> native FlexWrap -> Yoga line formation/cross-axis reversal/gaps -> Skia positions",
+          "evidenceIds": ["semantic:observed-dom-flex-wrap"]
         }
       ]
     },
