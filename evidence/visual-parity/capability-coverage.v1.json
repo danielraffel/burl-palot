@@ -178,10 +178,9 @@
         {
           "value": "none",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed backdropFilter=none -> TypedPaint.backdropFilter identity -> NativeDesignIR.style.backdropFilter=none -> apply_visual_style -> View.backdrop_blur=0 -> no backdrop save layer",
+          "evidenceIds": ["semantic:observed-dom-backdrop-filter-none"]
         }
       ]
     },
