@@ -441,10 +441,9 @@
         {
           "value": "1.67772e+07px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed large borderBottomLeftRadius px -> authored TypedPaint value -> NativeDesignIR corner style -> View authored radius -> CSS overlap common-scale used value at each paint/resize -> Skia path",
+          "evidenceIds": ["semantic:observed-dom-border-corner-large"]
         },
         {
           "value": "10.5px",
