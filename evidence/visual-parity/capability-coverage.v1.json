@@ -166,10 +166,9 @@
           "value": "stretch",
           "context": {"parentAlignItems": "center", "parentDisplay": "flex"},
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed alignSelf=stretch + parent display=flex/alignItems=center -> TypedLayout.alignSelf -> NativeDesignIR.layout.alignSelf -> apply_layout -> FlexStyle.align_self -> Yoga stretch override",
+          "evidenceIds": ["semantic:observed-dom-align-self-stretch"]
         }
       ]
     },
