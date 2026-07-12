@@ -23,6 +23,11 @@ const modulePath = resolve(burlSource, "packages/pulp-import-ir/src/index.ts")
 const importer = await import(pathToFileURL(modulePath).href)
 const semantics = JSON.parse(await readFile(semanticsPath, "utf8"))
 if (!semantics.observedDom) throw new Error("source semantics has no observedDom tree")
+const importPolicy = JSON.parse(await readFile(bindingPolicyPath, "utf8")) as {
+	version: number
+	rules: PolicyRule[]
+	svgExclusions?: Array<{ sourceId: string; reason: string }>
+}
 const removeFormattingWhitespace = (node: any) => {
 	if (Array.isArray(node.content)) node.content = node.content.filter((item: any) => item.kind !== "text" || item.text?.trim())
 	if (Array.isArray(node.orderedPaintContent)) node.orderedPaintContent = node.orderedPaintContent.filter((item: any) => item.kind !== "text" || item.text?.trim())
@@ -31,12 +36,35 @@ const removeFormattingWhitespace = (node: any) => {
 removeFormattingWhitespace(semantics.observedDom)
 
 const lowered = importer.lowerObservedDom(semantics.observedDom, importedAt)
+const inlineSvgCaptures: Array<{ sourceId: string; outerHTML: string; computedColor?: string }> = []
+const collectInlineSvg = (node: any) => {
+	if (node.tagName?.toLowerCase() === "svg") {
+		if (!node.outerHtml) throw new Error(`SVG ${node.sourceId} has no captured outerHTML`)
+		inlineSvgCaptures.push({ sourceId: node.sourceId, outerHTML: node.outerHtml, computedColor: node.computedStyle?.color })
+	}
+	for (const child of node.children ?? []) collectInlineSvg(child)
+}
+collectInlineSvg(semantics.observedDom)
+const exclusions = new Map((importPolicy.svgExclusions ?? []).map((item) => [item.sourceId, item.reason]))
+for (const [sourceId, reason] of exclusions) {
+	if (!reason.trim() || !inlineSvgCaptures.some((capture) => capture.sourceId === sourceId))
+		throw new Error(`invalid SVG exclusion ${sourceId}`)
+}
+const projectedSvgCaptures = inlineSvgCaptures.filter((capture) => !exclusions.has(capture.sourceId))
 const designIr = importer.toNativeDesignIrV1(lowered, {
 	sourceFile: semanticsPath,
 	importedAt,
 	sourceRevision,
 	platformFonts: importer.macosSkiaPlatformFontContract,
+	inlineSvgCaptures: projectedSvgCaptures,
 })
+
+const faithfulSvgCount = (node: any): number => (node.render_mode === "faithful_svg" ? 1 : 0) +
+	(node.children ?? []).reduce((sum: number, child: any) => sum + faithfulSvgCount(child), 0)
+if (designIr.diagnostics.some((item: any) => item.severity === "error"))
+	throw new Error(`source import error diagnostics: ${JSON.stringify(designIr.diagnostics)}`)
+if (faithfulSvgCount(designIr.root) !== projectedSvgCaptures.length)
+	throw new Error(`inline SVG invariant failed: captured ${inlineSvgCaptures.length}, excluded ${exclusions.size}, resolved ${faithfulSvgCount(designIr.root)}`)
 
 interface ObservedNode {
 	sourceId: string
@@ -52,7 +80,7 @@ interface PolicyRule {
 	attributes: Record<string, string>
 }
 
-const policy = JSON.parse(await readFile(bindingPolicyPath, "utf8")) as { version: number; rules: PolicyRule[] }
+const policy = importPolicy
 if (policy.version !== 1 || !Array.isArray(policy.rules)) throw new Error("invalid binding policy")
 const observed = new Map<string, { node: ObservedNode; text: string }>()
 const collect = (node: ObservedNode): string => {

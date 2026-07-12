@@ -1,5 +1,9 @@
 {
   "version": 1,
+  "svgExclusions": [
+    {"sourceId":"html:1/body:2/div[root]:3/div:1/div:1/div[sidebar-wrapper]:1/main[sidebar-inset]:2/div[content-area]:2/div:1/div:1/div:1/div:1/div:2/div:1/div:1/form:2/div[input-group]:1/div[input-group-addon]:2/div:1/div:2/button[base-ui-_r_43_]:1/svg:2","reason":"source SVG contains a non-SVG text glyph after its path; sibling text already carries the chevron"},
+    {"sourceId":"html:1/body:2/div[root]:3/div:1/div:1/div[sidebar-wrapper]:1/main[sidebar-inset]:2/div[content-area]:2/div:1/div:1/div:1/div:1/div:2/div:1/div:1/form:2/div[input-group]:1/div[input-group-addon]:2/div:1/div:2/button[base-ui-_r_49_]:6/svg:2","reason":"source SVG contains a non-SVG text glyph after its path; sibling text already carries the chevron"}
+  ],
   "rules": [
     {"id":"session-create","match":{"role":"button","textExact":"New Session"},"attributes":{"pulpRouteId":"session.create","pulpHostAction":"session.create","pulpHostActionLabel":"New Session","pulpEventContract":"click"}},
     {"id":"project-select","match":{"role":"button","textExact":"Add Project"},"attributes":{"pulpRouteId":"project.select","pulpHostAction":"project.select","pulpHostActionLabel":"Add Project","pulpEventContract":"click"}},
