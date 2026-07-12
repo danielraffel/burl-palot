@@ -1500,490 +1500,429 @@
         {
           "value": "0px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "supported",
+          "route": "computed CSS height plus observed border-box geometry -> typed nonnegative pixel height or auto -> NativeDesignIR fixed scalar or hug sizing mode -> validated IRStyle height/IRLayout height_mode -> native Dimension point/auto -> Yoga responsive layout and intrinsic measurement -> Skia pixels; invalid native IR fails closed",
+          "evidenceIds": ["semantic:observed-dom-height"]
         },
         {
           "value": "104px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "supported",
+          "route": "computed CSS height plus observed border-box geometry -> typed nonnegative pixel height or auto -> NativeDesignIR fixed scalar or hug sizing mode -> validated IRStyle height/IRLayout height_mode -> native Dimension point/auto -> Yoga responsive layout and intrinsic measurement -> Skia pixels; invalid native IR fails closed",
+          "evidenceIds": ["semantic:observed-dom-height"]
         },
         {
           "value": "105.5px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "supported",
+          "route": "computed CSS height plus observed border-box geometry -> typed nonnegative pixel height or auto -> NativeDesignIR fixed scalar or hug sizing mode -> validated IRStyle height/IRLayout height_mode -> native Dimension point/auto -> Yoga responsive layout and intrinsic measurement -> Skia pixels; invalid native IR fails closed",
+          "evidenceIds": ["semantic:observed-dom-height"]
         },
         {
           "value": "106px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "supported",
+          "route": "computed CSS height plus observed border-box geometry -> typed nonnegative pixel height or auto -> NativeDesignIR fixed scalar or hug sizing mode -> validated IRStyle height/IRLayout height_mode -> native Dimension point/auto -> Yoga responsive layout and intrinsic measurement -> Skia pixels; invalid native IR fails closed",
+          "evidenceIds": ["semantic:observed-dom-height"]
         },
         {
           "value": "107px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "supported",
+          "route": "computed CSS height plus observed border-box geometry -> typed nonnegative pixel height or auto -> NativeDesignIR fixed scalar or hug sizing mode -> validated IRStyle height/IRLayout height_mode -> native Dimension point/auto -> Yoga responsive layout and intrinsic measurement -> Skia pixels; invalid native IR fails closed",
+          "evidenceIds": ["semantic:observed-dom-height"]
         },
         {
           "value": "10px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "supported",
+          "route": "computed CSS height plus observed border-box geometry -> typed nonnegative pixel height or auto -> NativeDesignIR fixed scalar or hug sizing mode -> validated IRStyle height/IRLayout height_mode -> native Dimension point/auto -> Yoga responsive layout and intrinsic measurement -> Skia pixels; invalid native IR fails closed",
+          "evidenceIds": ["semantic:observed-dom-height"]
         },
         {
           "value": "112px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "supported",
+          "route": "computed CSS height plus observed border-box geometry -> typed nonnegative pixel height or auto -> NativeDesignIR fixed scalar or hug sizing mode -> validated IRStyle height/IRLayout height_mode -> native Dimension point/auto -> Yoga responsive layout and intrinsic measurement -> Skia pixels; invalid native IR fails closed",
+          "evidenceIds": ["semantic:observed-dom-height"]
         },
         {
           "value": "116px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "supported",
+          "route": "computed CSS height plus observed border-box geometry -> typed nonnegative pixel height or auto -> NativeDesignIR fixed scalar or hug sizing mode -> validated IRStyle height/IRLayout height_mode -> native Dimension point/auto -> Yoga responsive layout and intrinsic measurement -> Skia pixels; invalid native IR fails closed",
+          "evidenceIds": ["semantic:observed-dom-height"]
         },
         {
           "value": "118px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "supported",
+          "route": "computed CSS height plus observed border-box geometry -> typed nonnegative pixel height or auto -> NativeDesignIR fixed scalar or hug sizing mode -> validated IRStyle height/IRLayout height_mode -> native Dimension point/auto -> Yoga responsive layout and intrinsic measurement -> Skia pixels; invalid native IR fails closed",
+          "evidenceIds": ["semantic:observed-dom-height"]
         },
         {
           "value": "11px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "supported",
+          "route": "computed CSS height plus observed border-box geometry -> typed nonnegative pixel height or auto -> NativeDesignIR fixed scalar or hug sizing mode -> validated IRStyle height/IRLayout height_mode -> native Dimension point/auto -> Yoga responsive layout and intrinsic measurement -> Skia pixels; invalid native IR fails closed",
+          "evidenceIds": ["semantic:observed-dom-height"]
         },
         {
           "value": "12px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "supported",
+          "route": "computed CSS height plus observed border-box geometry -> typed nonnegative pixel height or auto -> NativeDesignIR fixed scalar or hug sizing mode -> validated IRStyle height/IRLayout height_mode -> native Dimension point/auto -> Yoga responsive layout and intrinsic measurement -> Skia pixels; invalid native IR fails closed",
+          "evidenceIds": ["semantic:observed-dom-height"]
         },
         {
           "value": "13.75px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "supported",
+          "route": "computed CSS height plus observed border-box geometry -> typed nonnegative pixel height or auto -> NativeDesignIR fixed scalar or hug sizing mode -> validated IRStyle height/IRLayout height_mode -> native Dimension point/auto -> Yoga responsive layout and intrinsic measurement -> Skia pixels; invalid native IR fails closed",
+          "evidenceIds": ["semantic:observed-dom-height"]
         },
         {
           "value": "136.5px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "supported",
+          "route": "computed CSS height plus observed border-box geometry -> typed nonnegative pixel height or auto -> NativeDesignIR fixed scalar or hug sizing mode -> validated IRStyle height/IRLayout height_mode -> native Dimension point/auto -> Yoga responsive layout and intrinsic measurement -> Skia pixels; invalid native IR fails closed",
+          "evidenceIds": ["semantic:observed-dom-height"]
         },
         {
           "value": "13px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "supported",
+          "route": "computed CSS height plus observed border-box geometry -> typed nonnegative pixel height or auto -> NativeDesignIR fixed scalar or hug sizing mode -> validated IRStyle height/IRLayout height_mode -> native Dimension point/auto -> Yoga responsive layout and intrinsic measurement -> Skia pixels; invalid native IR fails closed",
+          "evidenceIds": ["semantic:observed-dom-height"]
         },
         {
           "value": "140px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "supported",
+          "route": "computed CSS height plus observed border-box geometry -> typed nonnegative pixel height or auto -> NativeDesignIR fixed scalar or hug sizing mode -> validated IRStyle height/IRLayout height_mode -> native Dimension point/auto -> Yoga responsive layout and intrinsic measurement -> Skia pixels; invalid native IR fails closed",
+          "evidenceIds": ["semantic:observed-dom-height"]
         },
         {
           "value": "14px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "supported",
+          "route": "computed CSS height plus observed border-box geometry -> typed nonnegative pixel height or auto -> NativeDesignIR fixed scalar or hug sizing mode -> validated IRStyle height/IRLayout height_mode -> native Dimension point/auto -> Yoga responsive layout and intrinsic measurement -> Skia pixels; invalid native IR fails closed",
+          "evidenceIds": ["semantic:observed-dom-height"]
         },
         {
           "value": "152px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "supported",
+          "route": "computed CSS height plus observed border-box geometry -> typed nonnegative pixel height or auto -> NativeDesignIR fixed scalar or hug sizing mode -> validated IRStyle height/IRLayout height_mode -> native Dimension point/auto -> Yoga responsive layout and intrinsic measurement -> Skia pixels; invalid native IR fails closed",
+          "evidenceIds": ["semantic:observed-dom-height"]
         },
         {
           "value": "15px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "supported",
+          "route": "computed CSS height plus observed border-box geometry -> typed nonnegative pixel height or auto -> NativeDesignIR fixed scalar or hug sizing mode -> validated IRStyle height/IRLayout height_mode -> native Dimension point/auto -> Yoga responsive layout and intrinsic measurement -> Skia pixels; invalid native IR fails closed",
+          "evidenceIds": ["semantic:observed-dom-height"]
         },
         {
           "value": "16.25px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "supported",
+          "route": "computed CSS height plus observed border-box geometry -> typed nonnegative pixel height or auto -> NativeDesignIR fixed scalar or hug sizing mode -> validated IRStyle height/IRLayout height_mode -> native Dimension point/auto -> Yoga responsive layout and intrinsic measurement -> Skia pixels; invalid native IR fails closed",
+          "evidenceIds": ["semantic:observed-dom-height"]
         },
         {
           "value": "16.5px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "supported",
+          "route": "computed CSS height plus observed border-box geometry -> typed nonnegative pixel height or auto -> NativeDesignIR fixed scalar or hug sizing mode -> validated IRStyle height/IRLayout height_mode -> native Dimension point/auto -> Yoga responsive layout and intrinsic measurement -> Skia pixels; invalid native IR fails closed",
+          "evidenceIds": ["semantic:observed-dom-height"]
         },
         {
           "value": "160.5px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "supported",
+          "route": "computed CSS height plus observed border-box geometry -> typed nonnegative pixel height or auto -> NativeDesignIR fixed scalar or hug sizing mode -> validated IRStyle height/IRLayout height_mode -> native Dimension point/auto -> Yoga responsive layout and intrinsic measurement -> Skia pixels; invalid native IR fails closed",
+          "evidenceIds": ["semantic:observed-dom-height"]
         },
         {
           "value": "16px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "supported",
+          "route": "computed CSS height plus observed border-box geometry -> typed nonnegative pixel height or auto -> NativeDesignIR fixed scalar or hug sizing mode -> validated IRStyle height/IRLayout height_mode -> native Dimension point/auto -> Yoga responsive layout and intrinsic measurement -> Skia pixels; invalid native IR fails closed",
+          "evidenceIds": ["semantic:observed-dom-height"]
         },
         {
           "value": "182px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "supported",
+          "route": "computed CSS height plus observed border-box geometry -> typed nonnegative pixel height or auto -> NativeDesignIR fixed scalar or hug sizing mode -> validated IRStyle height/IRLayout height_mode -> native Dimension point/auto -> Yoga responsive layout and intrinsic measurement -> Skia pixels; invalid native IR fails closed",
+          "evidenceIds": ["semantic:observed-dom-height"]
         },
         {
           "value": "186px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "supported",
+          "route": "computed CSS height plus observed border-box geometry -> typed nonnegative pixel height or auto -> NativeDesignIR fixed scalar or hug sizing mode -> validated IRStyle height/IRLayout height_mode -> native Dimension point/auto -> Yoga responsive layout and intrinsic measurement -> Skia pixels; invalid native IR fails closed",
+          "evidenceIds": ["semantic:observed-dom-height"]
         },
         {
           "value": "188px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "supported",
+          "route": "computed CSS height plus observed border-box geometry -> typed nonnegative pixel height or auto -> NativeDesignIR fixed scalar or hug sizing mode -> validated IRStyle height/IRLayout height_mode -> native Dimension point/auto -> Yoga responsive layout and intrinsic measurement -> Skia pixels; invalid native IR fails closed",
+          "evidenceIds": ["semantic:observed-dom-height"]
         },
         {
           "value": "18px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "supported",
+          "route": "computed CSS height plus observed border-box geometry -> typed nonnegative pixel height or auto -> NativeDesignIR fixed scalar or hug sizing mode -> validated IRStyle height/IRLayout height_mode -> native Dimension point/auto -> Yoga responsive layout and intrinsic measurement -> Skia pixels; invalid native IR fails closed",
+          "evidenceIds": ["semantic:observed-dom-height"]
         },
         {
           "value": "1px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "supported",
+          "route": "computed CSS height plus observed border-box geometry -> typed nonnegative pixel height or auto -> NativeDesignIR fixed scalar or hug sizing mode -> validated IRStyle height/IRLayout height_mode -> native Dimension point/auto -> Yoga responsive layout and intrinsic measurement -> Skia pixels; invalid native IR fails closed",
+          "evidenceIds": ["semantic:observed-dom-height"]
         },
         {
           "value": "20px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "supported",
+          "route": "computed CSS height plus observed border-box geometry -> typed nonnegative pixel height or auto -> NativeDesignIR fixed scalar or hug sizing mode -> validated IRStyle height/IRLayout height_mode -> native Dimension point/auto -> Yoga responsive layout and intrinsic measurement -> Skia pixels; invalid native IR fails closed",
+          "evidenceIds": ["semantic:observed-dom-height"]
         },
         {
           "value": "22.5px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "supported",
+          "route": "computed CSS height plus observed border-box geometry -> typed nonnegative pixel height or auto -> NativeDesignIR fixed scalar or hug sizing mode -> validated IRStyle height/IRLayout height_mode -> native Dimension point/auto -> Yoga responsive layout and intrinsic measurement -> Skia pixels; invalid native IR fails closed",
+          "evidenceIds": ["semantic:observed-dom-height"]
         },
         {
           "value": "224px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "supported",
+          "route": "computed CSS height plus observed border-box geometry -> typed nonnegative pixel height or auto -> NativeDesignIR fixed scalar or hug sizing mode -> validated IRStyle height/IRLayout height_mode -> native Dimension point/auto -> Yoga responsive layout and intrinsic measurement -> Skia pixels; invalid native IR fails closed",
+          "evidenceIds": ["semantic:observed-dom-height"]
         },
         {
           "value": "22px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "supported",
+          "route": "computed CSS height plus observed border-box geometry -> typed nonnegative pixel height or auto -> NativeDesignIR fixed scalar or hug sizing mode -> validated IRStyle height/IRLayout height_mode -> native Dimension point/auto -> Yoga responsive layout and intrinsic measurement -> Skia pixels; invalid native IR fails closed",
+          "evidenceIds": ["semantic:observed-dom-height"]
         },
         {
           "value": "24.5px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "supported",
+          "route": "computed CSS height plus observed border-box geometry -> typed nonnegative pixel height or auto -> NativeDesignIR fixed scalar or hug sizing mode -> validated IRStyle height/IRLayout height_mode -> native Dimension point/auto -> Yoga responsive layout and intrinsic measurement -> Skia pixels; invalid native IR fails closed",
+          "evidenceIds": ["semantic:observed-dom-height"]
         },
         {
           "value": "248.5px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "supported",
+          "route": "computed CSS height plus observed border-box geometry -> typed nonnegative pixel height or auto -> NativeDesignIR fixed scalar or hug sizing mode -> validated IRStyle height/IRLayout height_mode -> native Dimension point/auto -> Yoga responsive layout and intrinsic measurement -> Skia pixels; invalid native IR fails closed",
+          "evidenceIds": ["semantic:observed-dom-height"]
         },
         {
           "value": "24px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "supported",
+          "route": "computed CSS height plus observed border-box geometry -> typed nonnegative pixel height or auto -> NativeDesignIR fixed scalar or hug sizing mode -> validated IRStyle height/IRLayout height_mode -> native Dimension point/auto -> Yoga responsive layout and intrinsic measurement -> Skia pixels; invalid native IR fails closed",
+          "evidenceIds": ["semantic:observed-dom-height"]
         },
         {
           "value": "26px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "supported",
+          "route": "computed CSS height plus observed border-box geometry -> typed nonnegative pixel height or auto -> NativeDesignIR fixed scalar or hug sizing mode -> validated IRStyle height/IRLayout height_mode -> native Dimension point/auto -> Yoga responsive layout and intrinsic measurement -> Skia pixels; invalid native IR fails closed",
+          "evidenceIds": ["semantic:observed-dom-height"]
         },
         {
           "value": "28px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "supported",
+          "route": "computed CSS height plus observed border-box geometry -> typed nonnegative pixel height or auto -> NativeDesignIR fixed scalar or hug sizing mode -> validated IRStyle height/IRLayout height_mode -> native Dimension point/auto -> Yoga responsive layout and intrinsic measurement -> Skia pixels; invalid native IR fails closed",
+          "evidenceIds": ["semantic:observed-dom-height"]
         },
         {
           "value": "30px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "supported",
+          "route": "computed CSS height plus observed border-box geometry -> typed nonnegative pixel height or auto -> NativeDesignIR fixed scalar or hug sizing mode -> validated IRStyle height/IRLayout height_mode -> native Dimension point/auto -> Yoga responsive layout and intrinsic measurement -> Skia pixels; invalid native IR fails closed",
+          "evidenceIds": ["semantic:observed-dom-height"]
         },
         {
           "value": "32px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "supported",
+          "route": "computed CSS height plus observed border-box geometry -> typed nonnegative pixel height or auto -> NativeDesignIR fixed scalar or hug sizing mode -> validated IRStyle height/IRLayout height_mode -> native Dimension point/auto -> Yoga responsive layout and intrinsic measurement -> Skia pixels; invalid native IR fails closed",
+          "evidenceIds": ["semantic:observed-dom-height"]
         },
         {
           "value": "39px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "supported",
+          "route": "computed CSS height plus observed border-box geometry -> typed nonnegative pixel height or auto -> NativeDesignIR fixed scalar or hug sizing mode -> validated IRStyle height/IRLayout height_mode -> native Dimension point/auto -> Yoga responsive layout and intrinsic measurement -> Skia pixels; invalid native IR fails closed",
+          "evidenceIds": ["semantic:observed-dom-height"]
         },
         {
           "value": "413px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "supported",
+          "route": "computed CSS height plus observed border-box geometry -> typed nonnegative pixel height or auto -> NativeDesignIR fixed scalar or hug sizing mode -> validated IRStyle height/IRLayout height_mode -> native Dimension point/auto -> Yoga responsive layout and intrinsic measurement -> Skia pixels; invalid native IR fails closed",
+          "evidenceIds": ["semantic:observed-dom-height"]
         },
         {
           "value": "44.5px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "supported",
+          "route": "computed CSS height plus observed border-box geometry -> typed nonnegative pixel height or auto -> NativeDesignIR fixed scalar or hug sizing mode -> validated IRStyle height/IRLayout height_mode -> native Dimension point/auto -> Yoga responsive layout and intrinsic measurement -> Skia pixels; invalid native IR fails closed",
+          "evidenceIds": ["semantic:observed-dom-height"]
         },
         {
           "value": "44px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "supported",
+          "route": "computed CSS height plus observed border-box geometry -> typed nonnegative pixel height or auto -> NativeDesignIR fixed scalar or hug sizing mode -> validated IRStyle height/IRLayout height_mode -> native Dimension point/auto -> Yoga responsive layout and intrinsic measurement -> Skia pixels; invalid native IR fails closed",
+          "evidenceIds": ["semantic:observed-dom-height"]
         },
         {
           "value": "45px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "supported",
+          "route": "computed CSS height plus observed border-box geometry -> typed nonnegative pixel height or auto -> NativeDesignIR fixed scalar or hug sizing mode -> validated IRStyle height/IRLayout height_mode -> native Dimension point/auto -> Yoga responsive layout and intrinsic measurement -> Skia pixels; invalid native IR fails closed",
+          "evidenceIds": ["semantic:observed-dom-height"]
         },
         {
           "value": "46px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "supported",
+          "route": "computed CSS height plus observed border-box geometry -> typed nonnegative pixel height or auto -> NativeDesignIR fixed scalar or hug sizing mode -> validated IRStyle height/IRLayout height_mode -> native Dimension point/auto -> Yoga responsive layout and intrinsic measurement -> Skia pixels; invalid native IR fails closed",
+          "evidenceIds": ["semantic:observed-dom-height"]
         },
         {
           "value": "52.5px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "supported",
+          "route": "computed CSS height plus observed border-box geometry -> typed nonnegative pixel height or auto -> NativeDesignIR fixed scalar or hug sizing mode -> validated IRStyle height/IRLayout height_mode -> native Dimension point/auto -> Yoga responsive layout and intrinsic measurement -> Skia pixels; invalid native IR fails closed",
+          "evidenceIds": ["semantic:observed-dom-height"]
         },
         {
           "value": "53px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "supported",
+          "route": "computed CSS height plus observed border-box geometry -> typed nonnegative pixel height or auto -> NativeDesignIR fixed scalar or hug sizing mode -> validated IRStyle height/IRLayout height_mode -> native Dimension point/auto -> Yoga responsive layout and intrinsic measurement -> Skia pixels; invalid native IR fails closed",
+          "evidenceIds": ["semantic:observed-dom-height"]
         },
         {
           "value": "56px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "supported",
+          "route": "computed CSS height plus observed border-box geometry -> typed nonnegative pixel height or auto -> NativeDesignIR fixed scalar or hug sizing mode -> validated IRStyle height/IRLayout height_mode -> native Dimension point/auto -> Yoga responsive layout and intrinsic measurement -> Skia pixels; invalid native IR fails closed",
+          "evidenceIds": ["semantic:observed-dom-height"]
         },
         {
           "value": "581.5px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "supported",
+          "route": "computed CSS height plus observed border-box geometry -> typed nonnegative pixel height or auto -> NativeDesignIR fixed scalar or hug sizing mode -> validated IRStyle height/IRLayout height_mode -> native Dimension point/auto -> Yoga responsive layout and intrinsic measurement -> Skia pixels; invalid native IR fails closed",
+          "evidenceIds": ["semantic:observed-dom-height"]
         },
         {
           "value": "593px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "supported",
+          "route": "computed CSS height plus observed border-box geometry -> typed nonnegative pixel height or auto -> NativeDesignIR fixed scalar or hug sizing mode -> validated IRStyle height/IRLayout height_mode -> native Dimension point/auto -> Yoga responsive layout and intrinsic measurement -> Skia pixels; invalid native IR fails closed",
+          "evidenceIds": ["semantic:observed-dom-height"]
         },
         {
           "value": "596px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "supported",
+          "route": "computed CSS height plus observed border-box geometry -> typed nonnegative pixel height or auto -> NativeDesignIR fixed scalar or hug sizing mode -> validated IRStyle height/IRLayout height_mode -> native Dimension point/auto -> Yoga responsive layout and intrinsic measurement -> Skia pixels; invalid native IR fails closed",
+          "evidenceIds": ["semantic:observed-dom-height"]
         },
         {
           "value": "641px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "supported",
+          "route": "computed CSS height plus observed border-box geometry -> typed nonnegative pixel height or auto -> NativeDesignIR fixed scalar or hug sizing mode -> validated IRStyle height/IRLayout height_mode -> native Dimension point/auto -> Yoga responsive layout and intrinsic measurement -> Skia pixels; invalid native IR fails closed",
+          "evidenceIds": ["semantic:observed-dom-height"]
         },
         {
           "value": "64px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "supported",
+          "route": "computed CSS height plus observed border-box geometry -> typed nonnegative pixel height or auto -> NativeDesignIR fixed scalar or hug sizing mode -> validated IRStyle height/IRLayout height_mode -> native Dimension point/auto -> Yoga responsive layout and intrinsic measurement -> Skia pixels; invalid native IR fails closed",
+          "evidenceIds": ["semantic:observed-dom-height"]
         },
         {
           "value": "666px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "supported",
+          "route": "computed CSS height plus observed border-box geometry -> typed nonnegative pixel height or auto -> NativeDesignIR fixed scalar or hug sizing mode -> validated IRStyle height/IRLayout height_mode -> native Dimension point/auto -> Yoga responsive layout and intrinsic measurement -> Skia pixels; invalid native IR fails closed",
+          "evidenceIds": ["semantic:observed-dom-height"]
         },
         {
           "value": "68px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "supported",
+          "route": "computed CSS height plus observed border-box geometry -> typed nonnegative pixel height or auto -> NativeDesignIR fixed scalar or hug sizing mode -> validated IRStyle height/IRLayout height_mode -> native Dimension point/auto -> Yoga responsive layout and intrinsic measurement -> Skia pixels; invalid native IR fails closed",
+          "evidenceIds": ["semantic:observed-dom-height"]
         },
         {
           "value": "742px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "supported",
+          "route": "computed CSS height plus observed border-box geometry -> typed nonnegative pixel height or auto -> NativeDesignIR fixed scalar or hug sizing mode -> validated IRStyle height/IRLayout height_mode -> native Dimension point/auto -> Yoga responsive layout and intrinsic measurement -> Skia pixels; invalid native IR fails closed",
+          "evidenceIds": ["semantic:observed-dom-height"]
         },
         {
           "value": "788px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "supported",
+          "route": "computed CSS height plus observed border-box geometry -> typed nonnegative pixel height or auto -> NativeDesignIR fixed scalar or hug sizing mode -> validated IRStyle height/IRLayout height_mode -> native Dimension point/auto -> Yoga responsive layout and intrinsic measurement -> Skia pixels; invalid native IR fails closed",
+          "evidenceIds": ["semantic:observed-dom-height"]
         },
         {
           "value": "800px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "supported",
+          "route": "computed CSS height plus observed border-box geometry -> typed nonnegative pixel height or auto -> NativeDesignIR fixed scalar or hug sizing mode -> validated IRStyle height/IRLayout height_mode -> native Dimension point/auto -> Yoga responsive layout and intrinsic measurement -> Skia pixels; invalid native IR fails closed",
+          "evidenceIds": ["semantic:observed-dom-height"]
         },
         {
           "value": "84px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "supported",
+          "route": "computed CSS height plus observed border-box geometry -> typed nonnegative pixel height or auto -> NativeDesignIR fixed scalar or hug sizing mode -> validated IRStyle height/IRLayout height_mode -> native Dimension point/auto -> Yoga responsive layout and intrinsic measurement -> Skia pixels; invalid native IR fails closed",
+          "evidenceIds": ["semantic:observed-dom-height"]
         },
         {
           "value": "88px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "supported",
+          "route": "computed CSS height plus observed border-box geometry -> typed nonnegative pixel height or auto -> NativeDesignIR fixed scalar or hug sizing mode -> validated IRStyle height/IRLayout height_mode -> native Dimension point/auto -> Yoga responsive layout and intrinsic measurement -> Skia pixels; invalid native IR fails closed",
+          "evidenceIds": ["semantic:observed-dom-height"]
         },
         {
           "value": "8px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "supported",
+          "route": "computed CSS height plus observed border-box geometry -> typed nonnegative pixel height or auto -> NativeDesignIR fixed scalar or hug sizing mode -> validated IRStyle height/IRLayout height_mode -> native Dimension point/auto -> Yoga responsive layout and intrinsic measurement -> Skia pixels; invalid native IR fails closed",
+          "evidenceIds": ["semantic:observed-dom-height"]
         },
         {
           "value": "auto",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed CSS height plus observed border-box geometry -> typed nonnegative pixel height or auto -> NativeDesignIR fixed scalar or hug sizing mode -> validated IRStyle height/IRLayout height_mode -> native Dimension point/auto -> Yoga responsive layout and intrinsic measurement -> Skia pixels; invalid native IR fails closed",
+          "evidenceIds": ["semantic:observed-dom-height"]
         }
       ]
     },
