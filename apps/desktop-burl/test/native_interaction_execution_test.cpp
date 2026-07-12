@@ -2,6 +2,7 @@
 
 #include <pulp/view/buttons.hpp>
 #include <pulp/view/pointer_dispatch.hpp>
+#include <pulp/canvas/canvas.hpp>
 
 #include <algorithm>
 #include <cstdlib>
@@ -113,6 +114,22 @@ int main(int argc, char** argv) {
 	for (const auto* id : {"project.open", "project.select", "prompt.cancel", "session.create", "session.open"})
 		if (exercised[id] == 0) { std::cerr << "unexercised=" << id << '\n'; return 11; }
 	if (payloads["project.open"] != std::filesystem::current_path().string()) return 12;
+	pulp::canvas::RecordingCanvas canvas;
+	host.paint_all(canvas);
+	bool painted_project = false;
+	bool opaque_project_foreground = false;
+	pulp::canvas::Color current_fill;
+	for (const auto& command : canvas.commands()) {
+		if (command.type == pulp::canvas::DrawCommand::Type::set_fill_color) {
+			current_fill = command.color;
+		}
+		if (command.type == pulp::canvas::DrawCommand::Type::fill_text &&
+		    command.text.find("project") != std::string::npos) {
+			painted_project = true;
+			opaque_project_foreground = current_fill.a > 0.0f;
+		}
+	}
+	if (!painted_project || !opaque_project_foreground) return 13;
 	std::cout << "native interaction union: anchors, pointer down/up, endpoint, focus, keyboard, disabled, overlay and fail-closed diagnostics pass\n";
 	return EXIT_SUCCESS;
 }
