@@ -2546,34 +2546,30 @@
         {
           "value": "auto",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed CSS overflow-x/overflow-y visible, hidden, clip, auto, or scroll -> independently validated TypedLayout keywords -> NativeDesignIR overflowX/overflowY -> validated IRLayout -> View OverflowAxis x/y contract with explicit scroll-container ownership -> axis-specific paint clip and descendant hit-test bounds -> Skia pixels; Yoga receives a derived measurement hint only and unsupported values fail closed",
+          "evidenceIds": ["semantic:observed-dom-overflow-axis"]
         },
         {
           "value": "clip",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed CSS overflow-x/overflow-y visible, hidden, clip, auto, or scroll -> independently validated TypedLayout keywords -> NativeDesignIR overflowX/overflowY -> validated IRLayout -> View OverflowAxis x/y contract with explicit scroll-container ownership -> axis-specific paint clip and descendant hit-test bounds -> Skia pixels; Yoga receives a derived measurement hint only and unsupported values fail closed",
+          "evidenceIds": ["semantic:observed-dom-overflow-axis"]
         },
         {
           "value": "hidden",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed CSS overflow-x/overflow-y visible, hidden, clip, auto, or scroll -> independently validated TypedLayout keywords -> NativeDesignIR overflowX/overflowY -> validated IRLayout -> View OverflowAxis x/y contract with explicit scroll-container ownership -> axis-specific paint clip and descendant hit-test bounds -> Skia pixels; Yoga receives a derived measurement hint only and unsupported values fail closed",
+          "evidenceIds": ["semantic:observed-dom-overflow-axis"]
         },
         {
           "value": "visible",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed CSS overflow-x/overflow-y visible, hidden, clip, auto, or scroll -> independently validated TypedLayout keywords -> NativeDesignIR overflowX/overflowY -> validated IRLayout -> View OverflowAxis x/y contract with explicit scroll-container ownership -> axis-specific paint clip and descendant hit-test bounds -> Skia pixels; Yoga receives a derived measurement hint only and unsupported values fail closed",
+          "evidenceIds": ["semantic:observed-dom-overflow-axis"]
         }
       ]
     },
@@ -2583,34 +2579,30 @@
         {
           "value": "auto",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed CSS overflow-x/overflow-y visible, hidden, clip, auto, or scroll -> independently validated TypedLayout keywords -> NativeDesignIR overflowX/overflowY -> validated IRLayout -> View OverflowAxis x/y contract with explicit scroll-container ownership -> axis-specific paint clip and descendant hit-test bounds -> Skia pixels; Yoga receives a derived measurement hint only and unsupported values fail closed",
+          "evidenceIds": ["semantic:observed-dom-overflow-axis"]
         },
         {
           "value": "clip",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed CSS overflow-x/overflow-y visible, hidden, clip, auto, or scroll -> independently validated TypedLayout keywords -> NativeDesignIR overflowX/overflowY -> validated IRLayout -> View OverflowAxis x/y contract with explicit scroll-container ownership -> axis-specific paint clip and descendant hit-test bounds -> Skia pixels; Yoga receives a derived measurement hint only and unsupported values fail closed",
+          "evidenceIds": ["semantic:observed-dom-overflow-axis"]
         },
         {
           "value": "hidden",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed CSS overflow-x/overflow-y visible, hidden, clip, auto, or scroll -> independently validated TypedLayout keywords -> NativeDesignIR overflowX/overflowY -> validated IRLayout -> View OverflowAxis x/y contract with explicit scroll-container ownership -> axis-specific paint clip and descendant hit-test bounds -> Skia pixels; Yoga receives a derived measurement hint only and unsupported values fail closed",
+          "evidenceIds": ["semantic:observed-dom-overflow-axis"]
         },
         {
           "value": "visible",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed CSS overflow-x/overflow-y visible, hidden, clip, auto, or scroll -> independently validated TypedLayout keywords -> NativeDesignIR overflowX/overflowY -> validated IRLayout -> View OverflowAxis x/y contract with explicit scroll-container ownership -> axis-specific paint clip and descendant hit-test bounds -> Skia pixels; Yoga receives a derived measurement hint only and unsupported values fail closed",
+          "evidenceIds": ["semantic:observed-dom-overflow-axis"]
         }
       ]
     },
