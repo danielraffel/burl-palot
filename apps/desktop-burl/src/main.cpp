@@ -28,15 +28,19 @@ int main(int argc, char** argv) {
 	std::string demo_prompt;
 	std::string demo_capture;
 	bool visual_parity_fixture = false;
+	float window_width = 1200.0f;
+	float window_height = 800.0f;
 	for (int index = 1; index < argc; ++index) {
 		const std::string_view argument(argv[index]);
 		if (argument == "--demo-project" && index + 1 < argc) demo_project = argv[++index];
 		else if (argument == "--demo-prompt" && index + 1 < argc) demo_prompt = argv[++index];
 		else if (argument == "--demo-capture" && index + 1 < argc) demo_capture = argv[++index];
 		else if (argument == "--visual-parity-fixture") visual_parity_fixture = true;
+		else if (argument == "--window-width" && index + 1 < argc) window_width = std::stof(argv[++index]);
+		else if (argument == "--window-height" && index + 1 < argc) window_height = std::stof(argv[++index]);
 	}
 	PalotView root;
-	root.set_bounds({0.0f, 0.0f, 1200.0f, 800.0f});
+	root.set_bounds({0.0f, 0.0f, window_width, window_height});
 	root.layout_children();
 	if (argc == 2 && std::string_view(argv[1]) == "--accessibility-dump") {
 		const auto nodes = pulp::view::snapshot_accessibility_tree(root);
@@ -61,9 +65,9 @@ int main(int argc, char** argv) {
 	}
 	pulp::view::WindowOptions options;
 	options.title = BURL_APP_NAME;
-	options.width = 1200.0f;
-	options.height = 800.0f;
-	options.min_width = 760.0f;
+	options.width = window_width;
+	options.height = window_height;
+	options.min_width = 280.0f;
 	options.min_height = 520.0f;
 	options.use_gpu = true;
 
