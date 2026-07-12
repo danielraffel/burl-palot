@@ -1,6 +1,7 @@
 #pragma once
 
 #include "opencode_process.hpp"
+#include "imported_root_host.hpp"
 
 #include <pulp/view/buttons.hpp>
 #include <pulp/view/text_editor.hpp>
@@ -20,6 +21,8 @@ public:
 	void layout_children() override;
 	void start_demo(std::string project, std::string prompt);
 	void load_visual_parity_fixture();
+	[[nodiscard]] bool source_observed_primary_tree() const noexcept;
+	[[nodiscard]] const std::vector<std::string>& unattached_required_actions() const noexcept;
 	std::function<void()> on_demo_complete;
 private:
 	class UiEventSink;
@@ -52,4 +55,5 @@ private:
 	std::string last_request_id_;
 	std::string configuration_error_;
 	bool create_session_ = true;
+	ImportedRootHost* imported_root_ = nullptr;
 };

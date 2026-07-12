@@ -199,10 +199,33 @@ private:
 PalotView::PalotView() {
 	event_sink_ = std::make_shared<UiEventSink>(this);
 	set_access_label("Palot chat workspace");
-	auto workspace = std::make_unique<pulp::view::View>();
-	workspace->set_access_role(AccessRole::group);
-	workspace->set_access_label("Palot chat workspace");
-	add_child(std::move(workspace));
+	auto imported_root = std::make_unique<ImportedRootHost>();
+	imported_root->register_action("composer.copy", [this](std::string_view) {
+		if (transcript_ && transcript_->child_count() != 0) request_repaint();
+	});
+	imported_root->register_action("project.select", [this](std::string_view) { choose_project_folder(); });
+	imported_root->register_action("prompt.cancel", [this](std::string_view) {
+		process_.cancel();
+		status_ = "Cancelling…";
+		request_repaint();
+	});
+	imported_root->register_action("prompt.retry", [this](std::string_view) {
+		if (!last_prompt_.empty()) send_prompt(last_prompt_, true);
+	});
+	imported_root->register_action("prompt.send", [this](std::string_view) {
+		if (composer_ && !composer_->text().empty()) send_prompt(composer_->text());
+	});
+	imported_root->register_action("session.create", [this](std::string_view) {
+		create_session_ = true;
+		if (session_editor_) session_editor_->set_text("");
+	});
+	imported_root->register_action("session.open", [this](std::string_view) {
+		create_session_ = false;
+	});
+	imported_root->load(palot_bundle_resource("import/main-chat.observed.design-ir.v1.json"),
+	                   palot_bundle_resource("contracts/main-chat.application-bindings.v1.json"));
+	imported_root_ = imported_root.get();
+	add_child(std::move(imported_root));
 	auto project = std::make_unique<pulp::view::TextEditor>();
 	project->placeholder = "Project folder";
 	project->set_access_role(AccessRole::group);
@@ -340,11 +363,22 @@ PalotView::~PalotView() {
 	persist();
 }
 
+bool PalotView::source_observed_primary_tree() const noexcept {
+	return imported_root_ && imported_root_->source_observed_primary_tree();
+}
+
+const std::vector<std::string>& PalotView::unattached_required_actions() const noexcept {
+	static const std::vector<std::string> empty;
+	return imported_root_ ? imported_root_->unattached_required_actions() : empty;
+}
+
 void PalotView::layout_children() {
 	const auto b = local_bounds();
+	imported_root_->set_bounds(b);
+	imported_root_->layout_children();
 	const float sidebar_width = b.width < 700.0f ? 0.0f : kSidebarWidth;
 	project_->set_visible(false);
-	const bool sidebar_visible = sidebar_width > 0.0f;
+	const bool sidebar_visible = false;
 	new_session_->set_visible(sidebar_visible);
 	open_session_->set_visible(sidebar_visible);
 	choose_project_->set_visible(sidebar_visible);
@@ -359,8 +393,12 @@ void PalotView::layout_children() {
 		(b.width - sidebar_width - content_width) * 0.5f);
 	const float composer_y = b.height - kComposerHeight - 53.0f;
 	composer_->set_bounds({content_x, composer_y, std::max(0.0f, content_width), kComposerHeight});
-	provider_->set_visible(true);
-	model_->set_visible(true);
+	provider_->set_visible(false);
+	model_->set_visible(false);
+	composer_->set_visible(false);
+	send_->set_visible(false);
+	cancel_->set_visible(false);
+	transcript_->set_visible(false);
 	if (sidebar_visible) {
 		provider_->set_bounds({16.0f, 620.0f, 112.0f, 24.0f});
 		model_->set_bounds({16.0f, 650.0f, 190.0f, 24.0f});
@@ -409,73 +447,7 @@ void PalotView::load_visual_parity_fixture() {
 }
 
 void PalotView::paint(pulp::canvas::Canvas& canvas) {
-	const auto b = local_bounds();
-	const float sidebar_width = b.width < 700.0f ? 0.0f : kSidebarWidth;
-	canvas.set_fill_color(pulp::canvas::Color::rgba8(20, 20, 20));
-	canvas.fill_rect(0, 0, b.width, b.height);
-	if (sidebar_width > 0.0f) {
-		canvas.set_fill_color(pulp::canvas::Color::rgba8(13, 13, 13));
-		canvas.fill_rect(0, 0, sidebar_width, b.height);
-	}
-	canvas.set_fill_color(pulp::canvas::Color::rgba8(10, 10, 10));
-	canvas.fill_rect(sidebar_width, 0, b.width - sidebar_width, kAppBarHeight);
-	if (sidebar_width > 0.0f) {
-	canvas.set_fill_color(pulp::canvas::Color::rgba8(255, 80, 86));
-	canvas.fill_circle(22.0f, 18.0f, 7.0f);
-	canvas.set_fill_color(pulp::canvas::Color::rgba8(255, 189, 46));
-	canvas.fill_circle(45.0f, 18.0f, 7.0f);
-	canvas.set_fill_color(pulp::canvas::Color::rgba8(39, 201, 63));
-	canvas.fill_circle(68.0f, 18.0f, 7.0f);
-	canvas.set_fill_color(pulp::canvas::Color::rgba8(205, 205, 205));
-	canvas.set_font("Inter", 13.0f);
-	canvas.fill_text("▣     +", 99.0f, 25.0f);
-	}
-	canvas.set_fill_color(pulp::canvas::Color::rgba8(237, 237, 237));
-	canvas.set_font("Inter", 13.0f);
-	canvas.fill_text("palot.", sidebar_width + 16.0f, 29.0f);
-	canvas.set_fill_color(pulp::canvas::Color::rgba8(166, 166, 166));
-	canvas.fill_text("|   palot  /", sidebar_width + 66.0f, 29.0f);
-	canvas.set_fill_color(pulp::canvas::Color::rgba8(237, 237, 237));
-	canvas.fill_text("Add dark mode toggle to settings", sidebar_width + 142.0f, 29.0f);
-	canvas.set_fill_color(pulp::canvas::Color::rgba8(120, 120, 120));
-	canvas.set_font("Inter", 12.0f);
-	if (b.width > 900.0f)
-		canvas.fill_text("+58  -2     ◷ 13m 30s  ·  ◉ $0.02  ·  ▥     Open⌄     >_     ×",
-		                 std::max(sidebar_width + 330.0f, b.width - 430.0f), 28.0f);
-	if (sidebar_width > 0.0f) {
-	canvas.set_fill_color(pulp::canvas::Color::rgba8(166, 166, 166));
-	canvas.fill_text("▣  Automations", 24.0f, 104.0f);
-	canvas.set_font("Inter", 12.0f);
-	canvas.fill_text("Active Now", 16.0f, 154.0f);
-	canvas.set_fill_color(pulp::canvas::Color::rgba8(8, 20, 32));
-	canvas.fill_rounded_rect(8.0f, 166.0f, 264.0f, 34.0f, 8.0f);
-	canvas.set_fill_color(pulp::canvas::Color::rgba8(237, 237, 237));
-	canvas.fill_text("◯  OpenCode chat", 20.0f, 188.0f);
-	canvas.set_fill_color(pulp::canvas::Color::rgba8(166, 166, 166));
-	canvas.fill_text("◉  Fix JWT token refresh race condition     now", 20.0f, 224.0f);
-	canvas.fill_text("Recent", 16.0f, 278.0f);
-	canvas.fill_text("○  Build hero section with animations       35m", 20.0f, 318.0f);
-	canvas.fill_text("○  Refactor database connection              45m", 20.0f, 354.0f);
-	canvas.fill_text("○  Add unit tests for auth middleware        2h", 20.0f, 390.0f);
-	canvas.fill_text("○  Update API documentation                  4h", 20.0f, 426.0f);
-	canvas.set_fill_color(pulp::canvas::Color::rgba8(36, 36, 36));
-	canvas.fill_rect(8.0f, 458.0f, kSidebarWidth - 16.0f, 1.0f);
-	canvas.set_fill_color(pulp::canvas::Color::rgba8(166, 166, 166));
-	canvas.fill_text("Projects                         ⌕  ⌘", 16.0f, 492.0f);
-	canvas.set_fill_color(pulp::canvas::Color::rgba8(237, 237, 237));
-	canvas.fill_text("›  palot", 20.0f, 528.0f);
-	canvas.fill_text("›  acme-api", 20.0f, 564.0f);
-	canvas.fill_text("›  landing-page", 20.0f, 600.0f);
-	canvas.set_fill_color(pulp::canvas::Color::rgba8(166, 166, 166));
-	canvas.fill_text("▣  This Mac", 20.0f, b.height - 64.0f);
-	canvas.fill_text("⚙  Settings", 20.0f, b.height - 24.0f);
-	}
-	if (!configuration_error_.empty()) {
-		canvas.set_fill_color(pulp::canvas::Color::rgba8(248, 113, 113));
-		canvas.fill_text(configuration_error_.substr(0, 32), sidebar_width + 16.0f, 50.0f);
-	}
-	canvas.set_fill_color(pulp::canvas::Color::rgba8(100, 100, 100));
-	canvas.fill_text("Local   esc interrupt", sidebar_width + 16.0f, b.height - 8.0f);
+	(void)canvas;
 }
 
 float PalotView::message_height(std::size_t index) const {

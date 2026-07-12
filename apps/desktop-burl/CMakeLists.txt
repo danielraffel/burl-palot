@@ -58,6 +58,7 @@ if(BURL_PALOT_ENABLE_FRAMEWORK)
 	burl_add_app(burl-palot
 		SOURCES
 			src/main.cpp
+			src/imported_root_host.cpp
 			src/opencode_process.cpp
 			src/project_config.cpp
 			src/palot_view.cpp
@@ -164,9 +165,20 @@ if(BURL_PALOT_ENABLE_FRAMEWORK)
 	add_dependencies(burl-palot palot-opencode-sidecar)
 	target_include_directories(burl-palot PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/include")
 	target_compile_definitions(burl-palot PRIVATE
-		PALOT_OPENCODE_SIDECAR_RESOURCE_PATH="bin/${PALOT_SIDECAR_NAME}")
+		PALOT_OPENCODE_SIDECAR_RESOURCE_PATH="bin/${PALOT_SIDECAR_NAME}"
+		PALOT_RESOURCE_SOURCE_ROOT="${CMAKE_CURRENT_SOURCE_DIR}/resources")
 
 	add_custom_command(TARGET burl-palot POST_BUILD
+		COMMAND "${CMAKE_COMMAND}" -E make_directory
+			"$<TARGET_BUNDLE_DIR:burl-palot>/Contents/Resources/import"
+		COMMAND "${CMAKE_COMMAND}" -E make_directory
+			"$<TARGET_BUNDLE_DIR:burl-palot>/Contents/Resources/contracts"
+		COMMAND "${CMAKE_COMMAND}" -E copy
+			"${CMAKE_CURRENT_SOURCE_DIR}/resources/import/main-chat.observed.design-ir.v1.json"
+			"$<TARGET_BUNDLE_DIR:burl-palot>/Contents/Resources/import/main-chat.observed.design-ir.v1.json"
+		COMMAND "${CMAKE_COMMAND}" -E copy
+			"${CMAKE_CURRENT_SOURCE_DIR}/contracts/main-chat.application-bindings.v1.json"
+			"$<TARGET_BUNDLE_DIR:burl-palot>/Contents/Resources/contracts/main-chat.application-bindings.v1.json"
 		COMMAND "${CMAKE_COMMAND}" -E make_directory
 			"$<TARGET_BUNDLE_DIR:burl-palot>/Contents/Resources/bin"
 		COMMAND "${CMAKE_COMMAND}" -E copy "${PALOT_SIDECAR_OUTPUT}"
@@ -254,6 +266,17 @@ if(BURL_PALOT_ENABLE_FRAMEWORK)
 		add_test(NAME palot-observed-design-ir
 			COMMAND palot-observed-design-ir-test
 				"${CMAKE_CURRENT_SOURCE_DIR}/resources/import/main-chat.observed.design-ir.v1.json")
+		add_executable(palot-imported-root-host-test
+			test/imported_root_host_test.cpp
+			src/imported_root_host.cpp)
+		target_include_directories(palot-imported-root-host-test PRIVATE src)
+		target_compile_definitions(palot-imported-root-host-test PRIVATE
+			PALOT_RESOURCE_SOURCE_ROOT="${CMAKE_CURRENT_SOURCE_DIR}/resources")
+		target_link_libraries(palot-imported-root-host-test PRIVATE pulp-view)
+		add_test(NAME palot-imported-root-host
+			COMMAND palot-imported-root-host-test
+				"${CMAKE_CURRENT_SOURCE_DIR}/resources/import/main-chat.observed.design-ir.v1.json"
+				"${CMAKE_CURRENT_SOURCE_DIR}/contracts/main-chat.application-bindings.v1.json")
 		add_test(NAME palot-accessibility-dump
 			COMMAND $<TARGET_FILE:burl-palot> --accessibility-dump)
 		set_tests_properties(palot-accessibility-dump PROPERTIES TIMEOUT 5)

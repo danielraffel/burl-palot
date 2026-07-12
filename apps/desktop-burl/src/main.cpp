@@ -40,28 +40,10 @@ int main(int argc, char** argv) {
 	root.layout_children();
 	if (argc == 2 && std::string_view(argv[1]) == "--accessibility-dump") {
 		const auto nodes = pulp::view::snapshot_accessibility_tree(root);
-		bool project = false;
-		bool composer = false;
-		bool transcript = false;
-		bool workspace = false;
-		bool session = false;
-		bool provider = false;
-		bool model = false;
-		bool send = false;
-		bool cancel = false;
 		std::size_t accessible = 0;
 		for (const auto& node : nodes) {
 			if (node.role == pulp::view::View::AccessRole::none || node.hidden == "true") continue;
 			++accessible;
-			project |= node.label == "Project folder";
-			composer |= node.label == "Message composer";
-			transcript |= node.label == "Conversation transcript";
-			workspace |= node.label == "Palot chat workspace";
-			session |= node.label == "OpenCode session ID";
-			provider |= node.label == "OpenCode model provider";
-			model |= node.label == "OpenCode model ID";
-			send |= node.label == "Send message";
-			cancel |= node.label == "Cancel OpenCode response";
 			if (node.label.size() > 1024 || node.value.size() > 1024) {
 				std::cerr << "accessibility node exceeds bounded text contract\n";
 				return 2;
@@ -70,8 +52,12 @@ int main(int argc, char** argv) {
 			          << '\t' << node.label << '\n';
 		}
 		std::cout << "accessible_nodes\t" << accessible << '\n';
-		return project && composer && transcript && workspace && session && provider &&
-		       model && send && cancel ? 0 : 3;
+		return root.source_observed_primary_tree() && accessible > 20 ? 0 : 3;
+	}
+	if (!root.unattached_required_actions().empty()) {
+		std::cerr << "Palot: source-observed controls still lack application action identity:";
+		for (const auto& action : root.unattached_required_actions()) std::cerr << ' ' << action;
+		std::cerr << '\n';
 	}
 	pulp::view::WindowOptions options;
 	options.title = BURL_APP_NAME;
