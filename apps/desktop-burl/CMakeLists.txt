@@ -281,6 +281,16 @@ if(BURL_PALOT_ENABLE_FRAMEWORK)
 			COMMAND palot-imported-root-host-test
 				"${CMAKE_CURRENT_SOURCE_DIR}/resources/import/main-chat.observed.design-ir.v1.json"
 				"${CMAKE_CURRENT_SOURCE_DIR}/contracts/main-chat.application-bindings.v1.json")
+		add_executable(palot-native-interaction-execution-test
+			test/native_interaction_execution_test.cpp src/imported_root_host.cpp)
+		target_include_directories(palot-native-interaction-execution-test PRIVATE src)
+		target_compile_definitions(palot-native-interaction-execution-test PRIVATE
+			PALOT_RESOURCE_SOURCE_ROOT="${CMAKE_CURRENT_SOURCE_DIR}/resources")
+		target_link_libraries(palot-native-interaction-execution-test PRIVATE pulp-view)
+		add_test(NAME palot-native-interaction-execution
+			COMMAND palot-native-interaction-execution-test
+				"${CMAKE_CURRENT_SOURCE_DIR}/resources/import/main-chat.observed.design-ir.v1.json"
+				"${CMAKE_CURRENT_SOURCE_DIR}/contracts/main-chat.application-bindings.v1.json")
 		add_test(NAME palot-accessibility-dump
 			COMMAND $<TARGET_FILE:burl-palot> --accessibility-dump)
 		set_tests_properties(palot-accessibility-dump PROPERTIES TIMEOUT 5)

@@ -1,7 +1,7 @@
 {
   "version": 1,
   "source": "jsx",
-  "sourceFile": "/tmp/burl-palot-reference-1200/source.json",
+  "sourceFile": "/private/tmp/burl-palot-reference-1200/source.json",
   "capture_method": "runtime_snapshot",
   "settle_rounds": 2,
   "fallback_reason": "",
@@ -20420,6 +20420,46 @@
                                                   "minHeight": 0,
                                                   "height": 581.5
                                                 },
+                                                "responsive": {
+                                                  "horizontal": {
+                                                    "kind": "fill",
+                                                    "offset": 0,
+                                                    "residual": 0
+                                                  },
+                                                  "visibility": [
+                                                    {
+                                                      "visible": true,
+                                                      "structural": false
+                                                    }
+                                                  ],
+                                                  "layoutVariants": [
+                                                    {
+                                                      "childOrder": [
+                                                        "dom/html-shape-3b68501b:0/body-shape-d65c892b:0/div-id-root:0/div-shape-74caabae:0/div-shape-20ec5713:0/div-data-slot-sidebar-wrapper:0/main-data-slot-sidebar-inset:0/div-data-slot-content-area:0/div-shape-12bbae35:0/div-shape-a9a56a97:0/div-shape-2f218dff:0/div-shape-641627bd:0/div-shape-c64206aa:0/div-log-unnamed:0",
+                                                        "dom/html-shape-3b68501b:0/body-shape-d65c892b:0/div-id-root:0/div-shape-74caabae:0/div-shape-20ec5713:0/div-data-slot-sidebar-wrapper:0/main-data-slot-sidebar-inset:0/div-data-slot-content-area:0/div-shape-12bbae35:0/div-shape-a9a56a97:0/div-shape-2f218dff:0/div-shape-641627bd:0/div-shape-c64206aa:0/div-data-slot-scroll-fade:0",
+                                                        "dom/html-shape-3b68501b:0/body-shape-d65c892b:0/div-id-root:0/div-shape-74caabae:0/div-shape-20ec5713:0/div-data-slot-sidebar-wrapper:0/main-data-slot-sidebar-inset:0/div-data-slot-content-area:0/div-shape-12bbae35:0/div-shape-a9a56a97:0/div-shape-2f218dff:0/div-shape-641627bd:0/div-shape-c64206aa:0/div-data-slot-scroll-fade:1"
+                                                      ],
+                                                      "reflowed": true
+                                                    }
+                                                  ],
+                                                  "sampledViewports": [
+                                                    280,
+                                                    599,
+                                                    600,
+                                                    601,
+                                                    639,
+                                                    640,
+                                                    641,
+                                                    740,
+                                                    767,
+                                                    768,
+                                                    769,
+                                                    1023,
+                                                    1024,
+                                                    1025,
+                                                    1200
+                                                  ]
+                                                },
                                                 "attributes": {
                                                   "source_revision": "fd63a75dad3d0e8555ba22a47e720d285889fbf0"
                                                 },
@@ -20701,6 +20741,46 @@
                                                               "minHeight": 0,
                                                               "bottomAuto": true,
                                                               "height": 641
+                                                            },
+                                                            "responsive": {
+                                                              "horizontal": {
+                                                                "kind": "fill",
+                                                                "offset": 0,
+                                                                "residual": 0
+                                                              },
+                                                              "visibility": [
+                                                                {
+                                                                  "visible": true,
+                                                                  "structural": false
+                                                                }
+                                                              ],
+                                                              "layoutVariants": [
+                                                                {
+                                                                  "flexDirection": "column",
+                                                                  "flexWrap": "nowrap",
+                                                                  "childOrder": [
+                                                                    "dom/html-shape-3b68501b:0/body-shape-d65c892b:0/div-id-root:0/div-shape-74caabae:0/div-shape-20ec5713:0/div-data-slot-sidebar-wrapper:0/main-data-slot-sidebar-inset:0/div-data-slot-content-area:0/div-shape-12bbae35:0/div-shape-a9a56a97:0/div-shape-2f218dff:0/div-shape-641627bd:0/div-shape-c64206aa:0/div-log-unnamed:0/div-shape-4e5382dc:0/div-shape-d3514b13:0/div-shape-85f15e7e:0"
+                                                                  ],
+                                                                  "reflowed": false
+                                                                }
+                                                              ],
+                                                              "sampledViewports": [
+                                                                280,
+                                                                599,
+                                                                600,
+                                                                601,
+                                                                639,
+                                                                640,
+                                                                641,
+                                                                740,
+                                                                767,
+                                                                768,
+                                                                769,
+                                                                1023,
+                                                                1024,
+                                                                1025,
+                                                                1200
+                                                              ]
                                                             },
                                                             "attributes": {
                                                               "source_revision": "fd63a75dad3d0e8555ba22a47e720d285889fbf0"
@@ -28366,6 +28446,44 @@
                                                   "width": 907,
                                                   "height": 160.5
                                                 },
+                                                "responsive": {
+                                                  "horizontal": {
+                                                    "kind": "fill",
+                                                    "offset": 0,
+                                                    "residual": 0
+                                                  },
+                                                  "visibility": [
+                                                    {
+                                                      "visible": true,
+                                                      "structural": false
+                                                    }
+                                                  ],
+                                                  "layoutVariants": [
+                                                    {
+                                                      "childOrder": [
+                                                        "dom/html-shape-3b68501b:0/body-shape-d65c892b:0/div-id-root:0/div-shape-74caabae:0/div-shape-20ec5713:0/div-data-slot-sidebar-wrapper:0/main-data-slot-sidebar-inset:0/div-data-slot-content-area:0/div-shape-12bbae35:0/div-shape-a9a56a97:0/div-shape-2f218dff:0/div-shape-641627bd:0/div-shape-e76cfa30:0/div-shape-b167bdec:0"
+                                                      ],
+                                                      "reflowed": false
+                                                    }
+                                                  ],
+                                                  "sampledViewports": [
+                                                    280,
+                                                    599,
+                                                    600,
+                                                    601,
+                                                    639,
+                                                    640,
+                                                    641,
+                                                    740,
+                                                    767,
+                                                    768,
+                                                    769,
+                                                    1023,
+                                                    1024,
+                                                    1025,
+                                                    1200
+                                                  ]
+                                                },
                                                 "attributes": {
                                                   "source_revision": "fd63a75dad3d0e8555ba22a47e720d285889fbf0"
                                                 },
@@ -33300,6 +33418,44 @@
                                           "width": 480,
                                           "height": 742
                                         },
+                                        "responsive": {
+                                          "vertical": {
+                                            "kind": "fixed",
+                                            "value": 742,
+                                            "residual": 0
+                                          },
+                                          "visibility": [
+                                            {
+                                              "visible": true,
+                                              "structural": false
+                                            }
+                                          ],
+                                          "layoutVariants": [
+                                            {
+                                              "childOrder": [
+                                                "dom/html-shape-3b68501b:0/body-shape-d65c892b:0/div-id-root:0/div-shape-74caabae:0/div-shape-20ec5713:0/div-data-slot-sidebar-wrapper:0/main-data-slot-sidebar-inset:0/div-data-slot-content-area:0/div-shape-12bbae35:0/div-shape-c8626a02:0/div-shape-caa002ee:0/div-shape-b25cc6fe:0"
+                                              ],
+                                              "reflowed": false
+                                            }
+                                          ],
+                                          "sampledViewports": [
+                                            280,
+                                            599,
+                                            600,
+                                            601,
+                                            639,
+                                            640,
+                                            641,
+                                            740,
+                                            767,
+                                            768,
+                                            769,
+                                            1023,
+                                            1024,
+                                            1025,
+                                            1200
+                                          ]
+                                        },
                                         "attributes": {
                                           "source_revision": "fd63a75dad3d0e8555ba22a47e720d285889fbf0"
                                         },
@@ -37750,6 +37906,47 @@
                                                       "bottomAuto": true,
                                                       "height": 118
                                                     },
+                                                    "responsive": {
+                                                      "horizontal": {
+                                                        "kind": "fill",
+                                                        "offset": 0,
+                                                        "residual": 0
+                                                      },
+                                                      "visibility": [
+                                                        {
+                                                          "visible": true,
+                                                          "structural": false
+                                                        }
+                                                      ],
+                                                      "layoutVariants": [
+                                                        {
+                                                          "flexDirection": "row",
+                                                          "flexWrap": "nowrap",
+                                                          "childOrder": [
+                                                            "dom/html-shape-3b68501b:0/body-shape-d65c892b:0/div-id-root:0/div-shape-74caabae:0/div-shape-20ec5713:0/div-data-slot-sidebar-wrapper:0/main-data-slot-sidebar-inset:0/div-data-slot-content-area:0/div-shape-12bbae35:0/div-shape-c8626a02:0/div-shape-caa002ee:0/div-shape-b25cc6fe:0/div-shape-2f218dff:0/div-shape-91beb548:0/svg-shape-3f9428ec:0",
+                                                            "dom/html-shape-3b68501b:0/body-shape-d65c892b:0/div-id-root:0/div-shape-74caabae:0/div-shape-20ec5713:0/div-data-slot-sidebar-wrapper:0/main-data-slot-sidebar-inset:0/div-data-slot-content-area:0/div-shape-12bbae35:0/div-shape-c8626a02:0/div-shape-caa002ee:0/div-shape-b25cc6fe:0/div-shape-2f218dff:0/div-shape-91beb548:0/span-shape-f6ea4a92:0"
+                                                          ],
+                                                          "reflowed": false
+                                                        }
+                                                      ],
+                                                      "sampledViewports": [
+                                                        280,
+                                                        599,
+                                                        600,
+                                                        601,
+                                                        639,
+                                                        640,
+                                                        641,
+                                                        740,
+                                                        767,
+                                                        768,
+                                                        769,
+                                                        1023,
+                                                        1024,
+                                                        1025,
+                                                        1200
+                                                      ]
+                                                    },
                                                     "attributes": {
                                                       "source_revision": "fd63a75dad3d0e8555ba22a47e720d285889fbf0"
                                                     },
@@ -38857,6 +39054,7 @@
               ]
             },
             "attributes": {
+              "pulpHitTestable": "false",
               "source_revision": "fd63a75dad3d0e8555ba22a47e720d285889fbf0"
             },
             "stable_anchor_id": "observed-dom:dom/html-shape-3b68501b:0/body-shape-d65c892b:0/div-id-root:0/div-data-slot-startup-overlay:0",

@@ -118,8 +118,19 @@ public:
 	[[nodiscard]] pulp::view::TextEditor* composer() const noexcept { return composer_; }
 	bool invoke_bound(std::string_view id) {
 		auto button = buttons_.find(std::string(id));
-		if (button != buttons_.end() && button->second->on_click) { button->second->on_click(); return true; }
+		if (button != buttons_.end() && !button->second.empty() && button->second.front()->on_click) {
+			button->second.front()->on_click();
+			return true;
+		}
 		return attached_.contains(std::string(id)) && invoke(id, "");
+	}
+	std::vector<pulp::view::View*> bound_views(std::string_view id) const {
+		std::vector<pulp::view::View*> result;
+		if (const auto found = buttons_.find(std::string(id)); found != buttons_.end())
+			result.assign(found->second.begin(), found->second.end());
+		if (id == "prompt.send" || id == "prompt.retry" || id == "prompt.cancel")
+			if (composer_) result.push_back(composer_);
+		return result;
 	}
 
 private:
@@ -131,7 +142,7 @@ private:
 		const auto payload = std::string(descriptor.payload_contract);
 		button.on_click = [callback = endpoint->second, payload] { callback(payload); };
 		attached_.insert(id);
-		buttons_[id] = &button;
+		buttons_[id].push_back(&button);
 	}
 	bool invoke(std::string_view id, std::string_view payload) {
 		auto endpoint = endpoints_.find(std::string(id));
@@ -145,7 +156,7 @@ private:
 	pulp::view::ImportedRepeatedList*& transcript_;
 	pulp::view::View* pending_host_ = nullptr;
 	std::unordered_set<std::string> attached_;
-	std::unordered_map<std::string, pulp::view::TextButton*> buttons_;
+	std::unordered_map<std::string, std::vector<pulp::view::TextButton*>> buttons_;
 	pulp::view::TextEditor* composer_ = nullptr;
 };
 
@@ -187,8 +198,9 @@ void ImportedRootHost::load(const std::filesystem::path& design_ir_path,
 	if (has_error(diagnostics)) throw std::runtime_error("source-observed primary tree binding failed");
 	binding_context_->install_pending_collection();
 	for (const auto& action : manifest->actions) {
-		if (action.required && !binding_context_->attached().contains(action.id))
-			unattached_required_actions_.push_back(action.id);
+		if (binding_context_->attached().contains(action.id)) continue;
+		unattached_actions_.push_back(action.id);
+		if (action.required) unattached_required_actions_.push_back(action.id);
 	}
 	attached_action_count_ = binding_context_->attached().size();
 	ir_ = std::move(parsed);
@@ -214,6 +226,14 @@ const std::vector<std::string>& ImportedRootHost::unattached_required_actions() 
 
 bool ImportedRootHost::invoke_bound_action(std::string_view id) {
 	return binding_context_ && binding_context_->invoke_bound(id);
+}
+
+std::vector<pulp::view::View*> ImportedRootHost::bound_action_views(std::string_view id) const {
+	return binding_context_ ? binding_context_->bound_views(id) : std::vector<pulp::view::View*>{};
+}
+
+const std::vector<std::string>& ImportedRootHost::unattached_actions() const noexcept {
+	return unattached_actions_;
 }
 
 pulp::view::TextEditor* ImportedRootHost::bound_composer() const noexcept {
