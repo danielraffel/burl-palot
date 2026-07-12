@@ -4046,10 +4046,9 @@
     {
       "name": "hover",
       "observation": "observed",
-      "decision": "unsupported",
-      "route": null,
-      "evidenceIds": [],
-      "reason": "No exact behavior route plus resolving evidence ID is published; screenshot scoring is gated."
+      "decision": "lowered",
+      "route": "captured CSS :hover computed visual state -> observed_visual_states -> NativeDesignIR VisualSkin hover state -> native pointer enter/leave dispatch -> WidgetState::hover skin with disabled/pressed/focused precedence -> Skia hover pixels -> pointer leave restores exact rest pixels",
+      "evidenceIds": ["behavior:observed-hover"]
     },
     {
       "name": "ime-composition",
