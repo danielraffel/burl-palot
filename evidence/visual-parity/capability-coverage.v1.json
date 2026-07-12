@@ -4074,10 +4074,9 @@
     {
       "name": "persistence",
       "observation": "observed",
-      "decision": "unsupported",
-      "route": null,
-      "evidenceIds": [],
-      "reason": "No exact behavior route plus resolving evidence ID is published; screenshot scoring is gated."
+      "decision": "lowered",
+      "route": "terminal chat/session/project/provider/model state -> bounded versioned native binary receipt -> owner-only temporary file -> fsync and atomic rename -> launch-time magic/size/count validation -> complete restore of configuration and bounded transcript -> malformed or truncated receipt fails closed without partial transcript; multiline and tab text round-trip",
+      "evidenceIds": ["behavior:palot-persistence"]
     },
     {
       "name": "responsive-layout",

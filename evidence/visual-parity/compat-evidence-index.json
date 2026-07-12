@@ -18,6 +18,15 @@
       "endpoint": "ImportedRootHost, OpenCodeProcess, SourceAwareChatSlice, PalotView stream callbacks, native collection model, and real OpenCode E2E probe",
       "path": "apps/desktop-burl/test/source_aware_chat_slice_test.cpp",
       "command": "cmake --build build-semantic --target palot-opencode-process-test palot-source-aware-slice-test && ctest --test-dir build-semantic -R 'palot-(opencode-process|source-aware-slice)' --output-on-failure"
+    },
+    "behavior:palot-persistence": {
+      "kind": "behavior",
+      "owner": "burl-palot-native-application",
+      "repository": "burl-palot",
+      "route": "terminal chat/session/project/provider/model state -> bounded versioned native binary receipt -> owner-only temporary file -> fsync and atomic rename -> launch-time magic/size/count validation -> complete restore of configuration and bounded transcript -> malformed or truncated receipt fails closed without partial transcript; multiline and tab text round-trip",
+      "endpoint": "PalotView::persist/restore, PALOT_STATE_PATH isolated test override, and native demo persistence evidence validator",
+      "path": "evidence/native-demo/final-20260711/persistence.json",
+      "command": "python3 -m unittest tests.native_evidence.test_native_demo_evidence.NativeEvidenceTest.test_persistence_gate_includes_corruption_recovery"
     }
   }
 }
