@@ -64,7 +64,8 @@ if (responsiveSemantics.length) {
 		if (transitions.some((variant: any) => variant.transitionToNext?.confidence === "bounded"))
 			reconciliation.constraints.delete(sourceId)
 	}
-	lowered = importer.applyResponsiveConstraints(lowered, reconciliation)
+	const loweredCaptures = captures.map((capture) => importer.lowerObservedDom(capture.root, importedAt))
+	lowered = importer.unionResponsiveTrees(loweredCaptures, reconciliation)
 }
 const inlineSvgCaptures: Array<{ sourceId: string; outerHTML: string; computedColor?: string }> = []
 const collectInlineSvg = (node: any) => {
