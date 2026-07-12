@@ -4081,10 +4081,9 @@
     {
       "name": "responsive-layout",
       "observation": "observed",
-      "decision": "unsupported",
-      "route": null,
-      "evidenceIds": [],
-      "reason": "No exact behavior route plus resolving evidence ID is published; screenshot scoring is gated."
+      "decision": "lowered",
+      "route": "multi-viewport observed geometry plus exact breakpoint triplets -> typed fixed/fill/proportional/min/max/clamp constraints and structural variants -> NativeDesignIR responsive metadata -> resize-time parent-relative resolution -> Yoga relayout and Skia repaint without clipping or stale captured dimensions",
+      "evidenceIds": ["behavior:observed-responsive-layout"]
     },
     {
       "name": "retry",
