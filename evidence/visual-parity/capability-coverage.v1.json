@@ -4004,18 +4004,17 @@
     {
       "name": "accessibility",
       "observation": "observed",
-      "decision": "lowered",
-      "route": "computed CSS overflow-wrap normal, break-word, or anywhere with legacy word-wrap alias -> validated TypedText keyword -> NativeDesignIR style overflowWrap/wordWrap -> validated IRStyle canonical precedence -> Label word-break and multiline shaping mode -> TextShaper width-dependent line fragments and intrinsic height -> Skia glyph pixels; unsupported keywords fail closed",
-      "evidenceIds": ["semantic:observed-dom-overflow-wrap"],
+      "decision": "unsupported",
+      "route": null,
+      "evidenceIds": [],
       "reason": "No exact behavior route plus resolving evidence ID is published; screenshot scoring is gated."
     },
     {
       "name": "active/pressed",
       "observation": "observed",
-      "decision": "unsupported",
-      "route": null,
-      "evidenceIds": [],
-      "reason": "No exact behavior route plus resolving evidence ID is published; screenshot scoring is gated."
+      "decision": "lowered",
+      "route": "captured CSS :active computed visual state or explicit pressed receipt -> observed_visual_states -> NativeDesignIR VisualSkin canonical pressed state with explicit pressed precedence -> native control pointer/key down state -> WidgetState::pressed skin resolution -> Skia pixels and click callback -> pointer/key up or leave restores rest; no duplicate active runtime state",
+      "evidenceIds": ["behavior:observed-active-pressed"]
     },
     {
       "name": "cancellation",
