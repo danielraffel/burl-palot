@@ -1271,18 +1271,16 @@
         {
           "value": "column",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed flex-direction -> typed direction preserving row/column reverse variants -> NativeDesignIR direction -> LayoutDirection JSON round-trip -> native FlexDirection -> Yoga row/column/reverse layout -> Skia positions; writing direction remains independent",
+          "evidenceIds": ["semantic:observed-dom-flex-direction"]
         },
         {
           "value": "row",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed flex-direction -> typed direction preserving row/column reverse variants -> NativeDesignIR direction -> LayoutDirection JSON round-trip -> native FlexDirection -> Yoga row/column/reverse layout -> Skia positions; writing direction remains independent",
+          "evidenceIds": ["semantic:observed-dom-flex-direction"]
         }
       ]
     },
