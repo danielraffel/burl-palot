@@ -1432,74 +1432,65 @@
         {
           "value": "10px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "supported",
+          "route": "computed CSS gap px shorthand -> typed single gap or ordered rowGap/columnGap -> NativeDesignIR layout scalars -> validated IRLayout gap fields -> native FlexStyle/GridStyle -> Yoga line and item spacing -> Skia pixels; normal lowers to the zero-gap flex/grid equivalence class; invalid values fail closed",
+          "evidenceIds": ["semantic:observed-dom-gap"]
         },
         {
           "value": "12px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "supported",
+          "route": "computed CSS gap px shorthand -> typed single gap or ordered rowGap/columnGap -> NativeDesignIR layout scalars -> validated IRLayout gap fields -> native FlexStyle/GridStyle -> Yoga line and item spacing -> Skia pixels; normal lowers to the zero-gap flex/grid equivalence class; invalid values fail closed",
+          "evidenceIds": ["semantic:observed-dom-gap"]
         },
         {
           "value": "2px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "supported",
+          "route": "computed CSS gap px shorthand -> typed single gap or ordered rowGap/columnGap -> NativeDesignIR layout scalars -> validated IRLayout gap fields -> native FlexStyle/GridStyle -> Yoga line and item spacing -> Skia pixels; normal lowers to the zero-gap flex/grid equivalence class; invalid values fail closed",
+          "evidenceIds": ["semantic:observed-dom-gap"]
         },
         {
           "value": "2px 6px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "supported",
+          "route": "computed CSS gap px shorthand -> typed single gap or ordered rowGap/columnGap -> NativeDesignIR layout scalars -> validated IRLayout gap fields -> native FlexStyle/GridStyle -> Yoga line and item spacing -> Skia pixels; normal lowers to the zero-gap flex/grid equivalence class; invalid values fail closed",
+          "evidenceIds": ["semantic:observed-dom-gap"]
         },
         {
           "value": "40px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "supported",
+          "route": "computed CSS gap px shorthand -> typed single gap or ordered rowGap/columnGap -> NativeDesignIR layout scalars -> validated IRLayout gap fields -> native FlexStyle/GridStyle -> Yoga line and item spacing -> Skia pixels; normal lowers to the zero-gap flex/grid equivalence class; invalid values fail closed",
+          "evidenceIds": ["semantic:observed-dom-gap"]
         },
         {
           "value": "4px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "supported",
+          "route": "computed CSS gap px shorthand -> typed single gap or ordered rowGap/columnGap -> NativeDesignIR layout scalars -> validated IRLayout gap fields -> native FlexStyle/GridStyle -> Yoga line and item spacing -> Skia pixels; normal lowers to the zero-gap flex/grid equivalence class; invalid values fail closed",
+          "evidenceIds": ["semantic:observed-dom-gap"]
         },
         {
           "value": "6px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "supported",
+          "route": "computed CSS gap px shorthand -> typed single gap or ordered rowGap/columnGap -> NativeDesignIR layout scalars -> validated IRLayout gap fields -> native FlexStyle/GridStyle -> Yoga line and item spacing -> Skia pixels; normal lowers to the zero-gap flex/grid equivalence class; invalid values fail closed",
+          "evidenceIds": ["semantic:observed-dom-gap"]
         },
         {
           "value": "8px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "supported",
+          "route": "computed CSS gap px shorthand -> typed single gap or ordered rowGap/columnGap -> NativeDesignIR layout scalars -> validated IRLayout gap fields -> native FlexStyle/GridStyle -> Yoga line and item spacing -> Skia pixels; normal lowers to the zero-gap flex/grid equivalence class; invalid values fail closed",
+          "evidenceIds": ["semantic:observed-dom-gap"]
         },
         {
           "value": "normal",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed CSS gap px shorthand -> typed single gap or ordered rowGap/columnGap -> NativeDesignIR layout scalars -> validated IRLayout gap fields -> native FlexStyle/GridStyle -> Yoga line and item spacing -> Skia pixels; normal lowers to the zero-gap flex/grid equivalence class; invalid values fail closed",
+          "evidenceIds": ["semantic:observed-dom-gap"]
         }
       ]
     },
