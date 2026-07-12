@@ -1193,42 +1193,37 @@
         {
           "value": "block",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed display + observed child geometry -> capability classifier -> simple block normal flow with exact vertical/margin and inline-fill oracle -> column-flex stretch lowering; flex/grid direct; inline text attributed; float/table/mixed-inline/positioned divergence fail closed -> Yoga + Skia",
+          "evidenceIds": ["semantic:observed-dom-display-layout"]
         },
         {
           "value": "flex",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed display + observed child geometry -> capability classifier -> simple block normal flow with exact vertical/margin and inline-fill oracle -> column-flex stretch lowering; flex/grid direct; inline text attributed; float/table/mixed-inline/positioned divergence fail closed -> Yoga + Skia",
+          "evidenceIds": ["semantic:observed-dom-display-layout"]
         },
         {
           "value": "inline",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed display + observed child geometry -> capability classifier -> simple block normal flow with exact vertical/margin and inline-fill oracle -> column-flex stretch lowering; flex/grid direct; inline text attributed; float/table/mixed-inline/positioned divergence fail closed -> Yoga + Skia",
+          "evidenceIds": ["semantic:observed-dom-display-layout"]
         },
         {
           "value": "inline-block",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed display + observed child geometry -> capability classifier -> simple block normal flow with exact vertical/margin and inline-fill oracle -> column-flex stretch lowering; flex/grid direct; inline text attributed; float/table/mixed-inline/positioned divergence fail closed -> Yoga + Skia",
+          "evidenceIds": ["semantic:observed-dom-display-layout"]
         },
         {
           "value": "list-item",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed display + observed child geometry -> capability classifier -> simple block normal flow with exact vertical/margin and inline-fill oracle -> column-flex stretch lowering; flex/grid direct; inline text attributed; float/table/mixed-inline/positioned divergence fail closed -> Yoga + Skia",
+          "evidenceIds": ["semantic:observed-dom-display-layout"]
         }
       ]
     },
