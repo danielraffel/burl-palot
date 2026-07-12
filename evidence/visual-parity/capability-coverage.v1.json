@@ -4060,10 +4060,9 @@
     {
       "name": "keyboard-navigation",
       "observation": "observed",
-      "decision": "unsupported",
-      "route": null,
-      "evidenceIds": [],
-      "reason": "No exact behavior route plus resolving evidence ID is published; screenshot scoring is gated."
+      "decision": "lowered",
+      "route": "captured DOM tabindex and semantic focusability independent of application actions -> observed metadata -> NativeDesignIR focusable/tabIndex -> native materializer View focus metadata -> deterministic positive-index then natural-order focus_next/focus_prev traversal excluding disabled/hidden/non-focusable controls -> focused VisualSkin pixels and native Space/Enter activation dispatch",
+      "evidenceIds": ["behavior:observed-keyboard-navigation"]
     },
     {
       "name": "loading/streaming",
