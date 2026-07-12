@@ -65,16 +65,17 @@ def resolve_evidence(burl_source: Path, evidence_id: str, route: str,
 		return f"unknown evidence ID {evidence_id}"
 	if record.get("route") != route:
 		return f"evidence route mismatch for {evidence_id}"
-	if record.get("repository") != "burl":
+	if record.get("repository") not in {"burl", "burl-palot"}:
 		return f"evidence repository mismatch for {evidence_id}"
 	for field in ("owner", "endpoint", "path", "command"):
 		if not isinstance(record.get(field), str) or not record[field]:
 			return f"malformed evidence ownership for {evidence_id}"
-	artifact = (burl_source / record["path"]).resolve()
+	source_root = Path(record.get("_source_root", burl_source)).resolve()
+	artifact = (source_root / record["path"]).resolve()
 	try:
-		artifact.relative_to(burl_source.resolve())
+		artifact.relative_to(source_root)
 	except ValueError:
-		return f"evidence path escapes Burl for {evidence_id}"
+		return f"evidence path escapes repository for {evidence_id}"
 	if not artifact.exists():
 		return f"evidence artifact is missing for {evidence_id}"
 	return None
@@ -104,6 +105,16 @@ def coverage_failure(root: Path, coverage_path: Path, burl_source: Path) -> str 
 	if registry_payload.get("schema") != "pulp-compat-evidence-index-v1":
 		return "capability evidence registry schema is invalid"
 	registry = registry_payload.get("entries", {})
+	consumer_registry_path = root / "evidence/visual-parity/compat-evidence-index.json"
+	if not consumer_registry_path.is_file():
+		return "consumer capability evidence registry is missing"
+	consumer_payload = json.loads(consumer_registry_path.read_text())
+	if consumer_payload.get("schema") != "pulp-compat-evidence-index-v1":
+		return "consumer capability evidence registry schema is invalid"
+	for evidence_id, evidence in consumer_payload.get("entries", {}).items():
+		if evidence_id in registry:
+			return f"duplicate evidence ID {evidence_id}"
+		registry[evidence_id] = {**evidence, "_source_root": str(root)}
 	for record in records:
 		name = record.get("name", "<unnamed>")
 		declared_values = record.get("values", [])

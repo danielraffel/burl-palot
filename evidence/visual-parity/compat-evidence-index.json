@@ -1,0 +1,14 @@
+{
+  "schema": "pulp-compat-evidence-index-v1",
+  "entries": {
+    "behavior:palot-stream-cancellation": {
+      "kind": "behavior",
+      "owner": "burl-palot-native-application",
+      "repository": "burl-palot",
+      "route": "captured Stop button or composer Escape -> imported prompt.cancel typed application action -> ImportedRootHost callback -> OpenCodeProcess generation-scoped prompt.cancel command -> correlated sidecar response -> cancelled terminal event with stale-generation filtering -> responsive native UI; transport remains reusable for retry",
+      "endpoint": "main-chat source binding policy, ImportedRootHost, OpenCodeProcess, native interaction execution, fake-sidecar lifecycle test, and real OpenCode cancellation probe",
+      "path": "apps/desktop-burl/test/opencode_process_test.cpp",
+      "command": "cmake --build build-semantic --target palot-opencode-process-test palot-native-interaction-execution-test && ctest --test-dir build-semantic -R 'palot-(opencode-process|native-interaction-execution)' --output-on-failure"
+    }
+  }
+}

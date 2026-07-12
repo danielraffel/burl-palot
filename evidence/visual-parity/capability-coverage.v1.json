@@ -4018,10 +4018,9 @@
     {
       "name": "cancellation",
       "observation": "observed",
-      "decision": "unsupported",
-      "route": null,
-      "evidenceIds": [],
-      "reason": "No exact behavior route plus resolving evidence ID is published; screenshot scoring is gated."
+      "decision": "lowered",
+      "route": "captured Stop button or composer Escape -> imported prompt.cancel typed application action -> ImportedRootHost callback -> OpenCodeProcess generation-scoped prompt.cancel command -> correlated sidecar response -> cancelled terminal event with stale-generation filtering -> responsive native UI; transport remains reusable for retry",
+      "evidenceIds": ["behavior:palot-stream-cancellation"]
     },
     {
       "name": "clipboard",
