@@ -195,8 +195,7 @@ public:
 		pulp::events::MainThreadDispatcher::call_async_after([self = std::move(self)] {
 			std::scoped_lock lock(self->mutex_);
 			if (!self->view_) return;
-			self->view_->transcript_sync_pending_ = false;
-			self->view_->sync_imported_transcript();
+			if (self->view_->transcript_updates_.flush()) self->view_->sync_imported_transcript();
 		}, 16);
 	}
 
@@ -509,8 +508,7 @@ void PalotView::sync_imported_transcript() {
 }
 
 void PalotView::schedule_imported_transcript_sync() {
-	if (transcript_sync_pending_) return;
-	transcript_sync_pending_ = true;
+	if (!transcript_updates_.request()) return;
 	event_sink_->schedule_transcript_sync();
 }
 

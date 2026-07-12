@@ -58,5 +58,5 @@ private:
 	std::string configuration_error_;
 	bool create_session_ = true;
 	ImportedRootHost* imported_root_ = nullptr;
-	bool transcript_sync_pending_ = false;
+	pulp::view::FrameUpdateCoalescer transcript_updates_;
 };
