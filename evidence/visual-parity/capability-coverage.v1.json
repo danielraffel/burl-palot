@@ -2508,18 +2508,16 @@
         {
           "value": "0",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed CSS opacity unit interval -> validated typed paint scalar with one represented by the exact native default -> NativeDesignIR style opacity including exact zero -> validated IRStyle opacity -> View subtree stacking-context save layer -> Skia compositing pixels; poison-theme sentinels remain absent and invalid values fail closed",
+          "evidenceIds": ["semantic:observed-dom-opacity"]
         },
         {
           "value": "1",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed CSS opacity unit interval -> validated typed paint scalar with one represented by the exact native default -> NativeDesignIR style opacity including exact zero -> validated IRStyle opacity -> View subtree stacking-context save layer -> Skia compositing pixels; poison-theme sentinels remain absent and invalid values fail closed",
+          "evidenceIds": ["semantic:observed-dom-opacity"]
         }
       ]
     },
