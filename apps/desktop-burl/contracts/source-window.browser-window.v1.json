@@ -13,6 +13,7 @@
   "projection": {
     "titleBarStyle": "hidden_inset",
     "backdropEffect": "liquid_glass",
+    "appearance": "dark",
     "transparent": true,
     "trafficLightX": 15,
     "trafficLightY": 15
