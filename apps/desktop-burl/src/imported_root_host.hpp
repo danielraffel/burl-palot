@@ -28,8 +28,6 @@ public:
 	[[nodiscard]] const std::vector<std::string>& unattached_required_actions() const noexcept;
 	bool invoke_bound_action(std::string_view id);
 	pulp::view::TextEditor* bound_composer() const noexcept;
-	void set_bound_text(std::string key, std::string value);
-	void set_bound_texts(std::unordered_map<std::string, std::string> values);
 
 private:
 	class BindingContext;
@@ -37,11 +35,8 @@ private:
 	std::unique_ptr<BindingContext> binding_context_;
 	std::unique_ptr<pulp::view::DesignIR> ir_;
 	std::vector<std::string> unattached_required_actions_;
-	std::vector<std::string> required_action_ids_;
 	bool source_observed_primary_tree_ = false;
 	std::size_t attached_action_count_ = 0;
-	std::unordered_map<std::string, std::string> bound_text_;
-	void materialize_root();
 };
 
 std::filesystem::path palot_bundle_resource(std::string_view relative_path);

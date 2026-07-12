@@ -10296,10 +10296,7 @@
                                                                                   "height": 44
                                                                                 },
                                                                                 "attributes": {
-                                                                                  "source_revision": "fd63a75dad3d0e8555ba22a47e720d285889fbf0",
-                                                                                  "pulpValueKey": "transcript.user",
-                                                                                  "pulpContentRole": "transcript-message",
-                                                                                  "pulpBindingPolicyRule": "transcript-user"
+                                                                                  "source_revision": "fd63a75dad3d0e8555ba22a47e720d285889fbf0"
                                                                                 },
                                                                                 "stable_anchor_id": "observed-dom:html:1/body:2/div[root]:3/div:1/div:1/div[sidebar-wrapper]:1/main[sidebar-inset]:2/div[content-area]:2/div:1/div:1/div:1/div:1/div:1/div:1/div:1/div:1/div:1/div:1/div:1/div:1/p:1",
                                                                                 "anchor_strategy": "adapter",
@@ -11120,10 +11117,7 @@
                                                                                                   "height": 22
                                                                                                 },
                                                                                                 "attributes": {
-                                                                                                  "source_revision": "fd63a75dad3d0e8555ba22a47e720d285889fbf0",
-                                                                                                  "pulpValueKey": "transcript.assistant",
-                                                                                                  "pulpContentRole": "transcript-message",
-                                                                                                  "pulpBindingPolicyRule": "transcript-assistant"
+                                                                                                  "source_revision": "fd63a75dad3d0e8555ba22a47e720d285889fbf0"
                                                                                                 },
                                                                                                 "stable_anchor_id": "observed-dom:html:1/body:2/div[root]:3/div:1/div:1/div[sidebar-wrapper]:1/main[sidebar-inset]:2/div[content-area]:2/div:1/div:1/div:1/div:1/div:1/div:1/div:1/div:1/div:1/div:1/div:2/div:1/div:2/div:1/div:1/div:1/p:1",
                                                                                                 "anchor_strategy": "adapter",
@@ -13953,10 +13947,7 @@
                                                                                       "height": 18
                                                                                     },
                                                                                     "attributes": {
-                                                                                      "source_revision": "fd63a75dad3d0e8555ba22a47e720d285889fbf0",
-                                                                                      "pulpValueKey": "transcript.tool",
-                                                                                      "pulpContentRole": "transcript-tool",
-                                                                                      "pulpBindingPolicyRule": "transcript-tool"
+                                                                                      "source_revision": "fd63a75dad3d0e8555ba22a47e720d285889fbf0"
                                                                                     },
                                                                                     "stable_anchor_id": "observed-dom:html:1/body:2/div[root]:3/div:1/div:1/div[sidebar-wrapper]:1/main[sidebar-inset]:2/div[content-area]:2/div:1/div:1/div:1/div:1/div:1/div:1/div:1/div:1/div:1/div:2/div:2/div:1/div:2/p:2",
                                                                                     "anchor_strategy": "adapter",

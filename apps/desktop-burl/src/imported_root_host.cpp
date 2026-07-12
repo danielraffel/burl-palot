@@ -123,76 +123,31 @@ void ImportedRootHost::load(const std::filesystem::path& design_ir_path,
 	for (const auto& action : manifest->actions) {
 		if (action.required && !endpoints_.contains(action.id))
 			throw std::runtime_error("required application action has no consumer endpoint: " + action.id);
-		if (action.required) required_action_ids_.push_back(action.id);
 	}
 
 	auto parsed = std::make_unique<pulp::view::DesignIR>(
 		pulp::view::parse_design_ir_json(read_text(design_ir_path)));
 	if (parsed->source_adapter != "observed-dom")
 		throw std::runtime_error("primary tree is not source-observed DesignIR");
-	ir_ = std::move(parsed);
-	materialize_root();
-	source_observed_primary_tree_ = true;
-}
-
-namespace {
-void apply_bound_text(pulp::view::IRNode& node,
-	                  const std::unordered_map<std::string, std::string>& values) {
-	if (const auto key = node.attributes.find("pulpValueKey"); key != node.attributes.end()) {
-		if (const auto value = values.find(key->second); value != values.end()) {
-			node.text_content = value->second;
-			if (!node.text_runs.empty()) {
-				node.text_runs.resize(1);
-				node.text_runs.front().start = 0;
-				node.text_runs.front().end = value->second.size();
-			}
-		}
-	}
-	for (auto& child : node.children) apply_bound_text(child, values);
-}
-}
-
-void ImportedRootHost::materialize_root() {
-	if (!ir_) return;
-	auto materialized_ir = *ir_;
-	apply_bound_text(materialized_ir.root, bound_text_);
 	std::vector<pulp::view::ImportDiagnostic> diagnostics;
 	pulp::view::NativeMaterializeOptions options;
 	options.diagnostics_out = &diagnostics;
-	auto root = pulp::view::build_native_view_tree(materialized_ir, materialized_ir.asset_manifest, options);
+	auto root = pulp::view::build_native_view_tree(*parsed, parsed->asset_manifest, options);
 	if (!root || root->child_count() == 0 || has_error(diagnostics))
 		throw std::runtime_error("source-observed primary tree failed native materialization" +
 		                         error_diagnostics(diagnostics));
 
 	binding_context_ = std::make_unique<BindingContext>(endpoints_);
-	pulp::view::bind_native_view_tree(*root, materialized_ir, *binding_context_, {.diagnostics_out = &diagnostics});
+	pulp::view::bind_native_view_tree(*root, *parsed, *binding_context_, {.diagnostics_out = &diagnostics});
 	if (has_error(diagnostics)) throw std::runtime_error("source-observed primary tree binding failed");
-	unattached_required_actions_.clear();
-	for (const auto& action : required_action_ids_) {
-		if (!binding_context_->attached().contains(action))
-			unattached_required_actions_.push_back(action);
+	for (const auto& action : manifest->actions) {
+		if (action.required && !binding_context_->attached().contains(action.id))
+			unattached_required_actions_.push_back(action.id);
 	}
 	attached_action_count_ = binding_context_->attached().size();
-	while (child_count() != 0) remove_child(child_at(0));
+	ir_ = std::move(parsed);
 	add_child(std::move(root));
-	layout_children();
-}
-
-void ImportedRootHost::set_bound_text(std::string key, std::string value) {
-	if (key.empty()) return;
-	set_bound_texts({{std::move(key), std::move(value)}});
-}
-
-void ImportedRootHost::set_bound_texts(std::unordered_map<std::string, std::string> values) {
-	bool changed = false;
-	for (auto& [key, value] : values) {
-		if (key.empty() || bound_text_[key] == value) continue;
-		bound_text_[std::move(key)] = std::move(value);
-		changed = true;
-	}
-	if (!changed) return;
-	materialize_root();
-	request_repaint();
+	source_observed_primary_tree_ = true;
 }
 
 void ImportedRootHost::layout_children() {

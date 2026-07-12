@@ -11,8 +11,5 @@
     {"id":"composer-copy","match":{"role":"button","textExact":"Copy response"},"attributes":{"pulpRouteId":"composer.copy","pulpHostAction":"composer.copy","pulpHostActionLabel":"Copy response","pulpEventContract":"click"}},
     {"id":"prompt-cancel","match":{"role":"button","accessibleName":"Stop"},"attributes":{"pulpRouteId":"prompt.cancel","pulpHostAction":"prompt.cancel","pulpHostActionLabel":"Stop","pulpEventContract":"click"}},
     {"id":"composer","match":{"tagName":"textarea","role":"textbox"},"attributes":{"pulpRouteId":"chat.composer","pulpValueKey":"composer.draft","pulpEventContract":"submit-send-or-retry;escape-cancel","pulpFocusContract":"composer-focus"}}
-    ,{"id":"transcript-user","match":{"tagName":"p","textExact":"Add a dark mode toggle to the application settings page. It should persist the user's preference to localStorage and apply the theme immediately without a page reload."},"attributes":{"pulpValueKey":"transcript.user","pulpContentRole":"transcript-message"}}
-    ,{"id":"transcript-assistant","match":{"tagName":"p","textExact":"I've added the dark mode toggle to the settings page. Here's what I did:"},"attributes":{"pulpValueKey":"transcript.assistant","pulpContentRole":"transcript-message"}}
-    ,{"id":"transcript-tool","match":{"tagName":"p","textExact":"Making edits..."},"attributes":{"pulpValueKey":"transcript.tool","pulpContentRole":"transcript-tool"}}
   ]
 }

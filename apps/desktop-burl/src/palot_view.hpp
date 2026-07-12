@@ -33,7 +33,6 @@ private:
 	void choose_project_folder();
 	void set_configuration_error(std::string error);
 	void append_message(std::string role, std::string text, bool announce);
-	void sync_imported_transcript();
 	float message_height(std::size_t index) const;
 
 	pulp::view::TextEditor* project_ = nullptr;

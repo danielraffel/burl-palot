@@ -212,8 +212,8 @@ PalotView::PalotView() {
 	imported_root->register_action("prompt.retry", [this](std::string_view) {
 		if (!last_prompt_.empty()) send_prompt(last_prompt_, true);
 	});
-	imported_root->register_action("prompt.send", [this](std::string_view payload) {
-		if (!payload.empty()) send_prompt(std::string(payload));
+	imported_root->register_action("prompt.send", [this](std::string_view) {
+		if (composer_ && !composer_->text().empty()) send_prompt(composer_->text());
 	});
 	imported_root->register_action("session.create", [this](std::string_view) {
 		create_session_ = true;
@@ -480,25 +480,9 @@ void PalotView::append_message(std::string role, std::string text, bool announce
 	transcript_->set_row_count(messages_.size());
 	transcript_->set_row_height(index, message_height(index));
 	transcript_->refresh_rows();
-	sync_imported_transcript();
 	if (announce)
 		pulp::view::announce_accessibility(announcement,
 			pulp::view::AnnouncementPriority::Polite);
-}
-
-void PalotView::sync_imported_transcript() {
-	if (!imported_root_) return;
-	std::string user;
-	std::string assistant;
-	std::string tool;
-	for (const auto& [role, text] : messages_) {
-		if (role == "You") user = text;
-		else if (role == "OpenCode") assistant = text;
-		else if (role == "Tool") tool = text;
-	}
-	imported_root_->set_bound_texts({{"transcript.user", std::move(user)},
-	                                {"transcript.assistant", std::move(assistant)},
-	                                {"transcript.tool", std::move(tool)}});
 }
 
 void PalotView::send_prompt(const std::string& prompt, bool retry) {
@@ -547,7 +531,6 @@ void PalotView::handle_event(std::string type, std::string value) {
 			const auto index = messages_.size() - 1;
 			transcript_->set_row_height(index, message_height(index));
 			transcript_->refresh_rows();
-			sync_imported_transcript();
 		} else {
 			append_message("OpenCode", std::move(value), false);
 		}

@@ -64,15 +64,6 @@ int main(int argc, char** argv) {
 	composer->on_return("");
 	composer->on_escape();
 	if (calls["prompt.send"] != 1 || calls["prompt.retry"] != 1 || calls["prompt.cancel"] != 1) return 11;
-	host.set_bound_texts({{"transcript.user", "runtime user prompt"},
-	                      {"transcript.assistant", "streamed chunk one"},
-	                      {"transcript.tool", "tool.read"}});
-	if (host.child_count() != 1 || host.attached_action_count() != 7 ||
-	    !host.unattached_required_actions().empty()) return 12;
-	auto* rebound_composer = host.bound_composer();
-	if (!rebound_composer || rebound_composer == composer) return 13;
-	rebound_composer->on_return("streamed chunk two");
-	if (calls["prompt.send"] != 2) return 14;
 	for (const auto size : {pulp::view::Rect{0, 0, 760, 520}, pulp::view::Rect{0, 0, 980, 680},
 	                        pulp::view::Rect{0, 0, 1200, 800}}) {
 		host.set_bounds(size);
