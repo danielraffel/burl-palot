@@ -93,6 +93,15 @@ int main(int argc, char** argv) {
 		if (!cancelled) return EXIT_FAILURE;
 	}
 
+	auto closed_pipe_sink = std::make_shared<Sink>();
+	if (!process.start({.project = "/tmp/close-on-cancel", .prompt = "stream then close"},
+	                   closed_pipe_sink) || !closed_pipe_sink->wait_for("text"))
+		return EXIT_FAILURE;
+	process.cancel();
+	if (!closed_pipe_sink->wait_for("error")) return EXIT_FAILURE;
+	for (const auto& event : closed_pipe_sink->events)
+		if (event.run_id != 3) return EXIT_FAILURE;
+
 	auto retry_sink = std::make_shared<Sink>();
 	if (!process.start({.project = "/tmp/project",
 	                    .prompt = "retry",
@@ -104,7 +113,7 @@ int main(int argc, char** argv) {
 	{
 		std::scoped_lock lock(retry_sink->mutex);
 		for (const auto& event : retry_sink->events)
-			if (event.run_id != 3) return EXIT_FAILURE;
+			if (event.run_id != 4) return EXIT_FAILURE;
 	}
 
 	OpenCodeProcess bounded({.sidecar_path = argv[1], .max_frame_bytes = 512});

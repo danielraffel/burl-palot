@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 import json
+import os
 import sys
 
 
@@ -34,6 +35,8 @@ for line in sys.stdin:
     elif command_type in ("prompt.send", "prompt.retry"):
         result = {"ok": True, "value": {"requestId": command["requestId"], "sessionId": session_id}}
     elif command_type == "prompt.cancel":
+        if project_directory == "/tmp/close-on-cancel":
+            os._exit(0)
         result = {"ok": True, "value": {"requestId": command["requestId"], "cancelled": True}}
     else:
         result = {"ok": False, "error": {"message": "unsupported fixture command"}}
@@ -78,6 +81,8 @@ for line in sys.stdin:
                 "properties": {"sessionID": session_id, "partID": "text-1", "field": "text", "delta": "fixture response"},
             }}},
         })
+        if project_directory == "/tmp/close-on-cancel":
+            continue
         send({
             "version": 1,
             "type": "event",

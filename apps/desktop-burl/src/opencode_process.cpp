@@ -7,6 +7,7 @@
 #include <csignal>
 #include <cstring>
 #include <filesystem>
+#include <fcntl.h>
 #include <optional>
 #include <spawn.h>
 #include <poll.h>
@@ -226,6 +227,12 @@ void OpenCodeProcess::run(std::shared_ptr<State> state, std::uint64_t generation
 		finish("error", std::strerror(errno));
 		return;
 	}
+#if defined(__APPLE__)
+	if (::fcntl(input_pipe[1], F_SETNOSIGPIPE, 1) != 0) {
+		finish("error", std::strerror(errno));
+		return;
+	}
+#endif
 	posix_spawn_file_actions_t actions;
 	posix_spawn_file_actions_init(&actions);
 	posix_spawn_file_actions_adddup2(&actions, input_pipe[0], STDIN_FILENO);
