@@ -8,6 +8,7 @@
 #include <iostream>
 #include <sstream>
 #include <stdexcept>
+#include <tuple>
 #include <unordered_map>
 
 namespace {
@@ -31,6 +32,13 @@ void register_actions(ImportedRootHost& host, std::unordered_map<std::string, in
 	for (const auto* id : {"composer.copy", "project.select", "prompt.cancel", "prompt.retry",
 	                       "prompt.send", "session.create", "session.open"})
 		host.register_action(id, [calls, id](std::string_view) { if (calls) ++(*calls)[id]; });
+}
+
+pulp::view::View* find_anchor_suffix(pulp::view::View& view, std::string_view suffix) {
+	if (view.anchor_id().ends_with(suffix)) return &view;
+	for (std::size_t index = 0; index < view.child_count(); ++index)
+		if (auto* found = find_anchor_suffix(*view.child_at(index), suffix)) return found;
+	return nullptr;
 }
 
 }  // namespace
@@ -73,6 +81,28 @@ int main(int argc, char** argv) {
 		host.layout_children();
 		if (host.child_at(0)->bounds().width != size.width || host.child_at(0)->bounds().height != size.height) return 8;
 	}
+	auto* sidebar = find_anchor_suffix(host, "/div-data-slot-sidebar:0");
+	auto* main = find_anchor_suffix(host, "/main-data-slot-sidebar-inset:0");
+	if (!sidebar || !main) return 12;
+	const auto verify_geometry = [&](float width, bool sidebar_visible, float main_x, float main_width) {
+		host.set_bounds({0, 0, width, 800});
+		host.layout_children();
+		return sidebar->visible() == sidebar_visible && main->visible() &&
+		       main->bounds().x == main_x && main->bounds().width == main_width &&
+		       (!sidebar_visible || (sidebar->bounds().x == 0.0f && sidebar->bounds().width == 280.0f));
+	};
+	for (const auto geometry : {std::tuple{599.0f, false, 0.0f, 587.0f},
+	                            std::tuple{768.0f, true, 280.0f, 476.0f},
+	                            std::tuple{1200.0f, true, 280.0f, 908.0f},
+	                            std::tuple{768.0f, true, 280.0f, 476.0f},
+	                            std::tuple{599.0f, false, 0.0f, 587.0f}})
+		if (!verify_geometry(std::get<0>(geometry), std::get<1>(geometry),
+		                     std::get<2>(geometry), std::get<3>(geometry))) {
+			std::cerr << "responsive geometry width=" << std::get<0>(geometry)
+			          << " sidebar-visible=" << sidebar->visible() << " main-x=" << main->bounds().x
+			          << " main-width=" << main->bounds().width << '\n';
+			return 13;
+		}
 	std::cout << "source-observed native primary tree; no WebView/Chromium; all actions attached\n";
 	return EXIT_SUCCESS;
 }
