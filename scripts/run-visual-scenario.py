@@ -123,6 +123,7 @@ def main() -> int:
     parser.add_argument("--manifest", type=Path, required=True)
     parser.add_argument("--scenario", required=True)
     parser.add_argument("--emit-source-plan", action="store_true")
+    parser.add_argument("--validate-source-only", action="store_true")
     parser.add_argument("--reference", type=Path)
     parser.add_argument("--candidate", type=Path)
     parser.add_argument("--reference-meta", type=Path)
@@ -137,6 +138,20 @@ def main() -> int:
     scenario = select_scenario(manifest, args.scenario)
     if args.emit_source_plan:
         print(json.dumps(source_bootstrap(manifest), indent=2, sort_keys=True))
+        return 0
+    if args.validate_source_only:
+        required = (args.reference, args.reference_meta, args.reference_semantics)
+        if any(value is None for value in required):
+            parser.error("source validation requires image, metadata, and semantics")
+        expected = effective_capture(manifest, scenario)
+        source_meta = json.loads(args.reference_meta.read_text())
+        validate_metadata(source_meta, expected, manifest, "source")
+        read_image(args.reference, expected)
+        source_semantics = json.loads(args.reference_semantics.read_text())
+        for condition in scenario["postconditions"]:
+            if lookup(source_semantics, condition["path"]) != condition["equals"]:
+                raise ValueError(f"reference postcondition failed: {condition['path']}")
+        print(args.reference)
         return 0
     required = (args.reference, args.candidate, args.reference_meta, args.candidate_meta,
                 args.reference_semantics, args.candidate_semantics, args.output)
