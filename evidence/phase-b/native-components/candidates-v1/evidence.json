@@ -54,21 +54,17 @@
         "visualStatePreconditionPass": true
       },
       "metrics": {
-        "mae": 0.2127231645499109,
-        "ssim": 0.28638281341352506,
-        "edgeDiff": 0.04428141240725669
+        "mae": 0.20298208416889482,
+        "ssim": 0.404720377297046,
+        "edgeDiff": 0.040214559566183465
       },
       "status": "GAP",
       "blockers": [
         "post-action semantic failed",
         "ApplicationBindingManifest dispatch not proven: session.select",
-        "visual gap: missing-nested-svg",
-        "visual gap: text-truncation-mismatch",
         "visual gap: wrong-shell-paint"
       ],
       "visualGapCodes": [
-        "missing-nested-svg",
-        "text-truncation-mismatch",
         "wrong-shell-paint"
       ]
     },
@@ -123,9 +119,9 @@
         "visualStatePreconditionPass": true
       },
       "metrics": {
-        "mae": 0.2902233212176916,
-        "ssim": 0.014776358121674618,
-        "edgeDiff": 0.016877236605796042
+        "mae": 0.28876956026255196,
+        "ssim": 0.09713654030918288,
+        "edgeDiff": 0.01648132889925978
       },
       "status": "GAP",
       "blockers": [
@@ -205,18 +201,16 @@
         "visualStatePreconditionPass": true
       },
       "metrics": {
-        "mae": 0.1398639857177439,
-        "ssim": 0.35998190446408856,
-        "edgeDiff": 0.09862693713933285
+        "mae": 0.10571819777293634,
+        "ssim": 0.558668556212076,
+        "edgeDiff": 0.08205757118758658
       },
       "status": "GAP",
       "blockers": [
         "ApplicationBindingManifest dispatch not proven: stream.stop",
-        "visual gap: nested-svg-render-mismatch",
         "visual gap: wrong-shell-paint"
       ],
       "visualGapCodes": [
-        "nested-svg-render-mismatch",
         "wrong-shell-paint"
       ]
     },
@@ -379,9 +373,9 @@
         "visualStatePreconditionPass": true
       },
       "metrics": {
-        "mae": 0.08059809108828717,
-        "ssim": 0.4412923315710546,
-        "edgeDiff": 0.028842554659855725
+        "mae": 0.0901720873534599,
+        "ssim": 0.39145705604443615,
+        "edgeDiff": 0.031586685343336765
       },
       "status": "GAP",
       "blockers": [
@@ -468,9 +462,9 @@
         "visualStatePreconditionPass": true
       },
       "metrics": {
-        "mae": 0.08691720398851364,
-        "ssim": -0.0006519644206380954,
-        "edgeDiff": 0.03133379667898176
+        "mae": 0.08792506782587248,
+        "ssim": -0.0036453232145280193,
+        "edgeDiff": 0.032081633540827305
       },
       "status": "GAP",
       "blockers": [
@@ -593,9 +587,9 @@
         "visualStatePreconditionPass": true
       },
       "metrics": {
-        "mae": 0.09804113051470588,
-        "ssim": 0.07338279161590792,
-        "edgeDiff": 0.020615443214322807
+        "mae": 0.11586961933210785,
+        "ssim": 0.022483122775682273,
+        "edgeDiff": 0.031992489440220526
       },
       "status": "GAP",
       "blockers": [

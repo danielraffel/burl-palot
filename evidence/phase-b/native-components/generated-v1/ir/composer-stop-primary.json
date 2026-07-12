@@ -62,6 +62,7 @@
       "whiteSpace": "nowrap",
       "textOverflow": "clip",
       "position": "static",
+      "width": 80.766,
       "height": 24
     },
     "visualSkin": {
@@ -156,6 +157,7 @@
           "borderBottomLeftRadius": 0,
           "cursor": "default",
           "position": "static",
+          "width": 66.766,
           "height": 18
         },
         "attributes": {
@@ -214,6 +216,7 @@
               "borderBottomLeftRadius": 0,
               "cursor": "default",
               "position": "static",
+              "width": 14,
               "height": 14
             },
             "attributes": {
@@ -227,7 +230,7 @@
             "confidence": "pass",
             "raw_source": "{\"kind\":\"observed-dom\",\"node\":{\"sourceId\":\"html:1/body:2/div[root]:3/div:1/div:1/div[sidebar-wrapper]:1/main[sidebar-inset]:2/div[content-area]:2/div:1/div:1/div:1/div:1/div:2/div:1/div:1/form:2/div[input-group]:1/div[input-group-addon]:2/button[button]:2/span:1/svg:1\",\"tagName\":\"svg\",\"attributes\":{},\"rect\":{\"x\":1086.234,\"y\":715.5,\"width\":14,\"height\":14}},\"computedStyle\":{\"display\":\"block\",\"position\":\"static\",\"flexDirection\":\"row\",\"flexGrow\":\"0\",\"flexShrink\":\"0\",\"flexBasis\":\"auto\",\"flexWrap\":\"nowrap\",\"alignItems\":\"normal\",\"alignSelf\":\"auto\",\"alignContent\":\"normal\",\"justifyContent\":\"normal\",\"gap\":\"normal\",\"padding\":\"0px\",\"paddingTop\":\"0px\",\"paddingRight\":\"0px\",\"paddingBottom\":\"0px\",\"paddingLeft\":\"0px\",\"margin\":\"0px\",\"marginTop\":\"0px\",\"marginRight\":\"0px\",\"marginBottom\":\"0px\",\"marginLeft\":\"0px\",\"width\":\"14px\",\"height\":\"14px\",\"minWidth\":\"auto\",\"minHeight\":\"auto\",\"maxWidth\":\"none\",\"maxHeight\":\"none\",\"top\":\"auto\",\"right\":\"auto\",\"bottom\":\"auto\",\"left\":\"auto\",\"color\":\"rgb(13, 13, 13)\",\"backgroundColor\":\"rgba(0, 0, 0, 0)\",\"backgroundImage\":\"none\",\"transform\":\"none\",\"filter\":\"none\",\"backdropFilter\":\"none\",\"fontFamily\":\"-apple-system, \\\"system-ui\\\", \\\"Segoe UI\\\", system-ui, sans-serif\",\"fontSize\":\"13px\",\"fontWeight\":\"500\",\"lineHeight\":\"18px\",\"whiteSpace\":\"nowrap\",\"textAlign\":\"center\",\"textOverflow\":\"clip\",\"overflowWrap\":\"normal\",\"wordWrap\":\"normal\",\"letterSpacing\":\"normal\",\"border\":\"0px solid rgb(46, 46, 46)\",\"borderRadius\":\"0px\",\"borderTopLeftRadius\":\"0px\",\"borderTopRightRadius\":\"0px\",\"borderBottomRightRadius\":\"0px\",\"borderBottomLeftRadius\":\"0px\",\"borderTopWidth\":\"0px\",\"borderRightWidth\":\"0px\",\"borderBottomWidth\":\"0px\",\"borderLeftWidth\":\"0px\",\"borderTopColor\":\"rgb(46, 46, 46)\",\"borderRightColor\":\"rgb(46, 46, 46)\",\"borderBottomColor\":\"rgb(46, 46, 46)\",\"borderLeftColor\":\"rgb(46, 46, 46)\",\"opacity\":\"1\",\"boxShadow\":\"none\",\"cursor\":\"default\",\"overflowX\":\"hidden\",\"overflowY\":\"hidden\"}}",
             "render_mode": "faithful_svg",
-            "svg_asset_id": "inline-svg-66fe7d4ab9c0fb98",
+            "svg_asset_id": "inline-svg-b4164fdb52adc3f3",
             "children": []
           },
           {
@@ -284,6 +287,7 @@
               "whiteSpace": "nowrap",
               "textOverflow": "clip",
               "position": "static",
+              "width": 46.765625,
               "height": 15
             },
             "attributes": {
@@ -311,9 +315,9 @@
     "version": 1,
     "assets": [
       {
-        "asset_id": "inline-svg-66fe7d4ab9c0fb98",
-        "original_uri": "data:image/svg+xml,%3Csvg%20aria-hidden%3D%22true%22%20class%3D%22lucide%20lucide-square%20size-3.5%22%20fill%3D%22none%22%20height%3D%2224%22%20stroke%3D%22rgb(13%2C%2013%2C%2013)%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%20stroke-width%3D%222%22%20viewBox%3D%220%200%2024%2024%22%20width%3D%2224%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Crect%20height%3D%2218%22%20rx%3D%222%22%20width%3D%2218%22%20x%3D%223%22%20y%3D%223%22%2F%3E%3C%2Fsvg%3E",
-        "content_hash": "66fe7d4ab9c0fb98af67216ce92f0a7ef513bac096c54cb9b6975a943af6c03c",
+        "asset_id": "inline-svg-b4164fdb52adc3f3",
+        "original_uri": "data:image/svg+xml,%3Csvg%20aria-hidden%3D%22true%22%20class%3D%22lucide%20lucide-square%20size-3.5%22%20fill%3D%22none%22%20height%3D%2224%22%20stroke%3D%22%230d0d0d%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%20stroke-width%3D%222%22%20viewBox%3D%220%200%2024%2024%22%20width%3D%2224%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Crect%20height%3D%2218%22%20rx%3D%222%22%20width%3D%2218%22%20x%3D%223%22%20y%3D%223%22%2F%3E%3C%2Fsvg%3E",
+        "content_hash": "b4164fdb52adc3f3bea159e2f00dad36a94baa3472512a61c2e9b799a8c3caf9",
         "mime": "image/svg+xml",
         "diagnostics": []
       }
