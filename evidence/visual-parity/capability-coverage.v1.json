@@ -4103,10 +4103,9 @@
     {
       "name": "selection",
       "observation": "observed",
-      "decision": "unsupported",
-      "route": null,
-      "evidenceIds": [],
-      "reason": "No exact behavior route plus resolving evidence ID is published; screenshot scoring is gated."
+      "decision": "supported",
+      "route": "imported TextEditor or MarkdownView pointer/keyboard input -> native shaped-text hit testing -> grapheme-aware caret and anchor/extent selection over Unicode bidi and multiline text -> drag and Shift extension -> Skia selection highlight and accessibility range geometry -> copy/cut replacement and clipboard interoperability; no WebView",
+      "evidenceIds": ["behavior:native-text-selection"]
     }
   ]
 }
