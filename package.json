@@ -63,6 +63,7 @@
 		"generate:source-components": "bun scripts/generate-source-component-references.ts",
 		"test:source-components": "bun test tests/generate_source_component_references.test.ts",
 		"test:electron-ipc-map": "bun test tests/generate_electron_ipc_map.test.ts",
+		"test:electron-interaction-traces": "bun test tests/electron_interaction_traces.test.ts",
 		"generate:electron-ipc-map": "node scripts/generate-electron-ipc-map.mjs",
 		"generate:native-components": "bun scripts/generate-native-component-ir.ts",
 		"gate:native-components": "bun scripts/run-native-component-gate.ts",
