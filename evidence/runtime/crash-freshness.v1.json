@@ -1,0 +1,9 @@
+{
+  "schema": "burl-palot-crash-freshness-v1",
+  "binary": "./build-semantic/Palot.app/Contents/MacOS/Palot",
+  "startedAtEpoch": 1783866113,
+  "latestBefore": "1783855326 /Users/danielraffel/Library/Logs/DiagnosticReports/Palot-2026-07-12-042206.ips",
+  "settleSeconds": 5,
+  "newCrashReports": [],
+  "passed": true
+}
