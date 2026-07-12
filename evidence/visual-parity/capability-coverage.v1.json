@@ -4039,10 +4039,9 @@
     {
       "name": "focus-visible",
       "observation": "observed",
-      "decision": "unsupported",
-      "route": null,
-      "evidenceIds": [],
-      "reason": "No exact behavior route plus resolving evidence ID is published; screenshot scoring is gated."
+      "decision": "lowered",
+      "route": "captured CSS :focus-visible computed visual state or explicit focused receipt -> observed_visual_states -> NativeDesignIR VisualSkin canonical focused state with explicit focused precedence -> native keyboard focus traversal excluding disabled/hidden controls -> WidgetState::focused skin and focus ring -> Skia pixels; pointer hover/press remains hover/pressed and does not synthesize keyboard focus",
+      "evidenceIds": ["behavior:observed-focus-visible"]
     },
     {
       "name": "hover",
