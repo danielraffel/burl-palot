@@ -40,29 +40,6 @@ std::string error_diagnostics(const std::vector<pulp::view::ImportDiagnostic>& d
 	return message;
 }
 
-bool prune_template(pulp::view::IRNode& node) {
-	const bool retained = node.attributes.contains("pulpValueKey") || node.attributes.contains("pulpHostAction");
-	auto out = node.children.begin();
-	for (auto it = node.children.begin(); it != node.children.end(); ++it) {
-		if (!prune_template(*it)) continue;
-		if (out != it) *out = std::move(*it);
-		++out;
-	}
-	node.children.erase(out, node.children.end());
-	return retained || !node.children.empty();
-}
-
-void collect_templates(const pulp::view::IRNode& node,
-	                   std::unordered_map<std::string, pulp::view::IRNode>& templates) {
-	if (const auto it = node.attributes.find("pulpCollectionTemplate"); it != node.attributes.end()) {
-		auto copy = node;
-		prune_template(copy);
-		copy.attributes.erase("pulpCollectionTemplate");
-		templates.emplace(it->second, std::move(copy));
-	}
-	for (const auto& child : node.children) collect_templates(child, templates);
-}
-
 }  // namespace
 
 class ImportedRootHost::BindingContext final : public pulp::view::NativeImportBindingContext {
@@ -80,7 +57,7 @@ public:
 
 	void bind_application_action(pulp::view::View& view,
 	                             const pulp::view::NativeImportHostActionDescriptor& descriptor) override {
-		if (auto* button = dynamic_cast<pulp::view::TextButton*>(&view)) attach(*button, descriptor);
+		attach(view, descriptor);
 	}
 	void bind_text_editor(pulp::view::TextEditor& editor,
 	                      const pulp::view::NativeImportTextBindingDescriptor& descriptor) override {
@@ -102,11 +79,25 @@ public:
 		if (!pending_hosts_.emplace(std::string(descriptor.collection_key), &host).second)
 			throw std::runtime_error("duplicate imported collection slot");
 	}
+	void unbind_imported_view(pulp::view::View& view) override {
+		for (auto& [id, bound] : action_views_) {
+			for (std::size_t index = bound.size(); index-- > 0;) {
+				auto identities = action_view_instance_ids_.find(id);
+				if (bound[index] != &view || identities == action_view_instance_ids_.end() ||
+				    index >= identities->second.size() ||
+				    identities->second[index] != view.import_binding_instance_id()) continue;
+				bound.erase(bound.begin() + static_cast<std::ptrdiff_t>(index));
+				identities->second.erase(identities->second.begin() + static_cast<std::ptrdiff_t>(index));
+				auto payload = payloads_.find(id);
+				if (payload != payloads_.end() && index < payload->second.size())
+					payload->second.erase(payload->second.begin() + static_cast<std::ptrdiff_t>(index));
+			}
+		}
+	}
 	void install_pending_collection() {
 		if (!pending_hosts_.contains("messages") || !pending_hosts_.contains("projects"))
 			throw std::runtime_error("required imported collection slot was not bound");
-		std::unordered_map<std::string, pulp::view::IRNode> templates;
-		collect_templates(ir_.root, templates);
+		auto templates = pulp::view::extract_imported_collection_templates(ir_.root);
 		if (!templates.contains("user") || !templates.contains("assistant") || !templates.contains("tool") ||
 		    !templates.contains("project")) throw std::runtime_error("source collection templates are incomplete");
 		std::unordered_map<std::string, pulp::view::IRNode> transcript_templates;
@@ -114,7 +105,8 @@ public:
 		auto list = std::make_unique<pulp::view::ImportedRepeatedList>(std::move(transcript_templates), ir_.asset_manifest, this);
 		auto* transcript_host = pending_hosts_.at("messages");
 		while (transcript_host->child_count()) transcript_host->remove_child(transcript_host->child_at(0));
-		buttons_.erase("composer.copy");
+		action_views_.erase("composer.copy");
+		action_view_instance_ids_.erase("composer.copy");
 		payloads_.erase("composer.copy");
 		transcript_ = list.get();
 		transcript_->flex().flex_grow = 1.0f;
@@ -122,7 +114,8 @@ public:
 		auto project_list = std::make_unique<pulp::view::ImportedRepeatedList>(
 			std::unordered_map<std::string, pulp::view::IRNode>{{"project", templates.at("project")}}, ir_.asset_manifest, this);
 		auto* project_host = pending_hosts_.at("projects");
-		buttons_.erase("project.open");
+		action_views_.erase("project.open");
+		action_view_instance_ids_.erase("project.open");
 		payloads_.erase("project.open");
 		while (project_host->child_count()) project_host->remove_child(project_host->child_at(0));
 		projects_ = project_list.get();
@@ -142,7 +135,7 @@ public:
 	}
 	std::vector<pulp::view::View*> bound_views(std::string_view id) const {
 		std::vector<pulp::view::View*> result;
-		if (const auto found = buttons_.find(std::string(id)); found != buttons_.end())
+		if (const auto found = action_views_.find(std::string(id)); found != action_views_.end())
 			result.assign(found->second.begin(), found->second.end());
 		if (id == "prompt.send" || id == "prompt.retry" || id == "prompt.cancel")
 			if (composer_) result.push_back(composer_);
@@ -150,15 +143,25 @@ public:
 	}
 
 private:
-	void attach(pulp::view::TextButton& button,
+	void attach(pulp::view::View& view,
 	            const pulp::view::NativeImportHostActionDescriptor& descriptor) {
 		auto endpoint = endpoints_.find(std::string(descriptor.action));
 		if (endpoint == endpoints_.end()) return;
 		const auto id = std::string(descriptor.action);
+		const auto instance_id = view.import_binding_instance_id();
+		if (const auto found = action_views_.find(id); found != action_views_.end()) {
+			const auto identities = action_view_instance_ids_.find(id);
+			for (std::size_t index = 0; index < found->second.size(); ++index)
+				if (found->second[index] == &view && identities != action_view_instance_ids_.end() &&
+				    index < identities->second.size() && identities->second[index] == instance_id) return;
+		}
 		const auto payload = std::string(descriptor.payload_contract);
-		button.on_click = [callback = endpoint->second, payload] { callback(payload); };
+		auto callback = [endpoint = endpoint->second, payload] { endpoint(payload); };
+		if (auto* button = dynamic_cast<pulp::view::TextButton*>(&view)) button->on_click = callback;
+		else view.on_click = std::move(callback);
 		attached_.insert(id);
-		buttons_[id].push_back(&button);
+		action_views_[id].push_back(&view);
+		action_view_instance_ids_[id].push_back(instance_id);
 		payloads_[id].push_back(payload);
 	}
 	bool invoke(std::string_view id, std::string_view payload) {
@@ -175,13 +178,17 @@ private:
 	pulp::view::ImportedRepeatedList*& projects_;
 	std::unordered_map<std::string, pulp::view::View*> pending_hosts_;
 	std::unordered_set<std::string> attached_;
-	std::unordered_map<std::string, std::vector<pulp::view::TextButton*>> buttons_;
+	std::unordered_map<std::string, std::vector<pulp::view::View*>> action_views_;
+	std::unordered_map<std::string, std::vector<std::uint64_t>> action_view_instance_ids_;
 	std::unordered_map<std::string, std::vector<std::string>> payloads_;
 	pulp::view::TextEditor* composer_ = nullptr;
 };
 
 ImportedRootHost::ImportedRootHost() = default;
-ImportedRootHost::~ImportedRootHost() = default;
+ImportedRootHost::~ImportedRootHost() {
+	while (child_count()) remove_child(child_at(0));
+	binding_context_.reset();
+}
 
 void ImportedRootHost::register_action(std::string id, ActionEndpoint endpoint) {
 	if (id.empty() || !endpoint) throw std::invalid_argument("imported-root action endpoint is invalid");

@@ -30,7 +30,7 @@ std::string read_text(const char* path) {
 }
 
 void register_actions(ImportedRootHost& host, std::unordered_map<std::string, int>* calls = nullptr) {
-	for (const auto* id : {"composer.copy", "project.select", "prompt.cancel", "prompt.retry",
+	for (const auto* id : {"composer.copy", "project.open", "project.select", "prompt.cancel", "prompt.retry",
 	                       "prompt.send", "session.create", "session.open"})
 		host.register_action(id, [calls, id](std::string_view) { if (calls) ++(*calls)[id]; });
 }
@@ -63,7 +63,7 @@ int main(int argc, char** argv) {
 	host.load(argv[1], argv[2]);
 	if (!host.source_observed_primary_tree() || host.child_count() != 1) return 5;
 	if (host.child_at(0)->child_count() == 0) return 6;
-	if (host.attached_action_count() != 7 || !host.unattached_required_actions().empty()) return 7;
+	if (host.attached_action_count() != 8 || !host.unattached_required_actions().empty()) return 7;
 	host.set_transcript({{"u1", "user", {{"message.text", "runtime user"}}},
 	                     {"a1", "assistant", {{"message.text", "runtime assistant"}}},
 	                     {"t1", "tool", {{"message.text", "tool.read"}}}});
@@ -71,6 +71,16 @@ int main(int argc, char** argv) {
 	                                          {"project.name", "project-one"},
 	                                          {"directory", "/tmp/project-one"},
 	                                          {"status", "active"}}}});
+	host.set_projects({{"p1", "project", {{"id", "/tmp/project-two"},
+	                                          {"project.name", "project-two"},
+	                                          {"directory", "/tmp/project-two"},
+	                                          {"status", "active"}}}});
+	host.set_bounds({0, 0, 1200, 800});
+	host.layout_children();
+	if (host.bound_action_views("project.open").size() != 1) {
+		std::cerr << "project bindings=" << host.bound_action_views("project.open").size() << '\n';
+		return 15;
+	}
 	for (const auto* id : {"composer.copy", "project.select", "session.create", "session.open"}) {
 		if (!host.invoke_bound_action(id) || calls[id] != 1) return 9;
 	}
@@ -114,7 +124,7 @@ int main(int argc, char** argv) {
 			return node.label.find(text) != std::string::npos || node.value.find(text) != std::string::npos;
 		});
 	};
-	for (const auto text : {"runtime user", "runtime assistant", "tool.read", "project-one"})
+	for (const auto text : {"runtime user", "runtime assistant", "tool.read", "project-two"})
 		if (!contains_accessible_text(text)) {
 			std::cerr << "dynamic imported collection missing accessible value: " << text << '\n';
 			return 14;

@@ -118,7 +118,11 @@ int main(int argc, char** argv) {
 				auto* up_target = host.hit_test(root_point);
 				if (up_target != down_target) return 7;
 				up_target->on_mouse_up(local);
-				if (calls[id] != before_pointer + 1) return 8;
+				if (calls[id] != before_pointer + 1) {
+					std::cerr << "pointer callback count action=" << id << " before=" << before_pointer
+					          << " after=" << calls[id] << '\n';
+					return 8;
+				}
 
 				const int before_keyboard = calls[id];
 				if (!button->on_key_event({.key = pulp::view::KeyCode::enter, .is_down = true}) ||
