@@ -41,6 +41,7 @@ for line in sys.stdin:
         project_directory = command["directory"]
         result = {"ok": True, "value": {"baseUrl": "http://127.0.0.1", "directory": command["directory"], "ownedProcess": True}}
     elif command_type == "project.select":
+        project_directory = command["directory"]
         result = {"ok": True, "value": {"id": project_id, "directory": command["directory"], "name": "fixture"}}
     elif command_type in ("session.create", "session.open"):
         result = {"ok": True, "value": {"id": session_id}}

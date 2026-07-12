@@ -50,8 +50,7 @@ public:
 
 private:
 	struct State;
-	static void run(std::shared_ptr<State> state, std::uint64_t run_id,
-	                OpenCodeRequest request, std::weak_ptr<OpenCodeEventSink> sink);
+	static void run(std::shared_ptr<State> state);
 
 	std::shared_ptr<State> state_;
 	std::jthread worker_;
