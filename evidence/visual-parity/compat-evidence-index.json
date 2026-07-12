@@ -9,6 +9,15 @@
       "endpoint": "main-chat source binding policy, ImportedRootHost, OpenCodeProcess, native interaction execution, fake-sidecar lifecycle test, and real OpenCode cancellation probe",
       "path": "apps/desktop-burl/test/opencode_process_test.cpp",
       "command": "cmake --build build-semantic --target palot-opencode-process-test palot-native-interaction-execution-test && ctest --test-dir build-semantic -R 'palot-(opencode-process|native-interaction-execution)' --output-on-failure"
+    },
+    "behavior:palot-loading-streaming": {
+      "kind": "behavior",
+      "owner": "burl-palot-native-application",
+      "repository": "burl-palot",
+      "route": "typed prompt.send application action -> OpenCodeProcess generation-scoped sidecar request -> newline-framed real OpenCode events -> ordered text deltas -> main-thread source-aware chat reducer -> one coalesced native collection/text-shaping update and polite accessibility announcement per frame -> loading indicator transitions to terminal completion while preserving composer focus/selection/IME and dropping stale generations",
+      "endpoint": "ImportedRootHost, OpenCodeProcess, SourceAwareChatSlice, PalotView stream callbacks, native collection model, and real OpenCode E2E probe",
+      "path": "apps/desktop-burl/test/source_aware_chat_slice_test.cpp",
+      "command": "cmake --build build-semantic --target palot-opencode-process-test palot-source-aware-slice-test && ctest --test-dir build-semantic -R 'palot-(opencode-process|source-aware-slice)' --output-on-failure"
     }
   }
 }

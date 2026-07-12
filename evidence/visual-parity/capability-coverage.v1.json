@@ -4067,10 +4067,9 @@
     {
       "name": "loading/streaming",
       "observation": "observed",
-      "decision": "unsupported",
-      "route": null,
-      "evidenceIds": [],
-      "reason": "No exact behavior route plus resolving evidence ID is published; screenshot scoring is gated."
+      "decision": "lowered",
+      "route": "typed prompt.send application action -> OpenCodeProcess generation-scoped sidecar request -> newline-framed real OpenCode events -> ordered text deltas -> main-thread source-aware chat reducer -> one coalesced native collection/text-shaping update and polite accessibility announcement per frame -> loading indicator transitions to terminal completion while preserving composer focus/selection/IME and dropping stale generations",
+      "evidenceIds": ["behavior:palot-loading-streaming"]
     },
     {
       "name": "persistence",
