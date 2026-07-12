@@ -3,10 +3,12 @@
 #include <pulp/view/buttons.hpp>
 #include <pulp/view/pointer_dispatch.hpp>
 #include <pulp/canvas/canvas.hpp>
+#include <pulp/view/screenshot.hpp>
 
 #include <algorithm>
 #include <cstdlib>
 #include <filesystem>
+#include <fstream>
 #include <iostream>
 #include <string>
 #include <unordered_map>
@@ -50,7 +52,7 @@ int main(int argc, char** argv) {
 			++calls[id]; payloads[id] = payload;
 		});
 	host.load(argv[1], argv[2]);
-	host.set_projects({{"project", "project", {{"id", "project"}, {"project.name", "project"},
+	host.set_projects({{"project", "project", {{"id", "project"}, {"project.name", "burl-palot-wt-semantic-restart"},
 	                                             {"directory", std::filesystem::current_path().string()},
 	                                             {"status", "active"}}}});
 	if (!host.unattached_actions().empty()) {
@@ -124,12 +126,19 @@ int main(int argc, char** argv) {
 			current_fill = command.color;
 		}
 		if (command.type == pulp::canvas::DrawCommand::Type::fill_text &&
-		    command.text.find("project") != std::string::npos) {
+		    command.text.find("burl-palot-wt-semantic-restart") != std::string::npos) {
 			painted_project = true;
 			opaque_project_foreground = current_fill.a > 0.0f;
 		}
 	}
 	if (!painted_project || !opaque_project_foreground) return 13;
+	if (const auto* proof = std::getenv("PALOT_PROJECT_ROW_PROOF")) {
+		const auto png = pulp::view::render_to_png(host, 1200, 800, 1.0f,
+		                                             pulp::view::ScreenshotBackend::skia);
+		std::ofstream output(proof, std::ios::binary);
+		output.write(reinterpret_cast<const char*>(png.data()), static_cast<std::streamsize>(png.size()));
+		if (!output.good() || png.empty()) return 14;
+	}
 	std::cout << "native interaction union: anchors, pointer down/up, endpoint, focus, keyboard, disabled, overlay and fail-closed diagnostics pass\n";
 	return EXIT_SUCCESS;
 }
