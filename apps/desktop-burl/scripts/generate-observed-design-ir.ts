@@ -102,8 +102,23 @@ if (responsiveSemantics.length) {
 		if (!root || !viewport) throw new Error(`invalid responsive semantics ${path}`)
 		removeFormattingWhitespace(root)
 		applyMotionReceipts(root)
-		return { viewport, root, path }
+		const cohort = JSON.stringify({
+			schema: capture.schema,
+			pageUrl: capture.page?.url,
+			clock: capture.policy?.clock,
+			deviceScaleFactor: viewport.deviceScaleFactor,
+			reload: capture.policy?.reload,
+			clearStorage: capture.policy?.clearStorage,
+			animations: capture.policy?.animations,
+			transitions: capture.policy?.transitions,
+			network: capture.policy?.network,
+			hostServices: capture.policy?.hostServices,
+		})
+		return { viewport, root, path, cohort }
 	}))
+	const cohorts = new Set(captures.map((capture) => capture.cohort))
+	if (cohorts.size !== 1)
+		throw new Error(`responsive captures cross source/build/state cohorts: ${JSON.stringify([...cohorts].sort())}`)
 	// unionResponsiveTrees takes its canonical literal/style tree from the last
 	// capture. Make that choice explicit and independent of CLI list ordering.
 	const reference = captures.findIndex((capture) => capture.path === semanticsPath)
