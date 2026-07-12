@@ -1932,34 +1932,30 @@
         {
           "value": "center",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "supported",
+          "route": "computed CSS justify-content -> validated typed distribution keyword with contextual normal-to-start lowering for flex and supported block-to-column-flex flow -> NativeDesignIR justify enum -> IRLayout LayoutAlign -> native FlexJustify -> Yoga main-axis distribution under resize -> Skia pixels; unknown syntax fails closed before the native enum boundary",
+          "evidenceIds": ["semantic:observed-dom-justify-content"]
         },
         {
           "value": "flex-end",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "supported",
+          "route": "computed CSS justify-content -> validated typed distribution keyword with contextual normal-to-start lowering for flex and supported block-to-column-flex flow -> NativeDesignIR justify enum -> IRLayout LayoutAlign -> native FlexJustify -> Yoga main-axis distribution under resize -> Skia pixels; unknown syntax fails closed before the native enum boundary",
+          "evidenceIds": ["semantic:observed-dom-justify-content"]
         },
         {
           "value": "normal",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed CSS justify-content -> validated typed distribution keyword with contextual normal-to-start lowering for flex and supported block-to-column-flex flow -> NativeDesignIR justify enum -> IRLayout LayoutAlign -> native FlexJustify -> Yoga main-axis distribution under resize -> Skia pixels; unknown syntax fails closed before the native enum boundary",
+          "evidenceIds": ["semantic:observed-dom-justify-content"]
         },
         {
           "value": "space-between",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "supported",
+          "route": "computed CSS justify-content -> validated typed distribution keyword with contextual normal-to-start lowering for flex and supported block-to-column-flex flow -> NativeDesignIR justify enum -> IRLayout LayoutAlign -> native FlexJustify -> Yoga main-axis distribution under resize -> Skia pixels; unknown syntax fails closed before the native enum boundary",
+          "evidenceIds": ["semantic:observed-dom-justify-content"]
         }
       ]
     },
