@@ -4089,10 +4089,9 @@
     {
       "name": "retry",
       "observation": "observed",
-      "decision": "unsupported",
-      "route": null,
-      "evidenceIds": [],
-      "reason": "No exact behavior route plus resolving evidence ID is published; screenshot scoring is gated."
+      "decision": "lowered",
+      "route": "captured retry affordance -> imported prompt.retry typed application action -> retained failed request identity -> OpenCodeProcess new generation using existing project/session and persistent sidecar transport -> prompt.retry command -> stale prior-generation events rejected -> fresh streamed deltas and terminal completion in the same native transcript",
+      "evidenceIds": ["behavior:palot-stream-retry"]
     },
     {
       "name": "scroll-anchor",

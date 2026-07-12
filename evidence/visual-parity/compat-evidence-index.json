@@ -27,6 +27,15 @@
       "endpoint": "PalotView::persist/restore, PALOT_STATE_PATH isolated test override, and native demo persistence evidence validator",
       "path": "evidence/native-demo/final-20260711/persistence.json",
       "command": "python3 -m unittest tests.native_evidence.test_native_demo_evidence.NativeEvidenceTest.test_persistence_gate_includes_corruption_recovery"
+    },
+    "behavior:palot-stream-retry": {
+      "kind": "behavior",
+      "owner": "burl-palot-native-application",
+      "repository": "burl-palot",
+      "route": "captured retry affordance -> imported prompt.retry typed application action -> retained failed request identity -> OpenCodeProcess new generation using existing project/session and persistent sidecar transport -> prompt.retry command -> stale prior-generation events rejected -> fresh streamed deltas and terminal completion in the same native transcript",
+      "endpoint": "source binding policy, ImportedRootHost, PalotView retry callback, OpenCodeProcess, fake-sidecar lifecycle test, and real OpenCode retry probe",
+      "path": "apps/desktop-burl/test/real_opencode_e2e.cpp",
+      "command": "cmake --build build-semantic --target palot-opencode-process-test palot-native-interaction-execution-test && ctest --test-dir build-semantic -R 'palot-(opencode-process|native-interaction-execution)' --output-on-failure"
     }
   }
 }
