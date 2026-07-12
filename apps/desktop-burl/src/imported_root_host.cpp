@@ -69,8 +69,9 @@ class ImportedRootHost::BindingContext final : public pulp::view::NativeImportBi
 public:
 	explicit BindingContext(std::unordered_map<std::string, ActionEndpoint>& endpoints,
 	                       const pulp::view::DesignIR& ir,
-	                       pulp::view::ImportedRepeatedList*& transcript)
-		: endpoints_(endpoints), ir_(ir), transcript_(transcript) {}
+	                       pulp::view::ImportedRepeatedList*& transcript,
+	                       pulp::view::ImportedRepeatedList*& projects)
+		: endpoints_(endpoints), ir_(ir), transcript_(transcript), projects_(projects) {}
 
 	void bind_host_action(pulp::view::TextButton& button,
 	                      const pulp::view::NativeImportHostActionDescriptor& descriptor) override {
@@ -97,21 +98,35 @@ public:
 	}
 	void bind_imported_collection(pulp::view::View& host,
 	                             const pulp::view::NativeImportCollectionDescriptor& descriptor) override {
-		if (descriptor.collection_key != "messages") return;
-		if (pending_host_) throw std::runtime_error("duplicate transcript collection slot");
-		pending_host_ = &host;
+		if (descriptor.collection_key != "messages" && descriptor.collection_key != "projects") return;
+		if (!pending_hosts_.emplace(std::string(descriptor.collection_key), &host).second)
+			throw std::runtime_error("duplicate imported collection slot");
 	}
 	void install_pending_collection() {
-		if (!pending_host_) throw std::runtime_error("transcript collection slot was not bound");
+		if (!pending_hosts_.contains("messages") || !pending_hosts_.contains("projects"))
+			throw std::runtime_error("required imported collection slot was not bound");
 		std::unordered_map<std::string, pulp::view::IRNode> templates;
 		collect_templates(ir_.root, templates);
-		if (templates.size() != 3) throw std::runtime_error("source transcript templates are incomplete");
-		auto list = std::make_unique<pulp::view::ImportedRepeatedList>(std::move(templates), ir_.asset_manifest, this);
-		while (pending_host_->child_count()) pending_host_->remove_child(pending_host_->child_at(0));
+		if (!templates.contains("user") || !templates.contains("assistant") || !templates.contains("tool") ||
+		    !templates.contains("project")) throw std::runtime_error("source collection templates are incomplete");
+		std::unordered_map<std::string, pulp::view::IRNode> transcript_templates;
+		for (const auto* id : {"user", "assistant", "tool"}) transcript_templates.emplace(id, templates.at(id));
+		auto list = std::make_unique<pulp::view::ImportedRepeatedList>(std::move(transcript_templates), ir_.asset_manifest, this);
+		auto* transcript_host = pending_hosts_.at("messages");
+		while (transcript_host->child_count()) transcript_host->remove_child(transcript_host->child_at(0));
 		buttons_.erase("composer.copy");
 		transcript_ = list.get();
 		transcript_->flex().flex_grow = 1.0f;
-		pending_host_->add_child(std::move(list));
+		transcript_host->add_child(std::move(list));
+		auto project_list = std::make_unique<pulp::view::ImportedRepeatedList>(
+			std::unordered_map<std::string, pulp::view::IRNode>{{"project", templates.at("project")}}, ir_.asset_manifest, this);
+		auto* project_host = pending_hosts_.at("projects");
+		buttons_.erase("project.open");
+		while (project_host->child_count()) project_host->remove_child(project_host->child_at(0));
+		projects_ = project_list.get();
+		projects_->set_auto_follow(false);
+		projects_->flex().flex_grow = 1.0f;
+		project_host->add_child(std::move(project_list));
 	}
 
 	[[nodiscard]] const std::unordered_set<std::string>& attached() const noexcept { return attached_; }
@@ -154,7 +169,8 @@ private:
 	std::unordered_map<std::string, ActionEndpoint>& endpoints_;
 	const pulp::view::DesignIR& ir_;
 	pulp::view::ImportedRepeatedList*& transcript_;
-	pulp::view::View* pending_host_ = nullptr;
+	pulp::view::ImportedRepeatedList*& projects_;
+	std::unordered_map<std::string, pulp::view::View*> pending_hosts_;
 	std::unordered_set<std::string> attached_;
 	std::unordered_map<std::string, std::vector<pulp::view::TextButton*>> buttons_;
 	pulp::view::TextEditor* composer_ = nullptr;
@@ -193,7 +209,7 @@ void ImportedRootHost::load(const std::filesystem::path& design_ir_path,
 		throw std::runtime_error("source-observed primary tree failed native materialization" +
 		                         error_diagnostics(diagnostics));
 
-	binding_context_ = std::make_unique<BindingContext>(endpoints_, *parsed, transcript_);
+	binding_context_ = std::make_unique<BindingContext>(endpoints_, *parsed, transcript_, projects_);
 	pulp::view::bind_native_view_tree(*root, *parsed, *binding_context_, {.diagnostics_out = &diagnostics});
 	if (has_error(diagnostics)) throw std::runtime_error("source-observed primary tree binding failed");
 	binding_context_->install_pending_collection();
@@ -243,6 +259,11 @@ pulp::view::TextEditor* ImportedRootHost::bound_composer() const noexcept {
 void ImportedRootHost::set_transcript(std::vector<pulp::view::ImportedListItem> items) {
 	if (!transcript_) throw std::logic_error("source transcript slot is not bound");
 	transcript_->set_items(std::move(items));
+}
+
+void ImportedRootHost::set_projects(std::vector<pulp::view::ImportedListItem> items) {
+	if (!projects_) throw std::logic_error("imported projects collection is not installed");
+	projects_->set_items(std::move(items));
 }
 
 std::filesystem::path palot_bundle_resource(std::string_view relative_path) {

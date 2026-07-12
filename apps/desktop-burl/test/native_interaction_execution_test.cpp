@@ -5,6 +5,7 @@
 
 #include <algorithm>
 #include <cstdlib>
+#include <filesystem>
 #include <iostream>
 #include <string>
 #include <unordered_map>
@@ -41,20 +42,25 @@ int main(int argc, char** argv) {
 	if (argc != 3) return 2;
 	ImportedRootHost host;
 	std::unordered_map<std::string, int> calls;
+	std::unordered_map<std::string, std::string> payloads;
 	for (const auto* id : {"composer.copy", "project.open", "project.select", "prompt.cancel",
 	                       "prompt.retry", "prompt.send", "session.create", "session.open"})
-		host.register_action(id, [&calls, id](std::string_view) { ++calls[id]; });
+		host.register_action(id, [&calls, &payloads, id](std::string_view payload) {
+			++calls[id]; payloads[id] = payload;
+		});
 	host.load(argv[1], argv[2]);
-	if (host.unattached_actions().size() != 1 || host.unattached_actions().front() != "project.open")
+	host.set_projects({{"project", "project", {{"id", "project"}, {"project.name", "project"},
+	                                             {"directory", std::filesystem::current_path().string()},
+	                                             {"status", "active"}}}});
+	if (!host.unattached_actions().empty()) {
+		for (const auto& action : host.unattached_actions()) std::cerr << "unattached=" << action << '\n';
 		return 3;
-	if (!host.bound_action_views("project.open").empty() || host.invoke_bound_action("project.open"))
-		return 4;
-
+	}
 	std::unordered_map<std::string, int> exercised;
 	for (const float width : {599.0f, 768.0f, 1200.0f}) {
 		host.set_bounds({0, 0, width, 800});
 		host.layout_children();
-		for (const auto* id : {"composer.copy", "project.select", "prompt.cancel", "session.create",
+		for (const auto* id : {"composer.copy", "project.open", "project.select", "prompt.cancel", "session.create",
 		                       "session.open"}) {
 			for (auto* candidate : host.bound_action_views(id)) {
 				auto* button = dynamic_cast<pulp::view::TextButton*>(candidate);
@@ -104,8 +110,9 @@ int main(int argc, char** argv) {
 			}
 		}
 	}
-	for (const auto* id : {"project.select", "prompt.cancel", "session.create", "session.open"})
-		if (exercised[id] == 0) return 11;
+	for (const auto* id : {"project.open", "project.select", "prompt.cancel", "session.create", "session.open"})
+		if (exercised[id] == 0) { std::cerr << "unexercised=" << id << '\n'; return 11; }
+	if (payloads["project.open"] != std::filesystem::current_path().string()) return 12;
 	std::cout << "native interaction union: anchors, pointer down/up, endpoint, focus, keyboard, disabled, overlay and fail-closed diagnostics pass\n";
 	return EXIT_SUCCESS;
 }

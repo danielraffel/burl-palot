@@ -34,6 +34,7 @@ private:
 	void set_configuration_error(std::string error);
 	void append_message(std::string role, std::string text, bool announce);
 	void sync_imported_transcript();
+	void sync_imported_projects();
 	void schedule_imported_transcript_sync();
 	float message_height(std::size_t index) const;
 

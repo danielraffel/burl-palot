@@ -220,6 +220,7 @@ PalotView::PalotView() {
 			return;
 		}
 		project_->set_text(*canonical_path);
+		sync_imported_projects();
 		set_configuration_error("");
 		create_session_ = false;
 		request_repaint();
@@ -253,6 +254,7 @@ PalotView::PalotView() {
 	project->set_text(std::filesystem::current_path().string());
 	project_ = project.get();
 	add_child(std::move(project));
+	sync_imported_projects();
 
 	auto choose_project = std::make_unique<PalotChromeButton>("+");
 	choose_project->set_access_label("Choose project folder");
@@ -435,7 +437,19 @@ void PalotView::layout_children() {
 
 void PalotView::start_demo(std::string project, std::string prompt) {
 	project_->set_text(std::move(project));
+	sync_imported_projects();
 	send_prompt(prompt);
+}
+
+void PalotView::sync_imported_projects() {
+	if (!imported_root_ || !project_ || project_->text().empty()) return;
+	const auto directory = std::filesystem::path(project_->text()).lexically_normal();
+	imported_root_->set_projects({{
+		.key = directory.string(),
+		.template_id = "project",
+		.values = {{"id", directory.string()}, {"project.name", directory.filename().string()},
+		           {"directory", directory.string()}, {"status", "active"}},
+	}});
 }
 
 void PalotView::load_visual_parity_fixture() {

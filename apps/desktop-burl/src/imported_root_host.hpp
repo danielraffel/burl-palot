@@ -32,6 +32,7 @@ public:
 	[[nodiscard]] const std::vector<std::string>& unattached_actions() const noexcept;
 	pulp::view::TextEditor* bound_composer() const noexcept;
 	void set_transcript(std::vector<pulp::view::ImportedListItem> items);
+	void set_projects(std::vector<pulp::view::ImportedListItem> items);
 
 private:
 	class BindingContext;
@@ -43,6 +44,7 @@ private:
 	bool source_observed_primary_tree_ = false;
 	std::size_t attached_action_count_ = 0;
 	pulp::view::ImportedRepeatedList* transcript_ = nullptr;
+	pulp::view::ImportedRepeatedList* projects_ = nullptr;
 };
 
 std::filesystem::path palot_bundle_resource(std::string_view relative_path);
