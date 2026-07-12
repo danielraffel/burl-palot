@@ -81,3 +81,27 @@ components. If a source capability cannot be represented, the importer emits a
 named divergence rather than silently substituting Burl defaults. This is the
 safest reversible path because any fix remains framework-generic and testable on
 held-out content.
+
+## 2026-07-12 — Keep one OpenCode transport lifecycle per application connection
+
+The native client will keep one bundled sidecar, one owned OpenCode server, and
+one global event subscription alive across project selection, session open or
+create, prompt, cancellation, and retry. Project-scoped clients remain logical
+views of that connection. This matches the reference application's
+`connection-manager.ts`, which owns a single base connection and persistent SSE
+loop while caching project clients; prompt cancellation calls `session.abort`
+without tearing the connection down.
+
+The rejected alternative was to spawn a sidecar and server for every prompt and
+bound every SDK call independently. Per-call deadlines remain required as a
+failure-containment layer, but they do not make repeated process startup the
+correct lifecycle. Live evidence showed successive startup paths independently
+stalling in health and project selection even after cancellation settlement.
+Persistent ownership removes those avoidable transitions, preserves ordered
+event continuity, and makes reconnect an explicit bounded recovery operation
+rather than an incidental part of every user action.
+
+Contract tests must prove: one server start for multiple prompts; cancel waits
+for its acknowledgement without closing transport; retry uses the same session
+and subscription; project switching does not spawn another server; explicit
+disconnect and bounded transport failure are the only normal teardown paths.
