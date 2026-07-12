@@ -15,9 +15,9 @@
   ],
   "collections": [{
     "id":"transcript",
-    "containerSourceId":"dom/html-shape-3b68501b:0/body-shape-d65c892b:0/div-id-root:0/div-shape-74caabae:0/div-shape-20ec5713:0/div-data-slot-sidebar-wrapper:0/main-data-slot-sidebar-inset:0/div-data-slot-content-area:0/div-shape-12bbae35:0/div-shape-a9a56a97:0/div-shape-2f218dff:0/div-shape-641627bd:0/div-shape-c64206aa:0",
-    "firstChildSourceId":"dom/html-shape-3b68501b:0/body-shape-d65c892b:0/div-id-root:0/div-shape-74caabae:0/div-shape-20ec5713:0/div-data-slot-sidebar-wrapper:0/main-data-slot-sidebar-inset:0/div-data-slot-content-area:0/div-shape-12bbae35:0/div-shape-a9a56a97:0/div-shape-2f218dff:0/div-shape-641627bd:0/div-shape-c64206aa:0/div-log-unnamed:0",
-    "lastChildSourceId":"dom/html-shape-3b68501b:0/body-shape-d65c892b:0/div-id-root:0/div-shape-74caabae:0/div-shape-20ec5713:0/div-data-slot-sidebar-wrapper:0/main-data-slot-sidebar-inset:0/div-data-slot-content-area:0/div-shape-12bbae35:0/div-shape-a9a56a97:0/div-shape-2f218dff:0/div-shape-641627bd:0/div-shape-c64206aa:0/div-data-slot-scroll-fade:1",
+    "containerSourceId":"dom/html-shape-3b68501b:0/body-shape-d65c892b:0/div-id-root:0/div-shape-74caabae:0/div-shape-20ec5713:0/div-data-slot-sidebar-wrapper:0/main-data-slot-sidebar-inset:0/div-data-slot-content-area:0/div-shape-12bbae35:0/div-shape-a9a56a97:0/div-shape-2f218dff:0/div-shape-641627bd:0/div-shape-c64206aa:0/div-log-unnamed:0/div-shape-4e5382dc:0/div-shape-d3514b13:0",
+    "firstChildSourceId":"dom/html-shape-3b68501b:0/body-shape-d65c892b:0/div-id-root:0/div-shape-74caabae:0/div-shape-20ec5713:0/div-data-slot-sidebar-wrapper:0/main-data-slot-sidebar-inset:0/div-data-slot-content-area:0/div-shape-12bbae35:0/div-shape-a9a56a97:0/div-shape-2f218dff:0/div-shape-641627bd:0/div-shape-c64206aa:0/div-log-unnamed:0/div-shape-4e5382dc:0/div-shape-d3514b13:0/div-shape-85f15e7e:0",
+    "lastChildSourceId":"dom/html-shape-3b68501b:0/body-shape-d65c892b:0/div-id-root:0/div-shape-74caabae:0/div-shape-20ec5713:0/div-data-slot-sidebar-wrapper:0/main-data-slot-sidebar-inset:0/div-data-slot-content-area:0/div-shape-12bbae35:0/div-shape-a9a56a97:0/div-shape-2f218dff:0/div-shape-641627bd:0/div-shape-c64206aa:0/div-log-unnamed:0/div-shape-4e5382dc:0/div-shape-d3514b13:0/div-shape-85f15e7e:0",
     "collectionKey":"messages", "routeId":"chat.transcript"
   },{
     "id":"projects",

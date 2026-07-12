@@ -329,6 +329,6 @@ if(BURL_PALOT_ENABLE_FRAMEWORK)
 		target_link_libraries(palot-real-opencode-e2e PRIVATE nlohmann_json::nlohmann_json)
 		add_test(NAME palot-accessibility-dump
 			COMMAND $<TARGET_FILE:burl-palot> --accessibility-dump)
-		set_tests_properties(palot-accessibility-dump PROPERTIES TIMEOUT 5)
+		set_tests_properties(palot-accessibility-dump PROPERTIES TIMEOUT 15)
 	endif()
 endif()

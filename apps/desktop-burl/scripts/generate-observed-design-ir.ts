@@ -17,6 +17,7 @@ const importedAt = args.get("--imported-at") ?? ""
 const bindingPolicyPath = resolve(args.get("--binding-policy") ?? "")
 const fontReceiptPath = resolve(args.get("--font-receipt") ?? "")
 const motionSemanticsPath = args.get("--motion-semantics") ? resolve(args.get("--motion-semantics")!) : undefined
+const provenanceSemanticsPath = args.get("--provenance-semantics") ? resolve(args.get("--provenance-semantics")!) : undefined
 const responsiveSemantics = (args.get("--responsive-semantics") ?? "").split(",").filter(Boolean).map((path) => resolve(path))
 if (!burlSource || !semanticsPath || !outputPath || !sourceRevision || !importedAt || !bindingPolicyPath || !fontReceiptPath) {
 	throw new Error("required: --burl-source --semantics --output --source-revision --imported-at --binding-policy --font-receipt")
@@ -33,6 +34,7 @@ if (!renderRoot) throw new Error("source semantics has no renderable body")
 const styleProvenance = semantics.styleProvenanceByDomOrder as Array<{
 	declarations?: Record<string, unknown>
 	matchedStylesCapture?: string
+	motion?: unknown[]
 }> | undefined
 const attachStyleProvenance = (node: any, receipts = styleProvenance) => {
 	if (Number.isInteger(node.provenanceIndex) && node.provenanceIndex >= 0) {
@@ -40,10 +42,49 @@ const attachStyleProvenance = (node: any, receipts = styleProvenance) => {
 		if (!receipt) throw new Error(`source semantics has no style provenance at DOM order ${node.provenanceIndex}`)
 		node.styleProvenance = receipt.declarations ?? {}
 		node.styleProvenanceComplete = receipt.matchedStylesCapture === "complete"
+		if (receipt.motion?.length) node.motion = receipt.motion
 	}
 	for (const child of node.children ?? []) attachStyleProvenance(child, receipts)
 }
 if (styleProvenance) attachStyleProvenance(renderRoot)
+let supplementalProvenanceBySourceId = new Map<string, { declarations?: Record<string, unknown>; matchedStylesCapture?: string }>()
+const joinSupplementalProvenance = (root: any) => {
+	let joined = 0
+	const visit = (node: any) => {
+		const receipt = supplementalProvenanceBySourceId.get(node.sourceId)
+		if (receipt) {
+			node.styleProvenance = receipt.declarations ?? {}
+			node.styleProvenanceComplete = true
+			joined++
+		}
+		for (const child of node.children ?? []) visit(child)
+	}
+	visit(root)
+	return joined
+}
+if (provenanceSemanticsPath) {
+	const supplemental = JSON.parse(await readFile(provenanceSemanticsPath, "utf8"))
+	const supplementalReceipts = supplemental.styleProvenanceByDomOrder as Array<{
+		declarations?: Record<string, unknown>
+		matchedStylesCapture?: string
+	}> | undefined
+	if (!supplementalReceipts || supplemental.page?.url !== semantics.page?.url ||
+		supplemental.policy?.clock !== semantics.policy?.clock ||
+		JSON.stringify(supplemental.policy?.viewport) !== JSON.stringify(semantics.policy?.viewport))
+		throw new Error("supplemental provenance must match the canonical page, clock, and viewport")
+	const indexSupplemental = (node: any) => {
+		if (node.sourceId && Number.isInteger(node.provenanceIndex) && node.provenanceIndex >= 0) {
+			const receipt = supplementalReceipts[node.provenanceIndex]
+			if (!receipt) throw new Error(`supplemental semantics has no style provenance at DOM order ${node.provenanceIndex}`)
+			if (receipt.matchedStylesCapture === "complete") supplementalProvenanceBySourceId.set(node.sourceId, receipt)
+		}
+		for (const child of node.children ?? []) indexSupplemental(child)
+	}
+	indexSupplemental(supplemental.observedDom)
+	const joined = joinSupplementalProvenance(renderRoot)
+	if (!joined) throw new Error("supplemental provenance did not join the canonical source tree")
+	console.error(`[supplemental-provenance] ${JSON.stringify({ candidates: supplementalProvenanceBySourceId.size, joined })}`)
+}
 const motionBySourceId = new Map<string, unknown[]>()
 if (motionSemanticsPath) {
 	const motionSemantics = JSON.parse(await readFile(motionSemanticsPath, "utf8"))
@@ -116,6 +157,11 @@ if (responsiveSemantics.length) {
 		if (!root || !viewport) throw new Error(`invalid responsive semantics ${path}`)
 		if (capture.styleProvenanceByDomOrder)
 			attachStyleProvenance(root, capture.styleProvenanceByDomOrder)
+		// Matched-rule provenance contains authored media qualifiers, so it is
+		// declaration ownership evidence for the stable source node across the
+		// cohort rather than a second used-value sample at one viewport.
+		if (supplementalProvenanceBySourceId.size)
+			joinSupplementalProvenance(root)
 		removeFormattingWhitespace(root)
 		applyMotionReceipts(root)
 		const cohort = JSON.stringify({
@@ -262,21 +308,15 @@ const emitCollectionSlot = (node: any, spec: NonNullable<typeof importPolicy.col
 		const first = node.children?.findIndex((child: any) => child.name === spec.firstChildSourceId) ?? -1
 		const last = node.children?.findIndex((child: any) => child.name === spec.lastChildSourceId) ?? -1
 		if (first < 0 || last < first) throw new Error(`collection ${spec.id} has invalid/noncontiguous child range`)
-		const selected = node.children.slice(first, last + 1)
+		const selected = node.children.slice(first, last + 1).map((child: any) => ({
+			...child,
+			attributes: { ...(child.attributes ?? {}), pulpCollectionSampleRoot: "true" },
+		}))
 		if (!selected.length) throw new Error(`collection ${spec.id} selected no children`)
-		const slotName = `${node.name}::collection-slot:${spec.id}`
-		const slot = {
-			...node,
-			name: slotName,
-			children: selected,
-			attributes: { source_revision: node.attributes?.source_revision ?? sourceRevision,
-				pulpRouteId: spec.routeId, pulpCollectionKey: spec.collectionKey },
-			stable_anchor_id: `observed-dom:${slotName}`,
-			source_node_id: slotName,
-			raw_source: JSON.stringify({ kind: "generated-collection-slot", containerSourceId: spec.containerSourceId,
-				firstChildSourceId: spec.firstChildSourceId, lastChildSourceId: spec.lastChildSourceId })
-		}
-		node.children = [...node.children.slice(0, first), slot, ...node.children.slice(last + 1)]
+		node.attributes = { ...(node.attributes ?? {}),
+			source_revision: node.attributes?.source_revision ?? sourceRevision,
+			pulpRouteId: spec.routeId, pulpCollectionKey: spec.collectionKey }
+		node.children = [...node.children.slice(0, first), ...selected, ...node.children.slice(last + 1)]
 		collectionDiagnostics.push({ id: spec.id, code: "collection-slot-emitted", detail: `${selected.length} contiguous children` })
 		return true
 	}

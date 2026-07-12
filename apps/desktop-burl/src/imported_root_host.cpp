@@ -75,9 +75,44 @@ public:
 	}
 	void bind_imported_collection(pulp::view::View& host,
 	                             const pulp::view::NativeImportCollectionDescriptor& descriptor) override {
+		(void)host;
 		if (descriptor.collection_key != "messages" && descriptor.collection_key != "projects") return;
-		if (!pending_hosts_.emplace(std::string(descriptor.collection_key), &host).second)
+		if ((descriptor.collection_key == "messages" && transcript_ != nullptr) ||
+		    (descriptor.collection_key == "projects" && projects_ != nullptr))
 			throw std::runtime_error("duplicate imported collection slot");
+		auto templates = pulp::view::extract_imported_collection_templates(ir_.root);
+		if (!templates.contains("user") || !templates.contains("assistant") ||
+		    !templates.contains("reasoning") || !templates.contains("tool.read") ||
+		    !templates.contains("tool.edit") || !templates.contains("project"))
+			throw std::runtime_error("source collection templates are incomplete");
+		if (descriptor.collection_key == "messages") {
+			std::unordered_map<std::string, pulp::view::IRNode> transcript_templates;
+			for (const auto* id : {"user", "assistant", "reasoning", "tool.read", "tool.edit"})
+				transcript_templates.emplace(id, templates.at(id));
+			auto list = std::make_unique<pulp::view::ImportedRepeatedList>(
+				std::move(transcript_templates), ir_.asset_manifest, this);
+			action_views_.erase("composer.copy");
+			action_view_instance_ids_.erase("composer.copy");
+			payloads_.erase("composer.copy");
+			attached_.insert("composer.copy");
+			transcript_ = list.get();
+			transcript_->flex().flex_grow = 1.0f;
+			if (!pulp::view::mount_imported_collection_items(descriptor, std::move(list)))
+				throw std::runtime_error("transcript collection mount was rejected");
+			return;
+		}
+		auto list = std::make_unique<pulp::view::ImportedRepeatedList>(
+			std::unordered_map<std::string, pulp::view::IRNode>{{"project", templates.at("project")}},
+			ir_.asset_manifest, this);
+		action_views_.erase("project.open");
+		action_view_instance_ids_.erase("project.open");
+		payloads_.erase("project.open");
+		attached_.insert("project.open");
+		projects_ = list.get();
+		projects_->set_auto_follow(false);
+		projects_->flex().flex_grow = 1.0f;
+		if (!pulp::view::mount_imported_collection_items(descriptor, std::move(list)))
+			throw std::runtime_error("project collection mount was rejected");
 	}
 	void unbind_imported_view(pulp::view::View& view) override {
 		for (auto& [id, bound] : action_views_) {
@@ -95,41 +130,8 @@ public:
 		}
 	}
 	void install_pending_collection() {
-		if (!pending_hosts_.contains("messages") || !pending_hosts_.contains("projects"))
+		if (transcript_ == nullptr || projects_ == nullptr)
 			throw std::runtime_error("required imported collection slot was not bound");
-		auto templates = pulp::view::extract_imported_collection_templates(ir_.root);
-		if (!templates.contains("user") || !templates.contains("assistant") ||
-		    !templates.contains("reasoning") ||
-		    !templates.contains("tool.read") || !templates.contains("tool.edit") ||
-		    !templates.contains("project"))
-			throw std::runtime_error("source collection templates are incomplete");
-		std::unordered_map<std::string, pulp::view::IRNode> transcript_templates;
-		for (const auto* id : {"user", "assistant", "reasoning", "tool.read", "tool.edit"})
-			transcript_templates.emplace(id, templates.at(id));
-		auto list = std::make_unique<pulp::view::ImportedRepeatedList>(std::move(transcript_templates), ir_.asset_manifest, this);
-		auto* transcript_host = pending_hosts_.at("messages");
-		while (transcript_host->child_count()) transcript_host->remove_child(transcript_host->child_at(0));
-		transcript_host->flex().direction = pulp::view::FlexDirection::column;
-		transcript_host->flex().flex_shrink = 1.0f;
-		transcript_host->flex().min_height = 0.0f;
-		transcript_host->flex().dim_min_height = {0.0f, pulp::view::DimensionUnit::px};
-		action_views_.erase("composer.copy");
-		action_view_instance_ids_.erase("composer.copy");
-		payloads_.erase("composer.copy");
-		transcript_ = list.get();
-		transcript_->flex().flex_grow = 1.0f;
-		transcript_host->add_child(std::move(list));
-		auto project_list = std::make_unique<pulp::view::ImportedRepeatedList>(
-			std::unordered_map<std::string, pulp::view::IRNode>{{"project", templates.at("project")}}, ir_.asset_manifest, this);
-		auto* project_host = pending_hosts_.at("projects");
-		action_views_.erase("project.open");
-		action_view_instance_ids_.erase("project.open");
-		payloads_.erase("project.open");
-		while (project_host->child_count()) project_host->remove_child(project_host->child_at(0));
-		projects_ = project_list.get();
-		projects_->set_auto_follow(false);
-		projects_->flex().flex_grow = 1.0f;
-		project_host->add_child(std::move(project_list));
 	}
 
 	[[nodiscard]] const std::unordered_set<std::string>& attached() const noexcept { return attached_; }
@@ -184,7 +186,6 @@ private:
 	const pulp::view::DesignIR& ir_;
 	pulp::view::ImportedRepeatedList*& transcript_;
 	pulp::view::ImportedRepeatedList*& projects_;
-	std::unordered_map<std::string, pulp::view::View*> pending_hosts_;
 	std::unordered_set<std::string> attached_;
 	std::unordered_map<std::string, std::vector<pulp::view::View*>> action_views_;
 	std::unordered_map<std::string, std::vector<std::uint64_t>> action_view_instance_ids_;
