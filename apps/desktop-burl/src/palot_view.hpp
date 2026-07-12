@@ -34,6 +34,7 @@ private:
 	void set_configuration_error(std::string error);
 	void append_message(std::string role, std::string text, bool announce);
 	void sync_imported_transcript();
+	void schedule_imported_transcript_sync();
 	float message_height(std::size_t index) const;
 
 	pulp::view::TextEditor* project_ = nullptr;
@@ -57,4 +58,5 @@ private:
 	std::string configuration_error_;
 	bool create_session_ = true;
 	ImportedRootHost* imported_root_ = nullptr;
+	bool transcript_sync_pending_ = false;
 };

@@ -190,6 +190,15 @@ public:
 		std::scoped_lock lock(mutex_);
 		view_ = nullptr;
 	}
+	void schedule_transcript_sync() {
+		auto self = shared_from_this();
+		pulp::events::MainThreadDispatcher::call_async_after([self = std::move(self)] {
+			std::scoped_lock lock(self->mutex_);
+			if (!self->view_) return;
+			self->view_->transcript_sync_pending_ = false;
+			self->view_->sync_imported_transcript();
+		}, 16);
+	}
 
 private:
 	std::mutex mutex_;
@@ -499,6 +508,12 @@ void PalotView::sync_imported_transcript() {
 	imported_root_->set_transcript(std::move(rows));
 }
 
+void PalotView::schedule_imported_transcript_sync() {
+	if (transcript_sync_pending_) return;
+	transcript_sync_pending_ = true;
+	event_sink_->schedule_transcript_sync();
+}
+
 void PalotView::send_prompt(const std::string& prompt, bool retry) {
 	if (prompt.empty() || process_.running()) return;
 	std::string validation_error;
@@ -545,7 +560,7 @@ void PalotView::handle_event(std::string type, std::string value) {
 			const auto index = messages_.size() - 1;
 			transcript_->set_row_height(index, message_height(index));
 			transcript_->refresh_rows();
-			sync_imported_transcript();
+			schedule_imported_transcript_sync();
 		} else {
 			append_message("OpenCode", std::move(value), false);
 		}
