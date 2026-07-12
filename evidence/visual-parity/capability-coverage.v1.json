@@ -1366,42 +1366,37 @@
         {
           "value": "10px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "supported",
+          "route": "computed CSS font-size used px value -> typed text scalar -> NativeDesignIR style fontSize -> validated IRStyle font_size -> inherited/direct Label font size -> shared text shaper metrics and Skia glyph pixels; invalid native IR fails closed",
+          "evidenceIds": ["semantic:observed-dom-font-size"]
         },
         {
           "value": "11px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "supported",
+          "route": "computed CSS font-size used px value -> typed text scalar -> NativeDesignIR style fontSize -> validated IRStyle font_size -> inherited/direct Label font size -> shared text shaper metrics and Skia glyph pixels; invalid native IR fails closed",
+          "evidenceIds": ["semantic:observed-dom-font-size"]
         },
         {
           "value": "13px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "supported",
+          "route": "computed CSS font-size used px value -> typed text scalar -> NativeDesignIR style fontSize -> validated IRStyle font_size -> inherited/direct Label font size -> shared text shaper metrics and Skia glyph pixels; invalid native IR fails closed",
+          "evidenceIds": ["semantic:observed-dom-font-size"]
         },
         {
           "value": "15px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "supported",
+          "route": "computed CSS font-size used px value -> typed text scalar -> NativeDesignIR style fontSize -> validated IRStyle font_size -> inherited/direct Label font size -> shared text shaper metrics and Skia glyph pixels; invalid native IR fails closed",
+          "evidenceIds": ["semantic:observed-dom-font-size"]
         },
         {
           "value": "16px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "supported",
+          "route": "computed CSS font-size used px value -> typed text scalar -> NativeDesignIR style fontSize -> validated IRStyle font_size -> inherited/direct Label font size -> shared text shaper metrics and Skia glyph pixels; invalid native IR fails closed",
+          "evidenceIds": ["semantic:observed-dom-font-size"]
         }
       ]
     },
