@@ -7,7 +7,37 @@
       "role": "button",
       "accessibleName": "",
       "enabled": true,
-      "evidence": null,
+      "evidence": {
+        "enabled": true,
+        "role": "button",
+        "accessibleName": "",
+        "listeners": [
+          {
+            "type": "click"
+          },
+          {
+            "type": "mouseenter"
+          },
+          {
+            "type": "mouseleave"
+          }
+        ],
+        "react": {
+          "componentName": "button",
+          "propNames": [
+            "onBlur",
+            "onClick",
+            "onFocus",
+            "onKeyDown",
+            "onKeyUp",
+            "onMouseDown",
+            "onMouseLeave",
+            "onMouseMove",
+            "onPointerDown",
+            "onPointerEnter"
+          ]
+        }
+      },
       "review": {
         "status": "unmapped"
       }
@@ -18,186 +48,666 @@
       "role": "button",
       "accessibleName": "",
       "enabled": true,
-      "evidence": null,
+      "evidence": {
+        "enabled": true,
+        "role": "button",
+        "accessibleName": "",
+        "listeners": [
+          {
+            "type": "click"
+          },
+          {
+            "type": "mouseenter"
+          },
+          {
+            "type": "mouseleave"
+          }
+        ],
+        "react": {
+          "componentName": "button",
+          "propNames": [
+            "onBlur",
+            "onClick",
+            "onFocus",
+            "onKeyDown",
+            "onKeyUp",
+            "onMouseDown",
+            "onMouseLeave",
+            "onMouseMove",
+            "onPointerDown",
+            "onPointerEnter"
+          ]
+        }
+      },
       "review": {
         "status": "unmapped"
       }
     },
     {
-      "sourceId": "html:1/body:2/div[root]:3/div:1/div:1/div[sidebar-wrapper]:1/div[sidebar]:1/div[sidebar-container]:1/div[sidebar-inner]:1/div[sidebar-content]:2/div[sidebar-group]:1/div[sidebar-group-content]:1/ul[sidebar-menu]:1/li[sidebar-menu-item]:1/button[base-ui-_r_1_]:1",
+      "sourceId": "html:1/body:2/div[root]:3/div:1/div:1/div[sidebar-wrapper]:1/div[sidebar]:1/div[sidebar-container]:1/div[sidebar-inner]:1/div[sidebar-content]:2/div[sidebar-group]:1/div[sidebar-group-content]:1/ul[sidebar-menu]:1/li[sidebar-menu-item]:1/button[base-ui-_r_22_]:1",
       "tag": "button",
       "role": "button",
-      "accessibleName": "New Session",
+      "accessibleName": "New Se ion",
       "enabled": true,
-      "evidence": null,
+      "evidence": {
+        "enabled": true,
+        "role": "button",
+        "accessibleName": "New Se ion",
+        "listeners": [
+          {
+            "type": "click"
+          },
+          {
+            "type": "mouseenter"
+          },
+          {
+            "type": "mouseleave"
+          }
+        ],
+        "react": {
+          "componentName": "button",
+          "propNames": [
+            "onBlur",
+            "onClick",
+            "onFocus",
+            "onKeyDown",
+            "onMouseLeave",
+            "onMouseMove",
+            "onPointerDown",
+            "onPointerEnter"
+          ]
+        }
+      },
       "review": {
         "status": "mapped",
         "applicationAction": "session.create"
       }
     },
     {
-      "sourceId": "html:1/body:2/div[root]:3/div:1/div:1/div[sidebar-wrapper]:1/div[sidebar]:1/div[sidebar-container]:1/div[sidebar-inner]:1/div[sidebar-content]:2/div[sidebar-group]:1/div[sidebar-group-content]:1/ul[sidebar-menu]:1/li[sidebar-menu-item]:2/button[base-ui-_r_3_]:1",
+      "sourceId": "html:1/body:2/div[root]:3/div:1/div:1/div[sidebar-wrapper]:1/div[sidebar]:1/div[sidebar-container]:1/div[sidebar-inner]:1/div[sidebar-content]:2/div[sidebar-group]:1/div[sidebar-group-content]:1/ul[sidebar-menu]:1/li[sidebar-menu-item]:2/button[base-ui-_r_24_]:1",
       "tag": "button",
       "role": "button",
-      "accessibleName": "Automations",
+      "accessibleName": "Automation ",
       "enabled": true,
-      "evidence": null,
+      "evidence": {
+        "enabled": true,
+        "role": "button",
+        "accessibleName": "Automation ",
+        "listeners": [
+          {
+            "type": "click"
+          },
+          {
+            "type": "mouseenter"
+          },
+          {
+            "type": "mouseleave"
+          }
+        ],
+        "react": {
+          "componentName": "button",
+          "propNames": [
+            "onBlur",
+            "onClick",
+            "onFocus",
+            "onKeyDown",
+            "onMouseLeave",
+            "onMouseMove",
+            "onPointerDown",
+            "onPointerEnter"
+          ]
+        }
+      },
       "review": {
         "status": "unmapped"
       }
     },
     {
-      "sourceId": "html:1/body:2/div[root]:3/div:1/div:1/div[sidebar-wrapper]:1/div[sidebar]:1/div[sidebar-container]:1/div[sidebar-inner]:1/div[sidebar-content]:2/div[sidebar-group]:2/div[sidebar-group-content]:2/ul[sidebar-menu]:1/li[context-menu-trigger]:1/button[base-ui-_r_p_]:1",
+      "sourceId": "html:1/body:2/div[root]:3/div:1/div:1/div[sidebar-wrapper]:1/div[sidebar]:1/div[sidebar-container]:1/div[sidebar-inner]:1/div[sidebar-content]:2/div[sidebar-group]:2/div[sidebar-group-content]:2/ul[sidebar-menu]:1/li[context-menu-trigger]:1/button[base-ui-_r_2b_]:1",
       "tag": "button",
       "role": "button",
-      "accessibleName": "Add dark mode toggle to settings now",
+      "accessibleName": "Add dark mode toggle to  etting \nnow",
       "enabled": true,
-      "evidence": null,
+      "evidence": {
+        "enabled": true,
+        "role": "button",
+        "accessibleName": "Add dark mode toggle to  etting \nnow",
+        "listeners": [
+          {
+            "type": "click"
+          },
+          {
+            "type": "mouseenter"
+          },
+          {
+            "type": "mouseleave"
+          }
+        ],
+        "react": {
+          "componentName": "button",
+          "propNames": [
+            "onBlur",
+            "onClick",
+            "onFocus",
+            "onKeyDown",
+            "onMouseLeave",
+            "onMouseMove",
+            "onPointerDown",
+            "onPointerEnter"
+          ]
+        }
+      },
       "review": {
         "status": "mapped",
         "applicationAction": "session.open"
       }
     },
     {
-      "sourceId": "html:1/body:2/div[root]:3/div:1/div:1/div[sidebar-wrapper]:1/div[sidebar]:1/div[sidebar-container]:1/div[sidebar-inner]:1/div[sidebar-content]:2/div[sidebar-group]:2/div[sidebar-group-content]:2/ul[sidebar-menu]:1/li[context-menu-trigger]:2/button[base-ui-_r_10_]:1",
+      "sourceId": "html:1/body:2/div[root]:3/div:1/div:1/div[sidebar-wrapper]:1/div[sidebar]:1/div[sidebar-container]:1/div[sidebar-inner]:1/div[sidebar-content]:2/div[sidebar-group]:2/div[sidebar-group-content]:2/ul[sidebar-menu]:1/li[context-menu-trigger]:2/button[base-ui-_r_2i_]:1",
       "tag": "button",
       "role": "button",
-      "accessibleName": "Fix JWT token refresh race condition Waiting for approval: file.write now",
+      "accessibleName": "Fix JWT token refre h race condition\nWaiting for approval: file.write\nnow",
       "enabled": true,
-      "evidence": null,
+      "evidence": {
+        "enabled": true,
+        "role": "button",
+        "accessibleName": "Fix JWT token refre h race condition\nWaiting for approval: file.write\nnow",
+        "listeners": [
+          {
+            "type": "click"
+          },
+          {
+            "type": "mouseenter"
+          },
+          {
+            "type": "mouseleave"
+          }
+        ],
+        "react": {
+          "componentName": "button",
+          "propNames": [
+            "onBlur",
+            "onClick",
+            "onFocus",
+            "onKeyDown",
+            "onMouseLeave",
+            "onMouseMove",
+            "onPointerDown",
+            "onPointerEnter"
+          ]
+        }
+      },
       "review": {
         "status": "unmapped"
       }
     },
     {
-      "sourceId": "html:1/body:2/div[root]:3/div:1/div:1/div[sidebar-wrapper]:1/div[sidebar]:1/div[sidebar-container]:1/div[sidebar-inner]:1/div[sidebar-content]:2/div[sidebar-group]:3/div[sidebar-group-content]:2/ul[sidebar-menu]:1/li[context-menu-trigger]:1/button[base-ui-_r_17_]:1",
+      "sourceId": "html:1/body:2/div[root]:3/div:1/div:1/div[sidebar-wrapper]:1/div[sidebar]:1/div[sidebar-container]:1/div[sidebar-inner]:1/div[sidebar-content]:2/div[sidebar-group]:3/div[sidebar-group-content]:2/ul[sidebar-menu]:1/li[context-menu-trigger]:1/button[base-ui-_r_2p_]:1",
       "tag": "button",
       "role": "button",
-      "accessibleName": "Build hero section with animated gradient 35m",
+      "accessibleName": "Build hero  ection with animated gradient\n35m",
       "enabled": true,
-      "evidence": null,
+      "evidence": {
+        "enabled": true,
+        "role": "button",
+        "accessibleName": "Build hero  ection with animated gradient\n35m",
+        "listeners": [
+          {
+            "type": "click"
+          },
+          {
+            "type": "mouseenter"
+          },
+          {
+            "type": "mouseleave"
+          }
+        ],
+        "react": {
+          "componentName": "button",
+          "propNames": [
+            "onBlur",
+            "onClick",
+            "onFocus",
+            "onKeyDown",
+            "onMouseLeave",
+            "onMouseMove",
+            "onPointerDown",
+            "onPointerEnter"
+          ]
+        }
+      },
       "review": {
         "status": "unmapped"
       }
     },
     {
-      "sourceId": "html:1/body:2/div[root]:3/div:1/div:1/div[sidebar-wrapper]:1/div[sidebar]:1/div[sidebar-container]:1/div[sidebar-inner]:1/div[sidebar-content]:2/div[sidebar-group]:3/div[sidebar-group-content]:2/ul[sidebar-menu]:1/li[context-menu-trigger]:2/button[base-ui-_r_1e_]:1",
+      "sourceId": "html:1/body:2/div[root]:3/div:1/div:1/div[sidebar-wrapper]:1/div[sidebar]:1/div[sidebar-container]:1/div[sidebar-inner]:1/div[sidebar-content]:2/div[sidebar-group]:3/div[sidebar-group-content]:2/ul[sidebar-menu]:1/li[context-menu-trigger]:2/button[base-ui-_r_30_]:1",
       "tag": "button",
       "role": "button",
-      "accessibleName": "Refactor database connection pooling 45m",
+      "accessibleName": "Refactor databa e connection pooling\n45m",
       "enabled": true,
-      "evidence": null,
+      "evidence": {
+        "enabled": true,
+        "role": "button",
+        "accessibleName": "Refactor databa e connection pooling\n45m",
+        "listeners": [
+          {
+            "type": "click"
+          },
+          {
+            "type": "mouseenter"
+          },
+          {
+            "type": "mouseleave"
+          }
+        ],
+        "react": {
+          "componentName": "button",
+          "propNames": [
+            "onBlur",
+            "onClick",
+            "onFocus",
+            "onKeyDown",
+            "onMouseLeave",
+            "onMouseMove",
+            "onPointerDown",
+            "onPointerEnter"
+          ]
+        }
+      },
       "review": {
         "status": "unmapped"
       }
     },
     {
-      "sourceId": "html:1/body:2/div[root]:3/div:1/div:1/div[sidebar-wrapper]:1/div[sidebar]:1/div[sidebar-container]:1/div[sidebar-inner]:1/div[sidebar-content]:2/div[sidebar-group]:3/div[sidebar-group-content]:2/ul[sidebar-menu]:1/li[context-menu-trigger]:3/button[base-ui-_r_1l_]:1",
+      "sourceId": "html:1/body:2/div[root]:3/div:1/div:1/div[sidebar-wrapper]:1/div[sidebar]:1/div[sidebar-container]:1/div[sidebar-inner]:1/div[sidebar-content]:2/div[sidebar-group]:3/div[sidebar-group-content]:2/ul[sidebar-menu]:1/li[context-menu-trigger]:3/button[base-ui-_r_37_]:1",
       "tag": "button",
       "role": "button",
-      "accessibleName": "Add unit tests for auth middleware 2h",
+      "accessibleName": "Add unit te t  for auth middleware\n2h",
       "enabled": true,
-      "evidence": null,
+      "evidence": {
+        "enabled": true,
+        "role": "button",
+        "accessibleName": "Add unit te t  for auth middleware\n2h",
+        "listeners": [
+          {
+            "type": "click"
+          },
+          {
+            "type": "mouseenter"
+          },
+          {
+            "type": "mouseleave"
+          }
+        ],
+        "react": {
+          "componentName": "button",
+          "propNames": [
+            "onBlur",
+            "onClick",
+            "onFocus",
+            "onKeyDown",
+            "onMouseLeave",
+            "onMouseMove",
+            "onPointerDown",
+            "onPointerEnter"
+          ]
+        }
+      },
       "review": {
         "status": "unmapped"
       }
     },
     {
-      "sourceId": "html:1/body:2/div[root]:3/div:1/div:1/div[sidebar-wrapper]:1/div[sidebar]:1/div[sidebar-container]:1/div[sidebar-inner]:1/div[sidebar-content]:2/div[sidebar-group]:3/div[sidebar-group-content]:2/ul[sidebar-menu]:1/li[context-menu-trigger]:4/button[base-ui-_r_1s_]:1",
+      "sourceId": "html:1/body:2/div[root]:3/div:1/div:1/div[sidebar-wrapper]:1/div[sidebar]:1/div[sidebar-container]:1/div[sidebar-inner]:1/div[sidebar-content]:2/div[sidebar-group]:3/div[sidebar-group-content]:2/ul[sidebar-menu]:1/li[context-menu-trigger]:4/button[base-ui-_r_3e_]:1",
       "tag": "button",
       "role": "button",
-      "accessibleName": "Update API documentation for v2 endpoints 4h",
+      "accessibleName": "Update API documentation for v2 endpoint \n4h",
       "enabled": true,
-      "evidence": null,
+      "evidence": {
+        "enabled": true,
+        "role": "button",
+        "accessibleName": "Update API documentation for v2 endpoint \n4h",
+        "listeners": [
+          {
+            "type": "click"
+          },
+          {
+            "type": "mouseenter"
+          },
+          {
+            "type": "mouseleave"
+          }
+        ],
+        "react": {
+          "componentName": "button",
+          "propNames": [
+            "onBlur",
+            "onClick",
+            "onFocus",
+            "onKeyDown",
+            "onMouseLeave",
+            "onMouseMove",
+            "onPointerDown",
+            "onPointerEnter"
+          ]
+        }
+      },
       "review": {
         "status": "unmapped"
       }
     },
     {
-      "sourceId": "html:1/body:2/div[root]:3/div:1/div:1/div[sidebar-wrapper]:1/div[sidebar]:1/div[sidebar-container]:1/div[sidebar-inner]:1/div[sidebar-content]:2/div[sidebar-group]:5/div:2/button[base-ui-_r_1u_]:1",
+      "sourceId": "html:1/body:2/div[root]:3/div:1/div:1/div[sidebar-wrapper]:1/div[sidebar]:1/div[sidebar-container]:1/div[sidebar-inner]:1/div[sidebar-content]:2/div[sidebar-group]:5/div:2/button[base-ui-_r_3g_]:1",
       "tag": "button",
       "role": "button",
-      "accessibleName": "Search projects",
+      "accessibleName": "Search project ",
       "enabled": true,
-      "evidence": null,
+      "evidence": {
+        "enabled": true,
+        "role": "button",
+        "accessibleName": "Search project ",
+        "listeners": [
+          {
+            "type": "click"
+          },
+          {
+            "type": "mouseenter"
+          },
+          {
+            "type": "mouseleave"
+          }
+        ],
+        "react": {
+          "componentName": "button",
+          "propNames": [
+            "onBlur",
+            "onClick",
+            "onFocus",
+            "onKeyDown",
+            "onMouseLeave",
+            "onMouseMove",
+            "onPointerDown",
+            "onPointerEnter"
+          ]
+        }
+      },
       "review": {
         "status": "unmapped"
       }
     },
     {
-      "sourceId": "html:1/body:2/div[root]:3/div:1/div:1/div[sidebar-wrapper]:1/div[sidebar]:1/div[sidebar-container]:1/div[sidebar-inner]:1/div[sidebar-content]:2/div[sidebar-group]:5/div:2/button[base-ui-_r_20_]:2",
+      "sourceId": "html:1/body:2/div[root]:3/div:1/div:1/div[sidebar-wrapper]:1/div[sidebar]:1/div[sidebar-container]:1/div[sidebar-inner]:1/div[sidebar-content]:2/div[sidebar-group]:5/div:2/button[base-ui-_r_3i_]:2",
       "tag": "button",
       "role": "button",
       "accessibleName": "Command palette",
       "enabled": true,
-      "evidence": null,
+      "evidence": {
+        "enabled": true,
+        "role": "button",
+        "accessibleName": "Command palette",
+        "listeners": [
+          {
+            "type": "click"
+          },
+          {
+            "type": "mouseenter"
+          },
+          {
+            "type": "mouseleave"
+          }
+        ],
+        "react": {
+          "componentName": "button",
+          "propNames": [
+            "onBlur",
+            "onClick",
+            "onFocus",
+            "onKeyDown",
+            "onMouseLeave",
+            "onMouseMove",
+            "onPointerDown",
+            "onPointerEnter"
+          ]
+        }
+      },
       "review": {
         "status": "unmapped"
       }
     },
     {
-      "sourceId": "html:1/body:2/div[root]:3/div:1/div:1/div[sidebar-wrapper]:1/div[sidebar]:1/div[sidebar-container]:1/div[sidebar-inner]:1/div[sidebar-content]:2/div[sidebar-group]:5/div:2/button[base-ui-_r_22_]:3",
+      "sourceId": "html:1/body:2/div[root]:3/div:1/div:1/div[sidebar-wrapper]:1/div[sidebar]:1/div[sidebar-container]:1/div[sidebar-inner]:1/div[sidebar-content]:2/div[sidebar-group]:5/div:2/button[base-ui-_r_3k_]:3",
       "tag": "button",
       "role": "button",
       "accessibleName": "Add Project",
       "enabled": true,
-      "evidence": null,
+      "evidence": {
+        "enabled": true,
+        "role": "button",
+        "accessibleName": "Add Project",
+        "listeners": [
+          {
+            "type": "click"
+          },
+          {
+            "type": "mouseenter"
+          },
+          {
+            "type": "mouseleave"
+          }
+        ],
+        "react": {
+          "componentName": "button",
+          "propNames": [
+            "onBlur",
+            "onClick",
+            "onFocus",
+            "onKeyDown",
+            "onMouseLeave",
+            "onMouseMove",
+            "onPointerDown",
+            "onPointerEnter"
+          ]
+        }
+      },
       "review": {
         "status": "mapped",
         "applicationAction": "project.select"
       }
     },
     {
-      "sourceId": "html:1/body:2/div[root]:3/div:1/div:1/div[sidebar-wrapper]:1/div[sidebar]:1/div[sidebar-container]:1/div[sidebar-inner]:1/div[sidebar-content]:2/div[sidebar-group]:5/div[sidebar-group-content]:3/ul[sidebar-menu]:1/li[sidebar-menu-item]:1/div[collapsible]:1/button[base-ui-_r_25_]:1",
+      "sourceId": "html:1/body:2/div[root]:3/div:1/div:1/div[sidebar-wrapper]:1/div[sidebar]:1/div[sidebar-container]:1/div[sidebar-inner]:1/div[sidebar-content]:2/div[sidebar-group]:5/div[sidebar-group-content]:3/ul[sidebar-menu]:1/li[sidebar-menu-item]:1/div[collapsible]:1/button[base-ui-_r_3n_]:1",
       "tag": "button",
       "role": "button",
       "accessibleName": "palot",
       "enabled": true,
-      "evidence": null,
+      "evidence": {
+        "enabled": true,
+        "role": "button",
+        "accessibleName": "palot",
+        "listeners": [
+          {
+            "type": "click"
+          },
+          {
+            "type": "mouseenter"
+          },
+          {
+            "type": "mouseleave"
+          }
+        ],
+        "react": {
+          "componentName": "button",
+          "propNames": [
+            "onBlur",
+            "onClick",
+            "onFocus",
+            "onKeyDown",
+            "onMouseLeave",
+            "onMouseMove",
+            "onPointerDown",
+            "onPointerEnter"
+          ]
+        }
+      },
       "review": {
         "status": "unmapped"
       }
     },
     {
-      "sourceId": "html:1/body:2/div[root]:3/div:1/div:1/div[sidebar-wrapper]:1/div[sidebar]:1/div[sidebar-container]:1/div[sidebar-inner]:1/div[sidebar-content]:2/div[sidebar-group]:5/div[sidebar-group-content]:3/ul[sidebar-menu]:1/li[sidebar-menu-item]:2/div[collapsible]:1/button[base-ui-_r_2t_]:1",
+      "sourceId": "html:1/body:2/div[root]:3/div:1/div:1/div[sidebar-wrapper]:1/div[sidebar]:1/div[sidebar-container]:1/div[sidebar-inner]:1/div[sidebar-content]:2/div[sidebar-group]:5/div[sidebar-group-content]:3/ul[sidebar-menu]:1/li[sidebar-menu-item]:2/div[collapsible]:1/button[base-ui-_r_4f_]:1",
       "tag": "button",
       "role": "button",
       "accessibleName": "acme-api",
       "enabled": true,
-      "evidence": null,
+      "evidence": {
+        "enabled": true,
+        "role": "button",
+        "accessibleName": "acme-api",
+        "listeners": [
+          {
+            "type": "click"
+          },
+          {
+            "type": "mouseenter"
+          },
+          {
+            "type": "mouseleave"
+          }
+        ],
+        "react": {
+          "componentName": "button",
+          "propNames": [
+            "onBlur",
+            "onClick",
+            "onFocus",
+            "onKeyDown",
+            "onMouseLeave",
+            "onMouseMove",
+            "onPointerDown",
+            "onPointerEnter"
+          ]
+        }
+      },
       "review": {
         "status": "unmapped"
       }
     },
     {
-      "sourceId": "html:1/body:2/div[root]:3/div:1/div:1/div[sidebar-wrapper]:1/div[sidebar]:1/div[sidebar-container]:1/div[sidebar-inner]:1/div[sidebar-content]:2/div[sidebar-group]:5/div[sidebar-group-content]:3/ul[sidebar-menu]:1/li[sidebar-menu-item]:3/div[collapsible]:1/button[base-ui-_r_3e_]:1",
+      "sourceId": "html:1/body:2/div[root]:3/div:1/div:1/div[sidebar-wrapper]:1/div[sidebar]:1/div[sidebar-container]:1/div[sidebar-inner]:1/div[sidebar-content]:2/div[sidebar-group]:5/div[sidebar-group-content]:3/ul[sidebar-menu]:1/li[sidebar-menu-item]:3/div[collapsible]:1/button[base-ui-_r_50_]:1",
       "tag": "button",
       "role": "button",
       "accessibleName": "landing-page",
       "enabled": true,
-      "evidence": null,
+      "evidence": {
+        "enabled": true,
+        "role": "button",
+        "accessibleName": "landing-page",
+        "listeners": [
+          {
+            "type": "click"
+          },
+          {
+            "type": "mouseenter"
+          },
+          {
+            "type": "mouseleave"
+          }
+        ],
+        "react": {
+          "componentName": "button",
+          "propNames": [
+            "onBlur",
+            "onClick",
+            "onFocus",
+            "onKeyDown",
+            "onMouseLeave",
+            "onMouseMove",
+            "onPointerDown",
+            "onPointerEnter"
+          ]
+        }
+      },
       "review": {
         "status": "unmapped"
       }
     },
     {
-      "sourceId": "html:1/body:2/div[root]:3/div:1/div:1/div[sidebar-wrapper]:1/div[sidebar]:1/div[sidebar-container]:1/div[sidebar-inner]:1/div[sidebar-footer]:3/ul[sidebar-menu]:1/li[sidebar-menu-item]:1/button[base-ui-_r_6_]:1",
+      "sourceId": "html:1/body:2/div[root]:3/div:1/div:1/div[sidebar-wrapper]:1/div[sidebar]:1/div[sidebar-container]:1/div[sidebar-inner]:1/div[sidebar-footer]:3/ul[sidebar-menu]:1/li[sidebar-menu-item]:1/button[base-ui-_r_5a_]:1",
       "tag": "button",
       "role": "button",
-      "accessibleName": "This Mac",
+      "accessibleName": "Thi  Mac",
       "enabled": true,
-      "evidence": null,
+      "evidence": {
+        "enabled": true,
+        "role": "button",
+        "accessibleName": "Thi  Mac",
+        "listeners": [
+          {
+            "type": "click"
+          },
+          {
+            "type": "mouseenter"
+          },
+          {
+            "type": "mouseleave"
+          }
+        ],
+        "react": {
+          "componentName": "button",
+          "propNames": [
+            "onBlur",
+            "onClick",
+            "onFocus",
+            "onKeyDown",
+            "onKeyUp",
+            "onMouseDown",
+            "onMouseLeave",
+            "onMouseMove",
+            "onPointerDown",
+            "onPointerEnter"
+          ]
+        }
+      },
       "review": {
         "status": "unmapped"
       }
     },
     {
-      "sourceId": "html:1/body:2/div[root]:3/div:1/div:1/div[sidebar-wrapper]:1/div[sidebar]:1/div[sidebar-container]:1/div[sidebar-inner]:1/div[sidebar-footer]:3/ul[sidebar-menu]:2/li[sidebar-menu-item]:1/button[base-ui-_r_a_]:1",
+      "sourceId": "html:1/body:2/div[root]:3/div:1/div:1/div[sidebar-wrapper]:1/div[sidebar]:1/div[sidebar-container]:1/div[sidebar-inner]:1/div[sidebar-footer]:3/ul[sidebar-menu]:2/li[sidebar-menu-item]:1/button[base-ui-_r_5e_]:1",
       "tag": "button",
       "role": "button",
-      "accessibleName": "Settings",
+      "accessibleName": "Setting ",
       "enabled": true,
-      "evidence": null,
+      "evidence": {
+        "enabled": true,
+        "role": "button",
+        "accessibleName": "Setting ",
+        "listeners": [
+          {
+            "type": "click"
+          },
+          {
+            "type": "mouseenter"
+          },
+          {
+            "type": "mouseleave"
+          }
+        ],
+        "react": {
+          "componentName": "button",
+          "propNames": [
+            "onBlur",
+            "onClick",
+            "onFocus",
+            "onKeyDown",
+            "onMouseLeave",
+            "onMouseMove",
+            "onPointerDown",
+            "onPointerEnter"
+          ]
+        }
+      },
       "review": {
         "status": "unmapped"
       }
@@ -206,9 +716,24 @@
       "sourceId": "html:1/body:2/div[root]:3/div:1/div:1/div[sidebar-wrapper]:1/main[sidebar-inset]:2/div[app-bar]:1/div:1/div:1/div:3/button:3",
       "tag": "button",
       "role": "button",
-      "accessibleName": "Add dark mode toggle to settings",
+      "accessibleName": "Add dark mode toggle to  etting ",
       "enabled": true,
-      "evidence": null,
+      "evidence": {
+        "enabled": true,
+        "role": "button",
+        "accessibleName": "Add dark mode toggle to  etting ",
+        "listeners": [
+          {
+            "type": "click"
+          }
+        ],
+        "react": {
+          "componentName": "button",
+          "propNames": [
+            "onClick"
+          ]
+        }
+      },
       "review": {
         "status": "unmapped"
       }
@@ -219,29 +744,91 @@
       "role": "button",
       "accessibleName": "",
       "enabled": true,
-      "evidence": null,
+      "evidence": {
+        "enabled": true,
+        "role": "button",
+        "accessibleName": "",
+        "listeners": [
+          {
+            "type": "click"
+          }
+        ],
+        "react": {
+          "componentName": "button",
+          "propNames": [
+            "onClick"
+          ]
+        }
+      },
       "review": {
         "status": "unmapped"
       }
     },
     {
-      "sourceId": "html:1/body:2/div[root]:3/div:1/div:1/div[sidebar-wrapper]:1/main[sidebar-inset]:2/div[app-bar]:1/div:1/div:1/div:4/button[base-ui-_r_4f_]:1",
+      "sourceId": "html:1/body:2/div[root]:3/div:1/div:1/div[sidebar-wrapper]:1/main[sidebar-inset]:2/div[app-bar]:1/div:1/div:1/div:4/button[base-ui-_r_1e_]:1",
       "tag": "button",
       "role": "button",
-      "accessibleName": "+ 58 - 2",
+      "accessibleName": "+58\n-2",
       "enabled": true,
-      "evidence": null,
+      "evidence": {
+        "enabled": true,
+        "role": "button",
+        "accessibleName": "+58\n-2",
+        "listeners": [
+          {
+            "type": "click"
+          },
+          {
+            "type": "mouseenter"
+          },
+          {
+            "type": "mouseleave"
+          }
+        ],
+        "react": {
+          "componentName": "button",
+          "propNames": [
+            "onBlur",
+            "onClick",
+            "onFocus",
+            "onKeyDown",
+            "onMouseLeave",
+            "onMouseMove",
+            "onPointerDown",
+            "onPointerEnter"
+          ]
+        }
+      },
       "review": {
         "status": "unmapped"
       }
     },
     {
-      "sourceId": "html:1/body:2/div[root]:3/div:1/div:1/div[sidebar-wrapper]:1/main[sidebar-inset]:2/div[app-bar]:1/div:1/div:1/div:4/div:2/div:1/button[base-ui-_r_4m_]:5",
+      "sourceId": "html:1/body:2/div[root]:3/div:1/div:1/div[sidebar-wrapper]:1/main[sidebar-inset]:2/div[app-bar]:1/div:1/div:1/div:4/div:2/div:1/button[base-ui-_r_1l_]:5",
       "tag": "button",
       "role": "button",
       "accessibleName": "",
       "enabled": true,
-      "evidence": null,
+      "evidence": {
+        "enabled": true,
+        "role": "button",
+        "accessibleName": "",
+        "listeners": [
+          {
+            "type": "click"
+          }
+        ],
+        "react": {
+          "componentName": "button",
+          "propNames": [
+            "onClick",
+            "onKeyDown",
+            "onKeyUp",
+            "onMouseDown",
+            "onPointerDown"
+          ]
+        }
+      },
       "review": {
         "status": "unmapped"
       }
@@ -252,29 +839,95 @@
       "role": "button",
       "accessibleName": "Open",
       "enabled": true,
-      "evidence": null,
+      "evidence": {
+        "enabled": true,
+        "role": "button",
+        "accessibleName": "Open",
+        "listeners": [
+          {
+            "type": "click"
+          }
+        ],
+        "react": {
+          "componentName": "button",
+          "propNames": [
+            "onClick"
+          ]
+        }
+      },
       "review": {
         "status": "unmapped"
       }
     },
     {
-      "sourceId": "html:1/body:2/div[root]:3/div:1/div:1/div[sidebar-wrapper]:1/main[sidebar-inset]:2/div[app-bar]:1/div:1/div:1/div:4/div:3/div:1/button[base-ui-_r_4r_]:2",
+      "sourceId": "html:1/body:2/div[root]:3/div:1/div:1/div[sidebar-wrapper]:1/main[sidebar-inset]:2/div[app-bar]:1/div:1/div:1/div:4/div:3/div:1/button[base-ui-_r_1q_]:2",
       "tag": "button",
       "role": "button",
       "accessibleName": "",
       "enabled": true,
-      "evidence": null,
+      "evidence": {
+        "enabled": true,
+        "role": "button",
+        "accessibleName": "",
+        "listeners": [
+          {
+            "type": "click"
+          }
+        ],
+        "react": {
+          "componentName": "button",
+          "propNames": [
+            "onClick",
+            "onFocus",
+            "onKeyDown",
+            "onKeyUp",
+            "onMouseDown",
+            "onPointerDown",
+            "onPointerEnter"
+          ]
+        }
+      },
       "review": {
         "status": "unmapped"
       }
     },
     {
-      "sourceId": "html:1/body:2/div[root]:3/div:1/div:1/div[sidebar-wrapper]:1/main[sidebar-inset]:2/div[app-bar]:1/div:1/div:1/div:4/div:4/button[base-ui-_r_50_]:1",
+      "sourceId": "html:1/body:2/div[root]:3/div:1/div:1/div[sidebar-wrapper]:1/main[sidebar-inset]:2/div[app-bar]:1/div:1/div:1/div:4/div:4/button[base-ui-_r_1v_]:1",
       "tag": "button",
       "role": "button",
       "accessibleName": "",
       "enabled": true,
-      "evidence": null,
+      "evidence": {
+        "enabled": true,
+        "role": "button",
+        "accessibleName": "",
+        "listeners": [
+          {
+            "type": "click"
+          },
+          {
+            "type": "mouseenter"
+          },
+          {
+            "type": "mouseleave"
+          }
+        ],
+        "react": {
+          "componentName": "button",
+          "propNames": [
+            "onBlur",
+            "onClick",
+            "onFocus",
+            "onKeyDown",
+            "onKeyUp",
+            "onMouseDown",
+            "onMouseLeave",
+            "onMouseMove",
+            "onPointerDown",
+            "onPointerEnter"
+          ]
+        }
+      },
       "review": {
         "status": "unmapped"
       }
@@ -283,9 +936,24 @@
       "sourceId": "html:1/body:2/div[root]:3/div:1/div:1/div[sidebar-wrapper]:1/main[sidebar-inset]:2/div[content-area]:2/div:1/div:1/div:1/div:1/div:1/div:1/div:1/div:1/div:1/div:1/div:2/button:2",
       "tag": "button",
       "role": "button",
-      "accessibleName": "Show 3 steps · anthropic.claude-opus-4-6 · 4m 58s · $0.01",
+      "accessibleName": "Show 3  tep \n· anthropic.claude-opu -4-6 · 4m 58  · $0.01",
       "enabled": true,
-      "evidence": null,
+      "evidence": {
+        "enabled": true,
+        "role": "button",
+        "accessibleName": "Show 3  tep \n· anthropic.claude-opu -4-6 · 4m 58  · $0.01",
+        "listeners": [
+          {
+            "type": "click"
+          }
+        ],
+        "react": {
+          "componentName": "button",
+          "propNames": [
+            "onClick"
+          ]
+        }
+      },
       "review": {
         "status": "unmapped"
       }
@@ -294,54 +962,193 @@
       "sourceId": "html:1/body:2/div[root]:3/div:1/div:1/div[sidebar-wrapper]:1/main[sidebar-inset]:2/div[content-area]:2/div:1/div:1/div:1/div:1/div:1/div:1/div:1/div:1/div:1/div:1/div:2/div:1/div[collapsible]:1/button[collapsible-trigger]:1",
       "tag": "button",
       "role": "button",
-      "accessibleName": "Thought for 2 seconds",
+      "accessibleName": "Thought for 2  econd ",
       "enabled": true,
-      "evidence": null,
+      "evidence": {
+        "enabled": true,
+        "role": "button",
+        "accessibleName": "Thought for 2  econd ",
+        "listeners": [
+          {
+            "type": "click"
+          }
+        ],
+        "react": {
+          "componentName": "button",
+          "propNames": [
+            "onClick",
+            "onKeyDown",
+            "onKeyUp",
+            "onMouseDown",
+            "onPointerDown"
+          ]
+        }
+      },
       "review": {
         "status": "unmapped"
       }
     },
     {
-      "sourceId": "html:1/body:2/div[root]:3/div:1/div:1/div[sidebar-wrapper]:1/main[sidebar-inset]:2/div[content-area]:2/div:1/div:1/div:1/div:1/div:1/div:1/div:1/div:1/div:1/div:1/div:4/button[base-ui-_r_3p_]:1",
+      "sourceId": "html:1/body:2/div[root]:3/div:1/div:1/div[sidebar-wrapper]:1/main[sidebar-inset]:2/div[content-area]:2/div:1/div:1/div:1/div:1/div:1/div:1/div:1/div:1/div:1/div:1/div:4/button[base-ui-_r_o_]:1",
       "tag": "button",
       "role": "button",
       "accessibleName": "Scroll to top",
       "enabled": true,
-      "evidence": null,
+      "evidence": {
+        "enabled": true,
+        "role": "button",
+        "accessibleName": "Scroll to top",
+        "listeners": [
+          {
+            "type": "click"
+          },
+          {
+            "type": "mouseenter"
+          },
+          {
+            "type": "mouseleave"
+          }
+        ],
+        "react": {
+          "componentName": "button",
+          "propNames": [
+            "onBlur",
+            "onClick",
+            "onFocus",
+            "onKeyDown",
+            "onKeyUp",
+            "onMouseDown",
+            "onMouseLeave",
+            "onMouseMove",
+            "onPointerDown",
+            "onPointerEnter"
+          ]
+        }
+      },
       "review": {
         "status": "unmapped"
       }
     },
     {
-      "sourceId": "html:1/body:2/div[root]:3/div:1/div:1/div[sidebar-wrapper]:1/main[sidebar-inset]:2/div[content-area]:2/div:1/div:1/div:1/div:1/div:1/div:1/div:1/div:1/div:1/div:1/div:4/button[base-ui-_r_3r_]:2",
+      "sourceId": "html:1/body:2/div[root]:3/div:1/div:1/div[sidebar-wrapper]:1/main[sidebar-inset]:2/div[content-area]:2/div:1/div:1/div:1/div:1/div:1/div:1/div:1/div:1/div:1/div:1/div:4/button[base-ui-_r_q_]:2",
       "tag": "button",
       "role": "button",
-      "accessibleName": "Copy response",
+      "accessibleName": "Copy re pon e",
       "enabled": true,
-      "evidence": null,
+      "evidence": {
+        "enabled": true,
+        "role": "button",
+        "accessibleName": "Copy re pon e",
+        "listeners": [
+          {
+            "type": "click"
+          },
+          {
+            "type": "mouseenter"
+          },
+          {
+            "type": "mouseleave"
+          }
+        ],
+        "react": {
+          "componentName": "button",
+          "propNames": [
+            "onBlur",
+            "onClick",
+            "onFocus",
+            "onKeyDown",
+            "onKeyUp",
+            "onMouseDown",
+            "onMouseLeave",
+            "onMouseMove",
+            "onPointerDown",
+            "onPointerEnter"
+          ]
+        }
+      },
       "review": {
         "status": "mapped",
         "applicationAction": "composer.copy"
       }
     },
     {
-      "sourceId": "html:1/body:2/div[root]:3/div:1/div:1/div[sidebar-wrapper]:1/main[sidebar-inset]:2/div[content-area]:2/div:1/div:1/div:1/div:1/div:1/div:1/div:1/div:1/div:1/div:1/div:4/button[base-ui-_r_3t_]:3",
+      "sourceId": "html:1/body:2/div[root]:3/div:1/div:1/div[sidebar-wrapper]:1/main[sidebar-inset]:2/div[content-area]:2/div:1/div:1/div:1/div:1/div:1/div:1/div:1/div:1/div:1/div:1/div:4/button[base-ui-_r_s_]:3",
       "tag": "button",
       "role": "button",
       "accessibleName": "Fork from here",
       "enabled": true,
-      "evidence": null,
+      "evidence": {
+        "enabled": true,
+        "role": "button",
+        "accessibleName": "Fork from here",
+        "listeners": [
+          {
+            "type": "click"
+          },
+          {
+            "type": "mouseenter"
+          },
+          {
+            "type": "mouseleave"
+          }
+        ],
+        "react": {
+          "componentName": "button",
+          "propNames": [
+            "onBlur",
+            "onClick",
+            "onFocus",
+            "onKeyDown",
+            "onKeyUp",
+            "onMouseDown",
+            "onMouseLeave",
+            "onMouseMove",
+            "onPointerDown",
+            "onPointerEnter"
+          ]
+        }
+      },
       "review": {
         "status": "unmapped"
       }
     },
     {
-      "sourceId": "html:1/body:2/div[root]:3/div:1/div:1/div[sidebar-wrapper]:1/main[sidebar-inset]:2/div[content-area]:2/div:1/div:1/div:1/div:1/div:1/div:1/div:1/div:1/div:1/div:1/div:4/button[base-ui-_r_3v_]:4",
+      "sourceId": "html:1/body:2/div[root]:3/div:1/div:1/div[sidebar-wrapper]:1/main[sidebar-inset]:2/div[content-area]:2/div:1/div:1/div:1/div:1/div:1/div:1/div:1/div:1/div:1/div:1/div:4/button[base-ui-_r_u_]:4",
       "tag": "button",
       "role": "button",
       "accessibleName": "Undo from here",
       "enabled": true,
-      "evidence": null,
+      "evidence": {
+        "enabled": true,
+        "role": "button",
+        "accessibleName": "Undo from here",
+        "listeners": [
+          {
+            "type": "click"
+          },
+          {
+            "type": "mouseenter"
+          },
+          {
+            "type": "mouseleave"
+          }
+        ],
+        "react": {
+          "componentName": "button",
+          "propNames": [
+            "onBlur",
+            "onClick",
+            "onFocus",
+            "onKeyDown",
+            "onKeyUp",
+            "onMouseDown",
+            "onMouseLeave",
+            "onMouseMove",
+            "onPointerDown",
+            "onPointerEnter"
+          ]
+        }
+      },
       "review": {
         "status": "unmapped"
       }
@@ -350,9 +1157,28 @@
       "sourceId": "html:1/body:2/div[root]:3/div:1/div:1/div[sidebar-wrapper]:1/main[sidebar-inset]:2/div[content-area]:2/div:1/div:1/div:1/div:1/div:1/div:1/div:1/div:1/div:1/div:2/div:2/div:1/div[collapsible]:1/button[collapsible-trigger]:1",
       "tag": "button",
       "role": "button",
-      "accessibleName": "Thought for 2 seconds",
+      "accessibleName": "Thought for 2  econd ",
       "enabled": true,
-      "evidence": null,
+      "evidence": {
+        "enabled": true,
+        "role": "button",
+        "accessibleName": "Thought for 2  econd ",
+        "listeners": [
+          {
+            "type": "click"
+          }
+        ],
+        "react": {
+          "componentName": "button",
+          "propNames": [
+            "onClick",
+            "onKeyDown",
+            "onKeyUp",
+            "onMouseDown",
+            "onPointerDown"
+          ]
+        }
+      },
       "review": {
         "status": "unmapped"
       }
@@ -363,52 +1189,166 @@
       "role": "button",
       "accessibleName": "Stop",
       "enabled": true,
-      "evidence": null,
+      "evidence": {
+        "enabled": true,
+        "role": "button",
+        "accessibleName": "Stop",
+        "listeners": [
+          {
+            "type": "click"
+          }
+        ],
+        "react": {
+          "componentName": "button",
+          "propNames": [
+            "onClick",
+            "onKeyDown",
+            "onKeyUp",
+            "onMouseDown",
+            "onPointerDown"
+          ]
+        }
+      },
       "review": {
         "status": "mapped",
         "applicationAction": "prompt.cancel"
       }
     },
     {
-      "sourceId": "html:1/body:2/div[root]:3/div:1/div:1/div[sidebar-wrapper]:1/main[sidebar-inset]:2/div[content-area]:2/div:1/div:1/div:1/div:1/div:2/div:1/div:1/form:2/div[input-group]:1/div[input-group-addon]:2/div:1/button[base-ui-_r_42_]:1",
+      "sourceId": "html:1/body:2/div[root]:3/div:1/div:1/div[sidebar-wrapper]:1/main[sidebar-inset]:2/div[content-area]:2/div:1/div:1/div:1/div:1/div:2/div:1/div:1/form:2/div[input-group]:1/div[input-group-addon]:2/div:1/button[base-ui-_r_11_]:1",
       "tag": "button",
       "role": "button",
       "accessibleName": "",
       "enabled": true,
-      "evidence": null,
+      "evidence": {
+        "enabled": true,
+        "role": "button",
+        "accessibleName": "",
+        "listeners": [
+          {
+            "type": "click"
+          },
+          {
+            "type": "mouseenter"
+          },
+          {
+            "type": "mouseleave"
+          }
+        ],
+        "react": {
+          "componentName": "button",
+          "propNames": [
+            "onBlur",
+            "onClick",
+            "onFocus",
+            "onKeyDown",
+            "onKeyUp",
+            "onMouseDown",
+            "onMouseLeave",
+            "onMouseMove",
+            "onPointerDown",
+            "onPointerEnter"
+          ]
+        }
+      },
       "review": {
         "status": "unmapped"
       }
     },
     {
-      "sourceId": "html:1/body:2/div[root]:3/div:1/div:1/div[sidebar-wrapper]:1/main[sidebar-inset]:2/div[content-area]:2/div:1/div:1/div:1/div:1/div:2/div:1/div:1/form:2/div[input-group]:1/div[input-group-addon]:2/div:1/div:2/button[base-ui-_r_43_]:1",
+      "sourceId": "html:1/body:2/div[root]:3/div:1/div:1/div[sidebar-wrapper]:1/main[sidebar-inset]:2/div[content-area]:2/div:1/div:1/div:1/div:1/div:2/div:1/div:1/form:2/div[input-group]:1/div[input-group-addon]:2/div:1/div:2/button[base-ui-_r_12_]:1",
       "tag": "button",
       "role": "combobox",
-      "accessibleName": "Build ▼",
+      "accessibleName": "Build",
       "enabled": true,
-      "evidence": null,
+      "evidence": {
+        "enabled": true,
+        "role": "combobox",
+        "accessibleName": "Build",
+        "listeners": [
+          {
+            "type": "click"
+          }
+        ],
+        "react": {
+          "componentName": "button",
+          "propNames": [
+            "onBlur",
+            "onClick",
+            "onFocus",
+            "onKeyDown",
+            "onKeyUp",
+            "onMouseDown",
+            "onPointerDown",
+            "onPointerEnter",
+            "onPointerMove"
+          ]
+        }
+      },
       "review": {
         "status": "unmapped"
       }
     },
     {
-      "sourceId": "html:1/body:2/div[root]:3/div:1/div:1/div[sidebar-wrapper]:1/main[sidebar-inset]:2/div[content-area]:2/div:1/div:1/div:1/div:1/div:2/div:1/div:1/form:2/div[input-group]:1/div[input-group-addon]:2/div:1/div:2/button[base-ui-_r_48_]:4",
+      "sourceId": "html:1/body:2/div[root]:3/div:1/div:1/div[sidebar-wrapper]:1/main[sidebar-inset]:2/div[content-area]:2/div:1/div:1/div:1/div:1/div:2/div:1/div:1/form:2/div[input-group]:1/div[input-group-addon]:2/div:1/div:2/button[base-ui-_r_17_]:4",
       "tag": "button",
       "role": "button",
-      "accessibleName": "Claude Opus 4.6",
+      "accessibleName": "A\nClaude Opu  4.6",
       "enabled": true,
-      "evidence": null,
+      "evidence": {
+        "enabled": true,
+        "role": "button",
+        "accessibleName": "A\nClaude Opu  4.6",
+        "listeners": [
+          {
+            "type": "click"
+          }
+        ],
+        "react": {
+          "componentName": "button",
+          "propNames": [
+            "onClick",
+            "onKeyDown",
+            "onKeyUp",
+            "onMouseDown",
+            "onPointerDown"
+          ]
+        }
+      },
       "review": {
         "status": "unmapped"
       }
     },
     {
-      "sourceId": "html:1/body:2/div[root]:3/div:1/div:1/div[sidebar-wrapper]:1/main[sidebar-inset]:2/div[content-area]:2/div:1/div:1/div:1/div:1/div:2/div:1/div:1/form:2/div[input-group]:1/div[input-group-addon]:2/div:1/div:2/button[base-ui-_r_49_]:6",
+      "sourceId": "html:1/body:2/div[root]:3/div:1/div:1/div[sidebar-wrapper]:1/main[sidebar-inset]:2/div[content-area]:2/div:1/div:1/div:1/div:1/div:2/div:1/div:1/form:2/div[input-group]:1/div[input-group-addon]:2/div:1/div:2/button[base-ui-_r_18_]:6",
       "tag": "button",
       "role": "combobox",
-      "accessibleName": "Default variant ▼",
+      "accessibleName": "Default variant",
       "enabled": true,
-      "evidence": null,
+      "evidence": {
+        "enabled": true,
+        "role": "combobox",
+        "accessibleName": "Default variant",
+        "listeners": [
+          {
+            "type": "click"
+          }
+        ],
+        "react": {
+          "componentName": "button",
+          "propNames": [
+            "onBlur",
+            "onClick",
+            "onFocus",
+            "onKeyDown",
+            "onKeyUp",
+            "onMouseDown",
+            "onPointerDown",
+            "onPointerEnter",
+            "onPointerMove"
+          ]
+        }
+      },
       "review": {
         "status": "unmapped"
       }
@@ -417,9 +1357,25 @@
       "sourceId": "html:1/body:2/div[root]:3/div:1/div:1/div[sidebar-wrapper]:1/main[sidebar-inset]:2/div[content-area]:2/div:1/div:1/div:1/div:1/div:2/div:1/div:1/form:2/div[input-group]:1/div[input-group-addon]:2/div:1/div:2/input:2",
       "tag": "input",
       "role": "textbox",
-      "accessibleName": "",
+      "accessibleName": "Build",
       "enabled": true,
-      "evidence": null,
+      "evidence": {
+        "enabled": true,
+        "role": "input",
+        "accessibleName": "Build",
+        "listeners": [
+          {
+            "type": "invalid"
+          }
+        ],
+        "react": {
+          "componentName": "input",
+          "propNames": [
+            "onChange",
+            "onFocus"
+          ]
+        }
+      },
       "review": {
         "status": "unmapped"
       }
@@ -428,9 +1384,25 @@
       "sourceId": "html:1/body:2/div[root]:3/div:1/div:1/div[sidebar-wrapper]:1/main[sidebar-inset]:2/div[content-area]:2/div:1/div:1/div:1/div:1/div:2/div:1/div:1/form:2/div[input-group]:1/div[input-group-addon]:2/div:1/div:2/input:7",
       "tag": "input",
       "role": "textbox",
-      "accessibleName": "",
+      "accessibleName": "__default__",
       "enabled": true,
-      "evidence": null,
+      "evidence": {
+        "enabled": true,
+        "role": "input",
+        "accessibleName": "__default__",
+        "listeners": [
+          {
+            "type": "invalid"
+          }
+        ],
+        "react": {
+          "componentName": "input",
+          "propNames": [
+            "onChange",
+            "onFocus"
+          ]
+        }
+      },
       "review": {
         "status": "unmapped"
       }
@@ -441,7 +1413,26 @@
       "role": "textbox",
       "accessibleName": "",
       "enabled": true,
-      "evidence": null,
+      "evidence": {
+        "enabled": true,
+        "role": "textbox",
+        "accessibleName": "",
+        "listeners": [
+          {
+            "type": "invalid"
+          }
+        ],
+        "react": {
+          "componentName": "textarea",
+          "propNames": [
+            "onChange",
+            "onCompositionEnd",
+            "onCompositionStart",
+            "onKeyDown",
+            "onPaste"
+          ]
+        }
+      },
       "review": {
         "status": "unmapped"
       }
@@ -452,7 +1443,22 @@
       "role": "button",
       "accessibleName": "Default",
       "enabled": true,
-      "evidence": null,
+      "evidence": {
+        "enabled": true,
+        "role": "button",
+        "accessibleName": "Default",
+        "listeners": [
+          {
+            "type": "click"
+          }
+        ],
+        "react": {
+          "componentName": "button",
+          "propNames": [
+            "onClick"
+          ]
+        }
+      },
       "review": {
         "status": "unmapped"
       }
@@ -463,7 +1469,22 @@
       "role": "button",
       "accessibleName": "",
       "enabled": true,
-      "evidence": null,
+      "evidence": {
+        "enabled": true,
+        "role": "button",
+        "accessibleName": "",
+        "listeners": [
+          {
+            "type": "click"
+          }
+        ],
+        "react": {
+          "componentName": "button",
+          "propNames": [
+            "onClick"
+          ]
+        }
+      },
       "review": {
         "status": "unmapped"
       }
@@ -474,7 +1495,22 @@
       "role": "button",
       "accessibleName": "",
       "enabled": true,
-      "evidence": null,
+      "evidence": {
+        "enabled": true,
+        "role": "button",
+        "accessibleName": "",
+        "listeners": [
+          {
+            "type": "click"
+          }
+        ],
+        "react": {
+          "componentName": "button",
+          "propNames": [
+            "onClick"
+          ]
+        }
+      },
       "review": {
         "status": "unmapped"
       }
@@ -485,7 +1521,22 @@
       "role": "button",
       "accessibleName": "",
       "enabled": true,
-      "evidence": null,
+      "evidence": {
+        "enabled": true,
+        "role": "button",
+        "accessibleName": "",
+        "listeners": [
+          {
+            "type": "click"
+          }
+        ],
+        "react": {
+          "componentName": "button",
+          "propNames": [
+            "onClick"
+          ]
+        }
+      },
       "review": {
         "status": "unmapped"
       }
@@ -496,7 +1547,22 @@
       "role": "button",
       "accessibleName": "",
       "enabled": true,
-      "evidence": null,
+      "evidence": {
+        "enabled": true,
+        "role": "button",
+        "accessibleName": "",
+        "listeners": [
+          {
+            "type": "click"
+          }
+        ],
+        "react": {
+          "componentName": "button",
+          "propNames": [
+            "onClick"
+          ]
+        }
+      },
       "review": {
         "status": "unmapped"
       }
@@ -505,9 +1571,24 @@
       "sourceId": "html:1/body:2/div[root]:3/div:1/div:1/div[sidebar-wrapper]:1/main[sidebar-inset]:2/div[content-area]:2/div:1/div:2/div:1/div:1/div:2/div:1/button:1",
       "tag": "button",
       "role": "button",
-      "accessibleName": "All files 3",
+      "accessibleName": "All file \n3",
       "enabled": true,
-      "evidence": null,
+      "evidence": {
+        "enabled": true,
+        "role": "button",
+        "accessibleName": "All file \n3",
+        "listeners": [
+          {
+            "type": "click"
+          }
+        ],
+        "react": {
+          "componentName": "button",
+          "propNames": [
+            "onClick"
+          ]
+        }
+      },
       "review": {
         "status": "unmapped"
       }
@@ -516,9 +1597,24 @@
       "sourceId": "html:1/body:2/div[root]:3/div:1/div:1/div[sidebar-wrapper]:1/main[sidebar-inset]:2/div[content-area]:2/div:1/div:2/div:1/div:1/div:2/div:1/button:2",
       "tag": "button",
       "role": "button",
-      "accessibleName": "src/lib/theme.ts + 28",
+      "accessibleName": " rc/lib/theme.t \n+28",
       "enabled": true,
-      "evidence": null,
+      "evidence": {
+        "enabled": true,
+        "role": "button",
+        "accessibleName": " rc/lib/theme.t \n+28",
+        "listeners": [
+          {
+            "type": "click"
+          }
+        ],
+        "react": {
+          "componentName": "button",
+          "propNames": [
+            "onClick"
+          ]
+        }
+      },
       "review": {
         "status": "unmapped"
       }
@@ -527,9 +1623,24 @@
       "sourceId": "html:1/body:2/div[root]:3/div:1/div:1/div[sidebar-wrapper]:1/main[sidebar-inset]:2/div[content-area]:2/div:1/div:2/div:1/div:1/div:2/div:1/button:3",
       "tag": "button",
       "role": "button",
-      "accessibleName": "src/components/settings.tsx + 18 - 2",
+      "accessibleName": " rc/component / etting .t x\n+18\n-2",
       "enabled": true,
-      "evidence": null,
+      "evidence": {
+        "enabled": true,
+        "role": "button",
+        "accessibleName": " rc/component / etting .t x\n+18\n-2",
+        "listeners": [
+          {
+            "type": "click"
+          }
+        ],
+        "react": {
+          "componentName": "button",
+          "propNames": [
+            "onClick"
+          ]
+        }
+      },
       "review": {
         "status": "unmapped"
       }
@@ -538,9 +1649,24 @@
       "sourceId": "html:1/body:2/div[root]:3/div:1/div:1/div[sidebar-wrapper]:1/main[sidebar-inset]:2/div[content-area]:2/div:1/div:2/div:1/div:1/div:2/div:1/button:4",
       "tag": "button",
       "role": "button",
-      "accessibleName": "src/styles/globals.css + 12",
+      "accessibleName": " rc/ tyle /global .c \n+12",
       "enabled": true,
-      "evidence": null,
+      "evidence": {
+        "enabled": true,
+        "role": "button",
+        "accessibleName": " rc/ tyle /global .c \n+12",
+        "listeners": [
+          {
+            "type": "click"
+          }
+        ],
+        "react": {
+          "componentName": "button",
+          "propNames": [
+            "onClick"
+          ]
+        }
+      },
       "review": {
         "status": "unmapped"
       }
@@ -550,6 +1676,6 @@
     "total": 49,
     "mapped": 5,
     "unmapped": 44,
-    "missingEvidence": 49
+    "missingEvidence": 0
   }
 }
