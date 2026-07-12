@@ -56,15 +56,24 @@ removeFormattingWhitespace(renderRoot)
 
 let lowered = importer.lowerObservedDom(renderRoot, importedAt)
 if (responsiveSemantics.length) {
-	const captures = await Promise.all(responsiveSemantics.map(async (path) => {
+	let captures = await Promise.all(responsiveSemantics.map(async (path) => {
 		const capture = JSON.parse(await readFile(path, "utf8"))
 		const root = capture.observedDom?.tagName?.toLowerCase() === "html"
 			? capture.observedDom.children?.find((child: any) => child.tagName?.toLowerCase() === "body")
 			: capture.observedDom
-		if (!root || !capture.policy?.viewport) throw new Error(`invalid responsive semantics ${path}`)
+		const viewport = capture.policy?.viewport ?? (Number.isFinite(capture.capture?.innerWidth) &&
+			Number.isFinite(capture.capture?.innerHeight) ? {
+				width: capture.capture.innerWidth, height: capture.capture.innerHeight,
+			} : undefined)
+		if (!root || !viewport) throw new Error(`invalid responsive semantics ${path}`)
 		removeFormattingWhitespace(root)
-		return { viewport: capture.policy.viewport, root }
+		return { viewport, root, path }
 	}))
+	// unionResponsiveTrees takes its canonical literal/style tree from the last
+	// capture. Make that choice explicit and independent of CLI list ordering.
+	const reference = captures.findIndex((capture) => capture.path === semanticsPath)
+	if (reference < 0) throw new Error("reference semantics must be included in responsive captures")
+	captures = [...captures.slice(0, reference), ...captures.slice(reference + 1), captures[reference]]
 	const alignment = importer.alignStableObservedDomIdentitiesWithReport(captures)
 	const alignedCaptures = alignment.captures
 	if (alignment.report.refusedCollisions !== alignment.report.collisions)
