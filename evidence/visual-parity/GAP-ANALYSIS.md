@@ -16,10 +16,26 @@ Reference: the unmodified Palot source at `fd63a75dad3d0e8555ba22a47e720d285889f
 10. The native capture remains C++/Yoga/Skia Graphite/Dawn/Metal; no WebView or Chromium code was introduced.
 11. A deterministic screenshot harness now emits normalized inputs, montage, heatmap, overlay, hashes, MAE, RMSE, PSNR, SSIM, and changed-pixel counts for every pass.
 
-## Quantitative result and residual gaps
+## Current measured pass
 
-The initial structural mock scored SSIM `0.088831116` with MAE `13.229267`. At exact consumer head `f659028`, after the shell, functional-control, fixture, composer, and typography passes, the matched native fixture scores SSIM `0.197067161`, MAE `13.298452`, and `10.958333%` pixels above the 16-channel threshold. SSIM more than doubled while MAE remained effectively flat; this is substantial structural convergence, not pixel identity.
+Pass 09 uses a fresh source capture from the detached reference worktree and the native GPU back buffer at identical 1200 x 800 logical / 2400 x 1600 physical dimensions. Its durable artifacts are in `pass-09-provenance-auto/`. The result is SSIM `0.258545926`, MAE `14.048430`, and `7.344844%` pixels above the 16-channel threshold. Compared with pass 08 (`0.197067161` SSIM and `10.958333%` changed pixels), structural similarity improved by 31.2% and the changed-pixel area fell by 33.0%.
 
-Residual differences remain in renderer-specific glyph antialiasing, exact Lucide icon shapes, selected-session copy, muted metadata color, rich inline-code backgrounds, scrollbar styling, and some transcript wrapping. Chromium/CoreText and Skia will not produce byte-identical glyph pixels, so the raw metrics are retained as an honest regression signal rather than described as equality. The functional native controls remain real widgets: New Session, project chooser, session ID/Open, provider, model, Send, and Cancel are visible and operable; static painting is limited to non-interactive chrome and fixture content.
+This pass also proves that exhaustive, selector-scoped authored-style receipts can distinguish CSS initial `width:auto` from omitted provenance. The native app-bar title now paints in full, while unqueried nodes retain observed geometry. Twelve of twelve consumer tests pass, including responsive geometry, the production interaction census, accessibility, and exact app-bar paint text.
+
+## Pass 09 eleven-gap queue
+
+1. Transcript vertical origin is too high; the source leaves a larger gap below the app bar before the first user bubble.
+2. Native transcript body glyphs are visibly larger/heavier than the captured 13 px source treatment, changing density and wrap points.
+3. Tool rows are taller than the source and have excessive vertical padding.
+4. Tool subjects and durations use incorrect muted opacity/weight, and duration alignment differs from the source.
+5. The assistant Markdown response consumes too much vertical space because line boxes and paragraph margins are too large.
+6. Inline-code pills are taller and wider than the source, with different baseline and horizontal padding.
+7. The second user bubble and subsequent reasoning/tool rows occur lower than the source because cumulative transcript spacing is too large.
+8. The composer is too tall and begins too low; its toolbar/status row is consequently displaced.
+9. Sidebar labels use heavier/wider glyph metrics and truncate sooner than the source, especially New Session, Automations, and footer labels.
+10. Several Lucide glyphs still differ in stroke geometry or optical centering, including the sidebar toggle, tool icons, and footer controls.
+11. Scrollbar styling, hover/pressed/focus animation captures, and deterministic transparent-window compositing still need state-matched screenshot gates.
+
+Pixel identity is not yet claimed. The queue remains open until each region passes its geometry, interaction, and visual oracle rather than merely improving the global score. Functional controls remain native widgets; static painting is limited to non-interactive chrome and fixture content.
 
 The real native OpenCode path was separately exercised after the visual fixture and returned exactly `REAL VISUAL PARITY OK`.

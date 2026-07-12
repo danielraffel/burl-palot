@@ -1,0 +1,33 @@
+{
+  "artifacts": {
+    "candidate-normalized.png": "6bbf211c3b3242754c2f255f34fdedfe027ed6e1fbd05036bd0f1682ae439824",
+    "diff-heatmap.png": "71ff39cd623e20cdba8ea6ad3080c10c07c6f0147e9c4d15ab1d8da368f82d5c",
+    "diff-overlay.png": "0dd6f658f53ea7eac13907f0f32366e02cec2cc90c48902d69cc443e29ef7836",
+    "montage.png": "0add11034d585f633f947e3fcf3235afe785a20153c5db22f5f544753afb70a8",
+    "reference-normalized.png": "dd2d8aaabfe493698601de2cfbb28b3068553900371648d0a587918cd03710e5"
+  },
+  "comparison": {
+    "candidateCrop": null,
+    "fit": "stretch",
+    "height": 1600,
+    "referenceCrop": null,
+    "threshold": 16,
+    "width": 2400
+  },
+  "inputs": {
+    "candidate": "/private/tmp/palot-native-fixture-9.png",
+    "candidateSha256": "ec58a583a661bcf99b70463c2275bd37388b0c2eb3a29a7d2353dc20742e0cba",
+    "reference": "/private/tmp/palot-complete-cohort/1200x800/source.png",
+    "referenceSha256": "53e783186601da542309cd83ca96d8a4dc521ed9b6a817a69156b1119b955508"
+  },
+  "metrics": {
+    "differentPixelPercent": 7.344844,
+    "differentPixels": 282042,
+    "globalSsim": 0.258545926,
+    "maximumChannelDelta": 253,
+    "meanAbsoluteError": 14.04843,
+    "peakSignalToNoiseRatioDb": 14.666591,
+    "rootMeanSquareError": 47.120578
+  },
+  "schemaVersion": 1
+}
