@@ -447,7 +447,7 @@ void PalotView::load_visual_parity_fixture() {
 	append_message("You",
 	               "Great! Now also add system preference detection so it defaults to the user's OS "
 	               "setting, and add a transition animation when switching themes.", false);
-	append_message("OpenCode", "🧠 Thought for 2 seconds\n\n◌  Making edits…", false);
+	append_message("OpenCode", "🧠 Thought for 2 seconds\n\n**Making edits** in `src/lib/theme.ts`…", false);
 	transcript_->set_scroll_y(54.0f);
 	status_ = "Streaming";
 	request_repaint();

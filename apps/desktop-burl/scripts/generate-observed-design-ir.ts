@@ -37,12 +37,15 @@ const importPolicy = JSON.parse(await readFile(bindingPolicyPath, "utf8")) as {
 const removeFormattingWhitespace = (node: any) => {
 	if (node.tagName?.toLowerCase() === "svg") {
 		node.content = []
+		node.orderedPaintContent = []
+		delete node.text
 		node.children = []
 		return
 	}
 	node.children = (node.children ?? []).filter((child: any) => !["script", "style", "template", "link", "meta"].includes(child.tagName?.toLowerCase()))
 	if (Array.isArray(node.content)) node.content = node.content.filter((item: any) => item.kind !== "text" || item.text?.trim())
 	if (Array.isArray(node.orderedPaintContent)) node.orderedPaintContent = node.orderedPaintContent.filter((item: any) => item.kind !== "text" || item.text?.trim())
+	if ((node.content?.length || node.orderedPaintContent?.length) && node.text !== undefined) delete node.text
 	for (const child of node.children ?? []) removeFormattingWhitespace(child)
 }
 removeFormattingWhitespace(renderRoot)
