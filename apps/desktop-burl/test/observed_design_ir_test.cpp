@@ -56,8 +56,8 @@ int main(int argc, char** argv) {
 	// Canonical 15-width source capture baseline. These floors make a
 	// single-viewport regeneration fail closed instead of silently erasing the
 	// responsive contract while allowing additive importer improvements.
-	if (counts.responsive_nodes < 251 || counts.responsive_transitions < 112 ||
-	    counts.collection_templates != 3) return 7;
+    if (counts.responsive_nodes < 251 || counts.responsive_transitions < 112 ||
+        counts.collection_templates != 4) return 7;
 	std::vector<pulp::view::ImportDiagnostic> diagnostics;
 	pulp::view::NativeMaterializeOptions options;
 	options.diagnostics_out = &diagnostics;
