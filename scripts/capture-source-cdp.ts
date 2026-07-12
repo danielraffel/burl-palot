@@ -72,6 +72,20 @@ export const semanticExpression = `(() => {
       return [{kind:"child", sourceId:id}];
     });
     const before = pseudo("::before"), after = pseudo("::after");
+    const listenerProbe = typeof getEventListeners === "function" ? getEventListeners(element) : {};
+    const listeners = Object.entries(listenerProbe).flatMap(([type, entries]) =>
+      entries.map(entry => ({
+        type,
+        ...(entry.scriptId ? {scriptId:String(entry.scriptId)} : {}),
+        ...(Number.isFinite(entry.lineNumber) ? {lineNumber:entry.lineNumber} : {}),
+        ...(Number.isFinite(entry.columnNumber) ? {columnNumber:entry.columnNumber} : {})
+      })));
+    const reactKey = Object.keys(element).find(key => key.startsWith("__reactProps$"));
+    const reactProps = reactKey ? element[reactKey] : null;
+    const react = reactProps ? {
+      componentName: element.tagName.toLowerCase(),
+      propNames: Object.keys(reactProps).filter(name => /^on[A-Z]/.test(name)).sort()
+    } : null;
     return {
       sourceId: sourceId(element),
       tagName: element.tagName.toLowerCase(),
@@ -79,6 +93,13 @@ export const semanticExpression = `(() => {
       outerHtml: element.tagName.toLowerCase() === "svg" ? element.outerHTML : "",
       imageSrc: element.tagName.toLowerCase() === "img" ? element.getAttribute("src") || "" : "",
       attributes: attrs,
+      interactionEvidence: {
+        enabled: !element.disabled && element.getAttribute("aria-disabled") !== "true",
+        role: element.getAttribute("role") || (element.tagName.toLowerCase() === "textarea" ? "textbox" : element.tagName.toLowerCase()),
+        accessibleName: element.getAttribute("aria-label") || (element.innerText || element.value || "").trim().replace(/\s+/g, " "),
+        listeners,
+        ...(react ? {react} : {})
+      },
       ...(content.length ? {content} : {}),
       pseudoElements: [before, after].filter(Boolean),
       orderedPaintContent: [...(before ? [before] : []), ...content, ...(after ? [after] : [])],
@@ -239,6 +260,7 @@ new Promise(resolve => setTimeout(resolve, 2500))
 		const semanticResult = await cdp.command("Runtime.evaluate", {
 			expression: semanticExpression,
 			returnByValue: true,
+			includeCommandLineAPI: true,
 		})
 		const screenshot = await cdp.command("Page.captureScreenshot", {
 			format: "png",
