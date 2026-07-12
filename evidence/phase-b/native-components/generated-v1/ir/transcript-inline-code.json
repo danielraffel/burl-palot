@@ -1,0 +1,81 @@
+{
+  "version": 1,
+  "source": "jsx",
+  "sourceFile": "/Users/danielraffel/Code/burl-palot-wt-semantic-restart/evidence/visual-parity/baselines/01-shell/source-semantics.json",
+  "capture_method": "runtime_snapshot",
+  "settle_rounds": 2,
+  "fallback_reason": "",
+  "source_adapter": "observed-dom",
+  "source_version": "1.0.0",
+  "imported_at": "2026-07-11T00:00:00.000Z",
+  "root": {
+    "type": "text",
+    "name": "html:1/body:2/div[root]:3/div:1/div:1/div[sidebar-wrapper]:1/main[sidebar-inset]:2/div[content-area]:2/div:1/div:1/div:1/div:1/div:1/div:1/div:1/div:1/div:1/div:1/div:2/div:1/div:2/div:1/div:1/div:1/ol:2/li:1/p:1/span:1/code:1",
+    "content": "src/lib/theme.ts",
+    "layout": {
+      "display": "inline",
+      "direction": "row",
+      "wrap": false,
+      "align": "normal",
+      "justify": "normal",
+      "paddingTop": 2,
+      "paddingRight": 6,
+      "paddingBottom": 2,
+      "paddingLeft": 6,
+      "marginTop": 0,
+      "marginRight": 0,
+      "marginBottom": 0,
+      "marginLeft": 0,
+      "overflowX": "visible",
+      "overflowY": "visible",
+      "widthMode": "fixed",
+      "width": 156.492,
+      "heightMode": "fixed",
+      "height": 21.5
+    },
+    "style": {
+      "backgroundColor": "#282828ff",
+      "color": "#ffffffff",
+      "borderRadius": 4,
+      "fontFamily": "ui-monospace, SFMono-Regular, \"SF Mono\", Menlo, Consolas, \"Liberation Mono\", monospace",
+      "fontSize": 15,
+      "fontWeight": 600,
+      "lineHeight": 22,
+      "textAlign": "start",
+      "whiteSpace": "normal",
+      "width": 156.492,
+      "height": 21.5
+    },
+    "attributes": {
+      "source_revision": "55696de9b3bd6d4b3846f9fb2457eb4bfe9239ee5fb3e1275b2fafe0d17a72d0"
+    },
+    "stable_anchor_id": "observed-dom:html:1/body:2/div[root]:3/div:1/div:1/div[sidebar-wrapper]:1/main[sidebar-inset]:2/div[content-area]:2/div:1/div:1/div:1/div:1/div:1/div:1/div:1/div:1/div:1/div:1/div:2/div:1/div:2/div:1/div:1/div:1/ol:2/li:1/p:1/span:1/code:1",
+    "anchor_strategy": "adapter",
+    "source_node_id": "html:1/body:2/div[root]:3/div:1/div:1/div[sidebar-wrapper]:1/main[sidebar-inset]:2/div[content-area]:2/div:1/div:1/div:1/div:1/div:1/div:1/div:1/div:1/div:1/div:1/div:2/div:1/div:2/div:1/div:1/div:1/ol:2/li:1/p:1/span:1/code:1",
+    "source_adapter": "observed-dom",
+    "source_version": "1.0.0",
+    "confidence": "pass",
+    "raw_source": "{\"kind\":\"observed-dom\",\"node\":{\"sourceId\":\"html:1/body:2/div[root]:3/div:1/div:1/div[sidebar-wrapper]:1/main[sidebar-inset]:2/div[content-area]:2/div:1/div:1/div:1/div:1/div:1/div:1/div:1/div:1/div:1/div:1/div:2/div:1/div:2/div:1/div:1/div:1/ol:2/li:1/p:1/span:1/code:1\",\"tagName\":\"code\",\"attributes\":{},\"rect\":{\"x\":357,\"y\":236.5,\"width\":156.492,\"height\":21.5}},\"computedStyle\":{\"display\":\"inline\",\"position\":\"static\",\"flexDirection\":\"row\",\"flexGrow\":\"0\",\"flexShrink\":\"1\",\"flexBasis\":\"auto\",\"flexWrap\":\"nowrap\",\"alignItems\":\"normal\",\"alignSelf\":\"auto\",\"alignContent\":\"normal\",\"justifyContent\":\"normal\",\"gap\":\"normal\",\"padding\":\"2px 6px\",\"paddingTop\":\"2px\",\"paddingRight\":\"6px\",\"paddingBottom\":\"2px\",\"paddingLeft\":\"6px\",\"margin\":\"0px\",\"marginTop\":\"0px\",\"marginRight\":\"0px\",\"marginBottom\":\"0px\",\"marginLeft\":\"0px\",\"width\":\"auto\",\"height\":\"auto\",\"minWidth\":\"0px\",\"minHeight\":\"0px\",\"maxWidth\":\"none\",\"maxHeight\":\"none\",\"top\":\"auto\",\"right\":\"auto\",\"bottom\":\"auto\",\"left\":\"auto\",\"color\":\"rgb(255, 255, 255)\",\"backgroundColor\":\"rgb(40, 40, 40)\",\"fontFamily\":\"ui-monospace, SFMono-Regular, \\\"SF Mono\\\", Menlo, Consolas, \\\"Liberation Mono\\\", monospace\",\"fontSize\":\"15px\",\"fontWeight\":\"600\",\"lineHeight\":\"22px\",\"whiteSpace\":\"normal\",\"textAlign\":\"start\",\"letterSpacing\":\"normal\",\"border\":\"0px solid rgb(46, 46, 46)\",\"borderRadius\":\"4px\",\"borderTopWidth\":\"0px\",\"borderRightWidth\":\"0px\",\"borderBottomWidth\":\"0px\",\"borderLeftWidth\":\"0px\",\"borderTopColor\":\"rgb(46, 46, 46)\",\"borderRightColor\":\"rgb(46, 46, 46)\",\"borderBottomColor\":\"rgb(46, 46, 46)\",\"borderLeftColor\":\"rgb(46, 46, 46)\",\"opacity\":\"1\",\"boxShadow\":\"none\",\"cursor\":\"auto\",\"overflowX\":\"visible\",\"overflowY\":\"visible\"}}",
+    "children": []
+  },
+  "tokens": {
+    "colors": {},
+    "dimensions": {},
+    "strings": {}
+  },
+  "assetManifest": {
+    "version": 1,
+    "assets": []
+  },
+  "fontFamilyAssets": [],
+  "diagnostics": [
+    {
+      "severity": "error",
+      "kind": "unresolved_asset",
+      "code": "font-face-unresolved",
+      "path": "html:1/body:2/div[root]:3/div:1/div:1/div[sidebar-wrapper]:1/main[sidebar-inset]:2/div[content-area]:2/div:1/div:1/div:1/div:1/div:1/div:1/div:1/div:1/div:1/div:1/div:2/div:1/div:2/div:1/div:1/div:1/ol:2/li:1/p:1/span:1/code:1",
+      "property": "fontFamily",
+      "message": "no bundled face exactly matches ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, Liberation Mono, monospace 600 normal; parity mode forbids substitution"
+    }
+  ]
+}

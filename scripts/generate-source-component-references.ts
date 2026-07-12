@@ -28,6 +28,12 @@ interface ComponentSpec {
 	state: string
 	selector: Selector
 	expectedSourceId: string
+	interaction: {
+		kind: string
+		postcondition: string
+		actionIdentity: string
+		applicationBindingRequired: boolean
+	}
 }
 
 interface Manifest {
@@ -177,6 +183,7 @@ export async function generateSourceComponentReferences(
 				dataSlot: node.attributes["data-slot"] ?? "",
 				cursor: node.computedStyle.cursor ?? "",
 			},
+			interaction: component.interaction,
 			crop: { file: cropName, sha256: sha256(crop) },
 		}
 		references.push({ ...evidence, evidenceSha256: sha256(canonical(evidence)) })

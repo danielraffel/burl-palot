@@ -1,0 +1,406 @@
+{
+  "schemaVersion": 1,
+  "backend": "real Skia raster",
+  "comparison": "exact pixel dimensions; no resizing",
+  "results": [
+    {
+      "id": "sidebar-session-selected",
+      "state": "selected",
+      "sourceId": "html:1/body:2/div[root]:3/div:1/div:1/div[sidebar-wrapper]:1/div[sidebar]:1/div[sidebar-container]:1/div[sidebar-inner]:1/div[sidebar-content]:2/div[sidebar-group]:2/div[sidebar-group-content]:2/ul[sidebar-menu]:1/li[context-menu-trigger]:1/button[base-ui-_r_p_]:1",
+      "irFile": "ir/sidebar-session-selected.json",
+      "sourceCrop": "/Users/danielraffel/Code/burl-palot-wt-semantic-restart/evidence/phase-b/source-components/generated-v1/sidebar-session-selected.png",
+      "pixel": {
+        "left": 16,
+        "top": 356,
+        "width": 528,
+        "height": 64
+      },
+      "logical": {
+        "x": 8,
+        "y": 178,
+        "width": 264,
+        "height": 32
+      },
+      "devicePixelRatio": 2,
+      "interaction": {
+        "kind": "selected-row",
+        "postcondition": "remains-selected",
+        "actionIdentity": "session.select",
+        "applicationBindingRequired": true
+      },
+      "candidate": "/Users/danielraffel/Code/burl-palot-wt-semantic-restart/evidence/phase-b/native-components/candidates-v1/sidebar-session-selected.png",
+      "diff": "/Users/danielraffel/Code/burl-palot-wt-semantic-restart/evidence/phase-b/native-components/candidates-v1/sidebar-session-selected.diff.png",
+      "execution": {
+        "backend": "skia",
+        "dpr": 2,
+        "interactionSupported": false,
+        "irErrors": true,
+        "logicalHeight": 32,
+        "logicalWidth": 264,
+        "materializeErrors": true,
+        "postActionPass": true,
+        "rendered": true
+      },
+      "metrics": {
+        "mae": 0.2953127901255199,
+        "ssim": 0.28719667764379275,
+        "edgeDiff": 0.044093252199465915
+      },
+      "status": "GAP",
+      "blockers": [
+        "import diagnostics contain error",
+        "materialization diagnostics contain error",
+        "post-action semantic unsupported",
+        "ApplicationBindingManifest dispatch not proven: session.select"
+      ]
+    },
+    {
+      "id": "sidebar-new-session-rest",
+      "state": "rest",
+      "sourceId": "html:1/body:2/div[root]:3/div:1/div:1/div[sidebar-wrapper]:1/div[sidebar]:1/div[sidebar-container]:1/div[sidebar-inner]:1/div[sidebar-content]:2/div[sidebar-group]:1/div[sidebar-group-content]:1/ul[sidebar-menu]:1/li[sidebar-menu-item]:1/button[base-ui-_r_1_]:1",
+      "irFile": "ir/sidebar-new-session-rest.json",
+      "sourceCrop": "/Users/danielraffel/Code/burl-palot-wt-semantic-restart/evidence/phase-b/source-components/generated-v1/sidebar-new-session-rest.png",
+      "pixel": {
+        "left": 16,
+        "top": 108,
+        "width": 528,
+        "height": 64
+      },
+      "logical": {
+        "x": 8,
+        "y": 54,
+        "width": 264,
+        "height": 32
+      },
+      "devicePixelRatio": 2,
+      "interaction": {
+        "kind": "activate",
+        "postcondition": "callback-fired",
+        "actionIdentity": "session.create",
+        "applicationBindingRequired": true
+      },
+      "candidate": "/Users/danielraffel/Code/burl-palot-wt-semantic-restart/evidence/phase-b/native-components/candidates-v1/sidebar-new-session-rest.png",
+      "diff": "/Users/danielraffel/Code/burl-palot-wt-semantic-restart/evidence/phase-b/native-components/candidates-v1/sidebar-new-session-rest.diff.png",
+      "execution": {
+        "backend": "skia",
+        "dpr": 2,
+        "interactionSupported": true,
+        "irErrors": true,
+        "logicalHeight": 32,
+        "logicalWidth": 264,
+        "materializeErrors": true,
+        "postActionPass": true,
+        "rendered": true
+      },
+      "metrics": {
+        "mae": 0.3535366591001931,
+        "ssim": 0.3930301704525178,
+        "edgeDiff": 0.011140261886748923
+      },
+      "status": "GAP",
+      "blockers": [
+        "import diagnostics contain error",
+        "materialization diagnostics contain error",
+        "ApplicationBindingManifest dispatch not proven: session.create"
+      ]
+    },
+    {
+      "id": "composer-stop-primary",
+      "state": "active-stream",
+      "sourceId": "html:1/body:2/div[root]:3/div:1/div:1/div[sidebar-wrapper]:1/main[sidebar-inset]:2/div[content-area]:2/div:1/div:1/div:1/div:1/div:2/div:1/div:1/form:2/div[input-group]:1/div[input-group-addon]:2/button[button]:2",
+      "irFile": "ir/composer-stop-primary.json",
+      "sourceCrop": "/Users/danielraffel/Code/burl-palot-wt-semantic-restart/evidence/phase-b/source-components/generated-v1/composer-stop-primary.png",
+      "pixel": {
+        "left": 2158,
+        "top": 1421,
+        "width": 162,
+        "height": 48
+      },
+      "logical": {
+        "x": 1079.234,
+        "y": 710.5,
+        "width": 80.766,
+        "height": 24
+      },
+      "devicePixelRatio": 2,
+      "interaction": {
+        "kind": "activate",
+        "postcondition": "callback-fired",
+        "actionIdentity": "stream.stop",
+        "applicationBindingRequired": true
+      },
+      "candidate": "/Users/danielraffel/Code/burl-palot-wt-semantic-restart/evidence/phase-b/native-components/candidates-v1/composer-stop-primary.png",
+      "diff": "/Users/danielraffel/Code/burl-palot-wt-semantic-restart/evidence/phase-b/native-components/candidates-v1/composer-stop-primary.diff.png",
+      "execution": {
+        "backend": "skia",
+        "dpr": 2,
+        "interactionSupported": true,
+        "irErrors": true,
+        "logicalHeight": 24,
+        "logicalWidth": 81,
+        "materializeErrors": true,
+        "postActionPass": true,
+        "rendered": true
+      },
+      "metrics": {
+        "mae": 0.4660705640280804,
+        "ssim": -0.04291747320325344,
+        "edgeDiff": 0.07187297045737862
+      },
+      "status": "GAP",
+      "blockers": [
+        "import diagnostics contain error",
+        "materialization diagnostics contain error",
+        "ApplicationBindingManifest dispatch not proven: stream.stop"
+      ]
+    },
+    {
+      "id": "composer-rest",
+      "state": "rest-empty",
+      "sourceId": "html:1/body:2/div[root]:3/div:1/div:1/div[sidebar-wrapper]:1/main[sidebar-inset]:2/div[content-area]:2/div:1/div:1/div:1/div:1/div:2/div:1/div:1/form:2/div[input-group]:1/textarea[input-group-control]:1",
+      "irFile": "ir/composer-rest.json",
+      "sourceCrop": "/Users/danielraffel/Code/burl-palot-wt-semantic-restart/evidence/phase-b/source-components/generated-v1/composer-rest.png",
+      "pixel": {
+        "left": 594,
+        "top": 1273,
+        "width": 1746,
+        "height": 128
+      },
+      "logical": {
+        "x": 297,
+        "y": 636.5,
+        "width": 873,
+        "height": 64
+      },
+      "devicePixelRatio": 2,
+      "interaction": {
+        "kind": "text-input",
+        "postcondition": "text-committed",
+        "actionIdentity": "composer.edit",
+        "applicationBindingRequired": false
+      },
+      "candidate": "/Users/danielraffel/Code/burl-palot-wt-semantic-restart/evidence/phase-b/native-components/candidates-v1/composer-rest.png",
+      "diff": "/Users/danielraffel/Code/burl-palot-wt-semantic-restart/evidence/phase-b/native-components/candidates-v1/composer-rest.diff.png",
+      "execution": {
+        "backend": "skia",
+        "dpr": 2,
+        "interactionSupported": true,
+        "irErrors": true,
+        "logicalHeight": 64,
+        "logicalWidth": 873,
+        "materializeErrors": true,
+        "postActionPass": true,
+        "rendered": true
+      },
+      "metrics": {
+        "mae": 0.11977780006260809,
+        "ssim": 0.04031535293340229,
+        "edgeDiff": 0.008572294747161613
+      },
+      "status": "GAP",
+      "blockers": [
+        "import diagnostics contain error",
+        "materialization diagnostics contain error"
+      ]
+    },
+    {
+      "id": "composer-build-select-rest",
+      "state": "rest-collapsed",
+      "sourceId": "html:1/body:2/div[root]:3/div:1/div:1/div[sidebar-wrapper]:1/main[sidebar-inset]:2/div[content-area]:2/div:1/div:1/div:1/div:1/div:2/div:1/div:1/form:2/div[input-group]:1/div[input-group-addon]:2/div:1/div:2/button[base-ui-_r_43_]:1",
+      "irFile": "ir/composer-build-select-rest.json",
+      "sourceCrop": "/Users/danielraffel/Code/burl-palot-wt-semantic-restart/evidence/phase-b/source-components/generated-v1/composer-build-select-rest.png",
+      "pixel": {
+        "left": 686,
+        "top": 1417,
+        "width": 135,
+        "height": 56
+      },
+      "logical": {
+        "x": 343,
+        "y": 708.5,
+        "width": 67.102,
+        "height": 28
+      },
+      "devicePixelRatio": 2,
+      "interaction": {
+        "kind": "activate",
+        "postcondition": "selector-open",
+        "actionIdentity": "agent.select",
+        "applicationBindingRequired": true
+      },
+      "candidate": "/Users/danielraffel/Code/burl-palot-wt-semantic-restart/evidence/phase-b/native-components/candidates-v1/composer-build-select-rest.png",
+      "diff": "/Users/danielraffel/Code/burl-palot-wt-semantic-restart/evidence/phase-b/native-components/candidates-v1/composer-build-select-rest.diff.png",
+      "execution": {
+        "backend": "skia",
+        "dpr": 2,
+        "interactionSupported": true,
+        "irErrors": true,
+        "logicalHeight": 28,
+        "logicalWidth": 68,
+        "materializeErrors": true,
+        "postActionPass": true,
+        "rendered": true
+      },
+      "metrics": {
+        "mae": 0.1397489366116817,
+        "ssim": 0.36669756907698337,
+        "edgeDiff": 0.023869032165376638
+      },
+      "status": "GAP",
+      "blockers": [
+        "import diagnostics contain error",
+        "materialization diagnostics contain error",
+        "ApplicationBindingManifest dispatch not proven: agent.select"
+      ]
+    },
+    {
+      "id": "composer-model-select-rest",
+      "state": "rest-collapsed",
+      "sourceId": "html:1/body:2/div[root]:3/div:1/div:1/div[sidebar-wrapper]:1/main[sidebar-inset]:2/div[content-area]:2/div:1/div:1/div:1/div:1/div:2/div:1/div:1/form:2/div[input-group]:1/div[input-group-addon]:2/div:1/div:2/button[base-ui-_r_48_]:4",
+      "irFile": "ir/composer-model-select-rest.json",
+      "sourceCrop": "/Users/danielraffel/Code/burl-palot-wt-semantic-restart/evidence/phase-b/source-components/generated-v1/composer-model-select-rest.png",
+      "pixel": {
+        "left": 838,
+        "top": 1417,
+        "width": 318,
+        "height": 56
+      },
+      "logical": {
+        "x": 419.102,
+        "y": 708.5,
+        "width": 158.828,
+        "height": 28
+      },
+      "devicePixelRatio": 2,
+      "interaction": {
+        "kind": "activate",
+        "postcondition": "selector-open",
+        "actionIdentity": "model.select",
+        "applicationBindingRequired": true
+      },
+      "candidate": "/Users/danielraffel/Code/burl-palot-wt-semantic-restart/evidence/phase-b/native-components/candidates-v1/composer-model-select-rest.png",
+      "diff": "/Users/danielraffel/Code/burl-palot-wt-semantic-restart/evidence/phase-b/native-components/candidates-v1/composer-model-select-rest.diff.png",
+      "execution": {
+        "backend": "skia",
+        "dpr": 2,
+        "interactionSupported": true,
+        "irErrors": true,
+        "logicalHeight": 28,
+        "logicalWidth": 159,
+        "materializeErrors": true,
+        "postActionPass": true,
+        "rendered": true
+      },
+      "metrics": {
+        "mae": 0.15418230185155823,
+        "ssim": 0.13569616610259208,
+        "edgeDiff": 0.03596767990913093
+      },
+      "status": "GAP",
+      "blockers": [
+        "import diagnostics contain error",
+        "materialization diagnostics contain error",
+        "ApplicationBindingManifest dispatch not proven: model.select"
+      ]
+    },
+    {
+      "id": "transcript-inline-code",
+      "state": "rest",
+      "sourceId": "html:1/body:2/div[root]:3/div:1/div:1/div[sidebar-wrapper]:1/main[sidebar-inset]:2/div[content-area]:2/div:1/div:1/div:1/div:1/div:1/div:1/div:1/div:1/div:1/div:1/div:2/div:1/div:2/div:1/div:1/div:1/ol:2/li:1/p:1/span:1/code:1",
+      "irFile": "ir/transcript-inline-code.json",
+      "sourceCrop": "/Users/danielraffel/Code/burl-palot-wt-semantic-restart/evidence/phase-b/source-components/generated-v1/transcript-inline-code.png",
+      "pixel": {
+        "left": 714,
+        "top": 473,
+        "width": 313,
+        "height": 43
+      },
+      "logical": {
+        "x": 357,
+        "y": 236.5,
+        "width": 156.492,
+        "height": 21.5
+      },
+      "devicePixelRatio": 2,
+      "interaction": {
+        "kind": "none",
+        "postcondition": "none",
+        "actionIdentity": "",
+        "applicationBindingRequired": false
+      },
+      "candidate": "/Users/danielraffel/Code/burl-palot-wt-semantic-restart/evidence/phase-b/native-components/candidates-v1/transcript-inline-code.png",
+      "diff": "/Users/danielraffel/Code/burl-palot-wt-semantic-restart/evidence/phase-b/native-components/candidates-v1/transcript-inline-code.diff.png",
+      "execution": {
+        "backend": "skia",
+        "dpr": 2,
+        "interactionSupported": true,
+        "irErrors": true,
+        "logicalHeight": 22,
+        "logicalWidth": 157,
+        "materializeErrors": true,
+        "postActionPass": true,
+        "rendered": true
+      },
+      "metrics": {
+        "mae": 0.16151317946005952,
+        "ssim": 0.11968786097626416,
+        "edgeDiff": 0.07733010794488664
+      },
+      "status": "GAP",
+      "blockers": [
+        "import diagnostics contain error",
+        "materialization diagnostics contain error"
+      ]
+    },
+    {
+      "id": "transcript-copy-icon-rest",
+      "state": "rest",
+      "sourceId": "html:1/body:2/div[root]:3/div:1/div:1/div[sidebar-wrapper]:1/main[sidebar-inset]:2/div[content-area]:2/div:1/div:1/div:1/div:1/div:1/div:1/div:1/div:1/div:1/div:1/div:4/button[base-ui-_r_3r_]:2",
+      "irFile": "ir/transcript-copy-icon-rest.json",
+      "sourceCrop": "/Users/danielraffel/Code/burl-palot-wt-semantic-restart/evidence/phase-b/source-components/generated-v1/transcript-copy-icon-rest.png",
+      "pixel": {
+        "left": 664,
+        "top": 902,
+        "width": 64,
+        "height": 64
+      },
+      "logical": {
+        "x": 332,
+        "y": 451,
+        "width": 32,
+        "height": 32
+      },
+      "devicePixelRatio": 2,
+      "interaction": {
+        "kind": "activate",
+        "postcondition": "callback-fired",
+        "actionIdentity": "transcript.copy",
+        "applicationBindingRequired": true
+      },
+      "candidate": "/Users/danielraffel/Code/burl-palot-wt-semantic-restart/evidence/phase-b/native-components/candidates-v1/transcript-copy-icon-rest.png",
+      "diff": "/Users/danielraffel/Code/burl-palot-wt-semantic-restart/evidence/phase-b/native-components/candidates-v1/transcript-copy-icon-rest.diff.png",
+      "execution": {
+        "backend": "skia",
+        "dpr": 2,
+        "interactionSupported": true,
+        "irErrors": true,
+        "logicalHeight": 32,
+        "logicalWidth": 32,
+        "materializeErrors": true,
+        "postActionPass": true,
+        "rendered": true
+      },
+      "metrics": {
+        "mae": 0.2288631663602941,
+        "ssim": 0.00864388163611009,
+        "edgeDiff": 0.040566063462422225
+      },
+      "status": "GAP",
+      "blockers": [
+        "import diagnostics contain error",
+        "materialization diagnostics contain error",
+        "ApplicationBindingManifest dispatch not proven: transcript.copy"
+      ]
+    }
+  ]
+}

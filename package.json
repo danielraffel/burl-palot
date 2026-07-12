@@ -61,7 +61,9 @@
 		"test:visual-parity": "python3 -m unittest -q tests/test_compare_screenshots.py tests/test_visual_scenario_runner.py",
 		"test:source-capture": "bun test tests/capture_source_cdp.test.ts",
 		"generate:source-components": "bun scripts/generate-source-component-references.ts",
-		"test:source-components": "bun test tests/generate_source_component_references.test.ts"
+		"test:source-components": "bun test tests/generate_source_component_references.test.ts",
+		"generate:native-components": "bun scripts/generate-native-component-ir.ts",
+		"gate:native-components": "bun scripts/run-native-component-gate.ts"
 	},
 	"devDependencies": {
 		"@biomejs/biome": "^2.4.2",

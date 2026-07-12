@@ -219,6 +219,9 @@ if(BURL_PALOT_ENABLE_FRAMEWORK)
 			nlohmann_json::nlohmann_json pulp-view pulp-state)
 		add_executable(palot-authored-theme-test test/authored_theme_test.cpp)
 		target_link_libraries(palot-authored-theme-test PRIVATE pulp-view)
+		add_executable(palot-phase-b-native-component test/phase_b_native_component.cpp)
+		target_link_libraries(palot-phase-b-native-component PRIVATE
+			nlohmann_json::nlohmann_json pulp-view)
 		if(BURL_SOURCE_DIR AND EXISTS
 			"${BURL_SOURCE_DIR}/core/view/include/pulp/view/application_binding_manifest.hpp")
 			add_executable(palot-application-binding-manifest-test

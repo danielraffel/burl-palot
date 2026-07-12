@@ -3,7 +3,7 @@
   "scenario": "01-shell",
   "manifest": {
     "file": "source-components.v1.json",
-    "sha256": "b87e06d7188073c5a00815a864e05efd74dfd4f6db03ac09a2591d2f22ef444e"
+    "sha256": "710761d78ec0d46eeb62e14acf052f81501eba41ce13f0e44cfa4e6c2645b38c"
   },
   "source": {
     "pngSha256": "d363d609c214a7a4e7b34a58e0eea9b87a4c588d3fcd457c5a9aaf64c12cc7b0",
@@ -75,11 +75,17 @@
         "dataSlot": "sidebar-menu-button",
         "cursor": "default"
       },
+      "interaction": {
+        "kind": "selected-row",
+        "postcondition": "remains-selected",
+        "actionIdentity": "session.select",
+        "applicationBindingRequired": true
+      },
       "crop": {
         "file": "sidebar-session-selected.png",
         "sha256": "22cea3c31ae6ee42adadf226228ffd712cab2a6f1068ebda89803277f89d42f0"
       },
-      "evidenceSha256": "8ea4cb14a74c0337e98bcc750335f451379e63a27870ae78f2ec202d5b562e12"
+      "evidenceSha256": "463b9e9e3d35d266b2d1784eec6d9cc584e4d1989cbf6e7814189428f8fdb1da"
     },
     {
       "id": "sidebar-new-session-rest",
@@ -141,11 +147,17 @@
         "dataSlot": "sidebar-menu-button",
         "cursor": "default"
       },
+      "interaction": {
+        "kind": "activate",
+        "postcondition": "callback-fired",
+        "actionIdentity": "session.create",
+        "applicationBindingRequired": true
+      },
       "crop": {
         "file": "sidebar-new-session-rest.png",
         "sha256": "6d2a82534cc3194e735374408913fef12a8751ab0e286b5a18baf0141631e780"
       },
-      "evidenceSha256": "d46d7b7ab8e4e28840af3fb92c7ebca8e98bacaaaf6270c96265b7368d1f752a"
+      "evidenceSha256": "898a14c88cf4f03561fd749c8fa02f1fd499f7534a379973935d8a1e490691d3"
     },
     {
       "id": "composer-stop-primary",
@@ -207,11 +219,17 @@
         "dataSlot": "button",
         "cursor": "default"
       },
+      "interaction": {
+        "kind": "activate",
+        "postcondition": "callback-fired",
+        "actionIdentity": "stream.stop",
+        "applicationBindingRequired": true
+      },
       "crop": {
         "file": "composer-stop-primary.png",
         "sha256": "e6d6029650b32133b174ad9368b5f60c11f35d5d443e44d6306b50c0fd65b1ef"
       },
-      "evidenceSha256": "7ec2e18b89f7cd3a92077d303853a4758ad05ef8ed4f2c16eff15394cfcad414"
+      "evidenceSha256": "edbba8efe992c691c9b2a1cbd7345b6efaed8a0d85c5eda38895ea5e7b685267"
     },
     {
       "id": "composer-rest",
@@ -271,11 +289,17 @@
         "dataSlot": "input-group-control",
         "cursor": "text"
       },
+      "interaction": {
+        "kind": "text-input",
+        "postcondition": "text-committed",
+        "actionIdentity": "composer.edit",
+        "applicationBindingRequired": false
+      },
       "crop": {
         "file": "composer-rest.png",
         "sha256": "77a93cc0948fa4dc82a79695776d89917faf091205ee0ceadcab2a06149628ee"
       },
-      "evidenceSha256": "ee14c17194058ba9b87f392409c15cf7fb6969c4e0632a3304eb696a5ea5114e"
+      "evidenceSha256": "a957f30895de2a24b49695cd719f36784b794c29c6392f6c4b65d32928cb9f31"
     },
     {
       "id": "composer-build-select-rest",
@@ -341,11 +365,17 @@
         "dataSlot": "select-trigger",
         "cursor": "default"
       },
+      "interaction": {
+        "kind": "activate",
+        "postcondition": "selector-open",
+        "actionIdentity": "agent.select",
+        "applicationBindingRequired": true
+      },
       "crop": {
         "file": "composer-build-select-rest.png",
         "sha256": "2c245c686146090787dee306414aff1fa61e0016b6118ec81f6143f0c1de662e"
       },
-      "evidenceSha256": "5529e7faffb9217c5b8a879ef579d35d6a932a9793e5f0c1c56082ea958e05fb"
+      "evidenceSha256": "080deb914e074edbbd2ff21fb548ce861c15c37d86b51feb05f26907cd1982ae"
     },
     {
       "id": "composer-model-select-rest",
@@ -409,11 +439,17 @@
         "dataSlot": "searchable-list-popover-trigger",
         "cursor": "default"
       },
+      "interaction": {
+        "kind": "activate",
+        "postcondition": "selector-open",
+        "actionIdentity": "model.select",
+        "applicationBindingRequired": true
+      },
       "crop": {
         "file": "composer-model-select-rest.png",
         "sha256": "47fa0f63889cbdbf6166d6061fa0f400bf96cda2013bb794a63a682bf9c5f603"
       },
-      "evidenceSha256": "678824f1916312a0c1532f63081722f0a1475fc672054e8b50d1207b11273af7"
+      "evidenceSha256": "942a343ebe49d4c42d5383769e82c57feb6a33f1e20a4cbd5113367e5ee01187"
     },
     {
       "id": "transcript-inline-code",
@@ -469,11 +505,17 @@
         "dataSlot": "",
         "cursor": "auto"
       },
+      "interaction": {
+        "kind": "none",
+        "postcondition": "none",
+        "actionIdentity": "",
+        "applicationBindingRequired": false
+      },
       "crop": {
         "file": "transcript-inline-code.png",
         "sha256": "de12f4e42bdc305a824b5f6acde48e66f759e069c4663c4ae60184798f1b2514"
       },
-      "evidenceSha256": "729294eb9723596e82054cf03f6186dcfe7495b4ad5cd3e2b9777ff4c04a3a81"
+      "evidenceSha256": "3b086d8cabfaafb74ff5d8c8545612a493e66e901310e105d2c8f4b2efba0962"
     },
     {
       "id": "transcript-copy-icon-rest",
@@ -535,11 +577,17 @@
         "dataSlot": "tooltip-trigger",
         "cursor": "default"
       },
+      "interaction": {
+        "kind": "activate",
+        "postcondition": "callback-fired",
+        "actionIdentity": "transcript.copy",
+        "applicationBindingRequired": true
+      },
       "crop": {
         "file": "transcript-copy-icon-rest.png",
         "sha256": "3d47063c9ec85936734e2326f4f86714c9e3d9204495918b262e4a256c2f3fc3"
       },
-      "evidenceSha256": "0e500542dae684ec938142b4c90870e12ee1c6fbabf63779a76142196f243bbc"
+      "evidenceSha256": "a6c42de4fb661039e4ffffee097b9c2f058bf85565c43bed6c2dde455cf3ad65"
     }
   ]
 }
