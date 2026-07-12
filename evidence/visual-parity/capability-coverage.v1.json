@@ -4096,10 +4096,9 @@
     {
       "name": "scroll-anchor",
       "observation": "observed",
-      "decision": "unsupported",
-      "route": null,
-      "evidenceIds": [],
-      "reason": "No exact behavior route plus resolving evidence ID is published; screenshot scoring is gated."
+      "decision": "supported",
+      "route": "streamed keyed transcript collection updates -> native variable-height VirtualList measurement index -> capture first visible row and intra-row offset before height mutation -> prefix-height delta compensation -> same visible anchor after reflow; tail-follow applies only while already at tail and user-scrolled position otherwise remains exact",
+      "evidenceIds": ["behavior:native-variable-height-scroll-anchor"]
     },
     {
       "name": "selection",
