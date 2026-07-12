@@ -26,6 +26,7 @@ if (!semantics.observedDom) throw new Error("source semantics has no observedDom
 const importPolicy = JSON.parse(await readFile(bindingPolicyPath, "utf8")) as {
 	version: number
 	rules: PolicyRule[]
+	collections?: Array<{ id: string; containerSourceId: string; firstChildSourceId: string; lastChildSourceId: string; collectionKey: string; routeId: string }>
 	svgExclusions?: Array<{ sourceId: string; reason: string }>
 }
 const removeFormattingWhitespace = (node: any) => {
@@ -76,7 +77,7 @@ interface ObservedNode {
 }
 interface PolicyRule {
 	id: string
-	match: { tagName?: string; role?: string; accessibleName?: string; textExact?: string; attribute?: { name: string; present?: boolean; value?: string } }
+	match: { sourceId?: string; tagName?: string; role?: string; accessibleName?: string; textExact?: string; attribute?: { name: string; present?: boolean; value?: string } }
 	attributes: Record<string, string>
 }
 
@@ -91,6 +92,7 @@ const collect = (node: ObservedNode): string => {
 collect(semantics.observedDom)
 const matches = (entry: { node: ObservedNode; text: string }, rule: PolicyRule) => {
 	const { node, text } = entry, match = rule.match
+	if (match.sourceId && node.sourceId !== match.sourceId) return false
 	if (match.tagName && node.tagName !== match.tagName) return false
 	if (match.role && (node.attributes?.role ?? (node.tagName === "button" ? "button" : node.tagName === "textarea" ? "textbox" : "")) !== match.role) return false
 	if (match.accessibleName && node.attributes?.["aria-label"] !== match.accessibleName) return false
@@ -112,6 +114,36 @@ const stamp = (node: any) => {
 	for (const child of node.children ?? []) stamp(child)
 }
 stamp(designIr.root)
+
+const collectionDiagnostics: Array<{ id: string; code: string; detail: string }> = []
+const emitCollectionSlot = (node: any, spec: NonNullable<typeof importPolicy.collections>[number]): boolean => {
+	if (node.name === spec.containerSourceId) {
+		const first = node.children?.findIndex((child: any) => child.name === spec.firstChildSourceId) ?? -1
+		const last = node.children?.findIndex((child: any) => child.name === spec.lastChildSourceId) ?? -1
+		if (first < 0 || last < first) throw new Error(`collection ${spec.id} has invalid/noncontiguous child range`)
+		const selected = node.children.slice(first, last + 1)
+		if (!selected.length) throw new Error(`collection ${spec.id} selected no children`)
+		const slotName = `${node.name}::collection-slot:${spec.id}`
+		const slot = {
+			...node,
+			name: slotName,
+			children: selected,
+			attributes: { source_revision: node.attributes?.source_revision ?? sourceRevision,
+				pulpRouteId: spec.routeId, pulpCollectionKey: spec.collectionKey },
+			stable_anchor_id: `observed-dom:${slotName}`,
+			source_node_id: slotName,
+			raw_source: JSON.stringify({ kind: "generated-collection-slot", containerSourceId: spec.containerSourceId,
+				firstChildSourceId: spec.firstChildSourceId, lastChildSourceId: spec.lastChildSourceId })
+		}
+		node.children = [...node.children.slice(0, first), slot, ...node.children.slice(last + 1)]
+		collectionDiagnostics.push({ id: spec.id, code: "collection-slot-emitted", detail: `${selected.length} contiguous children` })
+		return true
+	}
+	return (node.children ?? []).some((child: any) => emitCollectionSlot(child, spec))
+}
+for (const collection of importPolicy.collections ?? []) {
+	if (!emitCollectionSlot(designIr.root, collection)) throw new Error(`collection ${collection.id} container not found`)
+}
 for (const rule of policy.rules) {
 	const count = applied.get(rule.id) ?? 0
 	if (count !== 1) throw new Error(`binding policy ${rule.id} matched ${count} nodes; expected exactly one`)

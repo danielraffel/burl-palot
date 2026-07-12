@@ -1,5 +1,12 @@
 {
   "version": 1,
+  "collections": [{
+    "id":"transcript",
+    "containerSourceId":"html:1/body:2/div[root]:3/div:1/div:1/div[sidebar-wrapper]:1/main[sidebar-inset]:2/div[content-area]:2/div:1/div:1/div:1/div:1/div:1/div:1/div:1/div:1/div:1",
+    "firstChildSourceId":"html:1/body:2/div[root]:3/div:1/div:1/div[sidebar-wrapper]:1/main[sidebar-inset]:2/div[content-area]:2/div:1/div:1/div:1/div:1/div:1/div:1/div:1/div:1/div:1/div:1",
+    "lastChildSourceId":"html:1/body:2/div[root]:3/div:1/div:1/div[sidebar-wrapper]:1/main[sidebar-inset]:2/div[content-area]:2/div:1/div:1/div:1/div:1/div:1/div:1/div:1/div:1/div:1/div:2",
+    "collectionKey":"messages", "routeId":"chat.transcript"
+  }],
   "svgExclusions": [
     {"sourceId":"html:1/body:2/div[root]:3/div:1/div:1/div[sidebar-wrapper]:1/main[sidebar-inset]:2/div[content-area]:2/div:1/div:1/div:1/div:1/div:2/div:1/div:1/form:2/div[input-group]:1/div[input-group-addon]:2/div:1/div:2/button[base-ui-_r_43_]:1/svg:2","reason":"source SVG contains a non-SVG text glyph after its path; sibling text already carries the chevron"},
     {"sourceId":"html:1/body:2/div[root]:3/div:1/div:1/div[sidebar-wrapper]:1/main[sidebar-inset]:2/div[content-area]:2/div:1/div:1/div:1/div:1/div:2/div:1/div:1/form:2/div[input-group]:1/div[input-group-addon]:2/div:1/div:2/button[base-ui-_r_49_]:6/svg:2","reason":"source SVG contains a non-SVG text glyph after its path; sibling text already carries the chevron"}
@@ -11,5 +18,11 @@
     {"id":"composer-copy","match":{"role":"button","textExact":"Copy response"},"attributes":{"pulpRouteId":"composer.copy","pulpHostAction":"composer.copy","pulpHostActionLabel":"Copy response","pulpEventContract":"click"}},
     {"id":"prompt-cancel","match":{"role":"button","accessibleName":"Stop"},"attributes":{"pulpRouteId":"prompt.cancel","pulpHostAction":"prompt.cancel","pulpHostActionLabel":"Stop","pulpEventContract":"click"}},
     {"id":"composer","match":{"tagName":"textarea","role":"textbox"},"attributes":{"pulpRouteId":"chat.composer","pulpValueKey":"composer.draft","pulpEventContract":"submit-send-or-retry;escape-cancel","pulpFocusContract":"composer-focus"}}
+    ,{"id":"user-template","match":{"sourceId":"html:1/body:2/div[root]:3/div:1/div:1/div[sidebar-wrapper]:1/main[sidebar-inset]:2/div[content-area]:2/div:1/div:1/div:1/div:1/div:1/div:1/div:1/div:1/div:1/div:1/div:1"},"attributes":{"pulpCollectionTemplate":"user"}}
+    ,{"id":"user-value","match":{"sourceId":"html:1/body:2/div[root]:3/div:1/div:1/div[sidebar-wrapper]:1/main[sidebar-inset]:2/div[content-area]:2/div:1/div:1/div:1/div:1/div:1/div:1/div:1/div:1/div:1/div:1/div:1/div:1/p:1"},"attributes":{"pulpValueKey":"message.text"}}
+    ,{"id":"assistant-template","match":{"sourceId":"html:1/body:2/div[root]:3/div:1/div:1/div[sidebar-wrapper]:1/main[sidebar-inset]:2/div[content-area]:2/div:1/div:1/div:1/div:1/div:1/div:1/div:1/div:1/div:1/div:1/div:2/div:1/div:2"},"attributes":{"pulpCollectionTemplate":"assistant"}}
+    ,{"id":"assistant-value","match":{"sourceId":"html:1/body:2/div[root]:3/div:1/div:1/div[sidebar-wrapper]:1/main[sidebar-inset]:2/div[content-area]:2/div:1/div:1/div:1/div:1/div:1/div:1/div:1/div:1/div:1/div:1/div:2/div:1/div:2/div:1/div:1/div:1/p:1"},"attributes":{"pulpValueKey":"message.text"}}
+    ,{"id":"tool-template","match":{"sourceId":"html:1/body:2/div[root]:3/div:1/div:1/div[sidebar-wrapper]:1/main[sidebar-inset]:2/div[content-area]:2/div:1/div:1/div:1/div:1/div:1/div:1/div:1/div:1/div:1/div:2/div:2"},"attributes":{"pulpCollectionTemplate":"tool"}}
+    ,{"id":"tool-value","match":{"sourceId":"html:1/body:2/div[root]:3/div:1/div:1/div[sidebar-wrapper]:1/main[sidebar-inset]:2/div[content-area]:2/div:1/div:1/div:1/div:1/div:1/div:1/div:1/div:1/div:1/div:2/div:2/div:1/div:2/p:2"},"attributes":{"pulpValueKey":"message.text"}}
   ]
 }
