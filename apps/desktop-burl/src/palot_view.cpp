@@ -212,6 +212,18 @@ PalotView::PalotView() {
 		if (transcript_ && transcript_->child_count() != 0) request_repaint();
 	});
 	imported_root->register_action("project.select", [this](std::string_view) { choose_project_folder(); });
+	imported_root->register_action("project.open", [this](std::string_view payload) {
+		std::string error;
+		auto canonical_path = validate_project_directory(std::filesystem::path(payload), error);
+		if (!canonical_path) {
+			set_configuration_error(std::move(error));
+			return;
+		}
+		project_->set_text(*canonical_path);
+		set_configuration_error("");
+		create_session_ = false;
+		request_repaint();
+	});
 	imported_root->register_action("prompt.cancel", [this](std::string_view) {
 		process_.cancel();
 		status_ = "Cancelling…";
