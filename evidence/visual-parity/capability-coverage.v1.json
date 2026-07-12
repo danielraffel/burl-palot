@@ -2127,98 +2127,86 @@
         {
           "value": "-1px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "supported",
+          "route": "computed CSS margin shorthand and sides -> validated 1/2/3/4 px expansion with side override -> typed four-side margins -> NativeDesignIR IRLayout -> simple-block explicit collapse lowering or flex additive margins -> Yoga positions under resize -> Skia pixels; invalid values fail closed",
+          "evidenceIds": ["semantic:observed-dom-margin-family"]
         },
         {
           "value": "0px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "supported",
+          "route": "computed CSS margin shorthand and sides -> validated 1/2/3/4 px expansion with side override -> typed four-side margins -> NativeDesignIR IRLayout -> simple-block explicit collapse lowering or flex additive margins -> Yoga positions under resize -> Skia pixels; invalid values fail closed",
+          "evidenceIds": ["semantic:observed-dom-margin-family"]
         },
         {
           "value": "0px 0px 0px 402.258px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "supported",
+          "route": "computed CSS margin shorthand and sides -> validated 1/2/3/4 px expansion with side override -> typed four-side margins -> NativeDesignIR IRLayout -> simple-block explicit collapse lowering or flex additive margins -> Yoga positions under resize -> Skia pixels; invalid values fail closed",
+          "evidenceIds": ["semantic:observed-dom-margin-family"]
         },
         {
           "value": "0px 0px 0px 659.781px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "supported",
+          "route": "computed CSS margin shorthand and sides -> validated 1/2/3/4 px expansion with side override -> typed four-side margins -> NativeDesignIR IRLayout -> simple-block explicit collapse lowering or flex additive margins -> Yoga positions under resize -> Skia pixels; invalid values fail closed",
+          "evidenceIds": ["semantic:observed-dom-margin-family"]
         },
         {
           "value": "0px 0px 0px 8px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "supported",
+          "route": "computed CSS margin shorthand and sides -> validated 1/2/3/4 px expansion with side override -> typed four-side margins -> NativeDesignIR IRLayout -> simple-block explicit collapse lowering or flex additive margins -> Yoga positions under resize -> Skia pixels; invalid values fail closed",
+          "evidenceIds": ["semantic:observed-dom-margin-family"]
         },
         {
           "value": "0px 0px 16px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "supported",
+          "route": "computed CSS margin shorthand and sides -> validated 1/2/3/4 px expansion with side override -> typed four-side margins -> NativeDesignIR IRLayout -> simple-block explicit collapse lowering or flex additive margins -> Yoga positions under resize -> Skia pixels; invalid values fail closed",
+          "evidenceIds": ["semantic:observed-dom-margin-family"]
         },
         {
           "value": "0px 0px 16px 43.75px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "supported",
+          "route": "computed CSS margin shorthand and sides -> validated 1/2/3/4 px expansion with side override -> typed four-side margins -> NativeDesignIR IRLayout -> simple-block explicit collapse lowering or flex additive margins -> Yoga positions under resize -> Skia pixels; invalid values fail closed",
+          "evidenceIds": ["semantic:observed-dom-margin-family"]
         },
         {
           "value": "0px 0px 40px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "supported",
+          "route": "computed CSS margin shorthand and sides -> validated 1/2/3/4 px expansion with side override -> typed four-side margins -> NativeDesignIR IRLayout -> simple-block explicit collapse lowering or flex additive margins -> Yoga positions under resize -> Skia pixels; invalid values fail closed",
+          "evidenceIds": ["semantic:observed-dom-margin-family"]
         },
         {
           "value": "0px 0px 8px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "supported",
+          "route": "computed CSS margin shorthand and sides -> validated 1/2/3/4 px expansion with side override -> typed four-side margins -> NativeDesignIR IRLayout -> simple-block explicit collapse lowering or flex additive margins -> Yoga positions under resize -> Skia pixels; invalid values fail closed",
+          "evidenceIds": ["semantic:observed-dom-margin-family"]
         },
         {
           "value": "0px 12px 12px 0px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "supported",
+          "route": "computed CSS margin shorthand and sides -> validated 1/2/3/4 px expansion with side override -> typed four-side margins -> NativeDesignIR IRLayout -> simple-block explicit collapse lowering or flex additive margins -> Yoga positions under resize -> Skia pixels; invalid values fail closed",
+          "evidenceIds": ["semantic:observed-dom-margin-family"]
         },
         {
           "value": "0px 8px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "supported",
+          "route": "computed CSS margin shorthand and sides -> validated 1/2/3/4 px expansion with side override -> typed four-side margins -> NativeDesignIR IRLayout -> simple-block explicit collapse lowering or flex additive margins -> Yoga positions under resize -> Skia pixels; invalid values fail closed",
+          "evidenceIds": ["semantic:observed-dom-margin-family"]
         },
         {
           "value": "8px 2px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "supported",
+          "route": "computed CSS margin shorthand and sides -> validated 1/2/3/4 px expansion with side override -> typed four-side margins -> NativeDesignIR IRLayout -> simple-block explicit collapse lowering or flex additive margins -> Yoga positions under resize -> Skia pixels; invalid values fail closed",
+          "evidenceIds": ["semantic:observed-dom-margin-family"]
         }
       ]
     },
@@ -2228,50 +2216,44 @@
         {
           "value": "-1px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "supported",
+          "route": "computed CSS margin shorthand and sides -> validated 1/2/3/4 px expansion with side override -> typed four-side margins -> NativeDesignIR IRLayout -> simple-block explicit collapse lowering or flex additive margins -> Yoga positions under resize -> Skia pixels; invalid values fail closed",
+          "evidenceIds": ["semantic:observed-dom-margin-family"]
         },
         {
           "value": "0px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "supported",
+          "route": "computed CSS margin shorthand and sides -> validated 1/2/3/4 px expansion with side override -> typed four-side margins -> NativeDesignIR IRLayout -> simple-block explicit collapse lowering or flex additive margins -> Yoga positions under resize -> Skia pixels; invalid values fail closed",
+          "evidenceIds": ["semantic:observed-dom-margin-family"]
         },
         {
           "value": "12px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "supported",
+          "route": "computed CSS margin shorthand and sides -> validated 1/2/3/4 px expansion with side override -> typed four-side margins -> NativeDesignIR IRLayout -> simple-block explicit collapse lowering or flex additive margins -> Yoga positions under resize -> Skia pixels; invalid values fail closed",
+          "evidenceIds": ["semantic:observed-dom-margin-family"]
         },
         {
           "value": "16px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "supported",
+          "route": "computed CSS margin shorthand and sides -> validated 1/2/3/4 px expansion with side override -> typed four-side margins -> NativeDesignIR IRLayout -> simple-block explicit collapse lowering or flex additive margins -> Yoga positions under resize -> Skia pixels; invalid values fail closed",
+          "evidenceIds": ["semantic:observed-dom-margin-family"]
         },
         {
           "value": "40px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "supported",
+          "route": "computed CSS margin shorthand and sides -> validated 1/2/3/4 px expansion with side override -> typed four-side margins -> NativeDesignIR IRLayout -> simple-block explicit collapse lowering or flex additive margins -> Yoga positions under resize -> Skia pixels; invalid values fail closed",
+          "evidenceIds": ["semantic:observed-dom-margin-family"]
         },
         {
           "value": "8px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "supported",
+          "route": "computed CSS margin shorthand and sides -> validated 1/2/3/4 px expansion with side override -> typed four-side margins -> NativeDesignIR IRLayout -> simple-block explicit collapse lowering or flex additive margins -> Yoga positions under resize -> Skia pixels; invalid values fail closed",
+          "evidenceIds": ["semantic:observed-dom-margin-family"]
         }
       ]
     },
@@ -2281,58 +2263,51 @@
         {
           "value": "-1px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "supported",
+          "route": "computed CSS margin shorthand and sides -> validated 1/2/3/4 px expansion with side override -> typed four-side margins -> NativeDesignIR IRLayout -> simple-block explicit collapse lowering or flex additive margins -> Yoga positions under resize -> Skia pixels; invalid values fail closed",
+          "evidenceIds": ["semantic:observed-dom-margin-family"]
         },
         {
           "value": "0px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "supported",
+          "route": "computed CSS margin shorthand and sides -> validated 1/2/3/4 px expansion with side override -> typed four-side margins -> NativeDesignIR IRLayout -> simple-block explicit collapse lowering or flex additive margins -> Yoga positions under resize -> Skia pixels; invalid values fail closed",
+          "evidenceIds": ["semantic:observed-dom-margin-family"]
         },
         {
           "value": "2px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "supported",
+          "route": "computed CSS margin shorthand and sides -> validated 1/2/3/4 px expansion with side override -> typed four-side margins -> NativeDesignIR IRLayout -> simple-block explicit collapse lowering or flex additive margins -> Yoga positions under resize -> Skia pixels; invalid values fail closed",
+          "evidenceIds": ["semantic:observed-dom-margin-family"]
         },
         {
           "value": "402.258px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "supported",
+          "route": "computed CSS margin shorthand and sides -> validated 1/2/3/4 px expansion with side override -> typed four-side margins -> NativeDesignIR IRLayout -> simple-block explicit collapse lowering or flex additive margins -> Yoga positions under resize -> Skia pixels; invalid values fail closed",
+          "evidenceIds": ["semantic:observed-dom-margin-family"]
         },
         {
           "value": "43.75px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "supported",
+          "route": "computed CSS margin shorthand and sides -> validated 1/2/3/4 px expansion with side override -> typed four-side margins -> NativeDesignIR IRLayout -> simple-block explicit collapse lowering or flex additive margins -> Yoga positions under resize -> Skia pixels; invalid values fail closed",
+          "evidenceIds": ["semantic:observed-dom-margin-family"]
         },
         {
           "value": "659.781px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "supported",
+          "route": "computed CSS margin shorthand and sides -> validated 1/2/3/4 px expansion with side override -> typed four-side margins -> NativeDesignIR IRLayout -> simple-block explicit collapse lowering or flex additive margins -> Yoga positions under resize -> Skia pixels; invalid values fail closed",
+          "evidenceIds": ["semantic:observed-dom-margin-family"]
         },
         {
           "value": "8px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "supported",
+          "route": "computed CSS margin shorthand and sides -> validated 1/2/3/4 px expansion with side override -> typed four-side margins -> NativeDesignIR IRLayout -> simple-block explicit collapse lowering or flex additive margins -> Yoga positions under resize -> Skia pixels; invalid values fail closed",
+          "evidenceIds": ["semantic:observed-dom-margin-family"]
         }
       ]
     },
@@ -2342,42 +2317,37 @@
         {
           "value": "-1px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "supported",
+          "route": "computed CSS margin shorthand and sides -> validated 1/2/3/4 px expansion with side override -> typed four-side margins -> NativeDesignIR IRLayout -> simple-block explicit collapse lowering or flex additive margins -> Yoga positions under resize -> Skia pixels; invalid values fail closed",
+          "evidenceIds": ["semantic:observed-dom-margin-family"]
         },
         {
           "value": "0px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "supported",
+          "route": "computed CSS margin shorthand and sides -> validated 1/2/3/4 px expansion with side override -> typed four-side margins -> NativeDesignIR IRLayout -> simple-block explicit collapse lowering or flex additive margins -> Yoga positions under resize -> Skia pixels; invalid values fail closed",
+          "evidenceIds": ["semantic:observed-dom-margin-family"]
         },
         {
           "value": "12px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "supported",
+          "route": "computed CSS margin shorthand and sides -> validated 1/2/3/4 px expansion with side override -> typed four-side margins -> NativeDesignIR IRLayout -> simple-block explicit collapse lowering or flex additive margins -> Yoga positions under resize -> Skia pixels; invalid values fail closed",
+          "evidenceIds": ["semantic:observed-dom-margin-family"]
         },
         {
           "value": "2px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "supported",
+          "route": "computed CSS margin shorthand and sides -> validated 1/2/3/4 px expansion with side override -> typed four-side margins -> NativeDesignIR IRLayout -> simple-block explicit collapse lowering or flex additive margins -> Yoga positions under resize -> Skia pixels; invalid values fail closed",
+          "evidenceIds": ["semantic:observed-dom-margin-family"]
         },
         {
           "value": "8px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "supported",
+          "route": "computed CSS margin shorthand and sides -> validated 1/2/3/4 px expansion with side override -> typed four-side margins -> NativeDesignIR IRLayout -> simple-block explicit collapse lowering or flex additive margins -> Yoga positions under resize -> Skia pixels; invalid values fail closed",
+          "evidenceIds": ["semantic:observed-dom-margin-family"]
         }
       ]
     },
@@ -2387,26 +2357,23 @@
         {
           "value": "-1px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "supported",
+          "route": "computed CSS margin shorthand and sides -> validated 1/2/3/4 px expansion with side override -> typed four-side margins -> NativeDesignIR IRLayout -> simple-block explicit collapse lowering or flex additive margins -> Yoga positions under resize -> Skia pixels; invalid values fail closed",
+          "evidenceIds": ["semantic:observed-dom-margin-family"]
         },
         {
           "value": "0px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "supported",
+          "route": "computed CSS margin shorthand and sides -> validated 1/2/3/4 px expansion with side override -> typed four-side margins -> NativeDesignIR IRLayout -> simple-block explicit collapse lowering or flex additive margins -> Yoga positions under resize -> Skia pixels; invalid values fail closed",
+          "evidenceIds": ["semantic:observed-dom-margin-family"]
         },
         {
           "value": "8px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "supported",
+          "route": "computed CSS margin shorthand and sides -> validated 1/2/3/4 px expansion with side override -> typed four-side margins -> NativeDesignIR IRLayout -> simple-block explicit collapse lowering or flex additive margins -> Yoga positions under resize -> Skia pixels; invalid values fail closed",
+          "evidenceIds": ["semantic:observed-dom-margin-family"]
         }
       ]
     },
