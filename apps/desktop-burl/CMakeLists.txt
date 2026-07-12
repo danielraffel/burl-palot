@@ -211,11 +211,20 @@ if(BURL_PALOT_ENABLE_FRAMEWORK)
 			test/project_config_test.cpp
 			src/project_config.cpp)
 		target_include_directories(palot-project-config-test PRIVATE src)
+		add_executable(palot-source-aware-slice-test
+			test/source_aware_chat_slice_test.cpp
+			src/source_aware_chat_slice.cpp)
+		target_include_directories(palot-source-aware-slice-test PRIVATE src)
+		target_link_libraries(palot-source-aware-slice-test PRIVATE
+			nlohmann_json::nlohmann_json pulp-view pulp-state)
 		add_test(NAME palot-opencode-process
 			COMMAND palot-opencode-process-test
 				"${CMAKE_CURRENT_SOURCE_DIR}/test/fake_sidecar.py"
 				"${PALOT_SIDECAR_OUTPUT}")
 		add_test(NAME palot-project-config COMMAND palot-project-config-test)
+		add_test(NAME palot-source-aware-slice
+			COMMAND palot-source-aware-slice-test
+				"${CMAKE_CURRENT_SOURCE_DIR}/test/fixtures/source-aware-stream.json")
 		add_test(NAME palot-accessibility-dump
 			COMMAND $<TARGET_FILE:burl-palot> --accessibility-dump)
 		set_tests_properties(palot-accessibility-dump PROPERTIES TIMEOUT 5)

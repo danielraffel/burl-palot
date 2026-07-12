@@ -1,0 +1,10 @@
+{
+  "identity": { "sessionID": "ses-source", "messageID": "msg-source", "partID": "part-source" },
+  "events": [
+    { "type": "message.part.updated", "seq": 0, "text": "Native **Markdown**" },
+    { "type": "message.part.delta", "seq": 1, "field": "text", "delta": " keeps " },
+    { "type": "message.part.delta", "seq": 2, "field": "text", "delta": "`stable` " },
+    { "type": "message.part.delta", "seq": 3, "field": "text", "delta": "identity." }
+  ],
+  "expected": "Native **Markdown** keeps `stable` identity."
+}
