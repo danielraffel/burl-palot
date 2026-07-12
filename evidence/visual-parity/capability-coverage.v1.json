@@ -3986,18 +3986,16 @@
         {
           "value": "break-word",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed CSS overflow-wrap normal, break-word, or anywhere with legacy word-wrap alias -> validated TypedText keyword -> NativeDesignIR style overflowWrap/wordWrap -> validated IRStyle canonical precedence -> Label word-break and multiline shaping mode -> TextShaper width-dependent line fragments and intrinsic height -> Skia glyph pixels; unsupported keywords fail closed",
+          "evidenceIds": ["semantic:observed-dom-overflow-wrap"]
         },
         {
           "value": "normal",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed CSS overflow-wrap normal, break-word, or anywhere with legacy word-wrap alias -> validated TypedText keyword -> NativeDesignIR style overflowWrap/wordWrap -> validated IRStyle canonical precedence -> Label word-break and multiline shaping mode -> TextShaper width-dependent line fragments and intrinsic height -> Skia glyph pixels; unsupported keywords fail closed",
+          "evidenceIds": ["semantic:observed-dom-overflow-wrap"]
         }
       ]
     }
@@ -4006,9 +4004,9 @@
     {
       "name": "accessibility",
       "observation": "observed",
-      "decision": "unsupported",
-      "route": null,
-      "evidenceIds": [],
+      "decision": "lowered",
+      "route": "computed CSS overflow-wrap normal, break-word, or anywhere with legacy word-wrap alias -> validated TypedText keyword -> NativeDesignIR style overflowWrap/wordWrap -> validated IRStyle canonical precedence -> Label word-break and multiline shaping mode -> TextShaper width-dependent line fragments and intrinsic height -> Skia glyph pixels; unsupported keywords fail closed",
+      "evidenceIds": ["semantic:observed-dom-overflow-wrap"],
       "reason": "No exact behavior route plus resolving evidence ID is published; screenshot scoring is gated."
     },
     {
