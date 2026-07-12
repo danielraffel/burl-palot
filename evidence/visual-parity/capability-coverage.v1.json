@@ -951,10 +951,9 @@
         {
           "value": "0px",
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed borderTopWidth + CSS Color 4 borderTopColor -> normalizeCssColor -> TypedPaint top slots -> NativeDesignIR top style -> generic View width-and-alpha gate -> Skia side fill or identity",
+          "evidenceIds": ["semantic:observed-dom-border-top-color"]
         },
         {
           "value": "1px",
