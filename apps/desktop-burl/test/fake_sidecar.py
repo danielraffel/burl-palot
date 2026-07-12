@@ -5,10 +5,18 @@ import sys
 import time
 
 
+def lifecycle(value):
+    path = os.environ.get("PALOT_FAKE_LIFECYCLE_LOG")
+    if path:
+        with open(path, "a", encoding="utf-8") as output:
+            output.write(value + "\n")
+
+
 def send(value):
     print(json.dumps(value, separators=(",", ":")), flush=True)
 
 
+lifecycle("sidecar.start")
 send({"version": 1, "type": "ready", "pid": 42})
 project_id = "project-1"
 session_id = "session-1"
@@ -17,15 +25,18 @@ for line in sys.stdin:
     value = json.loads(line)
     frame_type = value["type"]
     if frame_type == "shutdown":
+        lifecycle("sidecar.shutdown")
         send({"version": 1, "type": "shutdown", "id": value["id"]})
         break
     if frame_type == "subscribe":
+        lifecycle("events.subscribe")
         send({"version": 1, "type": "subscribed", "id": value["id"], "subscriptionId": value["id"]})
         continue
     if frame_type != "command":
         continue
     command = value["command"]
     command_type = command["type"]
+    lifecycle(command_type)
     if command_type == "server.start":
         project_directory = command["directory"]
         result = {"ok": True, "value": {"baseUrl": "http://127.0.0.1", "directory": command["directory"], "ownedProcess": True}}

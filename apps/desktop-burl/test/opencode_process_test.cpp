@@ -4,6 +4,7 @@
 #include <condition_variable>
 #include <cstdlib>
 #include <cstdio>
+#include <fstream>
 #include <memory>
 #include <mutex>
 #include <string>
@@ -54,6 +55,14 @@ bool packaged_handshake(const std::string& executable) {
 		}
 	}
 	return pclose(stream) == 0 && ready && shutdown;
+}
+
+std::size_t lifecycle_count(const std::string& path, std::string_view value) {
+	std::ifstream input(path);
+	std::size_t count = 0;
+	for (std::string line; std::getline(input, line);)
+		if (line == value) ++count;
+	return count;
 }
 
 int main(int argc, char** argv) {
@@ -137,6 +146,50 @@ int main(int argc, char** argv) {
 		for (const auto& event : bounded_sink->events)
 			rejected |= event.type == "error" && event.value.find("frame exceeds") != std::string::npos;
 		if (!rejected) return EXIT_FAILURE;
+	}
+
+	const std::string lifecycle_log = "/tmp/palot-persistent-lifecycle-contract.log";
+	std::remove(lifecycle_log.c_str());
+	setenv("PALOT_FAKE_LIFECYCLE_LOG", lifecycle_log.c_str(), 1);
+	{
+		OpenCodeProcess persistent({.sidecar_path = argv[1], .max_frame_bytes = 64 * 1024});
+		auto first = std::make_shared<Sink>();
+		if (!persistent.start({.project = "/tmp/persistent-a", .prompt = "first"}, first) ||
+		    !first->wait_for("done")) return 20;
+		auto retry = std::make_shared<Sink>();
+		if (!persistent.start({.project = "/tmp/persistent-a", .prompt = "retry",
+		                       .session = "session-1", .failed_request_id = "1-prompt"}, retry) ||
+		    !retry->wait_for("done")) return 21;
+		auto switched = std::make_shared<Sink>();
+		if (!persistent.start({.project = "/tmp/persistent-b", .prompt = "switch"}, switched) ||
+		    !switched->wait_for("done")) return 22;
+		auto cancelled = std::make_shared<Sink>();
+		if (!persistent.start({.project = "/tmp/delayed-cancel", .prompt = "cancel"}, cancelled) ||
+		    !cancelled->wait_for("text")) return 23;
+		persistent.cancel();
+		if (!cancelled->wait_for("error")) return 24;
+	}
+	unsetenv("PALOT_FAKE_LIFECYCLE_LOG");
+	const auto starts = lifecycle_count(lifecycle_log, "sidecar.start");
+	const auto servers = lifecycle_count(lifecycle_log, "server.start");
+	const auto subscriptions = lifecycle_count(lifecycle_log, "events.subscribe");
+	const auto shutdowns = lifecycle_count(lifecycle_log, "sidecar.shutdown");
+	const auto projects = lifecycle_count(lifecycle_log, "project.select");
+	const auto retries = lifecycle_count(lifecycle_log, "prompt.retry");
+	const bool one_transport_for_prompts = starts == 1 && servers == 1;
+	const bool cancel_keeps_transport = starts == 1;
+	const bool retry_keeps_subscription = retries == 1 && subscriptions == 1;
+	const bool project_switch_keeps_server = projects >= 2 && servers == 1;
+	const bool explicit_teardown_once = shutdowns == 1;
+	if (!(one_transport_for_prompts && cancel_keeps_transport && retry_keeps_subscription &&
+	      project_switch_keeps_server && explicit_teardown_once)) {
+		std::fprintf(stderr,
+		             "persistent lifecycle contracts: prompts=%d cancel=%d retry=%d project=%d teardown=%d "
+		             "(starts=%zu servers=%zu subscriptions=%zu projects=%zu retries=%zu shutdowns=%zu)\n",
+		             one_transport_for_prompts, cancel_keeps_transport, retry_keeps_subscription,
+		             project_switch_keeps_server, explicit_teardown_once, starts, servers,
+		             subscriptions, projects, retries, shutdowns);
+		return 25;
 	}
 	return EXIT_SUCCESS;
 }
