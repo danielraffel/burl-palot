@@ -78,7 +78,11 @@ class PalotVisualOracleTests(unittest.TestCase):
 			registry.parent.mkdir(parents=True)
 			registry.write_text(json.dumps({"schema": "pulp-compat-evidence-index-v1", "entries": {}}))
 			failure = MODULE.coverage_failure(ROOT, coverage_path, burl)
-		self.assertEqual(failure, "capability prerequisite failed: alignContent=normal is unsupported")
+		self.assertEqual(
+			failure,
+			"capability prerequisite failed: alignContent=normal [display=block]: "
+			"unknown evidence ID semantic:observed-dom-align-content-normal-context",
+		)
 
 	def test_arbitrary_evidence_id_does_not_resolve(self):
 		failure = MODULE.resolve_evidence(

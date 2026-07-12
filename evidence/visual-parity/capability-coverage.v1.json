@@ -10,11 +10,43 @@
       "values": [
         {
           "value": "normal",
+          "context": {"display": "block"},
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed alignContent + display -> DesignIR.layout -> native materializer -> FlexStyle -> Yoga",
+          "evidenceIds": ["semantic:observed-dom-align-content-normal-context"]
+        },
+        {
+          "value": "normal",
+          "context": {"display": "flex"},
+          "observation": "observed",
+          "decision": "lowered",
+          "route": "computed alignContent + display -> DesignIR.layout -> native materializer -> FlexStyle -> Yoga",
+          "evidenceIds": ["semantic:observed-dom-align-content-normal-context"]
+        },
+        {
+          "value": "normal",
+          "context": {"display": "inline"},
+          "observation": "observed",
+          "decision": "lowered",
+          "route": "computed alignContent + display -> DesignIR.layout -> native materializer -> FlexStyle -> Yoga",
+          "evidenceIds": ["semantic:observed-dom-align-content-normal-context"]
+        },
+        {
+          "value": "normal",
+          "context": {"display": "inline-block"},
+          "observation": "observed",
+          "decision": "lowered",
+          "route": "computed alignContent + display -> DesignIR.layout -> native materializer -> FlexStyle -> Yoga",
+          "evidenceIds": ["semantic:observed-dom-align-content-normal-context"]
+        },
+        {
+          "value": "normal",
+          "context": {"display": "list-item"},
+          "observation": "observed",
+          "decision": "lowered",
+          "route": "computed alignContent + display -> DesignIR.layout -> native materializer -> FlexStyle -> Yoga",
+          "evidenceIds": ["semantic:observed-dom-align-content-normal-context"]
         }
       ]
     },
@@ -23,19 +55,51 @@
       "values": [
         {
           "value": "center",
+          "context": {"display": "flex"},
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed alignItems -> TypedLayout.alignItems -> NativeDesignIR.layout.align -> apply_layout -> FlexStyle.align_items -> Yoga",
+          "evidenceIds": ["semantic:observed-dom-align-items-center"]
         },
         {
           "value": "normal",
+          "context": {"display": "block"},
           "observation": "observed",
-          "decision": "unsupported",
-          "route": null,
-          "evidenceIds": [],
-          "reason": "No exact capability route plus resolving evidence ID is published for this observed value; screenshot scoring is gated."
+          "decision": "lowered",
+          "route": "computed alignItems + display -> observed DOM layout context lowering -> TypedLayout.alignItems -> normalizeAlign -> NativeDesignIR.layout.align -> apply_layout -> FlexStyle.align_items -> Yoga",
+          "evidenceIds": ["semantic:observed-dom-align-items-normal"]
+        },
+        {
+          "value": "normal",
+          "context": {"display": "flex"},
+          "observation": "observed",
+          "decision": "lowered",
+          "route": "computed alignItems + display -> observed DOM layout context lowering -> TypedLayout.alignItems -> normalizeAlign -> NativeDesignIR.layout.align -> apply_layout -> FlexStyle.align_items -> Yoga",
+          "evidenceIds": ["semantic:observed-dom-align-items-normal"]
+        },
+        {
+          "value": "normal",
+          "context": {"display": "inline"},
+          "observation": "observed",
+          "decision": "lowered",
+          "route": "computed alignItems + display -> observed DOM layout context lowering -> TypedLayout.alignItems -> normalizeAlign -> NativeDesignIR.layout.align -> apply_layout -> FlexStyle.align_items -> Yoga",
+          "evidenceIds": ["semantic:observed-dom-align-items-normal"]
+        },
+        {
+          "value": "normal",
+          "context": {"display": "inline-block"},
+          "observation": "observed",
+          "decision": "lowered",
+          "route": "computed alignItems + display -> observed DOM layout context lowering -> TypedLayout.alignItems -> normalizeAlign -> NativeDesignIR.layout.align -> apply_layout -> FlexStyle.align_items -> Yoga",
+          "evidenceIds": ["semantic:observed-dom-align-items-normal"]
+        },
+        {
+          "value": "normal",
+          "context": {"display": "list-item"},
+          "observation": "observed",
+          "decision": "lowered",
+          "route": "computed alignItems + display -> observed DOM layout context lowering -> TypedLayout.alignItems -> normalizeAlign -> NativeDesignIR.layout.align -> apply_layout -> FlexStyle.align_items -> Yoga",
+          "evidenceIds": ["semantic:observed-dom-align-items-normal"]
         }
       ]
     },

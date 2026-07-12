@@ -22,15 +22,20 @@ def file_hash(path: Path) -> str:
 	return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
-def computed_property_values(path: Path) -> dict[str, set[str]]:
+CONTEXT_PROPERTIES = {"alignContent": ("display",), "alignItems": ("display",)}
+
+
+def computed_property_values(path: Path) -> dict[str, set[tuple[str, tuple[tuple[str, str], ...]]]]:
 	payload = json.loads(path.read_text())
-	result: dict[str, set[str]] = {}
+	result: dict[str, set[tuple[str, tuple[tuple[str, str], ...]]]] = {}
 	def walk(value):
 		if isinstance(value, dict):
 			style = value.get("computedStyle")
 			if isinstance(style, dict):
 				for name, observed in style.items():
-					result.setdefault(name, set()).add(str(observed))
+					context = tuple((field, str(style.get(field, "")))
+						for field in CONTEXT_PROPERTIES.get(name, ()))
+					result.setdefault(name, set()).add((str(observed), context))
 			for child in value.values():
 				walk(child)
 		elif isinstance(value, list):
@@ -89,11 +94,16 @@ def coverage_failure(root: Path, coverage_path: Path, burl_source: Path) -> str 
 	for record in records:
 		name = record.get("name", "<unnamed>")
 		declared_values = record.get("values", [])
-		value_map = {item.get("value"): item for item in declared_values if isinstance(item, dict)}
+		value_map = {
+			(item.get("value"), tuple(sorted((item.get("context") or {}).items()))): item
+			for item in declared_values if isinstance(item, dict)
+		}
 		if set(value_map) != actual[name]:
 			return f"capability value closure mismatch: {name}"
-		for value in sorted(actual[name]):
-			failure = decision_failure(f"{name}={value}", value_map[value], burl_source, registry)
+		for value, context in sorted(actual[name]):
+			context_label = "".join(f" [{field}={observed}]" for field, observed in context)
+			failure = decision_failure(
+				f"{name}={value}{context_label}", value_map[(value, context)], burl_source, registry)
 			if failure:
 				return failure
 	behavior_records = coverage.get("behaviorClasses", [])
