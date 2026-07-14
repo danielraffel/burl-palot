@@ -1,0 +1,6 @@
+{
+  "evidenceSha256": "ca608bb7f57904020bf85276513161a7fc267d717ff349a3aa7050e3513e4372",
+  "schema": "pulp-runtime-source-capture-v1",
+  "screenshotSha256": "f1a6c9f9baaa34eba8a75e8b739a24985abd5de2be2ec20cadefe2a426278eb9",
+  "sourceRevision": "fd63a75dad3d0e8555ba22a47e720d285889fbf0"
+}

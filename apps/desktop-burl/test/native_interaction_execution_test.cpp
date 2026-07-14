@@ -13,9 +13,11 @@
 #include <fstream>
 #include <functional>
 #include <iostream>
+#include <optional>
 #include <string>
 #include <unordered_map>
 #include <unordered_set>
+#include <utility>
 
 namespace {
 
@@ -39,6 +41,40 @@ bool contains(const pulp::view::Rect& outer, const pulp::view::Rect& inner) {
 	return inner.x >= outer.x && inner.y >= outer.y &&
 	       inner.x + inner.width <= outer.x + outer.width &&
 	       inner.y + inner.height <= outer.y + outer.height;
+}
+
+std::optional<pulp::view::Rect> intersection(const pulp::view::Rect& a,
+                                             const pulp::view::Rect& b) {
+	const float left = std::max(a.x, b.x);
+	const float top = std::max(a.y, b.y);
+	const float right = std::min(a.x + a.width, b.x + b.width);
+	const float bottom = std::min(a.y + a.height, b.y + b.height);
+	if (right <= left || bottom <= top) return std::nullopt;
+	return pulp::view::Rect{left, top, right - left, bottom - top};
+}
+
+std::optional<pulp::view::Rect> clipped_rect_in_root(const pulp::view::View& view,
+                                                     const pulp::view::View& root) {
+	auto visible = rect_in_root(view, root);
+	for (auto* ancestor = view.parent(); ancestor; ancestor = ancestor->parent()) {
+		const auto clip = rect_in_root(*ancestor, root);
+		float left = visible.x;
+		float top = visible.y;
+		float right = visible.x + visible.width;
+		float bottom = visible.y + visible.height;
+		if (ancestor->clips_overflow_x()) {
+			left = std::max(left, clip.x);
+			right = std::min(right, clip.x + clip.width);
+		}
+		if (ancestor->clips_overflow_y()) {
+			top = std::max(top, clip.y);
+			bottom = std::min(bottom, clip.y + clip.height);
+		}
+		if (right <= left || bottom <= top) return std::nullopt;
+		visible = {left, top, right - left, bottom - top};
+		if (ancestor == &root) break;
+	}
+	return visible;
 }
 
 bool descends_from(pulp::view::View* candidate, const pulp::view::View* ancestor) {
@@ -83,10 +119,12 @@ int main(int argc, char** argv) {
 	                       "composer.copy", "composer.model-menu.toggle", "composer.variant-menu.toggle",
 	                       "display.mode.cycle", "external.open.menu.toggle", "external.open.preferred",
 	                       "navigation.automations", "navigation.session.close", "navigation.settings",
+	                       "message.scroll-to-turn", "session.fork-from-message", "session.undo-to-message",
 	                       "project.open", "project.search.toggle", "project.select", "prompt.cancel",
 	                       "prompt.retry", "prompt.send", "review.panel.toggle", "server.menu.toggle",
-	                       "session.create", "session.metrics.toggle", "session.open", "session.title.edit.begin",
-	                       "sidebar.toggle", "terminal.attach"})
+	                       "session.create", "session.metrics.dismiss", "session.metrics.toggle", "session.open",
+	                       "session.title.edit.begin", "settings.theme.select", "sidebar.toggle",
+	                       "terminal.attach"})
 		host.register_action(id, [&calls, &payloads, id](std::string_view payload) {
 			++calls[id]; payloads[id] = payload;
 		});
@@ -101,9 +139,14 @@ int main(int argc, char** argv) {
 	});
 	host.set_transcript({
 		{"u1", "user", {{"message.text", "first prompt"}}},
-		{"a1", "assistant", {{"message.text", "first response"}}},
+		{"a1", "assistant", {{"message.text", "first response"},
+		                         {"turn.id", "user-message-1"},
+		                         {"turn.user-message-id", "user-message-1"},
+		                         {"turn.next-user-message-id", "user-message-2"}}},
 		{"u2", "user", {{"message.text", "second prompt"}}},
-		{"a2", "assistant", {{"message.text", "second response"}}},
+		{"a2", "assistant", {{"message.text", "second response"},
+		                         {"turn.id", "user-message-2"},
+		                         {"turn.user-message-id", "user-message-2"}}},
 	});
 	host.set_bounds({0, 0, 280, 248});
 	host.layout_children();
@@ -138,22 +181,56 @@ int main(int argc, char** argv) {
 		return 3;
 	}
 	std::unordered_map<std::string, int> exercised;
-	for (const float width : {599.0f, 768.0f, 1200.0f}) {
-		host.set_bounds({0, 0, width, 800});
+	float wide_main_height_at_800 = 0.0f;
+	std::unordered_map<int, float> bottom_inset_by_width;
+	for (const auto [width, height] : {std::pair{280.0f, 248.0f}, std::pair{280.0f, 420.0f},
+	                                  std::pair{600.0f, 420.0f}, std::pair{1200.0f, 800.0f},
+	                                  std::pair{1440.0f, 800.0f}, std::pair{1440.0f, 900.0f}}) {
+		host.set_bounds({0, 0, width, height});
 		host.layout_children();
 		auto* main_panel = find_anchor_suffix(host, "main-data-slot-sidebar-inset:0");
+		const pulp::view::Rect viewport{0, 0, width, height};
+		const auto main_rect = main_panel ? rect_in_root(*main_panel, host) : pulp::view::Rect{};
 		if (!main_panel ||
 		    std::abs(main_panel->corner_radius_bl() - 16.5f) > 0.01f ||
-		    std::abs(main_panel->corner_radius_br() - 16.5f) > 0.01f ||
-		    std::abs(main_panel->bounds().height - 788.0f) > 0.01f ||
-		    std::abs(main_panel->bounds().width - (width < 768.0f ? width - 24.0f : width - 292.0f)) > 0.01f)
+		    std::abs(main_panel->corner_radius_br()) > 0.01f ||
+		    !contains(viewport, main_rect)) {
+			std::cerr << "main panel does not fill the available height viewport=" << width << 'x'
+			          << height << " main=" << main_rect.x << ',' << main_rect.y << ','
+			          << main_rect.width << ',' << main_rect.height << " radii="
+			          << (main_panel ? main_panel->corner_radius_bl() : 0.0f) << ','
+			          << (main_panel ? main_panel->corner_radius_br() : 0.0f) << '\n';
 			return 16;
+		}
+		const float bottom_inset = height - (main_rect.y + main_rect.height);
+		const int width_key = static_cast<int>(width);
+		if (const auto found = bottom_inset_by_width.find(width_key);
+		    found != bottom_inset_by_width.end() && std::abs(found->second - bottom_inset) > 0.5f) {
+			std::cerr << "main panel bottom inset changed across heights viewport=" << width << 'x'
+			          << height << " baselineInset=" << found->second << " actualInset="
+			          << bottom_inset << " mainHeight=" << main_rect.height << '\n';
+			return 16;
+		} else {
+			bottom_inset_by_width.emplace(width_key, bottom_inset);
+		}
+		if (width == 1440.0f && height == 800.0f) wide_main_height_at_800 = main_rect.height;
+		if (width == 1440.0f && height == 900.0f &&
+		    std::abs(main_rect.height - wide_main_height_at_800 - 100.0f) > 0.5f) {
+			std::cerr << "main panel did not grow with viewport baseline=1440x800:" << wide_main_height_at_800
+			          << " actual=1440x900:" << main_rect.height << " expectedGrowth=100 actualGrowth="
+			          << main_rect.height - wide_main_height_at_800 << '\n';
+			return 16;
+		}
 		for (const auto* id : {"composer.copy", "project.open", "project.select", "prompt.cancel", "session.create",
 		                       "session.open"}) {
 			for (auto* candidate : host.bound_action_views(id)) {
 				auto* button = dynamic_cast<pulp::view::TextButton*>(candidate);
 				if (!button || !effectively_visible(*button, host)) continue;
-				const auto root_point = center_in_root(*button, host);
+				const auto visible = intersection(rect_in_root(*button, host),
+				                                  {0, 0, host.bounds().width, host.bounds().height});
+				if (!visible) continue;
+				const pulp::view::Point root_point{visible->x + visible->width * 0.5f,
+				                                  visible->y + visible->height * 0.5f};
 				auto* down_target = host.hit_test(root_point);
 				if (!down_target || !descends_from(down_target, button)) {
 					std::cerr << "dead overlay width=" << width << " action=" << id
@@ -212,7 +289,11 @@ int main(int argc, char** argv) {
 	host.layout_children();
 	auto* transcript = find_repeated_list(host, 24);
 	if (!transcript || transcript->content_height() <= transcript->bounds().height) return 18;
-	const auto wheel_point = center_in_root(*transcript, host);
+	const auto visible_transcript = clipped_rect_in_root(*transcript, host);
+	if (!visible_transcript) return 19;
+	const pulp::view::Point wheel_point{
+		visible_transcript->x + visible_transcript->width * 0.5f,
+		visible_transcript->y + visible_transcript->height * 0.5f};
 	auto* wheel_target = pulp::view::find_wheel_scroll_view_at(host, wheel_point);
 	if (!wheel_target || !descends_from(wheel_target, transcript)) {
 		std::cerr << "wheel target missing point=" << wheel_point.x << ',' << wheel_point.y
@@ -235,9 +316,14 @@ int main(int argc, char** argv) {
 	wheel.is_wheel = true;
 	wheel.scroll_delta_y = 100000.0f;
 	wheel_target->on_mouse_event(wheel);
-	const float max_scroll = std::max(0.0f, transcript->content_height() - transcript->bounds().height);
-	if (transcript->scroll_y() <= 0.0f || std::abs(transcript->scroll_y() - max_scroll) > 0.5f)
+	const float max_scroll = std::max(0.0f, transcript->content_height() - visible_transcript->height);
+	if (transcript->scroll_y() <= 0.0f || std::abs(transcript->scroll_y() - max_scroll) > 0.5f) {
+		std::cerr << "wheel scroll did not clamp to end target=" << wheel_target->anchor_id()
+		          << " transcript=" << transcript->anchor_id() << " actual=" << transcript->scroll_y()
+		          << " expected=" << max_scroll << " viewport=" << visible_transcript->height
+		          << " content=" << transcript->content_height() << '\n';
 		return 20;
+	}
 	wheel.scroll_delta_y = -100000.0f;
 	wheel_target->on_mouse_event(wheel);
 	if (std::abs(transcript->scroll_y()) > 0.01f) return 21;

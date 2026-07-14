@@ -1,0 +1,1865 @@
+{
+  "coordinateSpace": "production AppKit content coordinates, top-left logical pixels",
+  "failureCount": 2,
+  "passed": false,
+  "schema": "burl-native-layout-transition-census-v1",
+  "sourceWindowMinimum": {
+    "height": 421.0,
+    "width": 280.0
+  },
+  "underMinimumBoundaryProbe": {
+    "expectedMinimum": {
+      "height": 421.0,
+      "width": 280.0
+    },
+    "hosted": {
+      "height": 421.0,
+      "width": 280.0
+    },
+    "passed": true,
+    "rejected": true,
+    "requested": {
+      "height": 248.0,
+      "width": 280.0
+    }
+  },
+  "viewports": [
+    {
+      "label": "1200x800",
+      "native": {
+        "hostedHeight": 800.0,
+        "hostedWidth": 1200.0,
+        "windowHeight": 800.0,
+        "windowWidth": 1200.0
+      },
+      "nativeBoundsPassed": true,
+      "requested": {
+        "height": 800.0,
+        "width": 1200.0
+      },
+      "states": [
+        {
+          "captureElapsedMs": 430,
+          "capturedFrames": 4,
+          "checks": {
+            "completeChatFrameWithinMain": true,
+            "completeChatFrameWithinViewport": true,
+            "composerAccessoriesVisible": true,
+            "composerAccessoriesWithinViewport": true,
+            "composerWithinBottomEdge": true,
+            "composerWithinMain": true,
+            "mainConsumesBottomEdge": true,
+            "mainConsumesRightEdge": true,
+            "mainWithinViewport": true,
+            "requiredGeometryPresent": true,
+            "reviewClosed": true,
+            "reviewConsumesBottomEdge": true,
+            "reviewConsumesRightEdge": true,
+            "toggleSlotDoesNotOverlapLeadingHeaderContent": true
+          },
+          "geometry": {
+            "appBar": {
+              "bottom": 46.0,
+              "height": 46.0,
+              "right": 1200.0,
+              "width": 920.0,
+              "x": 280.0,
+              "y": 0.0
+            },
+            "chatFrame": {
+              "bottom": 784.0,
+              "height": 136.5,
+              "right": 1183.0,
+              "width": 887.0,
+              "x": 296.0,
+              "y": 647.5
+            },
+            "composer": {
+              "bottom": 759.5,
+              "height": 112.0,
+              "right": 1183.0,
+              "width": 887.0,
+              "x": 296.0,
+              "y": 647.5
+            },
+            "composerAccessories": [
+              [
+                {
+                  "anchor": "observed-dom:dom/html-shape-704d0864:0/body-shape-d65c892b:0/div-id-root:0/div-shape-74caabae:0/div-shape-20ec5713:0/div-data-slot-sidebar-wrapper:0/main-data-slot-sidebar-inset:0/div-data-slot-content-area:0/div-shape-12bbae35:0/div-shape-a9a56a97:0/div-shape-2f218dff:0/div-shape-641627bd:0/div-shape-e76cfa30:0/div-shape-b167bdec:0/div-shape-0edddc8f:0",
+                  "bounds": {
+                    "bottom": 784.0,
+                    "height": 24.5,
+                    "right": 516.5079345703125,
+                    "width": 220.5079345703125,
+                    "x": 296.0,
+                    "y": 759.5
+                  },
+                  "positiveViewCount": 12
+                }
+              ]
+            ],
+            "leadingHeaderLabel": {
+              "bottom": 29.0,
+              "height": 13.0,
+              "right": 387.65631103515625,
+              "width": 30.421899795532227,
+              "x": 357.2344055175781,
+              "y": 16.0
+            },
+            "main": {
+              "bottom": 800.0,
+              "height": 800.0,
+              "right": 1200.0,
+              "width": 920.0,
+              "x": 280.0,
+              "y": 0.0
+            },
+            "reviewPanel": {
+              "bottom": 800.0,
+              "height": 754.0,
+              "right": 1200.0,
+              "width": 1.0,
+              "x": 1199.0,
+              "y": 46.0
+            },
+            "sidebar": {
+              "bottom": 800.0,
+              "height": 800.0,
+              "right": 280.0,
+              "width": 280.0,
+              "x": 0.0,
+              "y": 0.0
+            },
+            "sidebarToggle": {
+              "bottom": 36.0,
+              "height": 28.0,
+              "right": 121.0,
+              "width": 28.0,
+              "x": 93.0,
+              "y": 8.0
+            }
+          },
+          "name": "sidebar-open",
+          "passed": true,
+          "screenshot": "/Users/danielraffel/Code/burl-palot-wt-semantic-restart/apps/desktop-burl/../../evidence/visual-parity/native-layout-transition-census-current/1200x800-sidebar-open.png",
+          "screenshotWritten": true
+        },
+        {
+          "captureElapsedMs": 173,
+          "capturedFrames": 4,
+          "checks": {
+            "completeChatFrameWithinMain": true,
+            "completeChatFrameWithinViewport": true,
+            "composerAccessoriesVisible": true,
+            "composerAccessoriesWithinViewport": true,
+            "composerWithinBottomEdge": true,
+            "composerWithinMain": true,
+            "mainConsumesBottomEdge": true,
+            "mainConsumesRightEdge": true,
+            "mainWithinViewport": true,
+            "requiredGeometryPresent": true,
+            "reviewClosed": true,
+            "reviewConsumesBottomEdge": true,
+            "reviewConsumesRightEdge": true,
+            "sidebarClosed": true,
+            "toggleSlotDoesNotOverlapLeadingHeaderContent": false
+          },
+          "geometry": {
+            "appBar": {
+              "bottom": 46.0,
+              "height": 46.0,
+              "right": 1200.0,
+              "width": 1200.0,
+              "x": 0.0,
+              "y": 0.0
+            },
+            "chatFrame": {
+              "bottom": 784.0,
+              "height": 136.5,
+              "right": 1047.5,
+              "width": 896.0,
+              "x": 151.5,
+              "y": 647.5
+            },
+            "composer": {
+              "bottom": 759.5,
+              "height": 112.0,
+              "right": 1047.5,
+              "width": 896.0,
+              "x": 151.5,
+              "y": 647.5
+            },
+            "composerAccessories": [
+              [
+                {
+                  "anchor": "observed-dom:dom/html-shape-704d0864:0/body-shape-d65c892b:0/div-id-root:0/div-shape-74caabae:0/div-shape-20ec5713:0/div-data-slot-sidebar-wrapper:0/main-data-slot-sidebar-inset:0/div-data-slot-content-area:0/div-shape-12bbae35:0/div-shape-a9a56a97:0/div-shape-2f218dff:0/div-shape-641627bd:0/div-shape-e76cfa30:0/div-shape-b167bdec:0/div-shape-0edddc8f:0",
+                  "bounds": {
+                    "bottom": 784.0,
+                    "height": 24.5,
+                    "right": 372.0079040527344,
+                    "width": 220.50790405273438,
+                    "x": 151.5,
+                    "y": 759.5
+                  },
+                  "positiveViewCount": 12
+                }
+              ]
+            ],
+            "leadingHeaderLabel": {
+              "bottom": 29.0,
+              "height": 13.0,
+              "right": 107.65630340576172,
+              "width": 30.421899795532227,
+              "x": 77.23440551757813,
+              "y": 16.0
+            },
+            "main": {
+              "bottom": 800.0,
+              "height": 800.0,
+              "right": 1200.0,
+              "width": 1200.0,
+              "x": 0.0,
+              "y": 0.0
+            },
+            "reviewPanel": {
+              "bottom": 800.0,
+              "height": 754.0,
+              "right": 1200.0,
+              "width": 1.0,
+              "x": 1199.0,
+              "y": 46.0
+            },
+            "sidebar": {
+              "bottom": 800.0,
+              "height": 800.0,
+              "right": 280.0,
+              "width": 280.0,
+              "x": 0.0,
+              "y": 0.0
+            },
+            "sidebarToggle": {
+              "bottom": 36.0,
+              "height": 28.0,
+              "right": 121.0,
+              "width": 28.0,
+              "x": 93.0,
+              "y": 8.0
+            }
+          },
+          "name": "sidebar-closed",
+          "passed": false,
+          "screenshot": "/Users/danielraffel/Code/burl-palot-wt-semantic-restart/apps/desktop-burl/../../evidence/visual-parity/native-layout-transition-census-current/1200x800-sidebar-closed.png",
+          "screenshotWritten": true
+        },
+        {
+          "captureElapsedMs": 97,
+          "capturedFrames": 4,
+          "checks": {
+            "completeChatFrameWithinMain": true,
+            "completeChatFrameWithinViewport": true,
+            "composerAccessoriesVisible": true,
+            "composerAccessoriesWithinViewport": true,
+            "composerWithinBottomEdge": true,
+            "composerWithinMain": true,
+            "mainConsumesBottomEdge": true,
+            "mainConsumesRightEdge": true,
+            "mainWithinViewport": true,
+            "requiredGeometryPresent": true,
+            "reviewClosed": true,
+            "reviewConsumesBottomEdge": true,
+            "reviewConsumesRightEdge": true,
+            "toggleSlotDoesNotOverlapLeadingHeaderContent": true
+          },
+          "geometry": {
+            "appBar": {
+              "bottom": 46.0,
+              "height": 46.0,
+              "right": 1200.0,
+              "width": 920.0,
+              "x": 280.0,
+              "y": 0.0
+            },
+            "chatFrame": {
+              "bottom": 784.0,
+              "height": 136.5,
+              "right": 1183.0,
+              "width": 887.0,
+              "x": 296.0,
+              "y": 647.5
+            },
+            "composer": {
+              "bottom": 759.5,
+              "height": 112.0,
+              "right": 1183.0,
+              "width": 887.0,
+              "x": 296.0,
+              "y": 647.5
+            },
+            "composerAccessories": [
+              [
+                {
+                  "anchor": "observed-dom:dom/html-shape-704d0864:0/body-shape-d65c892b:0/div-id-root:0/div-shape-74caabae:0/div-shape-20ec5713:0/div-data-slot-sidebar-wrapper:0/main-data-slot-sidebar-inset:0/div-data-slot-content-area:0/div-shape-12bbae35:0/div-shape-a9a56a97:0/div-shape-2f218dff:0/div-shape-641627bd:0/div-shape-e76cfa30:0/div-shape-b167bdec:0/div-shape-0edddc8f:0",
+                  "bounds": {
+                    "bottom": 784.0,
+                    "height": 24.5,
+                    "right": 516.5079345703125,
+                    "width": 220.5079345703125,
+                    "x": 296.0,
+                    "y": 759.5
+                  },
+                  "positiveViewCount": 12
+                }
+              ]
+            ],
+            "leadingHeaderLabel": {
+              "bottom": 29.0,
+              "height": 13.0,
+              "right": 387.65631103515625,
+              "width": 30.421899795532227,
+              "x": 357.2344055175781,
+              "y": 16.0
+            },
+            "main": {
+              "bottom": 800.0,
+              "height": 800.0,
+              "right": 1200.0,
+              "width": 920.0,
+              "x": 280.0,
+              "y": 0.0
+            },
+            "reviewPanel": {
+              "bottom": 800.0,
+              "height": 754.0,
+              "right": 1200.0,
+              "width": 1.0,
+              "x": 1199.0,
+              "y": 46.0
+            },
+            "sidebar": {
+              "bottom": 800.0,
+              "height": 800.0,
+              "right": 280.0,
+              "width": 280.0,
+              "x": 0.0,
+              "y": 0.0
+            },
+            "sidebarToggle": {
+              "bottom": 36.0,
+              "height": 28.0,
+              "right": 121.0,
+              "width": 28.0,
+              "x": 93.0,
+              "y": 8.0
+            }
+          },
+          "name": "sidebar-reopened",
+          "passed": true,
+          "screenshot": "/Users/danielraffel/Code/burl-palot-wt-semantic-restart/apps/desktop-burl/../../evidence/visual-parity/native-layout-transition-census-current/1200x800-sidebar-reopened.png",
+          "screenshotWritten": true
+        },
+        {
+          "captureElapsedMs": 259,
+          "capturedFrames": 4,
+          "checks": {
+            "completeChatFrameWithinMain": true,
+            "completeChatFrameWithinViewport": true,
+            "composerAccessoriesVisible": true,
+            "composerAccessoriesWithinViewport": true,
+            "composerWithinBottomEdge": true,
+            "composerWithinConversation": true,
+            "composerWithinMain": true,
+            "conversationConsumesBottomEdge": true,
+            "conversationMeetsReviewPanel": true,
+            "mainConsumesBottomEdge": true,
+            "mainConsumesRightEdge": true,
+            "mainWithinViewport": true,
+            "requiredGeometryPresent": true,
+            "reviewConsumesBottomEdge": true,
+            "reviewConsumesRightEdge": true,
+            "reviewOpen": true,
+            "toggleSlotDoesNotOverlapLeadingHeaderContent": true
+          },
+          "geometry": {
+            "appBar": {
+              "bottom": 46.0,
+              "height": 46.0,
+              "right": 1200.0,
+              "width": 920.0,
+              "x": 280.0,
+              "y": 0.0
+            },
+            "chatFrame": {
+              "bottom": 784.0,
+              "height": 136.5,
+              "right": 708.8049926757813,
+              "width": 412.80499267578125,
+              "x": 296.0,
+              "y": 647.5
+            },
+            "composer": {
+              "bottom": 759.5,
+              "height": 112.0,
+              "right": 708.8049926757813,
+              "width": 412.80499267578125,
+              "x": 296.0,
+              "y": 647.5
+            },
+            "composerAccessories": [
+              [
+                {
+                  "anchor": "observed-dom:dom/html-shape-704d0864:0/body-shape-d65c892b:0/div-id-root:0/div-shape-74caabae:0/div-shape-20ec5713:0/div-data-slot-sidebar-wrapper:0/main-data-slot-sidebar-inset:0/div-data-slot-content-area:0/div-shape-12bbae35:0/div-shape-a9a56a97:0/div-shape-2f218dff:0/div-shape-641627bd:0/div-shape-e76cfa30:0/div-shape-b167bdec:0/div-shape-0edddc8f:0",
+                  "bounds": {
+                    "bottom": 784.0,
+                    "height": 24.5,
+                    "right": 516.5079345703125,
+                    "width": 220.5079345703125,
+                    "x": 296.0,
+                    "y": 759.5
+                  },
+                  "positiveViewCount": 12
+                }
+              ]
+            ],
+            "conversationPanel": {
+              "bottom": 800.0,
+              "height": 754.0,
+              "right": 724.8049926757813,
+              "width": 444.80499267578125,
+              "x": 280.0,
+              "y": 46.0
+            },
+            "leadingHeaderLabel": {
+              "bottom": 29.0,
+              "height": 13.0,
+              "right": 387.65631103515625,
+              "width": 30.421899795532227,
+              "x": 357.2344055175781,
+              "y": 16.0
+            },
+            "main": {
+              "bottom": 800.0,
+              "height": 800.0,
+              "right": 1200.0,
+              "width": 920.0,
+              "x": 280.0,
+              "y": 0.0
+            },
+            "reviewPanel": {
+              "bottom": 800.0,
+              "height": 754.0,
+              "right": 1200.0,
+              "width": 475.19500732421875,
+              "x": 724.8049926757813,
+              "y": 46.0
+            },
+            "sidebar": {
+              "bottom": 800.0,
+              "height": 800.0,
+              "right": 280.0,
+              "width": 280.0,
+              "x": 0.0,
+              "y": 0.0
+            },
+            "sidebarToggle": {
+              "bottom": 36.0,
+              "height": 28.0,
+              "right": 121.0,
+              "width": 28.0,
+              "x": 93.0,
+              "y": 8.0
+            }
+          },
+          "name": "changes-open",
+          "passed": true,
+          "screenshot": "/Users/danielraffel/Code/burl-palot-wt-semantic-restart/apps/desktop-burl/../../evidence/visual-parity/native-layout-transition-census-current/1200x800-changes-open.png",
+          "screenshotWritten": true
+        },
+        {
+          "captureElapsedMs": 96,
+          "capturedFrames": 4,
+          "checks": {
+            "completeChatFrameWithinMain": true,
+            "completeChatFrameWithinViewport": true,
+            "composerAccessoriesVisible": true,
+            "composerAccessoriesWithinViewport": true,
+            "composerWithinBottomEdge": true,
+            "composerWithinMain": true,
+            "mainConsumesBottomEdge": true,
+            "mainConsumesRightEdge": true,
+            "mainWithinViewport": true,
+            "requiredGeometryPresent": true,
+            "reviewClosed": true,
+            "reviewConsumesBottomEdge": true,
+            "reviewConsumesRightEdge": true,
+            "toggleSlotDoesNotOverlapLeadingHeaderContent": true
+          },
+          "geometry": {
+            "appBar": {
+              "bottom": 46.0,
+              "height": 46.0,
+              "right": 1200.0,
+              "width": 920.0,
+              "x": 280.0,
+              "y": 0.0
+            },
+            "chatFrame": {
+              "bottom": 784.0,
+              "height": 136.5,
+              "right": 1183.0,
+              "width": 887.0,
+              "x": 296.0,
+              "y": 647.5
+            },
+            "composer": {
+              "bottom": 759.5,
+              "height": 112.0,
+              "right": 1183.0,
+              "width": 887.0,
+              "x": 296.0,
+              "y": 647.5
+            },
+            "composerAccessories": [
+              [
+                {
+                  "anchor": "observed-dom:dom/html-shape-704d0864:0/body-shape-d65c892b:0/div-id-root:0/div-shape-74caabae:0/div-shape-20ec5713:0/div-data-slot-sidebar-wrapper:0/main-data-slot-sidebar-inset:0/div-data-slot-content-area:0/div-shape-12bbae35:0/div-shape-a9a56a97:0/div-shape-2f218dff:0/div-shape-641627bd:0/div-shape-e76cfa30:0/div-shape-b167bdec:0/div-shape-0edddc8f:0",
+                  "bounds": {
+                    "bottom": 784.0,
+                    "height": 24.5,
+                    "right": 516.5079345703125,
+                    "width": 220.5079345703125,
+                    "x": 296.0,
+                    "y": 759.5
+                  },
+                  "positiveViewCount": 12
+                }
+              ]
+            ],
+            "leadingHeaderLabel": {
+              "bottom": 29.0,
+              "height": 13.0,
+              "right": 387.65631103515625,
+              "width": 30.421899795532227,
+              "x": 357.2344055175781,
+              "y": 16.0
+            },
+            "main": {
+              "bottom": 800.0,
+              "height": 800.0,
+              "right": 1200.0,
+              "width": 920.0,
+              "x": 280.0,
+              "y": 0.0
+            },
+            "reviewPanel": {
+              "bottom": 800.0,
+              "height": 754.0,
+              "right": 1200.0,
+              "width": 1.0,
+              "x": 1199.0,
+              "y": 46.0
+            },
+            "sidebar": {
+              "bottom": 800.0,
+              "height": 800.0,
+              "right": 280.0,
+              "width": 280.0,
+              "x": 0.0,
+              "y": 0.0
+            },
+            "sidebarToggle": {
+              "bottom": 36.0,
+              "height": 28.0,
+              "right": 121.0,
+              "width": 28.0,
+              "x": 93.0,
+              "y": 8.0
+            }
+          },
+          "name": "changes-reclosed",
+          "passed": true,
+          "screenshot": "/Users/danielraffel/Code/burl-palot-wt-semantic-restart/apps/desktop-burl/../../evidence/visual-parity/native-layout-transition-census-current/1200x800-changes-reclosed.png",
+          "screenshotWritten": true
+        }
+      ],
+      "transitions": [
+        {
+          "action": "sidebar.toggle",
+          "actionFired": true,
+          "actionableAncestor": "observed-dom:dom/html-shape-704d0864:0/body-shape-d65c892b:0/div-id-root:0/div-shape-74caabae:0/div-shape-20ec5713:0/div-data-slot-sidebar-wrapper:0/div-shape-101f5816:0/button-data-slot-tooltip-trigger:0",
+          "downDispatched": true,
+          "outcomeAfter": 1,
+          "outcomeBefore": 0,
+          "passed": true,
+          "pressTarget": "observed-dom:dom/html-shape-704d0864:0/body-shape-d65c892b:0/div-id-root:0/div-shape-74caabae:0/div-shape-20ec5713:0/div-data-slot-sidebar-wrapper:0/div-shape-101f5816:0/button-data-slot-tooltip-trigger:0",
+          "releaseTarget": "observed-dom:dom/html-shape-704d0864:0/body-shape-d65c892b:0/div-id-root:0/div-shape-74caabae:0/div-shape-20ec5713:0/div-data-slot-sidebar-wrapper:0/div-shape-101f5816:0/button-data-slot-tooltip-trigger:0",
+          "upDispatched": true,
+          "x": 107.0,
+          "y": 22.0
+        },
+        {
+          "action": "sidebar.toggle",
+          "actionFired": true,
+          "actionableAncestor": "observed-dom:dom/html-shape-704d0864:0/body-shape-d65c892b:0/div-id-root:0/div-shape-74caabae:0/div-shape-20ec5713:0/div-data-slot-sidebar-wrapper:0/div-shape-101f5816:0/button-data-slot-tooltip-trigger:0",
+          "downDispatched": true,
+          "outcomeAfter": 2,
+          "outcomeBefore": 1,
+          "passed": true,
+          "pressTarget": "observed-dom:dom/html-shape-704d0864:0/body-shape-d65c892b:0/div-id-root:0/div-shape-74caabae:0/div-shape-20ec5713:0/div-data-slot-sidebar-wrapper:0/div-shape-101f5816:0/button-data-slot-tooltip-trigger:0",
+          "releaseTarget": "observed-dom:dom/html-shape-704d0864:0/body-shape-d65c892b:0/div-id-root:0/div-shape-74caabae:0/div-shape-20ec5713:0/div-data-slot-sidebar-wrapper:0/div-shape-101f5816:0/button-data-slot-tooltip-trigger:0",
+          "upDispatched": true,
+          "x": 107.0,
+          "y": 22.0
+        },
+        {
+          "action": "review.panel.toggle",
+          "actionFired": true,
+          "actionableAncestor": "observed-dom:dom/html-shape-704d0864:0/body-shape-d65c892b:0/div-id-root:0/div-shape-74caabae:0/div-shape-20ec5713:0/div-data-slot-sidebar-wrapper:0/main-data-slot-sidebar-inset:0/div-data-slot-app-bar:0/div-shape-d1a99e95:0/div-shape-91386c77:0/div-shape-424a2145:0/button-data-slot-tooltip-trigger:0",
+          "downDispatched": true,
+          "outcomeAfter": 1,
+          "outcomeBefore": 0,
+          "passed": true,
+          "pressTarget": "observed-dom:dom/html-shape-704d0864:0/body-shape-d65c892b:0/div-id-root:0/div-shape-74caabae:0/div-shape-20ec5713:0/div-data-slot-sidebar-wrapper:0/main-data-slot-sidebar-inset:0/div-data-slot-app-bar:0/div-shape-d1a99e95:0/div-shape-91386c77:0/div-shape-424a2145:0/button-data-slot-tooltip-trigger:0",
+          "releaseTarget": "observed-dom:dom/html-shape-704d0864:0/body-shape-d65c892b:0/div-id-root:0/div-shape-74caabae:0/div-shape-20ec5713:0/div-data-slot-sidebar-wrapper:0/main-data-slot-sidebar-inset:0/div-data-slot-app-bar:0/div-shape-d1a99e95:0/div-shape-91386c77:0/div-shape-424a2145:0/button-data-slot-tooltip-trigger:0",
+          "upDispatched": true,
+          "x": 808.1968383789063,
+          "y": 22.5
+        },
+        {
+          "action": "review.panel.toggle",
+          "actionFired": true,
+          "actionableAncestor": "observed-dom:dom/html-shape-704d0864:0/body-shape-d65c892b:0/div-id-root:0/div-shape-74caabae:0/div-shape-20ec5713:0/div-data-slot-sidebar-wrapper:0/main-data-slot-sidebar-inset:0/div-data-slot-app-bar:0/div-shape-d1a99e95:0/div-shape-91386c77:0/div-shape-424a2145:0/button-data-slot-tooltip-trigger:0",
+          "downDispatched": true,
+          "outcomeAfter": 2,
+          "outcomeBefore": 1,
+          "passed": true,
+          "pressTarget": "observed-dom:dom/html-shape-704d0864:0/body-shape-d65c892b:0/div-id-root:0/div-shape-74caabae:0/div-shape-20ec5713:0/div-data-slot-sidebar-wrapper:0/main-data-slot-sidebar-inset:0/div-data-slot-app-bar:0/div-shape-d1a99e95:0/div-shape-91386c77:0/div-shape-424a2145:0/button-data-slot-tooltip-trigger:0",
+          "releaseTarget": "observed-dom:dom/html-shape-704d0864:0/body-shape-d65c892b:0/div-id-root:0/div-shape-74caabae:0/div-shape-20ec5713:0/div-data-slot-sidebar-wrapper:0/main-data-slot-sidebar-inset:0/div-data-slot-app-bar:0/div-shape-d1a99e95:0/div-shape-91386c77:0/div-shape-424a2145:0/button-data-slot-tooltip-trigger:0",
+          "upDispatched": true,
+          "x": 808.1968383789063,
+          "y": 22.5
+        }
+      ]
+    },
+    {
+      "label": "1200x1000",
+      "native": {
+        "hostedHeight": 1000.0,
+        "hostedWidth": 1200.0,
+        "windowHeight": 1000.0,
+        "windowWidth": 1200.0
+      },
+      "nativeBoundsPassed": true,
+      "requested": {
+        "height": 1000.0,
+        "width": 1200.0
+      },
+      "states": [
+        {
+          "captureElapsedMs": 199,
+          "capturedFrames": 4,
+          "checks": {
+            "completeChatFrameWithinMain": true,
+            "completeChatFrameWithinViewport": true,
+            "composerAccessoriesVisible": true,
+            "composerAccessoriesWithinViewport": true,
+            "composerWithinBottomEdge": true,
+            "composerWithinMain": true,
+            "mainConsumesBottomEdge": true,
+            "mainConsumesRightEdge": true,
+            "mainWithinViewport": true,
+            "requiredGeometryPresent": true,
+            "reviewClosed": true,
+            "reviewConsumesBottomEdge": true,
+            "reviewConsumesRightEdge": true,
+            "toggleSlotDoesNotOverlapLeadingHeaderContent": true
+          },
+          "geometry": {
+            "appBar": {
+              "bottom": 46.0,
+              "height": 46.0,
+              "right": 1200.0,
+              "width": 920.0,
+              "x": 280.0,
+              "y": 0.0
+            },
+            "chatFrame": {
+              "bottom": 984.0,
+              "height": 136.5,
+              "right": 1183.0,
+              "width": 887.0,
+              "x": 296.0,
+              "y": 847.5
+            },
+            "composer": {
+              "bottom": 959.5,
+              "height": 112.0,
+              "right": 1183.0,
+              "width": 887.0,
+              "x": 296.0,
+              "y": 847.5
+            },
+            "composerAccessories": [
+              [
+                {
+                  "anchor": "observed-dom:dom/html-shape-704d0864:0/body-shape-d65c892b:0/div-id-root:0/div-shape-74caabae:0/div-shape-20ec5713:0/div-data-slot-sidebar-wrapper:0/main-data-slot-sidebar-inset:0/div-data-slot-content-area:0/div-shape-12bbae35:0/div-shape-a9a56a97:0/div-shape-2f218dff:0/div-shape-641627bd:0/div-shape-e76cfa30:0/div-shape-b167bdec:0/div-shape-0edddc8f:0",
+                  "bounds": {
+                    "bottom": 984.0,
+                    "height": 24.5,
+                    "right": 516.5079345703125,
+                    "width": 220.5079345703125,
+                    "x": 296.0,
+                    "y": 959.5
+                  },
+                  "positiveViewCount": 12
+                }
+              ]
+            ],
+            "leadingHeaderLabel": {
+              "bottom": 29.0,
+              "height": 13.0,
+              "right": 387.65631103515625,
+              "width": 30.421899795532227,
+              "x": 357.2344055175781,
+              "y": 16.0
+            },
+            "main": {
+              "bottom": 1000.0,
+              "height": 1000.0,
+              "right": 1200.0,
+              "width": 920.0,
+              "x": 280.0,
+              "y": 0.0
+            },
+            "reviewPanel": {
+              "bottom": 1000.0,
+              "height": 954.0,
+              "right": 1200.0,
+              "width": 1.0,
+              "x": 1199.0,
+              "y": 46.0
+            },
+            "sidebar": {
+              "bottom": 1000.0,
+              "height": 1000.0,
+              "right": 280.0,
+              "width": 280.0,
+              "x": 0.0,
+              "y": 0.0
+            },
+            "sidebarToggle": {
+              "bottom": 36.0,
+              "height": 28.0,
+              "right": 121.0,
+              "width": 28.0,
+              "x": 93.0,
+              "y": 8.0
+            }
+          },
+          "name": "sidebar-open",
+          "passed": true,
+          "screenshot": "/Users/danielraffel/Code/burl-palot-wt-semantic-restart/apps/desktop-burl/../../evidence/visual-parity/native-layout-transition-census-current/1200x1000-sidebar-open.png",
+          "screenshotWritten": true
+        },
+        {
+          "captureElapsedMs": 187,
+          "capturedFrames": 4,
+          "checks": {
+            "completeChatFrameWithinMain": true,
+            "completeChatFrameWithinViewport": true,
+            "composerAccessoriesVisible": true,
+            "composerAccessoriesWithinViewport": true,
+            "composerWithinBottomEdge": true,
+            "composerWithinMain": true,
+            "mainConsumesBottomEdge": true,
+            "mainConsumesRightEdge": true,
+            "mainWithinViewport": true,
+            "requiredGeometryPresent": true,
+            "reviewClosed": true,
+            "reviewConsumesBottomEdge": true,
+            "reviewConsumesRightEdge": true,
+            "sidebarClosed": true,
+            "toggleSlotDoesNotOverlapLeadingHeaderContent": false
+          },
+          "geometry": {
+            "appBar": {
+              "bottom": 46.0,
+              "height": 46.0,
+              "right": 1200.0,
+              "width": 1200.0,
+              "x": 0.0,
+              "y": 0.0
+            },
+            "chatFrame": {
+              "bottom": 984.0,
+              "height": 136.5,
+              "right": 1047.5,
+              "width": 896.0,
+              "x": 151.5,
+              "y": 847.5
+            },
+            "composer": {
+              "bottom": 959.5,
+              "height": 112.0,
+              "right": 1047.5,
+              "width": 896.0,
+              "x": 151.5,
+              "y": 847.5
+            },
+            "composerAccessories": [
+              [
+                {
+                  "anchor": "observed-dom:dom/html-shape-704d0864:0/body-shape-d65c892b:0/div-id-root:0/div-shape-74caabae:0/div-shape-20ec5713:0/div-data-slot-sidebar-wrapper:0/main-data-slot-sidebar-inset:0/div-data-slot-content-area:0/div-shape-12bbae35:0/div-shape-a9a56a97:0/div-shape-2f218dff:0/div-shape-641627bd:0/div-shape-e76cfa30:0/div-shape-b167bdec:0/div-shape-0edddc8f:0",
+                  "bounds": {
+                    "bottom": 984.0,
+                    "height": 24.5,
+                    "right": 372.0079040527344,
+                    "width": 220.50790405273438,
+                    "x": 151.5,
+                    "y": 959.5
+                  },
+                  "positiveViewCount": 12
+                }
+              ]
+            ],
+            "leadingHeaderLabel": {
+              "bottom": 29.0,
+              "height": 13.0,
+              "right": 107.65630340576172,
+              "width": 30.421899795532227,
+              "x": 77.23440551757813,
+              "y": 16.0
+            },
+            "main": {
+              "bottom": 1000.0,
+              "height": 1000.0,
+              "right": 1200.0,
+              "width": 1200.0,
+              "x": 0.0,
+              "y": 0.0
+            },
+            "reviewPanel": {
+              "bottom": 1000.0,
+              "height": 954.0,
+              "right": 1200.0,
+              "width": 1.0,
+              "x": 1199.0,
+              "y": 46.0
+            },
+            "sidebar": {
+              "bottom": 1000.0,
+              "height": 1000.0,
+              "right": 280.0,
+              "width": 280.0,
+              "x": 0.0,
+              "y": 0.0
+            },
+            "sidebarToggle": {
+              "bottom": 36.0,
+              "height": 28.0,
+              "right": 121.0,
+              "width": 28.0,
+              "x": 93.0,
+              "y": 8.0
+            }
+          },
+          "name": "sidebar-closed",
+          "passed": false,
+          "screenshot": "/Users/danielraffel/Code/burl-palot-wt-semantic-restart/apps/desktop-burl/../../evidence/visual-parity/native-layout-transition-census-current/1200x1000-sidebar-closed.png",
+          "screenshotWritten": true
+        },
+        {
+          "captureElapsedMs": 109,
+          "capturedFrames": 4,
+          "checks": {
+            "completeChatFrameWithinMain": true,
+            "completeChatFrameWithinViewport": true,
+            "composerAccessoriesVisible": true,
+            "composerAccessoriesWithinViewport": true,
+            "composerWithinBottomEdge": true,
+            "composerWithinMain": true,
+            "mainConsumesBottomEdge": true,
+            "mainConsumesRightEdge": true,
+            "mainWithinViewport": true,
+            "requiredGeometryPresent": true,
+            "reviewClosed": true,
+            "reviewConsumesBottomEdge": true,
+            "reviewConsumesRightEdge": true,
+            "toggleSlotDoesNotOverlapLeadingHeaderContent": true
+          },
+          "geometry": {
+            "appBar": {
+              "bottom": 46.0,
+              "height": 46.0,
+              "right": 1200.0,
+              "width": 920.0,
+              "x": 280.0,
+              "y": 0.0
+            },
+            "chatFrame": {
+              "bottom": 984.0,
+              "height": 136.5,
+              "right": 1183.0,
+              "width": 887.0,
+              "x": 296.0,
+              "y": 847.5
+            },
+            "composer": {
+              "bottom": 959.5,
+              "height": 112.0,
+              "right": 1183.0,
+              "width": 887.0,
+              "x": 296.0,
+              "y": 847.5
+            },
+            "composerAccessories": [
+              [
+                {
+                  "anchor": "observed-dom:dom/html-shape-704d0864:0/body-shape-d65c892b:0/div-id-root:0/div-shape-74caabae:0/div-shape-20ec5713:0/div-data-slot-sidebar-wrapper:0/main-data-slot-sidebar-inset:0/div-data-slot-content-area:0/div-shape-12bbae35:0/div-shape-a9a56a97:0/div-shape-2f218dff:0/div-shape-641627bd:0/div-shape-e76cfa30:0/div-shape-b167bdec:0/div-shape-0edddc8f:0",
+                  "bounds": {
+                    "bottom": 984.0,
+                    "height": 24.5,
+                    "right": 516.5079345703125,
+                    "width": 220.5079345703125,
+                    "x": 296.0,
+                    "y": 959.5
+                  },
+                  "positiveViewCount": 12
+                }
+              ]
+            ],
+            "leadingHeaderLabel": {
+              "bottom": 29.0,
+              "height": 13.0,
+              "right": 387.65631103515625,
+              "width": 30.421899795532227,
+              "x": 357.2344055175781,
+              "y": 16.0
+            },
+            "main": {
+              "bottom": 1000.0,
+              "height": 1000.0,
+              "right": 1200.0,
+              "width": 920.0,
+              "x": 280.0,
+              "y": 0.0
+            },
+            "reviewPanel": {
+              "bottom": 1000.0,
+              "height": 954.0,
+              "right": 1200.0,
+              "width": 1.0,
+              "x": 1199.0,
+              "y": 46.0
+            },
+            "sidebar": {
+              "bottom": 1000.0,
+              "height": 1000.0,
+              "right": 280.0,
+              "width": 280.0,
+              "x": 0.0,
+              "y": 0.0
+            },
+            "sidebarToggle": {
+              "bottom": 36.0,
+              "height": 28.0,
+              "right": 121.0,
+              "width": 28.0,
+              "x": 93.0,
+              "y": 8.0
+            }
+          },
+          "name": "sidebar-reopened",
+          "passed": true,
+          "screenshot": "/Users/danielraffel/Code/burl-palot-wt-semantic-restart/apps/desktop-burl/../../evidence/visual-parity/native-layout-transition-census-current/1200x1000-sidebar-reopened.png",
+          "screenshotWritten": true
+        },
+        {
+          "captureElapsedMs": 111,
+          "capturedFrames": 4,
+          "checks": {
+            "completeChatFrameWithinMain": true,
+            "completeChatFrameWithinViewport": true,
+            "composerAccessoriesVisible": true,
+            "composerAccessoriesWithinViewport": true,
+            "composerWithinBottomEdge": true,
+            "composerWithinConversation": true,
+            "composerWithinMain": true,
+            "conversationConsumesBottomEdge": true,
+            "conversationMeetsReviewPanel": true,
+            "mainConsumesBottomEdge": true,
+            "mainConsumesRightEdge": true,
+            "mainWithinViewport": true,
+            "requiredGeometryPresent": true,
+            "reviewConsumesBottomEdge": true,
+            "reviewConsumesRightEdge": true,
+            "reviewOpen": true,
+            "toggleSlotDoesNotOverlapLeadingHeaderContent": true
+          },
+          "geometry": {
+            "appBar": {
+              "bottom": 46.0,
+              "height": 46.0,
+              "right": 1200.0,
+              "width": 920.0,
+              "x": 280.0,
+              "y": 0.0
+            },
+            "chatFrame": {
+              "bottom": 984.0,
+              "height": 136.5,
+              "right": 708.8049926757813,
+              "width": 412.80499267578125,
+              "x": 296.0,
+              "y": 847.5
+            },
+            "composer": {
+              "bottom": 959.5,
+              "height": 112.0,
+              "right": 708.8049926757813,
+              "width": 412.80499267578125,
+              "x": 296.0,
+              "y": 847.5
+            },
+            "composerAccessories": [
+              [
+                {
+                  "anchor": "observed-dom:dom/html-shape-704d0864:0/body-shape-d65c892b:0/div-id-root:0/div-shape-74caabae:0/div-shape-20ec5713:0/div-data-slot-sidebar-wrapper:0/main-data-slot-sidebar-inset:0/div-data-slot-content-area:0/div-shape-12bbae35:0/div-shape-a9a56a97:0/div-shape-2f218dff:0/div-shape-641627bd:0/div-shape-e76cfa30:0/div-shape-b167bdec:0/div-shape-0edddc8f:0",
+                  "bounds": {
+                    "bottom": 984.0,
+                    "height": 24.5,
+                    "right": 516.5079345703125,
+                    "width": 220.5079345703125,
+                    "x": 296.0,
+                    "y": 959.5
+                  },
+                  "positiveViewCount": 12
+                }
+              ]
+            ],
+            "conversationPanel": {
+              "bottom": 1000.0,
+              "height": 954.0,
+              "right": 724.8049926757813,
+              "width": 444.80499267578125,
+              "x": 280.0,
+              "y": 46.0
+            },
+            "leadingHeaderLabel": {
+              "bottom": 29.0,
+              "height": 13.0,
+              "right": 387.65631103515625,
+              "width": 30.421899795532227,
+              "x": 357.2344055175781,
+              "y": 16.0
+            },
+            "main": {
+              "bottom": 1000.0,
+              "height": 1000.0,
+              "right": 1200.0,
+              "width": 920.0,
+              "x": 280.0,
+              "y": 0.0
+            },
+            "reviewPanel": {
+              "bottom": 1000.0,
+              "height": 954.0,
+              "right": 1200.0,
+              "width": 475.19500732421875,
+              "x": 724.8049926757813,
+              "y": 46.0
+            },
+            "sidebar": {
+              "bottom": 1000.0,
+              "height": 1000.0,
+              "right": 280.0,
+              "width": 280.0,
+              "x": 0.0,
+              "y": 0.0
+            },
+            "sidebarToggle": {
+              "bottom": 36.0,
+              "height": 28.0,
+              "right": 121.0,
+              "width": 28.0,
+              "x": 93.0,
+              "y": 8.0
+            }
+          },
+          "name": "changes-open",
+          "passed": true,
+          "screenshot": "/Users/danielraffel/Code/burl-palot-wt-semantic-restart/apps/desktop-burl/../../evidence/visual-parity/native-layout-transition-census-current/1200x1000-changes-open.png",
+          "screenshotWritten": true
+        },
+        {
+          "captureElapsedMs": 108,
+          "capturedFrames": 4,
+          "checks": {
+            "completeChatFrameWithinMain": true,
+            "completeChatFrameWithinViewport": true,
+            "composerAccessoriesVisible": true,
+            "composerAccessoriesWithinViewport": true,
+            "composerWithinBottomEdge": true,
+            "composerWithinMain": true,
+            "mainConsumesBottomEdge": true,
+            "mainConsumesRightEdge": true,
+            "mainWithinViewport": true,
+            "requiredGeometryPresent": true,
+            "reviewClosed": true,
+            "reviewConsumesBottomEdge": true,
+            "reviewConsumesRightEdge": true,
+            "toggleSlotDoesNotOverlapLeadingHeaderContent": true
+          },
+          "geometry": {
+            "appBar": {
+              "bottom": 46.0,
+              "height": 46.0,
+              "right": 1200.0,
+              "width": 920.0,
+              "x": 280.0,
+              "y": 0.0
+            },
+            "chatFrame": {
+              "bottom": 984.0,
+              "height": 136.5,
+              "right": 1183.0,
+              "width": 887.0,
+              "x": 296.0,
+              "y": 847.5
+            },
+            "composer": {
+              "bottom": 959.5,
+              "height": 112.0,
+              "right": 1183.0,
+              "width": 887.0,
+              "x": 296.0,
+              "y": 847.5
+            },
+            "composerAccessories": [
+              [
+                {
+                  "anchor": "observed-dom:dom/html-shape-704d0864:0/body-shape-d65c892b:0/div-id-root:0/div-shape-74caabae:0/div-shape-20ec5713:0/div-data-slot-sidebar-wrapper:0/main-data-slot-sidebar-inset:0/div-data-slot-content-area:0/div-shape-12bbae35:0/div-shape-a9a56a97:0/div-shape-2f218dff:0/div-shape-641627bd:0/div-shape-e76cfa30:0/div-shape-b167bdec:0/div-shape-0edddc8f:0",
+                  "bounds": {
+                    "bottom": 984.0,
+                    "height": 24.5,
+                    "right": 516.5079345703125,
+                    "width": 220.5079345703125,
+                    "x": 296.0,
+                    "y": 959.5
+                  },
+                  "positiveViewCount": 12
+                }
+              ]
+            ],
+            "leadingHeaderLabel": {
+              "bottom": 29.0,
+              "height": 13.0,
+              "right": 387.65631103515625,
+              "width": 30.421899795532227,
+              "x": 357.2344055175781,
+              "y": 16.0
+            },
+            "main": {
+              "bottom": 1000.0,
+              "height": 1000.0,
+              "right": 1200.0,
+              "width": 920.0,
+              "x": 280.0,
+              "y": 0.0
+            },
+            "reviewPanel": {
+              "bottom": 1000.0,
+              "height": 954.0,
+              "right": 1200.0,
+              "width": 1.0,
+              "x": 1199.0,
+              "y": 46.0
+            },
+            "sidebar": {
+              "bottom": 1000.0,
+              "height": 1000.0,
+              "right": 280.0,
+              "width": 280.0,
+              "x": 0.0,
+              "y": 0.0
+            },
+            "sidebarToggle": {
+              "bottom": 36.0,
+              "height": 28.0,
+              "right": 121.0,
+              "width": 28.0,
+              "x": 93.0,
+              "y": 8.0
+            }
+          },
+          "name": "changes-reclosed",
+          "passed": true,
+          "screenshot": "/Users/danielraffel/Code/burl-palot-wt-semantic-restart/apps/desktop-burl/../../evidence/visual-parity/native-layout-transition-census-current/1200x1000-changes-reclosed.png",
+          "screenshotWritten": true
+        }
+      ],
+      "transitions": [
+        {
+          "action": "sidebar.toggle",
+          "actionFired": true,
+          "actionableAncestor": "observed-dom:dom/html-shape-704d0864:0/body-shape-d65c892b:0/div-id-root:0/div-shape-74caabae:0/div-shape-20ec5713:0/div-data-slot-sidebar-wrapper:0/div-shape-101f5816:0/button-data-slot-tooltip-trigger:0",
+          "downDispatched": true,
+          "outcomeAfter": 1,
+          "outcomeBefore": 0,
+          "passed": true,
+          "pressTarget": "observed-dom:dom/html-shape-704d0864:0/body-shape-d65c892b:0/div-id-root:0/div-shape-74caabae:0/div-shape-20ec5713:0/div-data-slot-sidebar-wrapper:0/div-shape-101f5816:0/button-data-slot-tooltip-trigger:0",
+          "releaseTarget": "observed-dom:dom/html-shape-704d0864:0/body-shape-d65c892b:0/div-id-root:0/div-shape-74caabae:0/div-shape-20ec5713:0/div-data-slot-sidebar-wrapper:0/div-shape-101f5816:0/button-data-slot-tooltip-trigger:0",
+          "upDispatched": true,
+          "x": 107.0,
+          "y": 22.0
+        },
+        {
+          "action": "sidebar.toggle",
+          "actionFired": true,
+          "actionableAncestor": "observed-dom:dom/html-shape-704d0864:0/body-shape-d65c892b:0/div-id-root:0/div-shape-74caabae:0/div-shape-20ec5713:0/div-data-slot-sidebar-wrapper:0/div-shape-101f5816:0/button-data-slot-tooltip-trigger:0",
+          "downDispatched": true,
+          "outcomeAfter": 2,
+          "outcomeBefore": 1,
+          "passed": true,
+          "pressTarget": "observed-dom:dom/html-shape-704d0864:0/body-shape-d65c892b:0/div-id-root:0/div-shape-74caabae:0/div-shape-20ec5713:0/div-data-slot-sidebar-wrapper:0/div-shape-101f5816:0/button-data-slot-tooltip-trigger:0",
+          "releaseTarget": "observed-dom:dom/html-shape-704d0864:0/body-shape-d65c892b:0/div-id-root:0/div-shape-74caabae:0/div-shape-20ec5713:0/div-data-slot-sidebar-wrapper:0/div-shape-101f5816:0/button-data-slot-tooltip-trigger:0",
+          "upDispatched": true,
+          "x": 107.0,
+          "y": 22.0
+        },
+        {
+          "action": "review.panel.toggle",
+          "actionFired": true,
+          "actionableAncestor": "observed-dom:dom/html-shape-704d0864:0/body-shape-d65c892b:0/div-id-root:0/div-shape-74caabae:0/div-shape-20ec5713:0/div-data-slot-sidebar-wrapper:0/main-data-slot-sidebar-inset:0/div-data-slot-app-bar:0/div-shape-d1a99e95:0/div-shape-91386c77:0/div-shape-424a2145:0/button-data-slot-tooltip-trigger:0",
+          "downDispatched": true,
+          "outcomeAfter": 1,
+          "outcomeBefore": 0,
+          "passed": true,
+          "pressTarget": "observed-dom:dom/html-shape-704d0864:0/body-shape-d65c892b:0/div-id-root:0/div-shape-74caabae:0/div-shape-20ec5713:0/div-data-slot-sidebar-wrapper:0/main-data-slot-sidebar-inset:0/div-data-slot-app-bar:0/div-shape-d1a99e95:0/div-shape-91386c77:0/div-shape-424a2145:0/button-data-slot-tooltip-trigger:0",
+          "releaseTarget": "observed-dom:dom/html-shape-704d0864:0/body-shape-d65c892b:0/div-id-root:0/div-shape-74caabae:0/div-shape-20ec5713:0/div-data-slot-sidebar-wrapper:0/main-data-slot-sidebar-inset:0/div-data-slot-app-bar:0/div-shape-d1a99e95:0/div-shape-91386c77:0/div-shape-424a2145:0/button-data-slot-tooltip-trigger:0",
+          "upDispatched": true,
+          "x": 808.1968383789063,
+          "y": 22.5
+        },
+        {
+          "action": "review.panel.toggle",
+          "actionFired": true,
+          "actionableAncestor": "observed-dom:dom/html-shape-704d0864:0/body-shape-d65c892b:0/div-id-root:0/div-shape-74caabae:0/div-shape-20ec5713:0/div-data-slot-sidebar-wrapper:0/main-data-slot-sidebar-inset:0/div-data-slot-app-bar:0/div-shape-d1a99e95:0/div-shape-91386c77:0/div-shape-424a2145:0/button-data-slot-tooltip-trigger:0",
+          "downDispatched": true,
+          "outcomeAfter": 2,
+          "outcomeBefore": 1,
+          "passed": true,
+          "pressTarget": "observed-dom:dom/html-shape-704d0864:0/body-shape-d65c892b:0/div-id-root:0/div-shape-74caabae:0/div-shape-20ec5713:0/div-data-slot-sidebar-wrapper:0/main-data-slot-sidebar-inset:0/div-data-slot-app-bar:0/div-shape-d1a99e95:0/div-shape-91386c77:0/div-shape-424a2145:0/button-data-slot-tooltip-trigger:0",
+          "releaseTarget": "observed-dom:dom/html-shape-704d0864:0/body-shape-d65c892b:0/div-id-root:0/div-shape-74caabae:0/div-shape-20ec5713:0/div-data-slot-sidebar-wrapper:0/main-data-slot-sidebar-inset:0/div-data-slot-app-bar:0/div-shape-d1a99e95:0/div-shape-91386c77:0/div-shape-424a2145:0/button-data-slot-tooltip-trigger:0",
+          "upDispatched": true,
+          "x": 808.1968383789063,
+          "y": 22.5
+        }
+      ]
+    },
+    {
+      "label": "280x421",
+      "native": {
+        "hostedHeight": 421.0,
+        "hostedWidth": 280.0,
+        "windowHeight": 421.0,
+        "windowWidth": 280.0
+      },
+      "nativeBoundsPassed": true,
+      "requested": {
+        "height": 421.0,
+        "width": 280.0
+      },
+      "states": [
+        {
+          "captureElapsedMs": 54,
+          "capturedFrames": 4,
+          "checks": {
+            "completeChatFrameWithinMain": true,
+            "completeChatFrameWithinViewport": true,
+            "composerAccessoriesVisible": true,
+            "composerAccessoriesWithinViewport": true,
+            "composerWithinBottomEdge": true,
+            "composerWithinMain": true,
+            "mainConsumesBottomEdge": true,
+            "mainConsumesRightEdge": true,
+            "mainWithinViewport": true,
+            "requiredGeometryPresent": true,
+            "reviewClosed": true,
+            "reviewConsumesBottomEdge": true,
+            "reviewConsumesRightEdge": true,
+            "toggleSlotDoesNotOverlapLeadingHeaderContent": true
+          },
+          "geometry": {
+            "appBar": {
+              "bottom": 46.0,
+              "height": 46.0,
+              "right": 280.0,
+              "width": 268.0,
+              "x": 12.0,
+              "y": 0.0
+            },
+            "chatFrame": {
+              "bottom": 347.0,
+              "height": 136.5,
+              "right": 279.0,
+              "width": 267.0,
+              "x": 12.0,
+              "y": 210.5
+            },
+            "composer": {
+              "bottom": 396.5,
+              "height": 186.0,
+              "right": 279.0,
+              "width": 267.0,
+              "x": 12.0,
+              "y": 210.5
+            },
+            "composerAccessories": [
+              [
+                {
+                  "anchor": "observed-dom:dom/html-shape-704d0864:0/body-shape-d65c892b:0/div-id-root:0/div-shape-74caabae:0/div-shape-20ec5713:0/div-data-slot-sidebar-wrapper:0/main-data-slot-sidebar-inset:0/div-data-slot-content-area:0/div-shape-12bbae35:0/div-shape-a9a56a97:0/div-shape-2f218dff:0/div-shape-641627bd:0/div-shape-e76cfa30:0/div-shape-b167bdec:0/div-shape-0edddc8f:0",
+                  "bounds": {
+                    "bottom": 421.0,
+                    "height": 24.5,
+                    "right": 232.50790405273438,
+                    "width": 220.50790405273438,
+                    "x": 12.0,
+                    "y": 396.5
+                  },
+                  "positiveViewCount": 12
+                }
+              ]
+            ],
+            "leadingHeaderLabel": {
+              "bottom": 31.5,
+              "height": 18.0,
+              "right": 220.96090698242188,
+              "width": 20.960899353027344,
+              "x": 200.0,
+              "y": 13.5
+            },
+            "main": {
+              "bottom": 421.0,
+              "height": 421.0,
+              "right": 280.0,
+              "width": 268.0,
+              "x": 12.0,
+              "y": 0.0
+            },
+            "reviewPanel": {
+              "bottom": 421.0,
+              "height": 375.0,
+              "right": 280.0,
+              "width": 1.0,
+              "x": 279.0,
+              "y": 46.0
+            },
+            "sidebar": {
+              "bottom": 0.0,
+              "height": 0.0,
+              "right": 0.0,
+              "width": 0.0,
+              "x": 0.0,
+              "y": 0.0
+            },
+            "sidebarToggle": {
+              "bottom": 36.0,
+              "height": 28.0,
+              "right": 121.0,
+              "width": 28.0,
+              "x": 93.0,
+              "y": 8.0
+            }
+          },
+          "name": "sidebar-open",
+          "passed": true,
+          "screenshot": "/Users/danielraffel/Code/burl-palot-wt-semantic-restart/apps/desktop-burl/../../evidence/visual-parity/native-layout-transition-census-current/280x421-sidebar-open.png",
+          "screenshotWritten": true
+        },
+        {
+          "captureElapsedMs": 32,
+          "capturedFrames": 4,
+          "checks": {
+            "completeChatFrameWithinMain": true,
+            "completeChatFrameWithinViewport": true,
+            "composerAccessoriesVisible": true,
+            "composerAccessoriesWithinViewport": true,
+            "composerWithinBottomEdge": true,
+            "composerWithinMain": true,
+            "mainConsumesBottomEdge": true,
+            "mainConsumesRightEdge": true,
+            "mainWithinViewport": true,
+            "requiredGeometryPresent": true,
+            "reviewClosed": true,
+            "reviewConsumesBottomEdge": true,
+            "reviewConsumesRightEdge": true,
+            "sidebarClosed": true,
+            "toggleSlotDoesNotOverlapLeadingHeaderContent": true
+          },
+          "geometry": {
+            "appBar": {
+              "bottom": 46.0,
+              "height": 46.0,
+              "right": 280.0,
+              "width": 268.0,
+              "x": 12.0,
+              "y": 0.0
+            },
+            "chatFrame": {
+              "bottom": 347.0,
+              "height": 136.5,
+              "right": 279.0,
+              "width": 267.0,
+              "x": 12.0,
+              "y": 210.5
+            },
+            "composer": {
+              "bottom": 396.5,
+              "height": 186.0,
+              "right": 279.0,
+              "width": 267.0,
+              "x": 12.0,
+              "y": 210.5
+            },
+            "composerAccessories": [
+              [
+                {
+                  "anchor": "observed-dom:dom/html-shape-704d0864:0/body-shape-d65c892b:0/div-id-root:0/div-shape-74caabae:0/div-shape-20ec5713:0/div-data-slot-sidebar-wrapper:0/main-data-slot-sidebar-inset:0/div-data-slot-content-area:0/div-shape-12bbae35:0/div-shape-a9a56a97:0/div-shape-2f218dff:0/div-shape-641627bd:0/div-shape-e76cfa30:0/div-shape-b167bdec:0/div-shape-0edddc8f:0",
+                  "bounds": {
+                    "bottom": 421.0,
+                    "height": 24.5,
+                    "right": 232.50790405273438,
+                    "width": 220.50790405273438,
+                    "x": 12.0,
+                    "y": 396.5
+                  },
+                  "positiveViewCount": 12
+                }
+              ]
+            ],
+            "leadingHeaderLabel": {
+              "bottom": 31.5,
+              "height": 18.0,
+              "right": 220.96090698242188,
+              "width": 20.960899353027344,
+              "x": 200.0,
+              "y": 13.5
+            },
+            "main": {
+              "bottom": 421.0,
+              "height": 421.0,
+              "right": 280.0,
+              "width": 268.0,
+              "x": 12.0,
+              "y": 0.0
+            },
+            "reviewPanel": {
+              "bottom": 421.0,
+              "height": 375.0,
+              "right": 280.0,
+              "width": 1.0,
+              "x": 279.0,
+              "y": 46.0
+            },
+            "sidebar": {
+              "bottom": 0.0,
+              "height": 0.0,
+              "right": 0.0,
+              "width": 0.0,
+              "x": 0.0,
+              "y": 0.0
+            },
+            "sidebarToggle": {
+              "bottom": 36.0,
+              "height": 28.0,
+              "right": 121.0,
+              "width": 28.0,
+              "x": 93.0,
+              "y": 8.0
+            }
+          },
+          "name": "sidebar-closed",
+          "passed": true,
+          "screenshot": "/Users/danielraffel/Code/burl-palot-wt-semantic-restart/apps/desktop-burl/../../evidence/visual-parity/native-layout-transition-census-current/280x421-sidebar-closed.png",
+          "screenshotWritten": true
+        },
+        {
+          "captureElapsedMs": 29,
+          "capturedFrames": 4,
+          "checks": {
+            "completeChatFrameWithinMain": true,
+            "completeChatFrameWithinViewport": true,
+            "composerAccessoriesVisible": true,
+            "composerAccessoriesWithinViewport": true,
+            "composerWithinBottomEdge": true,
+            "composerWithinMain": true,
+            "mainConsumesBottomEdge": true,
+            "mainConsumesRightEdge": true,
+            "mainWithinViewport": true,
+            "requiredGeometryPresent": true,
+            "reviewClosed": true,
+            "reviewConsumesBottomEdge": true,
+            "reviewConsumesRightEdge": true,
+            "toggleSlotDoesNotOverlapLeadingHeaderContent": true
+          },
+          "geometry": {
+            "appBar": {
+              "bottom": 46.0,
+              "height": 46.0,
+              "right": 280.0,
+              "width": 268.0,
+              "x": 12.0,
+              "y": 0.0
+            },
+            "chatFrame": {
+              "bottom": 347.0,
+              "height": 136.5,
+              "right": 279.0,
+              "width": 267.0,
+              "x": 12.0,
+              "y": 210.5
+            },
+            "composer": {
+              "bottom": 396.5,
+              "height": 186.0,
+              "right": 279.0,
+              "width": 267.0,
+              "x": 12.0,
+              "y": 210.5
+            },
+            "composerAccessories": [
+              [
+                {
+                  "anchor": "observed-dom:dom/html-shape-704d0864:0/body-shape-d65c892b:0/div-id-root:0/div-shape-74caabae:0/div-shape-20ec5713:0/div-data-slot-sidebar-wrapper:0/main-data-slot-sidebar-inset:0/div-data-slot-content-area:0/div-shape-12bbae35:0/div-shape-a9a56a97:0/div-shape-2f218dff:0/div-shape-641627bd:0/div-shape-e76cfa30:0/div-shape-b167bdec:0/div-shape-0edddc8f:0",
+                  "bounds": {
+                    "bottom": 421.0,
+                    "height": 24.5,
+                    "right": 232.50790405273438,
+                    "width": 220.50790405273438,
+                    "x": 12.0,
+                    "y": 396.5
+                  },
+                  "positiveViewCount": 12
+                }
+              ]
+            ],
+            "leadingHeaderLabel": {
+              "bottom": 31.5,
+              "height": 18.0,
+              "right": 220.96090698242188,
+              "width": 20.960899353027344,
+              "x": 200.0,
+              "y": 13.5
+            },
+            "main": {
+              "bottom": 421.0,
+              "height": 421.0,
+              "right": 280.0,
+              "width": 268.0,
+              "x": 12.0,
+              "y": 0.0
+            },
+            "reviewPanel": {
+              "bottom": 421.0,
+              "height": 375.0,
+              "right": 280.0,
+              "width": 1.0,
+              "x": 279.0,
+              "y": 46.0
+            },
+            "sidebar": {
+              "bottom": 0.0,
+              "height": 0.0,
+              "right": 0.0,
+              "width": 0.0,
+              "x": 0.0,
+              "y": 0.0
+            },
+            "sidebarToggle": {
+              "bottom": 36.0,
+              "height": 28.0,
+              "right": 121.0,
+              "width": 28.0,
+              "x": 93.0,
+              "y": 8.0
+            }
+          },
+          "name": "sidebar-reopened",
+          "passed": true,
+          "screenshot": "/Users/danielraffel/Code/burl-palot-wt-semantic-restart/apps/desktop-burl/../../evidence/visual-parity/native-layout-transition-census-current/280x421-sidebar-reopened.png",
+          "screenshotWritten": true
+        },
+        {
+          "captureElapsedMs": 33,
+          "capturedFrames": 4,
+          "checks": {
+            "completeChatFrameWithinMain": true,
+            "completeChatFrameWithinViewport": true,
+            "composerAccessoriesVisible": true,
+            "composerAccessoriesWithinViewport": true,
+            "composerWithinBottomEdge": true,
+            "composerWithinMain": true,
+            "mainConsumesBottomEdge": true,
+            "mainConsumesRightEdge": true,
+            "mainWithinViewport": true,
+            "requiredGeometryPresent": true,
+            "reviewConsumesBottomEdge": true,
+            "reviewConsumesRightEdge": true,
+            "reviewOpen": true,
+            "toggleSlotDoesNotOverlapLeadingHeaderContent": true
+          },
+          "geometry": {
+            "appBar": {
+              "bottom": 46.0,
+              "height": 46.0,
+              "right": 280.0,
+              "width": 268.0,
+              "x": 12.0,
+              "y": 0.0
+            },
+            "chatFrame": {
+              "bottom": 347.0,
+              "height": 136.5,
+              "right": 232.50790405273438,
+              "width": 220.50790405273438,
+              "x": 12.0,
+              "y": 210.5
+            },
+            "composer": {
+              "bottom": 396.5,
+              "height": 186.0,
+              "right": 12.0,
+              "width": 0.0,
+              "x": 12.0,
+              "y": 210.5
+            },
+            "composerAccessories": [
+              [
+                {
+                  "anchor": "observed-dom:dom/html-shape-704d0864:0/body-shape-d65c892b:0/div-id-root:0/div-shape-74caabae:0/div-shape-20ec5713:0/div-data-slot-sidebar-wrapper:0/main-data-slot-sidebar-inset:0/div-data-slot-content-area:0/div-shape-12bbae35:0/div-shape-a9a56a97:0/div-shape-2f218dff:0/div-shape-641627bd:0/div-shape-e76cfa30:0/div-shape-b167bdec:0/div-shape-0edddc8f:0",
+                  "bounds": {
+                    "bottom": 421.0,
+                    "height": 24.5,
+                    "right": 232.50790405273438,
+                    "width": 220.50790405273438,
+                    "x": 12.0,
+                    "y": 396.5
+                  },
+                  "positiveViewCount": 12
+                }
+              ]
+            ],
+            "leadingHeaderLabel": {
+              "bottom": 31.5,
+              "height": 18.0,
+              "right": 220.96090698242188,
+              "width": 20.960899353027344,
+              "x": 200.0,
+              "y": 13.5
+            },
+            "main": {
+              "bottom": 421.0,
+              "height": 421.0,
+              "right": 280.0,
+              "width": 268.0,
+              "x": 12.0,
+              "y": 0.0
+            },
+            "reviewPanel": {
+              "bottom": 421.0,
+              "height": 375.0,
+              "right": 280.0,
+              "width": 268.0,
+              "x": 12.0,
+              "y": 46.0
+            },
+            "sidebar": {
+              "bottom": 0.0,
+              "height": 0.0,
+              "right": 0.0,
+              "width": 0.0,
+              "x": 0.0,
+              "y": 0.0
+            },
+            "sidebarToggle": {
+              "bottom": 36.0,
+              "height": 28.0,
+              "right": 121.0,
+              "width": 28.0,
+              "x": 93.0,
+              "y": 8.0
+            }
+          },
+          "name": "changes-open",
+          "passed": true,
+          "screenshot": "/Users/danielraffel/Code/burl-palot-wt-semantic-restart/apps/desktop-burl/../../evidence/visual-parity/native-layout-transition-census-current/280x421-changes-open.png",
+          "screenshotWritten": true
+        },
+        {
+          "captureElapsedMs": 31,
+          "capturedFrames": 4,
+          "checks": {
+            "completeChatFrameWithinMain": true,
+            "completeChatFrameWithinViewport": true,
+            "composerAccessoriesVisible": true,
+            "composerAccessoriesWithinViewport": true,
+            "composerWithinBottomEdge": true,
+            "composerWithinMain": true,
+            "mainConsumesBottomEdge": true,
+            "mainConsumesRightEdge": true,
+            "mainWithinViewport": true,
+            "requiredGeometryPresent": true,
+            "reviewClosed": true,
+            "reviewConsumesBottomEdge": true,
+            "reviewConsumesRightEdge": true,
+            "toggleSlotDoesNotOverlapLeadingHeaderContent": true
+          },
+          "geometry": {
+            "appBar": {
+              "bottom": 46.0,
+              "height": 46.0,
+              "right": 280.0,
+              "width": 268.0,
+              "x": 12.0,
+              "y": 0.0
+            },
+            "chatFrame": {
+              "bottom": 347.0,
+              "height": 136.5,
+              "right": 279.0,
+              "width": 267.0,
+              "x": 12.0,
+              "y": 210.5
+            },
+            "composer": {
+              "bottom": 396.5,
+              "height": 186.0,
+              "right": 279.0,
+              "width": 267.0,
+              "x": 12.0,
+              "y": 210.5
+            },
+            "composerAccessories": [
+              [
+                {
+                  "anchor": "observed-dom:dom/html-shape-704d0864:0/body-shape-d65c892b:0/div-id-root:0/div-shape-74caabae:0/div-shape-20ec5713:0/div-data-slot-sidebar-wrapper:0/main-data-slot-sidebar-inset:0/div-data-slot-content-area:0/div-shape-12bbae35:0/div-shape-a9a56a97:0/div-shape-2f218dff:0/div-shape-641627bd:0/div-shape-e76cfa30:0/div-shape-b167bdec:0/div-shape-0edddc8f:0",
+                  "bounds": {
+                    "bottom": 421.0,
+                    "height": 24.5,
+                    "right": 232.50790405273438,
+                    "width": 220.50790405273438,
+                    "x": 12.0,
+                    "y": 396.5
+                  },
+                  "positiveViewCount": 12
+                }
+              ]
+            ],
+            "leadingHeaderLabel": {
+              "bottom": 31.5,
+              "height": 18.0,
+              "right": 220.96090698242188,
+              "width": 20.960899353027344,
+              "x": 200.0,
+              "y": 13.5
+            },
+            "main": {
+              "bottom": 421.0,
+              "height": 421.0,
+              "right": 280.0,
+              "width": 268.0,
+              "x": 12.0,
+              "y": 0.0
+            },
+            "reviewPanel": {
+              "bottom": 421.0,
+              "height": 375.0,
+              "right": 280.0,
+              "width": 1.0,
+              "x": 279.0,
+              "y": 46.0
+            },
+            "sidebar": {
+              "bottom": 0.0,
+              "height": 0.0,
+              "right": 0.0,
+              "width": 0.0,
+              "x": 0.0,
+              "y": 0.0
+            },
+            "sidebarToggle": {
+              "bottom": 36.0,
+              "height": 28.0,
+              "right": 121.0,
+              "width": 28.0,
+              "x": 93.0,
+              "y": 8.0
+            }
+          },
+          "name": "changes-reclosed",
+          "passed": true,
+          "screenshot": "/Users/danielraffel/Code/burl-palot-wt-semantic-restart/apps/desktop-burl/../../evidence/visual-parity/native-layout-transition-census-current/280x421-changes-reclosed.png",
+          "screenshotWritten": true
+        }
+      ],
+      "transitions": [
+        {
+          "action": "sidebar.toggle",
+          "actionFired": true,
+          "actionableAncestor": "observed-dom:dom/html-shape-704d0864:0/body-shape-d65c892b:0/div-id-root:0/div-shape-74caabae:0/div-shape-20ec5713:0/div-data-slot-sidebar-wrapper:0/div-shape-101f5816:0/button-data-slot-tooltip-trigger:0",
+          "downDispatched": true,
+          "outcomeAfter": 1,
+          "outcomeBefore": 0,
+          "passed": true,
+          "pressTarget": "observed-dom:dom/html-shape-704d0864:0/body-shape-d65c892b:0/div-id-root:0/div-shape-74caabae:0/div-shape-20ec5713:0/div-data-slot-sidebar-wrapper:0/div-shape-101f5816:0/button-data-slot-tooltip-trigger:0",
+          "releaseTarget": "observed-dom:dom/html-shape-704d0864:0/body-shape-d65c892b:0/div-id-root:0/div-shape-74caabae:0/div-shape-20ec5713:0/div-data-slot-sidebar-wrapper:0/div-shape-101f5816:0/button-data-slot-tooltip-trigger:0",
+          "upDispatched": true,
+          "x": 107.0,
+          "y": 22.0
+        },
+        {
+          "action": "sidebar.toggle",
+          "actionFired": true,
+          "actionableAncestor": "observed-dom:dom/html-shape-704d0864:0/body-shape-d65c892b:0/div-id-root:0/div-shape-74caabae:0/div-shape-20ec5713:0/div-data-slot-sidebar-wrapper:0/div-shape-101f5816:0/button-data-slot-tooltip-trigger:0",
+          "downDispatched": true,
+          "outcomeAfter": 2,
+          "outcomeBefore": 1,
+          "passed": true,
+          "pressTarget": "observed-dom:dom/html-shape-704d0864:0/body-shape-d65c892b:0/div-id-root:0/div-shape-74caabae:0/div-shape-20ec5713:0/div-data-slot-sidebar-wrapper:0/div-shape-101f5816:0/button-data-slot-tooltip-trigger:0",
+          "releaseTarget": "observed-dom:dom/html-shape-704d0864:0/body-shape-d65c892b:0/div-id-root:0/div-shape-74caabae:0/div-shape-20ec5713:0/div-data-slot-sidebar-wrapper:0/div-shape-101f5816:0/button-data-slot-tooltip-trigger:0",
+          "upDispatched": true,
+          "x": 107.0,
+          "y": 22.0
+        },
+        {
+          "action": "review.panel.toggle",
+          "actionFired": true,
+          "actionableAncestor": "observed-dom:dom/html-shape-704d0864:0/body-shape-d65c892b:0/div-id-root:0/div-shape-74caabae:0/div-shape-20ec5713:0/div-data-slot-sidebar-wrapper:0/main-data-slot-sidebar-inset:0/div-data-slot-app-bar:0/div-shape-d1a99e95:0/div-shape-91386c77:0/div-shape-424a2145:0/button-data-slot-tooltip-trigger:0",
+          "downDispatched": true,
+          "outcomeAfter": 1,
+          "outcomeBefore": 0,
+          "passed": true,
+          "pressTarget": "observed-dom:dom/html-shape-704d0864:0/body-shape-d65c892b:0/div-id-root:0/div-shape-74caabae:0/div-shape-20ec5713:0/div-data-slot-sidebar-wrapper:0/main-data-slot-sidebar-inset:0/div-data-slot-app-bar:0/div-shape-d1a99e95:0/div-shape-91386c77:0/div-shape-424a2145:0/button-data-slot-tooltip-trigger:0",
+          "releaseTarget": "observed-dom:dom/html-shape-704d0864:0/body-shape-d65c892b:0/div-id-root:0/div-shape-74caabae:0/div-shape-20ec5713:0/div-data-slot-sidebar-wrapper:0/main-data-slot-sidebar-inset:0/div-data-slot-app-bar:0/div-shape-d1a99e95:0/div-shape-91386c77:0/div-shape-424a2145:0/button-data-slot-tooltip-trigger:0",
+          "upDispatched": true,
+          "x": 208.46095275878906,
+          "y": 22.5
+        },
+        {
+          "action": "review.panel.toggle",
+          "actionFired": true,
+          "actionableAncestor": "observed-dom:dom/html-shape-704d0864:0/body-shape-d65c892b:0/div-id-root:0/div-shape-74caabae:0/div-shape-20ec5713:0/div-data-slot-sidebar-wrapper:0/main-data-slot-sidebar-inset:0/div-data-slot-app-bar:0/div-shape-d1a99e95:0/div-shape-91386c77:0/div-shape-424a2145:0/button-data-slot-tooltip-trigger:0",
+          "downDispatched": true,
+          "outcomeAfter": 2,
+          "outcomeBefore": 1,
+          "passed": true,
+          "pressTarget": "observed-dom:dom/html-shape-704d0864:0/body-shape-d65c892b:0/div-id-root:0/div-shape-74caabae:0/div-shape-20ec5713:0/div-data-slot-sidebar-wrapper:0/main-data-slot-sidebar-inset:0/div-data-slot-app-bar:0/div-shape-d1a99e95:0/div-shape-91386c77:0/div-shape-424a2145:0/button-data-slot-tooltip-trigger:0",
+          "releaseTarget": "observed-dom:dom/html-shape-704d0864:0/body-shape-d65c892b:0/div-id-root:0/div-shape-74caabae:0/div-shape-20ec5713:0/div-data-slot-sidebar-wrapper:0/main-data-slot-sidebar-inset:0/div-data-slot-app-bar:0/div-shape-d1a99e95:0/div-shape-91386c77:0/div-shape-424a2145:0/button-data-slot-tooltip-trigger:0",
+          "upDispatched": true,
+          "x": 208.46095275878906,
+          "y": 22.5
+        }
+      ]
+    }
+  ]
+}

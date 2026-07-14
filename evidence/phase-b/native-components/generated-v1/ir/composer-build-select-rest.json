@@ -62,6 +62,7 @@
       "whiteSpace": "nowrap",
       "textOverflow": "clip",
       "position": "static",
+      "width": 67.102,
       "height": 28
     },
     "visualSkin": {
@@ -155,6 +156,7 @@
           "borderBottomLeftRadius": 0,
           "cursor": "default",
           "position": "static",
+          "width": 31.102,
           "height": 18
         },
         "attributes": {
@@ -231,6 +233,7 @@
               "whiteSpace": "nowrap",
               "textOverflow": "clip",
               "position": "static",
+              "width": 31.102,
               "height": 18
             },
             "attributes": {
@@ -248,7 +251,7 @@
         ]
       },
       {
-        "type": "view",
+        "type": "text",
         "name": "html:1/body:2/div[root]:3/div:1/div:1/div[sidebar-wrapper]:1/main[sidebar-inset]:2/div[content-area]:2/div:1/div:1/div:1/div:1/div:2/div:1/div:1/form:2/div[input-group]:1/div[input-group-addon]:2/div:1/div:2/button[base-ui-_r_43_]:1/svg:2",
         "content": "▼",
         "layout": {
@@ -300,6 +303,7 @@
           "whiteSpace": "nowrap",
           "textOverflow": "clip",
           "position": "static",
+          "width": 16,
           "height": 16
         },
         "attributes": {

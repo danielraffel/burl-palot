@@ -1,0 +1,89 @@
+{
+  "schema": "burl-source-interaction-contract-candidate-v1",
+  "status": "candidate-only",
+  "canonicalActionId": null,
+  "source": {
+    "revision": "fd63a75dad3d0e8555ba22a47e720d285889fbf0",
+    "captureManifest": "evidence/phase-b/state-captures/composer-model-selection.candidate.interactions.json",
+    "captureEvidence": "evidence/phase-b/source-interaction-states/generated-v5/composer/model-selection/evidence.json"
+  },
+  "operationCandidate": {
+    "kind": "combined-provider-model-selection",
+    "trigger": {
+      "dataSlot": "searchable-list-popover-trigger",
+      "observedInitialText": "Claude Opus 4.6"
+    },
+    "selectedItem": {
+      "observedText": "Claude Sonnet 4",
+      "providerGroupText": "Anthropic"
+    },
+    "payloadCandidate": {
+      "providerID": "anthropic",
+      "modelID": "claude-sonnet-4-20250514"
+    }
+  },
+  "payloadProvenance": [
+    {
+      "field": "providerID",
+      "sourcePath": "apps/desktop/src/renderer/lib/mock-data.ts",
+      "sourceSha256": "a090a275f72eee7ea9df04e1d70bce5cb5fd88a5cb7705ca4b9dbfdb61741ee5",
+      "lines": [160, 169],
+      "derivation": "provider id and selected model display name are authored in the captured source revision"
+    },
+    {
+      "field": "modelID",
+      "sourcePath": "apps/desktop/src/renderer/lib/mock-data.ts",
+      "sourceSha256": "a090a275f72eee7ea9df04e1d70bce5cb5fd88a5cb7705ca4b9dbfdb61741ee5",
+      "lines": [166, 169],
+      "derivation": "model map key and model id are identical in the captured source revision"
+    },
+    {
+      "field": "payload-shape",
+      "sourcePath": "apps/desktop/src/renderer/components/chat/prompt-toolbar.tsx",
+      "sourceSha256": "0434439494df3ae8dc18ac778599d5524a0518b4d6006f512df08ec64f46bb4e",
+      "lines": [151, 162],
+      "derivation": "the source flattens each row into providerID, modelID, displayName, and providerName"
+    },
+    {
+      "field": "selection-semantics",
+      "sourcePath": "apps/desktop/src/renderer/components/chat/prompt-toolbar.tsx",
+      "sourceSha256": "0434439494df3ae8dc18ac778599d5524a0518b4d6006f512df08ec64f46bb4e",
+      "lines": [213, 230],
+      "derivation": "the selected combined value is parsed to a model reference and the popover is closed"
+    }
+  ],
+  "semanticPostconditions": [
+    {
+      "state": "closed",
+      "capture": "evidence/phase-b/source-interaction-states/generated-v5/composer/model-selection/initial/source.json",
+      "triggerAriaExpanded": "false",
+      "popoverCount": 0
+    },
+    {
+      "state": "open",
+      "capture": "evidence/phase-b/source-interaction-states/generated-v5/composer/model-selection/open-model-menu/source.json",
+      "triggerAriaExpanded": "true",
+      "popoverCount": 1
+    },
+    {
+      "state": "selected",
+      "capture": "evidence/phase-b/source-interaction-states/generated-v5/composer/model-selection/select-observed-model/source.json",
+      "triggerAriaExpanded": "false",
+      "popoverCount": 0,
+      "clickedObservedText": "Claude Sonnet 4"
+    }
+  ],
+  "providerControlAudit": {
+    "independentProviderControlExposed": false,
+    "exactAbsence": "No independent provider trigger or provider-only selection control is exposed in the captured composer state. Provider identity appears as grouping and secondary text inside the combined model picker, and selection emits the model reference containing both providerID and modelID.",
+    "supportingEvidence": [
+      "evidence/phase-b/source-interaction-states/generated-v3/composer/model/evidence/interactions.json",
+      "apps/desktop/src/renderer/components/chat/prompt-toolbar.tsx:151-178",
+      "apps/desktop/src/renderer/components/chat/prompt-toolbar.tsx:336-354"
+    ]
+  },
+  "promotion": {
+    "allowed": false,
+    "reason": "This source-evidence lane records a candidate payload and postconditions only; action naming and canonical promotion require separate review."
+  }
+}

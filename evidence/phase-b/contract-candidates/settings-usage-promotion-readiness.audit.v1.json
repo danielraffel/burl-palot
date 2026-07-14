@@ -1,0 +1,171 @@
+{
+  "schema": "burl-import-promotion-readiness-audit-v1",
+  "status": "red",
+  "scope": [
+    "evidence/phase-b/contract-candidates/settings-navigation.candidate.v1.json",
+    "evidence/phase-b/contract-candidates/usage-popover.candidate.v1.json"
+  ],
+  "frameworkInspection": {
+    "worktree": "../burl-wt-native-migration-feasibility",
+    "head": "9e6afe117622fe74c9114785f5eadd09c1596ae0",
+    "inspectionMode": "live-dirty-worktree",
+    "conclusion": "No independently missing framework primitive was found in this bounded audit. Existing generic APIs cover exact application-action binding, application-state transitions, anchored overlays, overlay click routing, focus trapping, outside-click dismissal, Escape dismissal, and explicit accessible names. Promotion remains RED where the source candidate lacks reviewed contract evidence."
+  },
+  "invariants": [
+    "Never infer an application action identifier from visible text, an accessible name, a data-slot value, or geometry.",
+    "Never promote a null observed action attribute to a made-up canonical action identifier.",
+    "Accessibility repair is an explicit reviewed semantic override and is not an action-identity source.",
+    "Overlay focus, Escape, and outside-click behavior require source-state evidence plus native coordinate and keyboard execution before product promotion."
+  ],
+  "capabilities": [
+    {
+      "id": "route-action-identity",
+      "foundationStatus": "ready",
+      "promotionStatus": "red",
+      "existingFramework": [
+        {
+          "path": "core/view/include/pulp/view/design_import.hpp",
+          "lines": [258, 262],
+          "symbol": "NativeImportBindingContext::bind_application_action"
+        },
+        {
+          "path": "core/view/src/design_import_native_common.cpp",
+          "lines": [372, 395],
+          "symbol": "bind_imported_view"
+        },
+        {
+          "path": "packages/pulp-import-ir/src/adapters/observed-dom/lower.ts",
+          "lines": [364, 366],
+          "symbol": "observed DOM action_binding_id lowering"
+        },
+        {
+          "path": "packages/pulp-import-ir/src/adapters/observed-dom/lower.ts",
+          "lines": [488, 500],
+          "symbol": "observedInteraction"
+        },
+        {
+          "path": "test/test_application_action_binding.cpp",
+          "lines": [22, 57],
+          "symbol": "ManifestActionContext"
+        }
+      ],
+      "sourceFinding": "The Settings trigger has observedActionAttribute null. Its text and accessible name prove target selection and semantics, not immutable action identity.",
+      "redBlocker": "Add a reviewed immutable action identifier through source instrumentation or an explicit contract mapping keyed by stable source identity, then prove exact native delivery. The identifier may not be inferred from the Settings label."
+    },
+    {
+      "id": "route-application-state",
+      "foundationStatus": "ready",
+      "promotionStatus": "red",
+      "existingFramework": [
+        {
+          "path": "core/view/src/design_import_native_common.cpp",
+          "lines": [505, 535],
+          "symbol": "bind_imported_state_transition"
+        },
+        {
+          "path": "test/test_responsive_import.cpp",
+          "lines": [736, 765],
+          "symbol": "ordered application state variants compose orthogonal runtime patches and round-trip"
+        }
+      ],
+      "sourceFinding": "The source capture proves the Settings postcondition route /settings/general, but the candidate intentionally has no canonical action identifier or reviewed state transition descriptor.",
+      "redBlocker": "After action identity review, bind the action to a reviewed route-state key/value and prove the visible General route through native coordinate execution. No route-specific framework primitive is missing."
+    },
+    {
+      "id": "overlay-anchoring-stacking-routing",
+      "foundationStatus": "ready",
+      "promotionStatus": "red",
+      "existingFramework": [
+        {
+          "path": "core/view/include/pulp/view/callout_box.hpp",
+          "lines": [58, 105],
+          "symbol": "place_callout and AnchoredCallout"
+        },
+        {
+          "path": "core/view/include/pulp/view/view.hpp",
+          "lines": [960, 1002],
+          "symbol": "active overlay routing and dismissal"
+        },
+        {
+          "path": "test/test_faithful_port_toolkit.cpp",
+          "lines": [276, 383],
+          "symbol": "AnchoredCallout placement and mounting tests"
+        },
+        {
+          "path": "test/test_overlay_routing.cpp",
+          "lines": [370, 419],
+          "symbol": "outside and inside click routing tests"
+        }
+      ],
+      "sourceFinding": "The usage candidate proves closed, open, and toggle-dismiss states with one role-dialog popover while open.",
+      "redBlocker": "Declare the stable overlay host and reviewed open-state transition, then prove source-equivalent anchor placement, stacking, inside interaction, and outside dismissal in the native app. Do not add Palot-specific coordinates to the framework."
+    },
+    {
+      "id": "overlay-focus-and-escape",
+      "foundationStatus": "ready",
+      "promotionStatus": "red",
+      "existingFramework": [
+        {
+          "path": "core/view/include/pulp/view/app_components.hpp",
+          "lines": [15, 49],
+          "symbol": "FocusScope and AppOverlay"
+        },
+        {
+          "path": "core/view/src/app_components.cpp",
+          "lines": [23, 60],
+          "symbol": "focus traversal, restoration, and Escape handling"
+        },
+        {
+          "path": "test/test_app_components.cpp",
+          "lines": [7, 34],
+          "symbol": "FocusScope traps traversal and handles Escape"
+        },
+        {
+          "path": "test/test_overlay_routing.cpp",
+          "lines": [348, 368],
+          "symbol": "active overlay Escape dismissal contract"
+        }
+      ],
+      "sourceFinding": "This bounded generated-v5 usage candidate proves pointer toggle dismissal only. It does not itself carry focus-entry, focus-trap, focus-return, or Escape-dismiss receipts.",
+      "redBlocker": "Attach the already captured source focus and Escape evidence, or recapture it in this candidate cohort, then execute Tab, Shift-Tab, Escape, and focus restoration against the native overlay. Framework capability alone cannot promote unobserved product behavior."
+    },
+    {
+      "id": "accessible-name-repair",
+      "foundationStatus": "ready-for-explicit-value",
+      "promotionStatus": "red",
+      "existingFramework": [
+        {
+          "path": "packages/pulp-import-ir/src/adapters/observed-dom/lower.ts",
+          "lines": [352, 354],
+          "symbol": "explicit accessibility_name lowering"
+        },
+        {
+          "path": "core/view/src/design_import_native_common.cpp",
+          "lines": [1716, 1733],
+          "symbol": "apply_identity accessible label materialization"
+        },
+        {
+          "path": "test/test_design_import_native_materializer.cpp",
+          "lines": [3986, 3995],
+          "symbol": "explicit imported accessibility name test"
+        }
+      ],
+      "sourceFinding": "The real usage trigger is icon-only, its icon is aria-hidden, and its computed accessible name is the empty string.",
+      "redBlocker": "Add an explicit reviewed non-empty accessibility-name repair keyed by stable source identity and prove it in the native accessibility tree. Do not copy the source defect, auto-name from the icon shape, or reuse the repair text as action identity."
+    }
+  ],
+  "frameworkChange": {
+    "implemented": false,
+    "reason": "Every bounded generic primitive requested by this audit already exists with focused tests. Adding a second overlay, routing, focus, dismissal, or accessibility mechanism would duplicate framework behavior without closing the source-contract blockers."
+  },
+  "promotionDecision": {
+    "allowed": false,
+    "blockingCapabilities": [
+      "route-action-identity",
+      "route-application-state",
+      "overlay-anchoring-stacking-routing",
+      "overlay-focus-and-escape",
+      "accessible-name-repair"
+    ]
+  }
+}

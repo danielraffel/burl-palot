@@ -49,6 +49,10 @@ const reviewed = policy.rules.flatMap((rule: any) => {
 	if (matches.length !== 1) throw new Error(`reviewed interaction rule ${rule.id} matched ${matches.length} nodes`)
 	return [{ sourceId: matches[0].sourceId, applicationAction }]
 })
-const report = importer.extractInteractionCandidates(semantics.observedDom, reviewed)
+const viewport = semantics.capture && Number.isFinite(semantics.capture.innerWidth) &&
+	Number.isFinite(semantics.capture.innerHeight)
+	? { x: 0, y: 0, width: semantics.capture.innerWidth, height: semantics.capture.innerHeight }
+	: undefined
+const report = importer.extractInteractionCandidates(semantics.observedDom, reviewed, { viewport })
 await writeFile(outputPath, `${JSON.stringify(report, null, 2)}\n`)
 console.log(`interaction candidates: total=${report.summary.total} mapped=${report.summary.mapped} unmapped=${report.summary.unmapped} missingEvidence=${report.summary.missingEvidence}`)

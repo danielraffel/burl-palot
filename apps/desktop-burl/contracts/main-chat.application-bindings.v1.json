@@ -38,8 +38,10 @@
     {"id":"session.open","variant":"typed","sourceAnchor":"chat.controller","required":true,"fields":[{"name":"directory","type":"path","required":true},{"name":"sessionID","type":"string","required":true}],"resultType":"session"},
     {"id":"server.menu.toggle","variant":"typed","sourceAnchor":"app.sidebar","required":true,"fields":[],"resultType":"boolean"},
     {"id":"review.panel.toggle","variant":"typed","sourceAnchor":"chat.controller","required":true,"fields":[],"resultType":"boolean"},
+    {"id":"session.metrics.dismiss","variant":"typed","sourceAnchor":"chat.controller","required":true,"fields":[],"resultType":"boolean"},
     {"id":"session.metrics.toggle","variant":"typed","sourceAnchor":"chat.controller","required":true,"fields":[],"resultType":"boolean"},
     {"id":"session.title.edit.begin","variant":"typed","sourceAnchor":"chat.controller","required":true,"fields":[],"resultType":"boolean"},
+    {"id":"settings.theme.select","variant":"typed","sourceAnchor":"state.persistence","required":true,"fields":[{"name":"theme","type":"string","required":true}],"resultType":"theme"},
     {"id":"sidebar.toggle","variant":"typed","sourceAnchor":"app.sidebar","required":true,"fields":[],"resultType":"boolean"},
     {"id":"terminal.attach","variant":"typed","sourceAnchor":"chat.controller","required":true,"fields":[{"name":"directory","type":"path","required":true},{"name":"sessionID","type":"string","required":true}],"resultType":"void"}
   ],

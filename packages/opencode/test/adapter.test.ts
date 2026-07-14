@@ -55,6 +55,14 @@ function fakeClient(calls: Array<{ name: string; value: unknown }>): OpencodeCli
 				calls.push({ name: "session.get", value })
 				return { data: session }
 			},
+			fork: async (value: unknown) => {
+				calls.push({ name: "session.fork", value })
+				return { data: { ...session, id: "session-forked", slug: "session-forked" } }
+			},
+			revert: async (value: unknown) => {
+				calls.push({ name: "session.revert", value })
+				return { data: { sessionID: "session-1", messageID: "message-user-1" } }
+			},
 			promptAsync: async (value: unknown) => {
 				calls.push({ name: "session.promptAsync", value })
 				return { data: undefined }
@@ -98,6 +106,21 @@ describe("SDK OpenCode gateway", () => {
 			projectId: "project-1",
 			sessionId: "session-1",
 		})
+		expect(await gateway.execute({
+			type: "session.fork",
+			projectId: "project-1",
+			sessionId: "session-1",
+			messageId: "message-user-2",
+		})).toMatchObject({ ok: true, value: { id: "session-forked" } })
+		expect(await gateway.execute({
+			type: "session.revert",
+			projectId: "project-1",
+			sessionId: "session-1",
+			messageId: "message-user-1",
+		})).toEqual({
+			ok: true,
+			value: { sessionID: "session-1", messageID: "message-user-1" },
+		})
 		await gateway.execute({
 			type: "prompt.send",
 			projectId: "project-1",
@@ -105,6 +128,9 @@ describe("SDK OpenCode gateway", () => {
 			requestId: "request-1",
 			text: "hello",
 			model: { providerId: "provider", modelId: "model" },
+			files: [
+				{ type: "file", url: "file:///tmp/example.png", mediaType: "image/png", filename: "example.png" },
+			],
 		})
 		await gateway.execute({
 			type: "prompt.retry",
@@ -127,6 +153,8 @@ describe("SDK OpenCode gateway", () => {
 			"session.list",
 			"session.create",
 			"session.get",
+			"session.fork",
+			"session.revert",
 			"session.promptAsync",
 			"session.promptAsync",
 			"session.abort",
@@ -134,7 +162,20 @@ describe("SDK OpenCode gateway", () => {
 		expect(calls[4]?.value).toEqual({
 			directory: "/tmp/project",
 			sessionID: "session-1",
-			parts: [{ type: "text", text: "hello" }],
+			messageID: "message-user-2",
+		})
+		expect(calls[5]?.value).toEqual({
+			directory: "/tmp/project",
+			sessionID: "session-1",
+			messageID: "message-user-1",
+		})
+		expect(calls[6]?.value).toEqual({
+			directory: "/tmp/project",
+			sessionID: "session-1",
+			parts: [
+				{ type: "text", text: "hello" },
+				{ type: "file", mime: "image/png", filename: "example.png", url: "file:///tmp/example.png" },
+			],
 			model: { providerID: "provider", modelID: "model" },
 		})
 	})

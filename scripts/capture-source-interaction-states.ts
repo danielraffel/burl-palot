@@ -4,7 +4,7 @@ import { createHash } from "node:crypto"
 import { mkdir, readFile, rm, writeFile } from "node:fs/promises"
 import { resolve } from "node:path"
 import sharp from "sharp"
-import { bootstrapSource, Cdp, semanticExpression } from "./capture-source-cdp"
+import { bootstrapSource, Cdp, captureAtomicFrame, semanticExpression } from "./capture-source-cdp"
 
 const args = new Map<string, string>()
 for (let i = 2; i < process.argv.length; i += 2) args.set(process.argv[i], process.argv[i + 1])
@@ -28,6 +28,18 @@ interface SemanticNode {
 	sourceId: string
 	children?: SemanticNode[]
 	content?: Array<{ kind: string; text?: string }>
+}
+interface PostState {
+	active?: boolean
+	value?: string
+	dataActive?: boolean
+	disabled?: boolean
+	hover?: boolean
+	activePseudo?: boolean
+	rect?: { x: number; y: number; width: number; height: number } | null
+	mouseDownHeldAtCapture?: boolean
+	visualStateMethod?: string
+	contentFloorPass?: boolean
 }
 const pages = await fetch("http://127.0.0.1:9222/json/list").then((response) => response.json())
 const page = pages.find((item: { type: string }) => item.type === "page")
@@ -128,25 +140,17 @@ try {
 			}
 			Object.assign(found, result.result.value)
 		}
-		await Bun.sleep(50)
-		const post = (
-			await cdp.command("Runtime.evaluate", {
-				expression: `(() => { const candidates=[...document.querySelectorAll(${JSON.stringify(state.selector)})]; const el=candidates.find(e=>!${JSON.stringify(state.descendantText ?? "")} || (e.textContent||'').trim().replace(/\\s+/g,' ')===${JSON.stringify(state.descendantText ?? "")}); return {active:document.activeElement===el,value:'value' in el?el.value:'',dataActive:el?.hasAttribute('data-active'),disabled:!!(el?.disabled||el?.getAttribute('aria-disabled')==='true'),hover:el?.matches(':hover'),activePseudo:el?.matches(':active'),rect:el?(()=>{const r=el.getBoundingClientRect();return{x:r.x,y:r.y,width:r.width,height:r.height}})():null}; })()`,
-				returnByValue: true,
-			})
-		).result.value
+		const postExpression = `(() => { const candidates=[...document.querySelectorAll(${JSON.stringify(state.selector)})]; const el=candidates.find(e=>!${JSON.stringify(state.descendantText ?? "")} || (e.textContent||'').trim().replace(/\\s+/g,' ')===${JSON.stringify(state.descendantText ?? "")}); return {active:document.activeElement===el,value:'value' in el?el.value:'',dataActive:el?.hasAttribute('data-active'),disabled:!!(el?.disabled||el?.getAttribute('aria-disabled')==='true'),hover:el?.matches(':hover'),activePseudo:el?.matches(':active'),rect:el?(()=>{const r=el.getBoundingClientRect();return{x:r.x,y:r.y,width:r.width,height:r.height}})():null}; })()`
+		const atomicCapture = await captureAtomicFrame<{
+			post: PostState
+			semantics: { capture: unknown; observedDom: SemanticNode }
+		}>(cdp, `({post:${postExpression},semantics:${semanticExpression}})`)
+		const post = atomicCapture.snapshot.post
 		post.mouseDownHeldAtCapture = mouseDownHeld
 		post.visualStateMethod =
 			state.action.type === "pressed" ? "CSS.forcePseudoState(:active)" : "natural"
-		const semantics = (
-			await cdp.command("Runtime.evaluate", { expression: semanticExpression, returnByValue: true })
-		).result.value
-		const shot = await cdp.command("Page.captureScreenshot", {
-			format: "png",
-			fromSurface: true,
-			captureBeyondViewport: false,
-		})
-		const full = Buffer.from(shot.data, "base64")
+		const semantics = atomicCapture.snapshot.semantics
+		const full = atomicCapture.png
 		const rect = post.rect ?? found
 		const flatten = (node: SemanticNode): SemanticNode[] => [
 			node,
@@ -220,6 +224,7 @@ try {
 			action: state.action,
 			postcondition: state.postcondition,
 			post,
+			atomicity: atomicCapture.proof,
 			geometry: {
 				logical: rect,
 				pixel: { left, top, width, height },

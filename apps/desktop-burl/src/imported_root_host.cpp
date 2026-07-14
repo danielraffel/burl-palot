@@ -23,6 +23,12 @@ std::string read_text(const std::filesystem::path& path) {
 	return bytes.str();
 }
 
+bool effectively_visible(const pulp::view::View& view) {
+	for (auto* current = &view; current; current = current->parent())
+		if (!current->visible()) return false;
+	return true;
+}
+
 bool has_error(const std::vector<pulp::view::ImportDiagnostic>& diagnostics) {
 	return std::ranges::any_of(diagnostics, [](const auto& diagnostic) {
 		return diagnostic.severity == pulp::view::ImportDiagnosticSeverity::error;
@@ -44,11 +50,14 @@ std::string error_diagnostics(const std::vector<pulp::view::ImportDiagnostic>& d
 
 class ImportedRootHost::BindingContext final : public pulp::view::NativeImportBindingContext {
 public:
-	explicit BindingContext(std::unordered_map<std::string, ActionEndpoint>& endpoints,
+	explicit BindingContext(ImportedRootHost& owner,
+	                       std::unordered_map<std::string, ActionEndpoint>& endpoints,
+	                       const pulp::view::ApplicationBindingManifest& manifest,
 	                       const pulp::view::DesignIR& ir,
 	                       pulp::view::ImportedRepeatedList*& transcript,
 	                       pulp::view::ImportedRepeatedList*& projects)
-		: endpoints_(endpoints), ir_(ir), transcript_(transcript), projects_(projects) {}
+		: owner_(owner), endpoints_(endpoints), manifest_(manifest), ir_(ir),
+		  transcript_(transcript), projects_(projects) {}
 
 	void bind_host_action(pulp::view::TextButton& button,
 	                      const pulp::view::NativeImportHostActionDescriptor& descriptor) override {
@@ -61,8 +70,9 @@ public:
 	}
 	void bind_text_editor(pulp::view::TextEditor& editor,
 	                      const pulp::view::NativeImportTextBindingDescriptor& descriptor) override {
+		if (descriptor.value_key.empty()) return;
+		text_bindings_[std::string(descriptor.value_key)].push_back(&editor);
 		if (descriptor.value_key != "composer.draft") return;
-		composer_ = &editor;
 		editor.multi_line = true;
 		editor.multi_line_return_behavior = pulp::view::TextEditor::MultiLineReturnBehavior::commit;
 		editor.on_return = [this](const std::string& text) {
@@ -107,6 +117,7 @@ public:
 		action_views_.erase("project.open");
 		action_view_instance_ids_.erase("project.open");
 		payloads_.erase("project.open");
+		state_transitions_.erase("project.open");
 		attached_.insert("project.open");
 		projects_ = list.get();
 		projects_->set_auto_follow(false);
@@ -126,8 +137,13 @@ public:
 				auto payload = payloads_.find(id);
 				if (payload != payloads_.end() && index < payload->second.size())
 					payload->second.erase(payload->second.begin() + static_cast<std::ptrdiff_t>(index));
+				auto state = state_transitions_.find(id);
+				if (state != state_transitions_.end() && index < state->second.size())
+					state->second.erase(state->second.begin() + static_cast<std::ptrdiff_t>(index));
 			}
 		}
+		for (auto& [id, bound] : unattached_action_views_)
+			std::erase(bound, &view);
 	}
 	void install_pending_collection() {
 		if (transcript_ == nullptr || projects_ == nullptr)
@@ -135,29 +151,117 @@ public:
 	}
 
 	[[nodiscard]] const std::unordered_set<std::string>& attached() const noexcept { return attached_; }
-	[[nodiscard]] pulp::view::TextEditor* composer() const noexcept { return composer_; }
+	[[nodiscard]] const std::unordered_set<std::string>& encountered_actions() const noexcept {
+		return encountered_actions_;
+	}
+	[[nodiscard]] pulp::view::TextEditor* text_binding(std::string_view value_key) const noexcept {
+		const auto found = text_bindings_.find(std::string(value_key));
+		if (found == text_bindings_.end()) return nullptr;
+		for (auto* editor : found->second)
+			if (editor && effectively_visible(*editor)) return editor;
+		return found->second.empty() ? nullptr : found->second.front();
+	}
+	[[nodiscard]] pulp::view::TextEditor* composer() const noexcept {
+		return text_binding("composer.draft");
+	}
+	[[nodiscard]] std::optional<std::size_t> active_action_index(std::string_view id) const {
+		const auto found = action_views_.find(std::string(id));
+		if (found == action_views_.end() || found->second.empty()) return std::nullopt;
+		for (std::size_t index = 0; index < found->second.size(); ++index)
+			if (found->second[index] && effectively_visible(*found->second[index])) return index;
+		return 0;
+	}
+	[[nodiscard]] std::optional<std::string> action_payload(std::string_view id) const {
+		const auto key = std::string(id);
+		const auto index = active_action_index(id);
+		const auto found = payloads_.find(key);
+		if (!index || found == payloads_.end() || *index >= found->second.size()) return std::nullopt;
+		return found->second[*index];
+	}
 	bool invoke_bound(std::string_view id) {
 		const auto key = std::string(id);
 		if (!attached_.contains(key)) return false;
-		const auto payload = payloads_.find(key);
-		return invoke(id, payload == payloads_.end() || payload->second.empty()
-			? std::string_view{} : std::string_view(payload->second.front()));
+		const auto index = active_action_index(id);
+		if (!index) {
+			const bool composer_action = id == "prompt.send" || id == "prompt.retry" ||
+			                             id == "prompt.cancel";
+			return composer_action && composer() != nullptr && invoke_with_state(id, "", "", "");
+		}
+		const auto payload = action_payload(id).value_or("");
+		std::string state_key;
+		std::string state_transition;
+		if (const auto state = state_transitions_.find(key);
+		    index && state != state_transitions_.end() && *index < state->second.size()) {
+			state_key = state->second[*index].first;
+			state_transition = state->second[*index].second;
+		}
+		return invoke_with_state(id, payload, state_key, state_transition);
 	}
 	std::vector<pulp::view::View*> bound_views(std::string_view id) const {
 		std::vector<pulp::view::View*> result;
 		if (const auto found = action_views_.find(std::string(id)); found != action_views_.end())
-			result.assign(found->second.begin(), found->second.end());
+			for (auto* view : found->second)
+				if (view && effectively_visible(*view)) result.push_back(view);
 		if (id == "prompt.send" || id == "prompt.retry" || id == "prompt.cancel")
-			if (composer_) result.push_back(composer_);
+			if (auto* active = composer()) result.push_back(active);
 		return result;
+	}
+	std::vector<pulp::view::View*> unattached_views(std::string_view id) const {
+		std::vector<pulp::view::View*> result;
+		if (const auto found = unattached_action_views_.find(std::string(id));
+		    found != unattached_action_views_.end())
+			for (auto* view : found->second)
+				if (view) result.push_back(view);
+		return result;
+	}
+	std::vector<std::pair<std::string, std::string>> state_transitions(std::string_view id) const {
+		if (const auto found = state_transitions_.find(std::string(id));
+		    found != state_transitions_.end())
+			return found->second;
+		return {};
+	}
+	std::optional<std::pair<std::string, std::string>> active_state_transition(
+	    std::string_view id) const {
+		const auto index = active_action_index(id);
+		const auto found = state_transitions_.find(std::string(id));
+		if (!index || found == state_transitions_.end() || *index >= found->second.size())
+			return std::nullopt;
+		return found->second[*index];
 	}
 
 private:
 	void attach(pulp::view::View& view,
 	            const pulp::view::NativeImportHostActionDescriptor& descriptor) {
-		auto endpoint = endpoints_.find(std::string(descriptor.action));
-		if (endpoint == endpoints_.end()) return;
+		if (descriptor.action.empty()) return;
 		const auto id = std::string(descriptor.action);
+		encountered_actions_.insert(id);
+		auto endpoint = endpoints_.find(id);
+		if (endpoint == endpoints_.end()) {
+			view.set_enabled(false);
+			view.set_hit_testable(false);
+			auto& views = unattached_action_views_[id];
+			if (std::ranges::find(views, &view) == views.end()) views.push_back(&view);
+			return;
+		}
+		const auto* signature = pulp::view::find_application_action(manifest_, id);
+		std::string payload(descriptor.payload_contract);
+		if (payload.empty() && descriptor.application_state_transition.starts_with("set:") &&
+		    signature && signature->fields.size() == 1 &&
+		    signature->fields.front().required && signature->fields.front().type == "string") {
+			// A captured state destination is sufficient evidence for the only
+			// scalar action field. This preserves payloads across state-frontier
+			// composition without guessing from product labels or action names.
+			payload = descriptor.application_state_transition.substr(4);
+		}
+		if (signature && !signature->fields.empty() && payload.empty()) {
+			// A typed action requiring data must never degrade into an empty
+			// callback when composition lost its payload evidence.
+			view.set_enabled(false);
+			view.set_hit_testable(false);
+			auto& views = unattached_action_views_[id];
+			if (std::ranges::find(views, &view) == views.end()) views.push_back(&view);
+			return;
+		}
 		const auto instance_id = view.import_binding_instance_id();
 		if (const auto found = action_views_.find(id); found != action_views_.end()) {
 			const auto identities = action_view_instance_ids_.find(id);
@@ -165,14 +269,31 @@ private:
 				if (found->second[index] == &view && identities != action_view_instance_ids_.end() &&
 				    index < identities->second.size() && identities->second[index] == instance_id) return;
 		}
-		const auto payload = std::string(descriptor.payload_contract);
-		auto callback = [endpoint = endpoint->second, payload] { endpoint(payload); };
-		if (auto* button = dynamic_cast<pulp::view::TextButton*>(&view)) button->on_click = callback;
-		else view.on_click = std::move(callback);
+		const auto state_key = std::string(descriptor.application_state_key);
+		const auto state_transition = std::string(descriptor.application_state_transition);
+		auto callback = [endpoint = endpoint->second, payload] {
+			endpoint(payload);
+		};
+		if (auto* button = dynamic_cast<pulp::view::TextButton*>(&view)) {
+			auto imported_callback = std::move(button->on_click);
+			button->on_click = [imported_callback = std::move(imported_callback),
+			                    callback = std::move(callback)]() mutable {
+				callback();
+				if (imported_callback) imported_callback();
+			};
+		} else {
+			auto imported_callback = std::move(view.on_click);
+			view.on_click = [imported_callback = std::move(imported_callback),
+			                 callback = std::move(callback)]() mutable {
+				callback();
+				if (imported_callback) imported_callback();
+			};
+		}
 		attached_.insert(id);
 		action_views_[id].push_back(&view);
 		action_view_instance_ids_[id].push_back(instance_id);
 		payloads_[id].push_back(payload);
+		state_transitions_[id].emplace_back(state_key, state_transition);
 	}
 	bool invoke(std::string_view id, std::string_view payload) {
 		auto endpoint = endpoints_.find(std::string(id));
@@ -181,16 +302,28 @@ private:
 		callback(payload);
 		return true;
 	}
+	bool invoke_with_state(std::string_view id, std::string_view payload,
+	                       std::string_view state_key, std::string_view state_transition) {
+		if (!invoke(id, payload)) return false;
+		if (!state_key.empty() && !state_transition.empty())
+			owner_.apply_application_state_transition(state_key, state_transition);
+		return true;
+	}
 
+	ImportedRootHost& owner_;
 	std::unordered_map<std::string, ActionEndpoint>& endpoints_;
+	pulp::view::ApplicationBindingManifest manifest_;
 	const pulp::view::DesignIR& ir_;
 	pulp::view::ImportedRepeatedList*& transcript_;
 	pulp::view::ImportedRepeatedList*& projects_;
 	std::unordered_set<std::string> attached_;
+	std::unordered_set<std::string> encountered_actions_;
 	std::unordered_map<std::string, std::vector<pulp::view::View*>> action_views_;
+	std::unordered_map<std::string, std::vector<pulp::view::View*>> unattached_action_views_;
 	std::unordered_map<std::string, std::vector<std::uint64_t>> action_view_instance_ids_;
 	std::unordered_map<std::string, std::vector<std::string>> payloads_;
-	pulp::view::TextEditor* composer_ = nullptr;
+	std::unordered_map<std::string, std::vector<std::pair<std::string, std::string>>> state_transitions_;
+	std::unordered_map<std::string, std::vector<pulp::view::TextEditor*>> text_bindings_;
 };
 
 ImportedRootHost::ImportedRootHost() = default;
@@ -229,7 +362,8 @@ void ImportedRootHost::load(const std::filesystem::path& design_ir_path,
 		throw std::runtime_error("source-observed primary tree failed native materialization" +
 		                         error_diagnostics(diagnostics));
 
-	binding_context_ = std::make_unique<BindingContext>(endpoints_, *parsed, transcript_, projects_);
+	binding_context_ = std::make_unique<BindingContext>(
+		*this, endpoints_, *manifest, *parsed, transcript_, projects_);
 	pulp::view::bind_native_view_tree(*root, *parsed, *binding_context_, {.diagnostics_out = &diagnostics});
 	if (has_error(diagnostics)) throw std::runtime_error("source-observed primary tree binding failed");
 	binding_context_->install_pending_collection();
@@ -238,6 +372,13 @@ void ImportedRootHost::load(const std::filesystem::path& design_ir_path,
 		unattached_actions_.push_back(action.id);
 		if (action.required) unattached_required_actions_.push_back(action.id);
 	}
+	for (const auto& action : binding_context_->encountered_actions()) {
+		if (binding_context_->attached().contains(action) ||
+		    std::ranges::find(unattached_actions_, action) != unattached_actions_.end())
+			continue;
+		unattached_actions_.push_back(action);
+	}
+	std::ranges::sort(unattached_actions_);
 	attached_action_count_ = binding_context_->attached().size();
 	ir_ = std::move(parsed);
 	add_child(std::move(root));
@@ -274,16 +415,59 @@ bool ImportedRootHost::clear_application_state(std::string_view key) {
 	       pulp::view::clear_imported_application_state(*child_at(0), key);
 }
 
+bool ImportedRootHost::apply_application_state_transition(std::string_view key,
+	                                                        std::string_view transition) {
+	return child_count() != 0 &&
+	       pulp::view::apply_imported_application_state_transition(*child_at(0), key, transition);
+}
+
 std::vector<pulp::view::View*> ImportedRootHost::bound_action_views(std::string_view id) const {
 	return binding_context_ ? binding_context_->bound_views(id) : std::vector<pulp::view::View*>{};
+}
+
+std::vector<std::pair<std::string, std::string>>
+ImportedRootHost::bound_action_state_transitions(std::string_view id) const {
+	return binding_context_
+		       ? binding_context_->state_transitions(id)
+		       : std::vector<std::pair<std::string, std::string>>{};
+}
+
+std::optional<std::pair<std::string, std::string>>
+ImportedRootHost::active_action_state_transition(std::string_view id) const {
+	return binding_context_ ? binding_context_->active_state_transition(id) : std::nullopt;
+}
+
+std::vector<pulp::view::View*> ImportedRootHost::unattached_action_views(std::string_view id) const {
+	return binding_context_ ? binding_context_->unattached_views(id) : std::vector<pulp::view::View*>{};
 }
 
 const std::vector<std::string>& ImportedRootHost::unattached_actions() const noexcept {
 	return unattached_actions_;
 }
 
+std::optional<std::string> ImportedRootHost::active_action_payload(std::string_view id) const {
+	return binding_context_ ? binding_context_->action_payload(id) : std::nullopt;
+}
+
+pulp::view::TextEditor* ImportedRootHost::active_text_binding(std::string_view value_key) const noexcept {
+	return binding_context_ ? binding_context_->text_binding(value_key) : nullptr;
+}
+
+std::optional<std::string> ImportedRootHost::text_binding_value(std::string_view value_key) const {
+	if (auto* editor = active_text_binding(value_key)) return editor->text();
+	return std::nullopt;
+}
+
+bool ImportedRootHost::set_text_binding_value(std::string_view value_key, std::string value) {
+	if (auto* editor = active_text_binding(value_key)) {
+		editor->set_text(std::move(value));
+		return true;
+	}
+	return false;
+}
+
 pulp::view::TextEditor* ImportedRootHost::bound_composer() const noexcept {
-	return binding_context_ ? binding_context_->composer() : nullptr;
+	return active_text_binding("composer.draft");
 }
 
 void ImportedRootHost::set_transcript(std::vector<pulp::view::ImportedListItem> items) {
@@ -299,6 +483,10 @@ void ImportedRootHost::set_transcript_auto_follow(bool enabled) {
 void ImportedRootHost::set_transcript_scroll_y(float y) {
 	if (!transcript_) throw std::logic_error("source transcript slot is not bound");
 	transcript_->set_scroll_y(y);
+}
+
+bool ImportedRootHost::scroll_transcript_to_item(std::string_view key) {
+	return transcript_ && transcript_->scroll_to_item(key);
 }
 
 void ImportedRootHost::set_projects(std::vector<pulp::view::ImportedListItem> items) {

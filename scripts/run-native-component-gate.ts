@@ -133,6 +133,19 @@ for (const record of manifest.records) {
 		blockers.push(
 			`ApplicationBindingManifest dispatch not proven: ${record.interaction.actionIdentity}`,
 		)
+	if (record.visualThresholds) {
+		if (typeof record.visualThresholds.maxMae === "number" &&
+			metrics.mae > record.visualThresholds.maxMae)
+			blockers.push(`visual MAE ${metrics.mae} exceeds ${record.visualThresholds.maxMae}`)
+		if (typeof record.visualThresholds.minSsim === "number" &&
+			metrics.ssim < record.visualThresholds.minSsim)
+			blockers.push(`visual SSIM ${metrics.ssim} is below ${record.visualThresholds.minSsim}`)
+		if (typeof record.visualThresholds.maxEdgeDiff === "number" &&
+			metrics.edgeDiff > record.visualThresholds.maxEdgeDiff)
+			blockers.push(
+				`visual edge diff ${metrics.edgeDiff} exceeds ${record.visualThresholds.maxEdgeDiff}`,
+			)
+	}
 	const visualGapCodes = inventory.components[record.id]
 	if (!Array.isArray(visualGapCodes)) throw new Error(`${record.id}: missing visual gap inventory`)
 	for (const code of visualGapCodes) blockers.push(`visual gap: ${code}`)

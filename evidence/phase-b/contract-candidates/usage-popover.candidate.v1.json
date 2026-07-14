@@ -1,0 +1,71 @@
+{
+  "schema": "burl-source-interaction-contract-candidate-v1",
+  "status": "candidate-only",
+  "canonicalActionId": null,
+  "source": {
+    "revision": "fd63a75dad3d0e8555ba22a47e720d285889fbf0",
+    "captureManifest": "evidence/phase-b/state-captures/usage-popover.candidate.interactions.json",
+    "captureEvidence": "evidence/phase-b/source-interaction-states/generated-v5/topbar/usage-popover/evidence.json"
+  },
+  "operationCandidate": {
+    "kind": "contextual-usage-popover",
+    "trigger": {
+      "selector": "div[data-slot='app-bar'] button[data-slot='popover-trigger']",
+      "tagName": "button",
+      "role": "button",
+      "accessibleName": "",
+      "dataSlot": "popover-trigger",
+      "observedActionAttribute": null
+    },
+    "overlay": {
+      "dataSlot": "popover-content",
+      "role": "dialog"
+    }
+  },
+  "sourceProvenance": [
+    {
+      "field": "usage-trigger-and-overlay",
+      "sourcePath": "apps/desktop/src/renderer/components/session-metrics-bar.tsx",
+      "sourceSha256": "29c4e1385bf5994b0ffcf9e6eac554f534c2cf0303b9b60d429b2139914195ea",
+      "lines": [105, 135],
+      "derivation": "metrics presence exposes an icon-only PopoverTrigger and an end-aligned PopoverContent"
+    },
+    {
+      "field": "usage-breakdown-content",
+      "sourcePath": "apps/desktop/src/renderer/components/session-metrics-bar.tsx",
+      "sourceSha256": "29c4e1385bf5994b0ffcf9e6eac554f534c2cf0303b9b60d429b2139914195ea",
+      "lines": [136, 235],
+      "derivation": "the overlay contains summary, token, exchange, model, tool-call, and average metrics"
+    }
+  ],
+  "semanticPostconditions": [
+    {
+      "state": "closed",
+      "capture": "evidence/phase-b/source-interaction-states/generated-v5/topbar/usage-popover/initial/source.json",
+      "triggerAriaExpanded": "false",
+      "popoverCount": 0
+    },
+    {
+      "state": "open",
+      "capture": "evidence/phase-b/source-interaction-states/generated-v5/topbar/usage-popover/open-usage-popover/source.json",
+      "triggerAriaExpanded": "true",
+      "popoverCount": 1,
+      "popoverRole": "dialog"
+    },
+    {
+      "state": "closed-after-dismiss",
+      "capture": "evidence/phase-b/source-interaction-states/generated-v5/topbar/usage-popover/close-usage-popover/source.json",
+      "triggerAriaExpanded": "false",
+      "popoverCount": 0
+    }
+  ],
+  "accessibilityGap": {
+    "observed": true,
+    "exactFinding": "The real Electron trigger is an icon-only button whose icon is aria-hidden and whose accessible name is the empty string.",
+    "promotionRequirement": "Assign a reviewed non-empty accessible name before this candidate can become a canonical native contract; do not reproduce the source defect."
+  },
+  "promotion": {
+    "allowed": false,
+    "reason": "The interaction is source-proven, but canonical naming and the accessibility repair require separate review and native coordinate proof."
+  }
+}

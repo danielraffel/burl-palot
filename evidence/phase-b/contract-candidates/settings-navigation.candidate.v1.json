@@ -1,0 +1,63 @@
+{
+  "schema": "burl-source-interaction-contract-candidate-v1",
+  "status": "candidate-only",
+  "canonicalActionId": null,
+  "source": {
+    "revision": "fd63a75dad3d0e8555ba22a47e720d285889fbf0",
+    "captureManifest": "evidence/phase-b/state-captures/settings-navigation.candidate.interactions.json",
+    "captureEvidence": "evidence/phase-b/source-interaction-states/generated-v5/navigation/settings/evidence.json"
+  },
+  "operationCandidate": {
+    "kind": "settings-navigation",
+    "trigger": {
+      "selector": "button[data-slot='sidebar-menu-button']",
+      "descendantText": "Settings",
+      "tagName": "button",
+      "role": "button",
+      "accessibleName": "Settings",
+      "dataSlot": "sidebar-menu-button",
+      "observedActionAttribute": null
+    },
+    "destination": "/settings/general"
+  },
+  "sourceProvenance": [
+    {
+      "field": "settings-trigger",
+      "sourcePath": "apps/desktop/src/renderer/components/sidebar.tsx",
+      "sourceSha256": "9bff54053b3cd7cd182456ae367dd4f0374302489ea12bc7fbd5542a204bbf50",
+      "lines": [382, 395],
+      "derivation": "the Settings sidebar button carries the visible Settings text and navigates to /settings"
+    },
+    {
+      "field": "settings-default-destination",
+      "sourcePath": "apps/desktop/src/renderer/router.tsx",
+      "sourceSha256": "bcf358a6da4f4e9e9aae9ce0f1ede2302354c13173df834293fdf1c3e3cc3470",
+      "lines": [66, 84],
+      "derivation": "the /settings index redirects to /settings/general and renders GeneralSettings"
+    }
+  ],
+  "semanticPostconditions": [
+    {
+      "state": "sidebar-collapsed",
+      "capture": "evidence/phase-b/source-interaction-states/generated-v5/navigation/settings/initial/source.json",
+      "route": "/project/palot-proj-a1b2c3d/session/ses-mock-darkmode-001?mock=1",
+      "sidebarWidth": 0
+    },
+    {
+      "state": "sidebar-open",
+      "capture": "evidence/phase-b/source-interaction-states/generated-v5/navigation/settings/open-sidebar/source.json",
+      "route": "/project/palot-proj-a1b2c3d/session/ses-mock-darkmode-001?mock=1",
+      "sidebarWidth": 280
+    },
+    {
+      "state": "settings-general",
+      "capture": "evidence/phase-b/source-interaction-states/generated-v5/navigation/settings/activate-settings/source.json",
+      "route": "/settings/general",
+      "sidebarWidth": 280
+    }
+  ],
+  "promotion": {
+    "allowed": false,
+    "reason": "This source-evidence lane records observed semantics and postconditions only; canonical action naming and native coordinate proof require separate review."
+  }
+}

@@ -8,8 +8,14 @@ test('BrowserWindow observations project without product-specific chrome', () =>
         trafficLightPosition: { x: 15, y: 15 }, contentFillsWindowBounds: true,
     }));
     expect(contract.projection).toEqual({
-        titleBarStyle: 'hidden_inset', backdropEffect: 'vibrancy_menu', transparent: true,
-        trafficLightX: 15, trafficLightY: 15,
+        titleBarStyle: 'hidden_inset', backdropEffect: 'liquid_glass', appearance: 'dark',
+        transparent: true, trafficLightX: 15, trafficLightY: 15,
+        minimumContentSize: {
+            width: 280, height: 421,
+            derivation: 'complete 280x420 source chat frame plus one logical pixel projection boundary guard; native Yoga preserves the source fractional geometry',
+            sourceRevision: 'fd63a75dad3d0e8555ba22a47e720d285889fbf0',
+            evidence: 'evidence/oracle-inputs/responsive/source-minimum-content-size.v1.json',
+        },
     });
 });
 

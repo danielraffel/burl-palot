@@ -1,0 +1,34 @@
+{
+  "top_bar": {
+    "x": 0.1866666667,
+    "y": 0.0,
+    "w": 0.8133333333,
+    "h": 0.09,
+    "threshold": 0.90,
+    "notes": "Main application toolbar, excluding the sidebar toolbar"
+  },
+  "composer": {
+    "x": 0.1975,
+    "y": 0.805,
+    "w": 0.7883333333,
+    "h": 0.15375,
+    "threshold": 0.88,
+    "notes": "Prompt input, controls, and local/interrupt footer"
+  },
+  "status_button": {
+    "x": 0.9083333333,
+    "y": 0.89,
+    "w": 0.0675,
+    "h": 0.03,
+    "threshold": 0.90,
+    "notes": "Rounded stop/time action button"
+  },
+  "left_sidebar": {
+    "x": 0.0,
+    "y": 0.0,
+    "w": 0.1866666667,
+    "h": 1.0,
+    "threshold": 0.90,
+    "notes": "Full-height navigation sidebar including toolbar and project list"
+  }
+}

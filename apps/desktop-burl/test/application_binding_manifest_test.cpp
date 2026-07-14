@@ -24,7 +24,7 @@ int main(int argc, char** argv) {
 	auto manifest = pulp::view::parse_application_binding_manifest(bytes.str(), &error);
 	if (!manifest) return fail(error.c_str());
 	if (manifest->application_id != "palot.main-chat.fd63a75") return fail("wrong source revision contract");
-	if (manifest->source_anchors.size() != 12 || manifest->actions.size() != 26 ||
+	if (manifest->source_anchors.size() != 12 || manifest->actions.size() != 28 ||
 	    manifest->events.size() != 5 || manifest->data.size() != 5 ||
 	    manifest->retained_modules.size() != 7 || manifest->scenarios.size() != 11)
 		return fail("manifest surface is incomplete");

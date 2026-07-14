@@ -19,8 +19,8 @@
     "trafficLightY": 15,
     "minimumContentSize": {
       "width": 280,
-      "height": 248,
-      "derivation": "one-pixel source critical-content containment probe",
+      "height": 421,
+      "derivation": "complete 280x420 source chat frame plus one logical pixel projection boundary guard; native Yoga preserves the source fractional geometry",
       "sourceRevision": "fd63a75dad3d0e8555ba22a47e720d285889fbf0",
       "evidence": "evidence/oracle-inputs/responsive/source-minimum-content-size.v1.json"
     }

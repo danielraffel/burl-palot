@@ -53,6 +53,27 @@ export interface OpenSessionCommand {
 	sessionId: string
 }
 
+export interface ForkSessionCommand {
+	type: "session.fork"
+	projectId: string
+	sessionId: string
+	messageId: string
+}
+
+export interface RevertSessionCommand {
+	type: "session.revert"
+	projectId: string
+	sessionId: string
+	messageId: string
+}
+
+export interface OpenCodeFileAttachment {
+	type: "file"
+	url: string
+	mediaType?: string
+	filename?: string
+}
+
 export interface SendPromptCommand {
 	type: "prompt.send"
 	projectId: string
@@ -63,6 +84,7 @@ export interface SendPromptCommand {
 		providerId: string
 		modelId: string
 	}
+	files?: OpenCodeFileAttachment[]
 }
 
 export interface CancelPromptCommand {
@@ -84,6 +106,7 @@ export interface RetryPromptCommand {
 		providerId: string
 		modelId: string
 	}
+	files?: OpenCodeFileAttachment[]
 }
 
 export type OpenCodeCommand =
@@ -93,6 +116,8 @@ export type OpenCodeCommand =
 	| ListSessionsCommand
 	| CreateSessionCommand
 	| OpenSessionCommand
+	| ForkSessionCommand
+	| RevertSessionCommand
 	| SendPromptCommand
 	| CancelPromptCommand
 	| RetryPromptCommand
@@ -121,8 +146,10 @@ export type OpenCodeCommandResponse<C extends OpenCodeCommand> = C extends
 		? OpenCodeProject
 		: C extends ListSessionsCommand
 			? SdkSession[]
-			: C extends CreateSessionCommand | OpenSessionCommand
+			: C extends CreateSessionCommand | OpenSessionCommand | ForkSessionCommand
 				? SdkSession
+				: C extends RevertSessionCommand
+					? unknown
 				: C extends SendPromptCommand | RetryPromptCommand
 					? PromptRequestAccepted
 					: C extends CancelPromptCommand

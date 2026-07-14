@@ -1,0 +1,45 @@
+{
+  "schema": "pulp-application-state-extension-contract-v1",
+  "extensions": [
+    {
+      "action": "prompt.cancel",
+      "stateKey": "prompt.execution",
+      "values": ["streaming", "cancelled"]
+    },
+    {
+      "action": "disclosure.thought.toggle",
+      "stateKey": "disclosure.thought.open",
+      "values": ["closed", "open"]
+    },
+    {
+      "action": "disclosure.read.toggle",
+      "stateKey": "disclosure.read.open",
+      "values": ["closed", "open"]
+    },
+    {
+      "action": "disclosure.edit.toggle",
+      "stateKey": "disclosure.edit.open",
+      "values": ["closed", "open"]
+    },
+    {
+      "action": "review.diff.open",
+      "stateKey": "review.diff.open",
+      "values": ["closed", "open"]
+    },
+    {
+      "action": "settings.theme.select",
+      "stateKey": "settings.theme",
+      "values": ["dark", "light"]
+    },
+    {
+      "action": "session.metrics.dismiss",
+      "stateKey": "session.metrics.open",
+      "values": ["closed", "open"]
+    },
+    {
+      "action": "composer.agent-menu.dismiss",
+      "stateKey": "composer.agent-menu.open",
+      "values": ["closed", "open"]
+    }
+  ]
+}

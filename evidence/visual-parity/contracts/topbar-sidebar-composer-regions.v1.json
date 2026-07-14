@@ -1,0 +1,165 @@
+{
+  "schema_version": 1,
+  "contract_id": "topbar-sidebar-composer-regions",
+  "scope": "generic imported desktop application chrome and responsive conversation layout",
+  "coordinate_space": {
+    "units": "logical_px",
+    "origin": "window_content_top_left",
+    "rect_order": ["x", "y", "width", "height"]
+  },
+  "evidence": {
+    "electron_desktop": "/tmp/palot-canonical-height/1200x800/source.json",
+    "electron_desktop_png": "/tmp/palot-canonical-height/1200x800/source.png",
+    "native_desktop": "/tmp/palot-current-audit-1200x800.layout.json",
+    "native_desktop_png": "/tmp/palot-current-audit-1200x800.png",
+    "electron_narrow_png": "evidence/oracle-inputs/responsive/source-280x800.png",
+    "electron_narrow_geometry": "evidence/oracle-inputs/responsive/source-280x800.geometry.json",
+    "native_narrow": "evidence/visual-parity/responsive-native-current/native-280x800.layout.json",
+    "native_narrow_png": "evidence/visual-parity/responsive-native-current/native-280x800.png",
+    "sidebar_source_collapsed": "evidence/phase-b/source-interaction-states/generated-v3/sidebar/collapsed/source.json",
+    "sidebar_source_collapsed_png": "evidence/phase-b/source-interaction-states/generated-v3/sidebar/collapsed/source.png",
+    "sidebar_source_expanded": "evidence/phase-b/source-interaction-states/generated-v3/sidebar/expanded/source.json",
+    "sidebar_source_expanded_png": "evidence/phase-b/source-interaction-states/generated-v3/sidebar/expanded/source.png"
+  },
+  "desktop_1200x800": {
+    "electron": {
+      "main": [280, 0, 920, 800],
+      "sidebar_toggle": [93, 8, 28, 28],
+      "new_session_button": [123, 8, 28, 28],
+      "project_breadcrumb_text_ink": [357.234375, 15, 30.421875, 15],
+      "session_title_text_ink": [403.546875, 15, 210.8671875, 15],
+      "composer": [296, 647.5, 887, 112],
+      "composer_footer": [296, 759.5, 887, 24.5],
+      "model_text_ink": [447.1015625, 727, 102.828125, 15],
+      "status_button": [1091.234375, 722.5, 80.765625, 24],
+      "status_text_ink": [1118.234375, 727, 46.765625, 15],
+      "footer_local_text_ink": [320, 769, 27.8125, 13],
+      "footer_escape_box": [359.8125, 767.75, 28.0625, 16],
+      "footer_escape_text_ink": [364.8125, 769.75, 18.0625, 12],
+      "footer_interrupt_text_ink": [391.875, 769, 45.53125, 13]
+    },
+    "native_current": {
+      "main": [280, 0, 908, 788],
+      "sidebar_toggle": [93, 8, 28, 28],
+      "project_breadcrumb_measured_text": [357, 16, 31, 13],
+      "session_title_measured_text": [403, 16, 211, 13],
+      "composer": [296, 636, 875, 112],
+      "composer_footer": [296, 748, 875, 24],
+      "model_node": [447, 714, 103, 18],
+      "model_measured_text": [447, 714, 0, 36],
+      "status_button": [1079, 711, 81, 24],
+      "status_text": [1106, 715, 47, 18],
+      "footer_local_measured_text": [320, 756, 28, 17],
+      "footer_escape_node": [360, 756, 29, 16],
+      "footer_escape_measured_text": [360, 756, 29, 10],
+      "footer_interrupt_measured_text": [392, 756, 47, 17]
+    }
+  },
+  "narrow_280x800": {
+    "electron_observed": {
+      "composer_textarea": [1, 578.5, 265, 64],
+      "model_visual_line_count": 2,
+      "title_visibility": "hidden"
+    },
+    "native_current": {
+      "main": [12, 0, 256, 788],
+      "content": [12, 46, 255, 742],
+      "composer": [12, 578, 255, 186],
+      "composer_footer": [12, 764, 255, 24],
+      "model_measured_text": [87, 675, 0, 54],
+      "model_visual_line_count": 3,
+      "status_button": [175, 690, 81, 24],
+      "status_text": [202, 694, 47, 18],
+      "footer_local_measured_text": [36, 772, 28, 17],
+      "footer_escape_measured_text": [76, 772, 29, 10],
+      "footer_interrupt_measured_text": [108, 772, 47, 17],
+      "title_visibility": "hidden"
+    }
+  },
+  "gates": [
+    {
+      "id": "desktop_main_full_extent",
+      "requirement": "The main imported root reaches the viewport right and bottom edges at the desktop reference size.",
+      "expected": {"right": 1200, "bottom": 800},
+      "native_current": {"right": 1188, "bottom": 788},
+      "status": "fail"
+    },
+    {
+      "id": "sidebar_toggle_fixed_slot",
+      "requirement": "The sidebar toggle remains in the same reserved toolbar slot in expanded, collapsed, and responsive states.",
+      "expected": [93, 8, 28, 28],
+      "observed_expanded_source": [93, 8, 28, 28],
+      "observed_expanded_native": [93, 8, 28, 28],
+      "observed_narrow_native": [93, 8, 28, 28],
+      "observed_collapsed_native": null,
+      "status": "fail_missing_post_interaction_evidence"
+    },
+    {
+      "id": "sidebar_toggle_title_non_overlap",
+      "requirement": "After sidebar collapse, visible breadcrumb/title rectangles must not intersect the reserved sidebar-toggle rectangle.",
+      "expected": {"intersection_area": 0, "minimum_gap": 0},
+      "status": "red_unevaluable",
+      "reason": "No native post-click visual state exists, and the stored collapsed Electron screenshot and geometry JSON disagree about the main-panel position. A fresh source capture pair is required before exact collapsed-state bounds can be frozen."
+    },
+    {
+      "id": "composer_right_bottom_anchor",
+      "requirement": "At 1200x800 the composer and its footer preserve source right and bottom anchors while the window resizes.",
+      "expected": {"composer_right": 1183, "footer_bottom": 784},
+      "native_current": {"composer_right": 1171, "footer_bottom": 772},
+      "status": "fail"
+    },
+    {
+      "id": "model_measurement_consistency",
+      "requirement": "Measured text height must fit its allocated node and match the source visual line count at each breakpoint.",
+      "desktop": {"allocated_height": 18, "measured_height": 36, "status": "fail"},
+      "narrow": {"source_visual_lines": 2, "native_visual_lines": 3, "status": "fail"},
+      "status": "fail"
+    },
+    {
+      "id": "footer_baseline_group",
+      "requirement": "Local, escape, and interrupt text share a visual baseline; source internal KBD padding and border are preserved.",
+      "source_ink_bottoms": [782, 781.75, 782],
+      "native_measured_bottoms": [773, 766, 773],
+      "source_bottom_spread": 0.25,
+      "native_bottom_spread": 7,
+      "status": "fail"
+    },
+    {
+      "id": "status_button_shape_and_anchor",
+      "requirement": "The status control preserves its source pill size, radius, and right/bottom placement across button states.",
+      "source_size": [80.765625, 24],
+      "native_size": [81, 24],
+      "source_origin": [1091.234375, 722.5],
+      "native_origin": [1079, 711],
+      "size_status": "pass_rounding_tolerance",
+      "anchor_status": "fail",
+      "skin_status": "requires_state_matrix_capture",
+      "status": "fail"
+    },
+    {
+      "id": "topbar_text_vertical_alignment",
+      "requirement": "Breadcrumb and title text ink match the source vertical bounds and share one baseline with neighboring top-bar controls.",
+      "source": {"top": 15, "height": 15, "bottom": 30},
+      "native_current": {"top": 16, "height": 13, "bottom": 29},
+      "status": "fail"
+    }
+  ],
+  "capture_requirements": {
+    "states": [
+      "desktop-expanded",
+      "desktop-collapsed-post-click",
+      "desktop-composer-model-menu-open",
+      "desktop-status-default-hover-pressed",
+      "narrow-expanded"
+    ],
+    "each_state_must_include": [
+      "source_png",
+      "source_geometry_json",
+      "native_png",
+      "native_layout_json",
+      "interaction_receipt",
+      "freshness_manifest"
+    ],
+    "rule": "A state is not green when the action receipt changes but the imported visual tree and screenshot do not change as required."
+  }
+}

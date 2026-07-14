@@ -117,6 +117,12 @@ struct OpenCodeProcess::State {
 		OpenCodeRequest request;
 		std::weak_ptr<OpenCodeEventSink> sink;
 	};
+	struct PendingControl {
+		std::uint64_t generation = 0;
+		std::string action;
+		std::string message_id;
+		std::weak_ptr<OpenCodeEventSink> sink;
+	};
 	Options options;
 	std::atomic<bool> running{false};
 	std::atomic<bool> connection_alive{false};
@@ -125,6 +131,7 @@ struct OpenCodeProcess::State {
 	std::mutex process_mutex;
 	std::condition_variable changed;
 	std::deque<PendingRequest> requests;
+	std::deque<PendingControl> controls;
 	bool shutdown = false;
 	pid_t pid = -1;
 	int input_fd = -1;
@@ -191,6 +198,21 @@ bool OpenCodeProcess::start(OpenCodeRequest request,
 		state_->requests.push_back({generation, std::move(request), sink});
 	}
 	if (!worker_.joinable()) worker_ = std::jthread([state = state_] { run(state); });
+	state_->changed.notify_one();
+	return true;
+}
+
+bool OpenCodeProcess::session_action(std::string action, std::string message_id,
+	                                 std::weak_ptr<OpenCodeEventSink> sink) {
+	if ((action != "session.fork" && action != "session.revert") ||
+	    message_id.empty() || sink.expired() || !state_->connection_alive.load() ||
+	    state_->running.load()) return false;
+	{
+		std::scoped_lock lock(state_->process_mutex);
+		if (state_->project_id.empty() || state_->session_id.empty()) return false;
+		state_->controls.push_back({state_->generation.load(), std::move(action),
+		                            std::move(message_id), sink});
+	}
 	state_->changed.notify_one();
 	return true;
 }
@@ -361,8 +383,37 @@ void OpenCodeProcess::run(std::shared_ptr<State> state) {
 			State::PendingRequest current;
 			{
 				std::unique_lock lock(state->process_mutex);
-				state->changed.wait(lock, [&] { return state->shutdown || !state->requests.empty(); });
-				if (state->shutdown && state->requests.empty()) break;
+				state->changed.wait(lock, [&] {
+					return state->shutdown || !state->requests.empty() || !state->controls.empty();
+				});
+				if (state->shutdown && state->requests.empty() && state->controls.empty()) break;
+				if (!state->controls.empty()) {
+					auto control = std::move(state->controls.front());
+					state->controls.pop_front();
+					const auto control_id = "control-" + std::to_string(control.generation) + "-" +
+					                        std::to_string(control.message_id.size());
+					const auto project_id = state->project_id;
+					const auto session_id = state->session_id;
+					lock.unlock();
+					try {
+						send({{"version", 1}, {"type", "command"}, {"id", control_id},
+						      {"command", {{"type", control.action}, {"projectId", project_id},
+						                   {"sessionId", session_id}, {"messageId", control.message_id}}}});
+						auto result = response(control_id);
+						if (!result.value("ok", false)) throw std::runtime_error(json_error(result));
+						if (control.action == "session.fork") {
+							const auto forked_id = result.at("value").value("id", "");
+							if (forked_id.empty()) throw std::runtime_error("OpenCode fork returned no session id");
+							std::scoped_lock state_lock(state->process_mutex);
+							state->session_id = forked_id;
+						}
+						emit(control.sink, control.generation, "session-action",
+						     Json{{"action", control.action}, {"value", result.at("value")}}.dump());
+					} catch (const std::exception& error) {
+						emit(control.sink, control.generation, "error", error.what());
+					}
+					continue;
+				}
 				current = std::move(state->requests.front());
 				state->requests.pop_front();
 			}
@@ -397,6 +448,14 @@ void OpenCodeProcess::run(std::shared_ptr<State> state) {
 				Json prompt_command = {{"type", retry ? "prompt.retry" : "prompt.send"}, {"projectId", state->project_id},
 				                       {"sessionId", state->session_id}, {"requestId", state->request_id}, {"text", request.prompt},
 				                       {"model", {{"providerId", request.provider_id}, {"modelId", request.model_id}}}};
+				if (!request.attachments.empty()) {
+					prompt_command["files"] = Json::array();
+					for (const auto& attachment : request.attachments)
+						prompt_command["files"].push_back({{"type", "file"},
+						                                   {"url", attachment.url},
+						                                   {"mediaType", attachment.media_type},
+						                                   {"filename", attachment.filename}});
+				}
 				if (retry) prompt_command["failedRequestId"] = request.failed_request_id;
 				send({{"version", 1}, {"type", "command"}, {"id", state->request_id}, {"command", std::move(prompt_command)}});
 				if (state->cancelled.load())
@@ -429,7 +488,10 @@ void OpenCodeProcess::run(std::shared_ptr<State> state) {
 					const auto sdk_type = sdk.value("type", "");
 					if (!sdk.contains("properties") || !sdk.at("properties").is_object()) continue;
 					const auto& properties = sdk.at("properties");
-					if (sdk_type == "message.part.updated") {
+					if (sdk_type == "message.updated") {
+						const auto& info = properties.at("info");
+						if (info.is_object()) emit(sink, generation, "message", info.dump());
+					} else if (sdk_type == "message.part.updated") {
 						const auto& part = properties.at("part");
 						part_types[part.value("id", "")] = part.value("type", "");
 						if (part.value("type", "") == "tool") emit(sink, generation, "tool", part.dump());
@@ -437,7 +499,10 @@ void OpenCodeProcess::run(std::shared_ptr<State> state) {
 							emit(sink, generation, "reasoning", part.dump());
 					} else if (sdk_type == "message.part.delta" && properties.value("field", "") == "text") {
 						if (part_types[properties.value("partID", "")] == "text")
-							emit(sink, generation, "text", properties.value("delta", ""));
+							emit(sink, generation, "text",
+							     Json{{"messageID", properties.value("messageID", "")},
+							          {"partID", properties.value("partID", "")},
+							          {"delta", properties.value("delta", "")}}.dump());
 					} else if (sdk_type == "session.idle") break;
 					else if (sdk_type == "session.error") throw std::runtime_error("OpenCode session error");
 				}

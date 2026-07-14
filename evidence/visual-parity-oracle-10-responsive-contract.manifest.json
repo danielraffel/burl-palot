@@ -16,36 +16,36 @@
     "candidate_repeats": [
       {
         "backend": "skia-dawn-metal",
-        "captured_at": "2026-07-12T07:00:00Z",
+        "captured_at": "2026-07-12T15:05:11Z",
         "dpr": 2,
         "fonts": [
           {
-            "family": ".AppleSystemUIFont / SFNS",
+            "family": ".SF NS + Menlo runtime-used",
             "path": "oracle-inputs/candidate-font-receipt.json",
-            "sha256": "7cc3b57e361ae0d5e9a6ca861d7254bd37a74263c617f85b5ed11aab90b9ec64"
+            "sha256": "f4bfc7cfff9e17133191fed3b3b36eef9ea5645120343df4eaf5d67552ab6ba3"
           }
         ],
         "height": 1600,
         "path": "oracle-inputs/native-repeat-1.png",
-        "revision": "working-tree-00d3d8b1b02ec2560904b498594fa899dcad609e",
-        "sha256": "3f22827d9bff31b42fbd316b1a01cdd764e1f56da1b7643ba040154b31b7cfc5",
+        "revision": "82864050334aa96ce68792c22c08ff6fab6d1128",
+        "sha256": "8364388e7794201c3695ddbcf7eb82df503ae46e7d572d26e8b027ed32cb376b",
         "width": 2400
       },
       {
         "backend": "skia-dawn-metal",
-        "captured_at": "2026-07-12T07:01:00Z",
+        "captured_at": "2026-07-12T15:05:11Z",
         "dpr": 2,
         "fonts": [
           {
-            "family": ".AppleSystemUIFont / SFNS",
+            "family": ".SF NS + Menlo runtime-used",
             "path": "oracle-inputs/candidate-font-receipt.json",
-            "sha256": "7cc3b57e361ae0d5e9a6ca861d7254bd37a74263c617f85b5ed11aab90b9ec64"
+            "sha256": "f4bfc7cfff9e17133191fed3b3b36eef9ea5645120343df4eaf5d67552ab6ba3"
           }
         ],
         "height": 1600,
         "path": "oracle-inputs/native-repeat-2.png",
-        "revision": "working-tree-00d3d8b1b02ec2560904b498594fa899dcad609e",
-        "sha256": "3f22827d9bff31b42fbd316b1a01cdd764e1f56da1b7643ba040154b31b7cfc5",
+        "revision": "82864050334aa96ce68792c22c08ff6fab6d1128",
+        "sha256": "8364388e7794201c3695ddbcf7eb82df503ae46e7d572d26e8b027ed32cb376b",
         "width": 2400
       }
     ],
@@ -89,19 +89,19 @@
   },
   "candidate": {
     "backend": "skia-dawn-metal",
-    "captured_at": "2026-07-12T07:00:00Z",
+    "captured_at": "2026-07-12T15:05:11Z",
     "dpr": 2,
     "fonts": [
       {
-        "family": ".AppleSystemUIFont / SFNS",
+        "family": ".SF NS + Menlo runtime-used",
         "path": "oracle-inputs/candidate-font-receipt.json",
-        "sha256": "7cc3b57e361ae0d5e9a6ca861d7254bd37a74263c617f85b5ed11aab90b9ec64"
+        "sha256": "f4bfc7cfff9e17133191fed3b3b36eef9ea5645120343df4eaf5d67552ab6ba3"
       }
     ],
     "height": 1600,
     "path": "oracle-inputs/native-repeat-1.png",
-    "revision": "working-tree-00d3d8b1b02ec2560904b498594fa899dcad609e",
-    "sha256": "3f22827d9bff31b42fbd316b1a01cdd764e1f56da1b7643ba040154b31b7cfc5",
+    "revision": "82864050334aa96ce68792c22c08ff6fab6d1128",
+    "sha256": "8364388e7794201c3695ddbcf7eb82df503ae46e7d572d26e8b027ed32cb376b",
     "width": 2400
   },
   "critical_regions": [

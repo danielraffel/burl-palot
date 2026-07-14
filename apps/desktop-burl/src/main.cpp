@@ -2,6 +2,7 @@
 
 #include <pulp/view/window_host.hpp>
 #include <pulp/view/accessibility_tree.hpp>
+#include <pulp/view/layout_snapshot.hpp>
 #include <pulp/events/main_thread_dispatcher.hpp>
 #include <pulp/canvas/font_flight_recorder.hpp>
 #include <pulp/canvas/font_resolver.hpp>
@@ -9,6 +10,7 @@
 
 #include <fstream>
 #include <filesystem>
+#include <exception>
 #include <iostream>
 #include <string>
 #include <string_view>
@@ -36,15 +38,22 @@ std::string read_text(const std::filesystem::path& path) {
 	return input ? std::string(std::istreambuf_iterator<char>(input), {}) : std::string{};
 }
 
+pulp::view::WindowAppearance window_appearance_for_theme(std::string_view theme) {
+	if (theme == "light") return pulp::view::WindowAppearance::light;
+	if (theme == "dark") return pulp::view::WindowAppearance::dark;
+	return pulp::view::WindowAppearance::system;
+}
+
 }  // namespace
 
-int main(int argc, char** argv) {
+int run_palot(int argc, char** argv) {
 	pulp::canvas::FontResolver::instance().set_family_alias("monospace", "Menlo");
 	std::string demo_project;
 	std::string demo_prompt;
 	std::string demo_capture;
 	std::string font_receipt;
 	std::string demo_evidence;
+	std::string layout_dump;
 	bool demo_cancel_retry = false;
 	bool visual_parity_fixture = false;
 	float window_width = 1200.0f;
@@ -56,6 +65,7 @@ int main(int argc, char** argv) {
 		else if (argument == "--demo-capture" && index + 1 < argc) demo_capture = argv[++index];
 		else if (argument == "--font-receipt" && index + 1 < argc) font_receipt = argv[++index];
 		else if (argument == "--demo-evidence" && index + 1 < argc) demo_evidence = argv[++index];
+		else if (argument == "--layout-dump" && index + 1 < argc) layout_dump = argv[++index];
 		else if (argument == "--demo-cancel-retry-proof") demo_cancel_retry = true;
 		else if (argument == "--demo-state" && index + 1 < argc)
 			setenv("PALOT_STATE_PATH", argv[++index], 1);
@@ -106,6 +116,10 @@ int main(int argc, char** argv) {
 		std::cerr << "Palot: native WindowHost is unavailable\n";
 		return 1;
 	}
+	root.on_window_appearance_change = [&window](pulp::view::WindowAppearance appearance) {
+		window->set_appearance(appearance);
+	};
+	window->set_appearance(window_appearance_for_theme(root.theme_preference()));
 	window->set_close_callback([] {});
 	std::jthread demo_starter;
 	if ((!demo_project.empty() && !demo_prompt.empty()) || visual_parity_fixture) {
@@ -134,7 +148,7 @@ int main(int argc, char** argv) {
 				}, 3000);
 			};
 		}
-		root.on_demo_complete = [&root, &window, demo_capture, font_receipt, demo_evidence,
+		root.on_demo_complete = [&root, &window, demo_capture, font_receipt, demo_evidence, layout_dump,
 		                         demo_cancel_retry, proof_session] {
 			if (demo_cancel_retry && (proof_session->empty() || root.demo_session_id() != *proof_session)) {
 				if (!demo_evidence.empty())
@@ -144,6 +158,14 @@ int main(int argc, char** argv) {
 			}
 			if (!demo_evidence.empty()) write_text(demo_evidence + ".progress", "streamed\ncancelled\nretried\ndone\n");
 			root.flush_demo_projection();
+			if (!layout_dump.empty()) {
+				pulp::view::LayoutTreeSnapshotOptions snapshot_options;
+				snapshot_options.surface = "burl-palot";
+				snapshot_options.fixture = "visual-parity";
+				snapshot_options.viewport_width = root.bounds().width;
+				snapshot_options.viewport_height = root.bounds().height;
+				write_text(layout_dump, pulp::view::dump_layout_tree(root, snapshot_options));
+			}
 			if (!demo_evidence.empty()) {
 				nlohmann::json nodes = nlohmann::json::array();
 				for (const auto& node : pulp::view::snapshot_accessibility_tree(root))
@@ -156,17 +178,25 @@ int main(int argc, char** argv) {
 				root.request_repaint();
 				window->mark_dirty();
 				window->repaint();
-				std::thread([&window, demo_capture, font_receipt] {
-					std::this_thread::sleep_for(std::chrono::milliseconds(750));
-					pulp::events::MainThreadDispatcher::call_async([&window, demo_capture, font_receipt] {
+				pulp::events::MainThreadDispatcher::call_async_after(
+					[&root, &window, demo_capture, font_receipt] {
+						// Dynamic collection binding and responsive reconciliation can
+						// invalidate layout during the first fixture frame. Capture only
+						// after a second explicit layout/paint turn so evidence never
+						// records a partially materialized back buffer.
+						root.layout_children();
+						root.request_repaint();
+						window->mark_dirty();
+						window->repaint();
+						pulp::events::MainThreadDispatcher::call_async_after([&window, demo_capture, font_receipt] {
 						const auto png = window->capture_back_buffer_png();
 						if (!demo_capture.empty() && !png.empty() && write_png(demo_capture, png))
 							std::cout << "demo capture: " << demo_capture << '\n';
 						if (!font_receipt.empty() &&
 						    write_text(font_receipt, pulp::canvas::flight_recorder_drain_json()))
 							std::cout << "font receipt: " << font_receipt << '\n';
-					});
-				}).detach();
+						}, 100);
+					}, 750);
 			}
 		};
 		demo_starter = std::jthread(
@@ -186,4 +216,16 @@ int main(int argc, char** argv) {
 	}
 	window->run_event_loop();
 	return 0;
+}
+
+int main(int argc, char** argv) {
+	try {
+		return run_palot(argc, argv);
+	} catch (const std::exception& error) {
+		std::cerr << "Palot: startup failed: " << error.what() << '\n';
+		return 1;
+	} catch (...) {
+		std::cerr << "Palot: startup failed with an unknown error\n";
+		return 1;
+	}
 }

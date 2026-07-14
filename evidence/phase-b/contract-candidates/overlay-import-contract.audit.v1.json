@@ -1,0 +1,148 @@
+{
+  "schema": "burl-overlay-import-contract-audit-v1",
+  "status": "green",
+  "scope": "product-neutral observed-overlay projection and native execution readiness",
+  "sourceRevision": "fd63a75dad3d0e8555ba22a47e720d285889fbf0",
+  "sourceEvidence": {
+    "projectSearchTooltip": {
+      "closed": "evidence/phase-b/source-interaction-states/generated-v3/project-search-tooltip/closed/source.json",
+      "open": "evidence/phase-b/source-interaction-states/generated-v3/project-search-tooltip/open/source.json",
+      "interaction": "evidence/phase-b/source-interaction-states/generated-v3/project-search-tooltip/evidence/interactions.json",
+      "atomicClosed": "evidence/phase-b/source-interaction-states/generated-v9/sidebar/project-search-tooltip/initial/source.json",
+      "atomicOpen": "evidence/phase-b/source-interaction-states/generated-v9/sidebar/project-search-tooltip/hover-project-search-tooltip/source.json",
+      "atomicInteraction": "evidence/phase-b/source-interaction-states/generated-v9/sidebar/project-search-tooltip/evidence.json",
+      "authoredTiming": {
+        "sourcePath": "packages/ui/src/components/tooltip.tsx",
+        "sourceLine": 5,
+        "sourceSha256": "929a3a2f90a684f6eb2799d43c56d78e48b55c22ca6367d16a6f0bf8baa7ef9c",
+        "openDelayMs": 0
+      },
+      "observed": [
+        "hover activation targets one stable source button",
+        "open capture mounts one data-slot tooltip-content",
+        "content records side bottom and align center",
+        "authored provider delay is zero milliseconds and trusted pointer entry mounts content within a measured renderer/host bracket"
+      ]
+    },
+    "usagePopover": {
+      "closed": "evidence/phase-b/source-interaction-states/generated-v4/usage/closed/source.json",
+      "open": "evidence/phase-b/source-interaction-states/generated-v4/usage/open/source.json",
+      "openFocused": "evidence/phase-b/source-interaction-states/generated-v4/usage/open-focused/source.json",
+      "closedAfterDismiss": "evidence/phase-b/source-interaction-states/generated-v4/usage/closed-after-dismiss/source.json",
+      "interaction": "evidence/phase-b/source-interaction-states/generated-v4/usage/evidence/interactions.json",
+      "atomicClosed": "evidence/phase-b/source-interaction-states/generated-v9/topbar/usage-popover/initial/source.json",
+      "atomicTriggerFocused": "evidence/phase-b/source-interaction-states/generated-v9/topbar/usage-popover/focus-usage-popover-trigger/source.json",
+      "atomicOpen": "evidence/phase-b/source-interaction-states/generated-v9/topbar/usage-popover/open-usage-popover/source.json",
+      "closedAfterOutsidePointer": "evidence/phase-b/source-interaction-states/generated-v9/topbar/usage-popover/dismiss-usage-popover-outside-pointer/source.json",
+      "outsideInteraction": "evidence/phase-b/source-interaction-states/generated-v9/topbar/usage-popover/evidence.json",
+      "observed": [
+        "pointer activation targets one stable source button",
+        "open capture mounts one data-slot popover-content with role dialog",
+        "content focus is captured",
+        "one trusted outside pointerdown, pointerup, and click sequence removes the dialog",
+        "trusted Tab focus establishes the trigger source identity before open",
+        "outside dismissal returns focus to that exact trigger source identity"
+      ]
+    }
+  },
+  "frameworkProjection": {
+    "path": "packages/pulp-import-ir/src/overlay-contract.ts",
+    "test": "packages/pulp-import-ir/test/overlay-contract.test.ts",
+    "nativeProjection": "packages/pulp-import-ir/src/native-design-ir-v1.ts",
+    "nativeMaterializer": "core/view/src/design_import_native_common.cpp",
+    "nativeTest": "test/test_design_import_native_materializer.cpp [overlay-contract]",
+    "contract": "Closed and open ObservedDOM captures plus the captured activation target produce a typed trigger/content relationship only through ARIA references or matching source data-slot families. The live element-path target is joined to the closed tree and then carried across state by authored stable identity so portal focus infrastructure cannot break the relationship. The reviewed contract is projected to native attributes and consumed by one product-neutral materializer for hover/click activation, captured hover-open timing, anchored side/alignment placement, evidence-gated dismissal, and evidence-gated focus restoration. Geometry and text matching are forbidden and ambiguous relationships fail closed.",
+    "canonicalIrMutation": false
+  },
+  "nativeAppKitEvidence": {
+    "receipt": "evidence/phase-b/native-overlay-appkit-v1/receipt.json",
+    "harness": "test/mac_window_harness.hpp and test/mac_window_harness.mm",
+    "test": "test/test_mac_platform_harness.cpp [overlay-contract]",
+    "result": "68 assertions in 3 test cases passed",
+    "screenshots": "evidence/phase-b/native-overlay-appkit-v1"
+  },
+  "nativeVisualEvidence": {
+    "manifest": "evidence/phase-b/native-overlay-visual-parity/generated-v7/manifest.json",
+    "result": "evidence/phase-b/native-overlay-visual-parity/candidates-v10/evidence.json",
+    "sourceScreenshots": "evidence/phase-b/native-overlay-visual-parity/generated-v7/source",
+    "nativeScreenshots": "evidence/phase-b/native-overlay-visual-parity/candidates-v10",
+    "comparison": "same pixel dimensions, real Skia raster, tolerance-MAE plus region edge diff; SSIM retained as a diagnostic metric but is not used as an uncalibrated blocking threshold"
+  },
+  "existingNativePrimitives": [
+    {
+      "path": "core/view/include/pulp/view/callout_box.hpp",
+      "capability": "edge-aware anchored placement"
+    },
+    {
+      "path": "core/view/include/pulp/view/app_components.hpp",
+      "capability": "focus scope, Escape dismissal, and focus restoration"
+    },
+    {
+      "path": "test/test_overlay_routing.cpp",
+      "capability": "active overlay routing and outside-click dispatch contract"
+    }
+  ],
+  "gates": [
+    {
+      "id": "typed-trigger-content-projection",
+      "status": "green",
+      "proof": "The shared extractor has focused tests for tooltip, popover, ARIA-linked menu, unrelated portal failure, stable trigger/content metadata application, ambiguity rejection, and end-to-end native-attribute projection."
+    },
+    {
+      "id": "native-materializer-overlay-execution",
+      "status": "green",
+      "proof": "The focused native materializer suite passes 27 assertions across click-popover and hover-tooltip cases. It proves default-hidden content, hover/click activation, captured delayed hover scheduling and cancellation, side/alignment placement with root-edge clamping, evidence policy flags, active-overlay ownership, focus entry, captured focus restoration, trigger-toggle dismissal, and hover-leave dismissal without consumer coordinates."
+    },
+    {
+      "id": "project-tooltip-source-open-placement",
+      "status": "green",
+      "proof": "The project search cohort captures hover activation and a newly mounted tooltip-content with bottom/center placement."
+    },
+    {
+      "id": "usage-source-open-focus-escape",
+      "status": "green",
+      "proof": "The generated-v4 usage cohort captures pointer open, focused dialog content, trusted Escape key events, and removal."
+    },
+    {
+      "id": "source-focus-restoration",
+      "status": "green",
+      "proof": "The generated-v9 usage cohort uses trusted Tab events to focus the trigger before opening. The focus action target, the pointer-open focusBefore identity, and the outside-dismiss focusAfter identity are the same stable source ID."
+    },
+    {
+      "id": "source-outside-pointer-dismissal",
+      "status": "green",
+      "proof": "The generated-v9 usage cohort records exactly one trusted outside pointerdown, pointerup, and click sequence; the post-action source tree contains no popover-content, and focus returns to the exact trigger identity established by trusted Tab focus before opening."
+    },
+    {
+      "id": "native-appkit-tooltip-hover",
+      "status": "green",
+      "proof": "The source tooltip provider authors a zero-millisecond delay at the pinned source revision. Generated-v6 records trusted pointer entry and bounded mount timing; production AppKit coordinates prove immediate hover open, captured placement, leave close, and same-viewport GPU screenshots. The generic runtime and focused native test also prove nonzero imported delays are scheduled and cancellable."
+    },
+    {
+      "id": "native-appkit-tooltip-coordinate-execution",
+      "status": "green",
+      "proof": "The production hidden NSWindow/CAMetalLayer harness routes mouseMoved through the real host, opens and edge-clamps the imported tooltip, closes it on leave, and captures byte-identical closed-before/after GPU frames."
+    },
+    {
+      "id": "native-appkit-popover-open-focus-escape",
+      "status": "green",
+      "proof": "Production AppKit Tab focuses the trigger, coordinate mouse down/up opens and places the imported popover, focus enters its editor, and AppKit Escape dismisses and restores trigger focus. Closed-before and Escape-closed GPU screenshots are byte-identical."
+    },
+    {
+      "id": "native-appkit-popover-outside-dismissal",
+      "status": "green",
+      "proof": "The generated-v6 source cohort authorizes outside-pointer dismissal. The production AppKit route executes that imported property, dismisses on outside mouseDown, preserves click-through, restores trigger focus when the outside target is non-focusable, and captures the closed GPU frame."
+    },
+    {
+      "id": "native-appkit-outside-dismiss-policy-capability",
+      "status": "green",
+      "proof": "Production AppKit mouseDown outside the active overlay retains it when the contract flag is false and dismisses it when an explicit generic contract flag is true."
+    },
+    {
+      "id": "native-visual-parity",
+      "status": "green",
+      "proof": "Atomic generated-v9 source states and generated-v7 exact node crops are compared to real Skia-native captures at identical pixel dimensions. The tooltip passes MAE 0.078041 and edge diff 0.054245; the usage popover passes MAE 0.022785 and edge diff 0.016485. Both have empty blocker and visual-gap lists. Generic fixes cover observed absolute placement, border-aware block-to-column lowering, nested CSS-grid execution, source-resolved grid tracks, single-line geometry preservation, and exact macOS system-face receipt matching."
+    }
+  ],
+  "decision": "The product-neutral importer-to-native materialization path, authored tooltip timing, trusted outside dismissal, exact source focus restoration, production AppKit execution, and same-pixel source/native visual gate are GREEN. Do not add a Palot-specific tooltip or popover and do not mutate canonical IR."
+}

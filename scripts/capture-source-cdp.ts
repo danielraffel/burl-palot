@@ -1,9 +1,137 @@
 #!/usr/bin/env bun
 
+import { createHash } from "node:crypto"
 import { mkdir, readFile, writeFile } from "node:fs/promises"
 import { resolve } from "node:path"
 
 type Json = Record<string, unknown>
+
+export interface CdpCommandSurface {
+	command(method: string, params?: Json): Promise<unknown>
+}
+
+export interface AtomicCaptureProof {
+	attempt: number
+	maxAttempts: number
+	settleFrames: number
+	settleTimeoutMs: number
+	settleBarrier: "animation-frames" | "timeout"
+	preSettleSha256: string
+	preScreenshotSha256: string
+	postScreenshotSha256: string
+	stableBeforeScreenshot: true
+	stableAfterScreenshot: true
+}
+
+export interface AtomicCapture<T> {
+	snapshot: T
+	png: Buffer
+	proof: AtomicCaptureProof
+}
+
+function canonicalJson(value: unknown): string {
+	if (value === null || typeof value !== "object") return JSON.stringify(value)
+	if (Array.isArray(value)) return `[${value.map(canonicalJson).join(",")}]`
+	return `{${Object.entries(value as Record<string, unknown>)
+		.sort(([left], [right]) => left.localeCompare(right))
+		.map(([key, entry]) => `${JSON.stringify(key)}:${canonicalJson(entry)}`)
+		.join(",")}}`
+}
+
+function snapshotHash(value: unknown): string {
+	return createHash("sha256").update(canonicalJson(value)).digest("hex")
+}
+
+async function evaluateSnapshot<T>(cdp: CdpCommandSurface, expression: string): Promise<T> {
+	const evaluation = (await cdp.command("Runtime.evaluate", {
+		expression,
+		returnByValue: true,
+		includeCommandLineAPI: true,
+	})) as { exceptionDetails?: unknown; result?: { value?: T } }
+	if (evaluation.exceptionDetails)
+		throw new Error(
+			`source snapshot evaluation failed: ${JSON.stringify(evaluation.exceptionDetails)}`,
+		)
+	if (!evaluation.result || !("value" in evaluation.result))
+		throw new Error("source snapshot evaluation returned no by-value result")
+	return evaluation.result.value as T
+}
+
+/**
+ * Brackets a screenshot with identical, by-value source snapshots. A capture is
+ * accepted only when the source is stable both before and after the PNG command.
+ * This makes a DOM/style snapshot and its pixels one fail-closed evidence unit.
+ */
+export async function captureAtomicFrame<T>(
+	cdp: CdpCommandSurface,
+	snapshotExpression: string,
+	options: { maxAttempts?: number; settleFrames?: number; settleTimeoutMs?: number } = {},
+): Promise<AtomicCapture<T>> {
+	const maxAttempts = options.maxAttempts ?? 4
+	const settleFrames = options.settleFrames ?? 2
+	const settleTimeoutMs = options.settleTimeoutMs ?? 100
+	if (!Number.isInteger(maxAttempts) || maxAttempts < 1)
+		throw new Error("atomic capture maxAttempts must be a positive integer")
+	if (!Number.isInteger(settleFrames) || settleFrames < 1)
+		throw new Error("atomic capture settleFrames must be a positive integer")
+	if (!Number.isInteger(settleTimeoutMs) || settleTimeoutMs < 1)
+		throw new Error("atomic capture settleTimeoutMs must be a positive integer")
+	const settleExpression = `globalThis.__burlAtomicCaptureSettle = Promise.race([new Promise(resolve => {
+let remaining = ${settleFrames};
+const next = () => { if (--remaining === 0) resolve("animation-frames"); else requestAnimationFrame(next); };
+requestAnimationFrame(next);
+}), new Promise(resolve => setTimeout(() => resolve("timeout"), ${settleTimeoutMs}))])`
+	const failures: string[] = []
+	for (let attempt = 1; attempt <= maxAttempts; attempt++) {
+		const preSettle = await evaluateSnapshot<T>(cdp, snapshotExpression)
+		const settle = (await cdp.command("Runtime.evaluate", {
+			expression: settleExpression,
+			awaitPromise: true,
+			returnByValue: true,
+		})) as { result?: { value?: unknown } }
+		const settleBarrier =
+			settle?.result?.value === "animation-frames" ? "animation-frames" : "timeout"
+		const preScreenshot = await evaluateSnapshot<T>(cdp, snapshotExpression)
+		const preSettleSha256 = snapshotHash(preSettle)
+		const preScreenshotSha256 = snapshotHash(preScreenshot)
+		if (preSettleSha256 !== preScreenshotSha256) {
+			failures.push(`attempt ${attempt}: source changed during settle barrier`)
+			continue
+		}
+		const screenshot = (await cdp.command("Page.captureScreenshot", {
+			format: "png",
+			fromSurface: true,
+			captureBeyondViewport: false,
+		})) as { data?: string }
+		if (typeof screenshot?.data !== "string")
+			throw new Error("source screenshot returned no PNG data")
+		const postScreenshot = await evaluateSnapshot<T>(cdp, snapshotExpression)
+		const postScreenshotSha256 = snapshotHash(postScreenshot)
+		if (preScreenshotSha256 !== postScreenshotSha256) {
+			failures.push(`attempt ${attempt}: source changed across screenshot command`)
+			continue
+		}
+		return {
+			snapshot: preScreenshot,
+			png: Buffer.from(screenshot.data, "base64"),
+			proof: {
+				attempt,
+				maxAttempts,
+				settleFrames,
+				settleTimeoutMs,
+				settleBarrier,
+				preSettleSha256,
+				preScreenshotSha256,
+				postScreenshotSha256,
+				stableBeforeScreenshot: true,
+				stableAfterScreenshot: true,
+			},
+		}
+	}
+	throw new Error(
+		`source did not remain stable for an atomic screenshot after ${maxAttempts} attempts: ${failures.join("; ")}`,
+	)
+}
 
 export function bootstrapSource(clock: string, storage: Record<string, string>): string {
 	const epoch = Date.parse(clock)
@@ -33,7 +161,7 @@ if (document.documentElement) apply(); else addEventListener("DOMContentLoaded",
 
 export const semanticExpression = `(() => {
   const visible = (element) => !!element && getComputedStyle(element).display !== "none" && element.getBoundingClientRect().width > 0;
-  const selectedAttributes = ["id", "role", "aria-label", "aria-selected", "aria-expanded", "aria-disabled", "data-slot", "data-state", "data-active", "data-testid"];
+  const selectedAttributes = ["id", "role", "title", "placeholder", "aria-label", "aria-labelledby", "aria-describedby", "aria-selected", "aria-expanded", "aria-disabled", "data-slot", "data-state", "data-active", "data-testid"];
   const sourceId = (element) => {
     const parts = [];
     for (let current = element; current && current.nodeType === 1; current = current.parentElement) {
@@ -87,8 +215,22 @@ export const semanticExpression = `(() => {
       propNames: Object.keys(reactProps).filter(name => /^on[A-Z]/.test(name)).sort()
     } : null;
     const semanticRole = element.getAttribute("role") || (element.tagName.toLowerCase() === "textarea" ? "textbox" : element.tagName.toLowerCase());
+    const interactionEvents = new Set(["auxclick","beforeinput","change","click","contextmenu","dblclick",
+      "focus","focusin","input","keydown","keyup","mousedown","mouseenter","mouseover","mouseup",
+      "pointerdown","pointerenter","pointerover","pointerup","submit"]);
+    const normalizeReactEvent = name => name.slice(2).replace(/Capture$/, "").toLowerCase();
+    const listenerBacked = listeners.some(listener => interactionEvents.has(listener.type.toLowerCase()));
+    const reactBacked = (react?.propNames || []).some(name => interactionEvents.has(normalizeReactEvent(name)));
+    const listenerSurface = listenerBacked && (element.hasAttribute("title") || element.hasAttribute("aria-label") ||
+      element.hasAttribute("tabindex") || style.cursor === "pointer");
     const interactionCandidate = ["button","input","textarea","select","a"].includes(element.tagName.toLowerCase()) ||
-      ["button","checkbox","combobox","link","menuitem","option","radio","slider","switch","tab","textbox"].includes(semanticRole);
+      ["button","checkbox","combobox","link","menuitem","option","radio","slider","switch","tab","textbox"].includes(semanticRole) ||
+      listenerSurface || reactBacked;
+    const referencedText = attribute => (element.getAttribute(attribute) || "").split(/\s+/).filter(Boolean)
+      .map(id => document.getElementById(id)?.innerText || document.getElementById(id)?.textContent || "").join(" ");
+    const accessibleName = element.getAttribute("aria-label") || referencedText("aria-labelledby") ||
+      element.getAttribute("title") || element.getAttribute("placeholder") || element.getAttribute("alt") ||
+      element.innerText || element.value || "";
     return {
       sourceId: sourceId(element),
       tagName: element.tagName.toLowerCase(),
@@ -99,7 +241,7 @@ export const semanticExpression = `(() => {
       ...(interactionCandidate ? {interactionEvidence: {
         enabled: !element.disabled && element.getAttribute("aria-disabled") !== "true",
         role: semanticRole,
-        accessibleName: element.getAttribute("aria-label") || (element.innerText || element.value || "").trim().replace(/\s+/g, " "),
+        accessibleName: accessibleName.trim().replace(/\s+/g, " "),
         listeners,
         ...(react ? {react} : {})
       }} : {}),
@@ -111,6 +253,8 @@ export const semanticExpression = `(() => {
         flexGrow: style.flexGrow, flexShrink: style.flexShrink, flexBasis: style.flexBasis,
         flexWrap: style.flexWrap, alignItems: style.alignItems, alignSelf: style.alignSelf,
         alignContent: style.alignContent, justifyContent: style.justifyContent,
+        gridTemplateColumns: style.gridTemplateColumns, gridTemplateRows: style.gridTemplateRows,
+        gridColumn: style.gridColumn, gridRow: style.gridRow,
         gap: style.gap, padding: style.padding, paddingTop: style.paddingTop,
         paddingRight: style.paddingRight, paddingBottom: style.paddingBottom, paddingLeft: style.paddingLeft,
         margin: style.margin, marginTop: style.marginTop, marginRight: style.marginRight,
@@ -160,7 +304,7 @@ export class Cdp {
 	private nextId = 1
 	private pending = new Map<
 		number,
-		{ resolve: (value: any) => void; reject: (error: Error) => void }
+		{ method: string; resolve: (value: any) => void; reject: (error: Error) => void }
 	>()
 
 	private constructor(socket: WebSocket) {
@@ -175,7 +319,8 @@ export class Cdp {
 			const waiter = this.pending.get(payload.id)
 			if (!waiter) return
 			this.pending.delete(payload.id)
-			if (payload.error) waiter.reject(new Error(JSON.stringify(payload.error)))
+			if (payload.error)
+				waiter.reject(new Error(`${waiter.method}: ${JSON.stringify(payload.error)}`))
 			else waiter.resolve(payload.result)
 		})
 	}
@@ -199,6 +344,7 @@ export class Cdp {
 				rejectCommand(new Error(`CDP command timed out: ${method}`))
 			}, 15000)
 			this.pending.set(id, {
+				method,
 				resolve: (value) => {
 					clearTimeout(timeout)
 					resolveCommand(value)
@@ -263,29 +409,21 @@ new Promise(resolve => setTimeout(resolve, 2500))
 			awaitPromise: true,
 			returnByValue: true,
 		})
-		const semanticResult = await cdp.command("Runtime.evaluate", {
-			expression: semanticExpression,
-			returnByValue: true,
-			includeCommandLineAPI: true,
-		})
-		const screenshot = await cdp.command("Page.captureScreenshot", {
-			format: "png",
-			fromSurface: true,
-			captureBeyondViewport: false,
-		})
+		const atomicCapture = await captureAtomicFrame(cdp, semanticExpression)
 
 		await mkdir(output, { recursive: true })
 		const imagePath = `${output}/source.png`
 		const semanticPath = `${output}/source-semantics.json`
 		const metadataPath = `${output}/source-meta.json`
-		await writeFile(imagePath, Buffer.from(screenshot.data, "base64"))
-		await writeFile(semanticPath, `${JSON.stringify(semanticResult.result.value, null, 2)}\n`)
+		await writeFile(imagePath, atomicCapture.png)
+		await writeFile(semanticPath, `${JSON.stringify(atomicCapture.snapshot, null, 2)}\n`)
 		const osBuild = Bun.spawnSync(["sw_vers", "-buildVersion"]).stdout.toString().trim()
 		const metadata = {
 			lane: "source",
 			revision: manifest.source.revision,
 			osBuild,
 			captureMethod: "CDP.Page.captureScreenshot",
+			atomicity: atomicCapture.proof,
 			clock: manifest.clock,
 			route: manifest.route,
 			logicalWidth: capture.logicalWidth,

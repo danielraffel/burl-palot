@@ -67,13 +67,38 @@ std::size_t lifecycle_count(const std::string& path, std::string_view value) {
 
 int main(int argc, char** argv) {
 	if (argc != 3 || !packaged_handshake(argv[2])) return EXIT_FAILURE;
+	const std::string prompt_log = "/tmp/palot-opencode-prompt-contract.jsonl";
+	std::remove(prompt_log.c_str());
+	setenv("PALOT_FAKE_PROMPT_LOG", prompt_log.c_str(), 1);
 	auto sink = std::make_shared<Sink>();
 	OpenCodeProcess process({.sidecar_path = argv[1], .max_frame_bytes = 64 * 1024});
-	if (!process.start({.project = "/tmp/project", .prompt = "hello"}, sink))
+	if (!process.start({.project = "/tmp/project",
+	                    .prompt = "hello",
+	                    .provider_id = "visible-provider",
+	                    .model_id = "visible-model",
+	                    .attachments = {{.url = "file:///tmp/visible%20attachment.png",
+	                                     .media_type = "image/png",
+	                                     .filename = "visible attachment.png"}}},
+	                   sink))
 		return EXIT_FAILURE;
 	if (!sink->wait_for("done")) return EXIT_FAILURE;
+	{
+		std::ifstream input(prompt_log);
+		std::string line;
+		if (!std::getline(input, line)) return EXIT_FAILURE;
+		const auto command = nlohmann::json::parse(line);
+		if (command.at("model").at("providerId") != "visible-provider" ||
+		    command.at("model").at("modelId") != "visible-model" ||
+		    command.at("files").size() != 1 ||
+		    command.at("files").at(0).at("url") != "file:///tmp/visible%20attachment.png" ||
+		    command.at("files").at(0).at("mediaType") != "image/png" ||
+		    command.at("files").at(0).at("filename") != "visible attachment.png")
+			return EXIT_FAILURE;
+	}
 	bool session = false;
 	bool text = false;
+	bool user_message = false;
+	bool assistant_message = false;
 	bool tool_running = false;
 	bool tool_completed = false;
 	std::size_t tool_updates = 0;
@@ -82,7 +107,20 @@ int main(int argc, char** argv) {
 		std::scoped_lock lock(sink->mutex);
 		for (const auto& event : sink->events) {
 			session |= event.type == "session" && event.value == "session-1";
-			text |= event.type == "text" && event.value == "fixture response";
+			if (event.type == "text") {
+				const auto delta = nlohmann::json::parse(event.value);
+				text |= delta.value("messageID", "") == "assistant-message-1" &&
+				        delta.value("partID", "") == "text-1" &&
+				        delta.value("delta", "") == "fixture response";
+			}
+			if (event.type == "message") {
+				const auto info = nlohmann::json::parse(event.value);
+				user_message |= info.value("id", "") == "user-message-1" &&
+				                info.value("role", "") == "user";
+				assistant_message |= info.value("id", "") == "assistant-message-1" &&
+				                     info.value("role", "") == "assistant" &&
+				                     info.value("parentID", "") == "user-message-1";
+			}
 			if (event.type == "tool") {
 				++tool_updates;
 				tool_running |= event.value.find("\"status\":\"running\"") != std::string::npos &&
@@ -95,8 +133,38 @@ int main(int argc, char** argv) {
 			if (event.run_id != 1) return EXIT_FAILURE;
 		}
 	}
-	if (!session || !text || !tool_running || !tool_completed || tool_updates != 2 ||
+	if (!session || !text || !user_message || !assistant_message || !tool_running || !tool_completed || tool_updates != 2 ||
 	    !reasoning_completed || process.running())
+		return EXIT_FAILURE;
+
+	auto revert_sink = std::make_shared<Sink>();
+	if (!process.session_action("session.revert", "user-message-1", revert_sink) ||
+	    !revert_sink->wait_for("session-action")) return EXIT_FAILURE;
+	{
+		std::scoped_lock lock(revert_sink->mutex);
+		const auto found = std::ranges::find_if(revert_sink->events, [](const auto& event) {
+			if (event.type != "session-action") return false;
+			const auto result = nlohmann::json::parse(event.value);
+			return result.value("action", "") == "session.revert" &&
+			       result.at("value").value("messageID", "") == "user-message-1";
+		});
+		if (found == revert_sink->events.end()) return EXIT_FAILURE;
+	}
+	auto fork_sink = std::make_shared<Sink>();
+	if (!process.session_action("session.fork", "user-message-2", fork_sink) ||
+	    !fork_sink->wait_for("session-action")) return EXIT_FAILURE;
+	{
+		std::scoped_lock lock(fork_sink->mutex);
+		const auto found = std::ranges::find_if(fork_sink->events, [](const auto& event) {
+			if (event.type != "session-action") return false;
+			const auto result = nlohmann::json::parse(event.value);
+			return result.value("action", "") == "session.fork" &&
+			       result.at("value").value("id", "") == "session-forked";
+		});
+		if (found == fork_sink->events.end()) return EXIT_FAILURE;
+	}
+	if (process.session_action("session.fork", "", fork_sink) ||
+	    process.session_action("session.unknown", "user-message-1", fork_sink))
 		return EXIT_FAILURE;
 
 	auto cancelled_sink = std::make_shared<Sink>();

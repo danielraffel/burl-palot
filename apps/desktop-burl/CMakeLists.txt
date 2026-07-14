@@ -62,6 +62,7 @@ if(BURL_PALOT_ENABLE_FRAMEWORK)
 			src/opencode_process.cpp
 			src/project_config.cpp
 			src/palot_view.cpp
+			src/transcript_turn_projection.cpp
 		APP_NAME "Palot"
 		BUNDLE_ID "com.palot.burl"
 		VERSION "0.1.0")
@@ -235,6 +236,10 @@ if(BURL_PALOT_ENABLE_FRAMEWORK)
 		target_include_directories(palot-source-aware-slice-test PRIVATE src)
 		target_link_libraries(palot-source-aware-slice-test PRIVATE
 			nlohmann_json::nlohmann_json pulp-view pulp-state)
+		add_executable(palot-transcript-turn-projection-test
+			test/transcript_turn_projection_test.cpp
+			src/transcript_turn_projection.cpp)
+		target_include_directories(palot-transcript-turn-projection-test PRIVATE src)
 		add_executable(palot-authored-theme-test test/authored_theme_test.cpp)
 		target_link_libraries(palot-authored-theme-test PRIVATE pulp-view)
 		add_executable(palot-phase-b-native-component test/phase_b_native_component.cpp)
@@ -257,6 +262,8 @@ if(BURL_PALOT_ENABLE_FRAMEWORK)
 		add_test(NAME palot-source-aware-slice
 			COMMAND palot-source-aware-slice-test
 				"${CMAKE_CURRENT_SOURCE_DIR}/test/fixtures/source-aware-stream.json")
+		add_test(NAME palot-transcript-turn-projection
+			COMMAND palot-transcript-turn-projection-test)
 		add_test(NAME palot-authored-theme
 			COMMAND palot-authored-theme-test
 				"${CMAKE_CURRENT_SOURCE_DIR}/resources/tokens/palot-authored-theme.sidecar.json")
@@ -295,7 +302,8 @@ if(BURL_PALOT_ENABLE_FRAMEWORK)
 				"${CMAKE_CURRENT_SOURCE_DIR}/contracts/main-chat.application-bindings.v1.json")
 		add_executable(palot-view-interaction-state-test
 			test/palot_view_interaction_state_test.cpp
-			src/palot_view.cpp src/imported_root_host.cpp src/opencode_process.cpp src/project_config.cpp)
+			src/palot_view.cpp src/imported_root_host.cpp src/opencode_process.cpp src/project_config.cpp
+			src/transcript_turn_projection.cpp)
 		target_include_directories(palot-view-interaction-state-test PRIVATE src)
 		target_compile_definitions(palot-view-interaction-state-test PRIVATE
 			PALOT_RESOURCE_SOURCE_ROOT="${CMAKE_CURRENT_SOURCE_DIR}/resources")
@@ -321,8 +329,46 @@ if(BURL_PALOT_ENABLE_FRAMEWORK)
 					"${CMAKE_CURRENT_SOURCE_DIR}/resources/import/main-chat.observed.design-ir.v1.json"
 					"${CMAKE_CURRENT_SOURCE_DIR}/contracts/main-chat.application-bindings.v1.json"
 					"${CMAKE_CURRENT_SOURCE_DIR}/../../evidence/phase-b/interaction-candidates.generated.v1.json"
-					"${CMAKE_CURRENT_SOURCE_DIR}/contracts/main-chat.source-binding-policy.v1.json")
-			set_tests_properties(palot-mac-production-interaction PROPERTIES TIMEOUT 30)
+					"${CMAKE_CURRENT_SOURCE_DIR}/contracts/main-chat.source-binding-policy.v1.json"
+					"${CMAKE_CURRENT_SOURCE_DIR}/../../evidence/phase-b/canonical-overlay-promotion-v1/native")
+			set_tests_properties(palot-mac-production-interaction PROPERTIES TIMEOUT 90)
+			add_test(NAME palot-mac-canonical-overlay-interaction
+				COMMAND palot-mac-production-interaction-test
+					"${CMAKE_CURRENT_SOURCE_DIR}/resources/import/main-chat.observed.design-ir.v1.json"
+					"${CMAKE_CURRENT_SOURCE_DIR}/contracts/main-chat.application-bindings.v1.json"
+					"${CMAKE_CURRENT_SOURCE_DIR}/../../evidence/phase-b/interaction-candidates.generated.v1.json"
+					"${CMAKE_CURRENT_SOURCE_DIR}/contracts/main-chat.source-binding-policy.v1.json"
+					"${CMAKE_CURRENT_SOURCE_DIR}/../../evidence/phase-b/canonical-overlay-promotion-v1/native")
+			set_tests_properties(palot-mac-canonical-overlay-interaction PROPERTIES
+				ENVIRONMENT "PALOT_OVERLAY_PROOF_ONLY=1"
+				TIMEOUT 30)
+			add_executable(palot-mac-settings-appearance-test
+				test/mac_settings_appearance_test.cpp
+				src/imported_root_host.cpp
+				"${BURL_SOURCE_DIR}/test/mac_window_harness.mm")
+			target_include_directories(palot-mac-settings-appearance-test PRIVATE
+				src "${BURL_SOURCE_DIR}/test")
+			target_compile_definitions(palot-mac-settings-appearance-test PRIVATE
+				PALOT_RESOURCE_SOURCE_ROOT="${CMAKE_CURRENT_SOURCE_DIR}/resources")
+			target_link_libraries(palot-mac-settings-appearance-test PRIVATE
+				pulp-view nlohmann_json::nlohmann_json "-framework AppKit" "-framework CoreGraphics")
+			add_executable(palot-mac-layout-transition-census-test
+				test/mac_layout_transition_census_test.cpp
+				src/imported_root_host.cpp
+				"${BURL_SOURCE_DIR}/test/mac_window_harness.mm")
+			target_include_directories(palot-mac-layout-transition-census-test PRIVATE
+				src "${BURL_SOURCE_DIR}/test")
+			target_compile_definitions(palot-mac-layout-transition-census-test PRIVATE
+				PALOT_RESOURCE_SOURCE_ROOT="${CMAKE_CURRENT_SOURCE_DIR}/resources")
+			target_link_libraries(palot-mac-layout-transition-census-test PRIVATE
+				pulp-view nlohmann_json::nlohmann_json "-framework AppKit" "-framework CoreGraphics")
+			add_test(NAME palot-mac-layout-transition-census
+				COMMAND palot-mac-layout-transition-census-test
+					"${CMAKE_CURRENT_SOURCE_DIR}/resources/import/main-chat.observed.design-ir.v1.json"
+					"${CMAKE_CURRENT_SOURCE_DIR}/contracts/main-chat.application-bindings.v1.json"
+					"${CMAKE_CURRENT_SOURCE_DIR}/contracts/source-window.browser-window.v1.json"
+					"${CMAKE_CURRENT_SOURCE_DIR}/../../evidence/visual-parity/native-layout-transition-census-current")
+			set_tests_properties(palot-mac-layout-transition-census PROPERTIES TIMEOUT 90)
 		endif()
 		add_executable(palot-real-opencode-e2e test/real_opencode_e2e.cpp src/opencode_process.cpp)
 		target_include_directories(palot-real-opencode-e2e PRIVATE src)

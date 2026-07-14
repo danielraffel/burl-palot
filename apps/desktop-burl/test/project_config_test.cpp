@@ -1,4 +1,5 @@
 #include "project_config.hpp"
+#include "runtime_session_state.hpp"
 
 #include <cstdlib>
 #include <filesystem>
@@ -45,5 +46,27 @@ int main() {
 	     .create_session = false,
 	     .session_id = "session-1"},
 	    error);
-	return valid && valid->session_id == "session-1" ? EXIT_SUCCESS : EXIT_FAILURE;
+	if (!valid || valid->session_id != "session-1") return EXIT_FAILURE;
+
+	RuntimeSessionState state;
+	state.project = "/tmp";
+	state.session = "visible-session-selection";
+	state.provider = "visible-provider-selection";
+	state.model = "visible-model-selection";
+	state.composer_draft = "visible imported composer text";
+	auto attachment = make_local_file_attachment("/tmp/visible attachment.png");
+	attachment.media_type = "image/png";
+	state.attachments = {std::move(attachment)};
+	const auto request = make_opencode_request(
+	    state, valid->canonical_project_path, state.composer_draft, "retry-request-id");
+	if (request.project != valid->canonical_project_path ||
+	    request.prompt != "visible imported composer text" ||
+	    request.session != "visible-session-selection" ||
+	    request.provider_id != "visible-provider-selection" ||
+	    request.model_id != "visible-model-selection" ||
+	    request.attachments.size() != 1 ||
+	    request.attachments[0].url != "file:///tmp/visible%20attachment.png" ||
+	    request.failed_request_id != "retry-request-id")
+		return EXIT_FAILURE;
+	return EXIT_SUCCESS;
 }

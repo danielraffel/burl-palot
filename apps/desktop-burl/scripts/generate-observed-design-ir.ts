@@ -15,10 +15,24 @@ const outputPath = resolve(args.get("--output") ?? "")
 const sourceRevision = args.get("--source-revision") ?? ""
 const importedAt = args.get("--imported-at") ?? ""
 const bindingPolicyPath = resolve(args.get("--binding-policy") ?? "")
+const applicationBindingsPath = args.get("--application-bindings") ? resolve(args.get("--application-bindings")!) : undefined
+const allowStateOnlyPolicyRules = args.get("--allow-state-only-policy-rules") === "true"
 const fontReceiptPath = resolve(args.get("--font-receipt") ?? "")
+const semanticRoleSemanticsPath = args.get("--semantic-role-semantics")
+	? resolve(args.get("--semantic-role-semantics")!) : undefined
 const motionSemanticsPath = args.get("--motion-semantics") ? resolve(args.get("--motion-semantics")!) : undefined
-const provenanceSemanticsPath = args.get("--provenance-semantics") ? resolve(args.get("--provenance-semantics")!) : undefined
+const provenanceSemanticsPaths = (args.get("--provenance-semantics") ?? "")
+	.split(",").filter(Boolean).map((path) => resolve(path))
 const responsiveSemantics = (args.get("--responsive-semantics") ?? "").split(",").filter(Boolean).map((path) => resolve(path))
+const applicationStateKey = args.get("--application-state-key")
+const applicationStateSemantics = (args.get("--application-state-semantics") ?? "").split(",").filter(Boolean).map((entry) => {
+	const split = entry.indexOf("=")
+	if (split <= 0 || split === entry.length - 1) throw new Error("application state semantics must be state=path")
+	return { state: entry.slice(0, split), path: resolve(entry.slice(split + 1)) }
+})
+const applicationOverlayHosts = (args.get("--application-overlay-hosts") ?? "").split(",").filter(Boolean)
+if (!!applicationStateKey !== !!applicationStateSemantics.length)
+	throw new Error("application state key and semantics must be provided together")
 if (!burlSource || !semanticsPath || !outputPath || !sourceRevision || !importedAt || !bindingPolicyPath || !fontReceiptPath) {
 	throw new Error("required: --burl-source --semantics --output --source-revision --imported-at --binding-policy --font-receipt")
 }
@@ -27,6 +41,14 @@ const modulePath = resolve(burlSource, "packages/pulp-import-ir/src/index.ts")
 const importer = await import(pathToFileURL(modulePath).href)
 const semantics = JSON.parse(await readFile(semanticsPath, "utf8"))
 if (!semantics.observedDom) throw new Error("source semantics has no observedDom tree")
+const semanticRoleSemantics = semanticRoleSemanticsPath
+	? JSON.parse(await readFile(semanticRoleSemanticsPath, "utf8")) : semantics
+if (semanticRoleSemanticsPath && (
+	semanticRoleSemantics.policy?.sourceRevision !== semantics.policy?.sourceRevision ||
+	semanticRoleSemantics.page?.url !== semantics.page?.url ||
+	semanticRoleSemantics.policy?.clock !== semantics.policy?.clock ||
+	JSON.stringify(semanticRoleSemantics.policy?.viewport) !== JSON.stringify(semantics.policy?.viewport)))
+	throw new Error("semantic role semantics crosses source revision, page, clock, or viewport provenance")
 const renderRoot = semantics.observedDom.tagName?.toLowerCase() === "html"
 	? semantics.observedDom.children?.find((child: any) => child.tagName?.toLowerCase() === "body")
 	: semantics.observedDom
@@ -34,6 +56,8 @@ if (!renderRoot) throw new Error("source semantics has no renderable body")
 const styleProvenance = semantics.styleProvenanceByDomOrder as Array<{
 	declarations?: Record<string, unknown>
 	matchedStylesCapture?: string
+	matchedStylesCompleteProperties?: string[]
+	winningDeclarations?: Record<string, string>
 	motion?: unknown[]
 }> | undefined
 const attachStyleProvenance = (node: any, receipts = styleProvenance) => {
@@ -42,19 +66,28 @@ const attachStyleProvenance = (node: any, receipts = styleProvenance) => {
 		if (!receipt) throw new Error(`source semantics has no style provenance at DOM order ${node.provenanceIndex}`)
 		node.styleProvenance = receipt.declarations ?? {}
 		node.styleProvenanceComplete = receipt.matchedStylesCapture === "complete"
+		node.styleProvenanceCompleteProperties = receipt.matchedStylesCompleteProperties ?? []
+		node.styleProvenanceWinners = receipt.winningDeclarations ?? {}
 		if (receipt.motion?.length) node.motion = receipt.motion
 	}
 	for (const child of node.children ?? []) attachStyleProvenance(child, receipts)
 }
 if (styleProvenance) attachStyleProvenance(renderRoot)
-let supplementalProvenanceBySourceId = new Map<string, { declarations?: Record<string, unknown>; matchedStylesCapture?: string }>()
+let supplementalProvenanceBySourceId = new Map<string, {
+	declarations?: Record<string, unknown>
+	matchedStylesCapture?: string
+	matchedStylesCompleteProperties?: string[]
+	winningDeclarations?: Record<string, string>
+}>()
 const joinSupplementalProvenance = (root: any) => {
 	let joined = 0
 	const visit = (node: any) => {
 		const receipt = supplementalProvenanceBySourceId.get(node.sourceId)
 		if (receipt) {
 			node.styleProvenance = receipt.declarations ?? {}
-			node.styleProvenanceComplete = true
+			node.styleProvenanceComplete = receipt.matchedStylesCapture === "complete"
+			node.styleProvenanceCompleteProperties = receipt.matchedStylesCompleteProperties ?? []
+			node.styleProvenanceWinners = receipt.winningDeclarations ?? {}
 			joined++
 		}
 		for (const child of node.children ?? []) visit(child)
@@ -62,13 +95,18 @@ const joinSupplementalProvenance = (root: any) => {
 	visit(root)
 	return joined
 }
-if (provenanceSemanticsPath) {
+for (const provenanceSemanticsPath of provenanceSemanticsPaths) {
 	const supplemental = JSON.parse(await readFile(provenanceSemanticsPath, "utf8"))
 	const supplementalReceipts = supplemental.styleProvenanceByDomOrder as Array<{
 		declarations?: Record<string, unknown>
 		matchedStylesCapture?: string
+		matchedStylesCompleteProperties?: string[]
+		winningDeclarations?: Record<string, string>
 	}> | undefined
-	if (!supplementalReceipts || supplemental.page?.url !== semantics.page?.url ||
+	if (!supplementalReceipts ||
+		importer.captureCohortKey(supplemental, { includeViewport: true }) !==
+			importer.captureCohortKey(semantics, { includeViewport: true }) ||
+		supplemental.page?.url !== semantics.page?.url ||
 		supplemental.policy?.clock !== semantics.policy?.clock ||
 		JSON.stringify(supplemental.policy?.viewport) !== JSON.stringify(semantics.policy?.viewport))
 		throw new Error("supplemental provenance must match the canonical page, clock, and viewport")
@@ -76,14 +114,36 @@ if (provenanceSemanticsPath) {
 		if (node.sourceId && Number.isInteger(node.provenanceIndex) && node.provenanceIndex >= 0) {
 			const receipt = supplementalReceipts[node.provenanceIndex]
 			if (!receipt) throw new Error(`supplemental semantics has no style provenance at DOM order ${node.provenanceIndex}`)
-			if (receipt.matchedStylesCapture === "complete") supplementalProvenanceBySourceId.set(node.sourceId, receipt)
+			if (receipt.matchedStylesCapture === "complete" || receipt.matchedStylesCapture === "property-scoped") {
+				const prior = supplementalProvenanceBySourceId.get(node.sourceId)
+				const nodeWideComplete = prior?.matchedStylesCapture === "complete" ||
+					receipt.matchedStylesCapture === "complete"
+				supplementalProvenanceBySourceId.set(node.sourceId, {
+					declarations: { ...(prior?.declarations ?? {}), ...(receipt.declarations ?? {}) },
+					matchedStylesCapture: nodeWideComplete ? "complete" : "property-scoped",
+					matchedStylesCompleteProperties: [...new Set([
+						...(prior?.matchedStylesCompleteProperties ?? []),
+						...(receipt.matchedStylesCompleteProperties ?? []),
+					])].sort(),
+					winningDeclarations: {
+						...(prior?.winningDeclarations ?? {}),
+						...(receipt.winningDeclarations ?? {}),
+					},
+				})
+			}
 		}
 		for (const child of node.children ?? []) indexSupplemental(child)
 	}
 	indexSupplemental(supplemental.observedDom)
+}
+if (provenanceSemanticsPaths.length) {
 	const joined = joinSupplementalProvenance(renderRoot)
 	if (!joined) throw new Error("supplemental provenance did not join the canonical source tree")
-	console.error(`[supplemental-provenance] ${JSON.stringify({ candidates: supplementalProvenanceBySourceId.size, joined })}`)
+	console.error(`[supplemental-provenance] ${JSON.stringify({
+		captures: provenanceSemanticsPaths.length,
+		candidates: supplementalProvenanceBySourceId.size,
+		joined,
+	})}`)
 }
 const motionBySourceId = new Map<string, unknown[]>()
 if (motionSemanticsPath) {
@@ -111,16 +171,57 @@ const applyMotionReceipts = (root: any) => {
 	visit(root)
 	return joined
 }
-const importPolicy = JSON.parse(await readFile(bindingPolicyPath, "utf8")) as {
+let importPolicy = JSON.parse(await readFile(bindingPolicyPath, "utf8")) as {
 	version: number
 	rules: PolicyRule[]
 	collections?: Array<{ id: string; containerSourceId: string; firstChildSourceId: string; lastChildSourceId: string; collectionKey: string; routeId: string }>
+	semanticRoleBindings?: Array<{ bindingSourceId: string; containerSelector: string }>
 	svgExclusions?: Array<{ sourceId: string; reason: string }>
+}
+const capturedSourceIds: string[] = []
+const collectSourceIds = (node: any) => {
+	if (node.sourceId) capturedSourceIds.push(node.sourceId)
+	for (const child of node.children ?? []) collectSourceIds(child)
+}
+collectSourceIds(renderRoot)
+const resolvePolicySourceId = (sourceId: string) => {
+	if (allowStateOnlyPolicyRules) {
+		const suffix = importer.stableAuthoredSourceSuffix(sourceId)
+		if (!capturedSourceIds.some((candidate) =>
+			importer.stableAuthoredSourceSuffix(candidate) === suffix)) return sourceId
+	}
+	return importer.resolveUniqueStableSourceId(sourceId, capturedSourceIds)
+}
+importPolicy = {
+	...importPolicy,
+	rules: importPolicy.rules.map((rule) => ({
+		...rule,
+		match: rule.match.sourceId
+			? { ...rule.match, sourceId: resolvePolicySourceId(rule.match.sourceId) }
+			: rule.match,
+	})),
+	collections: importPolicy.collections?.map((collection) => ({
+		...collection,
+		containerSourceId: resolvePolicySourceId(collection.containerSourceId),
+		firstChildSourceId: resolvePolicySourceId(collection.firstChildSourceId),
+		lastChildSourceId: resolvePolicySourceId(collection.lastChildSourceId),
+	})),
+	semanticRoleBindings: importPolicy.semanticRoleBindings?.map((binding) => ({
+		...binding,
+		bindingSourceId: resolvePolicySourceId(binding.bindingSourceId),
+	})),
+	svgExclusions: importPolicy.svgExclusions?.map((exclusion) => ({
+		...exclusion,
+		sourceId: resolvePolicySourceId(exclusion.sourceId),
+	})),
 }
 const fontReceipt = JSON.parse(await readFile(fontReceiptPath, "utf8")) as {
 	usedFaces?: Array<{ family: string; postScriptName: string; custom: boolean; glyphCount: number }>
 }
 if (!fontReceipt.usedFaces?.some((face) => face.glyphCount > 0)) throw new Error("font receipt has no runtime-used faces")
+const applicationActions = [...new Set([...(applicationBindingsPath
+	? (JSON.parse(await readFile(applicationBindingsPath, "utf8")).actions ?? []).map((action: any) => action.id)
+	: []), ...(args.get("--application-actions") ?? "").split(",").filter(Boolean)])]
 const removeFormattingWhitespace = (node: any) => {
 	if (node.tagName?.toLowerCase() === "svg") {
 		node.content = []
@@ -143,7 +244,33 @@ removeFormattingWhitespace(renderRoot)
 if (motionBySourceId.size && !applyMotionReceipts(renderRoot))
 	throw new Error("motion receipts did not join the canonical source tree")
 
-let lowered = importer.lowerObservedDom(renderRoot, importedAt)
+const lowerOptions = { applicationActions }
+let lowered = importer.lowerObservedDom(renderRoot, importedAt, lowerOptions)
+const applicationStateRoots: any[] = []
+if (applicationStateSemantics.length) {
+	if (responsiveSemantics.length) throw new Error("application state captures must be responsive-unioned per state before cross-state union")
+	const baseCaptureCohort = importer.captureCohortKey(semantics, { includeViewport: true })
+	const captures = await Promise.all(applicationStateSemantics.map(async ({ state, path }) => {
+		const capture = JSON.parse(await readFile(path, "utf8"))
+		const stateCaptureCohort = importer.captureCohortKey(capture, { includeViewport: true })
+		const hashedCohort = baseCaptureCohort.startsWith("sha256:") || stateCaptureCohort.startsWith("sha256:")
+		if ((hashedCohort && baseCaptureCohort !== stateCaptureCohort) ||
+			!capture.policy?.sourceRevision || capture.policy.sourceRevision !== sourceRevision ||
+			capture.page?.url !== semantics.page?.url || capture.policy?.clock !== semantics.policy?.clock ||
+			JSON.stringify(capture.policy?.viewport) !== JSON.stringify(semantics.policy?.viewport))
+			throw new Error(`application state capture ${state} crosses capture cohort or build/page/clock/viewport provenance`)
+		const root = capture.observedDom?.tagName?.toLowerCase() === "html"
+			? capture.observedDom.children?.find((child: any) => child.tagName?.toLowerCase() === "body")
+			: capture.observedDom
+		if (!root) throw new Error(`application state capture ${state} has no renderable root`)
+		if (capture.styleProvenanceByDomOrder) attachStyleProvenance(root, capture.styleProvenanceByDomOrder)
+		removeFormattingWhitespace(root)
+		applicationStateRoots.push(root)
+		return { state, root: importer.lowerObservedDom(root, importedAt, lowerOptions) }
+	}))
+	lowered = importer.unionApplicationStateTrees(applicationStateKey!, captures,
+		{ overlayHostIds: applicationOverlayHosts })
+}
 if (responsiveSemantics.length) {
 	let captures = await Promise.all(responsiveSemantics.map(async (path) => {
 		const capture = JSON.parse(await readFile(path, "utf8"))
@@ -164,18 +291,7 @@ if (responsiveSemantics.length) {
 			joinSupplementalProvenance(root)
 		removeFormattingWhitespace(root)
 		applyMotionReceipts(root)
-		const cohort = JSON.stringify({
-			schema: capture.schema,
-			pageUrl: capture.page?.url,
-			clock: capture.policy?.clock,
-			deviceScaleFactor: viewport.deviceScaleFactor,
-			reload: capture.policy?.reload,
-			clearStorage: capture.policy?.clearStorage,
-			animations: capture.policy?.animations,
-			transitions: capture.policy?.transitions,
-			network: capture.policy?.network,
-			hostServices: capture.policy?.hostServices,
-		})
+		const cohort = importer.captureCohortKey(capture)
 		return { viewport, root, path, cohort }
 	}))
 	const cohorts = new Set(captures.map((capture) => capture.cohort))
@@ -194,19 +310,26 @@ if (responsiveSemantics.length) {
 		throw new Error(`canonical captures must not require identity remapping: ${JSON.stringify(alignment.report)}`)
 	console.error(`[responsive-identity] ${JSON.stringify(alignment.report)}`)
 	const reconciliation = importer.reconcileResponsiveConstraints(alignedCaptures)
-	const loweredCaptures = alignedCaptures.map((capture: any) => importer.lowerObservedDom(capture.root, importedAt))
+	const fatalResponsiveDiagnostics = reconciliation.diagnostics.filter(
+		(diagnostic: any) => diagnostic.severity === "error")
+	if (fatalResponsiveDiagnostics.length)
+		throw new Error(`responsive import error diagnostics: ${JSON.stringify(fatalResponsiveDiagnostics)}`)
+	const loweredCaptures = alignedCaptures.map((capture: any) => importer.lowerObservedDom(capture.root, importedAt, lowerOptions))
 	lowered = importer.unionResponsiveTrees(loweredCaptures, reconciliation)
 }
-const inlineSvgCaptures: Array<{ sourceId: string; outerHTML: string; computedColor?: string }> = []
+const inlineSvgCaptureBySourceId = new Map<string, { sourceId: string; outerHTML: string; computedColor?: string }>()
 const collectInlineSvg = (node: any) => {
 	if (node.tagName?.toLowerCase() === "svg") {
 		const outerHTML = node.outerHtml ?? node.outerHTML ?? node.inlineSvg
 		if (!outerHTML) throw new Error(`SVG ${node.sourceId} has no captured outerHTML`)
-		inlineSvgCaptures.push({ sourceId: node.sourceId, outerHTML, computedColor: node.computedStyle?.color })
+		if (!inlineSvgCaptureBySourceId.has(node.sourceId))
+			inlineSvgCaptureBySourceId.set(node.sourceId, { sourceId: node.sourceId, outerHTML, computedColor: node.computedStyle?.color })
 	}
 	for (const child of node.children ?? []) collectInlineSvg(child)
 }
 collectInlineSvg(renderRoot)
+for (const root of applicationStateRoots) collectInlineSvg(root)
+const inlineSvgCaptures = [...inlineSvgCaptureBySourceId.values()]
 const runtimeFontsBySourceId = new Map<string, Array<{
 	family: string; postScriptName: string; custom: boolean; glyphCount: number
 }>>()
@@ -237,12 +360,20 @@ const designIr = importer.toNativeDesignIrV1(lowered, {
 	inlineSvgCaptures: projectedSvgCaptures,
 })
 
-const faithfulSvgCount = (node: any): number => (node.render_mode === "faithful_svg" ? 1 : 0) +
-	(node.children ?? []).reduce((sum: number, child: any) => sum + faithfulSvgCount(child), 0)
+const faithfulSvgSourceIds = (node: any, found = new Set<string>()): Set<string> => {
+	if (node.render_mode === "faithful_svg") found.add(node.name)
+	for (const child of node.children ?? []) faithfulSvgSourceIds(child, found)
+	return found
+}
 if (designIr.diagnostics.some((item: any) => item.severity === "error"))
 	throw new Error(`source import error diagnostics: ${JSON.stringify(designIr.diagnostics)}`)
-if (faithfulSvgCount(designIr.root) !== projectedSvgCaptures.length)
-	throw new Error(`inline SVG invariant failed: captured ${inlineSvgCaptures.length}, excluded ${exclusions.size}, resolved ${faithfulSvgCount(designIr.root)}`)
+const expectedSvgSourceIds = new Set(projectedSvgCaptures.map((capture) => capture.sourceId))
+const resolvedSvgSourceIds = faithfulSvgSourceIds(designIr.root)
+const missingSvgSourceIds = [...expectedSvgSourceIds].filter((sourceId) => !resolvedSvgSourceIds.has(sourceId))
+const unexpectedSvgSourceIds = [...resolvedSvgSourceIds].filter((sourceId) => !expectedSvgSourceIds.has(sourceId))
+if (missingSvgSourceIds.length || unexpectedSvgSourceIds.length)
+	throw new Error(`inline SVG invariant failed: ${JSON.stringify({ captured: inlineSvgCaptures.length,
+		excluded: exclusions.size, resolved: resolvedSvgSourceIds.size, missingSvgSourceIds, unexpectedSvgSourceIds })}`)
 
 interface ObservedNode {
 	sourceId: string
@@ -261,6 +392,7 @@ interface PolicyRule {
 
 const policy = importPolicy
 if (policy.version !== 1 || !Array.isArray(policy.rules)) throw new Error("invalid binding policy")
+importer.validateApplicationStatePolicyRules(policy.rules)
 const observed = new Map<string, { node: ObservedNode; text: string }>()
 const collect = (node: ObservedNode): string => {
 	const text = [node.text ?? "", ...(node.content ?? []).filter((item) => item.kind === "text").map((item) => item.text ?? ""), ...(node.children ?? []).map(collect)].join(" ").replace(/\s+/g, " ").trim()
@@ -282,7 +414,7 @@ const matches = (entry: { node: ObservedNode; text: string }, rule: PolicyRule) 
 	}
 	return true
 }
-const applied = new Map(policy.rules.map((rule) => [rule.id, 0]))
+const applied = new Map(policy.rules.map((rule) => [rule.id, { count: 0, sourceIds: new Set<string>() }]))
 const stamp = (node: any) => {
 	const entry = observed.get(node.name)
 	if (entry) for (const rule of policy.rules) if (matches(entry, rule)) {
@@ -296,11 +428,19 @@ const stamp = (node: any) => {
 				visibilityByApplicationState: rule.applicationState.visibility,
 			}
 		}
-		applied.set(rule.id, (applied.get(rule.id) ?? 0) + 1)
+		const receipt = applied.get(rule.id)!
+		receipt.count++
+		receipt.sourceIds.add(node.name)
 	}
 	for (const child of node.children ?? []) stamp(child)
 }
 stamp(designIr.root)
+if (importPolicy.semanticRoleBindings?.length) {
+	if (!Array.isArray(semanticRoleSemantics.semanticRoleReceipts))
+		throw new Error("source semantics has no semantic role receipts")
+	importer.attachSemanticRoleReceipts(
+		designIr.root, semanticRoleSemantics.semanticRoleReceipts, importPolicy.semanticRoleBindings)
+}
 
 const collectionDiagnostics: Array<{ id: string; code: string; detail: string }> = []
 const emitCollectionSlot = (node: any, spec: NonNullable<typeof importPolicy.collections>[number]): boolean => {
@@ -326,7 +466,9 @@ for (const collection of importPolicy.collections ?? []) {
 	if (!emitCollectionSlot(designIr.root, collection)) throw new Error(`collection ${collection.id} container not found`)
 }
 for (const rule of policy.rules) {
-	const count = applied.get(rule.id) ?? 0
-	if (count !== 1) throw new Error(`binding policy ${rule.id} matched ${count} nodes; expected exactly one`)
+	const receipt = applied.get(rule.id)!
+	if (allowStateOnlyPolicyRules && rule.match.sourceId && !receipt.count) continue
+	if (!receipt.count || receipt.sourceIds.size !== 1)
+		throw new Error(`binding policy ${rule.id} matched ${receipt.count} nodes across ${receipt.sourceIds.size} source identities; expected one source identity`)
 }
 await writeFile(outputPath, JSON.stringify(designIr, null, 2) + "\n")

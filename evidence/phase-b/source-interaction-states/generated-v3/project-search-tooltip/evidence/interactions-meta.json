@@ -1,0 +1,5 @@
+{
+  "evidenceSha256": "d8f5739d8288dd0ac833e97eecac6c5a3f6c0f50b790a08779e0fd7e5aa13a30",
+  "manifestSha256": "7a868ff9f4505a44ed9dc7fcdc4d4cc7615872e1ec4bf1141301b70aa8c85626",
+  "schema": "pulp-runtime-interaction-capture-v1"
+}

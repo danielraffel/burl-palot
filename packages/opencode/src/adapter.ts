@@ -293,6 +293,26 @@ export class SdkOpenCodeGateway implements OpenCodeGateway {
 				if (!result.data) throw result.error ?? new Error("OpenCode session was not found")
 				return result.data
 			}
+			case "session.fork": {
+				const context = this.#project(command.projectId)
+				const result = await context.client.session.fork(
+					{ directory: context.directory, sessionID: command.sessionId,
+					  messageID: command.messageId },
+					{ signal },
+				)
+				if (!result.data) throw result.error ?? new Error("OpenCode did not fork the session")
+				return result.data
+			}
+			case "session.revert": {
+				const context = this.#project(command.projectId)
+				const result = await context.client.session.revert(
+					{ directory: context.directory, sessionID: command.sessionId,
+					  messageID: command.messageId },
+					{ signal },
+				)
+				if (result.error) throw result.error
+				return result.data
+			}
 			case "prompt.send":
 			case "prompt.retry": {
 				const context = this.#project(command.projectId)
@@ -300,7 +320,15 @@ export class SdkOpenCodeGateway implements OpenCodeGateway {
 					{
 						directory: context.directory,
 						sessionID: command.sessionId,
-						parts: [{ type: "text", text: command.text }],
+						parts: [
+							{ type: "text" as const, text: command.text },
+							...(command.files ?? []).map((file) => ({
+								type: "file" as const,
+								mime: file.mediaType ?? "application/octet-stream",
+								filename: file.filename,
+								url: file.url,
+							})),
+						],
 						model: {
 							providerID: command.model.providerId,
 							modelID: command.model.modelId,

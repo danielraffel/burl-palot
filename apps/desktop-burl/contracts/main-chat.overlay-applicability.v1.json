@@ -1,0 +1,7 @@
+{
+  "schema": "pulp-application-state-applicability-contract-v1",
+  "dimensions": {
+    "project.search.tooltip.open": [{ "key": "navigation.route", "value": "chat" }],
+    "session.metrics.open": [{ "key": "navigation.route", "value": "chat" }]
+  }
+}
