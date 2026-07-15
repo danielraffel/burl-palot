@@ -1,5 +1,11 @@
 # Live React versus baked DesignIR A/B experiment
 
+> **Paused decision point (2026-07-15):** Read
+> [`docs/handoffs/2026-07-15-palot-import-approach-decision.md`](handoffs/2026-07-15-palot-import-approach-decision.md)
+> before resuming. It records both preserved approaches, exact commits, red
+> gates, and the recommended hybrid decision test. Do not infer a direction
+> without asking the user.
+
 ## Purpose
 
 This experiment evaluates the existing Pulp/Burl live React runtime against the
