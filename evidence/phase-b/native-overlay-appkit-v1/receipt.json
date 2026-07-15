@@ -1,0 +1,95 @@
+{
+  "schema": "burl-native-overlay-appkit-receipt-v1",
+  "frameworkTest": "pulp-test-mac-platform-harness [overlay-contract]",
+  "result": "92 assertions in 4 test cases passed",
+  "renderer": "production hidden NSWindow plus CAMetalLayer, Dawn Metal, and Skia Graphite back-buffer capture",
+  "tooltip": {
+    "viewportLogical": [320, 180],
+    "viewportPhysical": [640, 360],
+    "proof": [
+      "AppKit mouseMoved at the imported trigger opens the tooltip",
+      "source side bottom and align center place the content at the edge-clamped native bounds",
+      "AppKit mouseMoved away closes the tooltip",
+      "closed-before and closed-after screenshots are byte-identical"
+    ],
+    "screenshots": {
+      "closed": {
+        "path": "tooltip-closed-320x180.png",
+        "sha256": "6768a7e501639a8db52bdfbcc3bc86471a2133468cb75904ea4d9304ba6dfbb4"
+      },
+      "open": {
+        "path": "tooltip-open-320x180.png",
+        "sha256": "0442be0518e76b5c8f24f889fb4cf5310529f7e1a5a61800f75d64e44786e74a"
+      },
+      "closedAfterLeave": {
+        "path": "tooltip-closed-after-leave-320x180.png",
+        "sha256": "6768a7e501639a8db52bdfbcc3bc86471a2133468cb75904ea4d9304ba6dfbb4"
+      }
+    }
+  },
+  "popover": {
+    "viewportLogical": [400, 300],
+    "viewportPhysical": [800, 600],
+    "proof": [
+      "AppKit Tab focuses the imported trigger",
+      "AppKit mouse down and up at the trigger opens and places the popover",
+      "focus enters the imported editor",
+      "AppKit Escape closes and restores trigger focus",
+      "source-authorized outside pointer dismissal closes the overlay and restores trigger focus",
+      "outside pointer retains the overlay when the imported contract does not authorize dismissal"
+    ],
+    "screenshots": {
+      "closed": {
+        "path": "popover-closed-400x300.png",
+        "sha256": "8d7c5406f186cd08959570226acec320e555470488d9bd2e5283822c4c3f9f7c"
+      },
+      "open": {
+        "path": "popover-open-400x300.png",
+        "sha256": "3dc0a37226e7a4eebdc8ef77b847a789c182c46b455b90a2ef24fec0941ceb5a"
+      },
+      "outsideClosed": {
+        "path": "popover-outside-closed-400x300.png",
+        "sha256": "8d7c5406f186cd08959570226acec320e555470488d9bd2e5283822c4c3f9f7c"
+      },
+      "escapeClosed": {
+        "path": "popover-escape-closed-400x300.png",
+        "sha256": "8d7c5406f186cd08959570226acec320e555470488d9bd2e5283822c4c3f9f7c"
+      },
+      "outsideRetainedWithoutGate": {
+        "path": "popover-outside-retained-without-gate-400x300.png",
+        "sha256": "5c9854a36f92699183840e8296c08977c7878bf32884e89cdbfcbf7f16605d6b"
+      }
+    }
+  },
+  "contextMenu": {
+    "viewportLogical": [400, 300],
+    "viewportPhysical": [800, 600],
+    "proof": [
+      "AppKit rightMouseDown at the imported trigger opens the menu through View::on_context_menu",
+      "the menu origin is derived from the trusted activation pointer with the source-observed four-logical-pixel vertical offset",
+      "focus enters the first imported menu item",
+      "AppKit Escape closes the menu",
+      "focus restoration is not claimed because the source cohort did not prove it",
+      "closed-before and closed-after screenshots are byte-identical"
+    ],
+    "screenshots": {
+      "closed": {
+        "path": "context-menu-closed-400x300.png",
+        "sha256": "010e97b07c4bb4e8a18591157fd3ffc509c48428db19fa5c3930f2ab2a1e3637"
+      },
+      "open": {
+        "path": "context-menu-open-400x300.png",
+        "sha256": "3a96c89fc6131bc6eeed1fd0b0f10666a03182b5c80dec5e9521fc505afa5662"
+      },
+      "escapeClosed": {
+        "path": "context-menu-escape-closed-400x300.png",
+        "sha256": "010e97b07c4bb4e8a18591157fd3ffc509c48428db19fa5c3930f2ab2a1e3637"
+      }
+    }
+  },
+  "red": [
+    "menu-item actions remain unavailable because the source exposes no portable action IDs",
+    "focus restoration remains unclaimed because it is not source-proven",
+    "these full-window fixture screenshots prove AppKit execution; exact source-versus-native menu appearance is separately gated in native-overlay-visual-parity/candidates-v11"
+  ]
+}

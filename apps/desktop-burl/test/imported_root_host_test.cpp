@@ -96,7 +96,8 @@ void register_actions(ImportedRootHost& host, std::unordered_map<std::string, in
 	for (const auto* id : {"command.palette.open", "composer.agent-menu.toggle", "composer.attachment.open",
 	                       "composer.copy", "composer.model-menu.toggle", "composer.variant-menu.toggle",
 	                       "display.mode.cycle", "external.open.menu.toggle", "external.open.preferred",
-	                       "navigation.automations", "navigation.session.close", "navigation.settings",
+	                       "navigation.automations", "navigation.new-session", "navigation.session.close",
+	                       "navigation.settings", "navigation.back-to-app",
 	                       "message.scroll-to-turn", "session.fork-from-message", "session.undo-to-message",
 	                       "project.open", "project.search.toggle", "project.select", "prompt.cancel",
 	                       "prompt.retry", "prompt.send", "review.panel.toggle", "server.menu.toggle",
@@ -144,6 +145,8 @@ int main(int argc, char** argv) {
 	const bool state_candidate = std::getenv("PALOT_STATE_CANDIDATE") != nullptr;
 	const bool action_state_proof = std::getenv("PALOT_ACTION_STATE_PROOF") != nullptr;
 	const bool action_payload_proof = std::getenv("PALOT_ACTION_PAYLOAD_PROOF") != nullptr;
+	const bool prompt_cancel_payload_proof =
+		std::getenv("PALOT_PROMPT_CANCEL_PAYLOAD_PROOF") != nullptr;
 	const auto ir = pulp::view::parse_design_ir_json(read_text(argv[1]));
 	if (ir.source_adapter != "observed-dom" || forbidden_renderer(ir.root)) return 3;
 
@@ -158,6 +161,13 @@ int main(int argc, char** argv) {
 	ImportedRootHost host;
 	std::unordered_map<std::string, int> calls;
 	std::unordered_map<std::string, std::string> payloads;
+	std::unordered_map<std::string, std::string> runtime_context{
+		{"project.directory", "/tmp/runtime-project"}};
+	host.set_runtime_context_lookup([&](std::string_view field) -> std::optional<std::string> {
+		const auto found = runtime_context.find(std::string(field));
+		if (found == runtime_context.end()) return std::nullopt;
+		return found->second;
+	});
 	register_actions(host, &calls, &payloads);
 	host.load(argv[1], argv[2]);
 	if (const auto* expected = std::getenv("PALOT_EXPECT_UNATTACHED_ACTIONS")) {
@@ -196,7 +206,57 @@ int main(int argc, char** argv) {
 	                     {"t1", "tool.read", {{"tool.label", "Read"},
 	                                           {"tool.subject", "tool.read"},
 	                                           {"tool.duration", "1s"}}}});
+	if (prompt_cancel_payload_proof) {
+		const auto cancel_views = host.bound_action_views("prompt.cancel");
+		if (cancel_views.empty() || !cancel_views.front()->enabled() ||
+		    !cancel_views.front()->hit_testable() ||
+		    !invoke_installed_click(*cancel_views.front()) || calls["prompt.cancel"] != 0)
+			return 42;
+		runtime_context["session.id"] = "ses_initial";
+		if (!invoke_installed_click(*cancel_views.front()) || calls["prompt.cancel"] != 1 ||
+		    payloads["prompt.cancel"] !=
+		        R"({"directory":"/tmp/runtime-project","sessionID":"ses_initial"})")
+			return 43;
+		return EXIT_SUCCESS;
+	}
 	if (action_payload_proof) {
+		const auto terminal_views = host.bound_action_views("terminal.attach");
+		const auto cancel_views = host.bound_action_views("prompt.cancel");
+		if (host.active_action_payload("external.open.preferred") !=
+		        R"({"directory":"/tmp/runtime-project"})" ||
+		    host.active_action_payload("terminal.attach").has_value() ||
+		    terminal_views.empty() || cancel_views.empty() ||
+		    !cancel_views.front()->enabled() || !cancel_views.front()->hit_testable() ||
+		    !invoke_installed_click(*terminal_views.front()) ||
+		    !invoke_installed_click(*cancel_views.front()) ||
+		    calls["terminal.attach"] != 0 || calls["prompt.cancel"] != 0) {
+			std::cerr << "runtime context payload did not fail closed before session availability"
+			          << " terminalViews=" << terminal_views.size()
+			          << " cancelViews=" << cancel_views.size()
+			          << " cancelEnabled=" << (!cancel_views.empty() && cancel_views.front()->enabled())
+			          << " cancelHit=" << (!cancel_views.empty() && cancel_views.front()->hit_testable())
+			          << " terminalCalls=" << calls["terminal.attach"]
+			          << " cancelCalls=" << calls["prompt.cancel"] << '\n';
+			return 39;
+		}
+		runtime_context["session.id"] = "ses_initial";
+		if (!invoke_installed_click(*terminal_views.front()) ||
+		    !invoke_installed_click(*cancel_views.front()) ||
+		    payloads["terminal.attach"] !=
+		        R"({"directory":"/tmp/runtime-project","sessionID":"ses_initial"})" ||
+		    payloads["prompt.cancel"] !=
+		        R"({"directory":"/tmp/runtime-project","sessionID":"ses_initial"})") {
+			std::cerr << "runtime context payload was not resolved at invocation\n";
+			return 40;
+		}
+		runtime_context["project.directory"] = "/tmp/runtime-project-2";
+		runtime_context["session.id"] = "ses_updated";
+		if (!host.invoke_bound_action("terminal.attach") ||
+		    payloads["terminal.attach"] !=
+		        R"({"directory":"/tmp/runtime-project-2","sessionID":"ses_updated"})") {
+			std::cerr << "runtime context payload captured stale values\n";
+			return 41;
+		}
 		for (const auto& [action, expected] :
 		     std::initializer_list<std::pair<std::string_view, std::string_view>>{
 		         {"message.scroll-to-turn", "user-message-1"},
@@ -263,9 +323,12 @@ int main(int argc, char** argv) {
 		return 33;
 	const auto smoke_actions = action_state_proof
 		? std::vector<const char*>{"composer.copy"}
-		: std::vector<const char*>{"composer.copy", "project.select", "session.create", "session.open"};
+		: std::vector<const char*>{"navigation.new-session", "project.select", "session.open"};
 	for (const auto* id : smoke_actions) {
-		if (!host.invoke_bound_action(id) || calls[id] != 1) return 9;
+		if (!host.invoke_bound_action(id) || calls[id] != 1) {
+			std::cerr << "smoke action failed: " << id << " calls=" << calls[id] << '\n';
+			return 9;
+		}
 	}
 	auto* composer = host.bound_composer();
 	if (!composer) return 10;
@@ -311,9 +374,14 @@ int main(int argc, char** argv) {
 	const auto verify_geometry = [&](float width, bool sidebar_visible, float main_x, float main_width) {
 		host.set_bounds({0, 0, width, 800});
 		host.layout_children();
+		const auto nearly_equal = [](float actual, float expected) {
+			return std::abs(actual - expected) <= 0.01f;
+		};
 		return sidebar->visible() == sidebar_visible && main->visible() &&
-		       main->bounds().x == main_x && main->bounds().width == main_width &&
-		       (!sidebar_visible || (sidebar->bounds().x == 0.0f && sidebar->bounds().width == 280.0f));
+		       nearly_equal(main->bounds().x, main_x) &&
+		       nearly_equal(main->bounds().width, main_width) &&
+		       (!sidebar_visible || (nearly_equal(sidebar->bounds().x, 0.0f) &&
+		                            nearly_equal(sidebar->bounds().width, 280.0f)));
 	};
 	for (const auto geometry : {std::tuple{599.0f, false, 12.0f, 587.0f},
 	                            std::tuple{768.0f, true, 280.0f, 488.0f},

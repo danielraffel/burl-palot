@@ -1,0 +1,49 @@
+{
+  "schema": "pulp-application-state-promotion-report-v1",
+  "default": {
+    "path": "/Users/danielraffel/Code/burl-palot-wt-semantic-restart/evidence/phase-b/canonical-overlay-promotion-v1/main-chat.base-before-overlay.json",
+    "sha256": "6fd15f26c019356d9282b9a73e0bf846aa39e87a8147d7f2e4589384553bca30"
+  },
+  "protectedCandidate": {
+    "path": "/Users/danielraffel/Code/burl-palot-wt-semantic-restart/evidence/phase-b/canonical-overlay-promotion-v1/composed.candidate.json",
+    "sha256": "98d4e53732a00ddf1f03b78740ebd7e450c5f1e7e9e32a9cd710430f917443d5"
+  },
+  "promoted": {
+    "path": "/Users/danielraffel/Code/burl-palot-wt-semantic-restart/apps/desktop-burl/resources/import/main-chat.observed.design-ir.v1.json",
+    "sha256": "3bca9fc3a20f66d780611a02fcf2e9d5cd2ab82329e5282dc169548ea7e7ec4d"
+  },
+  "composition": {
+    "dimensions": [
+      "project.search.tooltip.open",
+      "session.metrics.open"
+    ],
+    "defaultNodes": 725,
+    "composedNodes": 781,
+    "nodeGrowthRatio": 1.0772413793103448,
+    "maximumIdentityDuplication": 4
+  },
+  "actionStateContracts": [
+    {
+      "key": "session.metrics.open",
+      "action": "session.metrics.toggle",
+      "before": "closed",
+      "after": "open"
+    }
+  ],
+  "actionClassifications": [
+    {
+      "action": "session.metrics.toggle",
+      "classification": "source-observed-visual-state"
+    }
+  ],
+  "overlayContractCandidate": {
+    "path": "/Users/danielraffel/Code/burl-palot-wt-semantic-restart/evidence/phase-b/canonical-overlay-promotion-v1/overlay-contracts.candidate.json",
+    "sha256": "b2ef8c92a31267aff1195db81d5081ac2b70aecc8b13939cafb0b916b9ab6acf",
+    "contractCount": 2
+  },
+  "deferredCandidateAssets": {
+    "count": 0,
+    "survivingCount": 0,
+    "assets": []
+  }
+}

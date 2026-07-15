@@ -1,0 +1,59 @@
+{
+  "schema": "consumer-invocation-payload-receipts-v1",
+  "inputs": {
+    "manifest": {
+      "path": "/Users/danielraffel/Code/burl-palot-wt-semantic-restart/apps/desktop-burl/contracts/main-chat.invocation-payload-capture.v1.json",
+      "sha256": "40fb4c7beb9e8cdaa3527a0608b1dda40985db3795ec7e9d7b70c3315f67ec12"
+    },
+    "trace": {
+      "path": "/Users/danielraffel/Code/burl-palot-wt-semantic-restart/evidence/phase-b/electron-interaction-traces.v1.json",
+      "sha256": "b63563697ddc23b1f43160d7b12388f7a79862777e8972a96b7ff4cf6552d198"
+    }
+  },
+  "receipts": [
+    {
+      "schema": "pulp-invocation-payload-receipt-v1",
+      "action": "external.open.preferred",
+      "payloadContract": "{\"$source\":\"runtime-context-fields\",\"capturedFields\":{\"persistPreferred\":true,\"targetID\":\"finder\"},\"fields\":{\"directory\":\"project.directory\"}}",
+      "provenance": {
+        "sourceRevision": "fd63a75dad3d0e8555ba22a47e720d285889fbf0",
+        "recordIndex": 23,
+        "activation": "candidate-23",
+        "sourceId": "html:1/body:2/div[root]:3/div:1/div:1/div[sidebar-wrapper]:1/main[sidebar-inset]:2/div[app-bar]:1/div:1/div:1/div:4/div:3/div:1/button:1",
+        "process": "preload",
+        "direction": "renderer-to-main",
+        "transport": "invoke",
+        "channel": "open-in:open",
+        "rendererFile": "apps/desktop/src/preload/index.ts",
+        "rendererFileSha256": "d79b43634c4c5462705d3a20bd3143281667654e549ec38b860c633f60e8edb9",
+        "rendererSiteSha256": "6a10651f20411c35caedb9be580025f5abe66676870c3cd743f1b7b06cbf3e17"
+      },
+      "fields": [
+        {
+          "name": "directory",
+          "argumentIndex": 0,
+          "type": "path",
+          "source": "runtime-context",
+          "runtimeContextKey": "project.directory",
+          "observedValueSha256": "521478cd92246bff77ec205ff98116a41935ab57f932f8cdd1e5f981ba86bb9c"
+        },
+        {
+          "name": "targetID",
+          "argumentIndex": 1,
+          "type": "string",
+          "source": "captured-invocation",
+          "capturedValue": "finder",
+          "observedValueSha256": "451b7403cff7520e4a88ea91a0113dd073f0c66dabc9c65565e3a93a0ec73c07"
+        },
+        {
+          "name": "persistPreferred",
+          "argumentIndex": 2,
+          "type": "boolean",
+          "source": "captured-invocation",
+          "capturedValue": true,
+          "observedValueSha256": "b5bea41b6c623f7c09f1bf24dcae58ebab3c0cdd90ad966bc43a45b44867e12b"
+        }
+      ]
+    }
+  ]
+}

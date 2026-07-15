@@ -1,0 +1,33 @@
+{
+  "schema": "consumer-invocation-payload-capture-v1",
+  "receipts": [
+    {
+      "action": "external.open.preferred",
+      "sourceId": "html:1/body:2/div[root]:3/div:1/div:1/div[sidebar-wrapper]:1/main[sidebar-inset]:2/div[app-bar]:1/div:1/div:1/div:4/div:3/div:1/button:1",
+      "process": "preload",
+      "direction": "renderer-to-main",
+      "transport": "invoke",
+      "channel": "open-in:open",
+      "fields": [
+        {
+          "name": "directory",
+          "argumentIndex": 0,
+          "type": "path",
+          "projection": { "source": "runtime-context", "key": "project.directory" }
+        },
+        {
+          "name": "targetID",
+          "argumentIndex": 1,
+          "type": "string",
+          "projection": { "source": "captured-invocation" }
+        },
+        {
+          "name": "persistPreferred",
+          "argumentIndex": 2,
+          "type": "boolean",
+          "projection": { "source": "captured-invocation" }
+        }
+      ]
+    }
+  ]
+}

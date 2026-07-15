@@ -64,6 +64,7 @@ private:
 	struct MessageIdentity {
 		std::string role;
 		std::string parent_message_id;
+		std::unordered_map<std::string, std::string> values;
 	};
 	class UiEventSink;
 	void send_prompt(const std::string& prompt, bool retry = false);

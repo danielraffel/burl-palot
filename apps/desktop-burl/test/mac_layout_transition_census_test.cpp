@@ -75,6 +75,7 @@ struct VisibleSubtreeGeometry {
 	bool entirely_within_viewport = true;
 	Rect bounds{};
 	std::size_t positive_view_count = 0;
+	std::vector<std::pair<std::string, Rect>> viewport_violations;
 };
 
 VisibleSubtreeGeometry measure_visible_subtree(const View& view,
@@ -85,7 +86,10 @@ VisibleSubtreeGeometry measure_visible_subtree(const View& view,
 		if (!effectively_visible(candidate, root)) return;
 		const auto rect = rect_in_root(candidate, root);
 		if (rect.width > 0.0f && rect.height > 0.0f) {
-			result.entirely_within_viewport &= strictly_contains(viewport, rect);
+			const bool within_viewport = strictly_contains(viewport, rect);
+			result.entirely_within_viewport &= within_viewport;
+			if (!within_viewport)
+				result.viewport_violations.emplace_back(candidate.anchor_id(), rect);
 			if (!result.has_positive_geometry) {
 				result.bounds = rect;
 				result.has_positive_geometry = true;
@@ -272,14 +276,25 @@ std::string find_state_width_anchor(const json& node, std::string_view state_key
 		if (responsive.contains("applicationStateVariants")) {
 			bool has_closed_width = false;
 			bool has_open_width = false;
+			bool has_closed_state = false;
+			bool has_open_state = false;
 			for (const auto& variant : responsive["applicationStateVariants"]) {
-				if (variant.value("key", "") != state_key || !variant.contains("layout") ||
-				    !variant["layout"].contains("width"))
-					continue;
-				has_closed_width |= variant.value("value", "") == "closed";
-				has_open_width |= variant.value("value", "") == "open";
+				if (variant.value("key", "") != state_key) continue;
+				const bool is_closed = variant.value("value", "") == "closed";
+				const bool is_open = variant.value("value", "") == "open";
+				has_closed_state |= is_closed;
+				has_open_state |= is_open;
+				const bool has_width = variant.contains("layout") &&
+				                       variant["layout"].contains("width");
+				has_closed_width |= is_closed && has_width;
+				has_open_width |= is_open && has_width;
 			}
-			if (has_closed_width && has_open_width) return node.value("stable_anchor_id", "");
+			const bool has_base_width = responsive.value("applicationStateBase", json::object())
+			                                .value("layout", json::object()).contains("width");
+			if (has_closed_state && has_open_state &&
+			    ((has_closed_width && has_open_width) ||
+			     (has_base_width && (has_closed_width || has_open_width))))
+				return node.value("stable_anchor_id", "");
 		}
 		for (const auto& [key, value] : node.items()) {
 			(void)key;
@@ -625,10 +640,17 @@ json evaluate_geometry(ImportedRootHost& root,
 			candidate_visible |= measured.has_positive_geometry;
 			if (measured.has_positive_geometry)
 				candidate_contained &= measured.entirely_within_viewport;
+			json viewport_violations = json::array();
+			for (const auto& [violation_anchor, violation_bounds] : measured.viewport_violations)
+				viewport_violations.push_back({
+					{"anchor", violation_anchor},
+					{"bounds", rect_json(violation_bounds)},
+				});
 			candidate_geometry.push_back({
 				{"bounds", rect_json(measured.bounds)},
 				{"positiveViewCount", measured.positive_view_count},
 				{"anchor", accessory->anchor_id()},
+				{"viewportViolations", std::move(viewport_violations)},
 			});
 		}
 		geometry["composerAccessories"].push_back(std::move(candidate_geometry));

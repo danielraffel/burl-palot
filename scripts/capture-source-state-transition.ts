@@ -25,6 +25,7 @@ interface StateCaptureManifest {
 	initialStateCapture?: { state: string }
 	scenarios: Array<{
 		id: string
+		binding?: { action: string }
 		action:
 			| { type: "pointer"; target: Target; button?: "left" | "right" }
 			| { type: "focus"; target: Target; maxTabs?: number }
@@ -140,6 +141,11 @@ const output = resolve(outputArg)
 const initialCondition = args.get("--initial-condition")
 const manifest = JSON.parse(await readFile(manifestPath, "utf8")) as StateCaptureManifest
 if (manifest.schemaVersion !== 1) throw new Error("unsupported source state capture manifest")
+for (const scenario of manifest.scenarios) {
+	if (!scenario.id?.trim()) throw new Error("source state capture scenario id is required")
+	if (scenario.binding && !scenario.binding.action?.trim())
+		throw new Error(`${scenario.id}: source state capture binding action is required`)
+}
 
 const pages = (await fetch(`${manifest.cdpEndpoint}/json/list`).then((response) =>
 	response.json(),
@@ -506,7 +512,9 @@ try {
 		if (scenario.settleMs) await Bun.sleep(scenario.settleMs)
 		records.push({
 			...(await writeCapture(scenario.id, scenario.stateCapture?.state ?? scenario.id)),
+			id: scenario.id,
 			action: scenario.action,
+			...(scenario.binding ? { binding: scenario.binding } : {}),
 			targetObservation,
 		})
 	}

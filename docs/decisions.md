@@ -293,3 +293,63 @@ CI image uses Burl's framework-owned synthetic backdrop and actual Dawn/Skia
 backbuffer. A live macOS Liquid Glass image is a distinct, environment-dependent
 WindowServer surface. AppKit view-cache or raw-backbuffer fallbacks are useful
 diagnostics but cannot be called a system composite or a visual-parity pass.
+
+## 2026-07-15 — Treat exact A/B failures as SDK contract defects
+
+Broad regional pixel similarity cannot certify an imported application. The
+acceptance harness now pairs source and native nodes by captured identity,
+retains duplicate candidates rather than overwriting them, compares exact
+geometry, and verifies that actionable nodes own hit regions intersecting their
+effective clip and viewport. Identity duplication, geometry drift, paint drift,
+and missing actionability are separate failures. This prevents a correctly
+positioned duplicate from hiding corrupted repeated-row identity and prevents a
+clipped or offscreen rectangle from counting as a usable target.
+
+The same rule applies to missing CSS mappings. Palot's clean Electron runtime
+reports `corner-shape: superellipse(1.5)` on the sidebar inset. Burl therefore
+captures `corner-shape` as computed style, lowers the supported circular and
+continuous equivalence classes into typed and native IR, and selects the SDK's
+Skia border-curve path. Unsupported corner families produce an explicit
+diagnostic. No source selector, Palot component name, or screenshot coordinate
+participates in that mapping.
+
+## 2026-07-15 — Preserve authored responsive geometry and explicit interaction identity
+
+Observed used pixels are evidence, not a replacement for authored responsive
+constraints. Block-flow lowering and application-state composition must retain
+winning authored relative values such as `width: 100%`, `margin: auto`, and
+single-edge auto margins. Replaying a captured pixel width or resolved auto
+margin at another viewport is forbidden because it freezes one observation
+into every responsive state. Two-width regressions cover centered and
+trailing-auto layouts, and the responsive census must bracket each structural
+boundary before a candidate can be promoted.
+
+Trusted interaction evidence follows the same explicit-identity rule. Capture
+manifests bind a scenario to its action id; the recorder preserves that binding
+and scenario id, and composition joins trusted pointer or keyboard events only
+through that declaration. Labels, selectors, and event-target text never infer
+an action identity. Events whose composed path does not include the intended
+target are excluded rather than used as activation proof.
+
+Stateful visual promotion also preserves authored geometry. When a control's
+interaction variants change only paint, its rest skin inherits the imported
+per-corner radii, including explicit zero-valued corners. Otherwise first/last
+segmented controls can be rounded at rest yet become square when selected.
+This rule is implemented and tested in Burl's generic materializer; the Palot
+consumer contains no compensating radius or selector override.
+
+## 2026-07-15 — Classify Electron services separately from product IPC
+
+Electron observations are not CSS properties and must not be treated as a
+browser-emulation checklist. Reusable window and platform capabilities are
+classified against portable Burl services and native backends; Chromium-only
+objects are explicit unsupported entries; absent platform services remain
+explicit gaps. Literal application IPC channels stay consumer protocol and
+cannot be promoted by channel-name heuristics or a generic string dispatcher.
+
+The first validated route is file selection: imported intent reaches the
+WidgetBridge dialog API, then Burl's portable `FileDialog`, then the native
+macOS panel backend. All four operations (`open_file`, `open_files`,
+`save_file`, and `choose_folder`) honor an installed backend and invoke copied
+callbacks after releasing the backend mutex. This is reusable SDK behavior,
+not a Palot adapter.

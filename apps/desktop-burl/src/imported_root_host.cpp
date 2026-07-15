@@ -176,7 +176,8 @@ public:
 		const auto index = active_action_index(id);
 		const auto found = payloads_.find(key);
 		if (!index || found == payloads_.end() || *index >= found->second.size()) return std::nullopt;
-		return found->second[*index];
+		return pulp::view::resolve_imported_action_payload(
+			found->second[*index], owner_.runtime_context_lookup_);
 	}
 	bool invoke_bound(std::string_view id) {
 		const auto key = std::string(id);
@@ -187,7 +188,8 @@ public:
 			                             id == "prompt.cancel";
 			return composer_action && composer() != nullptr && invoke_with_state(id, "", "", "");
 		}
-		const auto payload = action_payload(id).value_or("");
+		const auto payload = action_payload(id);
+		if (!payload) return false;
 		std::string state_key;
 		std::string state_transition;
 		if (const auto state = state_transitions_.find(key);
@@ -195,7 +197,7 @@ public:
 			state_key = state->second[*index].first;
 			state_transition = state->second[*index].second;
 		}
-		return invoke_with_state(id, payload, state_key, state_transition);
+		return invoke_with_state(id, *payload, state_key, state_transition);
 	}
 	std::vector<pulp::view::View*> bound_views(std::string_view id) const {
 		std::vector<pulp::view::View*> result;
@@ -253,9 +255,16 @@ private:
 			// composition without guessing from product labels or action names.
 			payload = descriptor.application_state_transition.substr(4);
 		}
-		if (signature && !signature->fields.empty() && payload.empty()) {
-			// A typed action requiring data must never degrade into an empty
-			// callback when composition lost its payload evidence.
+		std::vector<std::string_view> required_fields;
+		if (signature)
+			for (const auto& field : signature->fields)
+				if (field.required) required_fields.push_back(field.name);
+		if (!pulp::view::imported_action_payload_contract_covers_fields(
+		        payload, required_fields)) {
+			// Typed action admission is declarative: every required field must be
+			// literal, captured, or mapped to invocation-time runtime context.
+			// The callback below resolves mapped values again at dispatch and
+			// therefore still fails closed when current context is unavailable.
 			view.set_enabled(false);
 			view.set_hit_testable(false);
 			auto& views = unattached_action_views_[id];
@@ -271,22 +280,24 @@ private:
 		}
 		const auto state_key = std::string(descriptor.application_state_key);
 		const auto state_transition = std::string(descriptor.application_state_transition);
-		auto callback = [endpoint = endpoint->second, payload] {
-			endpoint(payload);
+		auto callback = [this, endpoint = endpoint->second, payload] {
+			const auto resolved = pulp::view::resolve_imported_action_payload(
+				payload, owner_.runtime_context_lookup_);
+			if (!resolved) return false;
+			endpoint(*resolved);
+			return true;
 		};
 		if (auto* button = dynamic_cast<pulp::view::TextButton*>(&view)) {
 			auto imported_callback = std::move(button->on_click);
 			button->on_click = [imported_callback = std::move(imported_callback),
 			                    callback = std::move(callback)]() mutable {
-				callback();
-				if (imported_callback) imported_callback();
+				if (callback() && imported_callback) imported_callback();
 			};
 		} else {
 			auto imported_callback = std::move(view.on_click);
 			view.on_click = [imported_callback = std::move(imported_callback),
 			                 callback = std::move(callback)]() mutable {
-				callback();
-				if (imported_callback) imported_callback();
+				if (callback() && imported_callback) imported_callback();
 			};
 		}
 		attached_.insert(id);
@@ -336,6 +347,10 @@ void ImportedRootHost::register_action(std::string id, ActionEndpoint endpoint) 
 	if (id.empty() || !endpoint) throw std::invalid_argument("imported-root action endpoint is invalid");
 	if (!endpoints_.emplace(std::move(id), std::move(endpoint)).second)
 		throw std::invalid_argument("duplicate imported-root action endpoint");
+}
+
+void ImportedRootHost::set_runtime_context_lookup(RuntimeContextLookup lookup) {
+	runtime_context_lookup_ = std::move(lookup);
 }
 
 void ImportedRootHost::load(const std::filesystem::path& design_ir_path,

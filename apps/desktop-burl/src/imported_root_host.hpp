@@ -17,10 +17,12 @@
 class ImportedRootHost final : public pulp::view::View {
 public:
 	using ActionEndpoint = std::function<void(std::string_view)>;
+	using RuntimeContextLookup = pulp::view::NativeImportRuntimeContextLookup;
 	ImportedRootHost();
 	~ImportedRootHost() override;
 
 	void register_action(std::string id, ActionEndpoint endpoint);
+	void set_runtime_context_lookup(RuntimeContextLookup lookup);
 	void load(const std::filesystem::path& design_ir_path,
 	          const std::filesystem::path& binding_manifest_path);
 	void layout_children() override;
@@ -53,6 +55,7 @@ public:
 private:
 	class BindingContext;
 	std::unordered_map<std::string, ActionEndpoint> endpoints_;
+	RuntimeContextLookup runtime_context_lookup_;
 	std::unique_ptr<BindingContext> binding_context_;
 	std::unique_ptr<pulp::view::DesignIR> ir_;
 	std::vector<std::string> unattached_required_actions_;

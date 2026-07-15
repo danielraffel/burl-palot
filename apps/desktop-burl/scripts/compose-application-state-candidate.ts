@@ -2,6 +2,7 @@
 import { createHash } from "node:crypto"
 import { readFile, writeFile } from "node:fs/promises"
 import { resolve } from "node:path"
+import { normalizeCapturedApplicationStateInteractionEvidence } from "./application-state-interaction-receipts"
 
 const args = new Map<string, string>()
 for (let index = 2; index < process.argv.length; index += 2) args.set(process.argv[index], process.argv[index + 1])
@@ -61,6 +62,7 @@ await writeFile(outputPath, JSON.stringify({
 	}])),
 	actionStateContracts,
 	actionClassifications,
-	interactionEvidence: interactions.map(({ value }) => value),
+	interactionEvidence: interactions.map(({ value }) =>
+		normalizeCapturedApplicationStateInteractionEvidence(value)),
 }, null, 2) + "\n")
 console.log(`${keys.length} application-state dimensions composed at ${outputPath}`)

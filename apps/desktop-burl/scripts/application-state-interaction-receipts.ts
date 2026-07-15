@@ -3,6 +3,32 @@ export interface InteractionReceiptResult {
 	keyboard: boolean
 }
 
+interface CapturedInteractionEvidence {
+	scenarios?: any[]
+	records?: any[]
+	[key: string]: unknown
+}
+
+// State-transition captures retain their event stream beside the structural
+// snapshot that the action produced. Normalize that losslessly into the same
+// scenario contract used by the framework interaction capture. The action ID
+// must be explicit capture metadata: labels and selectors are not identities.
+export const normalizeCapturedApplicationStateInteractionEvidence =
+	(evidence: CapturedInteractionEvidence): CapturedInteractionEvidence & { scenarios: any[] } => {
+		if (Array.isArray(evidence.scenarios)) return { ...evidence, scenarios: evidence.scenarios }
+		const scenarios = (evidence.records ?? [])
+			.filter((record) => record?.action)
+			.map((record, index) => ({
+				id: record.id ?? `captured-interaction-${index}`,
+				action: record.action,
+				...(record.binding ? { binding: record.binding } : {}),
+				events: (record.targetObservation?.events ?? []).filter((event: any) =>
+					event?.intendedTargetInComposedPath !== false),
+				target: record.targetObservation,
+			}))
+		return { ...evidence, scenarios }
+	}
+
 export const verifyTrustedInteractionReceipt = (scenario: any): InteractionReceiptResult => {
 	const events = (scenario.events ?? []).filter((event: any) => event.isTrusted === true)
 	const sequence = events.map((event: any) => event.type)

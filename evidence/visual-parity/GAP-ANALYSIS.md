@@ -2,6 +2,120 @@
 
 Reference: the unmodified Palot source at `fd63a75dad3d0e8555ba22a47e720d285889fbf0`, built with Bun/Electron and opened on its deterministic `?mock=1` dark-mode session fixture. Both reference and native captures use a 1200 x 800 logical viewport and 2400 x 1600 Retina pixels.
 
+## 2026-07-15 admissible A/B and capability checkpoint
+
+The current comparison is state/cohort gated before any pixel score is accepted.
+At both 1200 x 800 and 768 x 800 the source and native receipts now agree on
+source revision, route, fixture session, dark theme, open sidebar, closed Changes
+panel, verbose display mode, transparency/effect, viewport, scale factor, and
+source-capture identity. The false resting `Hide changes panel` tooltip was a
+closed generated portal incorrectly grafted into the open state; Burl's generic
+state composer now prunes semantically closed transient portal content while
+retaining genuinely open portals.
+
+The admissible region reports are:
+
+- `/private/tmp/palot-property-census-state-fixed-1200x800.regions.json`
+- `/private/tmp/palot-property-census-state-fixed-768x800.regions.json`
+
+At 1200 px, top bar, both sidebar regions, prompt, tools, response, metadata,
+and footer pass the current 0.90 regional threshold. Composer (`0.5928`) and
+status action (`0.5045`) fail. At 768 px, tools (`0.8581`), metadata (`0.8944`),
+composer (`0.5887`), and status action (`0.3144`) fail. These broad-region
+passes do not waive exact icon, baseline, text-metric, or interaction gates.
+
+The root causes are now mechanically pinned:
+
+1. Source composer input-group geometry changes from `(296,647.5,887,112)` at
+   1200 px to `(296,621.5,455,138)` at 768 px. The canonical IR freezes 112 px
+   and the native runtime further materializes both cohorts at `y=669.5,h=90`.
+   This is a generic intrinsic-height plus vertical-anchor projection defect.
+2. The source status action is `80.7656 x 24` with radius `7.5`, but the current
+   native binding has no hit region. The control is disabled before its required
+   invocation-time payload fields can be supplied. Runtime-resolvable fields
+   must preserve pointer eligibility while still failing closed if invocation
+   resolution fails; no `prompt.cancel` special case is acceptable.
+3. A fresh state/responsive composition now projects proven `heightMode:hug`
+   across matching state frontiers and passes minimum containment. It is not yet
+   canonical because fresh promotion loses composer agent/variant select-item
+   frontiers; trusted receipts correctly keep that artifact red.
+
+Broad regions are no longer the finest-grained oracle. Burl now has a generic
+source-identity anchor gate at
+`tools/import-validation/compare_layout_anchors.py`. It compares the captured
+ObservedDOM and the native layout dump at the same viewport, reports missing or
+duplicate structural identities, exact rectangle deltas, and actionable nodes
+without hit regions, then emits source-derived micro-regions for the pixel
+scorer. It contains no Palot selectors, labels, or coordinates, and its
+trustworthiness fixture proves that deliberate geometry, materialization, and
+hit-region failures are detected.
+
+The first 1200 x 800 exact-anchor run is intentionally RED:
+
+- 35 visible structural anchors are missing after excluding renderer-folded
+  inline text and SVG leaf primitives;
+- 27 native identities are duplicated, led by repeated sidebar siblings whose
+  captured `:0/:1/:2` ordinals collapse to `:0` during composition;
+- 104 exact matches exceed the 1 px geometry tolerance;
+- the usage/status action and one tooltip trigger materialize without hit
+  regions;
+- 56 of 139 source-derived failed-anchor pixel regions remain below 0.90.
+
+The leading generic cohorts are repeated-sibling identity retention, scroll and
+hit-region coordinate composition, intrinsic scroll-content extent,
+variable-height transcript flow, and composer inline-flex ordering. The durable
+machine evidence for the current run is
+`/private/tmp/palot-property-census-state-fixed-1200x800.anchor-report.v2.json`,
+with the independent full census at
+`/private/tmp/palot-1200x800-source-native-semantic-census.v1.json`. These
+temporary paths must be promoted into the consumer evidence tree with the next
+accepted canonical capture; they are not yet release evidence.
+
+The standards-seeded source/computed-DOM capability census is now
+context-aware: it reads CSS only from stylesheets, CSS/styled template literals,
+and top-level JSX style fields rather than treating arbitrary TypeScript object
+keys as CSS. Palot has zero uncataloged observations after normalization.
+`corner-shape` is now captured and supported through the generic continuous
+border-curve route with resolved semantic evidence. Six cataloged CSS features
+still require explicit
+support or honest exclusion: `contain-intrinsic-size`,
+`font-feature-settings`, `scrollbar-color`, `scrollbar-width`,
+`stroke-dasharray`, and `text-rendering`. Current visual evidence prioritizes
+corner shape, font features/text metrics, and scrollbar semantics, but the
+ledger remains source-wide rather than Palot-only.
+
+Two additional false-green paths are now closed at the framework boundary:
+
+1. Responsive/state verification distinguishes executable
+   `interaction.actionBindingId` endpoints from provenance-only
+   `pulpHostAction` attributes. The withdrawn v33 candidate is correctly RED:
+   22 required actions are not executable and 43 declared actions are not
+   attached to an interaction. A declaration can no longer satisfy the click
+   gate without a materialized hit region.
+2. `VisualSkin` and `TextButton` preserve per-state, per-corner pixel/percent
+   radii and circular/continuous curves. Fresh Settings projection preserves
+   the source's segmented-control end caps as `[10.5,0,0,10.5]` and
+   `[0,10.5,10.5,0]`; uniform-radius fallback is no longer allowed to square
+   those cells. Focused TypeScript projection, JSON/token round-trip,
+   materializer, and C++ paint tests pass. A launched Settings A/B capture is
+   still required before the visual row closes.
+
+The runtime capture property set now also records the six remaining census
+features rather than leaving them invisible to lowering. Authored
+`font-feature-settings` and non-default `text-rendering` are preserved in the
+typed text IR with computed defaults elided. Native projection/paint and the
+remaining scrollbar/SVG/intrinsic-size classifications stay RED until their
+property-level tests and launched A/B evidence pass.
+
+The independent source/runtime audit is durable at Burl
+`evidence/compatibility-current/palot-six-property-runtime-audit.v1.json`.
+It classifies four properties for implementation, `stroke-dasharray` for a
+bounded inline-SVG implementation, and `contain-intrinsic-size` as a candidate
+render-neutral exclusion only when paired with eager native subtree layout.
+The existing canonical source capture contains zero values for all six because
+it predates the expanded capture property set, so a fresh exercised Electron
+cohort is mandatory; catalog/source scanning alone cannot close the gate.
+
 ## Substantially closed structural gaps
 
 1. The native shell now uses the source's 280 px sidebar and 46 px app bar.
@@ -1096,3 +1210,171 @@ separate explicit `PALOT_ACTION_PAYLOAD_PROOF` gate and remain unpromoted until
 a generated IR carrying real turn identities passes it. This prevents both a
 false failure against an older IR and a false green based only on endpoint
 registration.
+
+### 2026-07-15 resumed acceptance contract
+
+The checkpoint was resumed with the user-visible build still rejected. The
+`Default variant / Adaptive / Standard` surface in the upper-left is not
+product navigation and may not remain in the resting tree. It is the composer
+variant portal leaking from an open application state. Acceptance requires a
+source-composed closed state with the menu absent, followed by a real trigger,
+selection, dismissal, payload, focus-restoration, and screenshot proof. Hiding
+the rows, moving them offscreen, or special-casing their labels is forbidden.
+
+Clickability is now an all-controls gate rather than a sample census. At every
+supported viewport, every visible sidebar row, dropdown trigger and option,
+top-bar control, inline icon/action, disclosure, contextual menu/popover,
+Settings control, and composer control must have a non-empty unobstructed hit
+region. Real AppKit pointer/keyboard/hover/right-click execution must produce
+the exact source-observed action or visible state transition. A registered
+callback, action inventory entry, or isolated primitive test cannot close the
+canonical row.
+
+Palot remains a proving fixture, not the implementation target. Responsive
+layout, state isolation, hit testing, portals, focus, typography, SVG/icons,
+radii, paint, motion, and CSS/Electron property lowering must land in Burl's
+importer/runtime with executable property fixtures. The consumer may contain
+only real Palot product adapters and reviewed source binding manifests. A
+coordinate, label-width, hidden-overlay, or paint override created solely to
+make this fixture resemble Electron is a release blocker. The final A/B gate
+uses matched Electron and native screenshots at identical states and viewport
+sizes, with region oracles for the sidebar, top bar, transcript/tool cards,
+composer, Settings, Changes, and every overlay.
+
+The resumed Settings capture also fails its rounded-group paint contract. The
+outer Settings panel and grouped cards lose the source per-corner radii, while
+child cell backgrounds and divider strokes paint straight through the intended
+corner mask. This must be fixed as a neutral SDK property chain—captured
+per-corner `border-radius`, ancestor `overflow` clipping, and descendant paint
+clipping—with a nested-card fixture that proves both rounded pixels and clipped
+child color/divider pixels. A Settings-specific radius or manually shortened
+divider is forbidden, and the Electron/native Settings region remains RED.
+
+### 2026-07-15 core mapping closure in progress
+
+The latest A/B investigation has closed three importer/runtime defects without
+consumer styling exceptions:
+
+- block-to-flex lowering now retains a captured winning authored `width: 100%`
+  rather than deleting it when a parent column stretches children;
+- responsive state composition suppresses captured used-pixel deltas for
+  authored auto margins, including `mx`/`my` and individual edges; and
+- stateful button promotion retains authored asymmetric corner longhands so
+  paint-only hover, focus, pressed, and selected skins cannot square off the
+  first or last segment.
+
+The trusted-interaction join was also repaired at the evidence-contract level.
+Raw state-transition records now preserve an explicit action binding and
+scenario id, allowing the real trusted `project.search.toggle` pointer and
+Escape receipts to survive composition without label inference.
+
+These fixes are green in their generic property furnaces, but the application
+row remains RED until a single freshly regenerated candidate incorporates all
+of them and passes the complete responsive, AppKit interaction, and matched
+Electron/native screenshot cohorts. The remaining responsive failures are
+currently isolated to 599 px footer pinning and the 280 px minimum boundary.
+
+The standards census now catalogs all 1,982 observed semantics. Its Electron
+partition contains 163 observations: 11 reusable surfaces have partial
+portable/native mappings, 2 are explicit missing services, 9 are explicit
+unsupported Chromium/IPC surfaces, and 141 literal IPC protocol observations
+remain consumer-owned. File/directory selection is the first typed validated
+Electron-service route. The audit remains RED rather than converting catalog
+claims into parity: 86 CSS support claims still lack resolved executable
+evidence and 134 evidence references remain unresolved.
+
+Composer validation previously had a false-green blind spot: layout snapshots
+reported `Label::intrinsic_width()`, which correctly returns zero for wrapping
+layout participation but is not a painted-text measurement. Snapshot evidence
+now uses the renderer-owned shaped natural text width. The repaired capture
+reports nonzero boxes for model, variant, locality, interrupt, and verbosity
+labels without changing layout. Status-pill outer geometry is within roughly a
+pixel of the matched source; the remaining broad composer mismatch is dominated
+by raster/color and missing exact font-face evidence rather than its shared
+outer bounds. Menlo Bold is present in the source runtime receipt but absent
+from the generated NativeIR font inventory, so font receipt propagation remains
+a RED core gate.
+
+### 2026-07-15 live interaction and window-chrome regression ledger
+
+The live native v37 inspection adds the following explicit RED gates. These are
+SDK import/runtime failures for which Palot is only the conformance fixture. A
+consumer callback, label match, fixed coordinate, or Palot-specific paint value
+cannot close any row.
+
+1. **Inline title editing and focus lifecycle.** Activating the title editor
+   displaces its text above the top-bar content box, and the edit surface cannot
+   be dismissed reliably. The imported editable-text contract must preserve the
+   resting box, baseline, clipping, and sibling layout while editing. Enter must
+   commit, Escape must cancel, outside-pointer must follow the source behavior,
+   and either exit must restore focus and the original top-bar geometry. Evidence:
+   `/var/folders/xj/nll023g11_v2c7n0kkcj4cww0000gn/T/clipboard-2026-07-15-085948-8271F5A7.png`,
+   `/var/folders/xj/nll023g11_v2c7n0kkcj4cww0000gn/T/TemporaryItems/NSIRD_screencaptureui_kfqGm9/Screenshot 2026-07-15 at 9.00.20 AM.png`, and
+   `/var/folders/xj/nll023g11_v2c7n0kkcj4cww0000gn/T/clipboard-2026-07-15-090123-03264514.png`.
+
+2. **Tooltip ownership and dismissal.** The Changes tooltip remains mounted
+   after its trigger state changes and after the Changes sidebar opens. The
+   generic overlay contract must close a tooltip on pointer exit, trigger
+   deactivation, competing-overlay activation, route change, Escape when
+   source-observed, and loss of its anchor; stale tooltip pixels or hit regions
+   may not survive. Evidence:
+   `/var/folders/xj/nll023g11_v2c7n0kkcj4cww0000gn/T/TemporaryItems/NSIRD_screencaptureui_iZvEkz/Screenshot 2026-07-15 at 9.01.09 AM.png` and
+   `/var/folders/xj/nll023g11_v2c7n0kkcj4cww0000gn/T/TemporaryItems/NSIRD_screencaptureui_pzwnIp/Screenshot 2026-07-15 at 9.01.43 AM.png`.
+
+3. **Menu/select keyboard and pointer semantics.** The model menu can mount,
+   but it lacks the complete platform-independent select contract: hovered-row
+   highlight, roving active option, Up/Down navigation, Enter/Space selection,
+   Escape dismissal, outside-pointer dismissal, focus restoration, selected
+   state, scroll containment, and collision-aware placement. These behaviors
+   must be inferred from source roles/events/state captures and materialized by
+   Burl's reusable overlay/menu runtime. Evidence:
+   `/var/folders/xj/nll023g11_v2c7n0kkcj4cww0000gn/T/clipboard-2026-07-15-090422-59E9658C.png`.
+
+4. **Routed navigation and asynchronous panel content.** Settings `Back to app`
+   does not navigate, and selecting files in Changes leaves the panel in an
+   indefinite loading state. Imported route actions must dispatch through one
+   typed route contract with a visible settled postcondition. Async content
+   actions must expose loading, success, empty, cancellation, and error states;
+   an endless spinner cannot count as action success. Evidence:
+   `/var/folders/xj/nll023g11_v2c7n0kkcj4cww0000gn/T/TemporaryItems/NSIRD_screencaptureui_pzwnIp/Screenshot 2026-07-15 at 9.01.43 AM.png` and
+   `/var/folders/xj/nll023g11_v2c7n0kkcj4cww0000gn/T/clipboard-2026-07-15-090524-78414FE1.png`.
+
+5. **All-visible-controls execution.** Most visible sidebar, top-bar, Settings,
+   Changes, composer, inline-icon, and dropdown controls still have no observable
+   result under real pointer execution. The all-controls census must exercise
+   every unobstructed visible hit region using AppKit down/up, hover, keyboard,
+   and right-click where source-observed, then require the exact action payload
+   plus a changed settled screenshot or named runtime postcondition. Sampling a
+   few working controls or proving callback registration remains insufficient.
+
+6. **Source-derived frame gutters.** The native Settings/chat frame is flush
+   against the top and side edges where the source preserves an inset gutter.
+   Import must retain authored padding/margin and containing-block ownership
+   through route/state composition at every supported viewport; consumer frame
+   constants are forbidden. Evidence:
+   `/var/folders/xj/nll023g11_v2c7n0kkcj4cww0000gn/T/TemporaryItems/NSIRD_screencaptureui_FKNf2b/Screenshot 2026-07-15 at 9.06.40 AM.png` compared with
+   `/var/folders/xj/nll023g11_v2c7n0kkcj4cww0000gn/T/TemporaryItems/NSIRD_screencaptureui_Dd8qpy/Screenshot 2026-07-15 at 9.06.48 AM.png`.
+
+7. **Portable macOS window material.** The source window uses the Tahoe-era
+   translucent/glass material, while the inspected native state is visually
+   opaque. Burl's portable window-appearance contract must carry the requested
+   transparent window/background and platform material behind a macOS adapter,
+   preserve it across route/theme/state changes, and provide deterministic
+   environment-qualified capture evidence. It must remain optional and must not
+   encode Palot identity. Evidence:
+   `/var/folders/xj/nll023g11_v2c7n0kkcj4cww0000gn/T/TemporaryItems/NSIRD_screencaptureui_How4rt/Screenshot 2026-07-15 at 9.08.12 AM.png` compared with
+   `/var/folders/xj/nll023g11_v2c7n0kkcj4cww0000gn/T/TemporaryItems/NSIRD_screencaptureui_nTHAwo/Screenshot 2026-07-15 at 9.08.26 AM.png`.
+
+8. **Rounded-window border continuity.** The native lower rounded edge loses
+   part of the source outline. Window/background clipping and border painting
+   must share one rounded path at device scale so the stroke remains continuous
+   through every corner without square child paint, missing antialiased pixels,
+   or a hand-shortened divider. Evidence:
+   `/var/folders/xj/nll023g11_v2c7n0kkcj4cww0000gn/T/TemporaryItems/NSIRD_screencaptureui_x8oYf7/Screenshot 2026-07-15 at 9.08.46 AM.png` compared with
+   `/var/folders/xj/nll023g11_v2c7n0kkcj4cww0000gn/T/TemporaryItems/NSIRD_screencaptureui_w4WLBn/Screenshot 2026-07-15 at 9.09.18 AM.png`.
+
+The next interaction slice closes these rows in dependency order: source
+capture/contract fidelity, generic overlay and focus runtime, generic route and
+async action execution, then the full AppKit control census and matched
+Electron/native state screenshots. No application row is green until the live
+control works and the reusable SDK fixture proving the same behavior is green.

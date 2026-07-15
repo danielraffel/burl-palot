@@ -1,5 +1,6 @@
 #include "palot_view.hpp"
 
+#include <pulp/platform/external_open.hpp>
 #include <pulp/view/input_events.hpp>
 
 #include <cstdlib>
@@ -27,6 +28,15 @@ int main(int argc, char** argv) {
 	if (argc != 1 && argc != 3) return 31;
 	PalotView view(argc == 3 ? argv[1] : std::filesystem::path{},
 	               argc == 3 ? argv[2] : std::filesystem::path{});
+	int external_open_calls = 0;
+	std::string external_open_directory;
+	pulp::platform::ExternalOpen::set_backend({
+		.reveal = [&](const std::string& directory) {
+			++external_open_calls;
+			external_open_directory = directory;
+			return true;
+		},
+	});
 	int appearance_changes = 0;
 	pulp::view::WindowAppearance last_appearance = pulp::view::WindowAppearance::system;
 	view.on_window_appearance_change = [&](pulp::view::WindowAppearance appearance) {
@@ -95,6 +105,9 @@ int main(int argc, char** argv) {
 	if (appearance_changes != 1 || last_appearance != pulp::view::WindowAppearance::light)
 		return 29;
 	if (!view.invoke_imported_action("external.open.menu.toggle") || !view.external_open_menu_open()) return 12;
+	if (!view.invoke_imported_action("external.open.preferred")) return 32;
+	if (argc == 3 && (external_open_calls != 1 || external_open_directory.empty())) return 33;
+	if (argc == 1 && external_open_calls != 0) return 34;
 	if (!view.invoke_imported_action("composer.agent-menu.toggle") || !view.composer_agent_menu_open()) return 13;
 	if (!view.invoke_imported_action("composer.model-menu.toggle") || !view.composer_model_menu_open()) return 14;
 	if (!view.invoke_imported_action("composer.variant-menu.toggle") || !view.composer_variant_menu_open()) return 15;
@@ -108,7 +121,18 @@ int main(int argc, char** argv) {
 	std::size_t reasoning_rows = 0;
 	bool completed_duration = false;
 	bool running_duration = false;
+	bool structured_assistant_metadata = false;
 	for (const auto& row : transcript) {
+		if (row.key == "fixture-assistant-1") {
+			structured_assistant_metadata =
+				row.values.contains("message.text") &&
+				row.values.at("message.text").find("anthropic.claude-opus-4-6") == std::string::npos &&
+				row.values.contains("message.model") &&
+				row.values.at("message.model") == "anthropic.claude-opus-4-6" &&
+				row.values.contains("message.duration") &&
+				row.values.at("message.duration") == "4m 58s" &&
+				row.values.contains("message.cost") && row.values.at("message.cost") == "$0.01";
+		}
 		if (row.template_id == "reasoning") {
 			++reasoning_rows;
 			if (!row.values.contains("reasoning.label") ||
@@ -125,6 +149,7 @@ int main(int argc, char** argv) {
 		if (!row.values.contains("tool.label") || !row.values.contains("tool.subject")) return 18;
 	}
 	if (tool_keys.size() != 4 || read_rows != 1 || edit_rows != 3 || reasoning_rows != 2 ||
-	    !completed_duration || !running_duration) return 19;
+	    !completed_duration || !running_duration || !structured_assistant_metadata) return 19;
+	pulp::platform::ExternalOpen::clear_backend();
 	return EXIT_SUCCESS;
 }

@@ -1,0 +1,59 @@
+{
+  "schema": "palot-native-interaction-contract-audit-v1",
+  "candidate": {
+    "path": "/private/tmp/palot-intrinsic-v18-strict-font-layout.design-ir.json",
+    "sha256": "6f0711ed4aadced725a1d2fd6f9effafd64d9134cd3aa8c09b55fab03d784173"
+  },
+  "contracts": [
+    {
+      "action": "sidebar.toggle",
+      "sourceEvidence": "generated-v3/sidebar expanded and collapsed",
+      "stateKey": "sidebar.open",
+      "transition": "cycle:open,closed",
+      "nativeStatus": "green"
+    },
+    {
+      "action": "navigation.settings",
+      "sourceEvidence": "source-interaction-states/settings-route.png",
+      "stateKey": "navigation.route",
+      "transition": "set:/settings/general",
+      "nativeStatus": "green"
+    },
+    {
+      "action": "review.panel.toggle",
+      "sourceEvidence": "generated-v3/review and review-diff",
+      "stateKey": "review.panel.open",
+      "transition": "toggle",
+      "nativeStatus": "contract-present-not-exercised-in-this-proof"
+    },
+    {
+      "action": "session.metrics.toggle",
+      "sourceEvidence": "generated-v4/usage closed and open-focused",
+      "stateKey": "session.metrics.open",
+      "transition": "toggle",
+      "nativeStatus": "contract-present-not-exercised-in-this-proof"
+    },
+    {
+      "action": "session.metrics.dismiss",
+      "sourceEvidence": "generated-v4/usage open-focused and closed-after-dismiss",
+      "stateKey": null,
+      "transition": null,
+      "nativeStatus": "red-unattached-and-fail-closed"
+    },
+    {
+      "action": "settings.theme.select",
+      "sourceEvidence": "generated-v3/settings-controls/dark carries payload light",
+      "payload": null,
+      "stateKey": null,
+      "transition": null,
+      "nativeStatus": "red-conversion-dropped-source-payload-and-state-contract"
+    }
+  ],
+  "gates": {
+    "focusedUnattachedActionInvariant": "green",
+    "normalNativeInteractionExecution": "red-exit-3",
+    "productionAppKitSidebarAndSettingsNavigation": "green",
+    "settingsVisualParity": "red-overlapping-layout",
+    "canonicalPromotion": "forbidden-until-red-gates-close"
+  }
+}

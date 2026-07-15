@@ -1,0 +1,41 @@
+{
+  "schemaVersion": 1,
+  "cdpEndpoint": "http://127.0.0.1:9222",
+  "pageUrlPattern": "localhost:1420/.*ses-mock-darkmode-001",
+  "output": "/private/tmp/palot-main-chat-liquid-glass",
+  "viewport": {
+    "width": 1200,
+    "height": 800,
+    "deviceScaleFactor": 2
+  },
+  "clock": "2026-07-12T17:00:00.000Z",
+  "sourceRevision": "fd63a75dad3d0e8555ba22a47e720d285889fbf0",
+  "settleFrames": 2,
+  "timeoutMs": 120000,
+  "reload": false,
+  "preserveLivePage": true,
+  "windowSurfaceState": "transparent-preference",
+  "rootStatePredicate": {
+    "selector": "html",
+    "requiredClasses": [
+      "dark",
+      "electron-transparent"
+    ]
+  },
+  "includeMatchedStyles": false,
+  "clearStorage": false,
+  "semanticRoleProbes": [
+    {
+      "containerSelector": ".is-assistant",
+      "roles": [
+        "paragraph",
+        "strong",
+        "inline-code",
+        "metadata"
+      ]
+    }
+  ],
+  "security": {
+    "mode": "recording-fake"
+  }
+}

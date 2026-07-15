@@ -1,20 +1,31 @@
 #!/usr/bin/env bun
 import { createHash } from "node:crypto"
 import { readFile, writeFile } from "node:fs/promises"
-import { pathToFileURL } from "node:url"
 import { resolve } from "node:path"
+import { pathToFileURL } from "node:url"
+import { promoteGuardedCanonicalCandidate } from "./guarded-canonical-promotion"
 
 const args = new Map<string, string>()
 for (let index = 2; index < process.argv.length; index += 2) args.set(process.argv[index], process.argv[index + 1])
-const defaultPath = resolve(args.get("--default") ?? "")
-const candidatePath = resolve(args.get("--candidate") ?? "")
-const outputPath = resolve(args.get("--output") ?? "")
-const reportPath = resolve(args.get("--report") ?? "")
-const burl = resolve(args.get("--burl-source") ?? "")
+const requiredArguments = [
+	"--default", "--candidate", "--output", "--report", "--burl-source",
+	"--source-window", "--source-capture", "--source-capture-meta",
+]
+for (const argument of requiredArguments)
+	if (!args.get(argument)) throw new Error(`missing required argument ${argument}`)
+const defaultPath = resolve(args.get("--default")!)
+const candidatePath = resolve(args.get("--candidate")!)
+const outputPath = resolve(args.get("--output")!)
+const reportPath = resolve(args.get("--report")!)
+const burl = resolve(args.get("--burl-source")!)
+const sourceWindowPath = resolve(args.get("--source-window")!)
+const sourceCapturePath = resolve(args.get("--source-capture")!)
+const sourceCaptureMetaPath = resolve(args.get("--source-capture-meta")!)
+const stagingPath = resolve(args.get("--staging-candidate") ?? `${outputPath}.candidate`)
+const promotionReceiptPath = resolve(args.get("--promotion-receipt") ?? `${reportPath}.candidate.json`)
+const guardReportPath = resolve(args.get("--guard-report") ?? `${reportPath}.guard.json`)
 const overlayCandidatePath = args.get("--overlay-contract-candidate")
 	? resolve(args.get("--overlay-contract-candidate")!) : ""
-if (!defaultPath || !candidatePath || !outputPath || !reportPath || !burl)
-	throw new Error("required: --default --candidate --output --report --burl-source")
 
 const [defaultBytes, candidateBytes] = await Promise.all([readFile(defaultPath), readFile(candidatePath)])
 const document = JSON.parse(defaultBytes.toString("utf8"))
@@ -55,6 +66,7 @@ const dimensions = Object.values(candidate.stateCandidates ?? {}).map((state: an
 		when: state.applicability ?? [],
 		preserveWholeTreeBranches: state.mode === "whole-tree",
 		defaultValue: (state.stateTransitions ?? []).find((transition: any) => transition.key === state.key)?.before,
+		stateTransitions: state.stateTransitions ?? [],
 	}
 })
 const maxNodeGrowthRatio = Number(args.get("--max-node-growth-ratio") ?? "4")
@@ -108,12 +120,27 @@ if (unresolvedDeferredAssets.length) {
 const outputDocument = { ...document, root: promotedRoot,
 	assetManifest: importer.mergeNativeAssetManifests(document.assetManifest, ...stateAssetManifests) }
 const outputBytes = JSON.stringify(outputDocument, null, 2) + "\n"
-await writeFile(outputPath, outputBytes)
+const guardedPromotion = await promoteGuardedCanonicalCandidate({
+	candidateBytes: outputBytes,
+	stagingPath,
+	canonicalPath: outputPath,
+	sourceWindowPath,
+	sourceCapturePath,
+	sourceCaptureMetaPath,
+	promotionReceiptPath,
+	guardReportPath,
+	burlSource: burl,
+})
 await writeFile(reportPath, JSON.stringify({
 	schema: "pulp-application-state-promotion-report-v1",
 	default: { path: defaultPath, sha256: defaultSha256 },
 	protectedCandidate: { path: candidatePath, sha256: createHash("sha256").update(candidateBytes).digest("hex") },
-	promoted: { path: outputPath, sha256: createHash("sha256").update(outputBytes).digest("hex") },
+	promoted: { path: outputPath, sha256: guardedPromotion.canonicalSha256 },
+	guardedPromotion: {
+		staging: { path: stagingPath, sha256: guardedPromotion.stagingSha256 },
+		candidateReceipt: guardedPromotion.receiptPath,
+		guardReport: guardedPromotion.guardReportPath,
+	},
 	composition: promoted.report,
 	actionStateContracts: candidate.actionStateContracts,
 	actionClassifications: candidate.actionClassifications,

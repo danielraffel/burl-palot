@@ -308,6 +308,12 @@ const merged = wholeTree ? {
 	children: lowered.flatMap((capture) => capture.root.children.map((child: any) =>
 		cloneWholeTreeBranch(child, capture.state))),
 } : importer.unionApplicationStateTrees(key, lowered, { overlayHostIds: [...overlayHosts] })
+const prunedSemanticallyClosedTransientPortals =
+	importer.pruneSemanticallyClosedTransientStatePortals(merged)
+if (prunedSemanticallyClosedTransientPortals) normalizations.push({
+	kind: "semantically-closed-transient-portal-prune",
+	count: prunedSemanticallyClosedTransientPortals,
+})
 const bindingPolicy = bindingPolicyPath
 	? JSON.parse(await readFile(bindingPolicyPath, "utf8")) : null
 const scopedBindingPolicy = bindingPolicy ? {

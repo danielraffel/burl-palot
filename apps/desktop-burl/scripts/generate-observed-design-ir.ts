@@ -345,6 +345,13 @@ for (const [sourceId, reason] of exclusions) {
 		throw new Error(`invalid SVG exclusion ${sourceId}`)
 }
 const projectedSvgCaptures = inlineSvgCaptures.filter((capture) => !exclusions.has(capture.sourceId))
+// Apply the reviewed public binding policy to the portable IR before native
+// projection.  The framework materializes both the portable metadata and the
+// typed executable interaction; stamping attributes onto already-native JSON
+// would make controls look bound while leaving hit dispatch inert.
+const bindingPolicyReceipts = importer.applySourceBindingPolicy(lowered, importPolicy, {
+	requireAllRules: !allowStateOnlyPolicyRules,
+})
 const designIr = importer.toNativeDesignIrV1(lowered, {
 	sourceFile: semanticsPath,
 	importedAt,
@@ -375,66 +382,12 @@ if (missingSvgSourceIds.length || unexpectedSvgSourceIds.length)
 	throw new Error(`inline SVG invariant failed: ${JSON.stringify({ captured: inlineSvgCaptures.length,
 		excluded: exclusions.size, resolved: resolvedSvgSourceIds.size, missingSvgSourceIds, unexpectedSvgSourceIds })}`)
 
-interface ObservedNode {
-	sourceId: string
-	tagName: string
-	attributes?: Record<string, string>
-	text?: string
-	content?: Array<{ kind: string; text?: string }>
-	children?: ObservedNode[]
-}
 interface PolicyRule {
 	id: string
 	match: { sourceId?: string; tagName?: string; role?: string; accessibleName?: string; textExact?: string; attribute?: { name: string; present?: boolean; value?: string } }
 	attributes: Record<string, string>
 	applicationState?: { key: string; visibility: Record<string, boolean> }
 }
-
-const policy = importPolicy
-if (policy.version !== 1 || !Array.isArray(policy.rules)) throw new Error("invalid binding policy")
-importer.validateApplicationStatePolicyRules(policy.rules)
-const observed = new Map<string, { node: ObservedNode; text: string }>()
-const collect = (node: ObservedNode): string => {
-	const text = [node.text ?? "", ...(node.content ?? []).filter((item) => item.kind === "text").map((item) => item.text ?? ""), ...(node.children ?? []).map(collect)].join(" ").replace(/\s+/g, " ").trim()
-	observed.set(node.sourceId, { node, text })
-	return text
-}
-collect(renderRoot)
-const matches = (entry: { node: ObservedNode; text: string }, rule: PolicyRule) => {
-	const { node, text } = entry, match = rule.match
-	if (match.sourceId && node.sourceId !== match.sourceId) return false
-	if (match.tagName && node.tagName !== match.tagName) return false
-	if (match.role && (node.attributes?.role ?? (node.tagName === "button" ? "button" : node.tagName === "textarea" ? "textbox" : "")) !== match.role) return false
-	if (match.accessibleName && node.attributes?.["aria-label"] !== match.accessibleName) return false
-	if (match.textExact && text !== match.textExact) return false
-	if (match.attribute) {
-		const value = node.attributes?.[match.attribute.name]
-		if (match.attribute.present && value === undefined) return false
-		if (match.attribute.value !== undefined && value !== match.attribute.value) return false
-	}
-	return true
-}
-const applied = new Map(policy.rules.map((rule) => [rule.id, { count: 0, sourceIds: new Set<string>() }]))
-const stamp = (node: any) => {
-	const entry = observed.get(node.name)
-	if (entry) for (const rule of policy.rules) if (matches(entry, rule)) {
-		node.attributes = { ...(node.attributes ?? {}), ...rule.attributes, pulpBindingPolicyRule: rule.id }
-		if (rule.applicationState) {
-			if (!rule.applicationState.key || !Object.keys(rule.applicationState.visibility).length)
-				throw new Error(`binding policy ${rule.id} has invalid application state`)
-			node.responsive = {
-				...(node.responsive ?? {}),
-				applicationStateKey: rule.applicationState.key,
-				visibilityByApplicationState: rule.applicationState.visibility,
-			}
-		}
-		const receipt = applied.get(rule.id)!
-		receipt.count++
-		receipt.sourceIds.add(node.name)
-	}
-	for (const child of node.children ?? []) stamp(child)
-}
-stamp(designIr.root)
 if (importPolicy.semanticRoleBindings?.length) {
 	if (!Array.isArray(semanticRoleSemantics.semanticRoleReceipts))
 		throw new Error("source semantics has no semantic role receipts")
@@ -465,10 +418,9 @@ const emitCollectionSlot = (node: any, spec: NonNullable<typeof importPolicy.col
 for (const collection of importPolicy.collections ?? []) {
 	if (!emitCollectionSlot(designIr.root, collection)) throw new Error(`collection ${collection.id} container not found`)
 }
-for (const rule of policy.rules) {
-	const receipt = applied.get(rule.id)!
-	if (allowStateOnlyPolicyRules && rule.match.sourceId && !receipt.count) continue
-	if (!receipt.count || receipt.sourceIds.size !== 1)
-		throw new Error(`binding policy ${rule.id} matched ${receipt.count} nodes across ${receipt.sourceIds.size} source identities; expected one source identity`)
-}
+console.error(`[binding-policy] ${JSON.stringify({
+	rules: importPolicy.rules.length,
+	matched: bindingPolicyReceipts.filter((receipt: any) => receipt.matchedNodes > 0).length,
+	stateOnly: bindingPolicyReceipts.filter((receipt: any) => receipt.matchedNodes === 0).length,
+})}`)
 await writeFile(outputPath, JSON.stringify(designIr, null, 2) + "\n")

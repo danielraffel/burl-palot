@@ -3,6 +3,13 @@
 import { createHash } from "node:crypto"
 import { readFile, writeFile } from "node:fs/promises"
 import { resolve } from "node:path"
+import {
+	declaredAction,
+	declaredButUnattachedActions,
+	executableAction,
+	missingRequiredExecutableActions,
+	uniqueActions,
+} from "./responsive-state-action-verification"
 
 const args = new Map<string, string>()
 for (let index = 2; index < process.argv.length; index += 2)
@@ -45,15 +52,13 @@ const walk = (root: any): any[] => {
 }
 const normalizedAnchor = (node: any): string => String(node.source_node_id ?? node.stable_anchor_id ?? "")
 	.replace(/^(?:application-state(?:-instance)?:[^:]+(?::[^:]+){0,2}::)+/, "")
-const action = (node: any): string | undefined => node.interaction?.actionBindingId
-	?? node.attributes?.action_binding_id ?? node.attributes?.pulpHostAction
 const subtreeText = (node: any): string => {
 	const text = [typeof node.content === "string" ? node.content : "",
 		typeof node.text?.text === "string" ? node.text.text : "",
 		...(node.children ?? []).map(subtreeText)].filter(Boolean).join(" ")
 	return text.replace(/\s+/g, " ").trim()
 }
-const emptyActionDetails = (nodes: any[]) => nodes.filter((node) => action(node) === "").map((node) => ({
+const emptyActionDetails = (nodes: any[]) => nodes.filter((node) => declaredAction(node) === "").map((node) => ({
 	sourceNodeId: node.source_node_id ?? node.stable_anchor_id ?? "",
 	sourceDataSlot: node.attributes?.sourceDataSlot ?? null,
 	role: node.attributes?.role ?? null,
@@ -87,20 +92,29 @@ assertMultiset("critical interaction and overlay records",
 	baseNodes.map(criticalInteraction).filter(Boolean),
 	integratedNodes.map(criticalInteraction).filter(Boolean))
 
-const baseActions = [...new Set(baseNodes.map(action).filter((item): item is string => !!item))].sort()
-const integratedActions = [...new Set(integratedNodes.map(action).filter((item): item is string => !!item))].sort()
+const baseActions = uniqueActions(baseNodes, declaredAction)
+const integratedActions = uniqueActions(integratedNodes, declaredAction)
 assertEqual("imported action set", baseActions, integratedActions)
-const baseEmptyActionBindings = baseNodes.filter((node) => action(node) === "").length
-const integratedEmptyActionBindings = integratedNodes.filter((node) => action(node) === "").length
+assertMultiset("executable imported action records",
+	baseNodes.map(executableAction).filter((item): item is string => !!item),
+	integratedNodes.map(executableAction).filter((item): item is string => !!item))
+const baseExecutableActions = uniqueActions(baseNodes, executableAction)
+const integratedExecutableActions = uniqueActions(integratedNodes, executableAction)
+const baseEmptyActionBindings = baseNodes.filter((node) => declaredAction(node) === "").length
+const integratedEmptyActionBindings = integratedNodes.filter((node) => declaredAction(node) === "").length
 if (integratedEmptyActionBindings)
 	violations.push(`integrated IR contains ${integratedEmptyActionBindings} empty action bindings (${baseEmptyActionBindings} inherited from the protected base)`)
 const requiredActions = (bindings.value.actions ?? []).filter((item: any) => item.required !== false)
 	.map((item: any) => item.id).sort()
 const nativeComposerActions = new Set(["prompt.send", "prompt.retry"])
-const missingRequiredActions = requiredActions.filter((id: string) =>
-	!integratedActions.includes(id) && !nativeComposerActions.has(id))
+const missingRequiredActions = missingRequiredExecutableActions(
+	integratedNodes, requiredActions, nativeComposerActions,
+)
 if (missingRequiredActions.length)
-	violations.push(`required imported actions are absent: ${missingRequiredActions.join(", ")}`)
+	violations.push(`required imported actions are not executable: ${missingRequiredActions.join(", ")}`)
+const unattachedActions = declaredButUnattachedActions(integratedNodes)
+if (unattachedActions.length)
+	violations.push(`integrated IR contains ${unattachedActions.length} declared actions without executable interaction bindings`)
 
 const layerEntries: Array<{ dimension: string; value: string; path: string; sha256: string }> = []
 for (const [dimension, values] of Object.entries(manifest.value.dimensions ?? {}))
@@ -139,6 +153,8 @@ for (const entry of layerEntries) {
 	const label = `${entry.dimension}:${entry.value}`
 	const composedProjectedRecords = compositionReport.value.composition
 		?.projectedResponsiveRecordsByLayer?.[label] ?? 0
+	const composedStateResponsivePatches = compositionReport.value.composition
+		?.projectedStateResponsivePatchesByLayer?.[label] ?? 0
 	const matchedFrontiers = compositionReport.value.composition?.matchedFrontiers?.[label] ?? 0
 	const matchedAbsentFrontiers = compositionReport.value.composition
 		?.matchedAbsentFrontiers?.[label] ?? 0
@@ -146,10 +162,17 @@ for (const entry of layerEntries) {
 	// popover or side panel). The framework composer accepts that only after an
 	// exact/stable source-identity check proves the owner is absent from this
 	// state's capture. Such a layer has no responsive subtree to project.
-	if (matchedAbsentFrontiers < 1 && (composedProjectedRecords < 1 || matchedFrontiers < 1))
+	// A property-owned state layer may be represented entirely by scalar
+	// responsive patches while the opposite state supplies the shared baseline.
+	// Require a composer-recorded direct projection or per-layer patch in
+	// addition to its matched frontier; a coincidental payload elsewhere in the
+	// integrated tree is not promotion evidence.
+	if (matchedAbsentFrontiers < 1 && (matchedFrontiers < 1 ||
+		(composedProjectedRecords < 1 && composedStateResponsivePatches < 1)))
 		violations.push(`responsive layer was not composed into an eligible state frontier: ${label}`)
 	layerReports.push({ ...entry, actualSha256: layer.sha256, responsiveRecords,
-		directAnchorMatches: projectedRecords, composedProjectedRecords, matchedFrontiers,
+		directAnchorMatches: projectedRecords, composedProjectedRecords,
+		composedStateResponsivePatches, matchedFrontiers,
 		matchedAbsentFrontiers })
 }
 if (compositionReport.value.output?.sha256 !== integrated.sha256)
@@ -183,6 +206,15 @@ const report = {
 		fontFamilyAssets: (integrated.value.fontFamilyAssets ?? []).length,
 		assets: integrated.value.assetManifest?.assets?.length ?? 0,
 		importedActions: integratedActions,
+		executableImportedActions: integratedExecutableActions,
+		protectedBaseExecutableActions: baseExecutableActions,
+		declaredButUnattachedActions: unattachedActions.map(({ node, action }) => ({
+			action,
+			sourceNodeId: node.source_node_id ?? node.stable_anchor_id ?? "",
+			sourceDataSlot: node.attributes?.sourceDataSlot ?? null,
+			role: node.attributes?.role ?? null,
+			text: subtreeText(node),
+		})),
 		emptyActionBindings: {
 			protectedBase: baseEmptyActionBindings,
 			integrated: integratedEmptyActionBindings,

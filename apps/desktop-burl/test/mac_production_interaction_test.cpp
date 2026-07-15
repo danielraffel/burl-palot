@@ -3,7 +3,9 @@
 
 #include <pulp/view/text_editor.hpp>
 #include <pulp/view/markdown_view.hpp>
+#include <pulp/view/ui_components.hpp>
 #include <pulp/view/virtual_list.hpp>
+#include <pulp/view/widgets.hpp>
 #include <nlohmann/json.hpp>
 
 #include <algorithm>
@@ -90,7 +92,10 @@ bool descends_from(const pulp::view::View* candidate, const pulp::view::View* an
 
 bool is_native_local_interaction(const pulp::view::View& view) {
 	return dynamic_cast<const pulp::view::MarkdownView*>(&view) != nullptr ||
-	       dynamic_cast<const pulp::view::VirtualList*>(&view) != nullptr;
+	       dynamic_cast<const pulp::view::VirtualList*>(&view) != nullptr ||
+	       dynamic_cast<const pulp::view::ToggleButton*>(&view) != nullptr ||
+	       dynamic_cast<const pulp::view::Checkbox*>(&view) != nullptr ||
+	       dynamic_cast<const pulp::view::ComboBox*>(&view) != nullptr;
 }
 
 void collect_interactive(pulp::view::View& view, const pulp::view::View& root,
@@ -155,7 +160,7 @@ std::vector<pulp::view::ImportedListItem> transcript_fixture() {
 
 std::vector<pulp::view::ImportedListItem> source_transcript_fixture() {
 	return {
-		{"source-user", "user", {{"message.text", "Add a dark mode toggle to the application settings page."}}},
+		{"source-user", "user", {{"message.text", "Add a dark mode toggle to the application settings page. It should persist the user's preference to localStorage and apply the theme immediately without a page reload."}}},
 		{"source-reasoning", "reasoning", {{"reasoning.label", "Thought for 2 seconds"},
 		                                      {"reasoning.text", "Inspecting the settings implementation."}}},
 		{"source-read", "tool.read", {{"tool.label", "Read"},
@@ -176,6 +181,11 @@ void configure_fixture(ImportedRootHost& root,
 	                   const char* bindings,
 	                   float width,
 	                   float height = 700.0f) {
+	root.set_runtime_context_lookup([](std::string_view field) -> std::optional<std::string> {
+		if (field == "project.directory") return "/fixture/project";
+		if (field == "session.id") return "fixture-session";
+		return std::nullopt;
+	});
 	root.load(design_ir, bindings);
 	root.set_projects({{"project", "project", {{"project.name", "held project"},
 	                                                {"directory", "/fixture/project"}}}});
@@ -190,6 +200,11 @@ void configure_source_fixture(ImportedRootHost& root,
 	                          const char* bindings,
 	                          float width,
 	                          float height) {
+	root.set_runtime_context_lookup([](std::string_view field) -> std::optional<std::string> {
+		if (field == "project.directory") return "/fixture/project";
+		if (field == "session.id") return "fixture-session";
+		return std::nullopt;
+	});
 	root.load(design_ir, bindings);
 	root.set_transcript_auto_follow(false);
 	root.set_transcript(source_transcript_fixture());
@@ -206,16 +221,21 @@ int main(int argc, char** argv) {
 	std::unordered_map<std::string, std::string> payloads;
 	const bool navigation_proof_only = std::getenv("PALOT_NAVIGATION_PROOF_ONLY") != nullptr;
 	std::vector<std::string> action_ids = {
+		"appearance.color-scheme.select",
 		"command.palette.open", "composer.agent-menu.toggle", "composer.attachment.open", "composer.copy",
-		"composer.model-menu.toggle", "composer.variant-menu.toggle", "display.mode.cycle",
+		"composer.model-menu.toggle", "composer.variant-menu.toggle", "composer.variant.select",
+		"configuration.reload", "conversation.compact", "developer.demo-mode.toggle",
+		"developer.react-scan.toggle", "display.mode.cycle",
 		"disclosure.edit.toggle", "disclosure.read.toggle", "disclosure.thought.toggle",
 		"external.open.menu.toggle", "external.open.preferred", "navigation.automations",
-		"navigation.session.close", "navigation.settings", "project.open", "project.search.toggle",
+		"navigation.back-to-app", "navigation.new-session", "navigation.session.close", "navigation.settings", "project.open",
+		"project.search.toggle",
 		"project.select", "prompt.cancel", "prompt.retry", "prompt.send", "review.diff.open",
 		"review.panel.toggle",
-		"server.menu.toggle", "session.create", "session.metrics.toggle", "session.open",
+		"server.menu.toggle", "session.create", "session.fork", "session.metrics.toggle", "session.open",
 		"session.metrics.dismiss", "session.title.edit.begin", "settings.theme.select",
-		"sidebar.toggle", "terminal.attach", "message.scroll-to-turn",
+		"sidebar.toggle", "terminal.attach", "message.scroll-to-turn", "session.undo-last-turn",
+		"features.automations.toggle", "window.transparency.toggle",
 		"session.fork-from-message", "session.undo-to-message"};
 	for (const auto& id : action_ids) {
 		root.register_action(id, [&, id](std::string_view payload) {
@@ -227,7 +247,10 @@ int main(int argc, char** argv) {
 	configure_fixture(root, argv[1], argv[2], 1200.0f, proof_height);
 	if (navigation_proof_only) root.set_transcript(source_transcript_fixture());
 
-	const bool overlay_proof_only = std::getenv("PALOT_OVERLAY_PROOF_ONLY") != nullptr;
+	const bool variant_overlay_proof_only =
+		std::getenv("PALOT_VARIANT_OVERLAY_PROOF_ONLY") != nullptr;
+	const bool overlay_proof_only =
+		std::getenv("PALOT_OVERLAY_PROOF_ONLY") != nullptr || variant_overlay_proof_only;
 	const bool usage_overlay_proof_only = std::getenv("PALOT_USAGE_OVERLAY_PROOF_ONLY") != nullptr;
 	std::unique_ptr<pulp::view::WindowHost> window;
 	if (!overlay_proof_only) {
@@ -240,18 +263,50 @@ int main(int argc, char** argv) {
 		root.layout_children();
 	}
 
-	if (!root.unattached_actions().empty() || !root.unattached_required_actions().empty()) {
-		for (const auto& action : root.unattached_actions())
-			std::cerr << "unattached imported action=" << action << '\n';
+	for (const auto& action : root.unattached_actions())
+		std::cerr << "unattached optional imported action=" << action << '\n';
+	if (!root.unattached_required_actions().empty()) {
+		for (const auto& action : root.unattached_required_actions())
+			std::cerr << "unattached required imported action=" << action << '\n';
 		return 4;
 	}
 	const auto candidates = nlohmann::json::parse(read_text(argv[3]));
-	const auto policy_text = read_text(argv[4]);
+	const auto policy = nlohmann::json::parse(read_text(argv[4]));
+	std::unordered_set<std::string> policy_actions;
+	for (const auto& rule : policy.at("rules")) {
+		const auto& attributes = rule.at("attributes");
+		const auto action = attributes.value("pulpHostAction",
+		                                  attributes.value("action_binding_id", ""));
+		if (!action.empty()) policy_actions.insert(action);
+	}
+	std::unordered_map<std::string, std::string> action_aliases;
+	for (const auto& alias : policy.value("actionAliases", nlohmann::json::array())) {
+		const auto source = alias.value("sourceAction", "");
+		const auto target = alias.value("applicationAction", "");
+		if (source.empty() || target.empty() || source == target ||
+		    (action_aliases.contains(source) && action_aliases.at(source) != target) ||
+		    !policy_actions.contains(target)) {
+			std::cerr << "invalid source binding policy action alias source=" << source
+			          << " target=" << target << '\n';
+			return 5;
+		}
+		action_aliases[source] = target;
+	}
+	for (const auto& [source, target] : action_aliases) {
+		if (action_aliases.contains(target)) {
+			std::cerr << "transitive source binding policy action alias is not allowed source="
+			          << source << " target=" << target << '\n';
+			return 5;
+		}
+	}
 	for (const auto& candidate : candidates.at("candidates")) {
 		if (candidate.at("review").value("status", "") != "mapped") continue;
-		const auto action = candidate.at("review").value("applicationAction", "");
-		if (action.empty() || policy_text.find(action) == std::string::npos) {
-			std::cerr << "mapped source interaction lacks policy coverage action=" << action
+		const auto source_action = candidate.at("review").value("applicationAction", "");
+		const auto action = action_aliases.contains(source_action)
+			? action_aliases.at(source_action) : source_action;
+		if (action.empty() || !policy_actions.contains(action)) {
+			std::cerr << "mapped source interaction lacks policy coverage action=" << source_action
+			          << " reconciled=" << action
 			          << " source=" << candidate.value("sourceId", "") << '\n';
 			return 5;
 		}
@@ -348,6 +403,66 @@ int main(int argc, char** argv) {
 				          << " captured=" << settings_captured << '\n';
 				return 40;
 			}
+			// Settings controls from headless component libraries are frequently
+			// emitted as <span role=switch> and <button role=combobox>. Prove that
+			// semantic materialization produced native local behavior rather than a
+			// merely focusable/static accessibility shell.
+			std::vector<pulp::view::View*> settings_controls;
+			collect_interactive(root, root, {}, settings_controls);
+			std::size_t settings_switch_count = 0;
+			std::size_t settings_select_count = 0;
+			std::size_t settings_switch_proved = 0;
+			std::size_t settings_select_proved = 0;
+			for (auto* control : settings_controls) {
+				if (auto* toggle = dynamic_cast<pulp::view::ToggleButton*>(control)) {
+					const auto ordinal = ++settings_switch_count;
+					std::vector<uint8_t> before_frame;
+					std::vector<uint8_t> after_frame;
+					const bool captured_before = capture_navigation_state(
+						"settings-switch-" + std::to_string(ordinal) + "-before.png", &before_frame);
+					const auto was_on = toggle->is_on();
+					const auto point = center_in_visible_root(*toggle, root);
+					const auto trace = pulp::test::mac::simulate_click_traced(
+						*window, root, point.x, point.y);
+					const bool captured_after = capture_navigation_state(
+						"settings-switch-" + std::to_string(ordinal) + "-after.png", &after_frame);
+					if (trace.down_dispatched && trace.up_dispatched &&
+					    toggle->is_on() != was_on &&
+					    toggle->access_checked() == (toggle->is_on() ? "true" : "false") &&
+					    captured_before && captured_after && before_frame != after_frame)
+						++settings_switch_proved;
+				}
+				if (auto* combo = dynamic_cast<pulp::view::ComboBox*>(control)) {
+					const auto ordinal = ++settings_select_count;
+					std::vector<uint8_t> closed_frame;
+					std::vector<uint8_t> open_frame;
+					const bool captured_closed = capture_navigation_state(
+						"settings-select-" + std::to_string(ordinal) + "-closed.png", &closed_frame);
+					const auto point = center_in_visible_root(*combo, root);
+					const auto trace = pulp::test::mac::simulate_click_traced(
+						*window, root, point.x, point.y);
+					const bool opened = trace.down_dispatched && trace.up_dispatched && combo->is_open();
+					const bool captured_open = opened && capture_navigation_state(
+						"settings-select-" + std::to_string(ordinal) + "-open.png", &open_frame);
+					const bool escaped = opened && pulp::test::mac::simulate_key(*window, {
+						.phase = pulp::test::mac::SimulatedKey::Phase::down,
+						.key = pulp::view::KeyCode::escape}) &&
+						pulp::test::mac::simulate_key(*window, {
+						.phase = pulp::test::mac::SimulatedKey::Phase::up,
+						.key = pulp::view::KeyCode::escape}) && !combo->is_open();
+					if (opened && escaped && captured_closed && captured_open &&
+					    closed_frame != open_frame)
+						++settings_select_proved;
+				}
+			}
+			if (settings_switch_count == 0 || settings_select_count == 0 ||
+			    settings_switch_proved != settings_switch_count ||
+			    settings_select_proved != settings_select_count) {
+				std::cerr << "settings semantic control execution failed switches="
+				          << settings_switch_proved << '/' << settings_switch_count
+				          << " selects=" << settings_select_proved << '/' << settings_select_count << '\n';
+				return 47;
+			}
 			if (!click_bound_action("settings.theme.select")) return 45;
 			root.layout_children();
 			if (calls["settings.theme.select"] != 1 || payloads["settings.theme.select"] != "light" ||
@@ -361,9 +476,13 @@ int main(int argc, char** argv) {
 			                        {"metricsDismissDispatches", calls["session.metrics.dismiss"]},
 			                        {"settingsNavigationDispatches", calls["navigation.settings"]},
 			                        {"chatMetricsHiddenAfterNavigation", true},
-			                        {"settingsThemeControlVisible", true},
-			                        {"settingsThemePayload", payloads["settings.theme.select"]},
-			                        {"settingsThemeVisualTransition", true}}.dump(2) << '\n';
+				                        {"settingsThemeControlVisible", true},
+				                        {"settingsThemePayload", payloads["settings.theme.select"]},
+				                        {"settingsThemeVisualTransition", true},
+				                        {"settingsNativeSwitchControls", settings_switch_count},
+				                        {"settingsNativeSwitchPostconditions", settings_switch_proved},
+				                        {"settingsNativeSelectControls", settings_select_count},
+				                        {"settingsNativeSelectOpenEscapePostconditions", settings_select_proved}}.dump(2) << '\n';
 			return audit.good() ? EXIT_SUCCESS : 41;
 		}
 	}
@@ -408,7 +527,7 @@ int main(int argc, char** argv) {
 		                 capture_settled(nullptr)))
 			return 35;
 
-		if (!usage_overlay_proof_only) {
+		if (!usage_overlay_proof_only && !variant_overlay_proof_only) {
 			const auto tooltip_triggers = overlay_root.bound_action_views("project.search.toggle");
 			if (tooltip_triggers.size() != 1) return 20;
 			const auto tooltip_point = center_in_visible_root(*tooltip_triggers.front(), overlay_root);
@@ -450,6 +569,7 @@ int main(int argc, char** argv) {
 		}
 		overlay_root.layout_children();
 
+		if (!variant_overlay_proof_only) {
 		const auto metrics_triggers = overlay_root.bound_action_views("session.metrics.toggle");
 		if (metrics_triggers.size() != 1) return 24;
 		const auto metrics_point = center_in_visible_root(*metrics_triggers.front(), overlay_root);
@@ -500,6 +620,120 @@ int main(int argc, char** argv) {
 		if (!write_bytes(std::filesystem::path(argv[5]) / "usage-popover-closed-after-outside.png",
 		                 capture_settled(nullptr)))
 			return 31;
+		}
+
+		// A captured select/menu surface is a top-layer contract, not merely a
+		// root-state pixel change. Prove the generic overlay invariants that keep
+		// imported portal content from appearing at window origin or surviving
+		// after dismissal. The application action below only selects the source
+		// control under test; all geometry and lifecycle assertions are generic.
+		const bool variant_closed_by_default = pulp::view::View::active_overlay_ == nullptr;
+		const auto variant_triggers =
+			overlay_root.bound_action_views("composer.variant-menu.toggle");
+		bool variant_dispatched = false;
+		bool variant_active = false;
+		bool variant_window_contained = false;
+		bool variant_trigger_anchored = false;
+		bool variant_escape_dismissed = false;
+		bool variant_outside_dismissed = false;
+		bool variant_visual_state_changed = false;
+		if (variant_triggers.size() == 1) {
+			auto* trigger = variant_triggers.front();
+			const auto trigger_rect = bounds_in_root(*trigger, overlay_root);
+			const auto trigger_point = center_in_visible_root(*trigger, overlay_root);
+			const auto variant_before = capture_settled(nullptr);
+			write_bytes(std::filesystem::path(argv[5]) / "variant-menu-closed.png",
+			            variant_before);
+			const auto trace = pulp::test::mac::simulate_click_traced(
+				*overlay_window, overlay_root, trigger_point.x, trigger_point.y,
+				[&] { return static_cast<uint64_t>(
+					overlay_calls["composer.variant-menu.toggle"]); });
+			variant_dispatched = trace.down_dispatched && trace.up_dispatched &&
+				trace.action_fired && trace.outcome_after == trace.outcome_before + 1;
+			overlay_root.layout_children();
+			const auto variant_after_dispatch = capture_settled(nullptr);
+			variant_visual_state_changed = !variant_before.empty() &&
+				!variant_after_dispatch.empty() && variant_before != variant_after_dispatch;
+			write_bytes(std::filesystem::path(argv[5]) / "variant-menu-after-dispatch.png",
+			            variant_after_dispatch);
+			auto* overlay = pulp::view::View::active_overlay_;
+			variant_active = overlay && effectively_visible(*overlay, overlay_root);
+			if (variant_active) {
+				const auto overlay_rect = bounds_in_root(*overlay, overlay_root);
+				constexpr float tolerance = 1.0f;
+				variant_window_contained =
+					overlay_rect.x >= -tolerance && overlay_rect.y >= -tolerance &&
+					overlay_rect.x + overlay_rect.width <= overlay_root.bounds().width + tolerance &&
+					overlay_rect.y + overlay_rect.height <= overlay_root.bounds().height + tolerance;
+				const bool horizontal_overlap =
+					overlay_rect.x < trigger_rect.x + trigger_rect.width + tolerance &&
+					overlay_rect.x + overlay_rect.width > trigger_rect.x - tolerance;
+				const float below_gap = overlay_rect.y - (trigger_rect.y + trigger_rect.height);
+				const float above_gap = trigger_rect.y - (overlay_rect.y + overlay_rect.height);
+				variant_trigger_anchored = horizontal_overlap &&
+					((below_gap >= -tolerance && below_gap <= 16.0f) ||
+					 (above_gap >= -tolerance && above_gap <= 16.0f));
+				write_bytes(std::filesystem::path(argv[5]) / "variant-menu-open.png",
+				            capture_settled(overlay));
+				variant_escape_dismissed =
+					pulp::test::mac::simulate_key(*overlay_window, {
+						.phase = pulp::test::mac::SimulatedKey::Phase::down,
+						.key = pulp::view::KeyCode::escape}) &&
+					pulp::test::mac::simulate_key(*overlay_window, {
+						.phase = pulp::test::mac::SimulatedKey::Phase::up,
+						.key = pulp::view::KeyCode::escape}) &&
+					pulp::view::View::active_overlay_ == nullptr;
+
+				const auto reopen = pulp::test::mac::simulate_click_traced(
+					*overlay_window, overlay_root, trigger_point.x, trigger_point.y);
+				auto* reopened_overlay = pulp::view::View::active_overlay_;
+				if (reopen.down_dispatched && reopen.up_dispatched && reopened_overlay) {
+					std::optional<pulp::view::Point> outside;
+					for (const auto candidate : std::vector<pulp::view::Point>{{8, 8},
+					         {overlay_root.bounds().width - 8, 8},
+					         {8, overlay_root.bounds().height - 8},
+					         {overlay_root.bounds().width - 8, overlay_root.bounds().height - 8}}) {
+						const bool in_trigger = candidate.x >= trigger_rect.x &&
+							candidate.x <= trigger_rect.x + trigger_rect.width &&
+							candidate.y >= trigger_rect.y &&
+							candidate.y <= trigger_rect.y + trigger_rect.height;
+						if (!in_trigger && !reopened_overlay->overlay_contains(candidate)) {
+							outside = candidate;
+							break;
+						}
+					}
+					variant_outside_dismissed = outside &&
+						pulp::test::mac::simulate_mouse(*overlay_window, {
+							.phase = pulp::test::mac::SimulatedMouse::Phase::down,
+							.x = outside->x, .y = outside->y}) &&
+						pulp::test::mac::simulate_mouse(*overlay_window, {
+							.phase = pulp::test::mac::SimulatedMouse::Phase::up,
+							.x = outside->x, .y = outside->y}) &&
+						pulp::view::View::active_overlay_ == nullptr;
+				}
+			}
+		}
+		const nlohmann::json variant_report{
+			{"schema", "palot-imported-overlay-geometry-proof-v1"},
+			{"action", "composer.variant-menu.toggle"},
+			{"closedByDefault", variant_closed_by_default},
+			{"triggerCount", variant_triggers.size()},
+			{"appKitDispatch", variant_dispatched},
+			{"visualStateChanged", variant_visual_state_changed},
+			{"activeTopLayer", variant_active},
+			{"windowContained", variant_window_contained},
+			{"triggerAnchored", variant_trigger_anchored},
+			{"escapeDismissed", variant_escape_dismissed},
+			{"outsidePointerDismissed", variant_outside_dismissed},
+		};
+		std::ofstream variant_audit(
+			std::filesystem::path(argv[5]) / "variant-menu-overlay-audit.v1.json");
+		variant_audit << variant_report.dump(2) << '\n';
+		if (!variant_audit.good() || !variant_closed_by_default ||
+		    variant_triggers.size() != 1 || !variant_dispatched || !variant_active ||
+		    !variant_window_contained || !variant_trigger_anchored ||
+		    !variant_escape_dismissed || !variant_outside_dismissed)
+			return 48;
 	}
 	if (overlay_proof_only) return EXIT_SUCCESS;
 
@@ -508,6 +742,7 @@ int main(int argc, char** argv) {
 	std::size_t native_local_count = 0;
 	std::size_t missing_state_action_count = 0;
 	const auto* action_proof_directory = std::getenv("PALOT_ACTION_PROOF_DIR");
+	nlohmann::json interaction_records = nlohmann::json::array();
 	struct ActionProbe {
 		std::string action;
 		std::string anchor;
@@ -590,8 +825,10 @@ int main(int argc, char** argv) {
 			const auto trace = pulp::test::mac::simulate_click_traced(
 				*probe_window, isolated, point.x, point.y,
 				[&calls, action = probe.action] { return static_cast<uint64_t>(calls[action]); });
-			if (!trace.down_dispatched || !trace.up_dispatched || !trace.action_fired ||
-			    trace.outcome_after != trace.outcome_before + 1) {
+			const bool dispatch_pass =
+				trace.down_dispatched && trace.up_dispatched && trace.action_fired &&
+				trace.outcome_after == trace.outcome_before + 1;
+			if (!dispatch_pass) {
 				std::cerr << "production action dispatch failed width=" << width << " action="
 				          << probe.action << " anchor=" << probe.anchor
 				          << " point=" << trace.x << ',' << trace.y
@@ -609,6 +846,7 @@ int main(int argc, char** argv) {
 				          << " anchor=" << probe.anchor
 				          << " coordinate-hit=1 dispatch=1" << '\n';
 			}
+			bool postcondition_pass = !probe.requires_visible_postcondition;
 			if (probe.requires_visible_postcondition) {
 				isolated.layout_children();
 				auto frames = pulp::test::mac::capture_settled_back_buffer_png(*probe_window, 4);
@@ -618,6 +856,7 @@ int main(int argc, char** argv) {
 					          << " anchor=" << probe.anchor << '\n';
 					++census_failures;
 				} else {
+					postcondition_pass = true;
 					if (action_proof_directory) {
 						auto file_action = probe.action;
 						std::ranges::replace(file_action, '.', '-');
@@ -631,6 +870,28 @@ int main(int argc, char** argv) {
 					          << " anchor=" << probe.anchor << " changed=1" << '\n';
 				}
 			}
+			interaction_records.push_back({
+				{"width", width},
+				{"action", probe.action},
+				{"anchor", probe.anchor},
+				{"hitTest", {{"coordinateHit", !trace.press_target.empty()},
+				             {"pressTarget", trace.press_target},
+				             {"releaseTarget", trace.release_target},
+				             {"actionableAncestor", trace.actionable_ancestor}}},
+				{"delivery", {{"down", trace.down_dispatched}, {"up", trace.up_dispatched}}},
+				{"dispatch", {{"actionFired", trace.action_fired},
+				              {"callbackBefore", trace.outcome_before},
+				              {"callbackAfter", trace.outcome_after},
+				              {"passed", dispatch_pass}}},
+				{"postcondition", {{"kind", probe.requires_visible_postcondition
+				                                      ? "settled-skia-pixel-diff" : "callback-only"},
+				                   {"required", probe.requires_visible_postcondition},
+				                   {"result", postcondition_pass ? "pass" : "fail"}}},
+				{"keyboard", "not-applicable"},
+				{"escape", "not-applicable"},
+				{"hover", "not-applicable"},
+				{"passed", dispatch_pass && postcondition_pass}
+			});
 		}
 		for (const auto& probe : pointer_probes) {
 			ImportedRootHost isolated;
@@ -662,6 +923,19 @@ int main(int argc, char** argv) {
 					          << " press=" << trace.press_target << " release=" << trace.release_target << '\n';
 					++missing_state_action_count;
 				}
+			interaction_records.push_back({
+				{"width", width}, {"action", nullptr}, {"anchor", probe.anchor},
+				{"label", probe.label},
+				{"hitTest", {{"coordinateHit", !trace.press_target.empty()},
+				             {"pressTarget", trace.press_target},
+				             {"releaseTarget", trace.release_target}}},
+				{"delivery", {{"down", trace.down_dispatched}, {"up", trace.up_dispatched}}},
+				{"dispatch", {{"actionFired", false}, {"passed", false}}},
+				{"postcondition", {{"kind", "missing-captured-state-or-action"},
+				                   {"required", true}, {"result", "fail"}}},
+				{"keyboard", "not-proved"}, {"escape", "not-proved"},
+				{"hover", "not-proved"}, {"passed", false}
+			});
 		}
 		root.set_bounds({0, 0, width, 700});
 		root.layout_children();
@@ -678,6 +952,22 @@ int main(int argc, char** argv) {
 			if (!trace.down_dispatched || !trace.up_dispatched ||
 			    !composer->has_focus() || !composer->focusable()) return 9;
 		}
+	}
+	const auto report_directory = action_proof_directory
+		? std::filesystem::path(action_proof_directory) : std::filesystem::path(argv[5]);
+	std::filesystem::create_directories(report_directory);
+	std::ofstream census_report(report_directory / "interaction-census.v1.json");
+	census_report << nlohmann::json{
+		{"schema", "palot-native-interaction-census-v1"},
+		{"designIr", argv[1]},
+		{"strict", true},
+		{"summary", {{"controls", census_count}, {"failures", census_failures},
+		             {"missingStateOrAction", missing_state_action_count},
+		             {"nativeLocal", native_local_count}}},
+		{"records", std::move(interaction_records)}}.dump(2) << '\n';
+	if (!census_report.good()) {
+		std::cerr << "failed to write strict interaction census report\n";
+		return 13;
 	}
 	if (census_count == 0) return 10;
 	if (census_failures != 0) {

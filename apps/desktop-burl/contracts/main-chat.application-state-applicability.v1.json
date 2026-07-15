@@ -23,7 +23,10 @@
     "review.panel.open": [{ "key": "navigation.route", "value": "chat" }],
     "session.metrics.open": [{ "key": "navigation.route", "value": "chat" }],
     "project.search.tooltip.open": [{ "key": "navigation.route", "value": "chat" }],
-    "review.diff.open": [{ "key": "navigation.route", "value": "chat" }],
+    "review.diff.open": [
+      { "key": "navigation.route", "value": "chat" },
+      { "key": "review.panel.open", "value": "open" }
+    ],
     "prompt.execution": [{ "key": "navigation.route", "value": "chat" }],
     "disclosure.thought.open": [{ "key": "navigation.route", "value": "chat" }],
     "disclosure.read.open": [{ "key": "navigation.route", "value": "chat" }],
