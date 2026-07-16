@@ -1,5 +1,10 @@
 # Palot import approach decision checkpoint
 
+> Historical checkpoint. The single current plan is now
+> [`docs/ROADMAP.md`](../ROADMAP.md). Preserve this file for its exact branches,
+> commits, and paused-decision context; update execution status only in the
+> roadmap.
+
 Updated: `2026-07-15T12:55:00-07:00`
 
 This is a paused decision checkpoint, not a declaration that the Palot goal is

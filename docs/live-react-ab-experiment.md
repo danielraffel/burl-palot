@@ -1,5 +1,8 @@
 # Live React versus baked DesignIR A/B experiment
 
+> Supporting experiment specification. The single current execution plan is
+> [`docs/ROADMAP.md`](ROADMAP.md).
+
 > **Paused decision point (2026-07-15):** Read
 > [`docs/handoffs/2026-07-15-palot-import-approach-decision.md`](handoffs/2026-07-15-palot-import-approach-decision.md)
 > before resuming. It records both preserved approaches, exact commits, red

@@ -353,3 +353,33 @@ macOS panel backend. All four operations (`open_file`, `open_files`,
 `save_file`, and `choose_folder`) honor an installed backend and invoke copied
 callbacks after releasing the backend mutex. This is reusable SDK behavior,
 not a Palot adapter.
+
+## 2026-07-16 — Join source-faithful paint to live React through exact identity
+
+The source-observed DesignIR tree remains the paint and layout authority for
+imported custom application UI. Live React remains the behavior authority for
+authored hooks, closures, context, effects, focus, and overlay lifecycle. React
+may adopt an already-materialized native node only through a deterministic
+capture/runtime identity shared by the observed DOM instance and live host
+instance. Labels, coordinates, selectors, Fiber internals, and Palot-specific
+ids are not valid joins.
+
+The join requires an authored source-site marker plus a deterministic instance
+discriminator derived from explicit React key lineage. Ambiguous keyless
+repeats fail closed. Initial adoption installs behavior without replaying
+layout or paint, and exact paint-command neutrality is a mechanical gate.
+
+## 2026-07-16 — Keep platform-native controls an explicit optional projection
+
+`NativeViewHost` is an existing geometry/composition seam for a caller-owned OS
+view, not a cross-platform native-control factory. A future semantic native
+control projection may deliberately choose AppKit/UIKit or other platform
+controls where OS text editing, IME, accessibility, or conventions are more
+valuable than custom-paint parity. It is not the default importer and cannot be
+used as a fallback merely because a custom control is difficult.
+
+Imported Electron application UI defaults to Burl/Skia/Dawn paint. Platform
+native paint must be explicitly selected, capability-checked, and proven not to
+silently change the intended design. Native-child z-order, transforms,
+clipping, snapshots, lifecycle, state synchronization, and accessibility are
+part of that future projection's contract.
