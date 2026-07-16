@@ -68,6 +68,8 @@ API may expose an explicit `backend="native" | "custom" | "automatic"`, but
 
 ### Phase 0 — Preserve both proven inputs — COMPLETE
 
+**Lane:** shared foundation for custom paint and React behavior.
+
 **Buys us:** no restart and no loss of either the visually stronger DesignIR
 lane or the behaviorally stronger live-React lane.
 
@@ -79,6 +81,9 @@ lane or the behaviorally stronger live-React lane.
 
 ### Phase 1 — Failure-capable native interaction harness — COMPLETE
 
+**Lane:** shared behavior/input validation; this uses native AppKit events but
+does **not** replace Burl-painted controls with AppKit-painted controls.
+
 **Buys us:** proof that a control was reached through real AppKit input, invoked
 the intended callback, changed named state/focus/overlay state, and produced a
 fresh frame. It prevents a resolved hit target or non-empty PNG from being
@@ -89,6 +94,8 @@ negative case. Targetless pointer steps now fail closed instead of
 dereferencing an absent semantic identity.
 
 ### Phase 2 — Deterministic capture/runtime identity — IN PROGRESS
+
+**Lane:** shared join between custom Burl paint and live React behavior.
 
 **Buys us:** the exact captured DOM instance and the exact live React host
 instance can identify the same native node without Palot IDs, coordinates, or
@@ -109,7 +116,18 @@ Required contract:
 Gate: multi-module, conditional, keyed-list, keyless-ambiguity, source-revision,
 and render-neutrality tests.
 
+Completed identity slice: framework commit `d6a5de6f` instruments intrinsic
+host JSX with deterministic, revision-bound source sites and explicit keyed
+instance evidence; emits a source-span sidecar; leaves custom components and
+authored files untouched; and fails closed for known ambiguous forms. Its 18
+Node tests, 29 source-contract self-tests, DOM-byte neutrality check, and macOS
+pixel-byte neutrality check pass. Remaining: make capture prefer this identity
+and make the live native host resolve the same final stable anchor.
+
 ### Phase 3 — Pixel-neutral native-node adoption — ENDPOINT COMPLETE
+
+**Lane:** custom Burl paint plus live React behavior. “Native node” here means a
+native Burl/Yoga/Skia view-tree node, not a platform-painted `NSControl`.
 
 **Buys us:** live React can attach its original callbacks/state to a node that
 the source-observed importer already laid out and painted, without replacing
@@ -121,6 +139,8 @@ callbacks; and verifies exact paint-command neutrality. It is not end-to-end
 until Phase 2 supplies untouched React with the correct identity.
 
 ### Phase 4 — One real Palot settings cohort — NEXT DECISION GATE
+
+**Lane:** custom Burl paint plus live React behavior, proven on real Palot.
 
 **Buys us:** falsifiable proof that the hybrid architecture solves the actual
 problem rather than only fixtures.
@@ -145,6 +165,8 @@ expanding coverage.
 
 ### Phase 5 — General interaction and overlay coverage — PENDING
 
+**Lane:** custom Burl paint plus reusable React/input/overlay behavior.
+
 **Buys us:** formerly inert application surfaces work through reusable runtime
 contracts rather than consumer click maps.
 
@@ -153,6 +175,8 @@ rows, title editing, menus, tooltips, popovers, Changes panel, model/variant
 selection, transcript tools, composer, cancellation, retry, and persistence.
 
 ### Phase 6 — Source-faithful visual and responsive parity — PENDING
+
+**Lane:** custom Burl paint.
 
 **Buys us:** the working app also looks and resizes like the Electron source.
 
@@ -163,6 +187,9 @@ clearance, glass/material, window border, animation, and panel geometry by
 region diffs and adversarial visual review.
 
 ### Phase 7 — Optional semantic native-control package — DEFERRED
+
+**Lane:** platform-native paint, explicitly selected for suitable semantic
+controls; separate from the Palot custom-paint critical path.
 
 **Buys us:** an explicit reusable route to genuine OS controls where native
 behavior is more valuable than custom-paint parity.
@@ -178,6 +205,9 @@ Deliver separately from the Palot critical path:
 6. never silently choose native paint when it changes captured appearance.
 
 ### Phase 8 — Standalone Palot completion — PENDING
+
+**Lane:** integrated product gate, primarily custom Burl paint with no WebView;
+any future platform-native control must be explicit and evidence-backed.
 
 **Buys us:** the original autonomous goal, not merely importer infrastructure.
 
