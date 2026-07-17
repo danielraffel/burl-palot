@@ -1,0 +1,66 @@
+{
+  "schema": "palot-visual-oracle-index-v1",
+  "capabilityCoverage": "evidence/visual-parity/capability-coverage.v1.json",
+  "scenarios": [
+    {
+      "id": "01-shell",
+      "manifest": "evidence/visual-parity-oracle-01-shell.manifest.json",
+      "stateEvidence": "available"
+    },
+    {
+      "id": "02-window-chrome",
+      "manifest": "evidence/visual-parity-oracle-02-window-chrome.manifest.json",
+      "stateEvidence": "gap",
+      "gap": "window-layer Electron and native captures are not available; the content screenshot is not a window-layer substitute"
+    },
+    {
+      "id": "03-app-bar",
+      "manifest": "evidence/visual-parity-oracle-03-app-bar.manifest.json",
+      "stateEvidence": "available"
+    },
+    {
+      "id": "04-sidebar",
+      "manifest": "evidence/visual-parity-oracle-04-sidebar.manifest.json",
+      "stateEvidence": "available"
+    },
+    {
+      "id": "05-transcript",
+      "manifest": "evidence/visual-parity-oracle-05-transcript.manifest.json",
+      "stateEvidence": "available"
+    },
+    {
+      "id": "06-markdown",
+      "manifest": "evidence/visual-parity-oracle-06-markdown.manifest.json",
+      "stateEvidence": "available"
+    },
+    {
+      "id": "07-composer-resting",
+      "manifest": "evidence/visual-parity-oracle-07-composer-resting.manifest.json",
+      "stateEvidence": "available"
+    },
+    {
+      "id": "08-composer-editing",
+      "manifest": "evidence/visual-parity-oracle-08-composer-editing.manifest.json",
+      "stateEvidence": "gap",
+      "gap": "state-correct native focused/typed/IME capture is unavailable"
+    },
+    {
+      "id": "09-scroll-anchor",
+      "manifest": "evidence/visual-parity-oracle-09-scroll-anchor.manifest.json",
+      "stateEvidence": "gap",
+      "gap": "source and native stable-anchor captures are unavailable"
+    },
+    {
+      "id": "10-responsive-contract",
+      "manifest": "evidence/visual-parity-oracle-10-responsive-contract.manifest.json",
+      "stateEvidence": "gap",
+      "gap": "source 280/740/1200 captures exist, but native min_width=760 blocks the source minimum and no exact 280/740/1200 native capture triplet exists"
+    },
+    {
+      "id": "11-live-stream",
+      "manifest": "evidence/visual-parity-oracle-11-live-stream.manifest.json",
+      "stateEvidence": "gap",
+      "gap": "state-matched Electron streamed transcript capture is unavailable; real native chat alone is not a parity pair"
+    }
+  ]
+}

@@ -1,0 +1,2548 @@
+{
+  "schema": "burl-electron-ipc-map-v1",
+  "generator": {
+    "name": "electron-ipc-map",
+    "parser": "@babel/parser",
+    "parserVersion": "7.29.7",
+    "frameworkRevision": "ea90eddf4e25738c981d860c8fda2ddb39424a9d"
+  },
+  "source": {
+    "revision": "fd63a75dad3d0e8555ba22a47e720d285889fbf0",
+    "rootLabel": "palot",
+    "preload": [
+      "apps/desktop/src/preload/index.ts"
+    ]
+  },
+  "summary": {
+    "exposedMethods": 85,
+    "mappedChannels": 84,
+    "missingMainHandlers": 0,
+    "orphanMainSites": 0,
+    "dynamicSites": 0
+  },
+  "verdict": "pass",
+  "mappings": [
+    {
+      "api": "palot.getAppInfo",
+      "channel": "app:info",
+      "rendererTransport": "invoke",
+      "renderer": {
+        "file": "apps/desktop/src/preload/index.ts",
+        "line": 14,
+        "column": 19,
+        "endLine": 14,
+        "endColumn": 49,
+        "fileSha256": "d79b43634c4c5462705d3a20bd3143281667654e549ec38b860c633f60e8edb9",
+        "siteSha256": "68e71fa19867d1299462ac35fad3fe7d56ae7245d52f792888a0da2bda20a47b"
+      },
+      "main": [
+        {
+          "channel": "app:info",
+          "transport": "handle",
+          "file": "apps/desktop/src/main/ipc-handlers.ts",
+          "line": 164,
+          "column": 1,
+          "endLine": 167,
+          "endColumn": 4,
+          "fileSha256": "cd57eb4e9400966ede6d2943fe5dcca974f1a9f52e8a42fa9ebe952fb1fb5c15",
+          "siteSha256": "e56296ac3d4b20d6bfc7ba721e941b3a8908dd3903c71739e7335438bf7b8243"
+        }
+      ],
+      "status": "mapped-handler"
+    },
+    {
+      "api": "palot.relaunch",
+      "channel": "app:relaunch",
+      "rendererTransport": "invoke",
+      "renderer": {
+        "file": "apps/desktop/src/preload/index.ts",
+        "line": 141,
+        "column": 17,
+        "endLine": 141,
+        "endColumn": 51,
+        "fileSha256": "d79b43634c4c5462705d3a20bd3143281667654e549ec38b860c633f60e8edb9",
+        "siteSha256": "8c3a285aa5f909d5f8c41d08226ba712a15cb1cacce178268f5c70569e2dff38"
+      },
+      "main": [
+        {
+          "channel": "app:relaunch",
+          "transport": "handle",
+          "file": "apps/desktop/src/main/ipc-handlers.ts",
+          "line": 367,
+          "column": 1,
+          "endLine": 370,
+          "endColumn": 3,
+          "fileSha256": "cd57eb4e9400966ede6d2943fe5dcca974f1a9f52e8a42fa9ebe952fb1fb5c15",
+          "siteSha256": "6cd8f80a01b85b8e4ce57bf92e6205705c24c5ef91c1d79ca2d8cfd432566292"
+        }
+      ],
+      "status": "mapped-handler"
+    },
+    {
+      "api": "palot.automation.acceptRun",
+      "channel": "automation:accept-run",
+      "rendererTransport": "invoke",
+      "renderer": {
+        "file": "apps/desktop/src/preload/index.ts",
+        "line": 250,
+        "column": 32,
+        "endLine": 250,
+        "endColumn": 82,
+        "fileSha256": "d79b43634c4c5462705d3a20bd3143281667654e549ec38b860c633f60e8edb9",
+        "siteSha256": "fac852ce6255851d2b005b82e8d1b457cd3fc93c36b06adb9e763e0663e13da9"
+      },
+      "main": [
+        {
+          "channel": "automation:accept-run",
+          "transport": "handle",
+          "file": "apps/desktop/src/main/ipc-handlers.ts",
+          "line": 589,
+          "column": 1,
+          "endLine": 598,
+          "endColumn": 2,
+          "fileSha256": "cd57eb4e9400966ede6d2943fe5dcca974f1a9f52e8a42fa9ebe952fb1fb5c15",
+          "siteSha256": "0a25379e9a8e18af682243b7fd18cd1e7653176c392be2b139eb0a46f4878966"
+        }
+      ],
+      "status": "mapped-handler"
+    },
+    {
+      "api": "palot.automation.archiveRun",
+      "channel": "automation:archive-run",
+      "rendererTransport": "invoke",
+      "renderer": {
+        "file": "apps/desktop/src/preload/index.ts",
+        "line": 249,
+        "column": 33,
+        "endLine": 249,
+        "endColumn": 84,
+        "fileSha256": "d79b43634c4c5462705d3a20bd3143281667654e549ec38b860c633f60e8edb9",
+        "siteSha256": "78b8318477a8732dff9edbb6c9149c59b67a4560bdf193a9b505dc60f64dc8bd"
+      },
+      "main": [
+        {
+          "channel": "automation:archive-run",
+          "transport": "handle",
+          "file": "apps/desktop/src/main/ipc-handlers.ts",
+          "line": 578,
+          "column": 1,
+          "endLine": 587,
+          "endColumn": 2,
+          "fileSha256": "cd57eb4e9400966ede6d2943fe5dcca974f1a9f52e8a42fa9ebe952fb1fb5c15",
+          "siteSha256": "ba1ecbcab9bccdaec0bd7072389c38bfa971da7bb1cf70287f82a1365ab54ecb"
+        }
+      ],
+      "status": "mapped-handler"
+    },
+    {
+      "api": "palot.automation.create",
+      "channel": "automation:create",
+      "rendererTransport": "invoke",
+      "renderer": {
+        "file": "apps/desktop/src/preload/index.ts",
+        "line": 244,
+        "column": 30,
+        "endLine": 244,
+        "endColumn": 76,
+        "fileSha256": "d79b43634c4c5462705d3a20bd3143281667654e549ec38b860c633f60e8edb9",
+        "siteSha256": "c88f638eba21bfbce41ebe635570ee178dde8484f0ae2f6550eeddcc2b951f51"
+      },
+      "main": [
+        {
+          "channel": "automation:create",
+          "transport": "handle",
+          "file": "apps/desktop/src/main/ipc-handlers.ts",
+          "line": 530,
+          "column": 1,
+          "endLine": 539,
+          "endColumn": 2,
+          "fileSha256": "cd57eb4e9400966ede6d2943fe5dcca974f1a9f52e8a42fa9ebe952fb1fb5c15",
+          "siteSha256": "808007e6eed3a63dff23ad3d41b014b353e4812507c34a01f9f42c6dc2eb5742"
+        }
+      ],
+      "status": "mapped-handler"
+    },
+    {
+      "api": "palot.automation.delete",
+      "channel": "automation:delete",
+      "rendererTransport": "invoke",
+      "renderer": {
+        "file": "apps/desktop/src/preload/index.ts",
+        "line": 246,
+        "column": 26,
+        "endLine": 246,
+        "endColumn": 69,
+        "fileSha256": "d79b43634c4c5462705d3a20bd3143281667654e549ec38b860c633f60e8edb9",
+        "siteSha256": "4ee13d85d83eee7a651437c4f127a46eecd564d4273aa03ede5c5a0a9df64422"
+      },
+      "main": [
+        {
+          "channel": "automation:delete",
+          "transport": "handle",
+          "file": "apps/desktop/src/main/ipc-handlers.ts",
+          "line": 552,
+          "column": 1,
+          "endLine": 561,
+          "endColumn": 2,
+          "fileSha256": "cd57eb4e9400966ede6d2943fe5dcca974f1a9f52e8a42fa9ebe952fb1fb5c15",
+          "siteSha256": "fde32c1a9db493fe624334d33c94b1c095b9994594624bb14a2e461c77cfca7e"
+        }
+      ],
+      "status": "mapped-handler"
+    },
+    {
+      "api": "palot.automation.get",
+      "channel": "automation:get",
+      "rendererTransport": "invoke",
+      "renderer": {
+        "file": "apps/desktop/src/preload/index.ts",
+        "line": 243,
+        "column": 23,
+        "endLine": 243,
+        "endColumn": 63,
+        "fileSha256": "d79b43634c4c5462705d3a20bd3143281667654e549ec38b860c633f60e8edb9",
+        "siteSha256": "47be940a771802609a9d7fb9fb69b530d2be6778822ef5c34085c1bc9a150456"
+      },
+      "main": [
+        {
+          "channel": "automation:get",
+          "transport": "handle",
+          "file": "apps/desktop/src/main/ipc-handlers.ts",
+          "line": 525,
+          "column": 1,
+          "endLine": 528,
+          "endColumn": 2,
+          "fileSha256": "cd57eb4e9400966ede6d2943fe5dcca974f1a9f52e8a42fa9ebe952fb1fb5c15",
+          "siteSha256": "22b0b2c5998d91ac1adfd592957af96227767cd79b98de7ebba4ff021be5d484"
+        }
+      ],
+      "status": "mapped-handler"
+    },
+    {
+      "api": "palot.automation.listRuns",
+      "channel": "automation:list-runs",
+      "rendererTransport": "invoke",
+      "renderer": {
+        "file": "apps/desktop/src/preload/index.ts",
+        "line": 248,
+        "column": 39,
+        "endLine": 248,
+        "endColumn": 95,
+        "fileSha256": "d79b43634c4c5462705d3a20bd3143281667654e549ec38b860c633f60e8edb9",
+        "siteSha256": "fa600ee9473ba96457a8f436ed657c87cad7bb703817bc7ddda7f6f427668c49"
+      },
+      "main": [
+        {
+          "channel": "automation:list-runs",
+          "transport": "handle",
+          "file": "apps/desktop/src/main/ipc-handlers.ts",
+          "line": 573,
+          "column": 1,
+          "endLine": 576,
+          "endColumn": 2,
+          "fileSha256": "cd57eb4e9400966ede6d2943fe5dcca974f1a9f52e8a42fa9ebe952fb1fb5c15",
+          "siteSha256": "5768ee04df67c93703d4a84bc2007f07515bb0a6132b5d9a4fc40bd9db61fe8e"
+        }
+      ],
+      "status": "mapped-handler"
+    },
+    {
+      "api": "palot.automation.list",
+      "channel": "automation:list",
+      "rendererTransport": "invoke",
+      "renderer": {
+        "file": "apps/desktop/src/preload/index.ts",
+        "line": 242,
+        "column": 14,
+        "endLine": 242,
+        "endColumn": 51,
+        "fileSha256": "d79b43634c4c5462705d3a20bd3143281667654e549ec38b860c633f60e8edb9",
+        "siteSha256": "1e85c98d328aa95284545f5851ef395d8792a5078437b4856f5141c927ab4d6d"
+      },
+      "main": [
+        {
+          "channel": "automation:list",
+          "transport": "handle",
+          "file": "apps/desktop/src/main/ipc-handlers.ts",
+          "line": 520,
+          "column": 1,
+          "endLine": 523,
+          "endColumn": 2,
+          "fileSha256": "cd57eb4e9400966ede6d2943fe5dcca974f1a9f52e8a42fa9ebe952fb1fb5c15",
+          "siteSha256": "b58d000924f8d86ee1e049ecc4aa20025aa26bb65754ed7bedae546b11f300ee"
+        }
+      ],
+      "status": "mapped-handler"
+    },
+    {
+      "api": "palot.automation.markRunRead",
+      "channel": "automation:mark-run-read",
+      "rendererTransport": "invoke",
+      "renderer": {
+        "file": "apps/desktop/src/preload/index.ts",
+        "line": 251,
+        "column": 34,
+        "endLine": 251,
+        "endColumn": 87,
+        "fileSha256": "d79b43634c4c5462705d3a20bd3143281667654e549ec38b860c633f60e8edb9",
+        "siteSha256": "504788288276a0b13667d99e3edb378c2739f1541b1c2979ccb2ee441c8ba784"
+      },
+      "main": [
+        {
+          "channel": "automation:mark-run-read",
+          "transport": "handle",
+          "file": "apps/desktop/src/main/ipc-handlers.ts",
+          "line": 600,
+          "column": 1,
+          "endLine": 609,
+          "endColumn": 2,
+          "fileSha256": "cd57eb4e9400966ede6d2943fe5dcca974f1a9f52e8a42fa9ebe952fb1fb5c15",
+          "siteSha256": "94008d56d81352555ab790401056b7a882feeda844dfa4738b4bcdc37886384b"
+        }
+      ],
+      "status": "mapped-handler"
+    },
+    {
+      "api": "palot.automation.previewSchedule",
+      "channel": "automation:preview-schedule",
+      "rendererTransport": "invoke",
+      "renderer": {
+        "file": "apps/desktop/src/preload/index.ts",
+        "line": 253,
+        "column": 3,
+        "endLine": 253,
+        "endColumn": 69,
+        "fileSha256": "d79b43634c4c5462705d3a20bd3143281667654e549ec38b860c633f60e8edb9",
+        "siteSha256": "3657c6a5e1a9953b6104b4d83a061f59b708f1b57f0f9ba4558a079c00bb6cc4"
+      },
+      "main": [
+        {
+          "channel": "automation:preview-schedule",
+          "transport": "handle",
+          "file": "apps/desktop/src/main/ipc-handlers.ts",
+          "line": 611,
+          "column": 1,
+          "endLine": 616,
+          "endColumn": 2,
+          "fileSha256": "cd57eb4e9400966ede6d2943fe5dcca974f1a9f52e8a42fa9ebe952fb1fb5c15",
+          "siteSha256": "ff2ca3c6bdfa6d28c43664e451e70679db1a82af1cf20c5720ac6419a78c373b"
+        }
+      ],
+      "status": "mapped-handler"
+    },
+    {
+      "api": "palot.automation.runNow",
+      "channel": "automation:run-now",
+      "rendererTransport": "invoke",
+      "renderer": {
+        "file": "apps/desktop/src/preload/index.ts",
+        "line": 247,
+        "column": 26,
+        "endLine": 247,
+        "endColumn": 70,
+        "fileSha256": "d79b43634c4c5462705d3a20bd3143281667654e549ec38b860c633f60e8edb9",
+        "siteSha256": "22d79f608661b3cc4cdf36d0321f43b4a5d6145ea8d3119048bd3cd30eb2aa1c"
+      },
+      "main": [
+        {
+          "channel": "automation:run-now",
+          "transport": "handle",
+          "file": "apps/desktop/src/main/ipc-handlers.ts",
+          "line": 563,
+          "column": 1,
+          "endLine": 571,
+          "endColumn": 2,
+          "fileSha256": "cd57eb4e9400966ede6d2943fe5dcca974f1a9f52e8a42fa9ebe952fb1fb5c15",
+          "siteSha256": "45e16abba576fc7639831e2fd2a6f7bfd70a29dee5deda2795e3fd1852e74a14"
+        }
+      ],
+      "status": "mapped-handler"
+    },
+    {
+      "api": "palot.onAutomationRunsUpdated",
+      "channel": "automation:runs-updated",
+      "rendererTransport": "on",
+      "renderer": {
+        "file": "apps/desktop/src/preload/index.ts",
+        "line": 258,
+        "column": 2,
+        "endLine": 258,
+        "endColumn": 53,
+        "fileSha256": "d79b43634c4c5462705d3a20bd3143281667654e549ec38b860c633f60e8edb9",
+        "siteSha256": "be4fc2611847cbec96808cfba6dcceba694c2abad59736fd5e93509547568768"
+      },
+      "main": [
+        {
+          "channel": "automation:runs-updated",
+          "transport": "webContents.send",
+          "file": "apps/desktop/src/main/automation/index.ts",
+          "line": 36,
+          "column": 2,
+          "endLine": 36,
+          "endColumn": 49,
+          "fileSha256": "2baf0ae98f02a65cbe293268032ec3a22f44d76ddfedd1873897e20d60eb54ef",
+          "siteSha256": "07680ac81b6769280c3c53f573b320c5299d221105a9a212e969d259ff3527c8"
+        },
+        {
+          "channel": "automation:runs-updated",
+          "transport": "webContents.send",
+          "file": "apps/desktop/src/main/ipc-handlers.ts",
+          "line": 535,
+          "column": 4,
+          "endLine": 535,
+          "endColumn": 51,
+          "fileSha256": "cd57eb4e9400966ede6d2943fe5dcca974f1a9f52e8a42fa9ebe952fb1fb5c15",
+          "siteSha256": "07680ac81b6769280c3c53f573b320c5299d221105a9a212e969d259ff3527c8"
+        },
+        {
+          "channel": "automation:runs-updated",
+          "transport": "webContents.send",
+          "file": "apps/desktop/src/main/ipc-handlers.ts",
+          "line": 546,
+          "column": 4,
+          "endLine": 546,
+          "endColumn": 51,
+          "fileSha256": "cd57eb4e9400966ede6d2943fe5dcca974f1a9f52e8a42fa9ebe952fb1fb5c15",
+          "siteSha256": "07680ac81b6769280c3c53f573b320c5299d221105a9a212e969d259ff3527c8"
+        },
+        {
+          "channel": "automation:runs-updated",
+          "transport": "webContents.send",
+          "file": "apps/desktop/src/main/ipc-handlers.ts",
+          "line": 557,
+          "column": 4,
+          "endLine": 557,
+          "endColumn": 51,
+          "fileSha256": "cd57eb4e9400966ede6d2943fe5dcca974f1a9f52e8a42fa9ebe952fb1fb5c15",
+          "siteSha256": "07680ac81b6769280c3c53f573b320c5299d221105a9a212e969d259ff3527c8"
+        },
+        {
+          "channel": "automation:runs-updated",
+          "transport": "webContents.send",
+          "file": "apps/desktop/src/main/ipc-handlers.ts",
+          "line": 583,
+          "column": 4,
+          "endLine": 583,
+          "endColumn": 51,
+          "fileSha256": "cd57eb4e9400966ede6d2943fe5dcca974f1a9f52e8a42fa9ebe952fb1fb5c15",
+          "siteSha256": "07680ac81b6769280c3c53f573b320c5299d221105a9a212e969d259ff3527c8"
+        },
+        {
+          "channel": "automation:runs-updated",
+          "transport": "webContents.send",
+          "file": "apps/desktop/src/main/ipc-handlers.ts",
+          "line": 594,
+          "column": 4,
+          "endLine": 594,
+          "endColumn": 51,
+          "fileSha256": "cd57eb4e9400966ede6d2943fe5dcca974f1a9f52e8a42fa9ebe952fb1fb5c15",
+          "siteSha256": "07680ac81b6769280c3c53f573b320c5299d221105a9a212e969d259ff3527c8"
+        },
+        {
+          "channel": "automation:runs-updated",
+          "transport": "webContents.send",
+          "file": "apps/desktop/src/main/ipc-handlers.ts",
+          "line": 605,
+          "column": 4,
+          "endLine": 605,
+          "endColumn": 51,
+          "fileSha256": "cd57eb4e9400966ede6d2943fe5dcca974f1a9f52e8a42fa9ebe952fb1fb5c15",
+          "siteSha256": "07680ac81b6769280c3c53f573b320c5299d221105a9a212e969d259ff3527c8"
+        }
+      ],
+      "status": "mapped-event-source"
+    },
+    {
+      "api": "palot.onAutomationRunsUpdated",
+      "channel": "automation:runs-updated",
+      "rendererTransport": "removeListener",
+      "renderer": {
+        "file": "apps/desktop/src/preload/index.ts",
+        "line": 260,
+        "column": 3,
+        "endLine": 260,
+        "endColumn": 66,
+        "fileSha256": "d79b43634c4c5462705d3a20bd3143281667654e549ec38b860c633f60e8edb9",
+        "siteSha256": "8eafee169ceaa08e26859ad67aebe1bf42f15d70e66c2ec6d783abdf67b7f5c9"
+      },
+      "main": [
+        {
+          "channel": "automation:runs-updated",
+          "transport": "webContents.send",
+          "file": "apps/desktop/src/main/automation/index.ts",
+          "line": 36,
+          "column": 2,
+          "endLine": 36,
+          "endColumn": 49,
+          "fileSha256": "2baf0ae98f02a65cbe293268032ec3a22f44d76ddfedd1873897e20d60eb54ef",
+          "siteSha256": "07680ac81b6769280c3c53f573b320c5299d221105a9a212e969d259ff3527c8"
+        },
+        {
+          "channel": "automation:runs-updated",
+          "transport": "webContents.send",
+          "file": "apps/desktop/src/main/ipc-handlers.ts",
+          "line": 535,
+          "column": 4,
+          "endLine": 535,
+          "endColumn": 51,
+          "fileSha256": "cd57eb4e9400966ede6d2943fe5dcca974f1a9f52e8a42fa9ebe952fb1fb5c15",
+          "siteSha256": "07680ac81b6769280c3c53f573b320c5299d221105a9a212e969d259ff3527c8"
+        },
+        {
+          "channel": "automation:runs-updated",
+          "transport": "webContents.send",
+          "file": "apps/desktop/src/main/ipc-handlers.ts",
+          "line": 546,
+          "column": 4,
+          "endLine": 546,
+          "endColumn": 51,
+          "fileSha256": "cd57eb4e9400966ede6d2943fe5dcca974f1a9f52e8a42fa9ebe952fb1fb5c15",
+          "siteSha256": "07680ac81b6769280c3c53f573b320c5299d221105a9a212e969d259ff3527c8"
+        },
+        {
+          "channel": "automation:runs-updated",
+          "transport": "webContents.send",
+          "file": "apps/desktop/src/main/ipc-handlers.ts",
+          "line": 557,
+          "column": 4,
+          "endLine": 557,
+          "endColumn": 51,
+          "fileSha256": "cd57eb4e9400966ede6d2943fe5dcca974f1a9f52e8a42fa9ebe952fb1fb5c15",
+          "siteSha256": "07680ac81b6769280c3c53f573b320c5299d221105a9a212e969d259ff3527c8"
+        },
+        {
+          "channel": "automation:runs-updated",
+          "transport": "webContents.send",
+          "file": "apps/desktop/src/main/ipc-handlers.ts",
+          "line": 583,
+          "column": 4,
+          "endLine": 583,
+          "endColumn": 51,
+          "fileSha256": "cd57eb4e9400966ede6d2943fe5dcca974f1a9f52e8a42fa9ebe952fb1fb5c15",
+          "siteSha256": "07680ac81b6769280c3c53f573b320c5299d221105a9a212e969d259ff3527c8"
+        },
+        {
+          "channel": "automation:runs-updated",
+          "transport": "webContents.send",
+          "file": "apps/desktop/src/main/ipc-handlers.ts",
+          "line": 594,
+          "column": 4,
+          "endLine": 594,
+          "endColumn": 51,
+          "fileSha256": "cd57eb4e9400966ede6d2943fe5dcca974f1a9f52e8a42fa9ebe952fb1fb5c15",
+          "siteSha256": "07680ac81b6769280c3c53f573b320c5299d221105a9a212e969d259ff3527c8"
+        },
+        {
+          "channel": "automation:runs-updated",
+          "transport": "webContents.send",
+          "file": "apps/desktop/src/main/ipc-handlers.ts",
+          "line": 605,
+          "column": 4,
+          "endLine": 605,
+          "endColumn": 51,
+          "fileSha256": "cd57eb4e9400966ede6d2943fe5dcca974f1a9f52e8a42fa9ebe952fb1fb5c15",
+          "siteSha256": "07680ac81b6769280c3c53f573b320c5299d221105a9a212e969d259ff3527c8"
+        }
+      ],
+      "status": "mapped-event-source"
+    },
+    {
+      "api": "palot.automation.update",
+      "channel": "automation:update",
+      "rendererTransport": "invoke",
+      "renderer": {
+        "file": "apps/desktop/src/preload/index.ts",
+        "line": 245,
+        "column": 30,
+        "endLine": 245,
+        "endColumn": 76,
+        "fileSha256": "d79b43634c4c5462705d3a20bd3143281667654e549ec38b860c633f60e8edb9",
+        "siteSha256": "982415d6095b84aaf38f9138d5605c93acf7bda9fb8fd53c1174fac15ba3c5dd"
+      },
+      "main": [
+        {
+          "channel": "automation:update",
+          "transport": "handle",
+          "file": "apps/desktop/src/main/ipc-handlers.ts",
+          "line": 541,
+          "column": 1,
+          "endLine": 550,
+          "endColumn": 2,
+          "fileSha256": "cd57eb4e9400966ede6d2943fe5dcca974f1a9f52e8a42fa9ebe952fb1fb5c15",
+          "siteSha256": "96a1e0e79da3cdf8314e7f0a4ac9f4a158640e66984636c3c5723bade76ce2af"
+        }
+      ],
+      "status": "mapped-handler"
+    },
+    {
+      "api": "palot.getChromeTier",
+      "channel": "chrome-tier:get",
+      "rendererTransport": "invoke",
+      "renderer": {
+        "file": "apps/desktop/src/preload/index.ts",
+        "line": 32,
+        "column": 22,
+        "endLine": 32,
+        "endColumn": 59,
+        "fileSha256": "d79b43634c4c5462705d3a20bd3143281667654e549ec38b860c633f60e8edb9",
+        "siteSha256": "24eeb7e4109cee758693cdd9293e0e7514e41dbde61403f421654f65bb2edca0"
+      },
+      "main": [
+        {
+          "channel": "chrome-tier:get",
+          "transport": "handle",
+          "file": "apps/desktop/src/main/ipc-handlers.ts",
+          "line": 354,
+          "column": 1,
+          "endLine": 354,
+          "endColumn": 65,
+          "fileSha256": "cd57eb4e9400966ede6d2943fe5dcca974f1a9f52e8a42fa9ebe952fb1fb5c15",
+          "siteSha256": "162a0a0dba5a6fb28ca0557de0161f8f73fd5d59a88ccb61e639ec7681707b7c"
+        }
+      ],
+      "status": "mapped-handler"
+    },
+    {
+      "api": "palot.onChromeTier",
+      "channel": "chrome-tier",
+      "rendererTransport": "on",
+      "renderer": {
+        "file": "apps/desktop/src/preload/index.ts",
+        "line": 25,
+        "column": 2,
+        "endLine": 25,
+        "endColumn": 41,
+        "fileSha256": "d79b43634c4c5462705d3a20bd3143281667654e549ec38b860c633f60e8edb9",
+        "siteSha256": "f080be3affd0a4d700edf8c5d31a1f09a42e56fb4de63fcd2a8abec2a9ee9d6a"
+      },
+      "main": [
+        {
+          "channel": "chrome-tier",
+          "transport": "webContents.send",
+          "file": "apps/desktop/src/main/index.ts",
+          "line": 213,
+          "column": 2,
+          "endLine": 213,
+          "endColumn": 50,
+          "fileSha256": "593ee1c027ac9be008e827b7117db96ce7183aabd04d3443fd4db92e5934710e",
+          "siteSha256": "c1affae90f1e0b94c125fd9e100a239d67ae090e84ca0bb1f564a4c491352726"
+        }
+      ],
+      "status": "mapped-event-source"
+    },
+    {
+      "api": "palot.onChromeTier",
+      "channel": "chrome-tier",
+      "rendererTransport": "removeListener",
+      "renderer": {
+        "file": "apps/desktop/src/preload/index.ts",
+        "line": 27,
+        "column": 3,
+        "endLine": 27,
+        "endColumn": 54,
+        "fileSha256": "d79b43634c4c5462705d3a20bd3143281667654e549ec38b860c633f60e8edb9",
+        "siteSha256": "194942cbd712a8507b20f0fd53b2fa15bf0f43950ce366ce96ee9d1cf9e84016"
+      },
+      "main": [
+        {
+          "channel": "chrome-tier",
+          "transport": "webContents.send",
+          "file": "apps/desktop/src/main/index.ts",
+          "line": 213,
+          "column": 2,
+          "endLine": 213,
+          "endColumn": 50,
+          "fileSha256": "593ee1c027ac9be008e827b7117db96ce7183aabd04d3443fd4db92e5934710e",
+          "siteSha256": "c1affae90f1e0b94c125fd9e100a239d67ae090e84ca0bb1f564a4c491352726"
+        }
+      ],
+      "status": "mapped-event-source"
+    },
+    {
+      "api": "palot.cli.install",
+      "channel": "cli:install",
+      "rendererTransport": "invoke",
+      "renderer": {
+        "file": "apps/desktop/src/preload/index.ts",
+        "line": 149,
+        "column": 17,
+        "endLine": 149,
+        "endColumn": 50,
+        "fileSha256": "d79b43634c4c5462705d3a20bd3143281667654e549ec38b860c633f60e8edb9",
+        "siteSha256": "43783ee18e3b19f9959f971bf025b8881a38f9653341affd8012bb844629829e"
+      },
+      "main": [
+        {
+          "channel": "cli:install",
+          "transport": "handle",
+          "file": "apps/desktop/src/main/ipc-handlers.ts",
+          "line": 330,
+          "column": 1,
+          "endLine": 330,
+          "endColumn": 50,
+          "fileSha256": "cd57eb4e9400966ede6d2943fe5dcca974f1a9f52e8a42fa9ebe952fb1fb5c15",
+          "siteSha256": "e066606d3ccaba6fb52860acb19a88d74e96267666ceb30adf3a731f81f6a0e1"
+        }
+      ],
+      "status": "mapped-handler"
+    },
+    {
+      "api": "palot.cli.isInstalled",
+      "channel": "cli:is-installed",
+      "rendererTransport": "invoke",
+      "renderer": {
+        "file": "apps/desktop/src/preload/index.ts",
+        "line": 147,
+        "column": 21,
+        "endLine": 147,
+        "endColumn": 59,
+        "fileSha256": "d79b43634c4c5462705d3a20bd3143281667654e549ec38b860c633f60e8edb9",
+        "siteSha256": "a4d143ce4dabde6e64e15703d34646d2d04ad38a6b194a073453fe797ad2d09c"
+      },
+      "main": [
+        {
+          "channel": "cli:is-installed",
+          "transport": "handle",
+          "file": "apps/desktop/src/main/ipc-handlers.ts",
+          "line": 328,
+          "column": 1,
+          "endLine": 328,
+          "endColumn": 59,
+          "fileSha256": "cd57eb4e9400966ede6d2943fe5dcca974f1a9f52e8a42fa9ebe952fb1fb5c15",
+          "siteSha256": "4bf3be4c0bc3e4b08aee7bfa3f2e0d4cfc2bf730ba296d960e3eb719cc0c42d6"
+        }
+      ],
+      "status": "mapped-handler"
+    },
+    {
+      "api": "palot.cli.uninstall",
+      "channel": "cli:uninstall",
+      "rendererTransport": "invoke",
+      "renderer": {
+        "file": "apps/desktop/src/preload/index.ts",
+        "line": 151,
+        "column": 19,
+        "endLine": 151,
+        "endColumn": 54,
+        "fileSha256": "d79b43634c4c5462705d3a20bd3143281667654e549ec38b860c633f60e8edb9",
+        "siteSha256": "dec90a8fd80d0c8f777d8f5059b5d0a06c50e13c4640a76b6c05840e68df52d9"
+      },
+      "main": [
+        {
+          "channel": "cli:uninstall",
+          "transport": "handle",
+          "file": "apps/desktop/src/main/ipc-handlers.ts",
+          "line": 332,
+          "column": 1,
+          "endLine": 332,
+          "endColumn": 54,
+          "fileSha256": "cd57eb4e9400966ede6d2943fe5dcca974f1a9f52e8a42fa9ebe952fb1fb5c15",
+          "siteSha256": "a48c7a7b2fa5e97c56ef872e83647dde7be8969444ffb304581d99b9d987f959"
+        }
+      ],
+      "status": "mapped-handler"
+    },
+    {
+      "api": "palot.credential.delete",
+      "channel": "credential:delete",
+      "rendererTransport": "invoke",
+      "renderer": {
+        "file": "apps/desktop/src/preload/index.ts",
+        "line": 52,
+        "column": 32,
+        "endLine": 52,
+        "endColumn": 81,
+        "fileSha256": "d79b43634c4c5462705d3a20bd3143281667654e549ec38b860c633f60e8edb9",
+        "siteSha256": "b7139b546679fbc9b25b3685f1a972aa76356325fc5107f63ac5a448a61266a7"
+      },
+      "main": [
+        {
+          "channel": "credential:delete",
+          "transport": "handle",
+          "file": "apps/desktop/src/main/ipc-handlers.ts",
+          "line": 399,
+          "column": 1,
+          "endLine": 404,
+          "endColumn": 2,
+          "fileSha256": "cd57eb4e9400966ede6d2943fe5dcca974f1a9f52e8a42fa9ebe952fb1fb5c15",
+          "siteSha256": "da9062b1f1fc0e4e38b0fbb349921b37a7b9f8cefcc2f3a1991c94d647ef3823"
+        }
+      ],
+      "status": "mapped-handler"
+    },
+    {
+      "api": "palot.credential.get",
+      "channel": "credential:get",
+      "rendererTransport": "invoke",
+      "renderer": {
+        "file": "apps/desktop/src/preload/index.ts",
+        "line": 51,
+        "column": 29,
+        "endLine": 51,
+        "endColumn": 75,
+        "fileSha256": "d79b43634c4c5462705d3a20bd3143281667654e549ec38b860c633f60e8edb9",
+        "siteSha256": "71ec7db4114152ff68e7c518d48fe7cb37ba342ca578c070677da33342f8b2e6"
+      },
+      "main": [
+        {
+          "channel": "credential:get",
+          "transport": "handle",
+          "file": "apps/desktop/src/main/ipc-handlers.ts",
+          "line": 397,
+          "column": 1,
+          "endLine": 397,
+          "endColumn": 83,
+          "fileSha256": "cd57eb4e9400966ede6d2943fe5dcca974f1a9f52e8a42fa9ebe952fb1fb5c15",
+          "siteSha256": "5bf65f4eb6d0e1bc31d9d9cecebe175870cd2ef7080485d03d7a0b9da40df8f4"
+        }
+      ],
+      "status": "mapped-handler"
+    },
+    {
+      "api": "palot.credential.store",
+      "channel": "credential:store",
+      "rendererTransport": "invoke",
+      "renderer": {
+        "file": "apps/desktop/src/preload/index.ts",
+        "line": 50,
+        "column": 3,
+        "endLine": 50,
+        "endColumn": 61,
+        "fileSha256": "d79b43634c4c5462705d3a20bd3143281667654e549ec38b860c633f60e8edb9",
+        "siteSha256": "3532b1bc875f63b8f39fb91a204d05955735cda84a86a481d6fdef6190fc9d2e"
+      },
+      "main": [
+        {
+          "channel": "credential:store",
+          "transport": "handle",
+          "file": "apps/desktop/src/main/ipc-handlers.ts",
+          "line": 390,
+          "column": 1,
+          "endLine": 395,
+          "endColumn": 2,
+          "fileSha256": "cd57eb4e9400966ede6d2943fe5dcca974f1a9f52e8a42fa9ebe952fb1fb5c15",
+          "siteSha256": "b4fdde77cdd5218f317c44ef6a49201fb4f1fbdd0e5264b6b135984e8b6ab004"
+        }
+      ],
+      "status": "mapped-handler"
+    },
+    {
+      "api": "palot.pickDirectory",
+      "channel": "dialog:open-directory",
+      "rendererTransport": "invoke",
+      "renderer": {
+        "file": "apps/desktop/src/preload/index.ts",
+        "line": 183,
+        "column": 22,
+        "endLine": 183,
+        "endColumn": 65,
+        "fileSha256": "d79b43634c4c5462705d3a20bd3143281667654e549ec38b860c633f60e8edb9",
+        "siteSha256": "b882355f08b15a71ca18e7bf44ec9f8a57d5e7578b6bb4d7ccfa20ab39d3bb9b"
+      },
+      "main": [
+        {
+          "channel": "dialog:open-directory",
+          "transport": "handle",
+          "file": "apps/desktop/src/main/ipc-handlers.ts",
+          "line": 310,
+          "column": 1,
+          "endLine": 320,
+          "endColumn": 2,
+          "fileSha256": "cd57eb4e9400966ede6d2943fe5dcca974f1a9f52e8a42fa9ebe952fb1fb5c15",
+          "siteSha256": "50c9e711c503bee3bb8b5c6c80b1d0e2110532572cc0f90bb28f54efae1ad112"
+        }
+      ],
+      "status": "mapped-handler"
+    },
+    {
+      "api": "palot.fetch",
+      "channel": "fetch:request",
+      "rendererTransport": "invoke",
+      "renderer": {
+        "file": "apps/desktop/src/preload/index.ts",
+        "line": 198,
+        "column": 7,
+        "endLine": 198,
+        "endColumn": 47,
+        "fileSha256": "d79b43634c4c5462705d3a20bd3143281667654e549ec38b860c633f60e8edb9",
+        "siteSha256": "6b7d098202f961ca7eef7721fd82d726d37386b35bb3b2c343b3504fd30c813a"
+      },
+      "main": [
+        {
+          "channel": "fetch:request",
+          "transport": "handle",
+          "file": "apps/desktop/src/main/ipc-handlers.ts",
+          "line": 324,
+          "column": 1,
+          "endLine": 324,
+          "endColumn": 80,
+          "fileSha256": "cd57eb4e9400966ede6d2943fe5dcca974f1a9f52e8a42fa9ebe952fb1fb5c15",
+          "siteSha256": "2d2cb5890bd3baa790bdb76959c1365906dd5a5a62b8e1c004d05ddd271ed615"
+        }
+      ],
+      "status": "mapped-handler"
+    },
+    {
+      "api": "palot.git.applyDiffText",
+      "channel": "git:apply-diff-text",
+      "rendererTransport": "invoke",
+      "renderer": {
+        "file": "apps/desktop/src/preload/index.ts",
+        "line": 127,
+        "column": 3,
+        "endLine": 127,
+        "endColumn": 64,
+        "fileSha256": "d79b43634c4c5462705d3a20bd3143281667654e549ec38b860c633f60e8edb9",
+        "siteSha256": "d3d7c7b76e4ec716c2a1010a6f9bbcb5e71acc1107033a63e50caf6f3968431b"
+      },
+      "main": [
+        {
+          "channel": "git:apply-diff-text",
+          "transport": "handle",
+          "file": "apps/desktop/src/main/ipc-handlers.ts",
+          "line": 286,
+          "column": 1,
+          "endLine": 293,
+          "endColumn": 2,
+          "fileSha256": "cd57eb4e9400966ede6d2943fe5dcca974f1a9f52e8a42fa9ebe952fb1fb5c15",
+          "siteSha256": "13ea248206ed4879e84a02c7eec4c23f536ac781f185deac1a3b42570ad3ac1f"
+        }
+      ],
+      "status": "mapped-handler"
+    },
+    {
+      "api": "palot.git.applyToLocal",
+      "channel": "git:apply-to-local",
+      "rendererTransport": "invoke",
+      "renderer": {
+        "file": "apps/desktop/src/preload/index.ts",
+        "line": 125,
+        "column": 3,
+        "endLine": 125,
+        "endColumn": 66,
+        "fileSha256": "d79b43634c4c5462705d3a20bd3143281667654e549ec38b860c633f60e8edb9",
+        "siteSha256": "752e18021b1926487112a471e2c9919597f4d7ff6f174c68ad7ae09caf35fcaf"
+      },
+      "main": [
+        {
+          "channel": "git:apply-to-local",
+          "transport": "handle",
+          "file": "apps/desktop/src/main/ipc-handlers.ts",
+          "line": 277,
+          "column": 1,
+          "endLine": 284,
+          "endColumn": 2,
+          "fileSha256": "cd57eb4e9400966ede6d2943fe5dcca974f1a9f52e8a42fa9ebe952fb1fb5c15",
+          "siteSha256": "e0b82fa4bdf38d7246ca61e422b157d94c727a2083562c48faa649fad0adf9c1"
+        }
+      ],
+      "status": "mapped-handler"
+    },
+    {
+      "api": "palot.git.listBranches",
+      "channel": "git:branches",
+      "rendererTransport": "invoke",
+      "renderer": {
+        "file": "apps/desktop/src/preload/index.ts",
+        "line": 110,
+        "column": 39,
+        "endLine": 110,
+        "endColumn": 84,
+        "fileSha256": "d79b43634c4c5462705d3a20bd3143281667654e549ec38b860c633f60e8edb9",
+        "siteSha256": "00b534a58f67f189bbc3837f01e2ba3911b11a434bd1282cb5a6db258453ea35"
+      },
+      "main": [
+        {
+          "channel": "git:branches",
+          "transport": "handle",
+          "file": "apps/desktop/src/main/ipc-handlers.ts",
+          "line": 217,
+          "column": 1,
+          "endLine": 220,
+          "endColumn": 2,
+          "fileSha256": "cd57eb4e9400966ede6d2943fe5dcca974f1a9f52e8a42fa9ebe952fb1fb5c15",
+          "siteSha256": "b0b0df7d4edf13f742ba23cbf296e859c5706d8345de45a185d56e876b9fb74d"
+        }
+      ],
+      "status": "mapped-handler"
+    },
+    {
+      "api": "palot.git.checkout",
+      "channel": "git:checkout",
+      "rendererTransport": "invoke",
+      "renderer": {
+        "file": "apps/desktop/src/preload/index.ts",
+        "line": 113,
+        "column": 3,
+        "endLine": 113,
+        "endColumn": 56,
+        "fileSha256": "d79b43634c4c5462705d3a20bd3143281667654e549ec38b860c633f60e8edb9",
+        "siteSha256": "a507a5835edd63db25fd365eb2c08e33b7d62978a100ed8830cfde5f8ff21ea8"
+      },
+      "main": [
+        {
+          "channel": "git:checkout",
+          "transport": "handle",
+          "file": "apps/desktop/src/main/ipc-handlers.ts",
+          "line": 227,
+          "column": 1,
+          "endLine": 233,
+          "endColumn": 2,
+          "fileSha256": "cd57eb4e9400966ede6d2943fe5dcca974f1a9f52e8a42fa9ebe952fb1fb5c15",
+          "siteSha256": "e68529df3acfe0386dc7f3615af6a29f83033770528e37a77c4e41d7474f7846"
+        }
+      ],
+      "status": "mapped-handler"
+    },
+    {
+      "api": "palot.git.commitAll",
+      "channel": "git:commit-all",
+      "rendererTransport": "invoke",
+      "renderer": {
+        "file": "apps/desktop/src/preload/index.ts",
+        "line": 120,
+        "column": 3,
+        "endLine": 120,
+        "endColumn": 59,
+        "fileSha256": "d79b43634c4c5462705d3a20bd3143281667654e549ec38b860c633f60e8edb9",
+        "siteSha256": "265271271fa8e98621de6331250f9c8d4a412465e5b97a596bb2a600d54dd479"
+      },
+      "main": [
+        {
+          "channel": "git:commit-all",
+          "transport": "handle",
+          "file": "apps/desktop/src/main/ipc-handlers.ts",
+          "line": 253,
+          "column": 1,
+          "endLine": 259,
+          "endColumn": 2,
+          "fileSha256": "cd57eb4e9400966ede6d2943fe5dcca974f1a9f52e8a42fa9ebe952fb1fb5c15",
+          "siteSha256": "cac25b15f43fb5e56b9344785959b8146450ee71b43a3e954f4b33ffa44ff046"
+        }
+      ],
+      "status": "mapped-handler"
+    },
+    {
+      "api": "palot.git.createBranch",
+      "channel": "git:create-branch",
+      "rendererTransport": "invoke",
+      "renderer": {
+        "file": "apps/desktop/src/preload/index.ts",
+        "line": 123,
+        "column": 3,
+        "endLine": 123,
+        "endColumn": 65,
+        "fileSha256": "d79b43634c4c5462705d3a20bd3143281667654e549ec38b860c633f60e8edb9",
+        "siteSha256": "05728ce08fe2ff4472e61dea8f60b48a630c582d12197373017d801af55aa711"
+      },
+      "main": [
+        {
+          "channel": "git:create-branch",
+          "transport": "handle",
+          "file": "apps/desktop/src/main/ipc-handlers.ts",
+          "line": 269,
+          "column": 1,
+          "endLine": 275,
+          "endColumn": 2,
+          "fileSha256": "cd57eb4e9400966ede6d2943fe5dcca974f1a9f52e8a42fa9ebe952fb1fb5c15",
+          "siteSha256": "f88e3da6b15cd519ffdacdd27e7893b831a53df59839d468b754b65d13a4aa38"
+        }
+      ],
+      "status": "mapped-handler"
+    },
+    {
+      "api": "palot.git.diffStat",
+      "channel": "git:diff-stat",
+      "rendererTransport": "invoke",
+      "renderer": {
+        "file": "apps/desktop/src/preload/index.ts",
+        "line": 118,
+        "column": 35,
+        "endLine": 118,
+        "endColumn": 81,
+        "fileSha256": "d79b43634c4c5462705d3a20bd3143281667654e549ec38b860c633f60e8edb9",
+        "siteSha256": "0e5a4f5fd4a46f5415acc5327a406bf094486aae4d9c8d0e2728622eeb3d7991"
+      },
+      "main": [
+        {
+          "channel": "git:diff-stat",
+          "transport": "handle",
+          "file": "apps/desktop/src/main/ipc-handlers.ts",
+          "line": 248,
+          "column": 1,
+          "endLine": 251,
+          "endColumn": 2,
+          "fileSha256": "cd57eb4e9400966ede6d2943fe5dcca974f1a9f52e8a42fa9ebe952fb1fb5c15",
+          "siteSha256": "806c1551823e9d43d7da995acdac0e06378d61ead3aebe47a665cff18a48c5a4"
+        }
+      ],
+      "status": "mapped-handler"
+    },
+    {
+      "api": "palot.git.push",
+      "channel": "git:push",
+      "rendererTransport": "invoke",
+      "renderer": {
+        "file": "apps/desktop/src/preload/index.ts",
+        "line": 121,
+        "column": 48,
+        "endLine": 121,
+        "endColumn": 97,
+        "fileSha256": "d79b43634c4c5462705d3a20bd3143281667654e549ec38b860c633f60e8edb9",
+        "siteSha256": "84a8e40e73fd2dc9b5b822bf36afbb61997498e109e9227538b69187744a2f87"
+      },
+      "main": [
+        {
+          "channel": "git:push",
+          "transport": "handle",
+          "file": "apps/desktop/src/main/ipc-handlers.ts",
+          "line": 261,
+          "column": 1,
+          "endLine": 267,
+          "endColumn": 2,
+          "fileSha256": "cd57eb4e9400966ede6d2943fe5dcca974f1a9f52e8a42fa9ebe952fb1fb5c15",
+          "siteSha256": "689a2c399fb7a3b5751f298d424cd902c9278faf6a7d3ed0f0967eee3a16d1a0"
+        }
+      ],
+      "status": "mapped-handler"
+    },
+    {
+      "api": "palot.git.getRemoteUrl",
+      "channel": "git:remote-url",
+      "rendererTransport": "invoke",
+      "renderer": {
+        "file": "apps/desktop/src/preload/index.ts",
+        "line": 129,
+        "column": 3,
+        "endLine": 129,
+        "endColumn": 58,
+        "fileSha256": "d79b43634c4c5462705d3a20bd3143281667654e549ec38b860c633f60e8edb9",
+        "siteSha256": "6a3e92638a8815f595503282a296a1765f525d94fcf5c041c3121509401bb8a1"
+      },
+      "main": [
+        {
+          "channel": "git:remote-url",
+          "transport": "handle",
+          "file": "apps/desktop/src/main/ipc-handlers.ts",
+          "line": 300,
+          "column": 1,
+          "endLine": 306,
+          "endColumn": 2,
+          "fileSha256": "cd57eb4e9400966ede6d2943fe5dcca974f1a9f52e8a42fa9ebe952fb1fb5c15",
+          "siteSha256": "5eb99bd49bee1f760121af74dbe692f9cef8d25464550d08e2e1ab2d53d42fc0"
+        }
+      ],
+      "status": "mapped-handler"
+    },
+    {
+      "api": "palot.git.getRoot",
+      "channel": "git:root",
+      "rendererTransport": "invoke",
+      "renderer": {
+        "file": "apps/desktop/src/preload/index.ts",
+        "line": 117,
+        "column": 34,
+        "endLine": 117,
+        "endColumn": 75,
+        "fileSha256": "d79b43634c4c5462705d3a20bd3143281667654e549ec38b860c633f60e8edb9",
+        "siteSha256": "cebf10851a725bb6272be7fe3bc5ec023c02fa139d6f9cfc2d852813eb069e8b"
+      },
+      "main": [
+        {
+          "channel": "git:root",
+          "transport": "handle",
+          "file": "apps/desktop/src/main/ipc-handlers.ts",
+          "line": 295,
+          "column": 1,
+          "endLine": 298,
+          "endColumn": 2,
+          "fileSha256": "cd57eb4e9400966ede6d2943fe5dcca974f1a9f52e8a42fa9ebe952fb1fb5c15",
+          "siteSha256": "6ff2a398169793ddb61793901a8d0252c681f890e76a7ee7d29e3784aaf6ee1b"
+        }
+      ],
+      "status": "mapped-handler"
+    },
+    {
+      "api": "palot.git.stashAndCheckout",
+      "channel": "git:stash-and-checkout",
+      "rendererTransport": "invoke",
+      "renderer": {
+        "file": "apps/desktop/src/preload/index.ts",
+        "line": 115,
+        "column": 3,
+        "endLine": 115,
+        "endColumn": 66,
+        "fileSha256": "d79b43634c4c5462705d3a20bd3143281667654e549ec38b860c633f60e8edb9",
+        "siteSha256": "b26ad64904977408ef3107b8a4e7d169e49ce38db8c337b2fa03a8ae21335325"
+      },
+      "main": [
+        {
+          "channel": "git:stash-and-checkout",
+          "transport": "handle",
+          "file": "apps/desktop/src/main/ipc-handlers.ts",
+          "line": 235,
+          "column": 1,
+          "endLine": 241,
+          "endColumn": 2,
+          "fileSha256": "cd57eb4e9400966ede6d2943fe5dcca974f1a9f52e8a42fa9ebe952fb1fb5c15",
+          "siteSha256": "1b69ce9cbcc43b1ec61a73993ee2f9863d107094b7dc3ea32979b401facc3c65"
+        }
+      ],
+      "status": "mapped-handler"
+    },
+    {
+      "api": "palot.git.stashPop",
+      "channel": "git:stash-pop",
+      "rendererTransport": "invoke",
+      "renderer": {
+        "file": "apps/desktop/src/preload/index.ts",
+        "line": 116,
+        "column": 35,
+        "endLine": 116,
+        "endColumn": 81,
+        "fileSha256": "d79b43634c4c5462705d3a20bd3143281667654e549ec38b860c633f60e8edb9",
+        "siteSha256": "47393786480340fdda76d3d46559c22569bd1efe7239ba7561f230006661214b"
+      },
+      "main": [
+        {
+          "channel": "git:stash-pop",
+          "transport": "handle",
+          "file": "apps/desktop/src/main/ipc-handlers.ts",
+          "line": 243,
+          "column": 1,
+          "endLine": 246,
+          "endColumn": 2,
+          "fileSha256": "cd57eb4e9400966ede6d2943fe5dcca974f1a9f52e8a42fa9ebe952fb1fb5c15",
+          "siteSha256": "514d08a3f97ea776b67e306bdd02a52fbde36e749437875b6063f6746b53494e"
+        }
+      ],
+      "status": "mapped-handler"
+    },
+    {
+      "api": "palot.git.getStatus",
+      "channel": "git:status",
+      "rendererTransport": "invoke",
+      "renderer": {
+        "file": "apps/desktop/src/preload/index.ts",
+        "line": 111,
+        "column": 36,
+        "endLine": 111,
+        "endColumn": 79,
+        "fileSha256": "d79b43634c4c5462705d3a20bd3143281667654e549ec38b860c633f60e8edb9",
+        "siteSha256": "c93cbec2b0460cdb2ead1d2a748505724e2a4fe26b03ca94f0a9a75970928f9d"
+      },
+      "main": [
+        {
+          "channel": "git:status",
+          "transport": "handle",
+          "file": "apps/desktop/src/main/ipc-handlers.ts",
+          "line": 222,
+          "column": 1,
+          "endLine": 225,
+          "endColumn": 2,
+          "fileSha256": "cd57eb4e9400966ede6d2943fe5dcca974f1a9f52e8a42fa9ebe952fb1fb5c15",
+          "siteSha256": "ec8b44e986559130d93eea171536de2b983031489e81eb7ed97b1cf564ded7e3"
+        }
+      ],
+      "status": "mapped-handler"
+    },
+    {
+      "api": "palot.mdns.getDiscovered",
+      "channel": "mdns:get-discovered",
+      "rendererTransport": "invoke",
+      "renderer": {
+        "file": "apps/desktop/src/preload/index.ts",
+        "line": 63,
+        "column": 23,
+        "endLine": 63,
+        "endColumn": 64,
+        "fileSha256": "d79b43634c4c5462705d3a20bd3143281667654e549ec38b860c633f60e8edb9",
+        "siteSha256": "92d59862c0008bd946a21536b61ee28dfa99f439646f2eec5678080d1da67d6b"
+      },
+      "main": [
+        {
+          "channel": "mdns:get-discovered",
+          "transport": "handle",
+          "file": "apps/desktop/src/main/ipc-handlers.ts",
+          "line": 408,
+          "column": 1,
+          "endLine": 408,
+          "endColumn": 68,
+          "fileSha256": "cd57eb4e9400966ede6d2943fe5dcca974f1a9f52e8a42fa9ebe952fb1fb5c15",
+          "siteSha256": "a3c8b2f4d3b26c69de2437a44144748b8c39faeeac78c0ac9f2b0abca0fe3e3f"
+        }
+      ],
+      "status": "mapped-handler"
+    },
+    {
+      "api": "palot.mdns.onChanged",
+      "channel": "mdns:servers-changed",
+      "rendererTransport": "on",
+      "renderer": {
+        "file": "apps/desktop/src/preload/index.ts",
+        "line": 67,
+        "column": 3,
+        "endLine": 67,
+        "endColumn": 51,
+        "fileSha256": "d79b43634c4c5462705d3a20bd3143281667654e549ec38b860c633f60e8edb9",
+        "siteSha256": "c424461543e4a33047b84bc2ee542537bb92033a823876e645f050a35260a536"
+      },
+      "main": [
+        {
+          "channel": "mdns:servers-changed",
+          "transport": "webContents.send",
+          "file": "apps/desktop/src/main/mdns-scanner.ts",
+          "line": 47,
+          "column": 2,
+          "endLine": 47,
+          "endColumn": 55,
+          "fileSha256": "ac3418da66d6f42c1b99e1a6babafe10f3eee594985534b4732e67abc44bfb47",
+          "siteSha256": "6753ce089dcf3cd3dedca665196fa1dc146851197cd6d8de2271149cebdb1b2f"
+        }
+      ],
+      "status": "mapped-event-source"
+    },
+    {
+      "api": "palot.mdns.onChanged",
+      "channel": "mdns:servers-changed",
+      "rendererTransport": "removeListener",
+      "renderer": {
+        "file": "apps/desktop/src/preload/index.ts",
+        "line": 69,
+        "column": 4,
+        "endLine": 69,
+        "endColumn": 64,
+        "fileSha256": "d79b43634c4c5462705d3a20bd3143281667654e549ec38b860c633f60e8edb9",
+        "siteSha256": "f3598147faa8e36505840e8e8a843d7d144ff088e118ddb0a855a9276bc5138f"
+      },
+      "main": [
+        {
+          "channel": "mdns:servers-changed",
+          "transport": "webContents.send",
+          "file": "apps/desktop/src/main/mdns-scanner.ts",
+          "line": 47,
+          "column": 2,
+          "endLine": 47,
+          "endColumn": 55,
+          "fileSha256": "ac3418da66d6f42c1b99e1a6babafe10f3eee594985534b4732e67abc44bfb47",
+          "siteSha256": "6753ce089dcf3cd3dedca665196fa1dc146851197cd6d8de2271149cebdb1b2f"
+        }
+      ],
+      "status": "mapped-event-source"
+    },
+    {
+      "api": "palot.updateModelRecent",
+      "channel": "model-state:update-recent",
+      "rendererTransport": "invoke",
+      "renderer": {
+        "file": "apps/desktop/src/preload/index.ts",
+        "line": 79,
+        "column": 2,
+        "endLine": 79,
+        "endColumn": 56,
+        "fileSha256": "d79b43634c4c5462705d3a20bd3143281667654e549ec38b860c633f60e8edb9",
+        "siteSha256": "7e3aa356e18b7cd47e9e6c3e3649a3ca141f3aa198c31ac565789dedf56c7bf9"
+      },
+      "main": [
+        {
+          "channel": "model-state:update-recent",
+          "transport": "handle",
+          "file": "apps/desktop/src/main/ipc-handlers.ts",
+          "line": 195,
+          "column": 1,
+          "endLine": 201,
+          "endColumn": 2,
+          "fileSha256": "cd57eb4e9400966ede6d2943fe5dcca974f1a9f52e8a42fa9ebe952fb1fb5c15",
+          "siteSha256": "e874f0235c3bbb4471532c7630af28599fd61af7a38d1df6e353c682b7d9d263"
+        }
+      ],
+      "status": "mapped-handler"
+    },
+    {
+      "api": "palot.getModelState",
+      "channel": "model-state",
+      "rendererTransport": "invoke",
+      "renderer": {
+        "file": "apps/desktop/src/preload/index.ts",
+        "line": 75,
+        "column": 22,
+        "endLine": 75,
+        "endColumn": 55,
+        "fileSha256": "d79b43634c4c5462705d3a20bd3143281667654e549ec38b860c633f60e8edb9",
+        "siteSha256": "0630c3cc0f6da36c2f7fe8873c267d297d2fe2f1d1c898c7d96d7a13b68056a2"
+      },
+      "main": [
+        {
+          "channel": "model-state",
+          "transport": "handle",
+          "file": "apps/desktop/src/main/ipc-handlers.ts",
+          "line": 190,
+          "column": 1,
+          "endLine": 193,
+          "endColumn": 2,
+          "fileSha256": "cd57eb4e9400966ede6d2943fe5dcca974f1a9f52e8a42fa9ebe952fb1fb5c15",
+          "siteSha256": "4f5abe1f0c5b3399f3afb19eb5394b9afeaead7fc3a4517d82d1ab2850497deb"
+        }
+      ],
+      "status": "mapped-handler"
+    },
+    {
+      "api": "palot.updateBadgeCount",
+      "channel": "notification:badge",
+      "rendererTransport": "invoke",
+      "renderer": {
+        "file": "apps/desktop/src/preload/index.ts",
+        "line": 219,
+        "column": 38,
+        "endLine": 219,
+        "endColumn": 85,
+        "fileSha256": "d79b43634c4c5462705d3a20bd3143281667654e549ec38b860c633f60e8edb9",
+        "siteSha256": "444c99791682813bdea18e99938b0fbc5183cb5bbc83740f3c41d9d8e337bfbc"
+      },
+      "main": [
+        {
+          "channel": "notification:badge",
+          "transport": "handle",
+          "file": "apps/desktop/src/main/ipc-handlers.ts",
+          "line": 378,
+          "column": 1,
+          "endLine": 380,
+          "endColumn": 3,
+          "fileSha256": "cd57eb4e9400966ede6d2943fe5dcca974f1a9f52e8a42fa9ebe952fb1fb5c15",
+          "siteSha256": "9887adc93cd6492e535ca93478f008e4bc3779d514e8f76b41f497a76fb571a7"
+        }
+      ],
+      "status": "mapped-handler"
+    },
+    {
+      "api": "palot.dismissNotification",
+      "channel": "notification:dismiss",
+      "rendererTransport": "invoke",
+      "renderer": {
+        "file": "apps/desktop/src/preload/index.ts",
+        "line": 216,
+        "column": 45,
+        "endLine": 216,
+        "endColumn": 98,
+        "fileSha256": "d79b43634c4c5462705d3a20bd3143281667654e549ec38b860c633f60e8edb9",
+        "siteSha256": "08d9010da059695cd26291b7d13bc0c7534c143f1f4675148acaca11ad88db3b"
+      },
+      "main": [
+        {
+          "channel": "notification:dismiss",
+          "transport": "handle",
+          "file": "apps/desktop/src/main/ipc-handlers.ts",
+          "line": 374,
+          "column": 1,
+          "endLine": 376,
+          "endColumn": 3,
+          "fileSha256": "cd57eb4e9400966ede6d2943fe5dcca974f1a9f52e8a42fa9ebe952fb1fb5c15",
+          "siteSha256": "90a7a0740f2372c03b31167831193f327f954ef878c60fbefa1330e2265149f5"
+        }
+      ],
+      "status": "mapped-handler"
+    },
+    {
+      "api": "palot.onNotificationNavigate",
+      "channel": "notification:navigate",
+      "rendererTransport": "on",
+      "renderer": {
+        "file": "apps/desktop/src/preload/index.ts",
+        "line": 209,
+        "column": 2,
+        "endLine": 209,
+        "endColumn": 51,
+        "fileSha256": "d79b43634c4c5462705d3a20bd3143281667654e549ec38b860c633f60e8edb9",
+        "siteSha256": "ee58b1adee0bb113131e5d4ab51812048ec4b5db8ab401414df150ab6d102a05"
+      },
+      "main": [
+        {
+          "channel": "notification:navigate",
+          "transport": "webContents.send",
+          "file": "apps/desktop/src/main/notifications.ts",
+          "line": 207,
+          "column": 2,
+          "endLine": 207,
+          "endColumn": 62,
+          "fileSha256": "dd8c6b190eef4e531a4c4bd97ea8061ce0b08e127e5a0f8cca9baccecccd2872",
+          "siteSha256": "fdd56363ac4c21898fb54a42382f27126c5adcaa17d89afbaf6e8c665163ff90"
+        },
+        {
+          "channel": "notification:navigate",
+          "transport": "webContents.send",
+          "file": "apps/desktop/src/main/tray.ts",
+          "line": 510,
+          "column": 2,
+          "endLine": 510,
+          "endColumn": 62,
+          "fileSha256": "e93876f13bd050454585332e29f7f107ec31017c0e755f6e6669469f09d60122",
+          "siteSha256": "fdd56363ac4c21898fb54a42382f27126c5adcaa17d89afbaf6e8c665163ff90"
+        }
+      ],
+      "status": "mapped-event-source"
+    },
+    {
+      "api": "palot.onNotificationNavigate",
+      "channel": "notification:navigate",
+      "rendererTransport": "removeListener",
+      "renderer": {
+        "file": "apps/desktop/src/preload/index.ts",
+        "line": 211,
+        "column": 3,
+        "endLine": 211,
+        "endColumn": 64,
+        "fileSha256": "d79b43634c4c5462705d3a20bd3143281667654e549ec38b860c633f60e8edb9",
+        "siteSha256": "b72aed62673b5c859042336d6272561c2ec81c5f38d20876bb16fc0f81063411"
+      },
+      "main": [
+        {
+          "channel": "notification:navigate",
+          "transport": "webContents.send",
+          "file": "apps/desktop/src/main/notifications.ts",
+          "line": 207,
+          "column": 2,
+          "endLine": 207,
+          "endColumn": 62,
+          "fileSha256": "dd8c6b190eef4e531a4c4bd97ea8061ce0b08e127e5a0f8cca9baccecccd2872",
+          "siteSha256": "fdd56363ac4c21898fb54a42382f27126c5adcaa17d89afbaf6e8c665163ff90"
+        },
+        {
+          "channel": "notification:navigate",
+          "transport": "webContents.send",
+          "file": "apps/desktop/src/main/tray.ts",
+          "line": 510,
+          "column": 2,
+          "endLine": 510,
+          "endColumn": 62,
+          "fileSha256": "e93876f13bd050454585332e29f7f107ec31017c0e755f6e6669469f09d60122",
+          "siteSha256": "fdd56363ac4c21898fb54a42382f27126c5adcaa17d89afbaf6e8c665163ff90"
+        }
+      ],
+      "status": "mapped-event-source"
+    },
+    {
+      "api": "palot.onboarding.checkOpenCode",
+      "channel": "onboarding:check-opencode",
+      "rendererTransport": "invoke",
+      "renderer": {
+        "file": "apps/desktop/src/preload/index.ts",
+        "line": 268,
+        "column": 23,
+        "endLine": 268,
+        "endColumn": 70,
+        "fileSha256": "d79b43634c4c5462705d3a20bd3143281667654e549ec38b860c633f60e8edb9",
+        "siteSha256": "b8911441937dcd68e620e023d1e0d3e810ec137bc4505117fda9b0bf52df2e17"
+      },
+      "main": [
+        {
+          "channel": "onboarding:check-opencode",
+          "transport": "handle",
+          "file": "apps/desktop/src/main/ipc-handlers.ts",
+          "line": 472,
+          "column": 1,
+          "endLine": 475,
+          "endColumn": 2,
+          "fileSha256": "cd57eb4e9400966ede6d2943fe5dcca974f1a9f52e8a42fa9ebe952fb1fb5c15",
+          "siteSha256": "0d276c9d432c049cce460bbe309f135953a855552c88d59500eadb2d13430b58"
+        }
+      ],
+      "status": "mapped-handler"
+    },
+    {
+      "api": "palot.onboarding.detectProviders",
+      "channel": "onboarding:detect-providers",
+      "rendererTransport": "invoke",
+      "renderer": {
+        "file": "apps/desktop/src/preload/index.ts",
+        "line": 280,
+        "column": 25,
+        "endLine": 280,
+        "endColumn": 74,
+        "fileSha256": "d79b43634c4c5462705d3a20bd3143281667654e549ec38b860c633f60e8edb9",
+        "siteSha256": "9fbf51bb43afea1502a8e0f7b6902261d3295b8ddc7e0dd8486b42b0dd1f2c67"
+      },
+      "main": [
+        {
+          "channel": "onboarding:detect-providers",
+          "transport": "handle",
+          "file": "apps/desktop/src/main/ipc-handlers.ts",
+          "line": 482,
+          "column": 1,
+          "endLine": 485,
+          "endColumn": 2,
+          "fileSha256": "cd57eb4e9400966ede6d2943fe5dcca974f1a9f52e8a42fa9ebe952fb1fb5c15",
+          "siteSha256": "7ced8db9ce4649df2b2bf7a813053a20c5de4633705ec5fe8a1188ab6ecf11ab"
+        }
+      ],
+      "status": "mapped-handler"
+    },
+    {
+      "api": "palot.onboarding.executeMigration",
+      "channel": "onboarding:execute-migration",
+      "rendererTransport": "invoke",
+      "renderer": {
+        "file": "apps/desktop/src/preload/index.ts",
+        "line": 288,
+        "column": 3,
+        "endLine": 288,
+        "endColumn": 87,
+        "fileSha256": "d79b43634c4c5462705d3a20bd3143281667654e549ec38b860c633f60e8edb9",
+        "siteSha256": "d0df9324d69fe5532bbd7188c57fa00d13140136d36dca6b9eb7ef45a7b74be7"
+      },
+      "main": [
+        {
+          "channel": "onboarding:execute-migration",
+          "transport": "handle",
+          "file": "apps/desktop/src/main/ipc-handlers.ts",
+          "line": 504,
+          "column": 1,
+          "endLine": 511,
+          "endColumn": 2,
+          "fileSha256": "cd57eb4e9400966ede6d2943fe5dcca974f1a9f52e8a42fa9ebe952fb1fb5c15",
+          "siteSha256": "25fbddd7d22fdba8c415ef1be43deeb07cbf2e488897e7476ac803ee66d0f055"
+        }
+      ],
+      "status": "mapped-handler"
+    },
+    {
+      "api": "palot.onboarding.installOpenCode",
+      "channel": "onboarding:install-opencode",
+      "rendererTransport": "invoke",
+      "renderer": {
+        "file": "apps/desktop/src/preload/index.ts",
+        "line": 270,
+        "column": 25,
+        "endLine": 270,
+        "endColumn": 74,
+        "fileSha256": "d79b43634c4c5462705d3a20bd3143281667654e549ec38b860c633f60e8edb9",
+        "siteSha256": "a19ab84ac97e70a28d2ead7b5ecf6ff697d40dea7887ab10536af8278089cc41"
+      },
+      "main": [
+        {
+          "channel": "onboarding:install-opencode",
+          "transport": "handle",
+          "file": "apps/desktop/src/main/ipc-handlers.ts",
+          "line": 477,
+          "column": 1,
+          "endLine": 480,
+          "endColumn": 2,
+          "fileSha256": "cd57eb4e9400966ede6d2943fe5dcca974f1a9f52e8a42fa9ebe952fb1fb5c15",
+          "siteSha256": "8d122c0b24485d69b25bc263ee877ebff1b2f9ad0f189517f71a9abd5f1fb674"
+        }
+      ],
+      "status": "mapped-handler"
+    },
+    {
+      "api": "palot.onboarding.onInstallOutput",
+      "channel": "onboarding:install-output",
+      "rendererTransport": "on",
+      "renderer": {
+        "file": "apps/desktop/src/preload/index.ts",
+        "line": 274,
+        "column": 3,
+        "endLine": 274,
+        "endColumn": 56,
+        "fileSha256": "d79b43634c4c5462705d3a20bd3143281667654e549ec38b860c633f60e8edb9",
+        "siteSha256": "8dedc60e9024296513ea67d31a57849af7b290f8a11efbcdc2184f8f163141e2"
+      },
+      "main": [
+        {
+          "channel": "onboarding:install-output",
+          "transport": "webContents.send",
+          "file": "apps/desktop/src/main/onboarding.ts",
+          "line": 159,
+          "column": 4,
+          "endLine": 159,
+          "endColumn": 59,
+          "fileSha256": "79c0f30462b2f3491655ade73a75f481e0ecf7cdded44f2d7c65a3bf0a43292d",
+          "siteSha256": "edc064bd1cb55cb2433e0f5e2a416b37411a522a7a23f089d98c85b0f1619cb1"
+        }
+      ],
+      "status": "mapped-event-source"
+    },
+    {
+      "api": "palot.onboarding.onInstallOutput",
+      "channel": "onboarding:install-output",
+      "rendererTransport": "removeListener",
+      "renderer": {
+        "file": "apps/desktop/src/preload/index.ts",
+        "line": 276,
+        "column": 4,
+        "endLine": 276,
+        "endColumn": 69,
+        "fileSha256": "d79b43634c4c5462705d3a20bd3143281667654e549ec38b860c633f60e8edb9",
+        "siteSha256": "4fdb13277022f965f030ae105db4ea18948cab69754d04a245a000e73cead4a3"
+      },
+      "main": [
+        {
+          "channel": "onboarding:install-output",
+          "transport": "webContents.send",
+          "file": "apps/desktop/src/main/onboarding.ts",
+          "line": 159,
+          "column": 4,
+          "endLine": 159,
+          "endColumn": 59,
+          "fileSha256": "79c0f30462b2f3491655ade73a75f481e0ecf7cdded44f2d7c65a3bf0a43292d",
+          "siteSha256": "edc064bd1cb55cb2433e0f5e2a416b37411a522a7a23f089d98c85b0f1619cb1"
+        }
+      ],
+      "status": "mapped-event-source"
+    },
+    {
+      "api": "palot.onboarding.onMigrationProgress",
+      "channel": "onboarding:migration-progress",
+      "rendererTransport": "on",
+      "renderer": {
+        "file": "apps/desktop/src/preload/index.ts",
+        "line": 292,
+        "column": 3,
+        "endLine": 292,
+        "endColumn": 60,
+        "fileSha256": "d79b43634c4c5462705d3a20bd3143281667654e549ec38b860c633f60e8edb9",
+        "siteSha256": "02319bfc7b3085a9e8f449a7acd4a7f16f9dc86f82c518a4504c7624a9a9334c"
+      },
+      "main": [
+        {
+          "channel": "onboarding:migration-progress",
+          "transport": "webContents.send",
+          "file": "apps/desktop/src/main/onboarding.ts",
+          "line": 721,
+          "column": 3,
+          "endLine": 726,
+          "endColumn": 5,
+          "fileSha256": "79c0f30462b2f3491655ade73a75f481e0ecf7cdded44f2d7c65a3bf0a43292d",
+          "siteSha256": "3565a576c21465510dc5c1e590f8095769a7966f28c5697f33a32eaeb9c5d268"
+        }
+      ],
+      "status": "mapped-event-source"
+    },
+    {
+      "api": "palot.onboarding.onMigrationProgress",
+      "channel": "onboarding:migration-progress",
+      "rendererTransport": "removeListener",
+      "renderer": {
+        "file": "apps/desktop/src/preload/index.ts",
+        "line": 294,
+        "column": 4,
+        "endLine": 294,
+        "endColumn": 73,
+        "fileSha256": "d79b43634c4c5462705d3a20bd3143281667654e549ec38b860c633f60e8edb9",
+        "siteSha256": "0e8e20de336c0e8b2808fe8f059629204d0054b85e7bc34857fc061b6aea7f5b"
+      },
+      "main": [
+        {
+          "channel": "onboarding:migration-progress",
+          "transport": "webContents.send",
+          "file": "apps/desktop/src/main/onboarding.ts",
+          "line": 721,
+          "column": 3,
+          "endLine": 726,
+          "endColumn": 5,
+          "fileSha256": "79c0f30462b2f3491655ade73a75f481e0ecf7cdded44f2d7c65a3bf0a43292d",
+          "siteSha256": "3565a576c21465510dc5c1e590f8095769a7966f28c5697f33a32eaeb9c5d268"
+        }
+      ],
+      "status": "mapped-event-source"
+    },
+    {
+      "api": "palot.onboarding.previewMigration",
+      "channel": "onboarding:preview-migration",
+      "rendererTransport": "invoke",
+      "renderer": {
+        "file": "apps/desktop/src/preload/index.ts",
+        "line": 285,
+        "column": 3,
+        "endLine": 285,
+        "endColumn": 87,
+        "fileSha256": "d79b43634c4c5462705d3a20bd3143281667654e549ec38b860c633f60e8edb9",
+        "siteSha256": "ae0497ad3de289b876b9a50ed672c143fe9dd03ac09fc4716a8dbea4d111a428"
+      },
+      "main": [
+        {
+          "channel": "onboarding:preview-migration",
+          "transport": "handle",
+          "file": "apps/desktop/src/main/ipc-handlers.ts",
+          "line": 495,
+          "column": 1,
+          "endLine": 502,
+          "endColumn": 2,
+          "fileSha256": "cd57eb4e9400966ede6d2943fe5dcca974f1a9f52e8a42fa9ebe952fb1fb5c15",
+          "siteSha256": "3a59c042fbaa0d0cfad7dee4c31671d9520fdfda6acfe41ce47b190946119821"
+        }
+      ],
+      "status": "mapped-handler"
+    },
+    {
+      "api": "palot.onboarding.restoreBackup",
+      "channel": "onboarding:restore-backup",
+      "rendererTransport": "invoke",
+      "renderer": {
+        "file": "apps/desktop/src/preload/index.ts",
+        "line": 298,
+        "column": 23,
+        "endLine": 298,
+        "endColumn": 70,
+        "fileSha256": "d79b43634c4c5462705d3a20bd3143281667654e549ec38b860c633f60e8edb9",
+        "siteSha256": "ae11cc9aeb55dc6c75e04f0273440c979a21ec460a45951e0da4066fee1d8d98"
+      },
+      "main": [
+        {
+          "channel": "onboarding:restore-backup",
+          "transport": "handle",
+          "file": "apps/desktop/src/main/ipc-handlers.ts",
+          "line": 513,
+          "column": 1,
+          "endLine": 516,
+          "endColumn": 2,
+          "fileSha256": "cd57eb4e9400966ede6d2943fe5dcca974f1a9f52e8a42fa9ebe952fb1fb5c15",
+          "siteSha256": "00dbdc8f76fb891e1404fdd5d379103f47f3103ec837ed96efba04cf1a12a899"
+        }
+      ],
+      "status": "mapped-handler"
+    },
+    {
+      "api": "palot.onboarding.scanProvider",
+      "channel": "onboarding:scan-provider",
+      "rendererTransport": "invoke",
+      "renderer": {
+        "file": "apps/desktop/src/preload/index.ts",
+        "line": 282,
+        "column": 38,
+        "endLine": 282,
+        "endColumn": 94,
+        "fileSha256": "d79b43634c4c5462705d3a20bd3143281667654e549ec38b860c633f60e8edb9",
+        "siteSha256": "a940c35bd15fe121e8f6b8204670ca9daba360412d6043993978fa9ff0b952d5"
+      },
+      "main": [
+        {
+          "channel": "onboarding:scan-provider",
+          "transport": "handle",
+          "file": "apps/desktop/src/main/ipc-handlers.ts",
+          "line": 487,
+          "column": 1,
+          "endLine": 493,
+          "endColumn": 2,
+          "fileSha256": "cd57eb4e9400966ede6d2943fe5dcca974f1a9f52e8a42fa9ebe952fb1fb5c15",
+          "siteSha256": "232756c688c72a6c36909043565a7a28c04efa4739bb30095f2f0397613071b4"
+        }
+      ],
+      "status": "mapped-handler"
+    },
+    {
+      "api": "palot.openIn.open",
+      "channel": "open-in:open",
+      "rendererTransport": "invoke",
+      "renderer": {
+        "file": "apps/desktop/src/preload/index.ts",
+        "line": 159,
+        "column": 3,
+        "endLine": 159,
+        "endColumn": 76,
+        "fileSha256": "d79b43634c4c5462705d3a20bd3143281667654e549ec38b860c633f60e8edb9",
+        "siteSha256": "6a10651f20411c35caedb9be580025f5abe66676870c3cd743f1b7b06cbf3e17"
+      },
+      "main": [
+        {
+          "channel": "open-in:open",
+          "transport": "handle",
+          "file": "apps/desktop/src/main/ipc-handlers.ts",
+          "line": 338,
+          "column": 1,
+          "endLine": 345,
+          "endColumn": 2,
+          "fileSha256": "cd57eb4e9400966ede6d2943fe5dcca974f1a9f52e8a42fa9ebe952fb1fb5c15",
+          "siteSha256": "9e1c625294bc2ebb63df5fa0130bc84de8a21d67fc7f7a5ea56389f0f6266cb5"
+        }
+      ],
+      "status": "mapped-handler"
+    },
+    {
+      "api": "palot.openIn.setPreferred",
+      "channel": "open-in:set-preferred",
+      "rendererTransport": "invoke",
+      "renderer": {
+        "file": "apps/desktop/src/preload/index.ts",
+        "line": 160,
+        "column": 38,
+        "endLine": 160,
+        "endColumn": 91,
+        "fileSha256": "d79b43634c4c5462705d3a20bd3143281667654e549ec38b860c633f60e8edb9",
+        "siteSha256": "de3872c9c511b8f3c737abc04e1e4b1f763bef11dd4cf2804969505b4ad719d5"
+      },
+      "main": [
+        {
+          "channel": "open-in:set-preferred",
+          "transport": "handle",
+          "file": "apps/desktop/src/main/ipc-handlers.ts",
+          "line": 347,
+          "column": 1,
+          "endLine": 350,
+          "endColumn": 3,
+          "fileSha256": "cd57eb4e9400966ede6d2943fe5dcca974f1a9f52e8a42fa9ebe952fb1fb5c15",
+          "siteSha256": "6aa1eed1d69a53e79af5ccb40c50fc794431a5036776a188e62083e4bd1e3e16"
+        }
+      ],
+      "status": "mapped-handler"
+    },
+    {
+      "api": "palot.openIn.getTargets",
+      "channel": "open-in:targets",
+      "rendererTransport": "invoke",
+      "renderer": {
+        "file": "apps/desktop/src/preload/index.ts",
+        "line": 157,
+        "column": 20,
+        "endLine": 157,
+        "endColumn": 57,
+        "fileSha256": "d79b43634c4c5462705d3a20bd3143281667654e549ec38b860c633f60e8edb9",
+        "siteSha256": "309a6cbc543c23787e06dbfd5ebfef2a47beb46e6d06f05c41a0edae0ffc8764"
+      },
+      "main": [
+        {
+          "channel": "open-in:targets",
+          "transport": "handle",
+          "file": "apps/desktop/src/main/ipc-handlers.ts",
+          "line": 336,
+          "column": 1,
+          "endLine": 336,
+          "endColumn": 60,
+          "fileSha256": "cd57eb4e9400966ede6d2943fe5dcca974f1a9f52e8a42fa9ebe952fb1fb5c15",
+          "siteSha256": "2e265b28cd654a8085ab8f9b2df7171c90cca14bc943abe2dd27015cbd1328c6"
+        }
+      ],
+      "status": "mapped-handler"
+    },
+    {
+      "api": "palot.ensureOpenCode",
+      "channel": "opencode:ensure",
+      "rendererTransport": "invoke",
+      "renderer": {
+        "file": "apps/desktop/src/preload/index.ts",
+        "line": 35,
+        "column": 23,
+        "endLine": 35,
+        "endColumn": 60,
+        "fileSha256": "d79b43634c4c5462705d3a20bd3143281667654e549ec38b860c633f60e8edb9",
+        "siteSha256": "565815a6ec57e7b22c1077ff1907d679517beca802fbe5d662237492d66e360e"
+      },
+      "main": [
+        {
+          "channel": "opencode:ensure",
+          "transport": "handle",
+          "file": "apps/desktop/src/main/ipc-handlers.ts",
+          "line": 171,
+          "column": 1,
+          "endLine": 174,
+          "endColumn": 2,
+          "fileSha256": "cd57eb4e9400966ede6d2943fe5dcca974f1a9f52e8a42fa9ebe952fb1fb5c15",
+          "siteSha256": "8f9ee7e656af48089feb6e4f06dc49cb395f4ae381f1af1b1b5f0b2b50dfa407"
+        }
+      ],
+      "status": "mapped-handler"
+    },
+    {
+      "api": "palot.restartOpenCode",
+      "channel": "opencode:restart",
+      "rendererTransport": "invoke",
+      "renderer": {
+        "file": "apps/desktop/src/preload/index.ts",
+        "line": 44,
+        "column": 24,
+        "endLine": 44,
+        "endColumn": 62,
+        "fileSha256": "d79b43634c4c5462705d3a20bd3143281667654e549ec38b860c633f60e8edb9",
+        "siteSha256": "bf178f0d51fbc658ee17ac334bcc051cfc6845fd412c50d100ed3ed13515a16d"
+      },
+      "main": [
+        {
+          "channel": "opencode:restart",
+          "transport": "handle",
+          "file": "apps/desktop/src/main/ipc-handlers.ts",
+          "line": 183,
+          "column": 1,
+          "endLine": 186,
+          "endColumn": 2,
+          "fileSha256": "cd57eb4e9400966ede6d2943fe5dcca974f1a9f52e8a42fa9ebe952fb1fb5c15",
+          "siteSha256": "9855e37cd99eb96986f1beabc214769796de798b1f3b501992e362ca6eb6da74"
+        }
+      ],
+      "status": "mapped-handler"
+    },
+    {
+      "api": "palot.stopOpenCode",
+      "channel": "opencode:stop",
+      "rendererTransport": "invoke",
+      "renderer": {
+        "file": "apps/desktop/src/preload/index.ts",
+        "line": 41,
+        "column": 21,
+        "endLine": 41,
+        "endColumn": 56,
+        "fileSha256": "d79b43634c4c5462705d3a20bd3143281667654e549ec38b860c633f60e8edb9",
+        "siteSha256": "4ede4b9784020e9fcf4c169daf99eb1dbfb8eb8b097586d92c9cd1d4c8abc84d"
+      },
+      "main": [
+        {
+          "channel": "opencode:stop",
+          "transport": "handle",
+          "file": "apps/desktop/src/main/ipc-handlers.ts",
+          "line": 178,
+          "column": 1,
+          "endLine": 181,
+          "endColumn": 2,
+          "fileSha256": "cd57eb4e9400966ede6d2943fe5dcca974f1a9f52e8a42fa9ebe952fb1fb5c15",
+          "siteSha256": "f9d8c233422af26239630c4f402297d6da5c9b2ed5e031d35400aee647d440a4"
+        }
+      ],
+      "status": "mapped-handler"
+    },
+    {
+      "api": "palot.getServerUrl",
+      "channel": "opencode:url",
+      "rendererTransport": "invoke",
+      "renderer": {
+        "file": "apps/desktop/src/preload/index.ts",
+        "line": 38,
+        "column": 21,
+        "endLine": 38,
+        "endColumn": 55,
+        "fileSha256": "d79b43634c4c5462705d3a20bd3143281667654e549ec38b860c633f60e8edb9",
+        "siteSha256": "267d8b1e9681ff5dccbfc1d82baf09e16a829b27aba4c85a504992a88f84a24c"
+      },
+      "main": [
+        {
+          "channel": "opencode:url",
+          "transport": "handle",
+          "file": "apps/desktop/src/main/ipc-handlers.ts",
+          "line": 176,
+          "column": 1,
+          "endLine": 176,
+          "endColumn": 53,
+          "fileSha256": "cd57eb4e9400966ede6d2943fe5dcca974f1a9f52e8a42fa9ebe952fb1fb5c15",
+          "siteSha256": "61ef1b8fce05ef0a58a8ea7134b499aad9c34b2577c8399a6ac457cfb43e3887"
+        }
+      ],
+      "status": "mapped-handler"
+    },
+    {
+      "api": "palot.getOpaqueWindows",
+      "channel": "prefs:get-opaque-windows",
+      "rendererTransport": "invoke",
+      "renderer": {
+        "file": "apps/desktop/src/preload/index.ts",
+        "line": 135,
+        "column": 25,
+        "endLine": 135,
+        "endColumn": 71,
+        "fileSha256": "d79b43634c4c5462705d3a20bd3143281667654e549ec38b860c633f60e8edb9",
+        "siteSha256": "b529c7aa632d2e61566d13c4679ca9689c462cda7f9526fd0b48d3188d2824a3"
+      },
+      "main": [
+        {
+          "channel": "prefs:get-opaque-windows",
+          "transport": "handle",
+          "file": "apps/desktop/src/main/ipc-handlers.ts",
+          "line": 358,
+          "column": 1,
+          "endLine": 360,
+          "endColumn": 3,
+          "fileSha256": "cd57eb4e9400966ede6d2943fe5dcca974f1a9f52e8a42fa9ebe952fb1fb5c15",
+          "siteSha256": "9f4b6c0c38a4e32a236e6900c0c022f733050d4919b892c366c356c4f3c4fb75"
+        }
+      ],
+      "status": "mapped-handler"
+    },
+    {
+      "api": "palot.setOpaqueWindows",
+      "channel": "prefs:set-opaque-windows",
+      "rendererTransport": "invoke",
+      "renderer": {
+        "file": "apps/desktop/src/preload/index.ts",
+        "line": 138,
+        "column": 39,
+        "endLine": 138,
+        "endColumn": 92,
+        "fileSha256": "d79b43634c4c5462705d3a20bd3143281667654e549ec38b860c633f60e8edb9",
+        "siteSha256": "dfdfe0fc8ed41d66998a7a73b204b314055e4685ca7d229d8f0157e054a3fced"
+      },
+      "main": [
+        {
+          "channel": "prefs:set-opaque-windows",
+          "transport": "handle",
+          "file": "apps/desktop/src/main/ipc-handlers.ts",
+          "line": 362,
+          "column": 1,
+          "endLine": 365,
+          "endColumn": 3,
+          "fileSha256": "cd57eb4e9400966ede6d2943fe5dcca974f1a9f52e8a42fa9ebe952fb1fb5c15",
+          "siteSha256": "21c67742c18b736580a86160a00d3ebce9f2f32cb53bb4f4d3b8b2cc2a8bea1e"
+        }
+      ],
+      "status": "mapped-handler"
+    },
+    {
+      "api": "palot.testServerConnection",
+      "channel": "server:test-connection",
+      "rendererTransport": "invoke",
+      "renderer": {
+        "file": "apps/desktop/src/preload/index.ts",
+        "line": 57,
+        "column": 2,
+        "endLine": 57,
+        "endColumn": 71,
+        "fileSha256": "d79b43634c4c5462705d3a20bd3143281667654e549ec38b860c633f60e8edb9",
+        "siteSha256": "7b4a83600eec9bf4675f54507c2f0a61ab743fe212f31bbb870e2409a20d3045"
+      },
+      "main": [
+        {
+          "channel": "server:test-connection",
+          "transport": "handle",
+          "file": "apps/desktop/src/main/ipc-handlers.ts",
+          "line": 412,
+          "column": 1,
+          "endLine": 441,
+          "endColumn": 2,
+          "fileSha256": "cd57eb4e9400966ede6d2943fe5dcca974f1a9f52e8a42fa9ebe952fb1fb5c15",
+          "siteSha256": "8863335db8ea35bc8c5d03bf4954d9a735d1dd50345bfa16376d1671e4e9d413"
+        }
+      ],
+      "status": "mapped-handler"
+    },
+    {
+      "api": "palot.onSettingsChanged",
+      "channel": "settings:changed",
+      "rendererTransport": "on",
+      "renderer": {
+        "file": "apps/desktop/src/preload/index.ts",
+        "line": 233,
+        "column": 2,
+        "endLine": 233,
+        "endColumn": 46,
+        "fileSha256": "d79b43634c4c5462705d3a20bd3143281667654e549ec38b860c633f60e8edb9",
+        "siteSha256": "369203f942ecdd942ff264c953c4eb561000dd7e18770ca04b9c08b9121c84c3"
+      },
+      "main": [
+        {
+          "channel": "settings:changed",
+          "transport": "webContents.send",
+          "file": "apps/desktop/src/main/ipc-handlers.ts",
+          "line": 623,
+          "column": 3,
+          "endLine": 623,
+          "endColumn": 53,
+          "fileSha256": "cd57eb4e9400966ede6d2943fe5dcca974f1a9f52e8a42fa9ebe952fb1fb5c15",
+          "siteSha256": "6f4cc087c192729ff852b85bdbd79591c58275b63714755e03d7306c5b917d13"
+        }
+      ],
+      "status": "mapped-event-source"
+    },
+    {
+      "api": "palot.onSettingsChanged",
+      "channel": "settings:changed",
+      "rendererTransport": "removeListener",
+      "renderer": {
+        "file": "apps/desktop/src/preload/index.ts",
+        "line": 235,
+        "column": 3,
+        "endLine": 235,
+        "endColumn": 59,
+        "fileSha256": "d79b43634c4c5462705d3a20bd3143281667654e549ec38b860c633f60e8edb9",
+        "siteSha256": "d39125acb0929d7a51395a4a3f1aec42e8879c59b9f607b8910d104d100f5550"
+      },
+      "main": [
+        {
+          "channel": "settings:changed",
+          "transport": "webContents.send",
+          "file": "apps/desktop/src/main/ipc-handlers.ts",
+          "line": 623,
+          "column": 3,
+          "endLine": 623,
+          "endColumn": 53,
+          "fileSha256": "cd57eb4e9400966ede6d2943fe5dcca974f1a9f52e8a42fa9ebe952fb1fb5c15",
+          "siteSha256": "6f4cc087c192729ff852b85bdbd79591c58275b63714755e03d7306c5b917d13"
+        }
+      ],
+      "status": "mapped-event-source"
+    },
+    {
+      "api": "palot.getSettings",
+      "channel": "settings:get",
+      "rendererTransport": "invoke",
+      "renderer": {
+        "file": "apps/desktop/src/preload/index.ts",
+        "line": 224,
+        "column": 20,
+        "endLine": 224,
+        "endColumn": 54,
+        "fileSha256": "d79b43634c4c5462705d3a20bd3143281667654e549ec38b860c633f60e8edb9",
+        "siteSha256": "ba348f189e83159f3dea560532d98297fa736d83565ae20ac41697209ab11fb5"
+      },
+      "main": [
+        {
+          "channel": "settings:get",
+          "transport": "handle",
+          "file": "apps/desktop/src/main/ipc-handlers.ts",
+          "line": 384,
+          "column": 1,
+          "endLine": 384,
+          "endColumn": 52,
+          "fileSha256": "cd57eb4e9400966ede6d2943fe5dcca974f1a9f52e8a42fa9ebe952fb1fb5c15",
+          "siteSha256": "1cb437afa457c80941355777c790e7706f7622dd3a1b1e42dcb1aa24ea0e3a18"
+        }
+      ],
+      "status": "mapped-handler"
+    },
+    {
+      "api": "palot.updateSettings",
+      "channel": "settings:update",
+      "rendererTransport": "invoke",
+      "renderer": {
+        "file": "apps/desktop/src/preload/index.ts",
+        "line": 228,
+        "column": 2,
+        "endLine": 228,
+        "endColumn": 48,
+        "fileSha256": "d79b43634c4c5462705d3a20bd3143281667654e549ec38b860c633f60e8edb9",
+        "siteSha256": "8732ade21afc2680983dccf88d4f4f54efdbb68187b361968b46af9b7d42ec6e"
+      },
+      "main": [
+        {
+          "channel": "settings:update",
+          "transport": "handle",
+          "file": "apps/desktop/src/main/ipc-handlers.ts",
+          "line": 386,
+          "column": 1,
+          "endLine": 386,
+          "endColumn": 75,
+          "fileSha256": "cd57eb4e9400966ede6d2943fe5dcca974f1a9f52e8a42fa9ebe952fb1fb5c15",
+          "siteSha256": "85378a8bd36f715e8cc3e60c31f89c7de63f4b58a8c4abcce5f6ac658a18c7aa"
+        }
+      ],
+      "status": "mapped-handler"
+    },
+    {
+      "api": "palot.onAccentColorChanged",
+      "channel": "theme:accent-color-changed",
+      "rendererTransport": "on",
+      "renderer": {
+        "file": "apps/desktop/src/preload/index.ts",
+        "line": 174,
+        "column": 2,
+        "endLine": 174,
+        "endColumn": 56,
+        "fileSha256": "d79b43634c4c5462705d3a20bd3143281667654e549ec38b860c633f60e8edb9",
+        "siteSha256": "fa3fa183d3a44b853d98390ca1d9d71cf9bcca223e79cb64483fd0093e067dfb"
+      },
+      "main": [
+        {
+          "channel": "theme:accent-color-changed",
+          "transport": "webContents.send",
+          "file": "apps/desktop/src/main/ipc-handlers.ts",
+          "line": 466,
+          "column": 3,
+          "endLine": 466,
+          "endColumn": 63,
+          "fileSha256": "cd57eb4e9400966ede6d2943fe5dcca974f1a9f52e8a42fa9ebe952fb1fb5c15",
+          "siteSha256": "acba7a49bdd71b3bca98e719382f5dabe547629966526aaed80f34b4736ba58c"
+        }
+      ],
+      "status": "mapped-event-source"
+    },
+    {
+      "api": "palot.onAccentColorChanged",
+      "channel": "theme:accent-color-changed",
+      "rendererTransport": "removeListener",
+      "renderer": {
+        "file": "apps/desktop/src/preload/index.ts",
+        "line": 176,
+        "column": 3,
+        "endLine": 176,
+        "endColumn": 69,
+        "fileSha256": "d79b43634c4c5462705d3a20bd3143281667654e549ec38b860c633f60e8edb9",
+        "siteSha256": "4c5da4f4eb22c6f16f60ca82c8328703a6800f7c64e1709aada5e072fb6af491"
+      },
+      "main": [
+        {
+          "channel": "theme:accent-color-changed",
+          "transport": "webContents.send",
+          "file": "apps/desktop/src/main/ipc-handlers.ts",
+          "line": 466,
+          "column": 3,
+          "endLine": 466,
+          "endColumn": 63,
+          "fileSha256": "cd57eb4e9400966ede6d2943fe5dcca974f1a9f52e8a42fa9ebe952fb1fb5c15",
+          "siteSha256": "acba7a49bdd71b3bca98e719382f5dabe547629966526aaed80f34b4736ba58c"
+        }
+      ],
+      "status": "mapped-event-source"
+    },
+    {
+      "api": "palot.getAccentColor",
+      "channel": "theme:accent-color",
+      "rendererTransport": "invoke",
+      "renderer": {
+        "file": "apps/desktop/src/preload/index.ts",
+        "line": 169,
+        "column": 23,
+        "endLine": 169,
+        "endColumn": 63,
+        "fileSha256": "d79b43634c4c5462705d3a20bd3143281667654e549ec38b860c633f60e8edb9",
+        "siteSha256": "37280bd8db8d66b7127c4e00d34d1eee29b14677f2b4a87b4528346fd3602052"
+      },
+      "main": [
+        {
+          "channel": "theme:accent-color",
+          "transport": "handle",
+          "file": "apps/desktop/src/main/ipc-handlers.ts",
+          "line": 455,
+          "column": 1,
+          "endLine": 461,
+          "endColumn": 3,
+          "fileSha256": "cd57eb4e9400966ede6d2943fe5dcca974f1a9f52e8a42fa9ebe952fb1fb5c15",
+          "siteSha256": "56080f4ad99fed4156017ae03c58f4032a936ae42db870958313bfb92737df8b"
+        }
+      ],
+      "status": "mapped-handler"
+    },
+    {
+      "api": "palot.setNativeTheme",
+      "channel": "theme:set-native",
+      "rendererTransport": "invoke",
+      "renderer": {
+        "file": "apps/desktop/src/preload/index.ts",
+        "line": 166,
+        "column": 37,
+        "endLine": 166,
+        "endColumn": 83,
+        "fileSha256": "d79b43634c4c5462705d3a20bd3143281667654e549ec38b860c633f60e8edb9",
+        "siteSha256": "f79e5ef47068329b77eeaf34496f3e896358de57257751c389543a53f385786d"
+      },
+      "main": [
+        {
+          "channel": "theme:set-native",
+          "transport": "handle",
+          "file": "apps/desktop/src/main/ipc-handlers.ts",
+          "line": 445,
+          "column": 1,
+          "endLine": 451,
+          "endColumn": 3,
+          "fileSha256": "cd57eb4e9400966ede6d2943fe5dcca974f1a9f52e8a42fa9ebe952fb1fb5c15",
+          "siteSha256": "801a9ce80ec70d3c1d61383dafb17f54fa5c031f51a8905e9916022f9bfe63a8"
+        }
+      ],
+      "status": "mapped-handler"
+    },
+    {
+      "api": "palot.checkForUpdates",
+      "channel": "updater:check",
+      "rendererTransport": "invoke",
+      "renderer": {
+        "file": "apps/desktop/src/preload/index.ts",
+        "line": 87,
+        "column": 24,
+        "endLine": 87,
+        "endColumn": 59,
+        "fileSha256": "d79b43634c4c5462705d3a20bd3143281667654e549ec38b860c633f60e8edb9",
+        "siteSha256": "a8345f48d625e1dca6a6b8568318cae4a76d22797e0091eefef1aad6aef73e55"
+      },
+      "main": [
+        {
+          "channel": "updater:check",
+          "transport": "handle",
+          "file": "apps/desktop/src/main/ipc-handlers.ts",
+          "line": 207,
+          "column": 1,
+          "endLine": 207,
+          "endColumn": 69,
+          "fileSha256": "cd57eb4e9400966ede6d2943fe5dcca974f1a9f52e8a42fa9ebe952fb1fb5c15",
+          "siteSha256": "3f4d292d584368cc2c186156dd3489a087d9aeb89a09e80500719d0eaa4a5a54"
+        }
+      ],
+      "status": "mapped-handler"
+    },
+    {
+      "api": "palot.downloadUpdate",
+      "channel": "updater:download",
+      "rendererTransport": "invoke",
+      "renderer": {
+        "file": "apps/desktop/src/preload/index.ts",
+        "line": 90,
+        "column": 23,
+        "endLine": 90,
+        "endColumn": 61,
+        "fileSha256": "d79b43634c4c5462705d3a20bd3143281667654e549ec38b860c633f60e8edb9",
+        "siteSha256": "8ba4e6c4dccde2ebcbb3f5bbf76880e3ef2f7f3fbcb3a2c250bd41d5f77551ae"
+      },
+      "main": [
+        {
+          "channel": "updater:download",
+          "transport": "handle",
+          "file": "apps/desktop/src/main/ipc-handlers.ts",
+          "line": 209,
+          "column": 1,
+          "endLine": 209,
+          "endColumn": 71,
+          "fileSha256": "cd57eb4e9400966ede6d2943fe5dcca974f1a9f52e8a42fa9ebe952fb1fb5c15",
+          "siteSha256": "d1eb7c6cf5a6137d6753ba6873438d566253aaad1726d7ab975d972711ca6dc2"
+        }
+      ],
+      "status": "mapped-handler"
+    },
+    {
+      "api": "palot.installUpdate",
+      "channel": "updater:install",
+      "rendererTransport": "invoke",
+      "renderer": {
+        "file": "apps/desktop/src/preload/index.ts",
+        "line": 93,
+        "column": 22,
+        "endLine": 93,
+        "endColumn": 59,
+        "fileSha256": "d79b43634c4c5462705d3a20bd3143281667654e549ec38b860c633f60e8edb9",
+        "siteSha256": "f3f49da948f2478a5380f8f8b9c31699492ff87d25baf2d6d6fce9f0453275f4"
+      },
+      "main": [
+        {
+          "channel": "updater:install",
+          "transport": "handle",
+          "file": "apps/desktop/src/main/ipc-handlers.ts",
+          "line": 211,
+          "column": 1,
+          "endLine": 211,
+          "endColumn": 69,
+          "fileSha256": "cd57eb4e9400966ede6d2943fe5dcca974f1a9f52e8a42fa9ebe952fb1fb5c15",
+          "siteSha256": "55f5c03217ccab4396dc7f2cfa0b540158ec03c985bf63caf4f4f39e538d4763"
+        }
+      ],
+      "status": "mapped-handler"
+    },
+    {
+      "api": "palot.openReleasePage",
+      "channel": "updater:open-release-page",
+      "rendererTransport": "invoke",
+      "renderer": {
+        "file": "apps/desktop/src/preload/index.ts",
+        "line": 96,
+        "column": 24,
+        "endLine": 96,
+        "endColumn": 71,
+        "fileSha256": "d79b43634c4c5462705d3a20bd3143281667654e549ec38b860c633f60e8edb9",
+        "siteSha256": "782070507051c3a3953347886b2bd94b56c57e68e2130803a722b56723fa0a01"
+      },
+      "main": [
+        {
+          "channel": "updater:open-release-page",
+          "transport": "handle",
+          "file": "apps/desktop/src/main/ipc-handlers.ts",
+          "line": 213,
+          "column": 1,
+          "endLine": 213,
+          "endColumn": 81,
+          "fileSha256": "cd57eb4e9400966ede6d2943fe5dcca974f1a9f52e8a42fa9ebe952fb1fb5c15",
+          "siteSha256": "d38c643858e384557d85d04f36523cad526124de6aa84e83079750791e9c5277"
+        }
+      ],
+      "status": "mapped-handler"
+    },
+    {
+      "api": "palot.onUpdateStateChanged",
+      "channel": "updater:state-changed",
+      "rendererTransport": "on",
+      "renderer": {
+        "file": "apps/desktop/src/preload/index.ts",
+        "line": 101,
+        "column": 2,
+        "endLine": 101,
+        "endColumn": 51,
+        "fileSha256": "d79b43634c4c5462705d3a20bd3143281667654e549ec38b860c633f60e8edb9",
+        "siteSha256": "349c02fba34ec2f2075bac6af6fd3825fe9a96e0d184d5d1a3839be197205fa7"
+      },
+      "main": [
+        {
+          "channel": "updater:state-changed",
+          "transport": "webContents.send",
+          "file": "apps/desktop/src/main/updater.ts",
+          "line": 91,
+          "column": 1,
+          "endLine": 91,
+          "endColumn": 66,
+          "fileSha256": "b048b53623c06b8ea22953762e340762537cb52366a5b0491cc519c4e5900e4f",
+          "siteSha256": "5432329153e643a810c64f201772cb6a2a28827f4560c4a52489db30952b7268"
+        }
+      ],
+      "status": "mapped-event-source"
+    },
+    {
+      "api": "palot.onUpdateStateChanged",
+      "channel": "updater:state-changed",
+      "rendererTransport": "removeListener",
+      "renderer": {
+        "file": "apps/desktop/src/preload/index.ts",
+        "line": 103,
+        "column": 3,
+        "endLine": 103,
+        "endColumn": 64,
+        "fileSha256": "d79b43634c4c5462705d3a20bd3143281667654e549ec38b860c633f60e8edb9",
+        "siteSha256": "c279c33d93b45f55565033342e8dbed5a053cc39ebda7956d6b82d91bbf1e193"
+      },
+      "main": [
+        {
+          "channel": "updater:state-changed",
+          "transport": "webContents.send",
+          "file": "apps/desktop/src/main/updater.ts",
+          "line": 91,
+          "column": 1,
+          "endLine": 91,
+          "endColumn": 66,
+          "fileSha256": "b048b53623c06b8ea22953762e340762537cb52366a5b0491cc519c4e5900e4f",
+          "siteSha256": "5432329153e643a810c64f201772cb6a2a28827f4560c4a52489db30952b7268"
+        }
+      ],
+      "status": "mapped-event-source"
+    },
+    {
+      "api": "palot.getUpdateState",
+      "channel": "updater:state",
+      "rendererTransport": "invoke",
+      "renderer": {
+        "file": "apps/desktop/src/preload/index.ts",
+        "line": 84,
+        "column": 23,
+        "endLine": 84,
+        "endColumn": 58,
+        "fileSha256": "d79b43634c4c5462705d3a20bd3143281667654e549ec38b860c633f60e8edb9",
+        "siteSha256": "dea1c39f5cf8cc4bcdda55f9b53d32ce9295277791966a1fa93e77d4b4ec59dd"
+      },
+      "main": [
+        {
+          "channel": "updater:state",
+          "transport": "handle",
+          "file": "apps/desktop/src/main/ipc-handlers.ts",
+          "line": 205,
+          "column": 1,
+          "endLine": 205,
+          "endColumn": 56,
+          "fileSha256": "cd57eb4e9400966ede6d2943fe5dcca974f1a9f52e8a42fa9ebe952fb1fb5c15",
+          "siteSha256": "696c49a8b54b4270ecaca45707c59abf85caabdaf864c834103f878fe0b5926d"
+        }
+      ],
+      "status": "mapped-handler"
+    }
+  ],
+  "exposedWithoutIpc": [
+    {
+      "api": "palot.platform",
+      "transport": null,
+      "channel": null,
+      "file": "apps/desktop/src/preload/index.ts",
+      "line": 11,
+      "column": 11,
+      "endLine": 11,
+      "endColumn": 27,
+      "fileSha256": "d79b43634c4c5462705d3a20bd3143281667654e549ec38b860c633f60e8edb9",
+      "siteSha256": "efe93b1e00e72877aff32ea76fb87c6fa4d14b1027ec8a935f6c4a03647edcc3"
+    }
+  ],
+  "orphanMain": [],
+  "unresolved": []
+}

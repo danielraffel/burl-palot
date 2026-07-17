@@ -1,0 +1,41 @@
+{
+  "schema": "pulp-compat-evidence-index-v1",
+  "entries": {
+    "behavior:palot-stream-cancellation": {
+      "kind": "behavior",
+      "owner": "burl-palot-native-application",
+      "repository": "burl-palot",
+      "route": "captured Stop button or composer Escape -> imported prompt.cancel typed application action -> ImportedRootHost callback -> OpenCodeProcess generation-scoped prompt.cancel command -> correlated sidecar response -> cancelled terminal event with stale-generation filtering -> responsive native UI; transport remains reusable for retry",
+      "endpoint": "main-chat source binding policy, ImportedRootHost, OpenCodeProcess, native interaction execution, fake-sidecar lifecycle test, and real OpenCode cancellation probe",
+      "path": "apps/desktop-burl/test/opencode_process_test.cpp",
+      "command": "cmake --build build-semantic --target palot-opencode-process-test palot-native-interaction-execution-test && ctest --test-dir build-semantic -R 'palot-(opencode-process|native-interaction-execution)' --output-on-failure"
+    },
+    "behavior:palot-loading-streaming": {
+      "kind": "behavior",
+      "owner": "burl-palot-native-application",
+      "repository": "burl-palot",
+      "route": "typed prompt.send application action -> OpenCodeProcess generation-scoped sidecar request -> newline-framed real OpenCode events -> ordered text deltas -> main-thread source-aware chat reducer -> one coalesced native collection/text-shaping update and polite accessibility announcement per frame -> loading indicator transitions to terminal completion while preserving composer focus/selection/IME and dropping stale generations",
+      "endpoint": "ImportedRootHost, OpenCodeProcess, SourceAwareChatSlice, PalotView stream callbacks, native collection model, and real OpenCode E2E probe",
+      "path": "apps/desktop-burl/test/source_aware_chat_slice_test.cpp",
+      "command": "cmake --build build-semantic --target palot-opencode-process-test palot-source-aware-slice-test && ctest --test-dir build-semantic -R 'palot-(opencode-process|source-aware-slice)' --output-on-failure"
+    },
+    "behavior:palot-persistence": {
+      "kind": "behavior",
+      "owner": "burl-palot-native-application",
+      "repository": "burl-palot",
+      "route": "terminal chat/session/project/provider/model state -> bounded versioned native binary receipt -> owner-only temporary file -> fsync and atomic rename -> launch-time magic/size/count validation -> complete restore of configuration and bounded transcript -> malformed or truncated receipt fails closed without partial transcript; multiline and tab text round-trip",
+      "endpoint": "PalotView::persist/restore, PALOT_STATE_PATH isolated test override, and native demo persistence evidence validator",
+      "path": "evidence/native-demo/final-20260711/persistence.json",
+      "command": "python3 -m unittest tests.native_evidence.test_native_demo_evidence.NativeEvidenceTest.test_persistence_gate_includes_corruption_recovery"
+    },
+    "behavior:palot-stream-retry": {
+      "kind": "behavior",
+      "owner": "burl-palot-native-application",
+      "repository": "burl-palot",
+      "route": "captured retry affordance -> imported prompt.retry typed application action -> retained failed request identity -> OpenCodeProcess new generation using existing project/session and persistent sidecar transport -> prompt.retry command -> stale prior-generation events rejected -> fresh streamed deltas and terminal completion in the same native transcript",
+      "endpoint": "source binding policy, ImportedRootHost, PalotView retry callback, OpenCodeProcess, fake-sidecar lifecycle test, and real OpenCode retry probe",
+      "path": "apps/desktop-burl/test/real_opencode_e2e.cpp",
+      "command": "cmake --build build-semantic --target palot-opencode-process-test palot-native-interaction-execution-test && ctest --test-dir build-semantic -R 'palot-(opencode-process|native-interaction-execution)' --output-on-failure"
+    }
+  }
+}

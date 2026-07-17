@@ -1,0 +1,48 @@
+{
+  "id": "new-session-keyboard-focused",
+  "status": "PASS",
+  "action": {
+    "type": "focus"
+  },
+  "postcondition": "active-element",
+  "post": {
+    "active": true,
+    "value": "",
+    "dataActive": false,
+    "disabled": false,
+    "hover": false,
+    "activePseudo": false,
+    "rect": {
+      "x": 8,
+      "y": 54,
+      "width": 264,
+      "height": 32
+    },
+    "mouseDownHeldAtCapture": false,
+    "visualStateMethod": "natural",
+    "contentFloorPass": true
+  },
+  "geometry": {
+    "logical": {
+      "x": 8,
+      "y": 54,
+      "width": 264,
+      "height": 32
+    },
+    "pixel": {
+      "left": 16,
+      "top": 108,
+      "width": 528,
+      "height": 64
+    },
+    "devicePixelRatio": 2
+  },
+  "files": {
+    "crop": "new-session-keyboard-focused/crop.png",
+    "semantics": "new-session-keyboard-focused/semantics.json"
+  },
+  "hashes": {
+    "crop": "c48e8b49f24e19fe550945c6df8dbed4ed9eecccc8eb4901fba57f7d4fb2c4d2",
+    "semantics": "3a3e8d0a2e988964d2dbc7ed10645694cf68cd367abdf099367383c8a537a00c"
+  }
+}

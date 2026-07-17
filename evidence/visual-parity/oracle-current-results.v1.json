@@ -1,0 +1,157 @@
+{
+  "capabilityPrerequisite": {
+    "firstFailure": "alignContent=normal is unsupported",
+    "passed": false
+  },
+  "frameworkGateCommit": "a535aed1f8459c6d21b1f2fbb94112a6739dee92",
+  "generatedAt": "2026-07-12T07:10:00Z",
+  "scenarios": [
+    {
+      "errors": [
+        "font substitution: source and candidate font pins differ",
+        "critical region failed: full"
+      ],
+      "id": "01-shell",
+      "oraclePassed": false,
+      "regions": {
+        "full": {
+          "minimum": 0.95,
+          "passed": false,
+          "pixel_similarity": 0.91068593,
+          "pixels": 3840000
+        }
+      },
+      "stateEvidence": "available"
+    },
+    {
+      "errors": [
+        "window-layer Electron and native captures are not available; the content screenshot is not a window-layer substitute"
+      ],
+      "id": "02-window-chrome",
+      "oraclePassed": false,
+      "regions": {},
+      "stateEvidence": "gap"
+    },
+    {
+      "errors": [
+        "font substitution: source and candidate font pins differ",
+        "critical region failed: app-bar"
+      ],
+      "id": "03-app-bar",
+      "oraclePassed": false,
+      "regions": {
+        "app-bar": {
+          "minimum": 0.95,
+          "passed": false,
+          "pixel_similarity": 0.87001295,
+          "pixels": 169280
+        }
+      },
+      "stateEvidence": "available"
+    },
+    {
+      "errors": [
+        "font substitution: source and candidate font pins differ",
+        "critical region failed: sidebar"
+      ],
+      "id": "04-sidebar",
+      "oraclePassed": false,
+      "regions": {
+        "sidebar": {
+          "minimum": 0.95,
+          "passed": false,
+          "pixel_similarity": 0.85805407,
+          "pixels": 896000
+        }
+      },
+      "stateEvidence": "available"
+    },
+    {
+      "errors": [
+        "font substitution: source and candidate font pins differ",
+        "critical region failed: transcript"
+      ],
+      "id": "05-transcript",
+      "oraclePassed": false,
+      "regions": {
+        "transcript": {
+          "minimum": 0.95,
+          "passed": false,
+          "pixel_similarity": 0.92670299,
+          "pixels": 2024640
+        }
+      },
+      "stateEvidence": "available"
+    },
+    {
+      "errors": [
+        "font substitution: source and candidate font pins differ",
+        "critical region failed: markdown"
+      ],
+      "id": "06-markdown",
+      "oraclePassed": false,
+      "regions": {
+        "markdown": {
+          "minimum": 0.95,
+          "passed": false,
+          "pixel_similarity": 0.92491964,
+          "pixels": 1472320
+        }
+      },
+      "stateEvidence": "available"
+    },
+    {
+      "errors": [
+        "font substitution: source and candidate font pins differ"
+      ],
+      "id": "07-composer-resting",
+      "oraclePassed": false,
+      "regions": {
+        "composer": {
+          "minimum": 0.95,
+          "passed": true,
+          "pixel_similarity": 0.95216477,
+          "pixels": 397824
+        }
+      },
+      "stateEvidence": "available"
+    },
+    {
+      "errors": [
+        "state-correct native focused/typed/IME capture is unavailable"
+      ],
+      "id": "08-composer-editing",
+      "oraclePassed": false,
+      "regions": {},
+      "stateEvidence": "gap"
+    },
+    {
+      "errors": [
+        "source and native stable-anchor captures are unavailable"
+      ],
+      "id": "09-scroll-anchor",
+      "oraclePassed": false,
+      "regions": {},
+      "stateEvidence": "gap"
+    },
+    {
+      "errors": [
+        "source 280/740/1200 captures exist, but native min_width=760 blocks the source minimum and no exact 280/740/1200 native capture triplet exists"
+      ],
+      "id": "10-responsive-contract",
+      "oraclePassed": false,
+      "regions": {},
+      "stateEvidence": "gap"
+    },
+    {
+      "errors": [
+        "state-matched Electron streamed transcript capture is unavailable; real native chat alone is not a parity pair"
+      ],
+      "id": "11-live-stream",
+      "oraclePassed": false,
+      "regions": {},
+      "stateEvidence": "gap"
+    }
+  ],
+  "schema": "palot-visual-oracle-results-v1"
+}

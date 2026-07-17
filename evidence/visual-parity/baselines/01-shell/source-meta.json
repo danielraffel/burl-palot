@@ -1,0 +1,15 @@
+{
+  "lane": "source",
+  "revision": "fd63a75dad3d0e8555ba22a47e720d285889fbf0",
+  "osBuild": "25F80",
+  "captureMethod": "CDP.Page.captureScreenshot",
+  "clock": "2026-07-11T20:00:00.000Z",
+  "route": "#/project/palot-proj-a1b2c3d/session/ses-mock-darkmode-001?mock=1",
+  "logicalWidth": 1200,
+  "logicalHeight": 800,
+  "pixelWidth": 2400,
+  "pixelHeight": 1600,
+  "deviceScaleFactor": 2,
+  "boundary": "content",
+  "cdpBrowser": "Chrome/144.0.7559.111"
+}

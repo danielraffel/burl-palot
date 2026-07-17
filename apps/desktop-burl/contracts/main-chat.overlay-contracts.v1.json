@@ -1,0 +1,85 @@
+{
+  "schema": "pulp-observed-overlay-contract-manifest-v1",
+  "records": [
+    {
+      "id": "project-search-tooltip",
+      "closed": "evidence/phase-b/source-interaction-states/generated-v3/project-search-tooltip/closed/source.json",
+      "open": "evidence/phase-b/source-interaction-states/generated-v3/project-search-tooltip/open/source.json",
+      "interactionEvidence": "evidence/phase-b/source-interaction-states/generated-v3/project-search-tooltip/evidence/interactions.json",
+      "scenarioId": "hover-project-search-tooltip",
+      "triggerBindingId": "project.search.toggle",
+      "activationEvent": "hover",
+      "openDelayMs": 0,
+      "dismissals": []
+    },
+    {
+      "id": "session-usage-popover",
+      "closed": "evidence/phase-b/source-interaction-states/generated-v4/usage/closed/source.json",
+      "open": "evidence/phase-b/source-interaction-states/generated-v4/usage/open/source.json",
+      "interactionEvidence": "evidence/phase-b/source-interaction-states/generated-v4/usage/evidence/interactions.json",
+      "scenarioId": "open-usage-popover",
+      "triggerBindingId": "session.metrics.toggle",
+      "activationEvent": "click",
+      "openDelayMs": 0,
+      "dismissals": [
+        { "event": "escape", "closed": true, "focusRestored": true },
+        { "event": "outside-pointer", "closed": true, "focusRestored": true },
+        { "event": "trigger-toggle", "closed": true, "focusRestored": true }
+      ]
+    },
+    {
+      "id": "first-session-context-menu",
+      "closed": "evidence/phase-b/source-interaction-states/context-menu-contract/generated-v2/initial/source.json",
+      "open": "evidence/phase-b/source-interaction-states/context-menu-contract/generated-v2/open-first-session-context-menu/source.json",
+      "interactionEvidence": "evidence/phase-b/source-interaction-states/context-menu-contract/generated-v2/evidence.json",
+      "activationEvent": "context-menu",
+      "openDelayMs": 0,
+      "dismissals": [{ "event": "escape", "closed": true, "focusRestored": false }]
+    },
+    {
+      "id": "second-session-context-menu",
+      "closed": "evidence/phase-b/source-interaction-states/context-menu-contract/generated-v2/initial/source.json",
+      "open": "evidence/phase-b/source-interaction-states/context-menu-contract/generated-v2/open-second-session-context-menu/source.json",
+      "interactionEvidence": "evidence/phase-b/source-interaction-states/context-menu-contract/generated-v2/evidence.json",
+      "activationEvent": "context-menu",
+      "openDelayMs": 0,
+      "dismissals": [{ "event": "escape", "closed": true, "focusRestored": false }]
+    },
+    {
+      "id": "third-session-context-menu",
+      "closed": "evidence/phase-b/source-interaction-states/context-menu-contract/generated-v2/initial/source.json",
+      "open": "evidence/phase-b/source-interaction-states/context-menu-contract/generated-v2/open-third-session-context-menu/source.json",
+      "interactionEvidence": "evidence/phase-b/source-interaction-states/context-menu-contract/generated-v2/evidence.json",
+      "activationEvent": "context-menu",
+      "openDelayMs": 0,
+      "dismissals": [{ "event": "escape", "closed": true, "focusRestored": false }]
+    },
+    {
+      "id": "fourth-session-context-menu",
+      "closed": "evidence/phase-b/source-interaction-states/context-menu-contract/generated-v2/initial/source.json",
+      "open": "evidence/phase-b/source-interaction-states/context-menu-contract/generated-v2/open-fourth-session-context-menu/source.json",
+      "interactionEvidence": "evidence/phase-b/source-interaction-states/context-menu-contract/generated-v2/evidence.json",
+      "activationEvent": "context-menu",
+      "openDelayMs": 0,
+      "dismissals": [{ "event": "escape", "closed": true, "focusRestored": false }]
+    },
+    {
+      "id": "fifth-session-context-menu",
+      "closed": "evidence/phase-b/source-interaction-states/context-menu-contract/generated-v2/initial/source.json",
+      "open": "evidence/phase-b/source-interaction-states/context-menu-contract/generated-v2/open-fifth-session-context-menu/source.json",
+      "interactionEvidence": "evidence/phase-b/source-interaction-states/context-menu-contract/generated-v2/evidence.json",
+      "activationEvent": "context-menu",
+      "openDelayMs": 0,
+      "dismissals": [{ "event": "escape", "closed": true, "focusRestored": false }]
+    },
+    {
+      "id": "sixth-session-context-menu",
+      "closed": "evidence/phase-b/source-interaction-states/context-menu-contract/generated-v2/initial/source.json",
+      "open": "evidence/phase-b/source-interaction-states/context-menu-contract/generated-v2/open-sixth-session-context-menu/source.json",
+      "interactionEvidence": "evidence/phase-b/source-interaction-states/context-menu-contract/generated-v2/evidence.json",
+      "activationEvent": "context-menu",
+      "openDelayMs": 0,
+      "dismissals": [{ "event": "escape", "closed": true, "focusRestored": false }]
+    }
+  ]
+}

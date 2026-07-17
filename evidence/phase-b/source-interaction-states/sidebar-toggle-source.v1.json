@@ -1,0 +1,48 @@
+{
+  "schemaVersion": 1,
+  "sourceRepository": "/Users/danielraffel/Code/palot",
+  "sourceRevision": "fd63a75dad3d0e8555ba22a47e720d285889fbf0",
+  "sourceBehavior": {
+    "provider": "packages/ui/src/components/sidebar.tsx#SidebarProvider",
+    "responsiveController": "apps/desktop/src/renderer/components/sidebar-layout.tsx#NarrowWindowCollapser",
+    "shortcut": "primary-modifier+b",
+    "manualResponsivePrecedence": "A narrow viewport records collapsedByResponsive and may reopen on widening. A manual collapse clears that provenance and widening must not reopen it."
+  },
+  "captures": [
+    {
+      "id": "sidebar-expanded",
+      "file": "sidebar-expanded.png",
+      "logicalWidth": 1152,
+      "logicalHeight": 768,
+      "sidebarOpen": true,
+      "sha256": "f17a7a68ac3da09a73e1ff1cb61052327cff15d9fab5ac8743118c25f05b9e98"
+    },
+    {
+      "id": "sidebar-manually-collapsed",
+      "file": "sidebar-manually-collapsed.png",
+      "logicalWidth": 1152,
+      "logicalHeight": 768,
+      "action": "primary-modifier+b",
+      "sidebarOpen": false,
+      "sha256": "0979c8cd92c9ee9b2a4b5ce9533fc751b7170dd1e5861a2d28566d02912036f6"
+    },
+    {
+      "id": "server-menu-open",
+      "file": "server-menu-open.png",
+      "logicalWidth": 1152,
+      "logicalHeight": 768,
+      "action": "click:This Mac",
+      "serverMenuOpen": true,
+      "sha256": "34468f50543be1ae639a984cc4db3e6a099d14b4ca7854e4bc2f5f801385455d"
+    },
+    {
+      "id": "settings-route",
+      "file": "settings-route.png",
+      "logicalWidth": 1152,
+      "logicalHeight": 768,
+      "action": "click:Settings",
+      "route": "/settings/general",
+      "sha256": "89cf17d6b94f93c5a05d8174d89c05cd924c0f5b54d92a23b0950d3defb06e30"
+    }
+  ]
+}

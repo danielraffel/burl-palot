@@ -1,0 +1,68 @@
+{
+  "schema": "palot-responsive-state-composition-report-v1",
+  "base": {
+    "path": "/private/tmp/palot-v31-fresh-state-atomic-contracts.design-ir.json",
+    "sha256": "d75bb5d2afb371d27cfe8260456b8fd0f2062a83439eb693d62477523acf4776"
+  },
+  "responsiveManifest": {
+    "path": "/private/tmp/palot-v27-responsive-unions/layer.manifest.json",
+    "sha256": "823ca5df8fedcba147d191c5527d11f721b997d56381767d64c070c3962d5038"
+  },
+  "layerSources": [
+    {
+      "key": "sidebar.open",
+      "value": "closed",
+      "path": "/private/tmp/palot-v27-responsive-unions/sidebar-closed.design-ir.json",
+      "sha256": "7f50bcd6168fd2351acec62790b1a29e44619db0fb9c9388558f3266ff8a301b"
+    },
+    {
+      "key": "sidebar.open",
+      "value": "open",
+      "path": "/private/tmp/palot-v27-responsive-unions/sidebar-open.design-ir.json",
+      "sha256": "82f1b0f52d14a2db5cc3e03e7b4cadfceb035deb9f62bbf89155b59ad5aa8dec"
+    },
+    {
+      "key": "review.panel.open",
+      "value": "closed",
+      "path": "/private/tmp/palot-v27-responsive-unions/review-closed.design-ir.json",
+      "sha256": "3cf55ea90107a65fd4d5a4cef0b3d02c345dec7bca88e3da8b93230f37480ef3"
+    },
+    {
+      "key": "review.panel.open",
+      "value": "open",
+      "path": "/private/tmp/palot-v27-responsive-unions/review-open.design-ir.json",
+      "sha256": "b2f9cb6b7c4a716a9fc88a51ee00cf11ed34ed172b93f9f69c58c0d979eae216"
+    }
+  ],
+  "output": {
+    "path": "/private/tmp/palot-v31-responsive-state-atomic-contracts-integrated.design-ir.json",
+    "sha256": "a82dd7737bf62d55cd9f71745f3c47d5888816270c90daae6d8474977ddb51f9"
+  },
+  "composition": {
+    "dimensions": [
+      "sidebar.open",
+      "review.panel.open"
+    ],
+    "projectedResponsiveRecords": 331,
+    "projectedResponsiveRecordsByLayer": {
+      "sidebar.open:closed": 23,
+      "sidebar.open:open": 170,
+      "sidebar.open:common": 137,
+      "review.panel.open:open": 1
+    },
+    "insertedStructuralNodes": 0,
+    "insertedStateResponsiveBranches": 0,
+    "projectedStateResponsivePatches": 8,
+    "preservedGeneratedTransientOverlays": 4,
+    "repairedOverflowingBaselineAxes": 2,
+    "preservedUnmatchedStateFrontiers": 0,
+    "matchedFrontiers": {
+      "sidebar.open:closed": 47,
+      "sidebar.open:open": 48,
+      "review.panel.open:open": 1
+    },
+    "matchedAbsentFrontiers": {
+      "review.panel.open:closed": 1
+    }
+  }
+}

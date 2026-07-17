@@ -1,0 +1,71 @@
+{
+  "schemaVersion": 1,
+  "scenario": "01-shell",
+  "source": {
+    "png": "../../visual-parity/baselines/01-shell/source.png",
+    "semantics": "../../visual-parity/baselines/01-shell/source-semantics.json",
+    "pngSha256": "d363d609c214a7a4e7b34a58e0eea9b87a4c588d3fcd457c5a9aaf64c12cc7b0",
+    "semanticsSha256": "cde304eb408da4379d598b2b3e7508fa7ebb19b72dfbbcf02b06f53a0b5fbac4",
+    "pixelWidth": 2400,
+    "pixelHeight": 1600,
+    "devicePixelRatio": 2
+  },
+  "components": [
+    {
+      "id": "sidebar-session-selected",
+      "state": "selected",
+      "interaction": { "kind": "selected-row", "postcondition": "remains-selected", "actionIdentity": "session.select", "applicationBindingRequired": true },
+      "selector": {"tagName": "button", "attributes": {"data-slot": "sidebar-menu-button", "data-active": ""}, "descendantText": "Add dark mode toggle to settings now"},
+      "expectedSourceId": "html:1/body:2/div[root]:3/div:1/div:1/div[sidebar-wrapper]:1/div[sidebar]:1/div[sidebar-container]:1/div[sidebar-inner]:1/div[sidebar-content]:2/div[sidebar-group]:2/div[sidebar-group-content]:2/ul[sidebar-menu]:1/li[context-menu-trigger]:1/button[base-ui-_r_p_]:1"
+    },
+    {
+      "id": "sidebar-new-session-rest",
+      "state": "rest",
+      "interaction": { "kind": "activate", "postcondition": "callback-fired", "actionIdentity": "session.create", "applicationBindingRequired": true },
+      "selector": {"tagName": "button", "attributes": {"data-slot": "sidebar-menu-button"}, "descendantText": "New Session"},
+      "expectedSourceId": "html:1/body:2/div[root]:3/div:1/div:1/div[sidebar-wrapper]:1/div[sidebar]:1/div[sidebar-container]:1/div[sidebar-inner]:1/div[sidebar-content]:2/div[sidebar-group]:1/div[sidebar-group-content]:1/ul[sidebar-menu]:1/li[sidebar-menu-item]:1/button[base-ui-_r_1_]:1"
+    },
+    {
+      "id": "composer-stop-primary",
+      "state": "active-stream",
+      "interaction": { "kind": "activate", "postcondition": "callback-fired", "actionIdentity": "stream.stop", "applicationBindingRequired": true },
+      "selector": {"tagName": "button", "attributes": {"data-slot": "button", "aria-label": "Stop"}},
+      "expectedSourceId": "html:1/body:2/div[root]:3/div:1/div:1/div[sidebar-wrapper]:1/main[sidebar-inset]:2/div[content-area]:2/div:1/div:1/div:1/div:1/div:2/div:1/div:1/form:2/div[input-group]:1/div[input-group-addon]:2/button[button]:2"
+    },
+    {
+      "id": "composer-rest",
+      "state": "rest-empty",
+      "interaction": { "kind": "text-input", "postcondition": "text-committed", "actionIdentity": "composer.edit", "applicationBindingRequired": false },
+      "selector": {"tagName": "textarea", "attributes": {"data-slot": "input-group-control"}},
+      "expectedSourceId": "html:1/body:2/div[root]:3/div:1/div:1/div[sidebar-wrapper]:1/main[sidebar-inset]:2/div[content-area]:2/div:1/div:1/div:1/div:1/div:2/div:1/div:1/form:2/div[input-group]:1/textarea[input-group-control]:1"
+    },
+    {
+      "id": "composer-build-select-rest",
+      "state": "rest-collapsed",
+      "interaction": { "kind": "activate", "postcondition": "selector-open", "actionIdentity": "agent.select", "applicationBindingRequired": true },
+      "selector": {"tagName": "button", "attributes": {"data-slot": "select-trigger", "role": "combobox", "aria-expanded": "false"}, "descendantText": "Build"},
+      "expectedSourceId": "html:1/body:2/div[root]:3/div:1/div:1/div[sidebar-wrapper]:1/main[sidebar-inset]:2/div[content-area]:2/div:1/div:1/div:1/div:1/div:2/div:1/div:1/form:2/div[input-group]:1/div[input-group-addon]:2/div:1/div:2/button[base-ui-_r_43_]:1"
+    },
+    {
+      "id": "composer-model-select-rest",
+      "state": "rest-collapsed",
+      "interaction": { "kind": "activate", "postcondition": "selector-open", "actionIdentity": "model.select", "applicationBindingRequired": true },
+      "selector": {"tagName": "button", "attributes": {"data-slot": "searchable-list-popover-trigger", "aria-expanded": "false"}, "descendantText": "Claude Opus 4.6"},
+      "expectedSourceId": "html:1/body:2/div[root]:3/div:1/div:1/div[sidebar-wrapper]:1/main[sidebar-inset]:2/div[content-area]:2/div:1/div:1/div:1/div:1/div:2/div:1/div:1/form:2/div[input-group]:1/div[input-group-addon]:2/div:1/div:2/button[base-ui-_r_48_]:4"
+    },
+    {
+      "id": "transcript-inline-code",
+      "state": "rest",
+      "interaction": { "kind": "none", "postcondition": "none", "actionIdentity": "", "applicationBindingRequired": false },
+      "selector": {"tagName": "code", "text": "src/lib/theme.ts"},
+      "expectedSourceId": "html:1/body:2/div[root]:3/div:1/div:1/div[sidebar-wrapper]:1/main[sidebar-inset]:2/div[content-area]:2/div:1/div:1/div:1/div:1/div:1/div:1/div:1/div:1/div:1/div:1/div:2/div:1/div:2/div:1/div:1/div:1/ol:2/li:1/p:1/span:1/code:1"
+    },
+    {
+      "id": "transcript-copy-icon-rest",
+      "state": "rest",
+      "interaction": { "kind": "activate", "postcondition": "callback-fired", "actionIdentity": "transcript.copy", "applicationBindingRequired": true },
+      "selector": {"tagName": "button", "attributes": {"data-slot": "tooltip-trigger"}, "descendantText": "Copy response"},
+      "expectedSourceId": "html:1/body:2/div[root]:3/div:1/div:1/div[sidebar-wrapper]:1/main[sidebar-inset]:2/div[content-area]:2/div:1/div:1/div:1/div:1/div:1/div:1/div:1/div:1/div:1/div:1/div:4/button[base-ui-_r_3r_]:2"
+    }
+  ]
+}

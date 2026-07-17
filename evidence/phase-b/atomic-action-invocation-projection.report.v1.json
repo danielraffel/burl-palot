@@ -1,0 +1,23 @@
+{
+  "schema": "consumer-invocation-payload-projection-v1",
+  "input": {
+    "path": "/Users/danielraffel/Code/burl-palot-wt-semantic-restart/apps/desktop-burl/resources/import/main-chat.observed.design-ir.v1.json",
+    "sha256": "519c88b0ced7eb215a49e136807b4bda1f7fbad4d387d0d313dc555d33cdc36d"
+  },
+  "receipts": {
+    "path": "/Users/danielraffel/Code/burl-palot-wt-semantic-restart/evidence/phase-b/atomic-action-invocation-receipts.v1.json",
+    "sha256": "966592d16af5e037e3a117ccd392b9c68760c3bb5e767353e1158914f0f73bcd"
+  },
+  "output": {
+    "path": "/private/tmp/main-chat.invocation-payload.design-ir.v1.json",
+    "sha256": "3fc2610f0d2e5b1d87f284c2a8eade1941158f9f14b39cd9bbb07e8c7eac0f39"
+  },
+  "projection": [
+    {
+      "action": "external.open.preferred",
+      "sourceNodeIds": [
+        "dom/html-shape-704d0864:0/body-shape-d65c892b:0/div-id-root:0/div-shape-74caabae:0/div-shape-20ec5713:0/div-data-slot-sidebar-wrapper:0/main-data-slot-sidebar-inset:0/div-data-slot-app-bar:0/div-shape-d1a99e95:0/div-shape-91386c77:0/div-shape-424a2145:0/div-shape-c4391174:0/div-shape-e60d23fc:0/button-shape-dca9c0c1:0"
+      ]
+    }
+  ]
+}

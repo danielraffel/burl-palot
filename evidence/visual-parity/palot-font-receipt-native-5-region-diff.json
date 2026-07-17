@@ -1,0 +1,58 @@
+{
+  "verdict": "needs_work",
+  "reference": {
+    "path": "/tmp/palot-canonical-height/1200x800/source.png",
+    "sha256": "24fd0b6526bb032cc133e049c3a0f113b728f9a317136bb6ff29d641dc0dc139",
+    "size_px": [2400, 1600]
+  },
+  "candidate": {
+    "path": "/tmp/palot-font-receipt-native-5.png",
+    "sha256": "704b551a4d2e6b4389d739209bd675d396a8fdcf73a6b6d93364f8cd4fc46df8",
+    "size_px": [2400, 1600]
+  },
+  "resized": false,
+  "regions_file": "evidence/visual-parity/palot-1200x800-regions.json",
+  "metric_contract": {
+    "score": "0.4 * histogram_similarity + 0.6 * pixel_similarity",
+    "pixel_similarity": "1 - mean_RGB_L2 / 441.7",
+    "mean_rgb_l2": "mean Euclidean distance between corresponding RGB pixels, range 0..441.7"
+  },
+  "regions": {
+    "top_bar": {
+      "rect_px": [448, 0, 1952, 144],
+      "score": 0.7438,
+      "histogram_similarity": 0.4413,
+      "pixel_similarity": 0.9454,
+      "mean_rgb_l2": 24.12,
+      "threshold": 0.90,
+      "passed": false
+    },
+    "composer": {
+      "rect_px": [474, 1288, 1892, 246],
+      "score": 0.5877,
+      "histogram_similarity": 0.0255,
+      "pixel_similarity": 0.9625,
+      "mean_rgb_l2": 16.56,
+      "threshold": 0.88,
+      "passed": false
+    },
+    "status_button": {
+      "rect_px": [2180, 1424, 162, 48],
+      "score": 0.5552,
+      "histogram_similarity": 0.6212,
+      "pixel_similarity": 0.5112,
+      "mean_rgb_l2": 215.94,
+      "threshold": 0.90,
+      "passed": false
+    },
+    "left_sidebar": {
+      "rect_px": [0, 0, 448, 1600],
+      "score": 0.5745,
+      "histogram_similarity": 0.0003,
+      "pixel_similarity": 0.9573,
+      "mean_rgb_l2": 18.86,
+      "threshold": 0.90,
+      "passed": false
+    }
+  }
+}

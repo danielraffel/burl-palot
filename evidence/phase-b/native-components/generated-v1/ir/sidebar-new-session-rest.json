@@ -1,0 +1,210 @@
+{
+  "version": 1,
+  "source": "jsx",
+  "sourceFile": "/Users/danielraffel/Code/burl-palot-wt-semantic-restart/evidence/visual-parity/baselines/01-shell/source-semantics.json",
+  "capture_method": "runtime_snapshot",
+  "settle_rounds": 2,
+  "fallback_reason": "",
+  "source_adapter": "observed-dom",
+  "source_version": "1.0.0",
+  "imported_at": "2026-07-11T00:00:00.000Z",
+  "root": {
+    "type": "button",
+    "name": "html:1/body:2/div[root]:3/div:1/div:1/div[sidebar-wrapper]:1/div[sidebar]:1/div[sidebar-container]:1/div[sidebar-inner]:1/div[sidebar-content]:2/div[sidebar-group]:1/div[sidebar-group-content]:1/ul[sidebar-menu]:1/li[sidebar-menu-item]:1/button[base-ui-_r_1_]:1",
+    "layout": {
+      "display": "flex",
+      "direction": "row",
+      "wrap": false,
+      "flexGrow": 0,
+      "flexShrink": 1,
+      "flexBasis": "auto",
+      "align": "center",
+      "justify": "normal",
+      "gap": 8,
+      "paddingTop": 8,
+      "paddingRight": 8,
+      "paddingBottom": 8,
+      "paddingLeft": 8,
+      "marginTop": 0,
+      "marginRight": 0,
+      "marginBottom": 0,
+      "marginLeft": 0,
+      "overflowX": "hidden",
+      "overflowY": "hidden",
+      "widthMode": "fixed",
+      "width": 264,
+      "heightMode": "fixed",
+      "height": 32
+    },
+    "style": {
+      "backgroundColor": "#00000000",
+      "color": "#afafafff",
+      "borderTopColor": "#2e2e2eff",
+      "borderRightColor": "#2e2e2eff",
+      "borderBottomColor": "#2e2e2eff",
+      "borderLeftColor": "#2e2e2eff",
+      "borderTopWidth": 0,
+      "borderRightWidth": 0,
+      "borderBottomWidth": 0,
+      "borderLeftWidth": 0,
+      "borderRadius": 10.5,
+      "borderTopLeftRadius": 10.5,
+      "borderTopRightRadius": 10.5,
+      "borderBottomRightRadius": 10.5,
+      "borderBottomLeftRadius": 10.5,
+      "cursor": "default",
+      "fontFamily": "-apple-system, \"system-ui\", \"Segoe UI\", system-ui, sans-serif",
+      "fontSize": 15,
+      "fontWeight": 400,
+      "lineHeight": 22,
+      "textAlign": "left",
+      "whiteSpace": "normal",
+      "textOverflow": "clip",
+      "position": "static",
+      "minWidth": 0,
+      "minHeight": 0,
+      "width": 264,
+      "height": 32
+    },
+    "visualSkin": {
+      "states": {
+        "rest": {
+          "background": {
+            "r": 0,
+            "g": 0,
+            "b": 0,
+            "a": 0
+          },
+          "foreground": {
+            "r": 175,
+            "g": 175,
+            "b": 175,
+            "a": 255
+          },
+          "cornerRadius": 10.5,
+          "fontSize": 15,
+          "lineHeight": 22,
+          "fontFamily": "-apple-system, \"system-ui\", \"Segoe UI\", system-ui, sans-serif",
+          "fontWeight": 400,
+          "textAlign": 0,
+          "insetHorizontal": 8,
+          "insetVertical": 8
+        }
+      },
+      "tokenRefs": {}
+    },
+    "attributes": {
+      "role": "button",
+      "action_binding_id": "session.create",
+      "pulpRouteId": "html:1/body:2/div[root]:3/div:1/div:1/div[sidebar-wrapper]:1/div[sidebar]:1/div[sidebar-container]:1/div[sidebar-inner]:1/div[sidebar-content]:2/div[sidebar-group]:1/div[sidebar-group-content]:1/ul[sidebar-menu]:1/li[sidebar-menu-item]:1/button[base-ui-_r_1_]:1",
+      "pulpHostAction": "session.create",
+      "pulpEventContract": "click",
+      "disabled": "false",
+      "focusable": "true",
+      "source_revision": "cde304eb408da4379d598b2b3e7508fa7ebb19b72dfbbcf02b06f53a0b5fbac4"
+    },
+    "stable_anchor_id": "observed-dom:html:1/body:2/div[root]:3/div:1/div:1/div[sidebar-wrapper]:1/div[sidebar]:1/div[sidebar-container]:1/div[sidebar-inner]:1/div[sidebar-content]:2/div[sidebar-group]:1/div[sidebar-group-content]:1/ul[sidebar-menu]:1/li[sidebar-menu-item]:1/button[base-ui-_r_1_]:1",
+    "anchor_strategy": "adapter",
+    "source_node_id": "html:1/body:2/div[root]:3/div:1/div:1/div[sidebar-wrapper]:1/div[sidebar]:1/div[sidebar-container]:1/div[sidebar-inner]:1/div[sidebar-content]:2/div[sidebar-group]:1/div[sidebar-group-content]:1/ul[sidebar-menu]:1/li[sidebar-menu-item]:1/button[base-ui-_r_1_]:1",
+    "source_adapter": "observed-dom",
+    "source_version": "1.0.0",
+    "confidence": "pass",
+    "raw_source": "{\"kind\":\"observed-dom\",\"node\":{\"sourceId\":\"html:1/body:2/div[root]:3/div:1/div:1/div[sidebar-wrapper]:1/div[sidebar]:1/div[sidebar-container]:1/div[sidebar-inner]:1/div[sidebar-content]:2/div[sidebar-group]:1/div[sidebar-group-content]:1/ul[sidebar-menu]:1/li[sidebar-menu-item]:1/button[base-ui-_r_1_]:1\",\"tagName\":\"button\",\"attributes\":{\"id\":\"base-ui-_r_1_\",\"data-slot\":\"sidebar-menu-button\",\"data-pulp-action\":\"session.create\"},\"rect\":{\"x\":8,\"y\":54,\"width\":264,\"height\":32}},\"computedStyle\":{\"display\":\"flex\",\"position\":\"static\",\"flexDirection\":\"row\",\"flexGrow\":\"0\",\"flexShrink\":\"1\",\"flexBasis\":\"auto\",\"flexWrap\":\"nowrap\",\"alignItems\":\"center\",\"alignSelf\":\"auto\",\"alignContent\":\"normal\",\"justifyContent\":\"normal\",\"gap\":\"8px\",\"padding\":\"8px\",\"paddingTop\":\"8px\",\"paddingRight\":\"8px\",\"paddingBottom\":\"8px\",\"paddingLeft\":\"8px\",\"margin\":\"0px\",\"marginTop\":\"0px\",\"marginRight\":\"0px\",\"marginBottom\":\"0px\",\"marginLeft\":\"0px\",\"width\":\"264px\",\"height\":\"32px\",\"minWidth\":\"0px\",\"minHeight\":\"0px\",\"maxWidth\":\"none\",\"maxHeight\":\"none\",\"top\":\"auto\",\"right\":\"auto\",\"bottom\":\"auto\",\"left\":\"auto\",\"color\":\"rgb(175, 175, 175)\",\"backgroundColor\":\"rgba(0, 0, 0, 0)\",\"backgroundImage\":\"none\",\"transform\":\"none\",\"filter\":\"none\",\"backdropFilter\":\"none\",\"fontFamily\":\"-apple-system, \\\"system-ui\\\", \\\"Segoe UI\\\", system-ui, sans-serif\",\"fontSize\":\"15px\",\"fontWeight\":\"400\",\"lineHeight\":\"22px\",\"whiteSpace\":\"normal\",\"textAlign\":\"left\",\"textOverflow\":\"clip\",\"overflowWrap\":\"normal\",\"wordWrap\":\"normal\",\"letterSpacing\":\"normal\",\"border\":\"0px solid rgb(46, 46, 46)\",\"borderRadius\":\"10.5px\",\"borderTopLeftRadius\":\"10.5px\",\"borderTopRightRadius\":\"10.5px\",\"borderBottomRightRadius\":\"10.5px\",\"borderBottomLeftRadius\":\"10.5px\",\"borderTopWidth\":\"0px\",\"borderRightWidth\":\"0px\",\"borderBottomWidth\":\"0px\",\"borderLeftWidth\":\"0px\",\"borderTopColor\":\"rgb(46, 46, 46)\",\"borderRightColor\":\"rgb(46, 46, 46)\",\"borderBottomColor\":\"rgb(46, 46, 46)\",\"borderLeftColor\":\"rgb(46, 46, 46)\",\"opacity\":\"1\",\"boxShadow\":\"none\",\"cursor\":\"default\",\"overflowX\":\"hidden\",\"overflowY\":\"hidden\"}}",
+    "children": [
+      {
+        "type": "view",
+        "name": "html:1/body:2/div[root]:3/div:1/div:1/div[sidebar-wrapper]:1/div[sidebar]:1/div[sidebar-container]:1/div[sidebar-inner]:1/div[sidebar-content]:2/div[sidebar-group]:1/div[sidebar-group-content]:1/ul[sidebar-menu]:1/li[sidebar-menu-item]:1/button[base-ui-_r_1_]:1/svg:1",
+        "layout": {
+          "display": "flex",
+          "direction": "column",
+          "wrap": false,
+          "flexGrow": 0,
+          "flexShrink": 0,
+          "flexBasis": "auto",
+          "align": "normal",
+          "justify": "normal",
+          "paddingTop": 0,
+          "paddingRight": 0,
+          "paddingBottom": 0,
+          "paddingLeft": 0,
+          "marginTop": 0,
+          "marginRight": 0,
+          "marginBottom": 0,
+          "marginLeft": 0,
+          "overflowX": "hidden",
+          "overflowY": "hidden",
+          "widthMode": "fixed",
+          "width": 16,
+          "heightMode": "fixed",
+          "height": 16
+        },
+        "style": {
+          "backgroundColor": "#00000000",
+          "color": "#afafafff",
+          "borderTopColor": "#2e2e2eff",
+          "borderRightColor": "#2e2e2eff",
+          "borderBottomColor": "#2e2e2eff",
+          "borderLeftColor": "#2e2e2eff",
+          "borderTopWidth": 0,
+          "borderRightWidth": 0,
+          "borderBottomWidth": 0,
+          "borderLeftWidth": 0,
+          "borderRadius": 0,
+          "borderTopLeftRadius": 0,
+          "borderTopRightRadius": 0,
+          "borderBottomRightRadius": 0,
+          "borderBottomLeftRadius": 0,
+          "cursor": "default",
+          "position": "static",
+          "width": 16,
+          "height": 16
+        },
+        "attributes": {
+          "source_revision": "cde304eb408da4379d598b2b3e7508fa7ebb19b72dfbbcf02b06f53a0b5fbac4"
+        },
+        "stable_anchor_id": "observed-dom:html:1/body:2/div[root]:3/div:1/div:1/div[sidebar-wrapper]:1/div[sidebar]:1/div[sidebar-container]:1/div[sidebar-inner]:1/div[sidebar-content]:2/div[sidebar-group]:1/div[sidebar-group-content]:1/ul[sidebar-menu]:1/li[sidebar-menu-item]:1/button[base-ui-_r_1_]:1/svg:1",
+        "anchor_strategy": "adapter",
+        "source_node_id": "html:1/body:2/div[root]:3/div:1/div:1/div[sidebar-wrapper]:1/div[sidebar]:1/div[sidebar-container]:1/div[sidebar-inner]:1/div[sidebar-content]:2/div[sidebar-group]:1/div[sidebar-group-content]:1/ul[sidebar-menu]:1/li[sidebar-menu-item]:1/button[base-ui-_r_1_]:1/svg:1",
+        "source_adapter": "observed-dom",
+        "source_version": "1.0.0",
+        "confidence": "pass",
+        "raw_source": "{\"kind\":\"observed-dom\",\"node\":{\"sourceId\":\"html:1/body:2/div[root]:3/div:1/div:1/div[sidebar-wrapper]:1/div[sidebar]:1/div[sidebar-container]:1/div[sidebar-inner]:1/div[sidebar-content]:2/div[sidebar-group]:1/div[sidebar-group-content]:1/ul[sidebar-menu]:1/li[sidebar-menu-item]:1/button[base-ui-_r_1_]:1/svg:1\",\"tagName\":\"svg\",\"attributes\":{},\"rect\":{\"x\":16,\"y\":62,\"width\":16,\"height\":16}},\"computedStyle\":{\"display\":\"block\",\"position\":\"static\",\"flexDirection\":\"row\",\"flexGrow\":\"0\",\"flexShrink\":\"0\",\"flexBasis\":\"auto\",\"flexWrap\":\"nowrap\",\"alignItems\":\"normal\",\"alignSelf\":\"auto\",\"alignContent\":\"normal\",\"justifyContent\":\"normal\",\"gap\":\"normal\",\"padding\":\"0px\",\"paddingTop\":\"0px\",\"paddingRight\":\"0px\",\"paddingBottom\":\"0px\",\"paddingLeft\":\"0px\",\"margin\":\"0px\",\"marginTop\":\"0px\",\"marginRight\":\"0px\",\"marginBottom\":\"0px\",\"marginLeft\":\"0px\",\"width\":\"16px\",\"height\":\"16px\",\"minWidth\":\"auto\",\"minHeight\":\"auto\",\"maxWidth\":\"none\",\"maxHeight\":\"none\",\"top\":\"auto\",\"right\":\"auto\",\"bottom\":\"auto\",\"left\":\"auto\",\"color\":\"rgb(175, 175, 175)\",\"backgroundColor\":\"rgba(0, 0, 0, 0)\",\"backgroundImage\":\"none\",\"transform\":\"none\",\"filter\":\"none\",\"backdropFilter\":\"none\",\"fontFamily\":\"-apple-system, \\\"system-ui\\\", \\\"Segoe UI\\\", system-ui, sans-serif\",\"fontSize\":\"15px\",\"fontWeight\":\"400\",\"lineHeight\":\"22px\",\"whiteSpace\":\"normal\",\"textAlign\":\"left\",\"textOverflow\":\"clip\",\"overflowWrap\":\"normal\",\"wordWrap\":\"normal\",\"letterSpacing\":\"normal\",\"border\":\"0px solid rgb(46, 46, 46)\",\"borderRadius\":\"0px\",\"borderTopLeftRadius\":\"0px\",\"borderTopRightRadius\":\"0px\",\"borderBottomRightRadius\":\"0px\",\"borderBottomLeftRadius\":\"0px\",\"borderTopWidth\":\"0px\",\"borderRightWidth\":\"0px\",\"borderBottomWidth\":\"0px\",\"borderLeftWidth\":\"0px\",\"borderTopColor\":\"rgb(46, 46, 46)\",\"borderRightColor\":\"rgb(46, 46, 46)\",\"borderBottomColor\":\"rgb(46, 46, 46)\",\"borderLeftColor\":\"rgb(46, 46, 46)\",\"opacity\":\"1\",\"boxShadow\":\"none\",\"cursor\":\"default\",\"overflowX\":\"hidden\",\"overflowY\":\"hidden\"}}",
+        "render_mode": "faithful_svg",
+        "svg_asset_id": "inline-svg-83d80f8866cbc969",
+        "children": []
+      }
+    ]
+  },
+  "tokens": {
+    "colors": {},
+    "dimensions": {},
+    "strings": {}
+  },
+  "assetManifest": {
+    "version": 1,
+    "assets": [
+      {
+        "asset_id": "inline-svg-83d80f8866cbc969",
+        "original_uri": "data:image/svg+xml,%3Csvg%20aria-hidden%3D%22true%22%20class%3D%22lucide%20lucide-plus%20size-4%22%20fill%3D%22none%22%20height%3D%2224%22%20stroke%3D%22%23afafaf%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%20stroke-width%3D%222%22%20viewBox%3D%220%200%2024%2024%22%20width%3D%2224%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Cpath%20d%3D%22M5%2012h14%22%2F%3E%3Cpath%20d%3D%22M12%205v14%22%2F%3E%3C%2Fsvg%3E",
+        "content_hash": "83d80f8866cbc9696bf3ef9b39b12024cbce9881d8474db9706393076432d49c",
+        "mime": "image/svg+xml",
+        "diagnostics": []
+      }
+    ]
+  },
+  "fontFamilyAssets": [
+    {
+      "family": "-apple-system",
+      "weight": 400,
+      "style": "normal",
+      "platform_face": ".AppleSystemUIFont",
+      "provenance": {
+        "platform": "macos",
+        "os": "macos",
+        "runtime": "coretext-skia",
+        "cssAlias": "-apple-system"
+      }
+    }
+  ],
+  "diagnostics": []
+}

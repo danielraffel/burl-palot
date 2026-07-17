@@ -1,0 +1,141 @@
+{
+  "schema": "palot-visible-action-coverage-audit-v1",
+  "generatedAt": "2026-07-13T15:39:37-07:00",
+  "verdict": "red",
+  "gate": {
+    "definition": "An Electron-visible action is green only when Palot has a real consumer or imported-state endpoint, a production AppKit coordinate hit that dispatches the action, and a visible native postcondition. Endpoint registration or callback count alone is not sufficient.",
+    "passed": false
+  },
+  "inputs": {
+    "electronInventory": "evidence/phase-b/source-action-inventory.generated-v3-v4.json",
+    "sourceBindingPolicy": "apps/desktop-burl/contracts/main-chat.source-binding-policy.v1.json",
+    "consumerEndpoints": "apps/desktop-burl/src/palot_view.cpp",
+    "nativeInteractionHarness": "apps/desktop-burl/test/mac_production_interaction_test.cpp",
+    "stateContractCandidate": "/private/tmp/palot-v29-layout-aria-stable.report.json",
+    "nativeRunLog": "/private/tmp/palot-v31-action-census.log",
+    "visibleActionProofDirectory": "/private/tmp/palot-v31-action-census",
+    "nativeCensusIr": "/private/tmp/palot-v29-layout-aria-stable.design-ir.json",
+    "nativeCensusIrSha256": "eb967d925044ed7e4dcd17665f9ed00c30759b53218589243d40da4ec9aee135"
+  },
+  "sourceSummary": {
+    "inventoryItems": 219,
+    "capturedActionItems": 25,
+    "capturedActionIds": 21,
+    "policyActionIds": 28,
+    "contractedStateDimensions": 16,
+    "contractedActionIds": 17,
+    "auditedActionUnion": 34
+  },
+  "nativeCensus": {
+    "viewports": [599, 768, 1200],
+    "visibleControls": 97,
+    "coordinateOrDispatchFailures": 0,
+    "visiblePostconditionFailures": 12,
+    "testExit": 0,
+    "testResult": "failed",
+    "scope": "current whole-app v31 interaction gate over the v29 promoted IR",
+    "failedCells": {
+      "599": ["disclosure.thought.toggle", "review.diff.open"],
+      "768": ["command.palette.open", "disclosure.thought.toggle", "project.search.toggle", "review.diff.open", "server.menu.toggle"],
+      "1200": ["command.palette.open", "disclosure.thought.toggle", "project.search.toggle", "review.diff.open", "server.menu.toggle"]
+    },
+    "failureInvariant": "Every failed cell had coordinate-hit=1 and dispatch=1 but unchanged settled before/after pixels."
+  },
+  "scopedPriorCensus": {
+    "viewports": [599, 768, 1200],
+    "visibleControls": 87,
+    "coordinateOrDispatchFailures": 0,
+    "visiblePostconditionFailures": 0,
+    "testExit": 0,
+    "testResult": "passed",
+    "scope": "historical three-transition-normalized artifact only; not the current whole-app gate",
+    "visibleActionProofDirectory": "evidence/phase-b/visible-action-proofs-v2",
+    "warning": "This scoped result proves the three named-state transition repairs on that artifact. It must not be read as current whole-app interaction coverage."
+  },
+  "currentFrameworkRepair": {
+    "scope": "generic nested application-state inheritance and state-driven virtual-row remeasurement",
+    "resolvedCells": [
+      "599/disclosure.read.toggle", "599/disclosure.edit.toggle",
+      "768/disclosure.read.toggle", "768/disclosure.edit.toggle",
+      "1200/disclosure.read.toggle", "1200/disclosure.edit.toggle"
+    ],
+    "regression": "state-expanded virtual rows refresh height scroll range clipping and pixels",
+    "remainingTemplateGap": "The reasoning template exposes reasoning.label but no reasoning.text value binding; thought expansion remains pixel-invariant and is not waived."
+  },
+  "green": [
+    {"action": "composer.agent-menu.toggle", "surface": "composer", "coordinateWidths": [599, 768, 1200], "visiblePostconditionWidths": [599, 768, 1200]},
+    {"action": "display.mode.cycle", "surface": "composer", "coordinateWidths": [768, 1200], "visiblePostconditionWidths": [768, 1200]},
+    {"action": "external.open.menu.toggle", "surface": "topbar", "coordinateWidths": [768, 1200], "visiblePostconditionWidths": [768, 1200]},
+    {"action": "navigation.settings", "surface": "sidebar", "coordinateWidths": [768, 1200], "visiblePostconditionWidths": [768, 1200]},
+    {"action": "session.metrics.toggle", "surface": "overlays", "coordinateWidths": [1200], "visiblePostconditionWidths": [1200]},
+    {"action": "session.title.edit.begin", "surface": "topbar", "coordinateWidths": [599, 768, 1200], "visiblePostconditionWidths": [599, 768, 1200]},
+    {"action": "sidebar.toggle", "surface": "sidebar", "coordinateWidths": [599, 768, 1200], "visiblePostconditionWidths": [599, 768, 1200]}
+    ,{"action": "disclosure.edit.toggle", "surface": "tool cards", "coordinateWidths": [599, 768, 1200], "visiblePostconditionWidths": [599, 768, 1200]}
+    ,{"action": "disclosure.read.toggle", "surface": "tool cards", "coordinateWidths": [599, 768, 1200], "visiblePostconditionWidths": [599, 768, 1200]}
+    ,{"action": "composer.model-menu.toggle", "surface": "composer menus", "coordinateWidths": [599, 768, 1200], "visiblePostconditionWidths": [599, 768, 1200]}
+    ,{"action": "composer.variant-menu.toggle", "surface": "composer menus", "coordinateWidths": [599, 768, 1200], "visiblePostconditionWidths": [599, 768, 1200]}
+    ,{"action": "review.panel.toggle", "surface": "Changes", "coordinateWidths": [599, 768, 1200], "visiblePostconditionWidths": [599, 768, 1200]}
+  ],
+  "missing": [
+    {"action": "composer.agent.select", "surface": "composer menus", "reason": "Electron capture has the Debug selection action, but no binding-policy rule, PalotView endpoint, or native postcondition proof exists."},
+    {"action": "message.scroll-to-turn", "surface": "message actions", "reason": "Electron capture and policy rule exist, but PalotView has no endpoint and the 16-state contract has no state dimension for it."},
+    {"action": "session.fork-from-message", "surface": "message actions", "reason": "Electron capture and policy rule exist, but PalotView has no endpoint and the 16-state contract has no state dimension for it."},
+    {"action": "session.metrics.dismiss", "surface": "overlays", "reason": "Electron capture and state contract exist, but PalotView does not register the dismiss endpoint; outside-click and Escape proof do not prove the explicit dismiss target."},
+    {"action": "session.undo-to-message", "surface": "message actions", "reason": "Electron capture and policy rule exist, but PalotView has no endpoint and the 16-state contract has no state dimension for it."},
+    {"action": "settings.theme.select", "surface": "Settings", "reason": "Electron capture and state contract exist, but PalotView does not register the theme-selection endpoint; the isolated harness uses a synthetic endpoint and cannot prove the production app target."}
+  ],
+  "dead": [],
+  "resolvedThisRun": {
+    "actions": ["composer.model-menu.toggle", "composer.variant-menu.toggle", "review.panel.toggle"],
+    "rootCause": "Captured named-state domains used an ambiguous boolean-style toggle. Source transition contracts now normalize the native action to set:open for one-way evidence or cycle:closed,open for complete reverse-edge evidence.",
+    "proofScope": "Historical three-transition-normalized artifact; retained as focused regression evidence and not promoted to the current whole-app gate.",
+    "semanticWarning": "Model-menu and variant-menu after-image hashes are identical at every audited width. Pixel change proves a transition occurred, but does not yet prove distinct menu semantics; atomic state composition remains under investigation.",
+    "proofs": [
+      {"action": "review.panel.toggle", "width": 599, "beforeSha256": "bee70ae33aa5b3e99e629ab4f62814b2faa44de5c60f8afe1f9d7bb665bdb831", "afterSha256": "c9cc3f572dcb75842f48a93c2b0c534e43214a67aa6c4fb90fc76f49501054b1"},
+      {"action": "review.panel.toggle", "width": 768, "beforeSha256": "4f3f9167aaa70cc504f333af25f5d8a07e127b091319e043c550e96611d9e187", "afterSha256": "f3bf59f631d98bc3d3e1c1f763e479ffe8d3545bd8017631f2195b58f16791f1"},
+      {"action": "review.panel.toggle", "width": 1200, "beforeSha256": "4e12b8800e6951dc1d5f23bc41fe605ae7824467ac655dadbc3f8fb12096aa35", "afterSha256": "3910749c2192f8f2cd4a6aa3e330018e9947f27927d301adb8759ef7576be90b"},
+      {"action": "composer.model-menu.toggle", "width": 599, "beforeSha256": "bee70ae33aa5b3e99e629ab4f62814b2faa44de5c60f8afe1f9d7bb665bdb831", "afterSha256": "5a543a66d17b24b7d3c72ae1ebcb9f41be396ff1ef7c25f021c37780c56c5fc3"},
+      {"action": "composer.model-menu.toggle", "width": 768, "beforeSha256": "4f3f9167aaa70cc504f333af25f5d8a07e127b091319e043c550e96611d9e187", "afterSha256": "3467df5f08fc8082ad55c8fbe393f37c26f68c7cef87c31b92d61344155ec8c6"},
+      {"action": "composer.model-menu.toggle", "width": 1200, "beforeSha256": "4e12b8800e6951dc1d5f23bc41fe605ae7824467ac655dadbc3f8fb12096aa35", "afterSha256": "8f5878824b0c09dfd2d0d19bba12e4e262a1ffc1ad450c274773d069743be2bf"},
+      {"action": "composer.variant-menu.toggle", "width": 599, "beforeSha256": "bee70ae33aa5b3e99e629ab4f62814b2faa44de5c60f8afe1f9d7bb665bdb831", "afterSha256": "5a543a66d17b24b7d3c72ae1ebcb9f41be396ff1ef7c25f021c37780c56c5fc3"},
+      {"action": "composer.variant-menu.toggle", "width": 768, "beforeSha256": "4f3f9167aaa70cc504f333af25f5d8a07e127b091319e043c550e96611d9e187", "afterSha256": "3467df5f08fc8082ad55c8fbe393f37c26f68c7cef87c31b92d61344155ec8c6"},
+      {"action": "composer.variant-menu.toggle", "width": 1200, "beforeSha256": "4e12b8800e6951dc1d5f23bc41fe605ae7824467ac655dadbc3f8fb12096aa35", "afterSha256": "8f5878824b0c09dfd2d0d19bba12e4e262a1ffc1ad450c274773d069743be2bf"}
+    ],
+    "ambiguousReclassified": []
+  },
+  "ambiguous": [
+    {"action": "command.palette.open", "surface": "topbar", "coordinateWidths": [768, 1200], "reason": "Current whole-app v31 census proves coordinate hit and dispatch at 768 and 1200, but settled before/after pixels are identical at both widths."},
+    {"action": "composer.attachment.open", "surface": "composer", "coordinateWidths": [599, 768, 1200], "reason": "Dispatch is proven, but no visible file-picker or in-app postcondition receipt is captured."},
+    {"action": "composer.copy", "surface": "composer", "coordinateWidths": [], "reason": "Endpoint exists, but the target is not visible in the audited default states and no clipboard/postcondition receipt exists."},
+    {"action": "disclosure.thought.toggle", "surface": "disclosures", "coordinateWidths": [599, 768, 1200], "reason": "Current whole-app v31 census proves coordinate hit and dispatch at every width, but the reasoning template still has identical settled before/after pixels at all three widths."},
+    {"action": "external.open.preferred", "surface": "topbar", "coordinateWidths": [768, 1200], "reason": "Dispatch is proven, but no external-open side-effect or visible postcondition receipt is captured."},
+    {"action": "navigation.automations", "surface": "sidebar", "coordinateWidths": [768, 1200], "reason": "Dispatch is proven, but no native destination-state receipt is captured."},
+    {"action": "navigation.session.close", "surface": "topbar", "coordinateWidths": [599, 768, 1200], "reason": "Dispatch is proven, but no native closed-session postcondition receipt is captured."},
+    {"action": "project.open", "surface": "sidebar", "coordinateWidths": [768, 1200], "reason": "Dispatch is proven, but no native opened-project postcondition receipt is captured."},
+    {"action": "project.search.toggle", "surface": "sidebar", "coordinateWidths": [768, 1200], "reason": "Current whole-app v31 census proves coordinate hit and dispatch at 768 and 1200, but settled before/after pixels are identical at both widths."},
+    {"action": "project.select", "surface": "sidebar", "coordinateWidths": [768, 1200], "reason": "Dispatch is proven, but no file-picker or selected-project postcondition receipt is captured."},
+    {"action": "prompt.cancel", "surface": "composer", "coordinateWidths": [599, 768, 1200], "reason": "Dispatch and source state contract exist, but no before/after native streaming-state receipt is captured."},
+    {"action": "review.diff.open", "surface": "Changes", "coordinateWidths": [599, 768, 1200], "reason": "Current whole-app v31 census proves coordinate hit and dispatch at every width, but settled before/after pixels are identical at all three widths."},
+    {"action": "server.menu.toggle", "surface": "composer", "coordinateWidths": [768, 1200], "reason": "Current whole-app v31 census proves coordinate hit and dispatch at 768 and 1200, but settled before/after pixels are identical at both widths."},
+    {"action": "session.create", "surface": "sidebar", "coordinateWidths": [599, 768, 1200], "reason": "Dispatch is proven, but no created-session destination receipt is captured."},
+    {"action": "session.open", "surface": "sidebar", "coordinateWidths": [768, 1200], "reason": "Dispatch is proven, but no opened-session destination receipt is captured."},
+    {"action": "terminal.attach", "surface": "topbar", "coordinateWidths": [768, 1200], "reason": "Dispatch is proven, but no terminal attachment or visible postcondition receipt is captured."}
+  ],
+  "surfaceStatus": {
+    "default": "red: several default controls dispatch without a visible receipt",
+    "sidebar": "red: settings is proven, but automations/project/session actions are incomplete or ambiguous",
+    "Settings": "red: production theme selection endpoint is missing",
+    "Changes": "amber: review.panel.toggle changes settled native pixels at all three audited widths; review.diff.open still lacks a native postcondition receipt",
+    "composer menus": "red: model and variant menu toggles change settled native pixels at all three widths, but agent selection is missing",
+    "disclosures": "amber: thought disclosure dispatches but still lacks native before/after proof",
+    "tool cards": "green for read/edit disclosure toggles at all three widths",
+    "topbar": "red: several actions lack side-effect receipts",
+    "overlays": "red: usage open is proven, but the explicit dismiss endpoint is missing"
+  },
+  "requiredNextGate": [
+    "Add or correctly promote the six missing production action endpoints.",
+    "Promote state-transition metadata for every contracted stateful action so the generic verifier can require native before/after pixel change.",
+    "Capture visible or side-effect receipts for every remaining ambiguous action; do not waive them because a callback fired.",
+    "Re-run the production AppKit census until this report has no missing, dead, or ambiguous actions."
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "schema": "pulp-native-application-state-contract-normalization-v1",
+  "attachments": [
+    {
+      "action": "composer.model-menu.toggle",
+      "key": "composer.model-menu.open",
+      "matchedNodes": 1,
+      "attachedNodes": 1,
+      "preservedNodes": 0
+    },
+    {
+      "action": "composer.variant-menu.toggle",
+      "key": "composer.variant-menu.open",
+      "matchedNodes": 1,
+      "attachedNodes": 1,
+      "preservedNodes": 0
+    },
+    {
+      "action": "review.panel.toggle",
+      "key": "review.panel.open",
+      "matchedNodes": 1,
+      "attachedNodes": 1,
+      "preservedNodes": 0
+    }
+  ]
+}

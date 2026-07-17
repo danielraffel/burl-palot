@@ -28,6 +28,7 @@ export interface OpenCodeAdapterOptions {
 
 interface ProjectContext {
 	directory: string
+	eventDirectories: ReadonlySet<string>
 	client: OpencodeClient
 }
 
@@ -58,6 +59,32 @@ async function availablePort(preferredPort?: number): Promise<number> {
 			server.close((error) => (error ? reject(error) : resolve(address.port)))
 		})
 	})
+}
+
+async function healthWithDeadline(
+	client: OpencodeClient,
+	signal: AbortSignal | undefined,
+	remainingMs: number,
+): Promise<Awaited<ReturnType<OpencodeClient["global"]["health"]>>> {
+	const timeout = new AbortController()
+	const combined = signal ? AbortSignal.any([signal, timeout.signal]) : timeout.signal
+	let rejectAbort: ((reason: unknown) => void) | undefined
+	const aborted = new Promise<never>((_, reject) => {
+		rejectAbort = reject
+	})
+	const onAbort = () => rejectAbort?.(combined.reason ?? new DOMException("Aborted", "AbortError"))
+	combined.addEventListener("abort", onAbort, { once: true })
+	const timer = setTimeout(() => {
+		const error = new Error("OpenCode server startup timed out")
+		timeout.abort(error)
+	}, Math.max(1, remainingMs))
+	try {
+		if (combined.aborted) onAbort()
+		return await Promise.race([client.global.health({ signal: combined }), aborted])
+	} finally {
+		clearTimeout(timer)
+		combined.removeEventListener("abort", onAbort)
+	}
 }
 
 class SdkEventStream implements OpenCodeEventStream {
@@ -198,7 +225,9 @@ export class SdkOpenCodeGateway implements OpenCodeGateway {
 			source,
 			subscription,
 			(directory) =>
-				[...this.#projects.entries()].find(([, context]) => context.directory === directory)?.[0],
+				[...this.#projects.entries()].find(([, context]) =>
+					context.eventDirectories.has(directory),
+				)?.[0],
 			controller,
 		)
 	}
@@ -220,10 +249,14 @@ export class SdkOpenCodeGateway implements OpenCodeGateway {
 				if (!result.data) throw result.error ?? new Error("OpenCode did not return a project")
 				const project: OpenCodeProject = {
 					id: result.data.id,
-					directory: result.data.worktree,
-					name: result.data.name ?? basename(result.data.worktree),
+					directory: command.directory,
+					name: result.data.name ?? basename(command.directory),
 				}
-				this.#projects.set(project.id, { directory: project.directory, client })
+				this.#projects.set(project.id, {
+					directory: project.directory,
+					eventDirectories: new Set([project.directory, result.data.worktree]),
+					client,
+				})
 				return project
 			}
 			case "session.list": {
@@ -260,6 +293,26 @@ export class SdkOpenCodeGateway implements OpenCodeGateway {
 				if (!result.data) throw result.error ?? new Error("OpenCode session was not found")
 				return result.data
 			}
+			case "session.fork": {
+				const context = this.#project(command.projectId)
+				const result = await context.client.session.fork(
+					{ directory: context.directory, sessionID: command.sessionId,
+					  messageID: command.messageId },
+					{ signal },
+				)
+				if (!result.data) throw result.error ?? new Error("OpenCode did not fork the session")
+				return result.data
+			}
+			case "session.revert": {
+				const context = this.#project(command.projectId)
+				const result = await context.client.session.revert(
+					{ directory: context.directory, sessionID: command.sessionId,
+					  messageID: command.messageId },
+					{ signal },
+				)
+				if (result.error) throw result.error
+				return result.data
+			}
 			case "prompt.send":
 			case "prompt.retry": {
 				const context = this.#project(command.projectId)
@@ -267,7 +320,15 @@ export class SdkOpenCodeGateway implements OpenCodeGateway {
 					{
 						directory: context.directory,
 						sessionID: command.sessionId,
-						parts: [{ type: "text", text: command.text }],
+						parts: [
+							{ type: "text" as const, text: command.text },
+							...(command.files ?? []).map((file) => ({
+								type: "file" as const,
+								mime: file.mediaType ?? "application/octet-stream",
+								filename: file.filename,
+								url: file.url,
+							})),
+						],
 						model: {
 							providerID: command.model.providerId,
 							modelID: command.model.modelId,
@@ -332,7 +393,7 @@ export class SdkOpenCodeGateway implements OpenCodeGateway {
 		do {
 			if (signal?.aborted) throw signal.reason ?? new DOMException("Aborted", "AbortError")
 			try {
-				const health = await client.global.health({ signal })
+				const health = await healthWithDeadline(client, signal, deadline - Date.now())
 				if (health.data) {
 					this.#client = client
 					this.#baseUrl = baseUrl

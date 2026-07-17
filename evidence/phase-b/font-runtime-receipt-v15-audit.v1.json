@@ -1,0 +1,63 @@
+{
+  "schema": "palot-font-runtime-receipt-audit-v1",
+  "status": "pass-not-promoted",
+  "scope": "generic runtime-font receipt projection and atomic-state composition",
+  "inputs": {
+    "capturedDesignIr": {
+      "path": "/private/tmp/main-chat.intrinsic-width-v15.runtime-font-receipt.design-ir.v1.json",
+      "sha256": "16e842eb5863c1cbd09994dee6d6abd465e3bdd954a2a217c7543eb11c850671"
+    },
+    "sourceSemantics": "/private/tmp/palot-canonical-height/1200x800-deterministic/source.json"
+  },
+  "outputs": {
+    "strictRuntimeDesignIr": {
+      "path": "/private/tmp/main-chat.intrinsic-width-v15.strict-runtime-font-receipt.design-ir.v1.json",
+      "sha256": "c02c16a243205d22a6a8a8e4338bb0e6ca1a5cb4f24b88e81afd53f66359b970"
+    },
+    "composedCandidate": {
+      "path": "/private/tmp/palot-intrinsic-v16.strict-runtime-font-receipt.composed.candidate.json",
+      "sha256": "2874b40f498bf031a5468870b6bfe5cb422cb7faff13176af6459fd9f4541ee0"
+    }
+  },
+  "findings": {
+    "rootCause": "A responsive-state commit reintroduced an exception that retained the authored system CSS alias instead of projecting the exact runtime-selected family. Generated ordered-content text children also needed to inherit the containing DOM element's CDP font receipt.",
+    "styleProjection": [
+      { "family": ".SF NS", "nodeCount": 160 },
+      { "family": "Menlo", "nodeCount": 5 }
+    ],
+    "faceInventory": [
+      { "family": ".SF NS", "faceCount": 10, "runtime": "cdp-platform-fonts" },
+      { "family": "Menlo", "faceCount": 3, "runtime": "cdp-platform-fonts" }
+    ],
+    "captureProvenance": {
+      "capture_method": "runtime_snapshot",
+      "settle_rounds": 2,
+      "fallback_reason": "",
+      "source_adapter": "observed-dom",
+      "source_version": "1.0.0",
+      "sourceFile": "/private/tmp/palot-canonical-height/1200x800-deterministic/source.json",
+      "diagnostics": []
+    },
+    "composition": {
+      "dimensions": 16,
+      "defaultDeepEqualToStrictRuntimeDesignIr": true,
+      "defaultSemanticSha256": "8509bf2997df5187c69b60602f1a3970f7c73b12762960481c5b6b04122a960f",
+      "motionReceipts": 276,
+      "responsiveRecords": 402,
+      "actionKeys": 18,
+      "trustedPointerReceipts": 20,
+      "trustedKeyboardReceipts": 1,
+      "exactActionStateContracts": 19
+    }
+  },
+  "focusedTests": [
+    "packages/pulp-import-ir/test/imported-fonts.test.ts: 15 pass, 41 expectations",
+    "tools/import-design/runtime-capture/apply-runtime-font-receipts.test.ts: 2 pass, 6 expectations",
+    "verify-composed-application-state-candidate.ts: pass"
+  ],
+  "promotion": {
+    "canonicalUpdated": false,
+    "reason": "Atomic state composition must be visually clean before canonical promotion.",
+    "external01ShellBaselineTouched": false
+  }
+}

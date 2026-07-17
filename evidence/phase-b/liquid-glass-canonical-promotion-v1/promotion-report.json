@@ -1,0 +1,15 @@
+{
+  "candidateSha256": "188a927a727eb4c78bafc3b0f010a396789bdefdf128fbfa77ef8c273cd9e586",
+  "canonical": "/Users/danielraffel/Code/burl-palot-wt-semantic-restart/apps/desktop-burl/resources/import/main-chat.observed.design-ir.v1.json",
+  "hostEnvironment": {
+    "mode": "live-existing",
+    "provenanceSha256": "cf5fcde3ab59e7ec346cab85bb1e0ee225b8a5916327d39c73852fbc6082fba4"
+  },
+  "rootStatePredicateSha256": "7a5fea6e52d56dca4de33184725f55b2e76b8cd7f9316f420e49fd2267a8a75e",
+  "schema": "burl-guarded-import-promotion-report-v1",
+  "sourceCaptureManifestSha256": "5b4c92d1fa95a2f8a1b9fa97c4c94064c1f5512725c9cdea707f77732c5a9545",
+  "sourceCaptureSha256": "cf5fcde3ab59e7ec346cab85bb1e0ee225b8a5916327d39c73852fbc6082fba4",
+  "sourceWindowSha256": "53756ee72ef10afbe880c574cf3753e0f91af743e18fc45c9b11d323ecb60f09",
+  "status": "promoted",
+  "surfaceState": "transparent-preference"
+}

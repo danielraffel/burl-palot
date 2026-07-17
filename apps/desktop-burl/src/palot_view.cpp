@@ -1,18 +1,26 @@
 #include "palot_view.hpp"
 #include "project_config.hpp"
+#include "transcript_turn_projection.hpp"
 
 #include <pulp/events/main_thread_dispatcher.hpp>
 #include <pulp/platform/file_dialog.hpp>
+#include <pulp/platform/clipboard.hpp>
+#include <pulp/platform/external_open.hpp>
 #include <pulp/view/accessibility.hpp>
 #include <pulp/view/buttons.hpp>
 #include <pulp/view/markdown_view.hpp>
 #include <pulp/view/widgets.hpp>
+#include <nlohmann/json.hpp>
 
 #include <cstdlib>
 #include <algorithm>
+#include <cmath>
+#include <cctype>
 #include <filesystem>
 #include <fstream>
+#include <iomanip>
 #include <memory>
+#include <sstream>
 #include <cstdint>
 #include <fcntl.h>
 #include <unistd.h>
@@ -28,11 +36,120 @@ constexpr float kTranscriptGap = 40.0f;
 constexpr float kContentMaxWidth = 896.0f;
 constexpr std::size_t kAccessibilitySummaryBytes = 480;
 
+struct ProjectedTool {
+	std::string id;
+	std::string template_id;
+	std::string label;
+	std::string subject;
+	std::string duration;
+	std::string status;
+};
+
+std::string first_string(const nlohmann::json& object,
+	                     std::initializer_list<std::string_view> keys) {
+	if (!object.is_object()) return {};
+	for (const auto key : keys) {
+		const auto found = object.find(std::string(key));
+		if (found != object.end() && found->is_string() && !found->get_ref<const std::string&>().empty())
+			return found->get<std::string>();
+	}
+	return {};
+}
+
+std::optional<std::string> required_payload_string(std::string_view payload,
+	                                                std::string_view field) {
+	const auto object = nlohmann::json::parse(payload, nullptr, false);
+	if (!object.is_object()) return std::nullopt;
+	const auto found = object.find(std::string(field));
+	if (found == object.end() || !found->is_string() || found->get_ref<const std::string&>().empty())
+		return std::nullopt;
+	return found->get<std::string>();
+}
+
+std::optional<bool> required_payload_bool(std::string_view payload,
+	                                      std::string_view field) {
+	const auto object = nlohmann::json::parse(payload, nullptr, false);
+	if (!object.is_object()) return std::nullopt;
+	const auto found = object.find(std::string(field));
+	if (found == object.end() || !found->is_boolean()) return std::nullopt;
+	return found->get<bool>();
+}
+
+std::string format_work_duration(double milliseconds) {
+	const auto seconds = std::max(0L, static_cast<long>(std::floor(milliseconds / 1000.0)));
+	if (seconds < 60) return std::to_string(seconds) + "s";
+	const auto minutes = seconds / 60;
+	const auto remaining_seconds = seconds % 60;
+	if (minutes < 60)
+		return std::to_string(minutes) + "m" +
+		       (remaining_seconds == 0 ? "" : " " + std::to_string(remaining_seconds) + "s");
+	const auto hours = minutes / 60;
+	const auto remaining_minutes = minutes % 60;
+	return std::to_string(hours) + "h" +
+	       (remaining_minutes == 0 ? "" : " " + std::to_string(remaining_minutes) + "m");
+}
+
+std::unordered_map<std::string, std::string> project_message_metadata(
+	const nlohmann::json& info) {
+	std::unordered_map<std::string, std::string> values;
+	if (!info.is_object() || info.value("role", "") != "assistant") return values;
+	values["message.model"] = first_string(info, {"modelID", "modelId"});
+	const auto& time = info.contains("time") && info.at("time").is_object() ?
+	                   info.at("time") : nlohmann::json::object();
+	if (time.contains("created") && time.contains("completed") &&
+	    time.at("created").is_number() && time.at("completed").is_number())
+		values["message.duration"] = format_work_duration(
+			time.at("completed").get<double>() - time.at("created").get<double>());
+	if (info.contains("cost") && info.at("cost").is_number()) {
+		std::ostringstream cost;
+		cost << '$' << std::fixed << std::setprecision(2) << info.at("cost").get<double>();
+		values["message.cost"] = cost.str();
+	}
+	return values;
+}
+
+ProjectedTool project_tool_part(std::string_view payload) {
+	const auto part = nlohmann::json::parse(payload);
+	if (!part.is_object() || part.value("type", "") != "tool")
+		throw std::invalid_argument("OpenCode tool event is not a tool part");
+	ProjectedTool out;
+	out.id = first_string(part, {"id", "callID", "callId"});
+	if (out.id.empty()) throw std::invalid_argument("OpenCode tool part has no stable identity");
+	const auto tool = first_string(part, {"tool", "name"});
+	const auto normalized = [&] {
+		auto value = tool;
+		std::ranges::transform(value, value.begin(), [](unsigned char c) { return static_cast<char>(std::tolower(c)); });
+		return value;
+	}();
+	out.template_id = normalized == "read" ? "tool.read" : "tool.edit";
+	out.label = normalized == "read" ? "Read" :
+	            (normalized == "edit" || normalized == "write" || normalized == "patch") ? "Edit" : tool;
+	if (out.label.empty()) out.label = "Tool";
+	out.label.front() = static_cast<char>(std::toupper(static_cast<unsigned char>(out.label.front())));
+	const auto& state = part.contains("state") ? part.at("state") : nlohmann::json::object();
+	out.status = first_string(state, {"status"});
+	const auto& input = state.is_object() && state.contains("input") ? state.at("input") : nlohmann::json::object();
+	out.subject = first_string(input, {"path", "filePath", "file", "filename"});
+	if (out.subject.empty()) out.subject = first_string(state, {"title"});
+	if (out.subject.empty()) out.subject = first_string(part, {"title"});
+	if (out.subject.empty()) out.subject = tool;
+	out.duration = out.status == "running" || out.status == "pending" ? "…" : "";
+	if (state.is_object() && state.contains("time") && state.at("time").is_object()) {
+		const auto& time = state.at("time");
+		if (time.contains("start") && time.contains("end") && time.at("start").is_number() && time.at("end").is_number()) {
+			auto seconds = time.at("end").get<double>() - time.at("start").get<double>();
+			if (seconds > 100.0) seconds /= 1000.0;
+			out.duration = std::to_string(std::max(0L, std::lround(seconds))) + "s";
+		}
+	}
+	return out;
+}
+
 struct PalotComposer final : pulp::view::TextEditor {
 	void paint(pulp::canvas::Canvas& canvas) override {
 		pulp::view::TextEditor::paint(canvas);
 		const auto b = local_bounds();
-		canvas.set_font("Inter", 12.0f);
+		canvas.set_font(".SF NS", 12.0f);
 		canvas.set_fill_color(pulp::canvas::Color::rgba8(166, 166, 166));
 		canvas.fill_text("+     Build⌄",
 		                 18.0f, b.height - 17.0f);
@@ -48,7 +165,7 @@ struct PalotChromeButton final : pulp::view::TextButton {
 		set_style(Style::ghost);
 	}
 	void paint(pulp::canvas::Canvas& canvas) override {
-		canvas.set_font("Inter", 12.0f);
+		canvas.set_font(".SF NS", 12.0f);
 		canvas.set_fill_color(pulp::canvas::Color::rgba8(190, 190, 190));
 		canvas.fill_text(label(), 4.0f, std::max(15.0f, bounds().height * 0.62f));
 	}
@@ -82,14 +199,16 @@ struct MessageRow final : pulp::view::View {
 		auto role_label = std::make_unique<pulp::view::Label>(role_text);
 		role_label->set_font_size(13.0f);
 		role_label->set_font_weight(700);
+		role_label->set_font_family(".SF NS");
 		role_label->set_text_color(pulp::canvas::Color::rgba8(166, 166, 166));
 		role = role_label.get();
 		add_child(std::move(role_label));
 
 		auto markdown = std::make_unique<pulp::view::MarkdownView>(
 			tool ? "```json\n" + text + "\n```" : text);
-		markdown->set_body_style("Inter", 13.0f, 300,
+		markdown->set_body_style(".SF NS", 13.0f, 300,
 		                         pulp::canvas::Color::rgba8(237, 237, 237));
+		markdown->set_code_font_family("Menlo");
 		const auto summary = accessibility_summary(text);
 		markdown->set_access_label(role_text + " message text: " + summary);
 		markdown->set_access_value(summary);
@@ -139,6 +258,7 @@ struct MessageRow final : pulp::view::View {
 };
 
 std::filesystem::path state_path() {
+	if (const char* override_path = std::getenv("PALOT_STATE_PATH")) return override_path;
 	if (const char* home = std::getenv("HOME"))
 		return std::filesystem::path(home) /
 		       "Library/Application Support/Palot/burl-session.bin";
@@ -190,26 +310,296 @@ public:
 		std::scoped_lock lock(mutex_);
 		view_ = nullptr;
 	}
+	void schedule_transcript_sync() {
+		auto self = shared_from_this();
+		pulp::events::MainThreadDispatcher::call_async_after([self = std::move(self)] {
+			std::scoped_lock lock(self->mutex_);
+			if (!self->view_) return;
+			if (self->view_->transcript_updates_.flush()) self->view_->sync_imported_transcript();
+		}, 16);
+	}
 
 private:
 	std::mutex mutex_;
 	PalotView* view_ = nullptr;
 };
 
-PalotView::PalotView() {
+PalotView::PalotView(std::filesystem::path design_ir_path,
+                     std::filesystem::path binding_manifest_path) {
+	runtime_state_.project = std::filesystem::current_path().string();
 	event_sink_ = std::make_shared<UiEventSink>(this);
 	set_access_label("Palot chat workspace");
-	auto workspace = std::make_unique<pulp::view::View>();
-	workspace->set_access_role(AccessRole::group);
-	workspace->set_access_label("Palot chat workspace");
-	add_child(std::move(workspace));
+	auto imported_root = std::make_unique<ImportedRootHost>();
+	imported_root->set_runtime_context_lookup([this](std::string_view field) -> std::optional<std::string> {
+		if (field == "project.directory" && !runtime_state_.project.empty())
+			return runtime_state_.project;
+		if (field == "session.id" && !runtime_state_.session.empty())
+			return runtime_state_.session;
+		return std::nullopt;
+	});
+	imported_root->register_action("composer.agent-menu.toggle", [this](std::string_view) {
+		composer_agent_menu_open_ = !composer_agent_menu_open_;
+		request_repaint();
+	});
+	imported_root->register_action("composer.attachment.open", [this](std::string_view) {
+		runtime_state_.attachments.clear();
+		for (const auto& path : pulp::platform::FileDialog::open_files(
+		         "Attach files to the Palot prompt", {}, runtime_state_.project))
+			runtime_state_.attachments.push_back(make_local_file_attachment(path));
+		request_repaint();
+	});
+	imported_root->register_action("composer.model-menu.toggle", [this](std::string_view) {
+		composer_model_menu_open_ = !composer_model_menu_open_;
+		request_repaint();
+	});
+	imported_root->register_action("composer.variant-menu.toggle", [this](std::string_view) {
+		composer_variant_menu_open_ = !composer_variant_menu_open_;
+		request_repaint();
+	});
+	imported_root->register_action("command.palette.open", [this](std::string_view) {
+		command_palette_open_ = true;
+		request_repaint();
+	});
+	imported_root->register_action("composer.copy", [this](std::string_view) {
+		if (transcript_ && transcript_->child_count() != 0) request_repaint();
+	});
+	imported_root->register_action("display.mode.cycle", [this](std::string_view) {
+		display_mode_ = display_mode_ == "default" ? "verbose" : "default";
+		request_repaint();
+	});
+	for (const auto& [action, state_key] :
+	     std::initializer_list<std::pair<std::string_view, std::string_view>>{
+	         {"disclosure.thought.toggle", "disclosure.thought.open"},
+	         {"disclosure.read.toggle", "disclosure.read.open"},
+	         {"disclosure.edit.toggle", "disclosure.edit.open"}})
+		imported_root->register_action(std::string(action), [this, action, state_key](std::string_view) {
+			if (imported_root_) {
+				const auto transition = imported_root_->active_action_state_transition(action);
+				const bool imported_transition = transition && !transition->first.empty() &&
+				                                 !transition->second.empty();
+				if (!imported_transition)
+					imported_root_->apply_application_state_transition(state_key, "cycle:closed,open");
+			}
+			request_repaint();
+		});
+	imported_root->register_action("external.open.menu.toggle", [this](std::string_view) {
+		external_open_menu_open_ = !external_open_menu_open_;
+		request_repaint();
+	});
+	imported_root->register_action("external.open.preferred", [this](std::string_view payload) {
+		const auto directory = required_payload_string(payload, "directory");
+		const auto target = required_payload_string(payload, "targetID");
+		const auto persist_preferred = required_payload_bool(payload, "persistPreferred");
+		if (!directory || !target || !persist_preferred) {
+			set_configuration_error("External-open action is missing its source invocation fields");
+			return;
+		}
+		if (*target != "finder") {
+			set_configuration_error("The source-selected external-open target is not supported by this Burl build");
+			return;
+		}
+		if (!pulp::platform::ExternalOpen::reveal(*directory))
+			set_configuration_error("Unable to reveal the project in the platform file manager");
+	});
+	imported_root->register_action("navigation.settings", [this](std::string_view) {
+		navigation_route_ = "/settings/general";
+		server_menu_open_ = false;
+		request_repaint();
+	});
+	imported_root->register_action("navigation.back-to-app", [this](std::string_view) {
+		navigation_route_ = "/";
+		server_menu_open_ = false;
+		request_repaint();
+	});
+	imported_root->register_action("navigation.automations", [this](std::string_view) {
+		navigation_route_ = "/automations";
+		server_menu_open_ = false;
+		request_repaint();
+	});
+	imported_root->register_action("navigation.session.close", [this](std::string_view) {
+		navigation_route_ = "/";
+		request_repaint();
+	});
+	imported_root->register_action("navigation.new-session", [this](std::string_view) {
+		navigation_route_ = "/";
+		runtime_state_.create_session = true;
+		runtime_state_.session.clear();
+		if (session_editor_) session_editor_->set_text("");
+		server_menu_open_ = false;
+		request_repaint();
+	});
+	imported_root->register_action("project.select", [this](std::string_view) { choose_project_folder(); });
+	imported_root->register_action("project.open", [this](std::string_view payload) {
+		std::string error;
+		auto canonical_path = validate_project_directory(std::filesystem::path(payload), error);
+		if (!canonical_path) {
+			set_configuration_error(std::move(error));
+			return;
+		}
+		runtime_state_.project = *canonical_path;
+		project_->set_text(runtime_state_.project);
+		sync_imported_projects();
+		set_configuration_error("");
+		runtime_state_.create_session = false;
+		request_repaint();
+	});
+	imported_root->register_action("project.search.toggle", [this](std::string_view) {
+		project_search_open_ = !project_search_open_;
+		request_repaint();
+	});
+	imported_root->register_action("prompt.cancel", [this](std::string_view) {
+		process_.cancel();
+		status_ = "Cancelling…";
+		request_repaint();
+	});
+	imported_root->register_action("prompt.retry", [this](std::string_view) {
+		if (!last_prompt_.empty()) send_prompt(last_prompt_, true);
+	});
+	imported_root->register_action("prompt.send", [this](std::string_view payload) {
+		auto prompt = std::string(payload);
+		if (prompt.empty() && imported_root_)
+			if (const auto visible = imported_root_->text_binding_value("composer.draft")) prompt = *visible;
+		if (prompt.empty() && composer_) prompt = composer_->text();
+		if (!prompt.empty()) {
+			runtime_state_.composer_draft = prompt;
+			send_prompt(runtime_state_.composer_draft);
+		}
+	});
+	imported_root->register_action("session.create", [this](std::string_view) {
+		runtime_state_.create_session = true;
+		runtime_state_.session.clear();
+		if (session_editor_) session_editor_->set_text("");
+	});
+	imported_root->register_action("session.open", [this](std::string_view payload) {
+		try {
+			const auto contract = nlohmann::json::parse(payload);
+			if (!contract.is_object()) throw std::invalid_argument("payload is not an object");
+			const auto directory = contract.value("directory", "");
+			const auto session_id = contract.value("sessionID", "");
+			if (directory.empty() || session_id.empty())
+				throw std::invalid_argument("required fields are missing");
+
+			std::string error;
+			auto canonical_path = validate_project_directory(std::filesystem::path(directory), error);
+			if (!canonical_path) throw std::invalid_argument(error);
+			runtime_state_.project = *canonical_path;
+			runtime_state_.session = session_id;
+			runtime_state_.create_session = false;
+			if (project_) project_->set_text(runtime_state_.project);
+			if (session_editor_) session_editor_->set_text(runtime_state_.session);
+			set_configuration_error("");
+			request_repaint();
+		} catch (const std::exception& exception) {
+			set_configuration_error(std::string("Invalid session.open contract: ") + exception.what());
+		}
+	});
+	imported_root->register_action("message.scroll-to-turn", [this](std::string_view payload) {
+		if (payload.empty() || !imported_root_ || !imported_root_->scroll_transcript_to_item(payload))
+			set_configuration_error("The requested transcript turn is no longer available");
+	});
+	imported_root->register_action("session.fork-from-message", [this](std::string_view payload) {
+		if (!process_.session_action("session.fork", std::string(payload), event_sink_))
+			set_configuration_error("Unable to fork from the requested OpenCode message");
+	});
+	imported_root->register_action("session.undo-to-message", [this](std::string_view payload) {
+		if (!process_.session_action("session.revert", std::string(payload), event_sink_))
+			set_configuration_error("Unable to undo to the requested OpenCode message");
+	});
+	imported_root->register_action("server.menu.toggle", [this](std::string_view) {
+		server_menu_open_ = !server_menu_open_;
+		request_repaint();
+	});
+	imported_root->register_action("review.panel.toggle", [this](std::string_view) {
+		review_panel_open_ = !review_panel_open_;
+		presentation_state_ = review_panel_open_ ? "review.open" : "default";
+		if (imported_root_)
+			imported_root_->set_application_state("ui.presentation", presentation_state_);
+		request_repaint();
+	});
+	imported_root->register_action("review.diff.open", [this](std::string_view) {
+		review_panel_open_ = true;
+		presentation_state_ = "review.open";
+		if (imported_root_) {
+			imported_root_->set_application_state("review.panel.open", "open");
+			imported_root_->set_application_state("review.diff.open", "open");
+			imported_root_->set_application_state("ui.presentation", presentation_state_);
+		}
+		request_repaint();
+	});
+	imported_root->register_action("ui.presentation.toggle", [this](std::string_view state) {
+		presentation_state_ = presentation_state_ == state ? "default" : std::string(state);
+		review_panel_open_ = presentation_state_ == "review.open";
+		if (imported_root_)
+			imported_root_->set_application_state("ui.presentation", presentation_state_);
+		request_repaint();
+	});
+	imported_root->register_action("session.metrics.toggle", [this](std::string_view) {
+		session_metrics_open_ = !session_metrics_open_;
+		request_repaint();
+	});
+	imported_root->register_action("session.metrics.dismiss", [this](std::string_view) {
+		session_metrics_open_ = false;
+		request_repaint();
+	});
+	imported_root->register_action("settings.theme.select", [this](std::string_view payload) {
+		if (payload != "light" && payload != "dark" && payload != "system") {
+			set_configuration_error("Imported theme selection has an unsupported value");
+			return;
+		}
+		theme_preference_ = payload;
+		if (on_window_appearance_change) {
+			const auto appearance = payload == "light"
+				? pulp::view::WindowAppearance::light
+				: payload == "dark" ? pulp::view::WindowAppearance::dark
+				                    : pulp::view::WindowAppearance::system;
+			on_window_appearance_change(appearance);
+		}
+		request_repaint();
+	});
+	imported_root->register_action("session.title.edit.begin", [this](std::string_view) {
+		title_editing_ = true;
+		request_repaint();
+	});
+	imported_root->register_action("sidebar.toggle", [this](std::string_view) {
+		sidebar_open_ = !sidebar_open_;
+		request_repaint();
+	});
+	imported_root->register_action("terminal.attach", [this](std::string_view payload) {
+		const auto directory = required_payload_string(payload, "directory");
+		const auto session = required_payload_string(payload, "sessionID");
+		if (!directory || !session) {
+			set_configuration_error("Terminal attach action is missing its source runtime context");
+			return;
+		}
+		const auto command = "opencode attach http://127.0.0.1:4101 --session " + *session +
+		                     " --dir " + *directory;
+		if (!pulp::platform::Clipboard::set_text(command))
+			set_configuration_error("Unable to copy the OpenCode attach command");
+		request_repaint();
+	});
+	if (design_ir_path.empty())
+		design_ir_path = palot_bundle_resource("import/main-chat.observed.design-ir.v1.json");
+	if (binding_manifest_path.empty())
+		binding_manifest_path = palot_bundle_resource("contracts/main-chat.application-bindings.v1.json");
+	imported_root->load(design_ir_path, binding_manifest_path);
+	imported_root_ = imported_root.get();
+	add_child(std::move(imported_root));
+	on_global_key = [this](const pulp::view::KeyEvent& event) {
+		if (!event.is_down || !event.isMainModifier()) return false;
+		if (event.key == pulp::view::KeyCode::b) return invoke_imported_action("sidebar.toggle");
+		if (event.key == pulp::view::KeyCode::d && event.isShiftDown())
+			return invoke_imported_action("review.panel.toggle");
+		return false;
+	};
 	auto project = std::make_unique<pulp::view::TextEditor>();
 	project->placeholder = "Project folder";
 	project->set_access_role(AccessRole::group);
 	project->set_access_label("Project folder");
-	project->set_text(std::filesystem::current_path().string());
+	project->set_text(runtime_state_.project);
+	project->on_change = [this](const std::string& value) { runtime_state_.project = value; };
 	project_ = project.get();
 	add_child(std::move(project));
+	sync_imported_projects();
 
 	auto choose_project = std::make_unique<PalotChromeButton>("+");
 	choose_project->set_access_label("Choose project folder");
@@ -224,13 +614,15 @@ PalotView::PalotView() {
 	session_editor->set_background_color(pulp::canvas::Color::rgba8(13, 13, 13));
 	session_editor->set_border(pulp::canvas::Color::rgba8(13, 13, 13), 0.0f, 6.0f);
 	session_editor->set_font_size(12.0f);
+	session_editor->on_change = [this](const std::string& value) { runtime_state_.session = value; };
 	session_editor_ = session_editor.get();
 	add_child(std::move(session_editor));
 
 	auto new_session = std::make_unique<PalotChromeButton>("+  New Session");
 	new_session->set_access_label("Create a new OpenCode session");
 	new_session->on_click = [this] {
-		create_session_ = true;
+		runtime_state_.create_session = true;
+		runtime_state_.session.clear();
 		session_editor_->set_text("");
 		set_configuration_error("");
 		request_repaint();
@@ -241,7 +633,7 @@ PalotView::PalotView() {
 	auto open_session = std::make_unique<PalotChromeButton>("Open");
 	open_session->set_access_label("Open the entered OpenCode session");
 	open_session->on_click = [this] {
-		create_session_ = false;
+		runtime_state_.create_session = false;
 		set_configuration_error("");
 		request_repaint();
 	};
@@ -252,7 +644,8 @@ PalotView::PalotView() {
 	provider->placeholder = "Provider";
 	provider->set_access_role(AccessRole::group);
 	provider->set_access_label("OpenCode model provider");
-	provider->set_text("opencode");
+	provider->set_text(runtime_state_.provider);
+	provider->on_change = [this](const std::string& value) { runtime_state_.provider = value; };
 	provider->set_background_color(pulp::canvas::Color::rgba8(29, 29, 29));
 	provider->set_border(pulp::canvas::Color::rgba8(29, 29, 29), 0.0f, 4.0f);
 	provider->set_font_size(11.0f);
@@ -263,7 +656,8 @@ PalotView::PalotView() {
 	model->placeholder = "Model";
 	model->set_access_role(AccessRole::group);
 	model->set_access_label("OpenCode model ID");
-	model->set_text("north-mini-code-free");
+	model->set_text(runtime_state_.model);
+	model->on_change = [this](const std::string& value) { runtime_state_.model = value; };
 	model->set_background_color(pulp::canvas::Color::rgba8(29, 29, 29));
 	model->set_border(pulp::canvas::Color::rgba8(29, 29, 29), 0.0f, 4.0f);
 	model->set_font_size(11.0f);
@@ -280,6 +674,7 @@ PalotView::PalotView() {
 		pulp::view::TextEditor::MultiLineReturnBehavior::commit;
 	composer->set_access_role(AccessRole::group);
 	composer->set_access_label("Message composer");
+	composer->on_change = [this](const std::string& value) { runtime_state_.composer_draft = value; };
 	composer->on_return = [this](const std::string& text) {
 		if (!text.empty()) send_prompt(text);
 		else if (!last_prompt_.empty()) send_prompt(last_prompt_, true);
@@ -295,7 +690,7 @@ PalotView::PalotView() {
 	auto send = std::make_unique<PalotChromeButton>("↑");
 	send->set_access_label("Send message");
 	send->on_click = [this] {
-		if (!composer_->text().empty()) send_prompt(composer_->text());
+		if (!runtime_state_.composer_draft.empty()) send_prompt(runtime_state_.composer_draft);
 		else if (!last_prompt_.empty()) send_prompt(last_prompt_, true);
 	};
 	send_ = send.get();
@@ -322,12 +717,12 @@ PalotView::PalotView() {
 	});
 	transcript->set_row_binder([this](pulp::view::View& row, std::size_t index) {
 		if (index >= messages_.size()) return;
-		const auto& [role, text] = messages_[index];
-		static_cast<MessageRow&>(row).bind(role, text);
+		static_cast<MessageRow&>(row).bind(messages_[index].role, messages_[index].text);
 	});
 	transcript_ = transcript.get();
 	add_child(std::move(transcript));
 	restore();
+	sync_imported_projects();
 	pulp::platform::FileDialog::install_native_backend();
 	transcript_->set_row_count(messages_.size());
 	for (std::size_t index = 0; index < messages_.size(); ++index)
@@ -340,11 +735,22 @@ PalotView::~PalotView() {
 	persist();
 }
 
+bool PalotView::source_observed_primary_tree() const noexcept {
+	return imported_root_ && imported_root_->source_observed_primary_tree();
+}
+
+const std::vector<std::string>& PalotView::unattached_required_actions() const noexcept {
+	static const std::vector<std::string> empty;
+	return imported_root_ ? imported_root_->unattached_required_actions() : empty;
+}
+
 void PalotView::layout_children() {
 	const auto b = local_bounds();
+	imported_root_->set_bounds(b);
+	imported_root_->layout_children();
 	const float sidebar_width = b.width < 700.0f ? 0.0f : kSidebarWidth;
 	project_->set_visible(false);
-	const bool sidebar_visible = sidebar_width > 0.0f;
+	const bool sidebar_visible = false;
 	new_session_->set_visible(sidebar_visible);
 	open_session_->set_visible(sidebar_visible);
 	choose_project_->set_visible(sidebar_visible);
@@ -359,8 +765,12 @@ void PalotView::layout_children() {
 		(b.width - sidebar_width - content_width) * 0.5f);
 	const float composer_y = b.height - kComposerHeight - 53.0f;
 	composer_->set_bounds({content_x, composer_y, std::max(0.0f, content_width), kComposerHeight});
-	provider_->set_visible(true);
-	model_->set_visible(true);
+	provider_->set_visible(false);
+	model_->set_visible(false);
+	composer_->set_visible(false);
+	send_->set_visible(false);
+	cancel_->set_visible(false);
+	transcript_->set_visible(false);
 	if (sidebar_visible) {
 		provider_->set_bounds({16.0f, 620.0f, 112.0f, 24.0f});
 		model_->set_bounds({16.0f, 650.0f, 190.0f, 24.0f});
@@ -376,111 +786,90 @@ void PalotView::layout_children() {
 }
 
 void PalotView::start_demo(std::string project, std::string prompt) {
-	project_->set_text(std::move(project));
+	runtime_state_.project = std::move(project);
+	project_->set_text(runtime_state_.project);
+	sync_imported_projects();
 	send_prompt(prompt);
+}
+
+bool PalotView::invoke_imported_action(std::string_view action) {
+	return imported_root_ && imported_root_->invoke_bound_action(action);
+}
+
+void PalotView::flush_demo_projection() {
+	if (transcript_updates_.flush()) sync_imported_transcript();
+}
+
+void PalotView::sync_imported_projects() {
+	if (!imported_root_ || runtime_state_.project.empty()) return;
+	const auto directory = std::filesystem::path(runtime_state_.project).lexically_normal();
+	imported_root_->set_projects({{
+		.key = directory.string(),
+		.template_id = "project",
+		.values = {{"id", directory.string()}, {"project.name", directory.filename().string()},
+		           {"directory", directory.string()}, {"status", "active"}},
+	}});
 }
 
 void PalotView::load_visual_parity_fixture() {
 	transcript_->set_auto_follow(false);
+	imported_root_->set_transcript_auto_follow(false);
+	imported_root_->set_projects({
+		{.key = "/fixture/palot", .template_id = "project",
+		 .values = {{"id", "/fixture/palot"}, {"project.name", "palot"},
+		            {"directory", "/fixture/palot"}, {"status", "active"}}},
+		{.key = "/fixture/acme-api", .template_id = "project",
+		 .values = {{"id", "/fixture/acme-api"}, {"project.name", "acme-api"},
+		            {"directory", "/fixture/acme-api"}, {"status", "idle"}}},
+		{.key = "/fixture/landing-page", .template_id = "project",
+		 .values = {{"id", "/fixture/landing-page"}, {"project.name", "landing-page"},
+		            {"directory", "/fixture/landing-page"}, {"status", "idle"}}},
+	});
 	messages_.clear();
 	send_->set_visible(false);
 	cancel_->set_visible(false);
 	append_message("You",
-	               "Great! Now also add system preference detection so it defaults to the user's OS "
-	               "setting, and add a transition animation when switching themes.", false);
+	               "Add a dark mode toggle to the application settings page. It should persist the user's "
+	               "preference to localStorage and apply the theme immediately without a page reload.", false,
+	               "fixture-user-1", "user");
+	message_identities_["fixture-assistant-1"] = {
+		"assistant", "fixture-user-1",
+		{{"message.model", "anthropic.claude-opus-4-6"},
+		 {"message.duration", "4m 58s"}, {"message.cost", "$0.01"}}};
+	upsert_reasoning(R"({"id":"fixture-reasoning-1","messageID":"fixture-assistant-1","type":"reasoning","text":"Inspecting the settings implementation.","state":{"time":{"start":0,"end":2000}}})");
+	upsert_tool(R"({"id":"fixture-read-1","type":"tool","tool":"read","state":{"status":"running","input":{"path":"components/settings.tsx"},"time":{"start":0}}})", false);
+	upsert_tool(R"({"id":"fixture-read-1","type":"tool","tool":"read","state":{"status":"completed","input":{"path":"components/settings.tsx"},"time":{"start":0,"end":3000}}})", false);
+	upsert_tool(R"({"id":"fixture-edit-1","type":"tool","tool":"edit","state":{"status":"completed","input":{"path":"lib/theme.ts"},"time":{"start":0,"end":3000}}})", false);
+	upsert_tool(R"({"id":"fixture-edit-2","type":"tool","tool":"edit","state":{"status":"completed","input":{"path":"components/settings.tsx"},"time":{"start":0,"end":3000}}})", false);
 	append_message("OpenCode",
-	               "🧠 Thought for 2 seconds\n\n"
 	               "I've added the dark mode toggle to the settings page. Here's what I did:\n\n"
 	               "**Created `src/lib/theme.ts`** - Pure functions to resolve, apply, and persist the "
 	               "theme. Supports `light`, `dark`, and `system` (which reads `prefers-color-scheme`).\n\n"
 	               "**Updated `src/components/settings.tsx`** - Added a three-way toggle group so users "
 	               "can pick light, dark, or match their OS.\n\n"
-	               "The theme applies instantly via `data-theme` on the root element, no reload needed.\n\n"
-	               "›  Show 3 steps  ·  anthropic.claude-opus-4-6  ·  4m 58s  ·  $0.01\n\n"
-	               "anthropic.claude-opus-4-6  ·  4m 58s  ·  $0.01", false);
+	               "The theme applies instantly via `data-theme` on the root element, no reload needed.", false,
+	               "fixture-assistant-1", "assistant", "fixture-user-1");
 	append_message("You",
 	               "Great! Now also add system preference detection so it defaults to the user's OS "
-	               "setting, and add a transition animation when switching themes.", false);
-	append_message("OpenCode", "🧠 Thought for 2 seconds\n\n◌  Making edits…", false);
+	               "setting, and add a transition animation when switching themes.", false,
+	               "fixture-user-2", "user");
+	message_identities_["fixture-assistant-2"] = {"assistant", "fixture-user-2", {}};
+	upsert_reasoning(R"({"id":"fixture-reasoning-2","messageID":"fixture-assistant-2","type":"reasoning","text":"Making edits...","state":{"time":{"start":0,"end":2000}}})");
+	upsert_tool(R"({"id":"fixture-edit-running","type":"tool","tool":"edit","state":{"status":"running","input":{"path":"src/lib/theme.ts"}}})", false);
 	transcript_->set_scroll_y(54.0f);
+	imported_root_->set_transcript_scroll_y(0.0f);
 	status_ = "Streaming";
 	request_repaint();
 	if (on_demo_complete) on_demo_complete();
 }
 
 void PalotView::paint(pulp::canvas::Canvas& canvas) {
-	const auto b = local_bounds();
-	const float sidebar_width = b.width < 700.0f ? 0.0f : kSidebarWidth;
-	canvas.set_fill_color(pulp::canvas::Color::rgba8(20, 20, 20));
-	canvas.fill_rect(0, 0, b.width, b.height);
-	if (sidebar_width > 0.0f) {
-		canvas.set_fill_color(pulp::canvas::Color::rgba8(13, 13, 13));
-		canvas.fill_rect(0, 0, sidebar_width, b.height);
-	}
-	canvas.set_fill_color(pulp::canvas::Color::rgba8(10, 10, 10));
-	canvas.fill_rect(sidebar_width, 0, b.width - sidebar_width, kAppBarHeight);
-	if (sidebar_width > 0.0f) {
-	canvas.set_fill_color(pulp::canvas::Color::rgba8(255, 80, 86));
-	canvas.fill_circle(22.0f, 18.0f, 7.0f);
-	canvas.set_fill_color(pulp::canvas::Color::rgba8(255, 189, 46));
-	canvas.fill_circle(45.0f, 18.0f, 7.0f);
-	canvas.set_fill_color(pulp::canvas::Color::rgba8(39, 201, 63));
-	canvas.fill_circle(68.0f, 18.0f, 7.0f);
-	canvas.set_fill_color(pulp::canvas::Color::rgba8(205, 205, 205));
-	canvas.set_font("Inter", 13.0f);
-	canvas.fill_text("▣     +", 99.0f, 25.0f);
-	}
-	canvas.set_fill_color(pulp::canvas::Color::rgba8(237, 237, 237));
-	canvas.set_font("Inter", 13.0f);
-	canvas.fill_text("palot.", sidebar_width + 16.0f, 29.0f);
-	canvas.set_fill_color(pulp::canvas::Color::rgba8(166, 166, 166));
-	canvas.fill_text("|   palot  /", sidebar_width + 66.0f, 29.0f);
-	canvas.set_fill_color(pulp::canvas::Color::rgba8(237, 237, 237));
-	canvas.fill_text("Add dark mode toggle to settings", sidebar_width + 142.0f, 29.0f);
-	canvas.set_fill_color(pulp::canvas::Color::rgba8(120, 120, 120));
-	canvas.set_font("Inter", 12.0f);
-	if (b.width > 900.0f)
-		canvas.fill_text("+58  -2     ◷ 13m 30s  ·  ◉ $0.02  ·  ▥     Open⌄     >_     ×",
-		                 std::max(sidebar_width + 330.0f, b.width - 430.0f), 28.0f);
-	if (sidebar_width > 0.0f) {
-	canvas.set_fill_color(pulp::canvas::Color::rgba8(166, 166, 166));
-	canvas.fill_text("▣  Automations", 24.0f, 104.0f);
-	canvas.set_font("Inter", 12.0f);
-	canvas.fill_text("Active Now", 16.0f, 154.0f);
-	canvas.set_fill_color(pulp::canvas::Color::rgba8(8, 20, 32));
-	canvas.fill_rounded_rect(8.0f, 166.0f, 264.0f, 34.0f, 8.0f);
-	canvas.set_fill_color(pulp::canvas::Color::rgba8(237, 237, 237));
-	canvas.fill_text("◯  OpenCode chat", 20.0f, 188.0f);
-	canvas.set_fill_color(pulp::canvas::Color::rgba8(166, 166, 166));
-	canvas.fill_text("◉  Fix JWT token refresh race condition     now", 20.0f, 224.0f);
-	canvas.fill_text("Recent", 16.0f, 278.0f);
-	canvas.fill_text("○  Build hero section with animations       35m", 20.0f, 318.0f);
-	canvas.fill_text("○  Refactor database connection              45m", 20.0f, 354.0f);
-	canvas.fill_text("○  Add unit tests for auth middleware        2h", 20.0f, 390.0f);
-	canvas.fill_text("○  Update API documentation                  4h", 20.0f, 426.0f);
-	canvas.set_fill_color(pulp::canvas::Color::rgba8(36, 36, 36));
-	canvas.fill_rect(8.0f, 458.0f, kSidebarWidth - 16.0f, 1.0f);
-	canvas.set_fill_color(pulp::canvas::Color::rgba8(166, 166, 166));
-	canvas.fill_text("Projects                         ⌕  ⌘", 16.0f, 492.0f);
-	canvas.set_fill_color(pulp::canvas::Color::rgba8(237, 237, 237));
-	canvas.fill_text("›  palot", 20.0f, 528.0f);
-	canvas.fill_text("›  acme-api", 20.0f, 564.0f);
-	canvas.fill_text("›  landing-page", 20.0f, 600.0f);
-	canvas.set_fill_color(pulp::canvas::Color::rgba8(166, 166, 166));
-	canvas.fill_text("▣  This Mac", 20.0f, b.height - 64.0f);
-	canvas.fill_text("⚙  Settings", 20.0f, b.height - 24.0f);
-	}
-	if (!configuration_error_.empty()) {
-		canvas.set_fill_color(pulp::canvas::Color::rgba8(248, 113, 113));
-		canvas.fill_text(configuration_error_.substr(0, 32), sidebar_width + 16.0f, 50.0f);
-	}
-	canvas.set_fill_color(pulp::canvas::Color::rgba8(100, 100, 100));
-	canvas.fill_text("Local   esc interrupt", sidebar_width + 16.0f, b.height - 8.0f);
+	(void)canvas;
 }
 
 float PalotView::message_height(std::size_t index) const {
 	if (index >= messages_.size()) return 96.0f;
-	const auto& [role, text] = messages_[index];
+	const auto& text = messages_[index].text;
 	const float sidebar_width = local_bounds().width < 700.0f ? 0.0f : kSidebarWidth;
 	const float width = std::min(kContentMaxWidth,
 	                             std::max(240.0f, local_bounds().width - sidebar_width - 32.0f));
@@ -501,47 +890,163 @@ float PalotView::message_height(std::size_t index) const {
 	                  74.0f, 640.0f);
 }
 
-void PalotView::append_message(std::string role, std::string text, bool announce) {
+void PalotView::append_message(std::string role, std::string text, bool announce,
+	                           std::string message_id, std::string message_role,
+	                           std::string parent_message_id) {
 	const std::string announcement = role + ": " + text;
-	messages_.emplace_back(std::move(role), std::move(text));
+	const auto key = message_id.empty() ? role + "-" + std::to_string(messages_.size()) : message_id;
+	messages_.push_back({.key = key, .role = std::move(role), .text = std::move(text),
+	                     .message_role = std::move(message_role),
+	                     .message_id = std::move(message_id),
+	                     .parent_message_id = std::move(parent_message_id)});
 	const auto index = messages_.size() - 1;
 	transcript_->set_row_count(messages_.size());
 	transcript_->set_row_height(index, message_height(index));
 	transcript_->refresh_rows();
+	sync_imported_transcript();
 	if (announce)
 		pulp::view::announce_accessibility(announcement,
 			pulp::view::AnnouncementPriority::Polite);
+}
+
+void PalotView::upsert_reasoning(std::string payload) {
+	const auto part = nlohmann::json::parse(payload);
+	if (!part.is_object() || part.value("type", "") != "reasoning")
+		throw std::invalid_argument("OpenCode reasoning event is not a reasoning part");
+	const auto id = first_string(part, {"id"});
+	const auto message_id = first_string(part, {"messageID", "messageId"});
+	if (id.empty()) throw std::invalid_argument("OpenCode reasoning part has no stable identity");
+	std::string label = "Thought";
+	const auto& state = part.contains("state") ? part.at("state") : nlohmann::json::object();
+	const auto& time = state.is_object() && state.contains("time") ? state.at("time") :
+	                   part.contains("time") ? part.at("time") : nlohmann::json::object();
+	if (time.is_object() && time.contains("start") && time.contains("end") &&
+	    time.at("start").is_number() && time.at("end").is_number()) {
+		auto seconds = time.at("end").get<double>() - time.at("start").get<double>();
+		if (seconds > 100.0) seconds /= 1000.0;
+		label += " for " + std::to_string(std::max(0L, std::lround(seconds))) + " seconds";
+	}
+	auto found = std::ranges::find(messages_, id, &TranscriptEntry::key);
+	const auto values = std::unordered_map<std::string, std::string>{
+		{"reasoning.label", label}, {"reasoning.text", first_string(part, {"text"})}};
+	if (found == messages_.end()) {
+		messages_.push_back({.key = id, .role = "Reasoning", .text = std::move(payload),
+		                     .template_id = "reasoning", .message_role = "part",
+		                     .message_id = message_id, .values = values});
+	} else {
+		found->text = std::move(payload);
+		found->template_id = "reasoning";
+		found->values = values;
+		found->message_role = "part";
+		found->message_id = message_id;
+	}
+	transcript_->set_row_count(messages_.size());
+	transcript_->refresh_rows();
+	sync_imported_transcript();
+}
+
+void PalotView::upsert_tool(std::string payload, bool announce) {
+	const auto part = nlohmann::json::parse(payload);
+	const auto message_id = first_string(part, {"messageID", "messageId"});
+	const auto projected = project_tool_part(payload);
+	auto found = std::ranges::find(messages_, projected.id, &TranscriptEntry::key);
+	const auto values = std::unordered_map<std::string, std::string>{
+		{"tool.label", projected.label}, {"tool.subject", projected.subject},
+		{"tool.duration", projected.duration}, {"tool.status", projected.status},
+	};
+	if (found == messages_.end()) {
+		messages_.push_back({.key = projected.id, .role = "Tool", .text = std::move(payload),
+		                     .template_id = projected.template_id, .message_role = "part",
+		                     .message_id = message_id, .values = values});
+	} else {
+		found->text = std::move(payload);
+		found->template_id = projected.template_id;
+		found->values = values;
+		found->message_role = "part";
+		found->message_id = message_id;
+	}
+	transcript_->set_row_count(messages_.size());
+	const auto index = static_cast<std::size_t>(std::distance(messages_.begin(),
+		std::ranges::find(messages_, projected.id, &TranscriptEntry::key)));
+	transcript_->set_row_height(index, message_height(index));
+	transcript_->refresh_rows();
+	sync_imported_transcript();
+	if (announce)
+		pulp::view::announce_accessibility(projected.label + " " + projected.subject,
+		                                    pulp::view::AnnouncementPriority::Polite);
+}
+
+std::vector<pulp::view::ImportedListItem> PalotView::transcript_projection() const {
+	std::vector<TranscriptProjectionRow> projected;
+	projected.reserve(messages_.size());
+	for (const auto& message : messages_) {
+		auto parent = message.parent_message_id;
+		if (parent.empty()) {
+			if (const auto identity = message_identities_.find(message.message_id);
+			    identity != message_identities_.end()) parent = identity->second.parent_message_id;
+		}
+		auto values = message.values;
+		if (message.template_id.empty() && !values.contains("message.text"))
+			values["message.text"] = message.text;
+		if (const auto identity = message_identities_.find(message.message_id);
+		    identity != message_identities_.end())
+			for (const auto& [key, value] : identity->second.values) values[key] = value;
+		projected.push_back({.key = message.key,
+		                     .template_id = !message.template_id.empty() ? message.template_id :
+		                                    message.role == "You" ? "user" : "assistant",
+		                     .message_role = message.message_role,
+		                     .message_id = message.message_id,
+		                     .parent_message_id = std::move(parent),
+		                     .values = std::move(values)});
+	}
+	projected = project_transcript_turns(std::move(projected));
+	std::vector<pulp::view::ImportedListItem> rows;
+	rows.reserve(projected.size());
+	for (auto& row : projected)
+		rows.push_back({std::move(row.key), std::move(row.template_id), std::move(row.values)});
+	return rows;
+}
+
+void PalotView::sync_imported_transcript() {
+	if (!imported_root_) return;
+	imported_root_->set_transcript(transcript_projection());
+}
+
+void PalotView::schedule_imported_transcript_sync() {
+	if (!transcript_updates_.request()) return;
+	event_sink_->schedule_transcript_sync();
 }
 
 void PalotView::send_prompt(const std::string& prompt, bool retry) {
 	if (prompt.empty() || process_.running()) return;
 	std::string validation_error;
 	auto configuration = validate_project_configuration(
-	    {.project_path = project_->text(),
-	     .provider_id = provider_->text(),
-	     .model_id = model_->text(),
-	     .create_session = create_session_,
-	     .session_id = session_editor_->text()},
+	    {.project_path = runtime_state_.project,
+	     .provider_id = runtime_state_.provider,
+	     .model_id = runtime_state_.model,
+	     .create_session = runtime_state_.create_session,
+	     .session_id = runtime_state_.session},
 	    validation_error);
 	if (!configuration) {
 		set_configuration_error(std::move(validation_error));
 		return;
 	}
 	set_configuration_error("");
-	project_->set_text(configuration->canonical_project_path);
+	runtime_state_.project = configuration->canonical_project_path;
+	project_->set_text(runtime_state_.project);
 	const std::string prompt_value = prompt;
-	if (!process_.start({.project = configuration->canonical_project_path,
-	                    .prompt = prompt_value,
-	                    .session = configuration->session_id,
-	                    .failed_request_id = retry ? last_request_id_ : "",
-	                    .provider_id = configuration->provider_id,
-	                    .model_id = configuration->model_id},
+	const auto request = make_opencode_request(runtime_state_, configuration->canonical_project_path,
+	                                          prompt_value, retry ? last_request_id_ : "");
+	if (!process_.start(request,
 	               event_sink_)) {
 		set_configuration_error("Unable to start the OpenCode sidecar.");
 		return;
 	}
 	last_prompt_ = prompt_value;
 	append_message("You", prompt_value, false);
+	runtime_state_.composer_draft.clear();
+	runtime_state_.attachments.clear();
+	if (imported_root_) imported_root_->set_text_binding_value("composer.draft", "");
 	composer_->set_text("");
 	status_ = "Streaming";
 	request_repaint();
@@ -550,37 +1055,99 @@ void PalotView::send_prompt(const std::string& prompt, bool retry) {
 
 void PalotView::handle_event(std::string type, std::string value) {
 	if (type == "session") {
-		session_ = std::move(value);
-		session_editor_->set_text(session_);
-		create_session_ = false;
+		runtime_state_.session = std::move(value);
+		session_editor_->set_text(runtime_state_.session);
+		runtime_state_.create_session = false;
+	} else if (type == "message") {
+		try {
+			const auto info = nlohmann::json::parse(value);
+			const auto id = first_string(info, {"id"});
+			const auto role = first_string(info, {"role"});
+			const auto parent = first_string(info, {"parentID", "parentId"});
+			if (id.empty() || (role != "user" && role != "assistant"))
+				throw std::invalid_argument("message identity is incomplete");
+			message_identities_[id] = {role, parent, project_message_metadata(info)};
+			if (role == "user") {
+				auto pending = std::ranges::find_if(messages_, [](const auto& entry) {
+					return entry.role == "You" && entry.message_id.empty();
+				});
+				if (pending != messages_.end()) {
+					pending->key = id;
+					pending->message_id = id;
+					pending->message_role = role;
+				}
+			}
+			schedule_imported_transcript_sync();
+		} catch (const std::exception& error) {
+			set_configuration_error(std::string("Invalid OpenCode message identity: ") + error.what());
+		}
+	} else if (type == "session-action") {
+		try {
+			const auto result = nlohmann::json::parse(value);
+			if (result.value("action", "") == "session.fork") {
+				runtime_state_.session = result.at("value").value("id", "");
+				if (runtime_state_.session.empty())
+					throw std::invalid_argument("fork response has no session id");
+				session_editor_->set_text(runtime_state_.session);
+			}
+			set_configuration_error("");
+		} catch (const std::exception& error) {
+			set_configuration_error(std::string("Invalid OpenCode session action response: ") + error.what());
+		}
 	} else if (type == "text" && !value.empty()) {
-		if (!messages_.empty() && messages_.back().first == "OpenCode") {
-			messages_.back().second += value;
-			const auto index = messages_.size() - 1;
-			transcript_->set_row_height(index, message_height(index));
-			transcript_->refresh_rows();
-		} else {
-			append_message("OpenCode", std::move(value), false);
+		if (on_stream_delta) on_stream_delta();
+		try {
+			const auto delta = nlohmann::json::parse(value);
+			const auto message_id = first_string(delta, {"messageID", "messageId"});
+			if (message_id.empty()) throw std::invalid_argument("text delta has no message identity");
+			auto entry = std::ranges::find(messages_, message_id, &TranscriptEntry::message_id);
+			if (entry != messages_.end() && entry->role == "OpenCode") {
+				entry->text += delta.value("delta", "");
+				const auto index = static_cast<std::size_t>(std::distance(messages_.begin(), entry));
+				transcript_->set_row_height(index, message_height(index));
+				transcript_->refresh_rows();
+				schedule_imported_transcript_sync();
+			} else {
+				const auto identity = message_identities_.find(message_id);
+				const auto parent = identity == message_identities_.end() ? std::string{} :
+				                    identity->second.parent_message_id;
+				append_message("OpenCode", delta.value("delta", ""), false, message_id,
+				               "assistant", parent);
+			}
+		} catch (const std::exception& error) {
+			set_configuration_error(std::string("Invalid OpenCode text event: ") + error.what());
+		}
+	} else if (type == "reasoning") {
+		try {
+			upsert_reasoning(std::move(value));
+		} catch (const std::exception& error) {
+			set_configuration_error(std::string("Invalid OpenCode reasoning event: ") + error.what());
 		}
 	} else if (type == "tool") {
-		append_message("Tool", std::move(value), true);
+		try {
+			upsert_tool(std::move(value), true);
+		} catch (const std::exception& error) {
+			set_configuration_error(std::string("Invalid OpenCode tool event: ") + error.what());
+		}
 	} else if (type == "done") {
 		status_ = "Ready";
-		if (!messages_.empty() && messages_.back().first == "OpenCode")
+		if (!messages_.empty() && messages_.back().role == "OpenCode")
 			pulp::view::announce_accessibility(
-			    "OpenCode: " + accessibility_summary(messages_.back().second),
+			    "OpenCode: " + accessibility_summary(messages_.back().text),
 			    pulp::view::AnnouncementPriority::Polite);
 		persist();
 		if (on_demo_complete) on_demo_complete();
 	} else if (type == "error") {
 		status_ = value == "cancelled" ? "Cancelled" : "Error: " + value.substr(0, 80);
+		auto callback = std::move(on_demo_error);
+		if (callback) callback();
 	}
 	request_repaint();
 }
 
 void PalotView::choose_project_folder() {
 	auto selected = pulp::platform::FileDialog::choose_folder(
-	    "Choose a Palot project", project_->text());
+	    "Choose a Palot project", runtime_state_.project);
 	if (!selected) return;
 	std::string error;
 	auto canonical_path = validate_project_directory(*selected, error);
@@ -588,7 +1155,8 @@ void PalotView::choose_project_folder() {
 		set_configuration_error(std::move(error));
 		return;
 	}
-	project_->set_text(*canonical_path);
+	runtime_state_.project = *canonical_path;
+	project_->set_text(runtime_state_.project);
 	set_configuration_error("");
 	request_repaint();
 }
@@ -608,17 +1176,17 @@ void PalotView::persist() const {
 	std::filesystem::create_directories(path.parent_path(), error);
 	if (error) return;
 	std::vector<std::uint8_t> bytes(kStateMagic.begin(), kStateMagic.end());
-	append_string(bytes, session_);
-	append_string(bytes, project_->text());
-	append_string(bytes, provider_->text());
-	append_string(bytes, model_->text());
+	append_string(bytes, runtime_state_.session);
+	append_string(bytes, runtime_state_.project);
+	append_string(bytes, runtime_state_.provider);
+	append_string(bytes, runtime_state_.model);
 	const auto count = static_cast<std::uint32_t>(
 		std::min<std::size_t>(messages_.size(), kMaxMessages));
 	for (int shift = 0; shift < 32; shift += 8)
 		bytes.push_back(static_cast<std::uint8_t>((count >> shift) & 0xff));
 	for (std::size_t index = messages_.size() - count; index < messages_.size(); ++index) {
-		append_string(bytes, messages_[index].first);
-		append_string(bytes, messages_[index].second);
+		append_string(bytes, messages_[index].role);
+		append_string(bytes, messages_[index].text);
 		if (bytes.size() > kMaxStateBytes) return;
 	}
 	const auto temporary = path.string() + ".tmp";
@@ -649,15 +1217,18 @@ void PalotView::restore() {
 	std::string project;
 	std::string provider;
 	std::string model;
-	if (!read_string(bytes, cursor, session_) || !read_string(bytes, cursor, project) ||
+	if (!read_string(bytes, cursor, runtime_state_.session) || !read_string(bytes, cursor, project) ||
 	    !read_string(bytes, cursor, provider) || !read_string(bytes, cursor, model) ||
 	    cursor + 4 > bytes.size()) return;
-	if (!project.empty()) project_->set_text(project);
-	if (!provider.empty()) provider_->set_text(provider);
-	if (!model.empty()) model_->set_text(model);
-	if (!session_.empty()) {
-		session_editor_->set_text(session_);
-		create_session_ = false;
+	if (!project.empty()) runtime_state_.project = project;
+	if (!provider.empty()) runtime_state_.provider = provider;
+	if (!model.empty()) runtime_state_.model = model;
+	project_->set_text(runtime_state_.project);
+	provider_->set_text(runtime_state_.provider);
+	model_->set_text(runtime_state_.model);
+	if (!runtime_state_.session.empty()) {
+		session_editor_->set_text(runtime_state_.session);
+		runtime_state_.create_session = false;
 	}
 	std::uint32_t count = 0;
 	for (int shift = 0; shift < 32; shift += 8)
@@ -670,7 +1241,20 @@ void PalotView::restore() {
 			messages_.clear();
 			return;
 		}
-		messages_.emplace_back(std::move(role), std::move(text));
-		if (messages_.back().first == "You") last_prompt_ = messages_.back().second;
+		const auto key = role + "-restored-" + std::to_string(messages_.size());
+		messages_.push_back({.key = key, .role = std::move(role), .text = std::move(text)});
+		if (messages_.back().role == "Tool") {
+			try {
+				const auto tool = project_tool_part(messages_.back().text);
+				messages_.back().key = tool.id;
+				messages_.back().template_id = tool.template_id;
+				messages_.back().values = {{"tool.label", tool.label}, {"tool.subject", tool.subject},
+				                           {"tool.duration", tool.duration}, {"tool.status", tool.status}};
+			} catch (const std::exception&) {
+				messages_.pop_back();
+				continue;
+			}
+		}
+		if (messages_.back().role == "You") last_prompt_ = messages_.back().text;
 	}
 }

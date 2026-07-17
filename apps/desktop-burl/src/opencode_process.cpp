@@ -7,8 +7,10 @@
 #include <csignal>
 #include <cstring>
 #include <filesystem>
+#include <fcntl.h>
 #include <optional>
 #include <spawn.h>
+#include <poll.h>
 #include <sys/wait.h>
 #include <unistd.h>
 
@@ -110,11 +112,27 @@ std::string json_error(const Json& result) {
 
 struct OpenCodeProcess::State {
 	explicit State(Options value) : options(std::move(value)) {}
+	struct PendingRequest {
+		std::uint64_t generation = 0;
+		OpenCodeRequest request;
+		std::weak_ptr<OpenCodeEventSink> sink;
+	};
+	struct PendingControl {
+		std::uint64_t generation = 0;
+		std::string action;
+		std::string message_id;
+		std::weak_ptr<OpenCodeEventSink> sink;
+	};
 	Options options;
 	std::atomic<bool> running{false};
+	std::atomic<bool> connection_alive{false};
 	std::atomic<bool> cancelled{false};
 	std::atomic<std::uint64_t> generation{0};
 	std::mutex process_mutex;
+	std::condition_variable changed;
+	std::deque<PendingRequest> requests;
+	std::deque<PendingControl> controls;
+	bool shutdown = false;
 	pid_t pid = -1;
 	int input_fd = -1;
 	std::string project_id;
@@ -131,7 +149,21 @@ OpenCodeProcess::OpenCodeProcess(Options options)
 OpenCodeProcess::OpenCodeProcess() : OpenCodeProcess(Options{}) {}
 
 OpenCodeProcess::~OpenCodeProcess() {
-	cancel();
+	if (state_->running.load()) {
+		cancel();
+		const auto deadline = std::chrono::steady_clock::now() + std::chrono::seconds(5);
+		while (state_->running.load() && std::chrono::steady_clock::now() < deadline)
+			std::this_thread::sleep_for(std::chrono::milliseconds(10));
+		if (state_->running.load()) {
+			std::scoped_lock lock(state_->process_mutex);
+			if (state_->pid > 0) ::kill(state_->pid, SIGTERM);
+		}
+	}
+	{
+		std::scoped_lock lock(state_->process_mutex);
+		state_->shutdown = true;
+	}
+	state_->changed.notify_all();
 	if (worker_.joinable()) worker_.join();
 }
 
@@ -158,12 +190,30 @@ bool OpenCodeProcess::start(OpenCodeRequest request,
 	                        std::weak_ptr<OpenCodeEventSink> sink) {
 	if (request.project.empty() || request.prompt.empty() || sink.expired()) return false;
 	if (state_->running.exchange(true)) return false;
-	if (worker_.joinable()) worker_.join();
+	if (worker_.joinable() && !state_->connection_alive.load()) worker_.join();
 	state_->cancelled = false;
 	const auto generation = state_->generation.fetch_add(1) + 1;
-	worker_ = std::jthread([state = state_, generation, request = std::move(request), sink] {
-		run(std::move(state), generation, std::move(request), sink);
-	});
+	{
+		std::scoped_lock lock(state_->process_mutex);
+		state_->requests.push_back({generation, std::move(request), sink});
+	}
+	if (!worker_.joinable()) worker_ = std::jthread([state = state_] { run(state); });
+	state_->changed.notify_one();
+	return true;
+}
+
+bool OpenCodeProcess::session_action(std::string action, std::string message_id,
+	                                 std::weak_ptr<OpenCodeEventSink> sink) {
+	if ((action != "session.fork" && action != "session.revert") ||
+	    message_id.empty() || sink.expired() || !state_->connection_alive.load() ||
+	    state_->running.load()) return false;
+	{
+		std::scoped_lock lock(state_->process_mutex);
+		if (state_->project_id.empty() || state_->session_id.empty()) return false;
+		state_->controls.push_back({state_->generation.load(), std::move(action),
+		                            std::move(message_id), sink});
+	}
+	state_->changed.notify_one();
 	return true;
 }
 
@@ -183,46 +233,55 @@ void OpenCodeProcess::cancel() {
 			                   {"sessionId", state->session_id},
 			                   {"requestId", state->request_id}}}}));
 		}
-		write_all(state->input_fd,
-		          frame({{"version", 1},
-		                 {"type", "shutdown"},
-		                 {"id", "shutdown-" + std::to_string(state->generation.load())}}));
 	}
-	if (state->pid > 0) ::kill(state->pid, SIGTERM);
 }
 
-void OpenCodeProcess::run(std::shared_ptr<State> state, std::uint64_t generation,
-	                      OpenCodeRequest request,
-	                      std::weak_ptr<OpenCodeEventSink> sink) {
+void OpenCodeProcess::run(std::shared_ptr<State> state) {
 	int input_pipe[2]{-1, -1};
 	int output_pipe[2]{-1, -1};
 	int error_pipe[2]{-1, -1};
 	pid_t pid = -1;
 	std::thread stderr_reader;
+	std::atomic<bool> stop_stderr_reader{false};
 	std::string stderr_text;
-	auto finish = [&](std::string type, std::string value) {
+	auto finish_connection = [&] {
 		if (pid > 0) wait_for_child(pid);
+		stop_stderr_reader = true;
 		if (stderr_reader.joinable()) stderr_reader.join();
 		for (int fd : {input_pipe[0], input_pipe[1], output_pipe[0], output_pipe[1],
 		               error_pipe[0], error_pipe[1]})
 			if (fd >= 0) ::close(fd);
 		{
 			std::scoped_lock lock(state->process_mutex);
-			if (state->generation.load() == generation) {
-				state->pid = -1;
-				state->input_fd = -1;
-				state->project_id.clear();
-				state->session_id.clear();
-			}
+			state->pid = -1;
+			state->input_fd = -1;
+			state->project_id.clear();
+			state->session_id.clear();
 		}
+	};
+	auto fail_pending = [&](std::string value) {
+		std::deque<State::PendingRequest> pending_requests;
+		{
+			std::scoped_lock lock(state->process_mutex);
+			pending_requests.swap(state->requests);
+		}
+		for (auto& pending_request : pending_requests)
+			emit(pending_request.sink, pending_request.generation, "error", value);
 		state->running = false;
-		emit(sink, generation, std::move(type), std::move(value));
 	};
 
 	if (::pipe(input_pipe) || ::pipe(output_pipe) || ::pipe(error_pipe)) {
-		finish("error", std::strerror(errno));
+		fail_pending(std::strerror(errno));
+		finish_connection();
 		return;
 	}
+#if defined(__APPLE__)
+	if (::fcntl(input_pipe[1], F_SETNOSIGPIPE, 1) != 0) {
+		fail_pending(std::strerror(errno));
+		finish_connection();
+		return;
+	}
+#endif
 	posix_spawn_file_actions_t actions;
 	posix_spawn_file_actions_init(&actions);
 	posix_spawn_file_actions_adddup2(&actions, input_pipe[0], STDIN_FILENO);
@@ -242,7 +301,8 @@ void OpenCodeProcess::run(std::shared_ptr<State> state, std::uint64_t generation
 	::close(error_pipe[1]);
 	error_pipe[1] = -1;
 	if (spawn_error != 0) {
-		finish("error", std::strerror(spawn_error));
+		fail_pending(std::strerror(spawn_error));
+		finish_connection();
 		return;
 	}
 	{
@@ -250,20 +310,19 @@ void OpenCodeProcess::run(std::shared_ptr<State> state, std::uint64_t generation
 		state->pid = pid;
 		state->input_fd = input_pipe[1];
 	}
-	stderr_reader = std::thread([fd = error_pipe[0], &stderr_text] {
+	stderr_reader = std::thread([fd = error_pipe[0], &stderr_text, &stop_stderr_reader] {
 		std::array<char, 1024> bytes{};
-		while (stderr_text.size() < 8192) {
+		while (!stop_stderr_reader.load() && stderr_text.size() < 8192) {
+			pollfd descriptor{fd, POLLIN, 0};
+			const auto ready = ::poll(&descriptor, 1, 100);
+			if (ready == 0) continue;
+			if (ready < 0) { if (errno == EINTR) continue; break; }
+			if (!(descriptor.revents & (POLLIN | POLLHUP))) break;
 			const auto count = ::read(fd, bytes.data(), bytes.size());
 			if (count <= 0) break;
 			stderr_text.append(bytes.data(), static_cast<std::size_t>(count));
 		}
 	});
-	if (state->cancelled.load()) {
-		::kill(pid, SIGTERM);
-		finish("error", "cancelled");
-		return;
-	}
-
 	std::string pending;
 	auto next = [&]() -> std::optional<Json> {
 		auto line = read_line(output_pipe[0], pending, state->options.max_frame_bytes);
@@ -273,7 +332,8 @@ void OpenCodeProcess::run(std::shared_ptr<State> state, std::uint64_t generation
 		return parsed;
 	};
 	auto send = [&](const Json& value) {
-		if (!write_all(input_pipe[1], frame(value)))
+		std::scoped_lock lock(state->process_mutex);
+		if (!write_all(state->input_fd, frame(value)))
 			throw std::runtime_error("failed to write sidecar command");
 	};
 	auto response = [&](std::string_view id) -> Json {
@@ -291,107 +351,182 @@ void OpenCodeProcess::run(std::shared_ptr<State> state, std::uint64_t generation
 		auto ready = next();
 		if (!ready || ready->value("type", "") != "ready")
 			throw std::runtime_error("sidecar did not send ready frame");
-		const auto prefix = std::to_string(generation) + "-";
+		state->connection_alive = true;
+		const std::string connection_prefix = "connection-";
+		std::string server_directory;
+		{
+			std::unique_lock lock(state->process_mutex);
+			state->changed.wait(lock, [&] { return state->shutdown || !state->requests.empty(); });
+			if (state->shutdown && state->requests.empty()) {
+				finish_connection();
+				return;
+			}
+			server_directory = state->requests.front().request.project;
+		}
 		send({{"version", 1},
 		      {"type", "command"},
-		      {"id", prefix + "server"},
-		      {"command", {{"type", "server.start"}, {"directory", request.project}}}});
-		auto server = response(prefix + "server");
+		      {"id", connection_prefix + "server"},
+		      {"command", {{"type", "server.start"}, {"directory", server_directory}}}});
+		auto server = response(connection_prefix + "server");
 		if (!server.value("ok", false)) throw std::runtime_error(json_error(server));
-
-		send({{"version", 1},
-		      {"type", "command"},
-		      {"id", prefix + "project"},
-		      {"command", {{"type", "project.select"}, {"directory", request.project}}}});
-		auto project = response(prefix + "project");
-		if (!project.value("ok", false)) throw std::runtime_error(json_error(project));
-		{
-			std::scoped_lock lock(state->process_mutex);
-			state->project_id = project.at("value").at("id").get<std::string>();
-		}
-
-		const bool create = request.session.empty();
-		send({{"version", 1},
-		      {"type", "command"},
-		      {"id", prefix + "session"},
-		      {"command",
-		       create ? Json{{"type", "session.create"}, {"projectId", state->project_id}}
-		              : Json{{"type", "session.open"},
-		                     {"projectId", state->project_id},
-		                     {"sessionId", request.session}}}});
-		auto session = response(prefix + "session");
-		if (!session.value("ok", false)) throw std::runtime_error(json_error(session));
-		{
-			std::scoped_lock lock(state->process_mutex);
-			state->session_id = session.at("value").at("id").get<std::string>();
-		}
-		emit(sink, generation, "session", state->session_id);
-
 		send({{"version", 1},
 		      {"type", "subscribe"},
-		      {"id", prefix + "events"},
-		      {"subscription",
-		       {{"projectId", state->project_id}, {"sessionId", state->session_id}}}});
-		std::unordered_map<std::string, std::string> part_types;
+		      {"id", connection_prefix + "events"},
+		      {"subscription", Json::object()}});
 		for (;;) {
 			auto subscribed = next();
 			if (!subscribed) throw std::runtime_error("sidecar closed before subscription");
 			if (subscribed->value("type", "") == "subscribed") break;
 		}
 
-		{
-			std::scoped_lock lock(state->process_mutex);
-			state->request_id = prefix + "prompt";
-		}
-		const bool retry = !request.failed_request_id.empty();
-		Json prompt_command = {{"type", retry ? "prompt.retry" : "prompt.send"},
-		                       {"projectId", state->project_id},
-		                       {"sessionId", state->session_id},
-		                       {"requestId", state->request_id},
-		                       {"text", request.prompt},
-		                       {"model",
-		                        {{"providerId", request.provider_id},
-		                         {"modelId", request.model_id}}}};
-		if (retry) prompt_command["failedRequestId"] = request.failed_request_id;
-		send({{"version", 1},
-		      {"type", "command"},
-		      {"id", state->request_id},
-		      {"command", std::move(prompt_command)}});
-
 		for (;;) {
-			if (state->cancelled.load()) throw std::runtime_error("cancelled");
-			auto value = next();
-			if (!value) throw std::runtime_error("sidecar stream ended");
-			const auto type = value->value("type", "");
-			if (type == "response" && value->value("id", "") == state->request_id) {
-				auto result = value->at("result");
-				if (!result.value("ok", false)) throw std::runtime_error(json_error(result));
-				continue;
+			State::PendingRequest current;
+			{
+				std::unique_lock lock(state->process_mutex);
+				state->changed.wait(lock, [&] {
+					return state->shutdown || !state->requests.empty() || !state->controls.empty();
+				});
+				if (state->shutdown && state->requests.empty() && state->controls.empty()) break;
+				if (!state->controls.empty()) {
+					auto control = std::move(state->controls.front());
+					state->controls.pop_front();
+					const auto control_id = "control-" + std::to_string(control.generation) + "-" +
+					                        std::to_string(control.message_id.size());
+					const auto project_id = state->project_id;
+					const auto session_id = state->session_id;
+					lock.unlock();
+					try {
+						send({{"version", 1}, {"type", "command"}, {"id", control_id},
+						      {"command", {{"type", control.action}, {"projectId", project_id},
+						                   {"sessionId", session_id}, {"messageId", control.message_id}}}});
+						auto result = response(control_id);
+						if (!result.value("ok", false)) throw std::runtime_error(json_error(result));
+						if (control.action == "session.fork") {
+							const auto forked_id = result.at("value").value("id", "");
+							if (forked_id.empty()) throw std::runtime_error("OpenCode fork returned no session id");
+							std::scoped_lock state_lock(state->process_mutex);
+							state->session_id = forked_id;
+						}
+						emit(control.sink, control.generation, "session-action",
+						     Json{{"action", control.action}, {"value", result.at("value")}}.dump());
+					} catch (const std::exception& error) {
+						emit(control.sink, control.generation, "error", error.what());
+					}
+					continue;
+				}
+				current = std::move(state->requests.front());
+				state->requests.pop_front();
 			}
-			if (type != "event") continue;
-			const auto& sdk = value->at("event").at("payload").at("event");
-			const auto sdk_type = sdk.value("type", "");
-			const auto& properties = sdk.at("properties");
-			if (sdk_type == "message.part.updated") {
-				const auto& part = properties.at("part");
-				part_types[part.value("id", "")] = part.value("type", "");
-				if (part.value("type", "") == "tool")
-					emit(sink, generation, "tool", part.dump());
-			} else if (sdk_type == "message.part.delta" &&
-			           properties.value("field", "") == "text") {
-				const auto part_id = properties.value("partID", "");
-				if (part_types[part_id] == "text")
-					emit(sink, generation, "text", properties.value("delta", ""));
+			const auto generation = current.generation;
+			auto& request = current.request;
+			auto sink = current.sink;
+			const auto prefix = std::to_string(generation) + "-";
+			std::unordered_map<std::string, std::string> part_types;
+			bool transport_failed = false;
+			try {
+				send({{"version", 1}, {"type", "command"}, {"id", prefix + "project"},
+				      {"command", {{"type", "project.select"}, {"directory", request.project}}}});
+				auto project = response(prefix + "project");
+				if (!project.value("ok", false)) throw std::runtime_error(json_error(project));
+				{
+					std::scoped_lock lock(state->process_mutex);
+					state->project_id = project.at("value").at("id").get<std::string>();
+				}
+				const bool create = request.session.empty();
+				send({{"version", 1}, {"type", "command"}, {"id", prefix + "session"},
+				      {"command", create ? Json{{"type", "session.create"}, {"projectId", state->project_id}}
+				                         : Json{{"type", "session.open"}, {"projectId", state->project_id}, {"sessionId", request.session}}}});
+				auto session = response(prefix + "session");
+				if (!session.value("ok", false)) throw std::runtime_error(json_error(session));
+				{
+					std::scoped_lock lock(state->process_mutex);
+					state->session_id = session.at("value").at("id").get<std::string>();
+					state->request_id = prefix + "prompt";
+				}
+				emit(sink, generation, "session", state->session_id);
+				const bool retry = !request.failed_request_id.empty();
+				Json prompt_command = {{"type", retry ? "prompt.retry" : "prompt.send"}, {"projectId", state->project_id},
+				                       {"sessionId", state->session_id}, {"requestId", state->request_id}, {"text", request.prompt},
+				                       {"model", {{"providerId", request.provider_id}, {"modelId", request.model_id}}}};
+				if (!request.attachments.empty()) {
+					prompt_command["files"] = Json::array();
+					for (const auto& attachment : request.attachments)
+						prompt_command["files"].push_back({{"type", "file"},
+						                                   {"url", attachment.url},
+						                                   {"mediaType", attachment.media_type},
+						                                   {"filename", attachment.filename}});
+				}
+				if (retry) prompt_command["failedRequestId"] = request.failed_request_id;
+				send({{"version", 1}, {"type", "command"}, {"id", state->request_id}, {"command", std::move(prompt_command)}});
+				if (state->cancelled.load())
+					send({{"version", 1}, {"type", "command"}, {"id", "cancel-" + std::to_string(generation)},
+					      {"command", {{"type", "prompt.cancel"}, {"projectId", state->project_id},
+					                   {"sessionId", state->session_id}, {"requestId", state->request_id}}}});
+				for (;;) {
+					auto value = next();
+					if (!value) throw std::runtime_error("sidecar stream ended");
+					const auto type = value->value("type", "");
+					if (state->cancelled.load()) {
+						const auto cancel_id = "cancel-" + std::to_string(generation);
+						if (type == "response" && value->value("id", "") == cancel_id)
+							throw std::runtime_error("cancelled");
+						continue;
+					}
+					if (type == "response" && value->value("id", "") == state->request_id) {
+						auto result = value->at("result");
+						if (!result.value("ok", false)) throw std::runtime_error(json_error(result));
+						continue;
+					}
+					if (type != "event") continue;
+					const auto& envelope = value->at("event");
+					if ((envelope.contains("projectId") &&
+					     envelope.value("projectId", "") != state->project_id) ||
+					    (envelope.contains("sessionId") &&
+					     envelope.value("sessionId", "") != state->session_id))
+						continue;
+					const auto& sdk = envelope.at("payload").at("event");
+					const auto sdk_type = sdk.value("type", "");
+					if (!sdk.contains("properties") || !sdk.at("properties").is_object()) continue;
+					const auto& properties = sdk.at("properties");
+					if (sdk_type == "message.updated") {
+						const auto& info = properties.at("info");
+						if (info.is_object()) emit(sink, generation, "message", info.dump());
+					} else if (sdk_type == "message.part.updated") {
+						const auto& part = properties.at("part");
+						part_types[part.value("id", "")] = part.value("type", "");
+						if (part.value("type", "") == "tool") emit(sink, generation, "tool", part.dump());
+						else if (part.value("type", "") == "reasoning")
+							emit(sink, generation, "reasoning", part.dump());
+					} else if (sdk_type == "message.part.delta" && properties.value("field", "") == "text") {
+						if (part_types[properties.value("partID", "")] == "text")
+							emit(sink, generation, "text",
+							     Json{{"messageID", properties.value("messageID", "")},
+							          {"partID", properties.value("partID", "")},
+							          {"delta", properties.value("delta", "")}}.dump());
+					} else if (sdk_type == "session.idle") break;
+					else if (sdk_type == "session.error") throw std::runtime_error("OpenCode session error");
+				}
+				state->running = false;
+				emit(sink, generation, "done", "");
+			} catch (const std::exception& error) {
+				const std::string message = error.what();
+				transport_failed = message == "sidecar stream ended" ||
+				                   message == "failed to write sidecar command" ||
+				                   message.find("frame exceeds") != std::string::npos;
+				if (transport_failed) state->connection_alive = false;
+				state->running = false;
+				emit(sink, generation, "error", state->cancelled.load() ? "cancelled" : error.what());
 			}
-			else if (sdk_type == "session.idle")
-				break;
-			else if (sdk_type == "session.error")
-				throw std::runtime_error("OpenCode session error");
+			if (transport_failed) break;
 		}
-		send({{"version", 1}, {"type", "shutdown"}, {"id", prefix + "shutdown"}});
-		finish("done", "");
+		if (state->input_fd >= 0)
+			send({{"version", 1}, {"type", "shutdown"}, {"id", connection_prefix + "shutdown"}});
+		state->connection_alive = false;
+		finish_connection();
 	} catch (const std::exception& error) {
 		::kill(pid, SIGTERM);
-		finish("error", state->cancelled.load() ? "cancelled" : error.what());
+		state->connection_alive = false;
+		fail_pending(error.what());
+		finish_connection();
 	}
 }

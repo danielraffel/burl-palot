@@ -58,13 +58,19 @@ if(BURL_PALOT_ENABLE_FRAMEWORK)
 	burl_add_app(burl-palot
 		SOURCES
 			src/main.cpp
+			src/imported_root_host.cpp
 			src/opencode_process.cpp
 			src/project_config.cpp
 			src/palot_view.cpp
+			src/transcript_turn_projection.cpp
 		APP_NAME "Palot"
 		BUNDLE_ID "com.palot.burl"
 		VERSION "0.1.0")
 	target_link_libraries(burl-palot PRIVATE nlohmann_json::nlohmann_json)
+	set_property(TARGET burl-palot APPEND PROPERTY LINK_DEPENDS
+		"${CMAKE_CURRENT_SOURCE_DIR}/resources/import/main-chat.observed.design-ir.v1.json"
+		"${CMAKE_CURRENT_SOURCE_DIR}/contracts/main-chat.application-bindings.v1.json"
+		"${CMAKE_CURRENT_SOURCE_DIR}/contracts/main-chat.source-binding-policy.v1.json")
 
 	set(PALOT_SIDECAR_NAME "palot-opencode-sidecar")
 	set(PALOT_SIDECAR_BUILD_DIR "${CMAKE_CURRENT_BINARY_DIR}/sidecar")
@@ -168,6 +174,19 @@ if(BURL_PALOT_ENABLE_FRAMEWORK)
 
 	add_custom_command(TARGET burl-palot POST_BUILD
 		COMMAND "${CMAKE_COMMAND}" -E make_directory
+			"$<TARGET_BUNDLE_DIR:burl-palot>/Contents/Resources/import"
+		COMMAND "${CMAKE_COMMAND}" -E make_directory
+			"$<TARGET_BUNDLE_DIR:burl-palot>/Contents/Resources/contracts"
+		COMMAND "${CMAKE_COMMAND}" -E copy
+			"${CMAKE_CURRENT_SOURCE_DIR}/resources/import/main-chat.observed.design-ir.v1.json"
+			"$<TARGET_BUNDLE_DIR:burl-palot>/Contents/Resources/import/main-chat.observed.design-ir.v1.json"
+		COMMAND "${CMAKE_COMMAND}" -E copy
+			"${CMAKE_CURRENT_SOURCE_DIR}/contracts/main-chat.application-bindings.v1.json"
+			"$<TARGET_BUNDLE_DIR:burl-palot>/Contents/Resources/contracts/main-chat.application-bindings.v1.json"
+		COMMAND "${CMAKE_COMMAND}" -E copy
+			"${CMAKE_CURRENT_SOURCE_DIR}/contracts/source-window.browser-window.v1.json"
+			"$<TARGET_BUNDLE_DIR:burl-palot>/Contents/Resources/contracts/source-window.browser-window.v1.json"
+		COMMAND "${CMAKE_COMMAND}" -E make_directory
 			"$<TARGET_BUNDLE_DIR:burl-palot>/Contents/Resources/bin"
 		COMMAND "${CMAKE_COMMAND}" -E copy "${PALOT_SIDECAR_OUTPUT}"
 			"$<TARGET_BUNDLE_DIR:burl-palot>/Contents/Resources/bin/${PALOT_SIDECAR_NAME}"
@@ -211,13 +230,151 @@ if(BURL_PALOT_ENABLE_FRAMEWORK)
 			test/project_config_test.cpp
 			src/project_config.cpp)
 		target_include_directories(palot-project-config-test PRIVATE src)
+		add_executable(palot-source-aware-slice-test
+			test/source_aware_chat_slice_test.cpp
+			src/source_aware_chat_slice.cpp)
+		target_include_directories(palot-source-aware-slice-test PRIVATE src)
+		target_link_libraries(palot-source-aware-slice-test PRIVATE
+			nlohmann_json::nlohmann_json pulp-view pulp-state)
+		add_executable(palot-transcript-turn-projection-test
+			test/transcript_turn_projection_test.cpp
+			src/transcript_turn_projection.cpp)
+		target_include_directories(palot-transcript-turn-projection-test PRIVATE src)
+		add_executable(palot-authored-theme-test test/authored_theme_test.cpp)
+		target_link_libraries(palot-authored-theme-test PRIVATE pulp-view)
+		add_executable(palot-phase-b-native-component test/phase_b_native_component.cpp)
+		target_link_libraries(palot-phase-b-native-component PRIVATE
+			nlohmann_json::nlohmann_json pulp-view)
+		if(BURL_SOURCE_DIR AND EXISTS
+			"${BURL_SOURCE_DIR}/core/view/include/pulp/view/application_binding_manifest.hpp")
+			add_executable(palot-application-binding-manifest-test
+				test/application_binding_manifest_test.cpp)
+			target_link_libraries(palot-application-binding-manifest-test PRIVATE pulp-view)
+			add_test(NAME palot-application-binding-manifest
+				COMMAND palot-application-binding-manifest-test
+					"${CMAKE_CURRENT_SOURCE_DIR}/contracts/main-chat.application-bindings.v1.json")
+		endif()
 		add_test(NAME palot-opencode-process
 			COMMAND palot-opencode-process-test
 				"${CMAKE_CURRENT_SOURCE_DIR}/test/fake_sidecar.py"
 				"${PALOT_SIDECAR_OUTPUT}")
 		add_test(NAME palot-project-config COMMAND palot-project-config-test)
+		add_test(NAME palot-source-aware-slice
+			COMMAND palot-source-aware-slice-test
+				"${CMAKE_CURRENT_SOURCE_DIR}/test/fixtures/source-aware-stream.json")
+		add_test(NAME palot-transcript-turn-projection
+			COMMAND palot-transcript-turn-projection-test)
+		add_test(NAME palot-authored-theme
+			COMMAND palot-authored-theme-test
+				"${CMAKE_CURRENT_SOURCE_DIR}/resources/tokens/palot-authored-theme.sidecar.json")
+		find_program(PALOT_PYTHON3_EXECUTABLE python3 REQUIRED)
+		add_test(NAME palot-authored-theme-generation
+			COMMAND "${PALOT_PYTHON3_EXECUTABLE}"
+				"${CMAKE_CURRENT_SOURCE_DIR}/scripts/generate-authored-theme-sidecar.py"
+				--repo "${CMAKE_CURRENT_SOURCE_DIR}/../.."
+				--check "${CMAKE_CURRENT_SOURCE_DIR}/resources/tokens/palot-authored-theme.sidecar.json")
+		add_executable(palot-observed-design-ir-test
+			test/observed_design_ir_test.cpp)
+		target_link_libraries(palot-observed-design-ir-test PRIVATE pulp-view)
+		add_test(NAME palot-observed-design-ir
+			COMMAND palot-observed-design-ir-test
+				"${CMAKE_CURRENT_SOURCE_DIR}/resources/import/main-chat.observed.design-ir.v1.json")
+		add_executable(palot-imported-root-host-test
+			test/imported_root_host_test.cpp
+			src/imported_root_host.cpp)
+		target_include_directories(palot-imported-root-host-test PRIVATE src)
+		target_compile_definitions(palot-imported-root-host-test PRIVATE
+			PALOT_RESOURCE_SOURCE_ROOT="${CMAKE_CURRENT_SOURCE_DIR}/resources")
+		target_link_libraries(palot-imported-root-host-test PRIVATE pulp-view)
+		add_test(NAME palot-imported-root-host
+			COMMAND palot-imported-root-host-test
+				"${CMAKE_CURRENT_SOURCE_DIR}/resources/import/main-chat.observed.design-ir.v1.json"
+				"${CMAKE_CURRENT_SOURCE_DIR}/contracts/main-chat.application-bindings.v1.json")
+		add_executable(palot-native-interaction-execution-test
+			test/native_interaction_execution_test.cpp src/imported_root_host.cpp)
+		target_include_directories(palot-native-interaction-execution-test PRIVATE src)
+		target_compile_definitions(palot-native-interaction-execution-test PRIVATE
+			PALOT_RESOURCE_SOURCE_ROOT="${CMAKE_CURRENT_SOURCE_DIR}/resources")
+		target_link_libraries(palot-native-interaction-execution-test PRIVATE pulp-view)
+		add_test(NAME palot-native-interaction-execution
+			COMMAND palot-native-interaction-execution-test
+				"${CMAKE_CURRENT_SOURCE_DIR}/resources/import/main-chat.observed.design-ir.v1.json"
+				"${CMAKE_CURRENT_SOURCE_DIR}/contracts/main-chat.application-bindings.v1.json")
+		add_executable(palot-view-interaction-state-test
+			test/palot_view_interaction_state_test.cpp
+			src/palot_view.cpp src/imported_root_host.cpp src/opencode_process.cpp src/project_config.cpp
+			src/transcript_turn_projection.cpp)
+		target_include_directories(palot-view-interaction-state-test PRIVATE src)
+		target_compile_definitions(palot-view-interaction-state-test PRIVATE
+			PALOT_RESOURCE_SOURCE_ROOT="${CMAKE_CURRENT_SOURCE_DIR}/resources")
+		target_link_libraries(palot-view-interaction-state-test PRIVATE
+			nlohmann_json::nlohmann_json pulp-view pulp-events pulp-platform)
+		add_test(NAME palot-view-interaction-state COMMAND palot-view-interaction-state-test)
+		if(APPLE AND BURL_SOURCE_DIR AND
+		   EXISTS "${BURL_SOURCE_DIR}/test/mac_window_harness.mm")
+			set_source_files_properties("${BURL_SOURCE_DIR}/test/mac_window_harness.mm"
+				PROPERTIES LANGUAGE CXX COMPILE_FLAGS "-x objective-c++")
+			add_executable(palot-mac-production-interaction-test
+				test/mac_production_interaction_test.cpp
+				src/imported_root_host.cpp
+				"${BURL_SOURCE_DIR}/test/mac_window_harness.mm")
+			target_include_directories(palot-mac-production-interaction-test PRIVATE
+				src "${BURL_SOURCE_DIR}/test")
+			target_compile_definitions(palot-mac-production-interaction-test PRIVATE
+				PALOT_RESOURCE_SOURCE_ROOT="${CMAKE_CURRENT_SOURCE_DIR}/resources")
+			target_link_libraries(palot-mac-production-interaction-test PRIVATE
+				pulp-view nlohmann_json::nlohmann_json "-framework AppKit" "-framework CoreGraphics")
+			add_test(NAME palot-mac-production-interaction
+				COMMAND palot-mac-production-interaction-test
+					"${CMAKE_CURRENT_SOURCE_DIR}/resources/import/main-chat.observed.design-ir.v1.json"
+					"${CMAKE_CURRENT_SOURCE_DIR}/contracts/main-chat.application-bindings.v1.json"
+					"${CMAKE_CURRENT_SOURCE_DIR}/../../evidence/phase-b/interaction-candidates.generated.v1.json"
+					"${CMAKE_CURRENT_SOURCE_DIR}/contracts/main-chat.source-binding-policy.v1.json"
+					"${CMAKE_CURRENT_SOURCE_DIR}/../../evidence/phase-b/canonical-overlay-promotion-v1/native")
+			set_tests_properties(palot-mac-production-interaction PROPERTIES TIMEOUT 90)
+			add_test(NAME palot-mac-canonical-overlay-interaction
+				COMMAND palot-mac-production-interaction-test
+					"${CMAKE_CURRENT_SOURCE_DIR}/resources/import/main-chat.observed.design-ir.v1.json"
+					"${CMAKE_CURRENT_SOURCE_DIR}/contracts/main-chat.application-bindings.v1.json"
+					"${CMAKE_CURRENT_SOURCE_DIR}/../../evidence/phase-b/interaction-candidates.generated.v1.json"
+					"${CMAKE_CURRENT_SOURCE_DIR}/contracts/main-chat.source-binding-policy.v1.json"
+					"${CMAKE_CURRENT_SOURCE_DIR}/../../evidence/phase-b/canonical-overlay-promotion-v1/native")
+			set_tests_properties(palot-mac-canonical-overlay-interaction PROPERTIES
+				ENVIRONMENT "PALOT_OVERLAY_PROOF_ONLY=1"
+				TIMEOUT 30)
+			add_executable(palot-mac-settings-appearance-test
+				test/mac_settings_appearance_test.cpp
+				src/imported_root_host.cpp
+				"${BURL_SOURCE_DIR}/test/mac_window_harness.mm")
+			target_include_directories(palot-mac-settings-appearance-test PRIVATE
+				src "${BURL_SOURCE_DIR}/test")
+			target_compile_definitions(palot-mac-settings-appearance-test PRIVATE
+				PALOT_RESOURCE_SOURCE_ROOT="${CMAKE_CURRENT_SOURCE_DIR}/resources")
+			target_link_libraries(palot-mac-settings-appearance-test PRIVATE
+				pulp-view nlohmann_json::nlohmann_json "-framework AppKit" "-framework CoreGraphics")
+			add_executable(palot-mac-layout-transition-census-test
+				test/mac_layout_transition_census_test.cpp
+				src/imported_root_host.cpp
+				"${BURL_SOURCE_DIR}/test/mac_window_harness.mm")
+			target_include_directories(palot-mac-layout-transition-census-test PRIVATE
+				src "${BURL_SOURCE_DIR}/test")
+			target_compile_definitions(palot-mac-layout-transition-census-test PRIVATE
+				PALOT_RESOURCE_SOURCE_ROOT="${CMAKE_CURRENT_SOURCE_DIR}/resources")
+			target_link_libraries(palot-mac-layout-transition-census-test PRIVATE
+				pulp-view nlohmann_json::nlohmann_json "-framework AppKit" "-framework CoreGraphics")
+			add_test(NAME palot-mac-layout-transition-census
+				COMMAND palot-mac-layout-transition-census-test
+					"${CMAKE_CURRENT_SOURCE_DIR}/resources/import/main-chat.observed.design-ir.v1.json"
+					"${CMAKE_CURRENT_SOURCE_DIR}/contracts/main-chat.application-bindings.v1.json"
+					"${CMAKE_CURRENT_SOURCE_DIR}/contracts/source-window.browser-window.v1.json"
+					"${CMAKE_CURRENT_SOURCE_DIR}/../../evidence/visual-parity/native-layout-transition-census-current")
+			set_tests_properties(palot-mac-layout-transition-census PROPERTIES TIMEOUT 90)
+		endif()
+		add_executable(palot-real-opencode-e2e test/real_opencode_e2e.cpp src/opencode_process.cpp)
+		target_include_directories(palot-real-opencode-e2e PRIVATE src)
+		target_link_libraries(palot-real-opencode-e2e PRIVATE nlohmann_json::nlohmann_json)
 		add_test(NAME palot-accessibility-dump
 			COMMAND $<TARGET_FILE:burl-palot> --accessibility-dump)
-		set_tests_properties(palot-accessibility-dump PROPERTIES TIMEOUT 5)
+		set_tests_properties(palot-accessibility-dump PROPERTIES TIMEOUT 15)
 	endif()
 endif()

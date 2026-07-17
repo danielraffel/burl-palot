@@ -1,0 +1,15 @@
+{
+  "innerWidth": 280,
+  "innerHeight": 800,
+  "devicePixelRatio": 2,
+  "mobile": true,
+  "rootScrollWidth": 280,
+  "bodyScrollWidth": 280,
+  "sidebar": null,
+  "composer": {
+    "x": 1,
+    "y": 578.5,
+    "width": 265,
+    "height": 64
+  }
+}

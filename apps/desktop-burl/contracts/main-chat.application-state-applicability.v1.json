@@ -1,0 +1,42 @@
+{
+  "schema": "pulp-application-state-applicability-contract-v1",
+  "dimensions": {
+    "project.search.open": [
+      {
+        "key": "navigation.route",
+        "value": "chat"
+      }
+    ],
+    "command.palette.open": [
+      {
+        "key": "navigation.route",
+        "value": "chat"
+      }
+    ],
+    "server.menu.open": [
+      {
+        "key": "navigation.route",
+        "value": "chat"
+      }
+    ],
+    "sidebar.open": [{ "key": "navigation.route", "value": "chat" }],
+    "review.panel.open": [{ "key": "navigation.route", "value": "chat" }],
+    "session.metrics.open": [{ "key": "navigation.route", "value": "chat" }],
+    "project.search.tooltip.open": [{ "key": "navigation.route", "value": "chat" }],
+    "review.diff.open": [
+      { "key": "navigation.route", "value": "chat" },
+      { "key": "review.panel.open", "value": "open" }
+    ],
+    "prompt.execution": [{ "key": "navigation.route", "value": "chat" }],
+    "disclosure.thought.open": [{ "key": "navigation.route", "value": "chat" }],
+    "disclosure.read.open": [{ "key": "navigation.route", "value": "chat" }],
+    "disclosure.edit.open": [{ "key": "navigation.route", "value": "chat" }],
+    "settings.theme": [{ "key": "navigation.route", "value": "/settings/general" }],
+    "composer.agent-menu.open": [{ "key": "navigation.route", "value": "chat" }],
+    "composer.model-menu.open": [{ "key": "navigation.route", "value": "chat" }],
+    "composer.variant-menu.open": [{ "key": "navigation.route", "value": "chat" }],
+    "display.mode": [{ "key": "navigation.route", "value": "chat" }],
+    "session.title.editing": [{ "key": "navigation.route", "value": "chat" }],
+    "external.open.menu.open": [{ "key": "navigation.route", "value": "chat" }]
+  }
+}

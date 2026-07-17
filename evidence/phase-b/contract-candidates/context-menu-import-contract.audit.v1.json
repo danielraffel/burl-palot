@@ -1,0 +1,82 @@
+{
+  "schemaVersion": 1,
+  "status": "conditional",
+  "scope": "generic source context-menu activation, placement, focus entry, and Escape dismissal",
+  "sourceEvidence": {
+    "manifest": "evidence/phase-b/source-interaction-states/context-menu-contract/context-menu.manifest.json",
+    "manifestSha256": "0db1b525e853405c3e5c72622b9ded7bcf2b4983219e34e5142883835a14386a",
+    "capture": "evidence/phase-b/source-interaction-states/context-menu-contract/generated-v2/evidence.json",
+    "captureSha256": "e9261d9ff1d587d3cf71eb5d224e0d67bc38448cb9c435a253893ae4f23df0c7",
+    "sourceRevision": "fd63a75dad3d0e8555ba22a47e720d285889fbf0",
+    "cohort": {
+      "visibleTriggers": 6,
+      "trustedRightButtonActivations": 6,
+      "menuOpenTransitions": 6,
+      "trustedEscapeDismissals": 6,
+      "focusEntries": 6,
+      "focusRestorationsObserved": 0,
+      "menuItemsObserved": 18,
+      "portableItemActionIdsObserved": 0
+    },
+    "placement": {
+      "anchor": "activation-pointer",
+      "observedInvariant": "menu left equals activation x; menu top is four logical pixels below activation y",
+      "storedProductCoordinates": false
+    }
+  },
+  "frameworkProjection": {
+    "contract": "packages/pulp-import-ir/src/overlay-contract.ts",
+    "nativeProjection": "packages/pulp-import-ir/src/native-design-ir-v1.ts",
+    "nativeRuntime": "core/view/src/design_import_native_common.cpp",
+    "canonicalIrMutation": false,
+    "actionIdentityPolicy": "Only explicit data-pulp-action values are portable action IDs; accessible labels are evidence, never IDs."
+  },
+  "verification": {
+    "typescript": {
+      "command": "bun test packages/pulp-import-ir/test/overlay-contract.test.ts packages/pulp-import-ir/test/native-design-ir-v1.test.ts",
+      "result": "17 tests passed; 51 expectations"
+    },
+    "nativeMaterializer": {
+      "buildType": "Release",
+      "buildCommand": "cmake --build build --target pulp-test-design-import-native-materializer -j 4",
+      "testCommand": "build/test/pulp-test-design-import-native-materializer native materializer executes pointer-anchored context menu contracts --reporter compact",
+      "result": "10 assertions in 1 test case passed"
+    },
+    "nativeAppKit": {
+      "buildType": "Release (-O3 -DNDEBUG verified)",
+      "testCommand": "BURL_OVERLAY_APPKIT_DUMP_DIR=evidence/phase-b/native-overlay-appkit-v1 build/test/pulp-test-mac-platform-harness [overlay-contract][context-menu] --reporter compact",
+      "result": "24 assertions in 1 test case passed",
+      "receipt": "evidence/phase-b/native-overlay-appkit-v1/receipt.json"
+    },
+    "visualParity": {
+      "manifest": "evidence/phase-b/native-overlay-visual-parity/generated-v8/manifest.json",
+      "result": "evidence/phase-b/native-overlay-visual-parity/candidates-v11/evidence.json",
+      "status": "PASS",
+      "metrics": {"mae": 0.011717005020962633, "ssim": 0.7267132934347175, "edgeDiff": 0.00919892879988251}
+    },
+    "canonicalConsumerImport": {
+      "manifest": "apps/desktop-burl/contracts/main-chat.overlay-contracts.v1.json",
+      "candidate": "evidence/phase-b/canonical-overlay-promotion-v1/overlay-contracts.candidate-v2.json",
+      "result": "8 contracts generated with zero diagnostics, including all 6 context-menu shells"
+    },
+    "consumer": {
+      "command": "bun test tests/context_menu_source_contract.test.ts tests/main_chat_interaction_completeness_audit.test.ts tests/overlay_import_contract_audit.test.ts",
+      "result": "13 tests passed; 357 expectations"
+    }
+  },
+  "gates": [
+    { "id": "trusted-source-right-button-open", "status": "green" },
+    { "id": "source-pointer-anchor-placement", "status": "green" },
+    { "id": "source-focus-entry", "status": "green" },
+    { "id": "source-escape-dismissal", "status": "green" },
+    { "id": "typed-trigger-content-projection", "status": "green" },
+    { "id": "native-materializer-right-button-execution", "status": "green" },
+    { "id": "source-focus-restoration", "status": "red-unproved" },
+    { "id": "portable-menu-item-actions", "status": "red-missing-source-action-ids" },
+    { "id": "native-appkit-context-menu-execution", "status": "green" },
+    { "id": "native-visual-parity", "status": "green" },
+    { "id": "canonical-consumer-contract-generation", "status": "green" },
+    { "id": "canonical-consumer-state-promotion", "status": "red-unproved" }
+  ],
+  "decision": "The generic import contract lowers all six source triggers to right-button, pointer-anchored menu shells with source-proven focus entry and Escape dismissal. Production AppKit execution and exact source-versus-native visual parity are green. Menu-item execution, focus restoration, and final canonical state promotion remain explicitly red until independent source evidence exists."
+}

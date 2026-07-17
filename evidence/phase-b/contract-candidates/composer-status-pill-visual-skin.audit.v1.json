@@ -1,0 +1,116 @@
+{
+  "schema": "burl-imported-control-visual-skin-audit-v1",
+  "status": "red",
+  "control": "composer-status-action",
+  "sourceRevision": "fd63a75dad3d0e8555ba22a47e720d285889fbf0",
+  "scope": {
+    "sourceReceipt": "evidence/phase-b/source-interaction-states/generated-v3/prompt-cancel/streaming/source.json",
+    "sourceCrop": "evidence/phase-b/source-components/generated-v1/composer-stop-primary.png",
+    "focusedNativeIr": "evidence/phase-b/native-components/generated-v1/ir/composer-stop-primary.json",
+    "focusedNativeCrop": "evidence/phase-b/native-components/candidates-v1/composer-stop-primary.png",
+    "canonicalNativeIr": "apps/desktop-burl/resources/import/main-chat.observed.design-ir.v1.json"
+  },
+  "sourceContract": {
+    "semanticRole": "button",
+    "accessibleName": "Stop",
+    "event": "click",
+    "size": { "width": 80.765625, "height": 24 },
+    "rest": {
+      "background": "rgb(255, 255, 255)",
+      "foreground": "rgb(13, 13, 13)",
+      "border": "1px solid transparent",
+      "cornerRadii": [7.5, 7.5, 7.5, 7.5],
+      "padding": [0, 6, 0, 6],
+      "gap": 4,
+      "opacity": 1
+    },
+    "icon": {
+      "kind": "lucide-square",
+      "viewport": "0 0 24 24",
+      "renderedSize": { "width": 14, "height": 14 },
+      "stroke": "currentColor",
+      "strokeWidth": 2,
+      "shape": "rect x=3 y=3 width=18 height=18 rx=2"
+    },
+    "stateReceipt": {
+      "rest": "authoritative-durable",
+      "hover": "exploratory-live-cdp-only",
+      "pressed": "exploratory-live-cdp-only",
+      "disabled": "synthetic-only-not-promotable"
+    },
+    "stateFinding": "Live CDP inspection preserved the uniform 7.5 px radius and one button box through hover and forced active. The checked-in source node has stateStyles null, and the disabled observation required synthetic mutation, so hover, pressed, and disabled paint must remain RED until captured as durable source states."
+  },
+  "layerAudit": [
+    {
+      "layer": "source-computed-style",
+      "status": "pass-rest-only",
+      "finding": "The checked-in source receipt proves a single 80.765625 by 24 button with four 7.5 px corners, a transparent one-pixel border, exact insets, and a 14 by 14 currentColor icon."
+    },
+    {
+      "layer": "focused-lowering",
+      "status": "pass-rest-only",
+      "finding": "The focused generated IR contains style.borderRadius 7.5 and visualSkin.states.rest.cornerRadius 7.5. Its native crop is a single rounded pill and does not reproduce the rectangular shell reported in the whole app."
+    },
+    {
+      "layer": "canonical-lowering",
+      "status": "pass-rest-only",
+      "finding": "The regenerated canonical prompt.cancel node retains four style longhands at 7.5 px and now projects visualSkin.states.rest.cornerRadius 7.5. This closes canonical rest-state lowering only; it does not prove whole-app paint, hit testing, or interaction states."
+    },
+    {
+      "layer": "native-materialization",
+      "status": "foundation-ready",
+      "finding": "Current generic materialization gives TextButton sole ownership of imported button chrome by clearing the base View background, gradient, and border after installing VisualSkin. This removes the rectangular outer box rather than masking it with consumer drawing."
+    },
+    {
+      "layer": "native-paint",
+      "status": "foundation-ready",
+      "finding": "TextButton resolves imported pixel or percentage radius per runtime state, paints exactly one rounded face, and suppresses a transparent imported border. Focused recording-canvas tests cover state radius selection, single-face ownership, and transparent-border suppression."
+    },
+    {
+      "layer": "whole-app-output",
+      "status": "red",
+      "finding": "The user-observed whole-app build still shows a rectangular outer surface. No post-regeneration, post-rebuild whole-app rest, hover, pressed, disabled, or click receipt currently proves that the stale canonical artifact is gone."
+    }
+  ],
+  "frameworkEvidence": [
+    {
+      "path": "packages/pulp-import-ir/src/native-design-ir-v1.ts",
+      "lines": [247, 280],
+      "symbol": "nativeVisualState uniform longhand radius projection"
+    },
+    {
+      "path": "packages/pulp-import-ir/test/visual-skin-projection.test.ts",
+      "lines": [47, 116],
+      "symbol": "state radius and asymmetric fail-closed tests"
+    },
+    {
+      "path": "core/view/src/design_import_native_common.cpp",
+      "lines": [2714, 2727],
+      "symbol": "single imported button chrome owner"
+    },
+    {
+      "path": "core/view/src/buttons.cpp",
+      "lines": [11, 77],
+      "symbol": "TextButton state skin, rounded face, and imported border paint"
+    },
+    {
+      "path": "test/test_buttons.cpp",
+      "lines": [122, 215],
+      "symbol": "recording-canvas radius, single-face, and border identity tests"
+    }
+  ],
+  "frameworkChange": {
+    "implementedByThisAudit": false,
+    "reason": "The product-neutral importer, materializer, and painter fixes already exist in the shared framework worktree with focused tests. A Palot-specific shape, coordinate, or overlay would duplicate and weaken that foundation."
+  },
+  "redGate": {
+    "closed": false,
+    "requirements": [
+      "Retain the canonical prompt.cancel visualSkin.states.rest.cornerRadius value of 7.5 through final application-state composition and promotion.",
+      "Capture durable source hover, pressed, and disabled stateStyles or explicitly classify unavailable states; do not invent state paint from Burl defaults.",
+      "Rebuild the standalone app from the regenerated immutable Burl revision.",
+      "Capture source and native rest, hover, pressed, and disabled crops plus recording-canvas output, proving exactly one rounded face and no rectangular base box.",
+      "Execute a real coordinate click and prove the prompt.cancel postcondition while retaining the 14 by 14 icon, accessible name Stop, and 7.5 px outer radius."
+    ]
+  }
+}

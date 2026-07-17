@@ -1,0 +1,44 @@
+{
+  "schema": "burl-source-minimum-content-size-v1",
+  "sourceRevision": "fd63a75dad3d0e8555ba22a47e720d285889fbf0",
+  "captureMethod": "CDP Emulation.setDeviceMetricsOverride plus getBoundingClientRect",
+  "canonicalCaptureSet": "canonical-height-captures.v1.json",
+  "criterion": "main and complete chat frame follow the app bar; composer, textarea, every visible composer control, and the footer status row remain inside the main content and viewport without a clipping ancestor",
+  "minimum": {
+    "width": 280,
+    "height": 421
+  },
+  "projectionRoundingGuard": {
+    "height": 1,
+    "reason": "the projected window contract retains one logical pixel beyond the smallest passing source capture; native Yoga preserves the half-pixel footer geometry and strict containment does not rely on tolerance"
+  },
+  "minimumGeometry": {
+    "main": { "x": 12, "y": 0, "width": 268, "height": 420 },
+    "appBarBottom": 46,
+    "chatFrame": { "x": 12, "y": 209.5, "width": 267, "height": 210.5 },
+    "composer": { "x": 12, "y": 209.5, "width": 267, "height": 186 },
+    "footer": { "x": 12, "y": 395.5, "width": 267, "height": 24.5 },
+    "furthestControlBottom": 387,
+    "footerBottom": 420
+  },
+  "boundaryProof": {
+    "excludedCapture": { "width": 280, "height": 248 },
+    "reason": "the footer status row extends below the captured host and the complete chat frame is visibly cropped",
+    "smallestCanonicalPassingCapture": { "width": 280, "height": 420 },
+    "projectedMinimumWithRoundingGuard": { "width": 280, "height": 421 }
+  },
+  "sampledPassingViewports": [
+    { "width": 280, "height": 420 },
+    { "width": 280, "height": 520 },
+    { "width": 280, "height": 640 },
+    { "width": 280, "height": 800 },
+    { "width": 600, "height": 420 },
+    { "width": 600, "height": 520 },
+    { "width": 600, "height": 640 },
+    { "width": 600, "height": 800 },
+    { "width": 1200, "height": 420 },
+    { "width": 1200, "height": 520 },
+    { "width": 1200, "height": 640 },
+    { "width": 1200, "height": 800 }
+  ]
+}

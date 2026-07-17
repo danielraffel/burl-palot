@@ -1,0 +1,586 @@
+{
+  "schemaVersion": 1,
+  "scenario": "01-shell",
+  "manifest": {
+    "file": "source-components.v1.json",
+    "sha256": "df9368091475e8e6436e8d086f18bacd07d62b793dbadb552759e1f279359934"
+  },
+  "source": {
+    "pngSha256": "d363d609c214a7a4e7b34a58e0eea9b87a4c588d3fcd457c5a9aaf64c12cc7b0",
+    "semanticsSha256": "cde304eb408da4379d598b2b3e7508fa7ebb19b72dfbbcf02b06f53a0b5fbac4",
+    "pixelWidth": 2400,
+    "pixelHeight": 1600,
+    "devicePixelRatio": 2
+  },
+  "references": [
+    {
+      "id": "sidebar-session-selected",
+      "state": "selected",
+      "selector": {
+        "tagName": "button",
+        "attributes": {
+          "data-slot": "sidebar-menu-button",
+          "data-active": ""
+        },
+        "descendantText": "Add dark mode toggle to settings now"
+      },
+      "sourceId": "html:1/body:2/div[root]:3/div:1/div:1/div[sidebar-wrapper]:1/div[sidebar]:1/div[sidebar-container]:1/div[sidebar-inner]:1/div[sidebar-content]:2/div[sidebar-group]:2/div[sidebar-group-content]:2/ul[sidebar-menu]:1/li[context-menu-trigger]:1/button[base-ui-_r_p_]:1",
+      "semantic": {
+        "tagName": "button",
+        "descendantText": "Add dark mode toggle to settings now",
+        "attributes": {
+          "id": "base-ui-_r_p_",
+          "data-slot": "sidebar-menu-button",
+          "data-active": ""
+        }
+      },
+      "geometry": {
+        "logical": {
+          "x": 8,
+          "y": 178,
+          "width": 264,
+          "height": 32
+        },
+        "pixel": {
+          "left": 16,
+          "top": 356,
+          "width": 528,
+          "height": 64
+        },
+        "devicePixelRatio": 2
+      },
+      "paint": {
+        "backgroundColor": "color(srgb 0 0.0941177 0.2 / 0.35)",
+        "color": "rgb(255, 255, 255)",
+        "border": "0px solid rgb(46, 46, 46)",
+        "borderRadius": "10.5px",
+        "boxShadow": "none",
+        "opacity": "1"
+      },
+      "font": {
+        "fontFamily": "-apple-system, \"system-ui\", \"Segoe UI\", system-ui, sans-serif",
+        "fontSize": "15px",
+        "fontWeight": "500",
+        "lineHeight": "22px",
+        "letterSpacing": "normal",
+        "whiteSpace": "normal",
+        "textAlign": "left"
+      },
+      "action": {
+        "role": "",
+        "ariaLabel": "",
+        "ariaExpanded": "",
+        "ariaDisabled": "",
+        "dataSlot": "sidebar-menu-button",
+        "cursor": "default"
+      },
+      "interaction": {
+        "kind": "selected-row",
+        "postcondition": "remains-selected",
+        "actionIdentity": "session.select",
+        "applicationBindingRequired": true
+      },
+      "crop": {
+        "file": "sidebar-session-selected.png",
+        "sha256": "22cea3c31ae6ee42adadf226228ffd712cab2a6f1068ebda89803277f89d42f0"
+      },
+      "evidenceSha256": "dd63bc4635f6e73fe91e7530b6e658e686aebaf2da5d10cc0b67a15d7e532a92"
+    },
+    {
+      "id": "sidebar-new-session-rest",
+      "state": "rest",
+      "selector": {
+        "tagName": "button",
+        "attributes": {
+          "data-slot": "sidebar-menu-button"
+        },
+        "descendantText": "New Session"
+      },
+      "sourceId": "html:1/body:2/div[root]:3/div:1/div:1/div[sidebar-wrapper]:1/div[sidebar]:1/div[sidebar-container]:1/div[sidebar-inner]:1/div[sidebar-content]:2/div[sidebar-group]:1/div[sidebar-group-content]:1/ul[sidebar-menu]:1/li[sidebar-menu-item]:1/button[base-ui-_r_1_]:1",
+      "semantic": {
+        "tagName": "button",
+        "descendantText": "New Session",
+        "attributes": {
+          "id": "base-ui-_r_1_",
+          "data-slot": "sidebar-menu-button"
+        }
+      },
+      "geometry": {
+        "logical": {
+          "x": 8,
+          "y": 54,
+          "width": 264,
+          "height": 32
+        },
+        "pixel": {
+          "left": 16,
+          "top": 108,
+          "width": 528,
+          "height": 64
+        },
+        "devicePixelRatio": 2
+      },
+      "paint": {
+        "backgroundColor": "rgba(0, 0, 0, 0)",
+        "color": "rgb(175, 175, 175)",
+        "border": "0px solid rgb(46, 46, 46)",
+        "borderRadius": "10.5px",
+        "boxShadow": "none",
+        "opacity": "1"
+      },
+      "font": {
+        "fontFamily": "-apple-system, \"system-ui\", \"Segoe UI\", system-ui, sans-serif",
+        "fontSize": "15px",
+        "fontWeight": "400",
+        "lineHeight": "22px",
+        "letterSpacing": "normal",
+        "whiteSpace": "normal",
+        "textAlign": "left"
+      },
+      "action": {
+        "role": "",
+        "ariaLabel": "",
+        "ariaExpanded": "",
+        "ariaDisabled": "",
+        "dataSlot": "sidebar-menu-button",
+        "cursor": "default"
+      },
+      "interaction": {
+        "kind": "activate",
+        "postcondition": "callback-fired",
+        "actionIdentity": "session.create",
+        "applicationBindingRequired": true
+      },
+      "crop": {
+        "file": "sidebar-new-session-rest.png",
+        "sha256": "6d2a82534cc3194e735374408913fef12a8751ab0e286b5a18baf0141631e780"
+      },
+      "evidenceSha256": "f6c543a381c9e721ba446cdebbe1be2bf9eed67ba985c80387766d67292850c4"
+    },
+    {
+      "id": "composer-stop-primary",
+      "state": "active-stream",
+      "selector": {
+        "tagName": "button",
+        "attributes": {
+          "data-slot": "button",
+          "aria-label": "Stop"
+        }
+      },
+      "sourceId": "html:1/body:2/div[root]:3/div:1/div:1/div[sidebar-wrapper]:1/main[sidebar-inset]:2/div[content-area]:2/div:1/div:1/div:1/div:1/div:2/div:1/div:1/form:2/div[input-group]:1/div[input-group-addon]:2/button[button]:2",
+      "semantic": {
+        "tagName": "button",
+        "descendantText": "7m 58s",
+        "attributes": {
+          "aria-label": "Stop",
+          "data-slot": "button"
+        }
+      },
+      "geometry": {
+        "logical": {
+          "x": 1079.234,
+          "y": 710.5,
+          "width": 80.766,
+          "height": 24
+        },
+        "pixel": {
+          "left": 2158,
+          "top": 1421,
+          "width": 162,
+          "height": 48
+        },
+        "devicePixelRatio": 2
+      },
+      "paint": {
+        "backgroundColor": "rgb(255, 255, 255)",
+        "color": "rgb(13, 13, 13)",
+        "border": "1px solid rgba(0, 0, 0, 0)",
+        "borderRadius": "7.5px",
+        "boxShadow": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px",
+        "opacity": "1"
+      },
+      "font": {
+        "fontFamily": "-apple-system, \"system-ui\", \"Segoe UI\", system-ui, sans-serif",
+        "fontSize": "15px",
+        "fontWeight": "500",
+        "lineHeight": "22px",
+        "letterSpacing": "normal",
+        "whiteSpace": "nowrap",
+        "textAlign": "center"
+      },
+      "action": {
+        "role": "",
+        "ariaLabel": "Stop",
+        "ariaExpanded": "",
+        "ariaDisabled": "",
+        "dataSlot": "button",
+        "cursor": "default"
+      },
+      "interaction": {
+        "kind": "activate",
+        "postcondition": "callback-fired",
+        "actionIdentity": "stream.stop",
+        "applicationBindingRequired": true
+      },
+      "crop": {
+        "file": "composer-stop-primary.png",
+        "sha256": "e6d6029650b32133b174ad9368b5f60c11f35d5d443e44d6306b50c0fd65b1ef"
+      },
+      "evidenceSha256": "970bf9193ed7f1fd53df7ba918f2dd7d1968910235b63ce40799be3769c984d3"
+    },
+    {
+      "id": "composer-rest",
+      "state": "rest-empty",
+      "selector": {
+        "tagName": "textarea",
+        "attributes": {
+          "data-slot": "input-group-control"
+        }
+      },
+      "sourceId": "html:1/body:2/div[root]:3/div:1/div:1/div[sidebar-wrapper]:1/main[sidebar-inset]:2/div[content-area]:2/div:1/div:1/div:1/div:1/div:2/div:1/div:1/form:2/div[input-group]:1/textarea[input-group-control]:1",
+      "semantic": {
+        "tagName": "textarea",
+        "text": "",
+        "descendantText": "",
+        "attributes": {
+          "data-slot": "input-group-control"
+        }
+      },
+      "geometry": {
+        "logical": {
+          "x": 297,
+          "y": 636.5,
+          "width": 873,
+          "height": 64
+        },
+        "pixel": {
+          "left": 594,
+          "top": 1273,
+          "width": 1746,
+          "height": 128
+        },
+        "devicePixelRatio": 2
+      },
+      "paint": {
+        "backgroundColor": "rgba(0, 0, 0, 0)",
+        "color": "rgb(255, 255, 255)",
+        "border": "0px solid rgb(46, 46, 46)",
+        "borderRadius": "0px",
+        "boxShadow": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgb(255, 255, 255) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px",
+        "opacity": "1"
+      },
+      "font": {
+        "fontFamily": "-apple-system, \"system-ui\", \"Segoe UI\", system-ui, sans-serif",
+        "fontSize": "15px",
+        "fontWeight": "400",
+        "lineHeight": "22px",
+        "letterSpacing": "normal",
+        "whiteSpace": "pre-wrap",
+        "textAlign": "start"
+      },
+      "action": {
+        "role": "",
+        "ariaLabel": "",
+        "ariaExpanded": "",
+        "ariaDisabled": "",
+        "dataSlot": "input-group-control",
+        "cursor": "text"
+      },
+      "interaction": {
+        "kind": "text-input",
+        "postcondition": "text-committed",
+        "actionIdentity": "composer.edit",
+        "applicationBindingRequired": false
+      },
+      "crop": {
+        "file": "composer-rest.png",
+        "sha256": "77a93cc0948fa4dc82a79695776d89917faf091205ee0ceadcab2a06149628ee"
+      },
+      "evidenceSha256": "a957f30895de2a24b49695cd719f36784b794c29c6392f6c4b65d32928cb9f31"
+    },
+    {
+      "id": "composer-build-select-rest",
+      "state": "rest-collapsed",
+      "selector": {
+        "tagName": "button",
+        "attributes": {
+          "data-slot": "select-trigger",
+          "role": "combobox",
+          "aria-expanded": "false"
+        },
+        "descendantText": "Build"
+      },
+      "sourceId": "html:1/body:2/div[root]:3/div:1/div:1/div[sidebar-wrapper]:1/main[sidebar-inset]:2/div[content-area]:2/div:1/div:1/div:1/div:1/div:2/div:1/div:1/form:2/div[input-group]:1/div[input-group-addon]:2/div:1/div:2/button[base-ui-_r_43_]:1",
+      "semantic": {
+        "tagName": "button",
+        "descendantText": "Build",
+        "attributes": {
+          "id": "base-ui-_r_43_",
+          "role": "combobox",
+          "aria-expanded": "false",
+          "data-slot": "select-trigger"
+        }
+      },
+      "geometry": {
+        "logical": {
+          "x": 343,
+          "y": 708.5,
+          "width": 67.102,
+          "height": 28
+        },
+        "pixel": {
+          "left": 686,
+          "top": 1417,
+          "width": 135,
+          "height": 56
+        },
+        "devicePixelRatio": 2
+      },
+      "paint": {
+        "backgroundColor": "rgba(0, 0, 0, 0)",
+        "color": "rgb(175, 175, 175)",
+        "border": "0px none rgb(46, 46, 46)",
+        "borderRadius": "10.5px",
+        "boxShadow": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px",
+        "opacity": "1"
+      },
+      "font": {
+        "fontFamily": "-apple-system, \"system-ui\", \"Segoe UI\", system-ui, sans-serif",
+        "fontSize": "13px",
+        "fontWeight": "500",
+        "lineHeight": "18px",
+        "letterSpacing": "normal",
+        "whiteSpace": "nowrap",
+        "textAlign": "center"
+      },
+      "action": {
+        "role": "combobox",
+        "ariaLabel": "",
+        "ariaExpanded": "false",
+        "ariaDisabled": "",
+        "dataSlot": "select-trigger",
+        "cursor": "default"
+      },
+      "interaction": {
+        "kind": "activate",
+        "postcondition": "selector-open",
+        "actionIdentity": "agent.select",
+        "applicationBindingRequired": true
+      },
+      "crop": {
+        "file": "composer-build-select-rest.png",
+        "sha256": "2c245c686146090787dee306414aff1fa61e0016b6118ec81f6143f0c1de662e"
+      },
+      "evidenceSha256": "465186ad6d1d9136f9a5744b17c342daaad2790b6efbd21a251fbe3720410fd7"
+    },
+    {
+      "id": "composer-model-select-rest",
+      "state": "rest-collapsed",
+      "selector": {
+        "tagName": "button",
+        "attributes": {
+          "data-slot": "searchable-list-popover-trigger",
+          "aria-expanded": "false"
+        },
+        "descendantText": "Claude Opus 4.6"
+      },
+      "sourceId": "html:1/body:2/div[root]:3/div:1/div:1/div[sidebar-wrapper]:1/main[sidebar-inset]:2/div[content-area]:2/div:1/div:1/div:1/div:1/div:2/div:1/div:1/form:2/div[input-group]:1/div[input-group-addon]:2/div:1/div:2/button[base-ui-_r_48_]:4",
+      "semantic": {
+        "tagName": "button",
+        "descendantText": "Claude Opus 4.6",
+        "attributes": {
+          "id": "base-ui-_r_48_",
+          "aria-expanded": "false",
+          "data-slot": "searchable-list-popover-trigger"
+        }
+      },
+      "geometry": {
+        "logical": {
+          "x": 419.102,
+          "y": 708.5,
+          "width": 158.828,
+          "height": 28
+        },
+        "pixel": {
+          "left": 838,
+          "top": 1417,
+          "width": 318,
+          "height": 56
+        },
+        "devicePixelRatio": 2
+      },
+      "paint": {
+        "backgroundColor": "rgba(0, 0, 0, 0)",
+        "color": "rgb(175, 175, 175)",
+        "border": "0px none rgb(46, 46, 46)",
+        "borderRadius": "10.5px",
+        "boxShadow": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px",
+        "opacity": "1"
+      },
+      "font": {
+        "fontFamily": "-apple-system, \"system-ui\", \"Segoe UI\", system-ui, sans-serif",
+        "fontSize": "13px",
+        "fontWeight": "500",
+        "lineHeight": "18px",
+        "letterSpacing": "normal",
+        "whiteSpace": "normal",
+        "textAlign": "center"
+      },
+      "action": {
+        "role": "",
+        "ariaLabel": "",
+        "ariaExpanded": "false",
+        "ariaDisabled": "",
+        "dataSlot": "searchable-list-popover-trigger",
+        "cursor": "default"
+      },
+      "interaction": {
+        "kind": "activate",
+        "postcondition": "selector-open",
+        "actionIdentity": "model.select",
+        "applicationBindingRequired": true
+      },
+      "crop": {
+        "file": "composer-model-select-rest.png",
+        "sha256": "47fa0f63889cbdbf6166d6061fa0f400bf96cda2013bb794a63a682bf9c5f603"
+      },
+      "evidenceSha256": "73940b65a6332241071227cbce6a78e64c066d4ddaafada9e4b143d6e2875755"
+    },
+    {
+      "id": "transcript-inline-code",
+      "state": "rest",
+      "selector": {
+        "tagName": "code",
+        "text": "src/lib/theme.ts"
+      },
+      "sourceId": "html:1/body:2/div[root]:3/div:1/div:1/div[sidebar-wrapper]:1/main[sidebar-inset]:2/div[content-area]:2/div:1/div:1/div:1/div:1/div:1/div:1/div:1/div:1/div:1/div:1/div:2/div:1/div:2/div:1/div:1/div:1/ol:2/li:1/p:1/span:1/code:1",
+      "semantic": {
+        "tagName": "code",
+        "descendantText": "src/lib/theme.ts",
+        "attributes": {}
+      },
+      "geometry": {
+        "logical": {
+          "x": 357,
+          "y": 236.5,
+          "width": 156.492,
+          "height": 21.5
+        },
+        "pixel": {
+          "left": 714,
+          "top": 473,
+          "width": 313,
+          "height": 43
+        },
+        "devicePixelRatio": 2
+      },
+      "paint": {
+        "backgroundColor": "rgb(40, 40, 40)",
+        "color": "rgb(255, 255, 255)",
+        "border": "0px solid rgb(46, 46, 46)",
+        "borderRadius": "4px",
+        "boxShadow": "none",
+        "opacity": "1"
+      },
+      "font": {
+        "fontFamily": "ui-monospace, SFMono-Regular, \"SF Mono\", Menlo, Consolas, \"Liberation Mono\", monospace",
+        "fontSize": "15px",
+        "fontWeight": "600",
+        "lineHeight": "22px",
+        "letterSpacing": "normal",
+        "whiteSpace": "normal",
+        "textAlign": "start"
+      },
+      "action": {
+        "role": "",
+        "ariaLabel": "",
+        "ariaExpanded": "",
+        "ariaDisabled": "",
+        "dataSlot": "",
+        "cursor": "auto"
+      },
+      "interaction": {
+        "kind": "none",
+        "postcondition": "none",
+        "actionIdentity": "",
+        "applicationBindingRequired": false
+      },
+      "crop": {
+        "file": "transcript-inline-code.png",
+        "sha256": "de12f4e42bdc305a824b5f6acde48e66f759e069c4663c4ae60184798f1b2514"
+      },
+      "evidenceSha256": "3085334ad963c7ef09c0074d2f28561fe87b2392f394aeb27788c936454164e5"
+    },
+    {
+      "id": "transcript-copy-icon-rest",
+      "state": "rest",
+      "selector": {
+        "tagName": "button",
+        "attributes": {
+          "data-slot": "tooltip-trigger"
+        },
+        "descendantText": "Copy response"
+      },
+      "sourceId": "html:1/body:2/div[root]:3/div:1/div:1/div[sidebar-wrapper]:1/main[sidebar-inset]:2/div[content-area]:2/div:1/div:1/div:1/div:1/div:1/div:1/div:1/div:1/div:1/div:1/div:4/button[base-ui-_r_3r_]:2",
+      "semantic": {
+        "tagName": "button",
+        "descendantText": "Copy response",
+        "attributes": {
+          "id": "base-ui-_r_3r_",
+          "data-slot": "tooltip-trigger"
+        }
+      },
+      "geometry": {
+        "logical": {
+          "x": 332,
+          "y": 451,
+          "width": 32,
+          "height": 32
+        },
+        "pixel": {
+          "left": 664,
+          "top": 902,
+          "width": 64,
+          "height": 64
+        },
+        "devicePixelRatio": 2
+      },
+      "paint": {
+        "backgroundColor": "rgba(0, 0, 0, 0)",
+        "color": "rgb(255, 255, 255)",
+        "border": "1px solid rgba(0, 0, 0, 0)",
+        "borderRadius": "10px",
+        "boxShadow": "none",
+        "opacity": "1"
+      },
+      "font": {
+        "fontFamily": "-apple-system, \"system-ui\", \"Segoe UI\", system-ui, sans-serif",
+        "fontSize": "15px",
+        "fontWeight": "500",
+        "lineHeight": "22px",
+        "letterSpacing": "normal",
+        "whiteSpace": "nowrap",
+        "textAlign": "center"
+      },
+      "action": {
+        "role": "",
+        "ariaLabel": "",
+        "ariaExpanded": "",
+        "ariaDisabled": "",
+        "dataSlot": "tooltip-trigger",
+        "cursor": "default"
+      },
+      "interaction": {
+        "kind": "activate",
+        "postcondition": "callback-fired",
+        "actionIdentity": "transcript.copy",
+        "applicationBindingRequired": true
+      },
+      "crop": {
+        "file": "transcript-copy-icon-rest.png",
+        "sha256": "3d47063c9ec85936734e2326f4f86714c9e3d9204495918b262e4a256c2f3fc3"
+      },
+      "evidenceSha256": "82695178d2d0cff35e59378191cc222d112fbc76ab4c7071a59f0e88defca5e4"
+    }
+  ]
+}

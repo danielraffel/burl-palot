@@ -1,0 +1,28 @@
+{
+  "schema": "burl-source-window-contract-v1",
+  "source": "Electron BrowserWindow",
+  "observations": {
+    "titleBarStyle": "hiddenInset",
+    "transparent": true,
+    "trafficLightPosition": { "x": 15, "y": 15 },
+    "vibrancy": "menu",
+    "resizable": true,
+    "minimumSize": { "width": 0, "height": 0 },
+    "contentFillsWindowBounds": true
+  },
+  "projection": {
+    "titleBarStyle": "hidden_inset",
+    "backdropEffect": "liquid_glass",
+    "appearance": "dark",
+    "transparent": true,
+    "trafficLightX": 15,
+    "trafficLightY": 15,
+    "minimumContentSize": {
+      "width": 280,
+      "height": 421,
+      "derivation": "complete 280x420 source chat frame plus one logical pixel projection boundary guard; native Yoga preserves the source fractional geometry",
+      "sourceRevision": "fd63a75dad3d0e8555ba22a47e720d285889fbf0",
+      "evidence": "evidence/oracle-inputs/responsive/source-minimum-content-size.v1.json"
+    }
+  }
+}

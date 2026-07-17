@@ -1,0 +1,48 @@
+{
+  "id": "new-session-pressed",
+  "status": "PASS",
+  "action": {
+    "type": "pressed"
+  },
+  "postcondition": "mouse-down-held",
+  "post": {
+    "active": false,
+    "value": "",
+    "dataActive": false,
+    "disabled": false,
+    "hover": true,
+    "activePseudo": true,
+    "rect": {
+      "x": 8,
+      "y": 54,
+      "width": 264,
+      "height": 32
+    },
+    "mouseDownHeldAtCapture": true,
+    "visualStateMethod": "CSS.forcePseudoState(:active)",
+    "contentFloorPass": true
+  },
+  "geometry": {
+    "logical": {
+      "x": 8,
+      "y": 54,
+      "width": 264,
+      "height": 32
+    },
+    "pixel": {
+      "left": 16,
+      "top": 108,
+      "width": 528,
+      "height": 64
+    },
+    "devicePixelRatio": 2
+  },
+  "files": {
+    "crop": "new-session-pressed/crop.png",
+    "semantics": "new-session-pressed/semantics.json"
+  },
+  "hashes": {
+    "crop": "a28b7b8eaea1287e7d1392b598c269588b83140763d3933b8a3f43dd5d0ddc2e",
+    "semantics": "5c9c0708bc7c5b268f75424832303ee19a3760a26cf4d3fc314432e0a812ac9a"
+  }
+}

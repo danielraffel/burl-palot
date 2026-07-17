@@ -1,0 +1,91 @@
+{
+  "schema": "palot-atomic-action-source-receipts-v1",
+  "source": {
+    "repository": "/Users/danielraffel/Code/palot-wt-burl-capture",
+    "revision": "fd63a75dad3d0e8555ba22a47e720d285889fbf0",
+    "captureMode": "clean-detached-reference"
+  },
+  "projection": {
+    "receiptCompleteBaseSha256": "8909161caa05f7960c138aae389086a3a4ae8fb1667aa63b8affc7d346aa97e2",
+    "atomicBaseSha256": "d75bb5d2afb371d27cfe8260456b8fd0f2062a83439eb693d62477523acf4776",
+    "integratedDesignIrSha256": "a82dd7737bf62d55cd9f71745f3c47d5888816270c90daae6d8474977ddb51f9",
+    "compositionReport": "evidence/phase-b/atomic-action-contracts-v1/composition.report.json",
+    "verificationReport": "evidence/phase-b/atomic-action-contracts-v1/verification.report.json",
+    "verification": {"passed":true,"violations":[],"integratedEmptyActionBindings":0}
+  },
+  "files": [
+    {"path":"apps/desktop/src/renderer/components/agent-detail.tsx","sha256":"2bdbddcdc9ce92cd2c75c188b3787cd21bf9da395a11599838fad6ef568e1a03"},
+    {"path":"apps/desktop/src/renderer/components/sidebar.tsx","sha256":"9bff54053b3cd7cd182456ae367dd4f0374302489ea12bc7fbd5542a204bbf50"},
+    {"path":"apps/desktop/src/renderer/components/sidebar-layout.tsx","sha256":"98a6505981149f6987a21a6991ef1d403af4b7197b4c8ea1cda92db251878351"},
+    {"path":"apps/desktop/src/renderer/components/new-chat.tsx","sha256":"808303e65363a3092edf957073667f84953d2d08d146497225faa16bd0625478"},
+    {"path":"apps/desktop/src/renderer/components/settings/general-settings.tsx","sha256":"8aa6b66f4dc775b4974f7c967a9b8e0661d32511fae4f38e9c85699c79aa62a9"}
+  ],
+  "actions": [
+    {
+      "id": "external.open.preferred",
+      "receiptKind": "runtime-context-react-props",
+      "source": "apps/desktop/src/renderer/components/agent-detail.tsx#OpenInButton.props.directory",
+      "fields": {"directory":"project.directory"},
+      "decision": "Bind the current project directory. Do not infer a path from the visible editor label."
+    },
+    {
+      "id": "terminal.attach",
+      "receiptKind": "runtime-context-react-props",
+      "source": "apps/desktop/src/renderer/components/agent-detail.tsx#AttachCommand.props",
+      "fields": {"directory":"project.directory","sessionID":"session.id"},
+      "decision": "Bind both exact component props. Do not reconstruct either value from top-bar text."
+    },
+    {
+      "id": "session.open",
+      "receiptKind": "collection-react-props",
+      "source": "apps/desktop/src/renderer/components/sidebar.tsx#SessionItem.props.agent",
+      "fields": {"directory":"session.directory","sessionID":"session.id"},
+      "runtimeReceipt": {"path":"/private/tmp/palot-session-react-props.json","sha256":"5b21aa9e3618c396b21c71fb6671cfad8b7043eb8664529478ce8cc09e7a48a9"},
+      "decision": "Each row is a two-field collection contract. A bare session ID or label-derived project is insufficient and fails closed."
+    },
+    {
+      "id": "settings.theme.select",
+      "receiptKind": "literal-react-option-value",
+      "source": "apps/desktop/src/renderer/components/settings/general-settings.tsx#options.value",
+      "values": ["light","dark","system"],
+      "decision": "Use the exact option value passed to setColorScheme, never the rendered label."
+    },
+    {
+      "id": "project.select",
+      "receiptKind": "host-action-result",
+      "source": "apps/desktop/src/renderer/components/sidebar-layout.tsx#handleAddProject.pickDirectory",
+      "fields": {},
+      "resultType": "project",
+      "decision": "The directory is produced after activation by the native picker. A pre-activation directory payload would be fabricated."
+    },
+    {
+      "id": "navigation.new-session",
+      "receiptKind": "navigation-only",
+      "source": "apps/desktop/src/renderer/components/sidebar.tsx#NewSession.navigate",
+      "fields": {},
+      "resultType": "route",
+      "decision": "The sidebar control navigates to the new-chat route; it does not create an OpenCode session."
+    },
+    {
+      "id": "session.create",
+      "receiptKind": "source-command-boundary",
+      "source": "apps/desktop/src/renderer/components/new-chat.tsx#launchLocal.createSession",
+      "fields": {"directory":"selectedDirectory"},
+      "requiredInCurrentCapture": false,
+      "decision": "Keep session creation at the actual OpenCode command boundary, after project selection and prompt submission."
+    }
+  ],
+  "invariants": [
+    "No action payload may be inferred from a visible label.",
+    "Post-activation host results are not pre-activation input fields.",
+    "Multi-field identities fail closed when any field or provenance is absent.",
+    "Navigation controls are not relabeled as domain mutations."
+  ],
+  "redGates": [
+    {
+      "id": "runtime-session-collection.absent",
+      "status": "open",
+      "detail": "The native consumer does not yet supply a live session collection containing session.directory and session.id. Canonical sidebar samples have source-exact two-field receipts, but production session rows must remain a red gate until those same fields are supplied by an evidenced runtime inventory. The command-palette session rows remain disabled because their receipt exposes only a session ID."
+    }
+  ]
+}

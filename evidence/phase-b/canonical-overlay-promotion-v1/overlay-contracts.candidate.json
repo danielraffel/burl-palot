@@ -1,0 +1,124 @@
+{
+  "schema": "pulp-observed-overlay-contract-candidate-v1",
+  "manifest": {
+    "path": "/Users/danielraffel/Code/burl-palot-wt-semantic-restart/apps/desktop-burl/contracts/main-chat.overlay-contracts.v1.json",
+    "sha256": "9c53c053de07d7b27291cb5ea83850242d88ffdd63bd16e3cdc0b0a06efca3bb"
+  },
+  "sources": [
+    {
+      "id": "project-search-tooltip",
+      "closed": {
+        "path": "/Users/danielraffel/Code/burl-palot-wt-semantic-restart/evidence/phase-b/source-interaction-states/generated-v3/project-search-tooltip/closed/source.json",
+        "sha256": "d8e0a12c6bc1b773d7d4cf5105de04907ff6e136050f45c5e111851963c8d1f5"
+      },
+      "open": {
+        "path": "/Users/danielraffel/Code/burl-palot-wt-semantic-restart/evidence/phase-b/source-interaction-states/generated-v3/project-search-tooltip/open/source.json",
+        "sha256": "ca608bb7f57904020bf85276513161a7fc267d717ff349a3aa7050e3513e4372"
+      },
+      "interactionEvidence": {
+        "path": "/Users/danielraffel/Code/burl-palot-wt-semantic-restart/evidence/phase-b/source-interaction-states/generated-v3/project-search-tooltip/evidence/interactions.json",
+        "sha256": "d8f5739d8288dd0ac833e97eecac6c5a3f6c0f50b790a08779e0fd7e5aa13a30",
+        "scenarioId": "hover-project-search-tooltip"
+      }
+    },
+    {
+      "id": "session-usage-popover",
+      "closed": {
+        "path": "/Users/danielraffel/Code/burl-palot-wt-semantic-restart/evidence/phase-b/source-interaction-states/generated-v4/usage/closed/source.json",
+        "sha256": "572646fa7bd236e3b40272d228ad18eca72f1a083947c5b1cbf46e7c0febcafd"
+      },
+      "open": {
+        "path": "/Users/danielraffel/Code/burl-palot-wt-semantic-restart/evidence/phase-b/source-interaction-states/generated-v4/usage/open/source.json",
+        "sha256": "9b554f8fbfdaf06436f4d00bc3f5a56381102fe29118034fef51527b6b93c61f"
+      },
+      "interactionEvidence": {
+        "path": "/Users/danielraffel/Code/burl-palot-wt-semantic-restart/evidence/phase-b/source-interaction-states/generated-v4/usage/evidence/interactions.json",
+        "sha256": "1f7ba01a0fda825d6141e37695531d69876b45ba9c3c7701b664ef91b8122452",
+        "scenarioId": "open-usage-popover"
+      }
+    }
+  ],
+  "contracts": [
+    {
+      "version": 1,
+      "triggerSourceId": "html:1/body:2/div:3/div:1/div:1/div:1/div:1/div:1/div:1/div:2/div:5/div:2/button:1",
+      "triggerNodeSourceId": "dom/html-shape-3b68501b:0/body-shape-d65c892b:0/div-id-root:0/div-shape-74caabae:0/div-shape-20ec5713:0/div-data-slot-sidebar-wrapper:0/div-data-slot-sidebar:0/div-data-slot-sidebar-container:0/div-data-slot-sidebar-inner:0/div-data-slot-sidebar-content:0/div-data-slot-sidebar-group:3/div-shape-8d87b6d1:0/button-data-slot-tooltip-trigger:0",
+      "contentSourceId": "dom/html-shape-3b68501b:0/body-shape-d65c892b:0/div-id-_r_5b_:0/div-presentation-unnamed:0/div-data-slot-tooltip-content:0",
+      "kind": "tooltip",
+      "activationEvent": "hover",
+      "anchor": {
+        "kind": "trigger",
+        "evidence": "activation-event"
+      },
+      "timing": {
+        "openDelayMs": 0,
+        "evidence": "captured-open-transition"
+      },
+      "relationshipEvidence": "captured-slot-transition",
+      "trigger": {
+        "dataSlot": "tooltip-trigger",
+        "accessibleName": "Search projects",
+        "ariaHasPopup": null,
+        "ariaExpandedClosed": null,
+        "ariaExpandedOpen": null
+      },
+      "content": {
+        "dataSlot": "tooltip-content",
+        "role": null,
+        "side": "bottom",
+        "align": "center",
+        "items": []
+      },
+      "gates": {
+        "openTransitionObserved": true,
+        "triggerContentRelationshipObserved": true,
+        "escapeDismissalObserved": false,
+        "outsidePointerDismissalObserved": false,
+        "triggerToggleDismissalObserved": false,
+        "focusRestorationObserved": false
+      },
+      "triggerBindingId": "project.search.toggle"
+    },
+    {
+      "version": 1,
+      "triggerSourceId": "html:1/body:2/div:3/div:1/div:1/div:1/main:2/div:1/div:1/div:1/div:4/div:2/div:1/button:5",
+      "triggerNodeSourceId": "dom/html-shape-704d0864:0/body-shape-d65c892b:0/div-id-root:0/div-shape-74caabae:0/div-shape-20ec5713:0/div-data-slot-sidebar-wrapper:0/main-data-slot-sidebar-inset:0/div-data-slot-app-bar:0/div-shape-d1a99e95:0/div-shape-91386c77:0/div-shape-424a2145:0/div-shape-c035cafe:0/div-shape-e09411d2:0/button-data-slot-popover-trigger:0",
+      "contentSourceId": "dom/html-shape-704d0864:0/body-shape-d65c892b:0/div-id-_r_52_:0/div-presentation-unnamed:0/div-id-_r_4k_:0",
+      "kind": "popover",
+      "activationEvent": "click",
+      "anchor": {
+        "kind": "trigger",
+        "evidence": "activation-event"
+      },
+      "timing": {
+        "openDelayMs": 0,
+        "evidence": "captured-open-transition"
+      },
+      "relationshipEvidence": "aria-controls",
+      "trigger": {
+        "dataSlot": "popover-trigger",
+        "accessibleName": "",
+        "ariaHasPopup": "dialog",
+        "ariaExpandedClosed": "false",
+        "ariaExpandedOpen": "true"
+      },
+      "content": {
+        "dataSlot": "popover-content",
+        "role": "dialog",
+        "side": "bottom",
+        "align": "end",
+        "items": []
+      },
+      "gates": {
+        "openTransitionObserved": true,
+        "triggerContentRelationshipObserved": true,
+        "escapeDismissalObserved": true,
+        "outsidePointerDismissalObserved": true,
+        "triggerToggleDismissalObserved": true,
+        "focusRestorationObserved": true
+      },
+      "triggerBindingId": "session.metrics.toggle"
+    }
+  ],
+  "diagnostics": []
+}

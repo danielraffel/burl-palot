@@ -1,0 +1,108 @@
+{
+  "schemaVersion": 1,
+  "source": {
+    "repository": "/Users/danielraffel/Code/palot",
+    "revision": "fd63a75dad3d0e8555ba22a47e720d285889fbf0",
+    "launch": ["bun", "run", "dev:desktop"],
+    "cdpEndpoint": "http://127.0.0.1:9222"
+  },
+  "clock": "2026-07-11T20:00:00.000Z",
+  "route": "#/project/palot-proj-a1b2c3d/session/ses-mock-darkmode-001?mock=1",
+  "captureDefaults": {
+    "logicalWidth": 1200,
+    "logicalHeight": 800,
+    "pixelWidth": 2400,
+    "pixelHeight": 1600,
+    "deviceScaleFactor": 2,
+    "boundary": "content",
+    "resizePolicy": "reject"
+  },
+  "sourceBootstrap": {
+    "localStorage": {
+      "palot:mockMode": "true",
+      "palot:onboarding": "{\"completed\":true}",
+      "palot:theme": "\"dark\""
+    },
+    "disableAnimations": true,
+    "waitForFonts": true,
+    "animationFramesAfterReady": 2
+  },
+  "scenarios": [
+    {
+      "id": "01-shell",
+      "description": "Full shell baseline",
+      "regions": [{"id": "full", "x": 0, "y": 0, "width": 1200, "height": 800}],
+      "postconditions": [{"path": "route", "equals": "session"}, {"path": "sidebar.visible", "equals": true}]
+    },
+    {
+      "id": "02-window-chrome",
+      "description": "Native outer window chrome and controls",
+      "capture": {"boundary": "window-layer"},
+      "regions": [{"id": "titlebar", "x": 0, "y": 0, "width": 1200, "height": 46}],
+      "postconditions": [{"path": "window.active", "equals": true}, {"path": "window.controlsOperable", "equals": true}]
+    },
+    {
+      "id": "03-app-bar",
+      "description": "Breadcrumb, title, and status metrics",
+      "regions": [{"id": "app-bar", "x": 280, "y": 0, "width": 920, "height": 46}],
+      "postconditions": [{"path": "header.sessionTitle", "equals": "Add dark mode toggle to settings"}]
+    },
+    {
+      "id": "04-sidebar",
+      "description": "Sidebar hierarchy and selected session",
+      "regions": [{"id": "sidebar", "x": 0, "y": 0, "width": 280, "height": 800}],
+      "postconditions": [{"path": "sidebar.selectedSession", "equals": "ses-mock-darkmode-001"}, {"path": "sidebar.projects", "equals": 3}]
+    },
+    {
+      "id": "05-transcript",
+      "description": "Initial transcript viewport and row identity",
+      "regions": [{"id": "transcript", "x": 296, "y": 46, "width": 888, "height": 570}],
+      "postconditions": [{"path": "transcript.session", "equals": "ses-mock-darkmode-001"}, {"path": "transcript.stableIds", "equals": true}]
+    },
+    {
+      "id": "06-markdown",
+      "description": "Markdown typography, inline code, and tools",
+      "regions": [{"id": "markdown", "x": 312, "y": 120, "width": 856, "height": 430}],
+      "postconditions": [{"path": "markdown.emphasis", "equals": true}, {"path": "markdown.inlineCode", "equals": true}]
+    },
+    {
+      "id": "07-composer-resting",
+      "description": "Resting composer and toolbar controls",
+      "regions": [{"id": "composer", "x": 296, "y": 603, "width": 888, "height": 112}],
+      "postconditions": [{"path": "composer.empty", "equals": true}, {"path": "composer.controlsOperable", "equals": true}]
+    },
+    {
+      "id": "08-composer-editing",
+      "description": "Focused multiline selection and marked text",
+      "regions": [{"id": "composer", "x": 296, "y": 603, "width": 888, "height": 112}],
+      "actions": [{"type": "focus", "target": "composer"}, {"type": "insert", "text": "alpha\n日本語"}],
+      "postconditions": [{"path": "composer.focused", "equals": true}, {"path": "composer.text", "equals": "alpha\n日本語"}]
+    },
+    {
+      "id": "09-scroll-anchor",
+      "description": "Variable-height scroll anchoring",
+      "regions": [{"id": "transcript", "x": 296, "y": 46, "width": 888, "height": 570}],
+      "actions": [{"type": "scrollAnchor", "stableId": "msg-dm-a1", "intraRowOffset": 12}],
+      "postconditions": [{"path": "transcript.anchorDriftMax", "equals": 0.5}, {"path": "composer.focusPreserved", "equals": true}]
+    },
+    {
+      "id": "10-responsive-contract",
+      "description": "Source-minimum, intermediate, and reference responsive reflow without cropping or normalization",
+      "captures": [
+        {"id": "source-minimum", "widthPolicy": "empirically-probed-source-minimum", "logicalHeight": 800, "resizePolicy": "reject"},
+        {"id": "intermediate", "widthPolicy": "midpoint(source-minimum,1200)", "logicalHeight": 800, "resizePolicy": "reject"},
+        {"id": "reference", "logicalWidth": 1200, "logicalHeight": 800, "pixelWidth": 2400, "pixelHeight": 1600, "resizePolicy": "reject"}
+      ],
+      "regions": [{"id": "full", "x": 0, "y": 0, "width": 1200, "height": 800}],
+      "responsiveContract": "../oracle-inputs/responsive/responsive-contract.v1.json",
+      "postconditions": [{"path": "responsive.breakpointsTested", "equals": 3}, {"path": "responsive.currentViewportGeometry", "equals": true}, {"path": "responsive.noCropOrNormalization", "equals": true}, {"path": "responsive.noCriticalRegionClipped", "equals": true}, {"path": "responsive.sidebarBehaviorMatchesSource", "equals": true}, {"path": "responsive.controlsRemainOperable", "equals": true}]
+    },
+    {
+      "id": "11-live-stream",
+      "description": "Recorded stream parity plus separate real service proof",
+      "regions": [{"id": "full", "x": 0, "y": 0, "width": 1200, "height": 800}],
+      "actions": [{"type": "replay", "trace": "recorded-opencode-stream-v1"}],
+      "postconditions": [{"path": "stream.orderValid", "equals": true}, {"path": "stream.cancelRetryValid", "equals": true}, {"path": "architecture.native", "equals": true}]
+    }
+  ]
+}

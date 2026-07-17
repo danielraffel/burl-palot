@@ -1,0 +1,48 @@
+{
+  "id": "composer-focused-empty",
+  "status": "PASS",
+  "action": {
+    "type": "focus"
+  },
+  "postcondition": "focused-empty",
+  "post": {
+    "active": true,
+    "value": "",
+    "dataActive": false,
+    "disabled": false,
+    "hover": false,
+    "activePseudo": false,
+    "rect": {
+      "x": 297,
+      "y": 636.5,
+      "width": 873,
+      "height": 64
+    },
+    "mouseDownHeldAtCapture": false,
+    "visualStateMethod": "natural",
+    "contentFloorPass": true
+  },
+  "geometry": {
+    "logical": {
+      "x": 297,
+      "y": 636.5,
+      "width": 873,
+      "height": 64
+    },
+    "pixel": {
+      "left": 594,
+      "top": 1273,
+      "width": 1746,
+      "height": 128
+    },
+    "devicePixelRatio": 2
+  },
+  "files": {
+    "crop": "composer-focused-empty/crop.png",
+    "semantics": "composer-focused-empty/semantics.json"
+  },
+  "hashes": {
+    "crop": "91afe949e2f28b1ae5ae4dd0c61930884ff8287403335533229bf15f693dd15d",
+    "semantics": "0bba62221da70dcdd2db9d26575aa280b5fb088b843b506d27b50d7f478849f1"
+  }
+}

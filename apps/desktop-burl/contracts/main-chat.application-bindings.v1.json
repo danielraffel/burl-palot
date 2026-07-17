@@ -1,0 +1,101 @@
+{
+  "version": 1,
+  "applicationId": "palot.main-chat.fd63a75",
+  "sourceAnchors": [
+    {"id":"app.sidebar","sourceUri":"apps/desktop/src/renderer/components/sidebar-layout.tsx","symbol":"SidebarLayout"},
+    {"id":"chat.composer","sourceUri":"apps/desktop/src/renderer/components/chat/chat-input.tsx","symbol":"ChatInput"},
+    {"id":"chat.controller","sourceUri":"apps/desktop/src/renderer/components/session-view.tsx","symbol":"SessionView"},
+    {"id":"chat.transcript","sourceUri":"apps/desktop/src/renderer/components/chat/chat-view.tsx","symbol":"ChatView"},
+    {"id":"opencode.commands","sourceUri":"apps/desktop/src/renderer/hooks/use-server.ts","symbol":"useAgentActions"},
+    {"id":"opencode.connection","sourceUri":"apps/desktop/src/renderer/services/connection-manager.ts","symbol":"createEventBatcher"},
+    {"id":"state.events","sourceUri":"apps/desktop/src/renderer/atoms/actions/event-processor.ts","symbol":"processEvent"},
+    {"id":"state.messages","sourceUri":"apps/desktop/src/renderer/atoms/messages.ts","symbol":"upsertMessageAtom"},
+    {"id":"state.parts","sourceUri":"apps/desktop/src/renderer/atoms/parts.ts","symbol":"applyPartDeltaAtom"},
+    {"id":"state.persistence","sourceUri":"apps/desktop/src/renderer/atoms/preferences.ts","symbol":"draftsAtom"},
+    {"id":"state.sessions","sourceUri":"apps/desktop/src/renderer/atoms/sessions.ts","symbol":"upsertSessionAtom"},
+    {"id":"state.streaming","sourceUri":"apps/desktop/src/renderer/atoms/streaming.ts","symbol":"applyStreamingDelta"}
+  ],
+  "actions": [
+    {"id":"composer.agent-menu.toggle","variant":"typed","sourceAnchor":"chat.composer","required":true,"fields":[],"resultType":"boolean"},
+    {"id":"composer.attachment.open","variant":"typed","sourceAnchor":"chat.composer","required":true,"fields":[],"resultType":"file-attachment[]"},
+    {"id":"composer.model-menu.toggle","variant":"typed","sourceAnchor":"chat.composer","required":true,"fields":[],"resultType":"boolean"},
+    {"id":"composer.variant-menu.toggle","variant":"typed","sourceAnchor":"chat.composer","required":true,"fields":[],"resultType":"boolean"},
+    {"id":"command.palette.open","variant":"typed","sourceAnchor":"app.sidebar","required":true,"fields":[],"resultType":"boolean"},
+    {"id":"composer.copy","variant":"typed","sourceAnchor":"chat.transcript","required":true,"fields":[{"name":"messageID","type":"string","required":true}],"resultType":"void"},
+    {"id":"display.mode.cycle","variant":"typed","sourceAnchor":"chat.controller","required":true,"fields":[],"resultType":"display-mode"},
+    {"id":"external.open.menu.toggle","variant":"typed","sourceAnchor":"chat.controller","required":true,"fields":[],"resultType":"boolean"},
+    {"id":"external.open.preferred","variant":"typed","sourceAnchor":"chat.controller","required":true,"fields":[{"name":"directory","type":"path","required":true},{"name":"targetID","type":"string","required":true},{"name":"persistPreferred","type":"boolean","required":true}],"resultType":"void"},
+    {"id":"navigation.settings","variant":"typed","sourceAnchor":"app.sidebar","required":true,"fields":[],"resultType":"route"},
+    {"id":"navigation.automations","variant":"typed","sourceAnchor":"app.sidebar","required":true,"fields":[],"resultType":"route"},
+    {"id":"navigation.back-to-app","variant":"typed","sourceAnchor":"app.sidebar","required":true,"fields":[],"resultType":"route"},
+    {"id":"navigation.session.close","variant":"typed","sourceAnchor":"chat.controller","required":true,"fields":[],"resultType":"route"},
+    {"id":"navigation.new-session","variant":"typed","sourceAnchor":"app.sidebar","required":true,"fields":[],"resultType":"route"},
+    {"id":"project.select","variant":"typed","sourceAnchor":"app.sidebar","required":true,"fields":[],"resultType":"project"},
+    {"id":"project.open","variant":"typed","sourceAnchor":"app.sidebar","required":false,"fields":[{"name":"directory","type":"path","required":true}],"resultType":"project"},
+    {"id":"project.search.toggle","variant":"typed","sourceAnchor":"app.sidebar","required":true,"fields":[],"resultType":"boolean"},
+    {"id":"prompt.cancel","variant":"typed","sourceAnchor":"opencode.commands","required":true,"fields":[{"name":"directory","type":"path","required":true},{"name":"sessionID","type":"string","required":true}],"resultType":"void"},
+    {"id":"prompt.retry","variant":"typed","sourceAnchor":"opencode.commands","required":true,"fields":[{"name":"failedRequestID","type":"string","required":true},{"name":"sessionID","type":"string","required":true}],"resultType":"request-id"},
+    {"id":"prompt.send","variant":"typed","sourceAnchor":"opencode.commands","required":true,"fields":[{"name":"agent","type":"string","required":false},{"name":"files","type":"file-attachment[]","required":false},{"name":"model","type":"model-ref","required":true},{"name":"sessionID","type":"string","required":true},{"name":"text","type":"string","required":true},{"name":"variant","type":"string","required":false}],"resultType":"request-id"},
+    {"id":"session.create","variant":"typed","sourceAnchor":"opencode.commands","required":false,"fields":[{"name":"directory","type":"path","required":true}],"resultType":"session"},
+    {"id":"session.open","variant":"typed","sourceAnchor":"chat.controller","required":true,"fields":[{"name":"directory","type":"path","required":true},{"name":"sessionID","type":"string","required":true}],"resultType":"session"},
+    {"id":"server.menu.toggle","variant":"typed","sourceAnchor":"app.sidebar","required":true,"fields":[],"resultType":"boolean"},
+    {"id":"review.panel.toggle","variant":"typed","sourceAnchor":"chat.controller","required":true,"fields":[],"resultType":"boolean"},
+    {"id":"session.metrics.dismiss","variant":"typed","sourceAnchor":"chat.controller","required":true,"fields":[],"resultType":"boolean"},
+    {"id":"session.metrics.toggle","variant":"typed","sourceAnchor":"chat.controller","required":true,"fields":[],"resultType":"boolean"},
+    {"id":"session.title.edit.begin","variant":"typed","sourceAnchor":"chat.controller","required":true,"fields":[],"resultType":"boolean"},
+    {"id":"settings.theme.select","variant":"typed","sourceAnchor":"state.persistence","required":true,"fields":[{"name":"theme","type":"string","required":true}],"resultType":"theme"},
+    {"id":"sidebar.toggle","variant":"typed","sourceAnchor":"app.sidebar","required":true,"fields":[],"resultType":"boolean"},
+    {"id":"terminal.attach","variant":"typed","sourceAnchor":"chat.controller","required":true,"fields":[{"name":"directory","type":"path","required":true},{"name":"sessionID","type":"string","required":true}],"resultType":"void"}
+  ],
+  "events": [
+    {"id":"message.part.delta","variant":"typed","sourceAnchor":"opencode.connection","required":true,"fields":[{"name":"delta","type":"string","required":true},{"name":"field","type":"string","required":true},{"name":"messageID","type":"string","required":true},{"name":"partID","type":"string","required":true},{"name":"sessionID","type":"string","required":true}],"resultType":"void"},
+    {"id":"message.part.updated","variant":"typed","sourceAnchor":"opencode.connection","required":true,"fields":[{"name":"part","type":"opencode-part","required":true}],"resultType":"void"},
+    {"id":"message.updated","variant":"typed","sourceAnchor":"state.events","required":true,"fields":[{"name":"info","type":"opencode-message","required":true}],"resultType":"void"},
+    {"id":"session.error","variant":"typed","sourceAnchor":"state.events","required":true,"fields":[{"name":"error","type":"opencode-error","required":true},{"name":"sessionID","type":"string","required":true}],"resultType":"void"},
+    {"id":"session.status","variant":"typed","sourceAnchor":"state.events","required":true,"fields":[{"name":"sessionID","type":"string","required":true},{"name":"status","type":"session-status","required":true}],"resultType":"void"}
+  ],
+  "data": [
+    {"id":"composer.draft","variant":"typed","sourceAnchor":"state.persistence","required":true,"fields":[{"name":"sessionID","type":"string","required":true}],"resultType":"string"},
+    {"id":"message.by-id","variant":"typed","sourceAnchor":"state.messages","required":true,"fields":[{"name":"messageID","type":"string","required":true}],"resultType":"opencode-message"},
+    {"id":"part.by-message","variant":"typed","sourceAnchor":"state.parts","required":true,"fields":[{"name":"messageID","type":"string","required":true},{"name":"partID","type":"string","required":true}],"resultType":"opencode-part"},
+    {"id":"session.current","variant":"typed","sourceAnchor":"state.sessions","required":true,"fields":[{"name":"sessionID","type":"string","required":true}],"resultType":"session"},
+    {"id":"streaming.part","variant":"typed","sourceAnchor":"state.streaming","required":true,"fields":[{"name":"field","type":"string","required":true},{"name":"messageID","type":"string","required":true},{"name":"partID","type":"string","required":true}],"resultType":"string"}
+  ],
+  "retainedModules": [
+    {"id":"opencode-connection-manager","variant":"javascript","entrypoint":"apps/desktop/src/renderer/services/connection-manager.ts","sourceAnchor":"opencode.connection","required":true},
+    {"id":"opencode-event-processor","variant":"javascript","entrypoint":"apps/desktop/src/renderer/atoms/actions/event-processor.ts","sourceAnchor":"state.events","required":true},
+    {"id":"opencode-product-actions","variant":"javascript","entrypoint":"apps/desktop/src/renderer/hooks/use-server.ts","sourceAnchor":"opencode.commands","required":true},
+    {"id":"palot-message-store","variant":"javascript","entrypoint":"apps/desktop/src/renderer/atoms/messages.ts","sourceAnchor":"state.messages","required":true},
+    {"id":"palot-part-store","variant":"javascript","entrypoint":"apps/desktop/src/renderer/atoms/parts.ts","sourceAnchor":"state.parts","required":true},
+    {"id":"palot-session-store","variant":"javascript","entrypoint":"apps/desktop/src/renderer/atoms/sessions.ts","sourceAnchor":"state.sessions","required":true},
+    {"id":"palot-streaming-buffer","variant":"javascript","entrypoint":"apps/desktop/src/renderer/atoms/streaming.ts","sourceAnchor":"state.streaming","required":true}
+  ],
+  "requiredCapabilities": [
+    "accessibility-log",
+    "app-window-transparent-titlebar",
+    "clipboard-selection",
+    "generation-safe-async-reducer",
+    "native-markdown",
+    "native-multiline-ime",
+    "responsive-flex-breakpoint",
+    "stable-semantic-identity",
+    "variable-height-collection"
+  ],
+  "scenarios": [
+    {"id":"01-shell","manifestUri":"evidence/visual-parity/scenarios.v1.json#01-shell","required":true},
+    {"id":"02-window-chrome","manifestUri":"evidence/visual-parity/scenarios.v1.json#02-window-chrome","required":true},
+    {"id":"03-app-bar","manifestUri":"evidence/visual-parity/scenarios.v1.json#03-app-bar","required":true},
+    {"id":"04-sidebar","manifestUri":"evidence/visual-parity/scenarios.v1.json#04-sidebar","required":true},
+    {"id":"05-transcript","manifestUri":"evidence/visual-parity/scenarios.v1.json#05-transcript","required":true},
+    {"id":"06-markdown","manifestUri":"evidence/visual-parity/scenarios.v1.json#06-markdown","required":true},
+    {"id":"07-composer-resting","manifestUri":"evidence/visual-parity/scenarios.v1.json#07-composer-resting","required":true},
+    {"id":"08-composer-editing","manifestUri":"evidence/visual-parity/scenarios.v1.json#08-composer-editing","required":true},
+    {"id":"09-scroll-anchor","manifestUri":"evidence/visual-parity/scenarios.v1.json#09-scroll-anchor","required":true},
+    {"id":"10-responsive-contract","manifestUri":"evidence/visual-parity/scenarios.v1.json#10-responsive-contract","required":true},
+    {"id":"11-live-stream","manifestUri":"evidence/visual-parity/scenarios.v1.json#11-live-stream","required":true}
+  ],
+  "diagnostics": [
+    {"severity":"warning","code":"retained-source-state","path":"$.retainedModules","message":"Jotai and OpenCode orchestration remain consumer-owned modules until equivalence traces justify lowering."}
+  ],
+  "unknownOptionalVariants": []
+}

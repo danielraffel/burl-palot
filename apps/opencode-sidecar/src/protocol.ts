@@ -65,6 +65,8 @@ const COMMAND_TYPES = new Set([
 	"session.list",
 	"session.create",
 	"session.open",
+	"session.fork",
+	"session.revert",
 	"prompt.send",
 	"prompt.cancel",
 	"prompt.retry",

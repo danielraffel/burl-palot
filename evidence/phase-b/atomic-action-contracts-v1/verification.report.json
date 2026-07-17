@@ -1,0 +1,169 @@
+{
+  "schema": "palot-responsive-state-integration-verification-v1",
+  "passed": true,
+  "violations": [],
+  "inputs": {
+    "base": {
+      "path": "/private/tmp/palot-v31-fresh-state-atomic-contracts.design-ir.json",
+      "sha256": "d75bb5d2afb371d27cfe8260456b8fd0f2062a83439eb693d62477523acf4776"
+    },
+    "integrated": {
+      "path": "/private/tmp/palot-v31-responsive-state-atomic-contracts-integrated.design-ir.json",
+      "sha256": "a82dd7737bf62d55cd9f71745f3c47d5888816270c90daae6d8474977ddb51f9"
+    },
+    "responsiveManifest": {
+      "path": "/private/tmp/palot-v27-responsive-unions/layer.manifest.json",
+      "sha256": "823ca5df8fedcba147d191c5527d11f721b997d56381767d64c070c3962d5038"
+    },
+    "compositionReport": {
+      "path": "/private/tmp/palot-v31-responsive-state-atomic-contracts-composition.report.json",
+      "sha256": "653a983511627527da850ef564bc9ea2fe739bc454adfea1d3814b1e04c4afff"
+    },
+    "bindings": {
+      "path": "/Users/danielraffel/Code/burl-palot-wt-semantic-restart/apps/desktop-burl/contracts/main-chat.application-bindings.v1.json",
+      "sha256": "5b81a3136de1861661b0b127c0f6f24deca1ace469f26f5da57dc88197710366"
+    }
+  },
+  "preservation": {
+    "fontFamilyAssets": 14,
+    "assets": 70,
+    "importedActions": [
+      "appearance.color-scheme.select",
+      "command.palette.open",
+      "composer.agent-menu.toggle",
+      "composer.attachment.open",
+      "composer.copy",
+      "composer.model-menu.toggle",
+      "composer.variant-menu.toggle",
+      "composer.variant.select",
+      "configuration.reload",
+      "conversation.compact",
+      "developer.demo-mode.toggle",
+      "developer.react-scan.toggle",
+      "disclosure.edit.toggle",
+      "disclosure.read.toggle",
+      "disclosure.thought.toggle",
+      "display.mode.cycle",
+      "external.open.menu.toggle",
+      "external.open.preferred",
+      "features.automations.toggle",
+      "message.scroll-to-turn",
+      "navigation.automations",
+      "navigation.new-session",
+      "navigation.session.close",
+      "navigation.settings",
+      "project.open",
+      "project.search.toggle",
+      "project.select",
+      "prompt.cancel",
+      "review.diff.open",
+      "review.panel.toggle",
+      "server.menu.toggle",
+      "session.fork",
+      "session.fork-from-message",
+      "session.metrics.dismiss",
+      "session.metrics.toggle",
+      "session.open",
+      "session.title.edit.begin",
+      "session.undo-last-turn",
+      "session.undo-to-message",
+      "settings.theme.select",
+      "sidebar.toggle",
+      "terminal.attach",
+      "window.transparency.toggle"
+    ],
+    "emptyActionBindings": {
+      "protectedBase": 0,
+      "integrated": 0,
+      "introducedByComposition": 0,
+      "details": []
+    },
+    "requiredActions": [
+      "command.palette.open",
+      "composer.agent-menu.toggle",
+      "composer.attachment.open",
+      "composer.copy",
+      "composer.model-menu.toggle",
+      "composer.variant-menu.toggle",
+      "display.mode.cycle",
+      "external.open.menu.toggle",
+      "external.open.preferred",
+      "navigation.automations",
+      "navigation.new-session",
+      "navigation.session.close",
+      "navigation.settings",
+      "project.search.toggle",
+      "project.select",
+      "prompt.cancel",
+      "prompt.retry",
+      "prompt.send",
+      "review.panel.toggle",
+      "server.menu.toggle",
+      "session.metrics.dismiss",
+      "session.metrics.toggle",
+      "session.open",
+      "session.title.edit.begin",
+      "settings.theme.select",
+      "sidebar.toggle",
+      "terminal.attach"
+    ],
+    "nativeComposerActions": [
+      "prompt.retry",
+      "prompt.send"
+    ],
+    "criticalInteractionAndOverlayRecords": 75,
+    "sourceRevisions": [
+      "fd63a75dad3d0e8555ba22a47e720d285889fbf0"
+    ]
+  },
+  "responsiveLayers": [
+    {
+      "dimension": "sidebar.open",
+      "value": "closed",
+      "path": "/private/tmp/palot-v27-responsive-unions/sidebar-closed.design-ir.json",
+      "sha256": "7f50bcd6168fd2351acec62790b1a29e44619db0fb9c9388558f3266ff8a301b",
+      "actualSha256": "7f50bcd6168fd2351acec62790b1a29e44619db0fb9c9388558f3266ff8a301b",
+      "responsiveRecords": 350,
+      "directAnchorMatches": 144,
+      "composedProjectedRecords": 23,
+      "matchedFrontiers": 47,
+      "matchedAbsentFrontiers": 0
+    },
+    {
+      "dimension": "sidebar.open",
+      "value": "open",
+      "path": "/private/tmp/palot-v27-responsive-unions/sidebar-open.design-ir.json",
+      "sha256": "82f1b0f52d14a2db5cc3e03e7b4cadfceb035deb9f62bbf89155b59ad5aa8dec",
+      "actualSha256": "82f1b0f52d14a2db5cc3e03e7b4cadfceb035deb9f62bbf89155b59ad5aa8dec",
+      "responsiveRecords": 514,
+      "directAnchorMatches": 311,
+      "composedProjectedRecords": 170,
+      "matchedFrontiers": 48,
+      "matchedAbsentFrontiers": 0
+    },
+    {
+      "dimension": "review.panel.open",
+      "value": "closed",
+      "path": "/private/tmp/palot-v27-responsive-unions/review-closed.design-ir.json",
+      "sha256": "3cf55ea90107a65fd4d5a4cef0b3d02c345dec7bca88e3da8b93230f37480ef3",
+      "actualSha256": "3cf55ea90107a65fd4d5a4cef0b3d02c345dec7bca88e3da8b93230f37480ef3",
+      "responsiveRecords": 346,
+      "directAnchorMatches": 0,
+      "composedProjectedRecords": 0,
+      "matchedFrontiers": 0,
+      "matchedAbsentFrontiers": 1
+    },
+    {
+      "dimension": "review.panel.open",
+      "value": "open",
+      "path": "/private/tmp/palot-v27-responsive-unions/review-open.design-ir.json",
+      "sha256": "b2f9cb6b7c4a716a9fc88a51ee00cf11ed34ed172b93f9f69c58c0d979eae216",
+      "actualSha256": "b2f9cb6b7c4a716a9fc88a51ee00cf11ed34ed172b93f9f69c58c0d979eae216",
+      "responsiveRecords": 353,
+      "directAnchorMatches": 0,
+      "composedProjectedRecords": 1,
+      "matchedFrontiers": 1,
+      "matchedAbsentFrontiers": 0
+    }
+  ]
+}

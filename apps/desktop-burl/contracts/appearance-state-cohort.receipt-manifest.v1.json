@@ -1,0 +1,818 @@
+{
+  "schema": "burl-native-state-cohort-receipt-manifest-v1",
+  "cohortId": "appearance-theme-opacity-display-mode",
+  "purpose": "Prove that source-observed pixels and untouched React behavior remain coherent across coupled appearance state.",
+  "receiptCompatibility": {
+    "baseSchema": "burl-live-react-interaction-receipt-v2",
+    "reusedStepFields": [
+      "id",
+      "operation",
+      "resolvedIdentities",
+      "targetResolvedExactlyOnce",
+      "pointerDownDispatched",
+      "pointerUpDispatched",
+      "callbackBefore",
+      "callbackAfter",
+      "callbackDelta",
+      "stateBefore",
+      "stateAfter",
+      "changedStateKeys",
+      "focusBefore",
+      "focusAfter",
+      "overlaysBefore",
+      "overlaysAfter",
+      "screenshotBeforeHash",
+      "screenshotAfterHash",
+      "failureClasses",
+      "passed"
+    ],
+    "extensions": [
+      "storageBefore",
+      "storageAfter",
+      "themeBefore",
+      "themeAfter",
+      "windowBefore",
+      "windowAfter",
+      "layoutBeforeHash",
+      "layoutAfterHash",
+      "sourceRegionHashes",
+      "nativeRegionHashes",
+      "processGenerationBefore",
+      "processGenerationAfter",
+      "manifestStepId",
+      "sequenceIndex",
+      "activeDescendantAfter",
+      "dispatchTimestamp",
+      "settledTimestamp",
+      "layoutReceiptTimestamp",
+      "sourceCapture",
+      "nativeCapture",
+      "comparisons",
+      "candidateArtifactSetSha256",
+      "trustedEvents",
+      "processIdBefore",
+      "processIdAfter",
+      "sourceProcessId",
+      "layoutAfter",
+      "visibleContentAfter"
+    ],
+    "expansionRules": {
+      "key-sequence": "A key-sequence is manifest shorthand only. The runner MUST emit one ordered burl-live-react-interaction-receipt-v2 step for every listed native key, including intermediate focusBefore and focusAfter values; an aggregate-only receipt fails receipt-schema-drift."
+    }
+  },
+  "sourceAuthority": {
+    "repository": "/Users/danielraffel/Code/palot",
+    "revision": "fd63a75dad3d0e8555ba22a47e720d285889fbf0",
+    "component": "apps/desktop/src/renderer/components/settings/general-settings.tsx",
+    "files": [
+      {
+        "path": "apps/desktop/src/renderer/components/settings/general-settings.tsx",
+        "sha256": "8aa6b66f4dc775b4974f7c967a9b8e0661d32511fae4f38e9c85699c79aa62a9"
+      },
+      {
+        "path": "apps/desktop/src/renderer/atoms/preferences.ts",
+        "sha256": "ff9392dedc4a7e8b34c75a5532565383aa4c6e666485b77a270b701940460580"
+      },
+      {
+        "path": "apps/desktop/src/renderer/hooks/use-theme.ts",
+        "sha256": "2fbbb946318632f664885c8f2596d328a96561ea1df1925813bdd7e06e9a5ed7"
+      },
+      {
+        "path": "apps/desktop/src/renderer/hooks/use-chrome-tier.ts",
+        "sha256": "2b9a33c574fc523ce4954cafbb0f759bfe81340355eb666bb9024e8dadf70edb"
+      },
+      {
+        "path": "apps/desktop/src/renderer/components/settings/settings-page.tsx",
+        "sha256": "312256967f120e055d3f222b8cfe73e11180f53f7fa34eb16a081fbc61269a35"
+      },
+      {
+        "path": "apps/desktop/src/renderer/router.tsx",
+        "sha256": "bcf358a6da4f4e9e9aae9ce0f1ede2302354c13173df834293fdf1c3e3cc3470"
+      }
+    ],
+    "existingCaptures": [
+      {
+        "path": "evidence/phase-b/source-interaction-states/settings-route.png",
+        "sha256": "89cf17d6b94f93c5a05d8174d89c05cd924c0f5b54d92a23b0950d3defb06e30",
+        "authority": "visual-reference-only",
+        "reason": "The persisted state and interaction event stream were not isolated as one cohort."
+      },
+      {
+        "path": "evidence/phase-b/source-interaction-states/generated-v5/navigation/settings/activate-settings/source.png",
+        "sha256": "93270ce016b4c8ee0a2f78be8748a50b7a6db5a68d7e5c62b4b43887079de379",
+        "authority": "geometry-and-dark-rest-reference",
+        "reason": "The capture contains persisted verbose display mode and cannot prove the default-state seed."
+      },
+      {
+        "path": "evidence/phase-b/native-navigation-state-v18-appkit/04-settings-general.png",
+        "sha256": "14d5303b0e210e577a4d0197d341739a707039b137c421110b97bd9d85ab2d00",
+        "authority": "known-negative-native-reference",
+        "reason": "It exposes layout overlap and is not promotable parity evidence."
+      }
+    ]
+  },
+  "canonicalBindings": {
+    "state": {
+      "navigation.route": "settings/general",
+      "appearance.theme.id": "default",
+      "appearance.colorScheme.selection": "dark|light|system",
+      "appearance.colorScheme.resolved": "dark|light",
+      "appearance.opacity.preference": "transparent|opaque",
+      "appearance.chrome.capability": "liquid-glass|vibrancy|opaque",
+      "appearance.window.material": "liquid-glass|vibrancy|opaque",
+      "conversation.displayMode": "default|verbose"
+    },
+    "sourceStorage": {
+      "appearance.colorScheme.selection": {
+        "kind": "localStorage",
+        "key": "palot:colorScheme"
+      },
+      "appearance.opacity.preference": [
+        {
+          "kind": "localStorage",
+          "key": "palot:opaqueWindows"
+        },
+        {
+          "kind": "durable-settings",
+          "key": "opaqueWindows"
+        }
+      ],
+      "conversation.displayMode": {
+        "kind": "localStorage",
+        "key": "palot:displayMode"
+      }
+    },
+    "effects": {
+      "appearance.colorScheme.selection": [
+        "root-color-scheme-class",
+        "native-theme-source"
+      ],
+      "appearance.opacity.preference": [
+        "durable-settings-write",
+        "single-relaunch-request",
+        "post-relaunch-window-material"
+      ],
+      "conversation.displayMode": [
+        "conversation-detail-projection"
+      ]
+    }
+  },
+  "semanticTargets": [
+    "settings.root",
+    "settings.sidebar",
+    "settings.appearance.section",
+    "settings.openDestination.trigger",
+    "settings.theme.light",
+    "settings.theme.dark",
+    "settings.theme.system",
+    "settings.opacity.switch",
+    "settings.displayMode.trigger",
+    "settings.displayMode.menu",
+    "settings.displayMode.option.default",
+    "settings.displayMode.option.verbose",
+    "settings.navigation.general",
+    "settings.navigation.servers",
+    "settings.navigation.notifications",
+    "settings.navigation.providers",
+    "settings.navigation.worktrees",
+    "settings.navigation.setup",
+    "settings.navigation.about"
+  ],
+  "environment": {
+    "viewport": {
+      "width": 1200,
+      "height": 800,
+      "deviceScaleFactor": 2
+    },
+    "platform": "macos",
+    "systemColorScheme": "light",
+    "chromeCapability": "liquid-glass",
+    "profile": "isolated-empty-storage-then-explicit-seed",
+    "openDestinationTargets": [
+      {
+        "id": "finder",
+        "label": "Finder",
+        "available": true
+      }
+    ]
+  },
+  "initialState": {
+    "react": {
+      "navigation.route": "settings/general",
+      "appearance.theme.id": "default",
+      "appearance.colorScheme.selection": "dark",
+      "appearance.colorScheme.resolved": "dark",
+      "appearance.opacity.preference": "transparent",
+      "appearance.chrome.capability": "liquid-glass",
+      "appearance.window.material": "liquid-glass",
+      "conversation.displayMode": "default"
+    },
+    "importedTree": {
+      "appearance.colorScheme.selection": "dark",
+      "appearance.colorScheme.resolved": "dark",
+      "appearance.opacity.preference": "transparent",
+      "appearance.window.material": "liquid-glass",
+      "conversation.displayMode": "default"
+    },
+    "storage": {
+      "localStorage:palot:theme": "\"default\"",
+      "localStorage:palot:colorScheme": "\"dark\"",
+      "localStorage:palot:opaqueWindows": "false",
+      "localStorage:palot:displayMode": "\"default\"",
+      "durable-settings:opaqueWindows": false
+    },
+    "theme": {
+      "rootClassesContain": ["dark"],
+      "rootClassesExclude": ["light", "electron-opaque"],
+      "nativeThemeSource": "dark",
+      "paletteRegions": {
+        "settings.sidebar": "dark",
+        "settings.content": "dark",
+        "settings.appearance.section": "dark"
+      }
+    },
+    "window": {
+      "material": "liquid-glass",
+      "isOpaque": false,
+      "processGeneration": 1
+    },
+    "focus": "",
+    "overlays": []
+  },
+  "scenarios": [
+    {
+      "id": "theme-pointer-keyboard-system-resolution",
+      "resetToInitialState": true,
+      "steps": [
+        {
+          "id": "theme-light-hover-enter",
+          "operation": "hover-enter",
+          "target": "settings.theme.light",
+          "expected": {
+            "callbackDelta": 0,
+            "stateChanges": {},
+            "focus": "",
+            "overlays": [],
+            "visualState": "theme-light-hover"
+          }
+        },
+        {
+          "id": "theme-light-hover-leave",
+          "operation": "hover-leave",
+          "target": "settings.theme.light",
+          "expected": {
+            "callbackDelta": 0,
+            "stateChanges": {},
+            "visualState": "theme-dark-rest"
+          }
+        },
+        {
+          "id": "theme-light-pointer",
+          "operation": "click",
+          "target": "settings.theme.light",
+          "expected": {
+            "callbackDelta": 1,
+            "actionId": "appearance.colorScheme.select",
+            "payload": "light",
+            "state": {
+              "appearance.colorScheme.selection": "light",
+              "appearance.colorScheme.resolved": "light"
+            },
+            "storage": {
+              "localStorage:palot:colorScheme": "\"light\""
+            },
+            "theme": {
+              "rootClassesContain": ["light"],
+              "rootClassesExclude": ["dark"],
+              "nativeThemeSource": "light",
+              "allPaletteRegions": "light"
+            },
+            "focus": "settings.theme.light",
+            "overlays": []
+          }
+        },
+        {
+          "id": "theme-tab-to-dark",
+          "operation": "key-down",
+          "key": "Tab",
+          "expected": {
+            "callbackDelta": 0,
+            "stateChanges": {},
+            "focus": "settings.theme.dark"
+          }
+        },
+        {
+          "id": "theme-dark-keyboard",
+          "operation": "key-down",
+          "key": "Space",
+          "expected": {
+            "callbackDelta": 1,
+            "actionId": "appearance.colorScheme.select",
+            "payload": "dark",
+            "state": {
+              "appearance.colorScheme.selection": "dark",
+              "appearance.colorScheme.resolved": "dark"
+            },
+            "storage": {
+              "localStorage:palot:colorScheme": "\"dark\""
+            },
+            "theme": {
+              "rootClassesContain": ["dark"],
+              "rootClassesExclude": ["light"],
+              "nativeThemeSource": "dark",
+              "allPaletteRegions": "dark"
+            },
+            "focus": "settings.theme.dark",
+            "overlays": []
+          }
+        },
+        {
+          "id": "theme-tab-to-system",
+          "operation": "key-down",
+          "key": "Tab",
+          "expected": {
+            "callbackDelta": 0,
+            "stateChanges": {},
+            "focus": "settings.theme.system"
+          }
+        },
+        {
+          "id": "theme-system-keyboard",
+          "operation": "key-down",
+          "key": "Space",
+          "expected": {
+            "callbackDelta": 1,
+            "actionId": "appearance.colorScheme.select",
+            "payload": "system",
+            "state": {
+              "appearance.colorScheme.selection": "system",
+              "appearance.colorScheme.resolved": "light"
+            },
+            "storage": {
+              "localStorage:palot:colorScheme": "\"system\""
+            },
+            "theme": {
+              "rootClassesContain": ["light"],
+              "rootClassesExclude": ["dark"],
+              "nativeThemeSource": "system",
+              "allPaletteRegions": "light"
+            },
+            "focus": "settings.theme.system"
+          }
+        },
+        {
+          "id": "system-appearance-turns-dark",
+          "operation": "environment-change",
+          "value": "systemColorScheme=dark",
+          "expected": {
+            "callbackDelta": 0,
+            "state": {
+              "appearance.colorScheme.selection": "system",
+              "appearance.colorScheme.resolved": "dark"
+            },
+            "storage": {
+              "localStorage:palot:colorScheme": "\"system\""
+            },
+            "theme": {
+              "rootClassesContain": ["dark"],
+              "rootClassesExclude": ["light"],
+              "nativeThemeSource": "system",
+              "allPaletteRegions": "dark"
+            },
+            "focus": "settings.theme.system"
+          }
+        }
+      ]
+    },
+    {
+      "id": "opacity-pointer-keyboard-relaunch",
+      "resetToInitialState": true,
+      "steps": [
+        {
+          "id": "opacity-enable-pointer",
+          "operation": "click",
+          "target": "settings.opacity.switch",
+          "expected": {
+            "callbackDelta": 1,
+            "actionId": "appearance.opacity.set",
+            "payload": "opaque",
+            "state": {
+              "appearance.opacity.preference": "opaque"
+            },
+            "storage": {
+              "localStorage:palot:opaqueWindows": "true",
+              "durable-settings:opaqueWindows": true
+            },
+            "window": {
+              "relaunchRequests": 1,
+              "postRelaunchMaterial": "opaque",
+              "postRelaunchIsOpaque": true,
+              "processGenerationDelta": 1
+            },
+            "geometryDeltas": {
+              "settings.opacity.switch.thumb": {
+                "axis": "x",
+                "direction": "positive",
+                "minimumAbsoluteDelta": 1
+              }
+            },
+            "paintDeltaRegions": ["settings.opacity"],
+            "theme": {
+              "postRelaunchRootClassesContain": ["dark", "electron-opaque"],
+              "postRelaunchRootClassesExclude": ["light", "electron-transparent", "electron-vibrancy"],
+              "allPaletteRegions": "dark"
+            },
+            "focusAfterRelaunch": "",
+            "overlays": []
+          }
+        },
+        {
+          "id": "opacity-keyboard-tab-order",
+          "operation": "key-sequence",
+          "keys": ["Tab", "Tab", "Tab", "Tab", "Tab"],
+          "expected": {
+            "callbackDelta": 0,
+            "focusOrder": [
+              "settings.openDestination.trigger",
+              "settings.theme.light",
+              "settings.theme.dark",
+              "settings.theme.system",
+              "settings.opacity.switch"
+            ],
+            "stateChanges": {}
+          }
+        },
+        {
+          "id": "opacity-disable-keyboard",
+          "operation": "key-down",
+          "key": "Space",
+          "expected": {
+            "callbackDelta": 1,
+            "actionId": "appearance.opacity.set",
+            "payload": "transparent",
+            "state": {
+              "appearance.opacity.preference": "transparent"
+            },
+            "storage": {
+              "localStorage:palot:opaqueWindows": "false",
+              "durable-settings:opaqueWindows": false
+            },
+            "window": {
+              "relaunchRequests": 1,
+              "postRelaunchMaterial": "liquid-glass",
+              "postRelaunchIsOpaque": false,
+              "processGenerationDelta": 1
+            },
+            "geometryDeltas": {
+              "settings.opacity.switch.thumb": {
+                "axis": "x",
+                "direction": "negative",
+                "minimumAbsoluteDelta": 1
+              }
+            },
+            "paintDeltaRegions": ["settings.opacity"],
+            "theme": {
+              "postRelaunchRootClassesContain": ["dark", "electron-transparent"],
+              "postRelaunchRootClassesExclude": ["light", "electron-opaque", "electron-vibrancy"],
+              "allPaletteRegions": "dark"
+            },
+            "focusAfterRelaunch": ""
+          }
+        }
+      ]
+    },
+    {
+      "id": "display-mode-overlay-and-keyboard",
+      "resetToInitialState": true,
+      "steps": [
+        {
+          "id": "display-open-pointer",
+          "operation": "click",
+          "target": "settings.displayMode.trigger",
+          "expected": {
+            "callbackDelta": 0,
+            "state": {
+              "conversation.displayMode": "default"
+            },
+            "focus": "settings.displayMode.trigger",
+            "overlays": ["settings.displayMode.menu"]
+          }
+        },
+        {
+          "id": "display-verbose-hover",
+          "operation": "hover-enter",
+          "target": "settings.displayMode.option.verbose",
+          "expected": {
+            "callbackDelta": 0,
+            "state": {
+              "conversation.displayMode": "default"
+            },
+            "activeDescendant": "settings.displayMode.option.verbose",
+            "overlays": ["settings.displayMode.menu"]
+          }
+        },
+        {
+          "id": "display-outside-dismiss",
+          "operation": "outside-click",
+          "expected": {
+            "callbackDelta": 0,
+            "state": {
+              "conversation.displayMode": "default"
+            },
+            "storage": {
+              "localStorage:palot:displayMode": "\"default\""
+            },
+            "focus": "settings.displayMode.trigger",
+            "overlays": []
+          }
+        },
+        {
+          "id": "display-reopen-pointer",
+          "operation": "click",
+          "target": "settings.displayMode.trigger",
+          "expected": {
+            "callbackDelta": 0,
+            "overlays": ["settings.displayMode.menu"]
+          }
+        },
+        {
+          "id": "display-escape",
+          "operation": "key-down",
+          "key": "Escape",
+          "expected": {
+            "callbackDelta": 0,
+            "state": {
+              "conversation.displayMode": "default"
+            },
+            "focus": "settings.displayMode.trigger",
+            "overlays": []
+          }
+        },
+        {
+          "id": "display-keyboard-tab-order",
+          "operation": "key-sequence",
+          "keys": ["Tab", "Tab", "Tab", "Tab", "Tab", "Tab"],
+          "expected": {
+            "callbackDelta": 0,
+            "focusOrder": [
+              "settings.openDestination.trigger",
+              "settings.theme.light",
+              "settings.theme.dark",
+              "settings.theme.system",
+              "settings.opacity.switch",
+              "settings.displayMode.trigger"
+            ],
+            "stateChanges": {}
+          }
+        },
+        {
+          "id": "display-open-keyboard",
+          "operation": "key-down",
+          "key": "Space",
+          "expected": {
+            "callbackDelta": 0,
+            "overlays": ["settings.displayMode.menu"]
+          }
+        },
+        {
+          "id": "display-arrow-down",
+          "operation": "key-down",
+          "key": "ArrowDown",
+          "expected": {
+            "callbackDelta": 0,
+            "state": {
+              "conversation.displayMode": "default"
+            },
+            "activeDescendant": "settings.displayMode.option.verbose",
+            "overlays": ["settings.displayMode.menu"]
+          }
+        },
+        {
+          "id": "display-enter-verbose",
+          "operation": "key-down",
+          "key": "Enter",
+          "expected": {
+            "callbackDelta": 1,
+            "actionId": "conversation.displayMode.select",
+            "payload": "verbose",
+            "state": {
+              "conversation.displayMode": "verbose"
+            },
+            "storage": {
+              "localStorage:palot:displayMode": "\"verbose\""
+            },
+            "focus": "settings.displayMode.trigger",
+            "overlays": []
+          }
+        },
+        {
+          "id": "display-reopen-at-verbose",
+          "operation": "click",
+          "target": "settings.displayMode.trigger",
+          "expected": {
+            "callbackDelta": 0,
+            "activeDescendant": "settings.displayMode.option.verbose",
+            "overlays": ["settings.displayMode.menu"]
+          }
+        },
+        {
+          "id": "display-arrow-up",
+          "operation": "key-down",
+          "key": "ArrowUp",
+          "expected": {
+            "callbackDelta": 0,
+            "state": {
+              "conversation.displayMode": "verbose"
+            },
+            "activeDescendant": "settings.displayMode.option.default",
+            "overlays": ["settings.displayMode.menu"]
+          }
+        },
+        {
+          "id": "display-enter-default",
+          "operation": "key-down",
+          "key": "Enter",
+          "expected": {
+            "callbackDelta": 1,
+            "actionId": "conversation.displayMode.select",
+            "payload": "default",
+            "state": {
+              "conversation.displayMode": "default"
+            },
+            "storage": {
+              "localStorage:palot:displayMode": "\"default\""
+            },
+            "focus": "settings.displayMode.trigger",
+            "overlays": []
+          }
+        }
+      ]
+    },
+    {
+      "id": "settings-sidebar-navigation",
+      "resetToInitialState": true,
+      "steps": [
+        {
+          "id": "navigate-settings-servers",
+          "operation": "click",
+          "target": "settings.navigation.servers",
+          "expected": { "callbackDelta": 1, "actionId": "navigation.settings.select", "payload": "servers", "state": { "navigation.route": "settings/servers" }, "focus": "settings.navigation.servers", "visibleContent": "settings.content.servers", "overlays": [], "paintDeltaRegions": ["settings.content"] }
+        },
+        {
+          "id": "navigate-settings-notifications",
+          "operation": "click",
+          "target": "settings.navigation.notifications",
+          "expected": { "callbackDelta": 1, "actionId": "navigation.settings.select", "payload": "notifications", "state": { "navigation.route": "settings/notifications" }, "focus": "settings.navigation.notifications", "visibleContent": "settings.content.notifications", "overlays": [], "paintDeltaRegions": ["settings.content"] }
+        },
+        {
+          "id": "navigate-settings-providers",
+          "operation": "click",
+          "target": "settings.navigation.providers",
+          "expected": { "callbackDelta": 1, "actionId": "navigation.settings.select", "payload": "providers", "state": { "navigation.route": "settings/providers" }, "focus": "settings.navigation.providers", "visibleContent": "settings.content.providers", "overlays": [], "paintDeltaRegions": ["settings.content"] }
+        },
+        {
+          "id": "navigate-settings-worktrees",
+          "operation": "click",
+          "target": "settings.navigation.worktrees",
+          "expected": { "callbackDelta": 1, "actionId": "navigation.settings.select", "payload": "worktrees", "state": { "navigation.route": "settings/worktrees" }, "focus": "settings.navigation.worktrees", "visibleContent": "settings.content.worktrees", "overlays": [], "paintDeltaRegions": ["settings.content"] }
+        },
+        {
+          "id": "navigate-settings-setup",
+          "operation": "click",
+          "target": "settings.navigation.setup",
+          "expected": { "callbackDelta": 1, "actionId": "navigation.settings.select", "payload": "setup", "state": { "navigation.route": "settings/setup" }, "focus": "settings.navigation.setup", "visibleContent": "settings.content.setup", "overlays": [], "paintDeltaRegions": ["settings.content"] }
+        },
+        {
+          "id": "navigate-settings-about",
+          "operation": "click",
+          "target": "settings.navigation.about",
+          "expected": { "callbackDelta": 1, "actionId": "navigation.settings.select", "payload": "about", "state": { "navigation.route": "settings/about" }, "focus": "settings.navigation.about", "visibleContent": "settings.content.about", "overlays": [], "paintDeltaRegions": ["settings.content"] }
+        },
+        {
+          "id": "navigate-settings-general",
+          "operation": "click",
+          "target": "settings.navigation.general",
+          "expected": { "callbackDelta": 1, "actionId": "navigation.settings.select", "payload": "general", "state": { "navigation.route": "settings/general" }, "focus": "settings.navigation.general", "visibleContent": "settings.content.general", "overlays": [], "paintDeltaRegions": ["settings.content"] }
+        }
+      ]
+    }
+  ],
+  "screenshotRegions": [
+    {
+      "id": "window.full",
+      "anchor": "window",
+      "inset": 0,
+      "proves": ["global-palette", "window-material", "layout"]
+    },
+    {
+      "id": "settings.sidebar",
+      "anchor": "settings.sidebar",
+      "padding": 8,
+      "proves": ["resolved-theme-coherence", "selected-navigation", "material"]
+    },
+    {
+      "id": "settings.content",
+      "anchor": "settings.root",
+      "exclude": ["settings.sidebar"],
+      "proves": ["resolved-theme-coherence", "layout"]
+    },
+    {
+      "id": "settings.appearance",
+      "anchor": "settings.appearance.section",
+      "padding": 8,
+      "proves": ["coupled-control-state", "border-and-surface-colors", "layout"]
+    },
+    {
+      "id": "settings.theme",
+      "anchors": ["settings.theme.light", "settings.theme.dark", "settings.theme.system"],
+      "padding": 8,
+      "proves": ["selected-state", "hover-state", "focus-state"]
+    },
+    {
+      "id": "settings.opacity",
+      "anchor": "settings.opacity.switch",
+      "padding": 12,
+      "proves": ["checked-state", "focus-state"]
+    },
+    {
+      "id": "settings.displayMode",
+      "anchors": ["settings.displayMode.trigger", "settings.displayMode.menu"],
+      "padding": 12,
+      "includeOverlay": true,
+      "proves": ["selected-value", "overlay-lifecycle", "active-option", "focus-state"]
+    }
+  ],
+  "captureGate": {
+    "sourceAndNativeRequiredForEveryVisualStep": true,
+    "sameStateCohortRequired": true,
+    "sameViewportAndScaleRequired": true,
+    "freshness": {
+      "postHashMustDifferWhenVisualStateChanges": true,
+      "captureTimestampMustFollowDispatchTimestamp": true,
+      "layoutReceiptTimestampMustFollowSettleTimestamp": true
+    },
+    "comparison": {
+      "metric": "tolerance-mae-plus-region-diff",
+      "pixelChannelTolerance": 16,
+      "maxMeanAbsoluteError": 8,
+      "maxDifferentPixelPercent": 5,
+      "contentFloor": {
+        "minUniqueColors": 16,
+        "minLuminanceStddev": 1,
+        "minNonBackgroundCoverage": 0.05,
+        "minOpaqueCoverage": 0.95
+      },
+      "contentFloorRequired": true,
+      "skiaBackendOnlyForNative": true
+    },
+    "independentReview": {
+      "signatureAlgorithm": "ed25519",
+      "allowedReviewerPublicKeys": [
+        {
+          "reviewerId": "appearance-state-cohort-reviewer-v1",
+          "publicKeyPem": "-----BEGIN PUBLIC KEY-----\nMCowBQYDK2VwAyEAMH72303voqxCcLLM0XrNIahiegvajoq1nh2IXVx5H0s=\n-----END PUBLIC KEY-----\n",
+          "publicKeySha256": "71cb1d56c996c9e0da3660504720e390f392ae5642820cac1c4bd08e0f76ea5d"
+        }
+      ]
+    },
+    "promotion": "No canonical DesignIR, token document, or visual artifact may change until every scenario passes and an independent review accepts the cohort."
+  },
+  "failureClasses": {
+    "target-required": "A pointer or hover operation omitted its semantic target.",
+    "target-unresolved": "The semantic target resolved zero times.",
+    "target-ambiguous": "The semantic target resolved more than once.",
+    "dispatch-failed": "The native event could not be delivered.",
+    "pointer-down-failed": "Native pointer-down was not delivered.",
+    "pointer-up-failed": "Native pointer-up was not delivered.",
+    "trusted-event-sequence-mismatch": "The source event sequence was missing trusted pointer, click, or keyboard events in order.",
+    "callback-delta-mismatch": "The original React closure invocation count differed from the contract.",
+    "callback-action-mismatch": "The observed closure binding did not match the canonical action.",
+    "callback-payload-mismatch": "The closure payload differed from the selected value.",
+    "react-state-mismatch": "The React-owned state did not reach the expected value.",
+    "imported-state-mismatch": "The adopted native tree did not mirror the React-owned state.",
+    "unexpected-state-mutation": "A state key outside the declared cohort changed.",
+    "storage-state-mismatch": "Local or durable storage did not match React state.",
+    "persistence-reload-mismatch": "A seeded or changed value did not survive a clean reload.",
+    "theme-resolution-mismatch": "Selected and resolved color schemes were inconsistent with the system appearance.",
+    "native-theme-sync-mismatch": "The platform theme source did not match the source hook effect.",
+    "cohort-theme-split": "Theme-selected controls, sidebar, content, or appearance section resolved to different light/dark palettes. Dark selected with a light sidebar is this failure.",
+    "window-material-mismatch": "The native window material did not match the opacity preference and chrome capability.",
+    "relaunch-missing": "An opacity transition did not request the required relaunch.",
+    "relaunch-multiplicity": "One opacity transition requested more than one relaunch.",
+    "relaunch-generation-mismatch": "The post-transition receipt did not come from exactly the next process generation.",
+    "focus-mismatch": "Focus was not on the expected semantic control.",
+    "focus-order-mismatch": "Native Tab delivery did not traverse the declared source order.",
+    "overlay-lifecycle-mismatch": "The select overlay did not open, retain, or dismiss as expected.",
+    "active-descendant-mismatch": "Arrow or hover navigation did not activate the expected option.",
+    "screenshot-before-missing": "The required pre-state PNG was absent.",
+    "screenshot-after-missing": "The required settled post-state PNG was absent.",
+    "screenshot-stale": "A visual transition reused a pre-state frame or predated dispatch settlement.",
+    "screenshot-region-mismatch": "A declared native region exceeded its pinned source tolerance.",
+    "layout-receipt-mismatch": "Unexpected geometry changed or the post-state layout receipt was missing.",
+    "source-cohort-mismatch": "Electron evidence came from different storage, system appearance, viewport, revision, or process-state preconditions.",
+    "native-cohort-mismatch": "Native evidence came from different storage, system appearance, viewport, revision, or process-state preconditions.",
+    "receipt-schema-drift": "The manifest shorthand was not expanded into the required base receipts or receipt identity changed.",
+    "artifact-hash-mismatch": "A capture, manifest, or bundle hash did not match the bytes under review.",
+    "independent-review-missing": "Promotion was attempted without independent acceptance pinned to the exact manifest and evidence hashes."
+  }
+}
