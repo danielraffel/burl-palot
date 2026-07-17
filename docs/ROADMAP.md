@@ -6,6 +6,23 @@ This is the single current execution plan for the Burl/Palot import pilot. Older
 handoffs, experiments, decision records, gap analyses, and evidence manifests
 remain supporting evidence; they do not define a competing sequence of work.
 
+## Goal authority
+
+The active Codex goal still displays the two July 11 adversarial-review
+attachments as its stored objective. Those attachments remain architectural
+input: they require generic capture provenance and determinism, a sealed
+token-less/block-heavy held-out application, dynamic token support, explicit
+renderer-versus-window-effect ownership, deterministic transparent-window
+comparison, commit-pinned claims, and explicit capability decisions for the
+named CSS and embedded-content surfaces.
+
+Their historical instruction to pause implementation for another proposal
+review has been superseded by the user's later approval to continue, the
+hybrid decision work, and the explicit goal resume on July 16. Resuming the
+goal therefore means executing this roadmap through the standalone Palot gate;
+it does not mean returning to proposal-only work or reverting to either older
+implementation lane.
+
 ## Outcome
 
 Import a React/Electron application into a standalone native Burl application
