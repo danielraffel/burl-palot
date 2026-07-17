@@ -8,20 +8,20 @@ remain supporting evidence; they do not define a competing sequence of work.
 
 ## Goal authority
 
-The active Codex goal still displays the two July 11 adversarial-review
-attachments as its stored objective. Those attachments remain architectural
-input: they require generic capture provenance and determinism, a sealed
-token-less/block-heavy held-out application, dynamic token support, explicit
-renderer-versus-window-effect ownership, deterministic transparent-window
-comparison, commit-pinned claims, and explicit capability decisions for the
-named CSS and embedded-content surfaces.
+The active Codex goal now points directly at this roadmap and requires execution
+through Phase 8. The two July 11 adversarial-review attachments remain
+architectural input: they require generic capture provenance and determinism, a
+sealed token-less/block-heavy held-out application, dynamic token support,
+explicit renderer-versus-window-effect ownership, deterministic
+transparent-window comparison, commit-pinned claims, and explicit capability
+decisions for the named CSS and embedded-content surfaces.
 
 Their historical instruction to pause implementation for another proposal
 review has been superseded by the user's later approval to continue, the
-hybrid decision work, and the explicit goal resume on July 16. Resuming the
-goal therefore means executing this roadmap through the standalone Palot gate;
-it does not mean returning to proposal-only work or reverting to either older
-implementation lane.
+hybrid decision work, the explicit goal resume, and the updated objective on
+July 16. The active goal therefore means executing this roadmap through the
+standalone Palot gate; it does not mean returning to proposal-only work or
+reverting to either older implementation lane.
 
 ## Outcome
 
