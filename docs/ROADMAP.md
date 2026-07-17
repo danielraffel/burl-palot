@@ -180,6 +180,15 @@ Decision rule: if one real control cannot preserve imported pixels while using
 the original React behavior, stop and reassess the hybrid contract before
 expanding coverage.
 
+The independently reviewed executable receipt contract is integrated at
+consumer commit `f42adca`. Its 33 script tests and eight-package type-check gate
+pass. It expands 39 required actions and fails closed on unsigned or substituted
+evidence, untrusted input, stale provenance, non-semantic crops, RGB/alpha drift,
+switch paint without thumb motion, incomplete dropdown semantics, and Settings
+navigation without matching route/content/focus/paint. This defines the gate; it
+does **not** satisfy it. Phase 4 remains red until the real Electron and native
+applications produce and independently sign the complete evidence bundle.
+
 ### Phase 5 — General interaction and overlay coverage — PENDING
 
 **Lane:** custom Burl paint plus reusable React/input/overlay behavior.
